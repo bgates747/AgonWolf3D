@@ -1,4 +1,8 @@
 ## CUSTOM PROJECT-SPECIFIC ##
+# Ignore .python .vscode
+.python
+.vscode
+
 # Ignore everything in the 'dev' directory
 dev/*
 
