@@ -9,10 +9,10 @@ dev/*
 # Ignore all directories and their contents named archive
 **/archive/
 
-# Ignore everything in 'build' 'data', and 'scripts'
+# Ignore everything in 'build' except 'data', and 'scripts'
 build/*
-data/*
-scripts/*
+!build/data/
+!build/scripts/
 
 # Ignore everything in 'src/agon_api' except for the 'asm' directory
 src/agon_api/*
