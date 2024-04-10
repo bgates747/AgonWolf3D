@@ -9,28 +9,10 @@ dev/*
 # Ignore all directories and their contents named archive
 **/archive/
 
-# Ignore everything in 'build' except for 'blender', 'data', and 'scripts'
+# Ignore everything in 'build' 'data', and 'scripts'
 build/*
-!build/blender/
-!build/data/
-!build/scripts/
-# However, include these subdirectories of 'build' but not their contents: 'maps', 'panels'
-build/maps/*
-!build/maps/**/
-build/panels/*
-!build/panels/**/
-# Ignore .blend1 files
-*.blend1
-
-# Ignore everything in 'build/panels' except for subdirectories
-build/panels/*
-!build/panels/**/
-
-# In '/build/data' ignore all .txt files and .sql files and .gnumeric files and data.db
-build/data/data.db
-build/data/*.gnumeric
-build/data/*.sql
-build/data/*.txt
+data/*
+scripts/*
 
 # Ignore everything in 'src/agon_api' except for the 'asm' directory
 src/agon_api/*

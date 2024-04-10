@@ -189,4 +189,4 @@ vdu_load_bmp2_from_file:
 		db 0 
 @size:	dw 0x0000 ;width * height ; length of data in bytes
 
-filedata: ds 320*240 ; fullscreen bitmap in rgba2 format ; bitmap data
+filedata: ; no need to allocate space for the bitmap data as we org the map data at 0x070000 just after this

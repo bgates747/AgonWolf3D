@@ -21,8 +21,8 @@ render_panel:
     push iy
     pop bc
     ld iy,(ix+3) ; plot_y
-    ld de,240-160 ; temp debug to make room for dumpRegistersHex
-    add iy,de
+    ; ld de,240-160 ; temp debug to make room for dumpRegistersHex
+    ; add iy,de
     push iy
     pop de
 ; plot that mofo and go home
@@ -47,10 +47,8 @@ render_scene:
     push hl
     call vdu_cls
     pop hl
-
+    ld a,(orientation)
     ld iy,(cur_x)
-    call dumpRegistersHex
-
     jp (hl) ; 'call' the routine
 ; we always jp back here from the render routine
 render_scene_return: 

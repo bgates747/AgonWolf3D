@@ -59,8 +59,8 @@ player_end_variables: ; for when we want to traverse this table in reverse
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 player_init:
-    ld l,3 ; x
-    ld h,3 ; y
+    ld l,14 ; x
+    ld h,14 ; y
     ld (cur_x),hl
     xor a
     ld (orientation),a
@@ -101,43 +101,43 @@ player_input:
 ;
 ; BEGIN CHECKING FOR KEY PRESSES
 ;
-; 34 W
+; 34 W player moves forward
     bit 1,(ix+4)
     jr z,@W
-    ld a,-speed_player
+    ld a,speed_player ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
     ld (yvel),a
     xor a
-@W:
+@W: 
 ; =====================
-; 82 S
+; 82 S player moves backward
     bit 1,(ix+10)
     jr z,@S
-    ld d,speed_player
+    ld d,-speed_player ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
     ld a,(yvel)
     add a,d
     ld (yvel),a
     xor a
 @S:
 ; =====================
-; 66 A
+; 66 A plyer moves left
     bit 1,(ix+8)
     jr z,@A
-    ld a,-speed_player
+    ld a,-speed_player ; no funky axis conversion here
     ld (xvel),a
     xor a
 @A:
 ; =====================
-; 51 D
+; 51 D player moves right
     bit 2,(ix+6)
     jr z,@D
-    ld d,speed_player
+    ld d,speed_player ; no funky axis conversion here
     ld a,(xvel)
     add a,d
     ld (xvel),a
     xor a
 @D:
 ; =====================
-; 26 Left
+; 26 Left player rotates anti-clockwise
     bit 1,(ix+3)
     jr z,@Left
     ld a,(orientation)
@@ -147,7 +147,7 @@ player_input:
     xor a
 @Left:
 ; =====================
-; 122 Right
+; 122 Right player rotates clockwise
     bit 1,(ix+15)
     jr z,@Right
     ld a,(orientation)
@@ -157,7 +157,8 @@ player_input:
     xor a
 @Right:
 ; =====================
-; 99 Space
+; 99 Space FIRE ZEE MISSILES!!!111
+; TODO: implement 
     bit 2,(ix+12)
     jr z,@Space
     xor a
