@@ -58,89 +58,12 @@ init:
 	call cursor_on
 	ret
 
-
-
-; ; get current cell_id from x,y position
-; 	ld d,4
-; 	ld e,3
-; 	call get_cell_id
-; ; get current cell_id lookup table address
-; 	ld de,map00
-; 	ld hl,0
-; 	call get_cell_addr
-; 	call dumpRegistersHex
-; 	call render_scene
-	; ret
-
-
-; @tour_begin:
-; ; loop through each map location and view angle and render the scene
-; 	ld hl,0 ; initial map location
-; @tour_loop:
-; 	ex de,hl
-; 	ld hl,66
-; 	xor a ; clear carry
-; 	sbc hl,de
-; 	ex de,hl
-; 	jr z,@tour_begin
-; 	push hl ; save cell_id
-; 	call get_cell_addr
-; 	ld hl,(ix+map_panels)
-; 	; test hl for zero
-; 	ld a,l
-; 	or a
-; 	jr nz,@tour_draw
-; 	ld a,h
-; 	or a
-; 	jr nz,@tour_draw
-; 	pop hl
-; 	inc hl
-; 	jr @tour_loop
-; @tour_draw:
-; 	call vsync
-; 	pop hl ; get cell_id
-; 	push hl ; put it back
-; 	ld a,0 ; orientation
-; 	call render_scene
-
-; 	ld a,1000000b
-; 	call multiPurposeDelay
-
-; 	call vsync
-; 	pop hl ; get cell_id
-; 	push hl ; put it back
-; 	ld a,1 ; orientation
-; 	call render_scene
-
-; 	ld a,1000000b
-; 	call multiPurposeDelay
-
-; 	call vsync
-; 	pop hl ; get cell_id
-; 	push hl ; put it back
-; 	ld a,2 ; orientation
-; 	call render_scene
-
-; 	ld a,1000000b
-; 	call multiPurposeDelay
-
-; 	call vsync
-; 	pop hl ; get cell_id
-; 	push hl ; put it back
-; 	ld a,3 ; orientation
-; 	call render_scene
-
-; 	ld a,1000000b
-; 	call multiPurposeDelay
-
-; 	pop hl ; get cell_id
-; 	inc hl
-; 	jr @tour_loop
-
-; 	ret
-
-; filename: db "../src/rgb2/01_000_0000.rgba",0
-
+; WARNING: it may be tempting to move this routine to src/agon_api/vdp_buff.asm
+; where it feels more in place, but for now it needs to live here because it depends on its location relative to the filedata: label just below, 
+; and also since the agon_api includes live in the onboard 8kb SRAM, 
+; there's no room for the up to 4 MB of bitmap data that is possible to load onto the VDP
+; Credit to @HeathenUK for the original code that this is based on
+; I had tried for literally days to make this work
 ; https://discord.com/channels/1158535358624039014/1158536809916149831/1208492884861653145
 ; load an rgba2222 bitmap to a 16-bit bufferId
 ; inputs: bc = width, de = height, hl = bufferId, ix = size

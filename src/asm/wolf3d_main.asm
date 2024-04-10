@@ -13,7 +13,7 @@
     include "../../../agon_api/asm/mos_api.inc"
     include "../../../agon_api/asm/functions.inc"
     include "../../../agon_api/asm/vdu.inc"
-    include "../../../agon_api/asm/vdu_buff.inc"
+    ; include "../../../agon_api/asm/vdu_buff.inc"
     include "../../../agon_api/asm/vdu_plot.inc"
 	include "../../../agon_api/asm/vdu_sprites.inc"
 	include "../../../agon_api/asm/vdp.inc"
@@ -29,14 +29,6 @@
 ; ; #### BEGIN GAME VARIABLES ####
 
 main:
-; ; test get_cell_from_coords
-; 	ld d,2
-; 	ld e,6
-; 	call get_cell_from_coords
-; 	ld bc,(ix+map_obj_id)
-; 	ld de,(ix+map_render)
-; 	call dumpRegistersHex
-
 ; initialize player position
 	call player_init
 

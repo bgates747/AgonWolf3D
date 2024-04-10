@@ -10,7 +10,6 @@ render_panel:
 ; put hlu in a
     ld a,(@hlu+2)
 ; multiply a by 6 to get the offset
-    ld bc,0 ; make sure bcu is zero
     ld b,a
     ld c,6
     mlt bc
@@ -36,8 +35,7 @@ render_panel:
 ; destroys: a, hl, bc, de, ix
 render_scene:
 ; get cell info from lookup table
-    ld hl,(ix+map_render) ; hl = pointer to base of render routines
-    ld bc,0 ; make sure bcu is zero
+    ld hl,(ix+map_render) ; hl = pointer to base of render routiness
     ld b,3 ; 3 bytes per address label
     ld a,(orientation)
     ld c,a

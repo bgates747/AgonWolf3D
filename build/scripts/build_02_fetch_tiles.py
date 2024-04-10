@@ -133,6 +133,11 @@ def make_tbl_tiles(db_path, src_tiles_path):
     conn.commit()
     conn.close()
 
+def fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir):
+    make_tbl_tiles(db_path, src_tiles_path)
+    make_uvs(db_path, mapmaker_tiles_dir, uvs_tgt_dir)
+    make_thumbs(db_path, mapmaker_tiles_dir, thumbs_tgt_dir)
+
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     src_tiles_path = 'src/mapmaker/tiles.txt'
@@ -141,7 +146,5 @@ if __name__ == "__main__":
     uvs_tgt_dir = 'build/panels/uv'
     thumbs_tgt_dir = 'build/panels/thumbs'
 
-    make_tbl_tiles(db_path, src_tiles_path)
-    make_uvs(db_path, mapmaker_tiles_dir, uvs_tgt_dir)
-    make_thumbs(db_path, mapmaker_tiles_dir, thumbs_tgt_dir)
+    fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir)
 

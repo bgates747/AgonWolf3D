@@ -39,9 +39,12 @@ def do_all_the_things():
 
     # build_02_fetch_tiles.py
     src_tiles_path = 'src/mapmaker/tiles.txt'
+    mapmaker_tiles_dir = 'src/mapmaker'
+    uvs_tgt_dir = 'build/panels/uv'
+    thumbs_tgt_dir = 'build/panels/thumbs'
     if do_02_fetch_tiles:
-        from build_02_fetch_tiles import make_tbl_tiles
-        make_tbl_tiles(db_path, src_tiles_path)
+        from build_02_fetch_tiles import fetch_tiles
+        fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir)
 
     # build_04_open_cv_make_panels.py
     panels_png_dir = 'build/panels/png'
@@ -116,10 +119,10 @@ if __name__ == "__main__":
     do_92_asm_ez80Asmlinker = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_open_cv_panels = True
-    # do_05_panels_rgba = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_open_cv_panels = True
+    do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_90_asm_polys = True
