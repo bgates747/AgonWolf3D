@@ -11,7 +11,7 @@ from PIL import Image
 # scene are completely blocked from view. First it assigns every possible
 # polygon a unique color. Then it assembles the 3d scene using the color-coded
 # polygons. The compiles a list of all the colors that remain in the image,
-# and if a panel's unique color is not found, it removed from the list of
+# and if a panel's unique color is not found, it is removed from the list of
 # panels to render for that particular view.
 def make_tbl_07_render_panels(db_path, floor_num):
     conn = sqlite3.connect(db_path)

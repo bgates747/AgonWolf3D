@@ -105,7 +105,9 @@ def make_tbl_tiles(db_path, src_tiles_path):
             is_blocking INT,
             render_type TEXT,
             render_obj_id INT,
-            scale INT,
+            scale REAL,
+            align_vert TEXT,
+            align_horiz TEXT,
             special TEXT,
             notes TEXT
         )
@@ -124,7 +126,9 @@ def make_tbl_tiles(db_path, src_tiles_path):
             'is_blocking': 'INTEGER',
             'render_type': 'TEXT',
             'render_obj_id': 'INTEGER',
-            'scale': 'INTEGER',
+            'scale': 'REAL',
+            'align_vert': 'TEXT',
+            'align_horiz': 'TEXT',
             'special': 'TEXT',
             'notes': 'TEXT'
         })
@@ -147,4 +151,3 @@ if __name__ == "__main__":
     thumbs_tgt_dir = 'build/panels/thumbs'
 
     fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir)
-

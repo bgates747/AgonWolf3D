@@ -2,6 +2,11 @@ import os
 import sqlite3
 
 def make_tbl_06_maps(db_path):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    drop_table_sql = 'DROP TABLE IF EXISTS tbl_06_maps'
+    cursor.execute(drop_table_sql)
+    conn.commit()
     create_table_sql = '''
     CREATE TABLE IF NOT EXISTS tbl_06_maps (
         floor_num INT,
@@ -18,22 +23,14 @@ def make_tbl_06_maps(db_path):
         is_blocking INT,
         render_type TEXT,
         render_obj_id INT,
-        scale INT,
+        scale REAL,
+        align_vert TEXT,
+        align_horiz TEXT,
         special TEXT,
         primary key(floor_num, room_id, map_x, map_y)
     )
     '''
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
     cursor.execute(create_table_sql)
-    conn.close()
-
-def prep_tbl_06_maps(db_path, floor_num):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute(f'''
-        DELETE FROM tbl_06_maps
-        WHERE floor_num = {floor_num}''')
     conn.commit()
     conn.close()
 
@@ -63,8 +60,8 @@ def parse_map_files(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y):
                             INSERT INTO tbl_06_maps (
                                 floor_num, room_id, cell_id, map_x, map_y, obj_id,
                                 tile_name, is_active, is_door,
-                                is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, special
-                            ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+                                is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, align_vert, align_horiz, special
+                            ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
                         ''', (floor_num, room_id, cell_id, map_x, map_y, obj_id))
                         cell_id += 1  
                 
@@ -100,7 +97,6 @@ def add_tile_info(db_path, floor_num):
 
 def import_mapmaker(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y):
     make_tbl_06_maps(db_path)
-    prep_tbl_06_maps(db_path, floor_num)
     parse_map_files(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y)
     add_tile_info(db_path, floor_num)
 
