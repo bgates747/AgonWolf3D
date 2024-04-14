@@ -8,7 +8,8 @@
 	; include "files.inc" ; file handling and memory allocation for loading files from disk
 
 hello_world: defb "Welcome to Agon Wolf3D!\n\r",0
-loading_images: defb "Loading images...",0
+loading_panels: defb "Loading images...",0
+loading_sprites: defb "Loading sprites...",0
 
 init:
 ; ; set fonts
@@ -43,11 +44,17 @@ init:
 ; print loading message
 	ld hl,hello_world
 	call printString
-	ld hl,loading_images
-	call printString
 
-; load the bitmaps
+; load panels
+	ld hl,loading_panels
+	call printString
 	call load_panels
+
+; load sprites
+	call printNewline
+	ld hl,loading_sprites
+	call printString
+	call load_sprites
 
 ; clear the screen
 	call vdu_cls

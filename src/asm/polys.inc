@@ -45,3 +45,819 @@ polys_lookup:
 	dl 0x000000,0x000000 ; poly_id:42
 	dl 0x0000D5,0x000000 ; poly_id:43
 	dl 0x000000,0x000000 ; poly_id:44
+
+polys_south_lookup:
+;south_id 	; poly_id
+	db 0	; 0
+	db 1	; 1
+	db 2	; 2
+	db 3	; 3
+	db 4	; 4
+	db 5	; 5
+	db 6	; 6
+	db 7	; 7
+	db 8	; 8
+	db 255	; 9
+	db 255	; 10
+	db 255	; 11
+	db 255	; 12
+	db 255	; 13
+	db 255	; 14
+	db 255	; 15
+	db 255	; 16
+	db 9	; 17
+	db 10	; 18
+	db 11	; 19
+	db 12	; 20
+	db 13	; 21
+	db 14	; 22
+	db 15	; 23
+	db 255	; 24
+	db 255	; 25
+	db 255	; 26
+	db 255	; 27
+	db 255	; 28
+	db 255	; 29
+	db 16	; 30
+	db 17	; 31
+	db 18	; 32
+	db 19	; 33
+	db 20	; 34
+	db 255	; 35
+	db 255	; 36
+	db 255	; 37
+	db 255	; 38
+	db 21	; 39
+	db 22	; 40
+	db 23	; 41
+	db 255	; 42
+	db 255	; 43
+	db 24	; 44
+
+render_obj_to_sprite_obj:
+;	 sprite_obj; render_obj_id
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_000 ; render_obj_id:20
+	dl sprite_obj_001 ; render_obj_id:21
+	dl sprite_obj_002 ; render_obj_id:22
+	dl sprite_obj_003 ; render_obj_id:23
+	dl sprite_obj_004 ; render_obj_id:24
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_005 ; render_obj_id:40
+	dl sprite_obj_006 ; render_obj_id:41
+	dl sprite_obj_007 ; render_obj_id:42
+	dl sprite_obj_008 ; render_obj_id:43
+	dl sprite_obj_009 ; render_obj_id:44
+	dl sprite_obj_010 ; render_obj_id:45
+	dl sprite_obj_011 ; render_obj_id:46
+	dl sprite_obj_012 ; render_obj_id:47
+	dl sprite_obj_013 ; render_obj_id:48
+	dl sprite_obj_014 ; render_obj_id:49
+	dl sprite_obj_015 ; render_obj_id:50
+	dl sprite_obj_016 ; render_obj_id:51
+	dl sprite_obj_017 ; render_obj_id:52
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+	dl sprite_obj_255
+
+sprites_lookup:
+;	 plot_x,  plot_y, buffer_label
+
+; render_obj_id:20
+sprite_obj_000:
+	dl 0x000000,0x00003E,BUF_20_004
+	dl 0x000023,0x00003E,BUF_20_004
+	dl 0x000047,0x00003E,BUF_20_004
+	dl 0x00006A,0x00003E,BUF_20_004
+	dl 0x00008E,0x00003E,BUF_20_004
+	dl 0x0000B1,0x00003E,BUF_20_004
+	dl 0x0000D5,0x00003E,BUF_20_004
+	dl 0x0000F8,0x00003E,BUF_20_004
+	dl 0x00011C,0x00003E,BUF_20_004
+	dl 0x000000,0x000039,BUF_20_020
+	dl 0x00002E,0x000039,BUF_20_020
+	dl 0x00005B,0x000039,BUF_20_020
+	dl 0x000089,0x000039,BUF_20_020
+	dl 0x0000B6,0x000039,BUF_20_020
+	dl 0x0000E4,0x000039,BUF_20_020
+	dl 0x000111,0x000039,BUF_20_020
+	dl 0x000000,0x000030,BUF_20_032
+	dl 0x00003F,0x000030,BUF_20_032
+	dl 0x000080,0x000030,BUF_20_032
+	dl 0x0000C0,0x000030,BUF_20_032
+	dl 0x000100,0x000030,BUF_20_032
+	dl 0x000000,0x00001A,BUF_20_040
+	dl 0x00006A,0x00001A,BUF_20_040
+	dl 0x0000D5,0x00001A,BUF_20_040
+	dl 0x000000,0x000000,BUF_20_044
+
+; render_obj_id:21
+sprite_obj_001:
+	dl 0x000000,0x00003E,BUF_21_004
+	dl 0x000023,0x00003E,BUF_21_004
+	dl 0x000047,0x00003E,BUF_21_004
+	dl 0x00006A,0x00003E,BUF_21_004
+	dl 0x00008E,0x00003E,BUF_21_004
+	dl 0x0000B1,0x00003E,BUF_21_004
+	dl 0x0000D5,0x00003E,BUF_21_004
+	dl 0x0000F8,0x00003E,BUF_21_004
+	dl 0x00011C,0x00003E,BUF_21_004
+	dl 0x000000,0x000039,BUF_21_020
+	dl 0x00002E,0x000039,BUF_21_020
+	dl 0x00005B,0x000039,BUF_21_020
+	dl 0x000089,0x000039,BUF_21_020
+	dl 0x0000B6,0x000039,BUF_21_020
+	dl 0x0000E4,0x000039,BUF_21_020
+	dl 0x000111,0x000039,BUF_21_020
+	dl 0x000000,0x000030,BUF_21_032
+	dl 0x00003F,0x000030,BUF_21_032
+	dl 0x000080,0x000030,BUF_21_032
+	dl 0x0000C0,0x000030,BUF_21_032
+	dl 0x000100,0x000030,BUF_21_032
+	dl 0x000000,0x00001A,BUF_21_040
+	dl 0x00006A,0x00001A,BUF_21_040
+	dl 0x0000D5,0x00001A,BUF_21_040
+	dl 0x000000,0x000000,BUF_21_044
+
+; render_obj_id:22
+sprite_obj_002:
+	dl 0x000000,0x00003E,BUF_22_004
+	dl 0x000023,0x00003E,BUF_22_004
+	dl 0x000047,0x00003E,BUF_22_004
+	dl 0x00006A,0x00003E,BUF_22_004
+	dl 0x00008E,0x00003E,BUF_22_004
+	dl 0x0000B1,0x00003E,BUF_22_004
+	dl 0x0000D5,0x00003E,BUF_22_004
+	dl 0x0000F8,0x00003E,BUF_22_004
+	dl 0x00011C,0x00003E,BUF_22_004
+	dl 0x000000,0x000039,BUF_22_020
+	dl 0x00002E,0x000039,BUF_22_020
+	dl 0x00005B,0x000039,BUF_22_020
+	dl 0x000089,0x000039,BUF_22_020
+	dl 0x0000B6,0x000039,BUF_22_020
+	dl 0x0000E4,0x000039,BUF_22_020
+	dl 0x000111,0x000039,BUF_22_020
+	dl 0x000000,0x000030,BUF_22_032
+	dl 0x00003F,0x000030,BUF_22_032
+	dl 0x000080,0x000030,BUF_22_032
+	dl 0x0000C0,0x000030,BUF_22_032
+	dl 0x000100,0x000030,BUF_22_032
+	dl 0x000000,0x00001A,BUF_22_040
+	dl 0x00006A,0x00001A,BUF_22_040
+	dl 0x0000D5,0x00001A,BUF_22_040
+	dl 0x000000,0x000000,BUF_22_044
+
+; render_obj_id:23
+sprite_obj_003:
+	dl 0x000000,0x00003E,BUF_23_004
+	dl 0x000023,0x00003E,BUF_23_004
+	dl 0x000047,0x00003E,BUF_23_004
+	dl 0x00006A,0x00003E,BUF_23_004
+	dl 0x00008E,0x00003E,BUF_23_004
+	dl 0x0000B1,0x00003E,BUF_23_004
+	dl 0x0000D5,0x00003E,BUF_23_004
+	dl 0x0000F8,0x00003E,BUF_23_004
+	dl 0x00011C,0x00003E,BUF_23_004
+	dl 0x000000,0x000039,BUF_23_020
+	dl 0x00002E,0x000039,BUF_23_020
+	dl 0x00005B,0x000039,BUF_23_020
+	dl 0x000089,0x000039,BUF_23_020
+	dl 0x0000B6,0x000039,BUF_23_020
+	dl 0x0000E4,0x000039,BUF_23_020
+	dl 0x000111,0x000039,BUF_23_020
+	dl 0x000000,0x000030,BUF_23_032
+	dl 0x00003F,0x000030,BUF_23_032
+	dl 0x000080,0x000030,BUF_23_032
+	dl 0x0000C0,0x000030,BUF_23_032
+	dl 0x000100,0x000030,BUF_23_032
+	dl 0x000000,0x00001A,BUF_23_040
+	dl 0x00006A,0x00001A,BUF_23_040
+	dl 0x0000D5,0x00001A,BUF_23_040
+	dl 0x000000,0x000000,BUF_23_044
+
+; render_obj_id:24
+sprite_obj_004:
+	dl 0x000000,0x00003E,BUF_24_004
+	dl 0x000023,0x00003E,BUF_24_004
+	dl 0x000047,0x00003E,BUF_24_004
+	dl 0x00006A,0x00003E,BUF_24_004
+	dl 0x00008E,0x00003E,BUF_24_004
+	dl 0x0000B1,0x00003E,BUF_24_004
+	dl 0x0000D5,0x00003E,BUF_24_004
+	dl 0x0000F8,0x00003E,BUF_24_004
+	dl 0x00011C,0x00003E,BUF_24_004
+	dl 0x000000,0x000039,BUF_24_020
+	dl 0x00002E,0x000039,BUF_24_020
+	dl 0x00005B,0x000039,BUF_24_020
+	dl 0x000089,0x000039,BUF_24_020
+	dl 0x0000B6,0x000039,BUF_24_020
+	dl 0x0000E4,0x000039,BUF_24_020
+	dl 0x000111,0x000039,BUF_24_020
+	dl 0x000000,0x000030,BUF_24_032
+	dl 0x00003F,0x000030,BUF_24_032
+	dl 0x000080,0x000030,BUF_24_032
+	dl 0x0000C0,0x000030,BUF_24_032
+	dl 0x000100,0x000030,BUF_24_032
+	dl 0x000000,0x00001A,BUF_24_040
+	dl 0x00006A,0x00001A,BUF_24_040
+	dl 0x0000D5,0x00001A,BUF_24_040
+	dl 0x000000,0x000000,BUF_24_044
+
+; render_obj_id:40
+sprite_obj_005:
+	dl 0x000000,0x00003E,BUF_40_004
+	dl 0x000023,0x00003E,BUF_40_004
+	dl 0x000047,0x00003E,BUF_40_004
+	dl 0x00006A,0x00003E,BUF_40_004
+	dl 0x00008E,0x00003E,BUF_40_004
+	dl 0x0000B1,0x00003E,BUF_40_004
+	dl 0x0000D5,0x00003E,BUF_40_004
+	dl 0x0000F8,0x00003E,BUF_40_004
+	dl 0x00011C,0x00003E,BUF_40_004
+	dl 0x000000,0x000039,BUF_40_020
+	dl 0x00002E,0x000039,BUF_40_020
+	dl 0x00005B,0x000039,BUF_40_020
+	dl 0x000089,0x000039,BUF_40_020
+	dl 0x0000B6,0x000039,BUF_40_020
+	dl 0x0000E4,0x000039,BUF_40_020
+	dl 0x000111,0x000039,BUF_40_020
+	dl 0x000000,0x000030,BUF_40_032
+	dl 0x00003F,0x000030,BUF_40_032
+	dl 0x000080,0x000030,BUF_40_032
+	dl 0x0000C0,0x000030,BUF_40_032
+	dl 0x000100,0x000030,BUF_40_032
+	dl 0x000000,0x00001A,BUF_40_040
+	dl 0x00006A,0x00001A,BUF_40_040
+	dl 0x0000D5,0x00001A,BUF_40_040
+	dl 0x000000,0x000000,BUF_40_044
+
+; render_obj_id:41
+sprite_obj_006:
+	dl 0x000000,0x00003E,BUF_41_004
+	dl 0x000023,0x00003E,BUF_41_004
+	dl 0x000047,0x00003E,BUF_41_004
+	dl 0x00006A,0x00003E,BUF_41_004
+	dl 0x00008E,0x00003E,BUF_41_004
+	dl 0x0000B1,0x00003E,BUF_41_004
+	dl 0x0000D5,0x00003E,BUF_41_004
+	dl 0x0000F8,0x00003E,BUF_41_004
+	dl 0x00011C,0x00003E,BUF_41_004
+	dl 0x000000,0x000039,BUF_41_020
+	dl 0x00002E,0x000039,BUF_41_020
+	dl 0x00005B,0x000039,BUF_41_020
+	dl 0x000089,0x000039,BUF_41_020
+	dl 0x0000B6,0x000039,BUF_41_020
+	dl 0x0000E4,0x000039,BUF_41_020
+	dl 0x000111,0x000039,BUF_41_020
+	dl 0x000000,0x000030,BUF_41_032
+	dl 0x00003F,0x000030,BUF_41_032
+	dl 0x000080,0x000030,BUF_41_032
+	dl 0x0000C0,0x000030,BUF_41_032
+	dl 0x000100,0x000030,BUF_41_032
+	dl 0x000000,0x00001A,BUF_41_040
+	dl 0x00006A,0x00001A,BUF_41_040
+	dl 0x0000D5,0x00001A,BUF_41_040
+	dl 0x000000,0x000000,BUF_41_044
+
+; render_obj_id:42
+sprite_obj_007:
+	dl 0x000000,0x00003E,BUF_42_004
+	dl 0x000023,0x00003E,BUF_42_004
+	dl 0x000047,0x00003E,BUF_42_004
+	dl 0x00006A,0x00003E,BUF_42_004
+	dl 0x00008E,0x00003E,BUF_42_004
+	dl 0x0000B1,0x00003E,BUF_42_004
+	dl 0x0000D5,0x00003E,BUF_42_004
+	dl 0x0000F8,0x00003E,BUF_42_004
+	dl 0x00011C,0x00003E,BUF_42_004
+	dl 0x000000,0x000039,BUF_42_020
+	dl 0x00002E,0x000039,BUF_42_020
+	dl 0x00005B,0x000039,BUF_42_020
+	dl 0x000089,0x000039,BUF_42_020
+	dl 0x0000B6,0x000039,BUF_42_020
+	dl 0x0000E4,0x000039,BUF_42_020
+	dl 0x000111,0x000039,BUF_42_020
+	dl 0x000000,0x000030,BUF_42_032
+	dl 0x00003F,0x000030,BUF_42_032
+	dl 0x000080,0x000030,BUF_42_032
+	dl 0x0000C0,0x000030,BUF_42_032
+	dl 0x000100,0x000030,BUF_42_032
+	dl 0x000000,0x00001A,BUF_42_040
+	dl 0x00006A,0x00001A,BUF_42_040
+	dl 0x0000D5,0x00001A,BUF_42_040
+	dl 0x000000,0x000000,BUF_42_044
+
+; render_obj_id:43
+sprite_obj_008:
+	dl 0x000000,0x00003E,BUF_43_004
+	dl 0x000023,0x00003E,BUF_43_004
+	dl 0x000047,0x00003E,BUF_43_004
+	dl 0x00006A,0x00003E,BUF_43_004
+	dl 0x00008E,0x00003E,BUF_43_004
+	dl 0x0000B1,0x00003E,BUF_43_004
+	dl 0x0000D5,0x00003E,BUF_43_004
+	dl 0x0000F8,0x00003E,BUF_43_004
+	dl 0x00011C,0x00003E,BUF_43_004
+	dl 0x000000,0x000039,BUF_43_020
+	dl 0x00002E,0x000039,BUF_43_020
+	dl 0x00005B,0x000039,BUF_43_020
+	dl 0x000089,0x000039,BUF_43_020
+	dl 0x0000B6,0x000039,BUF_43_020
+	dl 0x0000E4,0x000039,BUF_43_020
+	dl 0x000111,0x000039,BUF_43_020
+	dl 0x000000,0x000030,BUF_43_032
+	dl 0x00003F,0x000030,BUF_43_032
+	dl 0x000080,0x000030,BUF_43_032
+	dl 0x0000C0,0x000030,BUF_43_032
+	dl 0x000100,0x000030,BUF_43_032
+	dl 0x000000,0x00001A,BUF_43_040
+	dl 0x00006A,0x00001A,BUF_43_040
+	dl 0x0000D5,0x00001A,BUF_43_040
+	dl 0x000000,0x000000,BUF_43_044
+
+; render_obj_id:44
+sprite_obj_009:
+	dl 0x000000,0x00003E,BUF_44_004
+	dl 0x000023,0x00003E,BUF_44_004
+	dl 0x000047,0x00003E,BUF_44_004
+	dl 0x00006A,0x00003E,BUF_44_004
+	dl 0x00008E,0x00003E,BUF_44_004
+	dl 0x0000B1,0x00003E,BUF_44_004
+	dl 0x0000D5,0x00003E,BUF_44_004
+	dl 0x0000F8,0x00003E,BUF_44_004
+	dl 0x00011C,0x00003E,BUF_44_004
+	dl 0x000000,0x000039,BUF_44_020
+	dl 0x00002E,0x000039,BUF_44_020
+	dl 0x00005B,0x000039,BUF_44_020
+	dl 0x000089,0x000039,BUF_44_020
+	dl 0x0000B6,0x000039,BUF_44_020
+	dl 0x0000E4,0x000039,BUF_44_020
+	dl 0x000111,0x000039,BUF_44_020
+	dl 0x000000,0x000030,BUF_44_032
+	dl 0x00003F,0x000030,BUF_44_032
+	dl 0x000080,0x000030,BUF_44_032
+	dl 0x0000C0,0x000030,BUF_44_032
+	dl 0x000100,0x000030,BUF_44_032
+	dl 0x000000,0x00001A,BUF_44_040
+	dl 0x00006A,0x00001A,BUF_44_040
+	dl 0x0000D5,0x00001A,BUF_44_040
+	dl 0x000000,0x000000,BUF_44_044
+
+; render_obj_id:45
+sprite_obj_010:
+	dl 0x000000,0x00003E,BUF_45_004
+	dl 0x000023,0x00003E,BUF_45_004
+	dl 0x000047,0x00003E,BUF_45_004
+	dl 0x00006A,0x00003E,BUF_45_004
+	dl 0x00008E,0x00003E,BUF_45_004
+	dl 0x0000B1,0x00003E,BUF_45_004
+	dl 0x0000D5,0x00003E,BUF_45_004
+	dl 0x0000F8,0x00003E,BUF_45_004
+	dl 0x00011C,0x00003E,BUF_45_004
+	dl 0x000000,0x000039,BUF_45_020
+	dl 0x00002E,0x000039,BUF_45_020
+	dl 0x00005B,0x000039,BUF_45_020
+	dl 0x000089,0x000039,BUF_45_020
+	dl 0x0000B6,0x000039,BUF_45_020
+	dl 0x0000E4,0x000039,BUF_45_020
+	dl 0x000111,0x000039,BUF_45_020
+	dl 0x000000,0x000030,BUF_45_032
+	dl 0x00003F,0x000030,BUF_45_032
+	dl 0x000080,0x000030,BUF_45_032
+	dl 0x0000C0,0x000030,BUF_45_032
+	dl 0x000100,0x000030,BUF_45_032
+	dl 0x000000,0x00001A,BUF_45_040
+	dl 0x00006A,0x00001A,BUF_45_040
+	dl 0x0000D5,0x00001A,BUF_45_040
+	dl 0x000000,0x000000,BUF_45_044
+
+; render_obj_id:46
+sprite_obj_011:
+	dl 0x000000,0x00003E,BUF_46_004
+	dl 0x000023,0x00003E,BUF_46_004
+	dl 0x000047,0x00003E,BUF_46_004
+	dl 0x00006A,0x00003E,BUF_46_004
+	dl 0x00008E,0x00003E,BUF_46_004
+	dl 0x0000B1,0x00003E,BUF_46_004
+	dl 0x0000D5,0x00003E,BUF_46_004
+	dl 0x0000F8,0x00003E,BUF_46_004
+	dl 0x00011C,0x00003E,BUF_46_004
+	dl 0x000000,0x000039,BUF_46_020
+	dl 0x00002E,0x000039,BUF_46_020
+	dl 0x00005B,0x000039,BUF_46_020
+	dl 0x000089,0x000039,BUF_46_020
+	dl 0x0000B6,0x000039,BUF_46_020
+	dl 0x0000E4,0x000039,BUF_46_020
+	dl 0x000111,0x000039,BUF_46_020
+	dl 0x000000,0x000030,BUF_46_032
+	dl 0x00003F,0x000030,BUF_46_032
+	dl 0x000080,0x000030,BUF_46_032
+	dl 0x0000C0,0x000030,BUF_46_032
+	dl 0x000100,0x000030,BUF_46_032
+	dl 0x000000,0x00001A,BUF_46_040
+	dl 0x00006A,0x00001A,BUF_46_040
+	dl 0x0000D5,0x00001A,BUF_46_040
+	dl 0x000000,0x000000,BUF_46_044
+
+; render_obj_id:47
+sprite_obj_012:
+	dl 0x000000,0x00003E,BUF_47_004
+	dl 0x000023,0x00003E,BUF_47_004
+	dl 0x000047,0x00003E,BUF_47_004
+	dl 0x00006A,0x00003E,BUF_47_004
+	dl 0x00008E,0x00003E,BUF_47_004
+	dl 0x0000B1,0x00003E,BUF_47_004
+	dl 0x0000D5,0x00003E,BUF_47_004
+	dl 0x0000F8,0x00003E,BUF_47_004
+	dl 0x00011C,0x00003E,BUF_47_004
+	dl 0x000000,0x000039,BUF_47_020
+	dl 0x00002E,0x000039,BUF_47_020
+	dl 0x00005B,0x000039,BUF_47_020
+	dl 0x000089,0x000039,BUF_47_020
+	dl 0x0000B6,0x000039,BUF_47_020
+	dl 0x0000E4,0x000039,BUF_47_020
+	dl 0x000111,0x000039,BUF_47_020
+	dl 0x000000,0x000030,BUF_47_032
+	dl 0x00003F,0x000030,BUF_47_032
+	dl 0x000080,0x000030,BUF_47_032
+	dl 0x0000C0,0x000030,BUF_47_032
+	dl 0x000100,0x000030,BUF_47_032
+	dl 0x000000,0x00001A,BUF_47_040
+	dl 0x00006A,0x00001A,BUF_47_040
+	dl 0x0000D5,0x00001A,BUF_47_040
+	dl 0x000000,0x000000,BUF_47_044
+
+; render_obj_id:48
+sprite_obj_013:
+	dl 0x000000,0x00003E,BUF_48_004
+	dl 0x000023,0x00003E,BUF_48_004
+	dl 0x000047,0x00003E,BUF_48_004
+	dl 0x00006A,0x00003E,BUF_48_004
+	dl 0x00008E,0x00003E,BUF_48_004
+	dl 0x0000B1,0x00003E,BUF_48_004
+	dl 0x0000D5,0x00003E,BUF_48_004
+	dl 0x0000F8,0x00003E,BUF_48_004
+	dl 0x00011C,0x00003E,BUF_48_004
+	dl 0x000000,0x000039,BUF_48_020
+	dl 0x00002E,0x000039,BUF_48_020
+	dl 0x00005B,0x000039,BUF_48_020
+	dl 0x000089,0x000039,BUF_48_020
+	dl 0x0000B6,0x000039,BUF_48_020
+	dl 0x0000E4,0x000039,BUF_48_020
+	dl 0x000111,0x000039,BUF_48_020
+	dl 0x000000,0x000030,BUF_48_032
+	dl 0x00003F,0x000030,BUF_48_032
+	dl 0x000080,0x000030,BUF_48_032
+	dl 0x0000C0,0x000030,BUF_48_032
+	dl 0x000100,0x000030,BUF_48_032
+	dl 0x000000,0x00001A,BUF_48_040
+	dl 0x00006A,0x00001A,BUF_48_040
+	dl 0x0000D5,0x00001A,BUF_48_040
+	dl 0x000000,0x000000,BUF_48_044
+
+; render_obj_id:49
+sprite_obj_014:
+	dl 0x000000,0x00003E,BUF_49_004
+	dl 0x000023,0x00003E,BUF_49_004
+	dl 0x000047,0x00003E,BUF_49_004
+	dl 0x00006A,0x00003E,BUF_49_004
+	dl 0x00008E,0x00003E,BUF_49_004
+	dl 0x0000B1,0x00003E,BUF_49_004
+	dl 0x0000D5,0x00003E,BUF_49_004
+	dl 0x0000F8,0x00003E,BUF_49_004
+	dl 0x00011C,0x00003E,BUF_49_004
+	dl 0x000000,0x000039,BUF_49_020
+	dl 0x00002E,0x000039,BUF_49_020
+	dl 0x00005B,0x000039,BUF_49_020
+	dl 0x000089,0x000039,BUF_49_020
+	dl 0x0000B6,0x000039,BUF_49_020
+	dl 0x0000E4,0x000039,BUF_49_020
+	dl 0x000111,0x000039,BUF_49_020
+	dl 0x000000,0x000030,BUF_49_032
+	dl 0x00003F,0x000030,BUF_49_032
+	dl 0x000080,0x000030,BUF_49_032
+	dl 0x0000C0,0x000030,BUF_49_032
+	dl 0x000100,0x000030,BUF_49_032
+	dl 0x000000,0x00001A,BUF_49_040
+	dl 0x00006A,0x00001A,BUF_49_040
+	dl 0x0000D5,0x00001A,BUF_49_040
+	dl 0x000000,0x000000,BUF_49_044
+
+; render_obj_id:50
+sprite_obj_015:
+	dl 0x000000,0x00003E,BUF_50_004
+	dl 0x000023,0x00003E,BUF_50_004
+	dl 0x000047,0x00003E,BUF_50_004
+	dl 0x00006A,0x00003E,BUF_50_004
+	dl 0x00008E,0x00003E,BUF_50_004
+	dl 0x0000B1,0x00003E,BUF_50_004
+	dl 0x0000D5,0x00003E,BUF_50_004
+	dl 0x0000F8,0x00003E,BUF_50_004
+	dl 0x00011C,0x00003E,BUF_50_004
+	dl 0x000000,0x000039,BUF_50_020
+	dl 0x00002E,0x000039,BUF_50_020
+	dl 0x00005B,0x000039,BUF_50_020
+	dl 0x000089,0x000039,BUF_50_020
+	dl 0x0000B6,0x000039,BUF_50_020
+	dl 0x0000E4,0x000039,BUF_50_020
+	dl 0x000111,0x000039,BUF_50_020
+	dl 0x000000,0x000030,BUF_50_032
+	dl 0x00003F,0x000030,BUF_50_032
+	dl 0x000080,0x000030,BUF_50_032
+	dl 0x0000C0,0x000030,BUF_50_032
+	dl 0x000100,0x000030,BUF_50_032
+	dl 0x000000,0x00001A,BUF_50_040
+	dl 0x00006A,0x00001A,BUF_50_040
+	dl 0x0000D5,0x00001A,BUF_50_040
+	dl 0x000000,0x000000,BUF_50_044
+
+; render_obj_id:51
+sprite_obj_016:
+	dl 0x000000,0x00003E,BUF_51_004
+	dl 0x000023,0x00003E,BUF_51_004
+	dl 0x000047,0x00003E,BUF_51_004
+	dl 0x00006A,0x00003E,BUF_51_004
+	dl 0x00008E,0x00003E,BUF_51_004
+	dl 0x0000B1,0x00003E,BUF_51_004
+	dl 0x0000D5,0x00003E,BUF_51_004
+	dl 0x0000F8,0x00003E,BUF_51_004
+	dl 0x00011C,0x00003E,BUF_51_004
+	dl 0x000000,0x000039,BUF_51_020
+	dl 0x00002E,0x000039,BUF_51_020
+	dl 0x00005B,0x000039,BUF_51_020
+	dl 0x000089,0x000039,BUF_51_020
+	dl 0x0000B6,0x000039,BUF_51_020
+	dl 0x0000E4,0x000039,BUF_51_020
+	dl 0x000111,0x000039,BUF_51_020
+	dl 0x000000,0x000030,BUF_51_032
+	dl 0x00003F,0x000030,BUF_51_032
+	dl 0x000080,0x000030,BUF_51_032
+	dl 0x0000C0,0x000030,BUF_51_032
+	dl 0x000100,0x000030,BUF_51_032
+	dl 0x000000,0x00001A,BUF_51_040
+	dl 0x00006A,0x00001A,BUF_51_040
+	dl 0x0000D5,0x00001A,BUF_51_040
+	dl 0x000000,0x000000,BUF_51_044
+
+; render_obj_id:52
+sprite_obj_017:
+	dl 0x000000,0x00003E,BUF_52_004
+	dl 0x000023,0x00003E,BUF_52_004
+	dl 0x000047,0x00003E,BUF_52_004
+	dl 0x00006A,0x00003E,BUF_52_004
+	dl 0x00008E,0x00003E,BUF_52_004
+	dl 0x0000B1,0x00003E,BUF_52_004
+	dl 0x0000D5,0x00003E,BUF_52_004
+	dl 0x0000F8,0x00003E,BUF_52_004
+	dl 0x00011C,0x00003E,BUF_52_004
+	dl 0x000000,0x000039,BUF_52_020
+	dl 0x00002E,0x000039,BUF_52_020
+	dl 0x00005B,0x000039,BUF_52_020
+	dl 0x000089,0x000039,BUF_52_020
+	dl 0x0000B6,0x000039,BUF_52_020
+	dl 0x0000E4,0x000039,BUF_52_020
+	dl 0x000111,0x000039,BUF_52_020
+	dl 0x000000,0x000030,BUF_52_032
+	dl 0x00003F,0x000030,BUF_52_032
+	dl 0x000080,0x000030,BUF_52_032
+	dl 0x0000C0,0x000030,BUF_52_032
+	dl 0x000100,0x000030,BUF_52_032
+	dl 0x000000,0x00001A,BUF_52_040
+	dl 0x00006A,0x00001A,BUF_52_040
+	dl 0x0000D5,0x00001A,BUF_52_040
+	dl 0x000000,0x000000,BUF_52_044
+
+sprite_obj_255: ; placeholder to keep the assembler happy, CANNOT BE A VALID sprite_obj

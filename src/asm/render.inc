@@ -1,5 +1,5 @@
 ; render a 3D panel
-; inputs: uhl is the poly_id, hl is the buffer_id
+; inputs: uhl is to_poly_id, hl is the buffer_id
 render_panel:
 ; write hl to scratch
     ld (@hlu),hl
@@ -16,18 +16,51 @@ render_panel:
 ; add the offset to the lookup table
     add ix,bc
 ; get the panel coordinates
-    ld iy,(ix) ; plot_x
-    push iy
+    ld hl,(ix) ; plot_x
+    push hl
     pop bc
-    ld iy,(ix+3) ; plot_y
-    ; ld de,240-160 ; temp debug to make room for dumpRegistersHex
-    ; add iy,de
-    push iy
-    pop de
+    ld hl,(ix+3) ; plot_y
+    ex de,hl
 ; plot that mofo and go home
     call vdu_plot_bmp
     ret
 @hlu: ds 3
+
+; render a 3D sprite
+; inputs: a is the poly_id of the cell to render, ix pointed to cell lookup
+render_sprite:
+    ld bc,0 ; make sure bcu is zero
+    ld c,a ; bc is poly_id
+; find the current map_render_obj of the target cell
+    ld a,(ix+map_render_obj)
+; if zero, nothing to draw
+    and a
+    jr nz,@not_zero
+    ret 
+@not_zero:
+; look up sprite_obj from render_obj
+    ld iy,render_obj_to_sprite_obj
+    ld e,a ; render_obj
+    ld d,3 ; three byte per record in lut
+    mlt de
+    add iy,de ; iy points to label
+    ld iy,(iy) ; iy has base address of sprite polys
+; look up south_poly from poly_id
+    ld hl,polys_south_lookup
+    add hl,bc ; hl points to south poly id
+    ld a,(hl) ; a is south poly id
+    ld e,a
+    ld d,9 ; nine byte per record in lut
+    mlt de
+    add iy,de ; iy points to sprite poly defs
+; select buffer
+    ld hl,(iy+6)
+    call vdu_buff_select
+; plot sprite 
+    ld bc,(iy+0) ; plot_x
+    ld de,(iy+3) ; plot_y
+    call vdu_plot_bmp
+    ret
 
 ; render a full 3d scene
 ; inputs: ix pointed to cell lookup, (orietation) set
@@ -43,7 +76,7 @@ render_scene:
     add hl,bc ; hl points to routine address
     ld hl,(hl) ; don't do this on a z80
     push hl
-    call vdu_cls
+    call vdu_cls ; DEBUG: commented out
     pop hl
     ld a,(orientation)
     ld iy,(cur_x)

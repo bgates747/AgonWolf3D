@@ -79,6 +79,10 @@ def add_tile_info(db_path, floor_num):
     for m_row in maps_rows:
         cursor.execute('SELECT * FROM tbl_02_tiles WHERE obj_id = ?', (m_row['obj_id'],))
         tile_row = cursor.fetchone()
+        render_obj_id = tile_row['render_obj_id']
+        render_type = tile_row['render_type']
+        if render_type != 'cube' and render_type != 'sprite':
+            render_obj_id = 0
         
         if tile_row:
             cursor.execute('''
@@ -89,8 +93,15 @@ def add_tile_info(db_path, floor_num):
             ''', (
                 tile_row['tile_name'], tile_row['is_active'], tile_row['is_door'], tile_row['is_wall'],
                 tile_row['is_trigger'], tile_row['is_blocking'], tile_row['render_type'],
-                tile_row['render_obj_id'], tile_row['scale'], tile_row['special'], m_row['obj_id'], floor_num
+                render_obj_id, tile_row['scale'], tile_row['special'], m_row['obj_id'], floor_num
             ))
+    conn.commit()
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE render_type = 'floor'""")
+    default_floor_obj = cursor.fetchone()[0]
+    cursor.execute(f"""
+        UPDATE tbl_06_maps
+        SET obj_id = {default_floor_obj}
+        WHERE floor_num = {floor_num} AND is_wall = 0 AND is_door = 0 AND is_trigger = 0""")
     conn.commit()
     conn.close()
 

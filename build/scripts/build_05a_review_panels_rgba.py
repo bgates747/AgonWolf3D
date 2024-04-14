@@ -1,6 +1,6 @@
 from agonImages import rgba2_to_img
 import tkinter as tk
-from tkinter import Label, Button, Canvas
+from tkinter import Button, Canvas
 from PIL import ImageTk
 import pandas as pd
 import sqlite3
@@ -46,7 +46,7 @@ def make_df_panels_lookup(db_path):
     conn = sqlite3.connect(db_path)
     query = """
         SELECT * 
-        FROM qry_04_panels_lookup
+        FROM tbl_04_panels_lookup
         WHERE (face = 'south' AND cube_x = 0) OR face <> 'south'
         ORDER BY render_obj_id, poly_id
     """

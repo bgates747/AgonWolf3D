@@ -1,19 +1,25 @@
 ; ############# MAP CONSTANTS #############
-; temporary hardcoded until we implement 
-; dynamically from tiles defs
-null_cell: equ 19 ; 0x13
-blank_cell: equ 29 ; 0x1D
-door_cell: equ 57 ; 0x39
-elevator_cell: equ 59 ; 0x3B
+; ; temporary hardcoded until we implement 
+; ; dynamically from tiles defs
+; null_cell: equ 19 ; 0x13
+; blank_cell: equ 29 ; 0x1D
+; door_cell: equ 57 ; 0x39
+; elevator_cell: equ 59 ; 0x3B
+
+; map type/status flags
+cell_is_door:     EQU %10000000  ; Bit 7: door flag
+cell_is_wall:     EQU %01000000  ; Bit 6: wall flag
+cell_is_trigger:  EQU %00100000  ; Bit 5: trigger flag
+cell_is_blocking: EQU %00010000  ; Bit 4: blocking flag
 
 ; HOW THE MAP TABLE IS LAID OUT
-; ; cell label: obj_id map_x map_y,render routine address
+; (obj_id render_obj type/status mask), render routine address
 ; cell_000: dl 0x110000,rend_000; 0x00 : 00,00 : 0x00,0x00 
 ;
 ; map table field offset constants
 ; (mind the little-endianess)
-map_x: equ 0
-map_y: equ 1
+map_type_status: equ 0
+map_render_obj: equ 1
 map_obj_id: equ 2
 map_render: equ 3
 map_record_size: equ 6

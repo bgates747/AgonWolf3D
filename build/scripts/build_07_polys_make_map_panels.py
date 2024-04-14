@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, ImageDraw
 import shutil
 import sqlite3
 import sqlite3
@@ -58,6 +58,11 @@ def make_tbl_07_render_panels(db_path, floor_num):
             to_g INTEGER,
             to_b INTEGER,
             to_mask_filename TEXT,
+            to_plot_x INTEGER,
+            to_plot_y INTEGER,
+            to_dim_x INTEGER,
+            to_dim_y INTEGER,
+            to_face TEXT,
             PRIMARY KEY (floor_num, room_id, cell_id, orientation, to_cell_id, to_poly_id)
         )
     """)
@@ -95,7 +100,7 @@ def make_qry_07_map_polys(db_path, floor_num):
     conn.commit()
     cursor.execute(f"""
         CREATE VIEW IF NOT EXISTS qry_07_map_polys AS
-        SELECT t1.*, t2.poly_id, t2.cube_x, t2.cube_y, t2.r, t2.g, t2.b, t2.mask_filename
+        SELECT t1.*, t2.poly_id, t2.cube_x, t2.cube_y, t2.plot_x, t2.plot_y, t2.dim_x, t2.dim_y, t2.r, t2.g, t2.b, t2.mask_filename, t2.face
         FROM tbl_06_maps AS t1
         CROSS JOIN qry_01_polys AS t2
         WHERE t1.floor_num = {floor_num}
@@ -110,7 +115,7 @@ def make_qry_07_potential_panels(db_path, floor_num, map_dim_x, map_dim_y):
     conn.commit()
     cursor.execute(f"""
     CREATE VIEW IF NOT EXISTS qry_07_potential_panels AS
-    SELECT f.*, t.cell_id as to_cell_id, t.map_x as to_map_x, t.map_y as to_map_y, t.obj_id as to_obj_id, t.tile_name as to_tile_name, t.is_active as to_is_active, t.is_door as to_is_door, t.is_wall as to_is_wall, t.is_trigger as to_is_trigger, t.is_blocking as to_is_blocking, t.render_type as to_render_type, t.render_obj_id as to_render_obj_id, t.scale as to_scale, t.special as to_special, t.poly_id as to_poly_id, t.cube_x as to_cube_x, t.cube_y as to_cube_y, t.r as to_r, t.g as to_g, t.b as to_b, t.mask_filename as to_mask_filename 
+    SELECT f.*, t.cell_id as to_cell_id, t.map_x as to_map_x, t.map_y as to_map_y, t.obj_id as to_obj_id, t.tile_name as to_tile_name, t.is_active as to_is_active, t.is_door as to_is_door, t.is_wall as to_is_wall, t.is_trigger as to_is_trigger, t.is_blocking as to_is_blocking, t.render_type as to_render_type, t.render_obj_id as to_render_obj_id, t.scale as to_scale, t.special as to_special, t.poly_id as to_poly_id, t.cube_x as to_cube_x, t.cube_y as to_cube_y, t.r as to_r, t.g as to_g, t.b as to_b, t.mask_filename as to_mask_filename, t.plot_x as to_plot_x, t.plot_y as to_plot_y, t.dim_x as to_dim_x, t.dim_y as to_dim_y, t.face as to_face
     FROM (
             SELECT mo.*
             FROM qry_07_map_orientations AS mo
@@ -126,6 +131,7 @@ def make_qry_07_potential_panels(db_path, floor_num, map_dim_x, map_dim_y):
     (f.orientation = 1 and t.map_x = (f.map_x + t.cube_y + {map_dim_x}) % {map_dim_x} and t.map_y = (f.map_y + t.cube_x + {map_dim_y}) % {map_dim_y}) OR
     (f.orientation = 2 and t.map_x = (f.map_x - t.cube_x + {map_dim_x}) % {map_dim_x} and t.map_y = (f.map_y + t.cube_y + {map_dim_y}) % {map_dim_y}) OR
     (f.orientation = 3 and t.map_x = (f.map_x - t.cube_y + {map_dim_x}) % {map_dim_x} and t.map_y = (f.map_y - t.cube_x + {map_dim_y}) % {map_dim_y}))
+    -- WHERE t.render_type IN('cube', 'sprite') -- DEBUG: FOR DEBUGGING
     """)
 
 def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_directory, map_masks_directory, map_dim_x, map_dim_y):
@@ -191,19 +197,29 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
             SELECT *
             FROM qry_07_potential_panels
             WHERE floor_num = {floor_num} AND room_id = {room_id} AND cell_id = {cell_id} AND orientation = {orientation} 
-                -- we're only interested in cells the player can navigate to
-                AND is_wall <> 1
-                -- we're only interested in the panels which block the view of any other panel behind it from the camera's perspective
-                AND to_is_blocking = 1 AND to_render_type = 'cube'
             ORDER BY to_poly_id""")
         panels = cursor.fetchall()
 
         img = Image.new('RGBA', (screen_width, screen_height), (255, 255, 255, 0))
+        draw = ImageDraw.Draw(img)
 
         for panel in panels:
-            mask_path = os.path.join(masks_directory, panel["to_mask_filename"])
-            mask = Image.open(mask_path)
-            img.paste(mask, (0, 0), mask)
+            to_render_type = panel["to_render_type"]
+            to_is_blocking = panel["to_is_blocking"]
+            to_plot_x = panel["to_plot_x"]
+            to_plot_y = panel["to_plot_y"]
+            to_dim_x = panel["to_dim_x"]
+            to_face = panel["to_face"]
+            to_r = panel["to_r"]
+            to_g = panel["to_g"]
+            to_b = panel["to_b"]
+            if to_render_type == "cube" and to_is_blocking == 1:
+                mask_path = os.path.join(masks_directory, panel["to_mask_filename"])
+                mask = Image.open(mask_path)
+                img.paste(mask, (0, 0), mask)
+            elif to_face == 'south':
+                draw.line([(to_plot_x, to_plot_y), (to_plot_x + to_dim_x, to_plot_y)], fill=(to_r, to_g, to_b, 255), width=1)
+
 
         # Get unique colors (excluding fully transparent pixels)
         colors = img.getcolors(screen_width * screen_height) or []
@@ -215,11 +231,11 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
             if rgb in unique_colors:
                 cursor.execute(f"""
                     INSERT INTO tbl_07_render_panels (
-                        floor_num, room_id, cell_id, map_x, map_y, obj_id, tile_name, is_active, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, special, orientation, to_cell_id, to_map_x, to_map_y, to_obj_id, to_tile_name, to_is_active, to_is_door, to_is_wall, to_is_trigger, to_is_blocking, to_render_type, to_render_obj_id, to_scale, to_special, to_poly_id, to_cube_x, to_cube_y, to_r, to_g, to_b, to_mask_filename
+                        floor_num, room_id, cell_id, map_x, map_y, obj_id, tile_name, is_active, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, special, orientation, to_cell_id, to_map_x, to_map_y, to_obj_id, to_tile_name, to_is_active, to_is_door, to_is_wall, to_is_trigger, to_is_blocking, to_render_type, to_render_obj_id, to_scale, to_special, to_poly_id, to_cube_x, to_cube_y, to_r, to_g, to_b, to_mask_filename, to_plot_x, to_plot_y, to_dim_x, to_dim_y, to_face
                     ) VALUES (
-                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                     )""", (
-                        panel["floor_num"], panel["room_id"], panel["cell_id"], panel["map_x"], panel["map_y"], panel["obj_id"], panel["tile_name"], panel["is_active"], panel["is_door"], panel["is_wall"], panel["is_trigger"], panel["is_blocking"], panel["render_type"], panel["render_obj_id"], panel["scale"], panel["special"], panel["orientation"], panel["to_cell_id"], panel["to_map_x"], panel["to_map_y"], panel["to_obj_id"], panel["to_tile_name"], panel["to_is_active"], panel["to_is_door"], panel["to_is_wall"], panel["to_is_trigger"], panel["to_is_blocking"], panel["to_render_type"], panel["to_render_obj_id"], panel["to_scale"], panel["to_special"], panel["to_poly_id"], panel["to_cube_x"], panel["to_cube_y"], panel["to_r"], panel["to_g"], panel["to_b"], panel["to_mask_filename"]
+                        panel["floor_num"], panel["room_id"], panel["cell_id"], panel["map_x"], panel["map_y"], panel["obj_id"], panel["tile_name"], panel["is_active"], panel["is_door"], panel["is_wall"], panel["is_trigger"], panel["is_blocking"], panel["render_type"], panel["render_obj_id"], panel["scale"], panel["special"], panel["orientation"], panel["to_cell_id"], panel["to_map_x"], panel["to_map_y"], panel["to_obj_id"], panel["to_tile_name"], panel["to_is_active"], panel["to_is_door"], panel["to_is_wall"], panel["to_is_trigger"], panel["to_is_blocking"], panel["to_render_type"], panel["to_render_obj_id"], panel["to_scale"], panel["to_special"], panel["to_poly_id"], panel["to_cube_x"], panel["to_cube_y"], panel["to_r"], panel["to_g"], panel["to_b"], panel["to_mask_filename"], panel["to_plot_x"], panel["to_plot_y"], panel["to_dim_x"], panel["to_dim_y"], panel["to_face"]
                     ))
 
         conn.commit()

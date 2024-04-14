@@ -49,9 +49,9 @@ def do_all_the_things():
     # build_04_open_cv_make_panels.py
     panels_png_dir = 'build/panels/png'
     textures_dir = 'build/panels/thumbs'
-    if do_04_open_cv_panels:
-        from build_04_open_cv_make_panels import make_panels
-        make_panels(db_path, panels_png_dir, textures_dir, screen_width, screen_height)
+    if do_04_make_panels_png:
+        from build_04_make_panels_png import make_panels_and_sprites
+        make_panels_and_sprites(db_path, panels_png_dir, textures_dir, screen_width, screen_height)
 
 # build_05_make_panels_rgba.py
     panels_rgba_dir = 'tgt/panels'
@@ -75,15 +75,18 @@ def do_all_the_things():
 
 # build_90_asm_polys.py
     if do_90_asm_polys:
-        from build_90_asm_polys import make_asm_polys
+        from build_90_asm_polys import make_asm_polys, make_asm_polys_south, make_asm_plot_sprites
         polys_inc_path = f"src/asm/polys.inc"
         make_asm_polys(db_path, polys_inc_path)
+        make_asm_polys_south(db_path, polys_inc_path)
+        make_asm_plot_sprites(db_path, polys_inc_path)
 
 # build_91_asm_panels.py
     if do_91_asm_panels:
-        from build_91_asm_panels import make_asm_panels
+        from build_91_asm_panels import make_asm_panels, make_asm_sprites
         panels_inc_path = f"src/asm/panels.inc"
-        make_asm_panels(db_path, panels_inc_path)
+        last_buffer_id = make_asm_panels(db_path, panels_inc_path)
+        make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
 
 # build_92_asm_ez80Asmlinker.py
     if do_92_asm_ez80Asmlinker:
@@ -103,12 +106,12 @@ if __name__ == "__main__":
     floor_nums = list(range(1))  # This will create a list: [0]
     room_ids = list(range(1))  # This will create a list: [0]
 
-    # By default don't run any scripts
+# By default don't run any scripts
 # Start here if you've mucked with the view distance
     do_01_polys_masks = False
 # Start here if you've changed tile textures or definitions
     do_02_fetch_tiles = False
-    do_04_open_cv_panels = False
+    do_04_make_panels_png = False
     do_05_panels_rgba = False
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
@@ -121,7 +124,7 @@ if __name__ == "__main__":
 # I find it easier to simply comment out the scripts I don't want to run
     do_01_polys_masks = True
     do_02_fetch_tiles = True
-    do_04_open_cv_panels = True
+    do_04_make_panels_png = True
     do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True

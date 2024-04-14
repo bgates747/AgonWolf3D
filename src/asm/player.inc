@@ -68,13 +68,10 @@ player_init:
     ld (player_move_timer),a
     ret
 
-; process player keyboard input, set player bitmap
-; velocities and draw player bitmap at updated coordinates
+; process player keyboard input
 ; Inputs: player_x/y set at desired position
-; Returns: player bitmap drawn at updated position
+; Returns: player position updated
 ; Destroys: probably everything except maybe iy
-; NOTE: in mode 9 we draw the ship as a sprite, not a bitmap
-; TODO: requires sprite implementation
 player_input:
 ; first check player_move_timer for zero
     ld a,(player_move_timer)
@@ -179,24 +176,20 @@ player_input:
     ld a,(cur_y)
     add a,d
     ld d,a
-    push de
-    call get_cell_from_coords ; a is target cell obj_id
-    pop de
-
-    ; call dumpRegistersHex
-
-    ; jr @move_it ; debug
-
-    cp blank_cell
-    jr z,@move_it
-    cp door_cell
-    jr z,@door
-    cp elevator_cell
-    jr z,@door
-    cp null_cell
-    ret z
-    ret ; if it wasn't one of the above, do nothing
-
+    push de ; save y_vel,x_vel
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id
+    pop de ; restore y_vel,x_vel
+; read map type/status mask from target cell
+    ld a,(ix+map_type_status)
+    ld b,a ; b = target cell type/status
+; branch on the values in the bitmask
+    ld a,cell_is_door
+    and b
+    jr nz,@door
+    ld a,cell_is_wall
+    and b
+    ret nz ; can't move thru walls
+    jr @move_it ; if it wasn't a wall or door, move as normal
 @door:
     ld de,(dx) ; d = dy, e = dx
     call get_dir_from_dy_dx ; a is direction of attempted movement
@@ -209,17 +202,15 @@ player_input:
     ld e,a
     ld d,2
     ld bc,(cur_x)
-    call get_neighbor ; a is object_id of target cell
-    cp blank_cell
-    jr z,@move_it
-    cp null_cell
-    ret z
-    ret ; if it wasn't one of the above, do nothing
-
+    call get_neighbor ; ix points to cell defs/status, a is target cell current obj_id
+    ld a,(ix+map_type_status)
+    ld b,a ; b = target cell type/status
+    ld a,cell_is_wall
+    and b
+    ret nz ; can't move thru walls
+    ; fall through to @move_it
 @move_it:
 ; we are cleared for movement so update player position
-    ; call dumpRegistersHex
-
     ld de,(dx) ; d = dy, e = dx
     ld a,(cur_x)
     add a,e

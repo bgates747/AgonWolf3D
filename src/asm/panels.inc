@@ -4130,3 +4130,1360 @@ F59_040: db "panels/59_040.rgba",0
 F59_042: db "panels/59_042.rgba",0
 F59_043: db "panels/59_043.rgba",0
 F59_044: db "panels/59_044.rgba",0
+; Bitmap indices:
+BUF_20_004: equ 0x0213
+BUF_20_020: equ 0x0214
+BUF_20_032: equ 0x0215
+BUF_20_040: equ 0x0216
+BUF_20_044: equ 0x0217
+BUF_21_004: equ 0x0218
+BUF_21_020: equ 0x0219
+BUF_21_032: equ 0x021A
+BUF_21_040: equ 0x021B
+BUF_21_044: equ 0x021C
+BUF_22_004: equ 0x021D
+BUF_22_020: equ 0x021E
+BUF_22_032: equ 0x021F
+BUF_22_040: equ 0x0220
+BUF_22_044: equ 0x0221
+BUF_23_004: equ 0x0222
+BUF_23_020: equ 0x0223
+BUF_23_032: equ 0x0224
+BUF_23_040: equ 0x0225
+BUF_23_044: equ 0x0226
+BUF_24_004: equ 0x0227
+BUF_24_020: equ 0x0228
+BUF_24_032: equ 0x0229
+BUF_24_040: equ 0x022A
+BUF_24_044: equ 0x022B
+BUF_40_004: equ 0x022C
+BUF_40_020: equ 0x022D
+BUF_40_032: equ 0x022E
+BUF_40_040: equ 0x022F
+BUF_40_044: equ 0x0230
+BUF_41_004: equ 0x0231
+BUF_41_020: equ 0x0232
+BUF_41_032: equ 0x0233
+BUF_41_040: equ 0x0234
+BUF_41_044: equ 0x0235
+BUF_42_004: equ 0x0236
+BUF_42_020: equ 0x0237
+BUF_42_032: equ 0x0238
+BUF_42_040: equ 0x0239
+BUF_42_044: equ 0x023A
+BUF_43_004: equ 0x023B
+BUF_43_020: equ 0x023C
+BUF_43_032: equ 0x023D
+BUF_43_040: equ 0x023E
+BUF_43_044: equ 0x023F
+BUF_44_004: equ 0x0240
+BUF_44_020: equ 0x0241
+BUF_44_032: equ 0x0242
+BUF_44_040: equ 0x0243
+BUF_44_044: equ 0x0244
+BUF_45_004: equ 0x0245
+BUF_45_020: equ 0x0246
+BUF_45_032: equ 0x0247
+BUF_45_040: equ 0x0248
+BUF_45_044: equ 0x0249
+BUF_46_004: equ 0x024A
+BUF_46_020: equ 0x024B
+BUF_46_032: equ 0x024C
+BUF_46_040: equ 0x024D
+BUF_46_044: equ 0x024E
+BUF_47_004: equ 0x024F
+BUF_47_020: equ 0x0250
+BUF_47_032: equ 0x0251
+BUF_47_040: equ 0x0252
+BUF_47_044: equ 0x0253
+BUF_48_004: equ 0x0254
+BUF_48_020: equ 0x0255
+BUF_48_032: equ 0x0256
+BUF_48_040: equ 0x0257
+BUF_48_044: equ 0x0258
+BUF_49_004: equ 0x0259
+BUF_49_020: equ 0x025A
+BUF_49_032: equ 0x025B
+BUF_49_040: equ 0x025C
+BUF_49_044: equ 0x025D
+BUF_50_004: equ 0x025E
+BUF_50_020: equ 0x025F
+BUF_50_032: equ 0x0260
+BUF_50_040: equ 0x0261
+BUF_50_044: equ 0x0262
+BUF_51_004: equ 0x0263
+BUF_51_020: equ 0x0264
+BUF_51_032: equ 0x0265
+BUF_51_040: equ 0x0266
+BUF_51_044: equ 0x0267
+BUF_52_004: equ 0x0268
+BUF_52_020: equ 0x0269
+BUF_52_032: equ 0x026A
+BUF_52_040: equ 0x026B
+BUF_52_044: equ 0x026C
+
+; Import .rgba bitmap files and load them into VDP buffers
+load_sprites:
+
+	ld hl,F20_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_20_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F20_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_20_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F20_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_20_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F20_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_20_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F20_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_20_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F21_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_21_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F21_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_21_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F21_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_21_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F21_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_21_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F21_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_21_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F22_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_22_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F22_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_22_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F22_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_22_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F22_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_22_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F22_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_22_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F23_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_23_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F23_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_23_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F23_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_23_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F23_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_23_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F23_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_23_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F24_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_24_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F24_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_24_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F24_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_24_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F24_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_24_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F24_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_24_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F40_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_40_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F40_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_40_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F40_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_40_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F40_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_40_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F40_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_40_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F41_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_41_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F41_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_41_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F41_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_41_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F41_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_41_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F41_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_41_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F42_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_42_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F42_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_42_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F42_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_42_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F42_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_42_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F42_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_42_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F43_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_43_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F43_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_43_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F43_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_43_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F43_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_43_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F43_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_43_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F44_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_44_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F44_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_44_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F44_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_44_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F44_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_44_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F44_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_44_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F45_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_45_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F45_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_45_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F45_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_45_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F45_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_45_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F45_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_45_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F46_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_46_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F46_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_46_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F46_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_46_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F46_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_46_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F46_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_46_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F47_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_47_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F47_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_47_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F47_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_47_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F47_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_47_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F47_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_47_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F48_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_48_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F48_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_48_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F48_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_48_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F48_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_48_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F48_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_48_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F49_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_49_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F49_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_49_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F49_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_49_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F49_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_49_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F49_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_49_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F50_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_50_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F50_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_50_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F50_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_50_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F50_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_50_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F50_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_50_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F51_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_51_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F51_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_51_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F51_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_51_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F51_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_51_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F51_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_51_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F52_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_52_004
+	ld bc,35
+	ld de,35
+	ld ix,1225
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F52_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_52_020
+	ld bc,45
+	ld de,45
+	ld ix,2025
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F52_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_52_032
+	ld bc,64
+	ld de,64
+	ld ix,4096
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F52_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_52_040
+	ld bc,107
+	ld de,107
+	ld ix,11449
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,F52_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_52_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ret
+
+F20_004: db "panels/20_004.rgba",0
+F20_020: db "panels/20_020.rgba",0
+F20_032: db "panels/20_032.rgba",0
+F20_040: db "panels/20_040.rgba",0
+F20_044: db "panels/20_044.rgba",0
+F21_004: db "panels/21_004.rgba",0
+F21_020: db "panels/21_020.rgba",0
+F21_032: db "panels/21_032.rgba",0
+F21_040: db "panels/21_040.rgba",0
+F21_044: db "panels/21_044.rgba",0
+F22_004: db "panels/22_004.rgba",0
+F22_020: db "panels/22_020.rgba",0
+F22_032: db "panels/22_032.rgba",0
+F22_040: db "panels/22_040.rgba",0
+F22_044: db "panels/22_044.rgba",0
+F23_004: db "panels/23_004.rgba",0
+F23_020: db "panels/23_020.rgba",0
+F23_032: db "panels/23_032.rgba",0
+F23_040: db "panels/23_040.rgba",0
+F23_044: db "panels/23_044.rgba",0
+F24_004: db "panels/24_004.rgba",0
+F24_020: db "panels/24_020.rgba",0
+F24_032: db "panels/24_032.rgba",0
+F24_040: db "panels/24_040.rgba",0
+F24_044: db "panels/24_044.rgba",0
+F40_004: db "panels/40_004.rgba",0
+F40_020: db "panels/40_020.rgba",0
+F40_032: db "panels/40_032.rgba",0
+F40_040: db "panels/40_040.rgba",0
+F40_044: db "panels/40_044.rgba",0
+F41_004: db "panels/41_004.rgba",0
+F41_020: db "panels/41_020.rgba",0
+F41_032: db "panels/41_032.rgba",0
+F41_040: db "panels/41_040.rgba",0
+F41_044: db "panels/41_044.rgba",0
+F42_004: db "panels/42_004.rgba",0
+F42_020: db "panels/42_020.rgba",0
+F42_032: db "panels/42_032.rgba",0
+F42_040: db "panels/42_040.rgba",0
+F42_044: db "panels/42_044.rgba",0
+F43_004: db "panels/43_004.rgba",0
+F43_020: db "panels/43_020.rgba",0
+F43_032: db "panels/43_032.rgba",0
+F43_040: db "panels/43_040.rgba",0
+F43_044: db "panels/43_044.rgba",0
+F44_004: db "panels/44_004.rgba",0
+F44_020: db "panels/44_020.rgba",0
+F44_032: db "panels/44_032.rgba",0
+F44_040: db "panels/44_040.rgba",0
+F44_044: db "panels/44_044.rgba",0
+F45_004: db "panels/45_004.rgba",0
+F45_020: db "panels/45_020.rgba",0
+F45_032: db "panels/45_032.rgba",0
+F45_040: db "panels/45_040.rgba",0
+F45_044: db "panels/45_044.rgba",0
+F46_004: db "panels/46_004.rgba",0
+F46_020: db "panels/46_020.rgba",0
+F46_032: db "panels/46_032.rgba",0
+F46_040: db "panels/46_040.rgba",0
+F46_044: db "panels/46_044.rgba",0
+F47_004: db "panels/47_004.rgba",0
+F47_020: db "panels/47_020.rgba",0
+F47_032: db "panels/47_032.rgba",0
+F47_040: db "panels/47_040.rgba",0
+F47_044: db "panels/47_044.rgba",0
+F48_004: db "panels/48_004.rgba",0
+F48_020: db "panels/48_020.rgba",0
+F48_032: db "panels/48_032.rgba",0
+F48_040: db "panels/48_040.rgba",0
+F48_044: db "panels/48_044.rgba",0
+F49_004: db "panels/49_004.rgba",0
+F49_020: db "panels/49_020.rgba",0
+F49_032: db "panels/49_032.rgba",0
+F49_040: db "panels/49_040.rgba",0
+F49_044: db "panels/49_044.rgba",0
+F50_004: db "panels/50_004.rgba",0
+F50_020: db "panels/50_020.rgba",0
+F50_032: db "panels/50_032.rgba",0
+F50_040: db "panels/50_040.rgba",0
+F50_044: db "panels/50_044.rgba",0
+F51_004: db "panels/51_004.rgba",0
+F51_020: db "panels/51_020.rgba",0
+F51_032: db "panels/51_032.rgba",0
+F51_040: db "panels/51_040.rgba",0
+F51_044: db "panels/51_044.rgba",0
+F52_004: db "panels/52_004.rgba",0
+F52_020: db "panels/52_020.rgba",0
+F52_032: db "panels/52_032.rgba",0
+F52_040: db "panels/52_040.rgba",0
+F52_044: db "panels/52_044.rgba",0

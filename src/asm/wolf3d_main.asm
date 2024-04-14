@@ -35,6 +35,15 @@ main:
 ; clear the screen
 	call vdu_cls
 
+; ; debug test plot a sprite
+; 	ld hl,BUF_51_004
+; 	call vdu_buff_select
+; 	ld bc,120
+; 	ld de,120
+; 	call vdu_plot_bmp
+; 	ret
+
+
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y
 	call get_cell_from_coords

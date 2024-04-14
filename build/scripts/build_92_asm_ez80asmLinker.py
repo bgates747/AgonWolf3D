@@ -3,17 +3,6 @@ import subprocess
 import glob
 import sqlite3
 
-# This monstrosity is the final step in the build process.
-# It's a poor-man's linking assembler of sorts which creates
-# multiple binary files, and then generates additional assembly
-# code telling the launcher application where to load them.
-# It's a two pass call to a two-pass assembler, for four passes total
-# As every room of every map is a separate binary file, this
-# script runs for each one of them. So a full floor of 10 rooms
-# will currently require 40 assembler passes.
-# Someday I may figure out a more elegant way to do this.
-# But for now, it works.
-
 bin_file_addr_and_bytes = []  
 bin_data = None
 
@@ -28,7 +17,6 @@ def make_df_buff_ids(full_panels_path):
 
 # Main function to generate map render routines
 def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room_id, full_panels_path):
-
     conn = sqlite3.connect(full_db_path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -41,12 +29,11 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
     with open(map_tgt_path, 'w') as writer:
         writer.write('\t.org 0x070000\n\n')
         writer.write('cells:\n')
-        writer.write('; cell label: obj_id map_x map_y, render routine address\n')
-        writer.write('; MIND THE LITTLE-ENDIANESS IN THE COORDINATES!!!111\n')
+        writer.write('; cell label: (obj_id render_obj type/status mask), render routine address\n')
+        writer.write('; Type/status mask: 0x80 = door, 0x40 = wall, 0x20 = trigger, 0x10 = blocking\n\n')
 
-    # Write main map cell lookup table
         cursor.execute(f"""
-            SELECT cell_id, map_x, map_y, obj_id
+            SELECT cell_id, map_x, map_y, obj_id, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, special
             FROM tbl_06_maps
             WHERE floor_num = {floor_num} AND room_id = {room_id}
             ORDER BY cell_id""")
@@ -54,11 +41,13 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
 
         for cell in map_cells:
             cell_id = cell['cell_id']
-            map_x, map_y, obj_id = cell['map_x'], cell['map_y'], cell['obj_id']
-            hex_obj_id, hex_map_x, hex_map_y = format(obj_id & 0xFF, "02X"), format(map_x & 0xFF, "02X"), format(map_y & 0xFF, "02X")
-
+            cell_id, map_x, map_y, obj_id, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, special = cell['cell_id'], cell['map_x'], cell['map_y'], cell['obj_id'], cell['is_door'], cell['is_wall'], cell['is_trigger'], cell['is_blocking'], cell['render_type'], cell['render_obj_id'], cell['special']
+            map_type_status = f'{is_door}{is_wall}{is_trigger}{is_blocking}0000'
+            hex_type_status = format(int(map_type_status, 2), "02X")
+            hex_obj_id = format(obj_id & 0xFF, "02X")
+            hex_render_obj_id = format(render_obj_id & 0xFF, "02X")
             # Writing the initial cell label and location
-            writer.write(f'cell_{cell_id:03d}: dl 0x{hex_obj_id}{hex_map_y}{hex_map_x}, rend_{cell_id:03d}\n')
+            writer.write(f'cell_{cell_id:03d}: dl 0x{hex_obj_id}{hex_render_obj_id}{hex_type_status}, rend_{cell_id:03d} ; x,y ({map_x},{map_y}) {render_type} {special}\n')
 
         writer.write('\n')
 
@@ -82,19 +71,29 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
                 # Write the routine label
                 writer.write(f'rend_{cell_id:03d}_{orientation}:\n')
                 # Create a cursor to get the panels to render
+
                 cursor.execute(f"""
-                    SELECT 'BUF_' || pl.panel_base_filename AS buffer_label, rp.to_poly_id
+                    SELECT 'BUF_' || pl.panel_base_filename AS buffer_label, rp.to_poly_id, rp.to_cell_id, rp.to_render_type
                     FROM tbl_07_render_panels AS rp
-                    INNER JOIN qry_04_panels_lookup AS pl
+                    LEFT JOIN tbl_04_panels_lookup AS pl
+                    -- INNER JOIN tbl_04_panels_lookup AS pl
                     ON rp.to_render_obj_id = pl.render_obj_id AND rp.to_poly_id = pl.poly_id
                     WHERE rp.floor_num = {floor_num} AND rp.room_id = {room_id} AND rp.cell_id = {cell_id} AND rp.orientation = {orientation}
                     ORDER BY rp.to_poly_id""")
                 panels = cursor.fetchall()
                 for panel in panels:
                     buffer_label, to_poly_id = panel['buffer_label'], panel['to_poly_id']
-                    buff_id = buff_id_dict[buffer_label]
-                    writer.write(f'\tld hl,0x{to_poly_id:02X}{buff_id} ; {buffer_label}\n')
-                    writer.write('\tcall render_panel\n')
+                    to_render_type = panel['to_render_type']
+                    to_cell_id = panel['to_cell_id']
+                    # if buffer_label is not None:
+                    if to_render_type == 'cube':
+                        buff_id = buff_id_dict[buffer_label]
+                        writer.write(f'\tld hl,0x{to_poly_id:02X}{buff_id} ; {buffer_label}\n')
+                        writer.write('\tcall render_panel\n')
+                    else: 
+                        writer.write(f'\tld ix,cell_{to_cell_id:03d}\n')
+                        writer.write(f'\tld a,0x{to_poly_id:02X}\n')
+                        writer.write('\tcall render_sprite\n')
                 writer.write('\tjp render_scene_return\n')
         # Party like it's 1999
     conn.close()
