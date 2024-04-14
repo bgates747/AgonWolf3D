@@ -156,45 +156,10 @@ def compute_cropping_offsets(poly_verts, screen_width, screen_height):
     offset_y = max(0, -min_y)
 
     # Adjust cropping dimensions to fit within screen and image bounds
-    crop_width = min(screen_width - min_x, poly_width - offset_x)
-    crop_height = min(screen_height - min_y, poly_height - offset_y)
+    crop_width = min(screen_width, screen_width - min_x, poly_width - offset_x)
+    crop_height = min(screen_height, screen_height - min_y, poly_height - offset_y)
 
     return int(offset_x), int(offset_y), int(crop_width), int(crop_height)
-
-# def compute_cropping_offsets(poly_verts, screen_width, screen_height):
-#     # Compute the polygon's bounding box
-#     min_x, max_x, min_y, max_y = calculate_bbox(poly_verts)
-
-#     # Calculate dimensions of the polygon's bounding box
-#     poly_width = max_x - min_x
-#     poly_height = max_y - min_y
-
-#     # The offsets should ensure that the polygon's bounding box is within screen bounds
-#     # Calculate the left offset based on the polygon's minimum X (but not less than 0)
-#     offset_x = max(0, -min_x)
-#     # Calculate the top offset based on the polygon's minimum Y (but not less than 0)
-#     offset_y = max(0, -min_y)
-
-#     # Adjust the crop width and height to fit within the screen dimensions
-#     # If the polygon extends beyond the right of the screen, crop it to the screen width
-#     crop_width = min(screen_width - offset_x, poly_width)
-#     # If the polygon extends beyond the bottom of the screen, crop it to the screen height
-#     crop_height = min(screen_height - offset_y, poly_height)
-
-#     # If the polygon is originally within the screen bounds, don't offset it
-#     if min_x >= 0:
-#         crop_width = min(screen_width, max_x)
-#         offset_x = min_x
-#     if min_y >= 0:
-#         crop_height = min(screen_height, max_y)
-#         offset_y = min_y
-
-#     # Ensure the crop width and height don't exceed the screen dimensions
-#     crop_width = min(crop_width, screen_width - offset_x)
-#     crop_height = min(crop_height, screen_height - offset_y)
-
-#     return int(offset_x), int(offset_y), int(crop_width), int(crop_height)
-
 
 def perspective_transform(db_path, texture_path, poly_def, screen_width, screen_height):
     scale = poly_def["scale"] / 100  # Convert scale from percentage to fractional

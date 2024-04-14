@@ -571,8 +571,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_10_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -584,8 +584,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_10_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -597,8 +597,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_10_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -896,8 +896,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_11_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -909,8 +909,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_11_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -922,8 +922,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_11_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1221,8 +1221,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_12_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1234,8 +1234,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_12_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1247,8 +1247,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_12_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1546,8 +1546,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_13_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1559,8 +1559,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_13_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1572,8 +1572,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_13_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1871,8 +1871,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_14_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1884,8 +1884,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_14_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -1897,8 +1897,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_14_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2196,8 +2196,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_15_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2209,8 +2209,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_15_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2222,8 +2222,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_15_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2521,8 +2521,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_16_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2534,8 +2534,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_16_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2547,8 +2547,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_16_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2846,8 +2846,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_17_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2859,8 +2859,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_17_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -2872,8 +2872,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_17_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3171,8 +3171,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_57_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3184,8 +3184,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_57_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3197,8 +3197,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_57_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3496,8 +3496,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_58_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3509,8 +3509,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_58_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3522,8 +3522,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_58_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3821,8 +3821,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_59_042
 	ld bc,106
-	ld de,240
-	ld ix,25440
+	ld de,160
+	ld ix,16960
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3834,8 +3834,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_59_043
 	ld bc,107
-	ld de,240
-	ld ix,25680
+	ld de,160
+	ld ix,17120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -3847,8 +3847,8 @@ load_panels:
 	RST.LIL 08h
 	ld hl,BUF_59_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -4284,8 +4284,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_20_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -4479,8 +4479,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_23_044
 	ld bc,320
-	ld de,240
-	ld ix,76800
+	ld de,160
+	ld ix,51200
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h

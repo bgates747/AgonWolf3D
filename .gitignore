@@ -18,16 +18,8 @@ build/*
 src/agon_api/*
 !src/agon_api/asm/
 
-# Ignore everyting in tgt except the panels directory and .bin files
+# Ignore everyting in tgt
 tgt/*
-!tgt/panels/
-!tgt/*.bin
-# Additionally ignore all files in tgt which contain 'temp', 'tmp' 'cmb' in their filenames
-tgt/*temp*
-tgt/*tmp*
-tgt/*cmb*
-# specifically ignor tgt/temp.bin
-tgt/temp.bin
 
 # Ignore Agon autoexec files
 autoexec*.txt
