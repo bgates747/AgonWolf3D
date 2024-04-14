@@ -238,8 +238,8 @@ def perspective_transform(db_path, texture_path, poly_def, screen_width, screen_
     poly_x1, poly_y1 = map(int, scaled_poly_verts[1])
     poly_x2, poly_y2 = map(int, scaled_poly_verts[2])
     poly_x3, poly_y3 = map(int, scaled_poly_verts[3])
-    plot_x = poly_x0
-    plot_y = poly_y0
+    plot_x = max(0, poly_x0)
+    plot_y = max(0, poly_y0)
     dim_x = int(cropped_image.shape[1])
     dim_y = int(cropped_image.shape[0])
     r = poly_def["r"]
