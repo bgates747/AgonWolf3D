@@ -49,10 +49,10 @@ class PolygonViewer:
         
         polygon = np.array(vertices)
         self.plot.plot(*polygon.T, marker='o')
-        self.plot.set_xlim(0, 320)  # Adjusted for a more centered view
-        self.plot.set_ylim(0, 160)  # Adjusted for a more centered view
+        self.plot.set_xlim(0, screen_width)  # Adjusted for a more centered view
+        self.plot.set_ylim(0, screen_height)  # Adjusted for a more centered view
 
-        viewport_vertices = [(0, 0), (320, 0), (320, 160), (0, 160), (0, 0)]
+        viewport_vertices = [(0, 0), (screen_width, 0), (screen_width, screen_height), (0, screen_height), (0, 0)]
         viewport_polygon = np.array(viewport_vertices)
         self.plot.plot(*viewport_polygon.T, marker='o', linestyle='--', color='gray')
 
@@ -426,7 +426,8 @@ def make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     masks_directory = "build/panels/masks"
-    screen_size = (320, 160)
+    screen_width, screen_height = 320, 160
+    screen_size = (screen_width, screen_height)
     view_distance = 5
     min_scanlines = 5
 

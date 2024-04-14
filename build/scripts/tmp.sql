@@ -179,8 +179,34 @@
 
 -- delete from tbl_06_maps;
 
-select obj_id, render_obj_id, count(*) as num_cells
-from tbl_06_maps
-group by obj_id, render_obj_id
-order by obj_id, render_obj_id
-;
+-- select obj_id, render_obj_id, count(*) as num_cells
+-- from tbl_06_maps
+-- group by obj_id, render_obj_id
+-- order by obj_id, render_obj_id
+-- ;
+
+-- select t1.poly_id, t1.cube_x, t1.cube_y, t1.poly_x0, t1.poly_y0, t1.poly_x1, t1.poly_y1, t1.poly_x2, t1.poly_y2, t1.poly_x3, t1.poly_y3, t1.plot_x, t1.plot_y, t1.dim_x, t1.dim_y, t1.scale, t1.align_vert, t1.align_horiz, t2.plot_x, t2.plot_y, t2.dim_x, t2.dim_y, t2.scale, t2.align_vert, t2.align_horiz
+-- from (
+--     select poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz
+--     from tbl_04_panels_lookup
+--     where render_obj_id = 51 and cube_x = 0
+-- ) as t1 inner join (
+--     select poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz
+--     from tbl_04_panels_lookup
+--     where render_obj_id = 10 and cube_x = 0
+-- ) as t2 on t1.poly_id = t2.poly_id
+-- order by poly_id
+
+
+select t1.poly_id, t1.cube_x, t1.cube_y, t1.poly_x0, t1.poly_y0, t1.poly_x1, t1.poly_y1, t1.poly_x2, t1.poly_y2, t1.poly_x3, t1.poly_y3, t1.plot_x, t1.plot_y, t1.dim_x, t1.dim_y, 
+t2.plot_x as plot_x_unscaled, t2.plot_y as plot_y_unscaled, t2.dim_x dim_x_unscaled, t2.dim_y as dim_y_unscaled
+from (
+    select poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz
+    from tbl_04_panels_lookup
+    where render_obj_id = 51 and cube_x = 0
+) as t1 inner join (
+    select poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz
+    from tbl_04_panels_lookup
+    where render_obj_id = 10 and cube_x = 0
+) as t2 on t1.poly_id = t2.poly_id
+order by t1.poly_id desc
