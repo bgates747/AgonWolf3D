@@ -218,9 +218,11 @@ player_input:
     ld a,(cur_y)
     add a,d
     ld (cur_y),a
-; finally at long last, render the updated player position
-    ld a,(orientation)
-    call render_scene
+; ; #### we will do the render back in the main loop if the player moved
+; ; #### based on whether the player_move_timer is set to its max value
+; ; finally at long last, render the updated player position
+;     ld a,(orientation)
+    ; call render_scene
 @reset_move_timer:
     ld a,move_timer_reset
     ld (player_move_timer),a

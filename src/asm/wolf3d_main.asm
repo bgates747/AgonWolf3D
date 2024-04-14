@@ -32,33 +32,38 @@ main:
 ; initialize player position
 	call player_init
 
-; clear the screen
-	call vdu_cls
-
-; ; debug test plot a sprite
-; 	ld hl,BUF_51_004
-; 	call vdu_buff_select
-; 	ld bc,120
-; 	ld de,120
-; 	call vdu_plot_bmp
-; 	ret
-
+; set screen to double-buffered mode
+	ld a,8 + 128
+	call vdu_set_screen_mode
 
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y
 	call get_cell_from_coords
+	xor a ; north orientation
 	call render_scene
+	call vdu_flip_screen
 
 main_loop:
+; wait for the next vsync
+	call vsync
+
 ; get player input and update sprite position
 	call player_input
 
 ; move enemies
 	; call move_enemies
 
-; wait for the next vsync
-	call vsync
+; update the screen if the player or enemies have moved
+	ld a,(player_move_timer) ; if player has moved, this timer
+	cp move_timer_reset ; will be at its reset value
+	jr nz, @no_render
+	ld de,(cur_x) ; implicitly loads cur_y
+	call get_cell_from_coords
+	ld a,(orientation)
+	call render_scene
+	call vdu_flip_screen
 
+@no_render:
 ; poll keyboard
     ld a, $08                           ; code to send to MOS
     rst.lil $08                         ; get IX pointer to System Variables
