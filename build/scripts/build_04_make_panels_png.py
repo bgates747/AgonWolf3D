@@ -227,13 +227,12 @@ def perspective_transform(db_path, texture_path, poly_def, screen_width, screen_
     offset_x, offset_y, crop_width, crop_height = compute_cropping_offsets(scaled_poly_verts, screen_width, screen_height)
     # Crop the image to fit within the screen dimensions maintaining the original polygon's relative position
     cropped_image = trans_image[offset_y:offset_y + crop_height, offset_x:offset_x + crop_width]
-
-    # Insert modified polygon and image scaling data into tbl_04_panels_lookup
-    cube_id = poly_def["cube_id"]
-    poly_id = poly_def["poly_id"]
-    face = poly_def["face"]
-    cube_x = poly_def["cube_x"]
-    cube_y = poly_def["cube_y"]
+    # get cropped image dimensions
+    cropped_image_dim_x, cropped_image_dim_y = cropped_image.shape[1], cropped_image.shape[0]
+    # if either dimension is 0, make that dimension 1 and add transparent pixels to every member of the new array
+    if cropped_image_dim_x == 0 or cropped_image_dim_y == 0:
+        cropped_image = np.zeros((max(1, cropped_image_dim_y), max(1, cropped_image_dim_x), 4), dtype=np.uint8)
+    # compute preliminary new geometries for the polygon
     poly_x0, poly_y0 = map(int, scaled_poly_verts[0])
     poly_x1, poly_y1 = map(int, scaled_poly_verts[1])
     poly_x2, poly_y2 = map(int, scaled_poly_verts[2])
@@ -242,6 +241,35 @@ def perspective_transform(db_path, texture_path, poly_def, screen_width, screen_
     plot_y = max(0, poly_y0)
     dim_x = int(cropped_image.shape[1])
     dim_y = int(cropped_image.shape[0])
+
+    # determine the min x,y and max x,y coordinates of the image which contain non-transparent pixels
+    min_x, min_y = dim_x, dim_y
+    max_x, max_y = 0, 0
+    for y in range(dim_y):
+        for x in range(dim_x):
+            if cropped_image[y, x, 3] > 0:
+                min_x = min(min_x, x)
+                min_y = min(min_y, y)
+                max_x = max(max_x, x)
+                max_y = max(max_y, y)
+    # compute x,y offsets and new x,y dimensions based on the min x,y and max x,y coordinates
+    offset_x = min_x
+    offset_y = min_y
+    new_dim_x = max(1, max_x - min_x + 1)
+    new_dim_y = max(1, max_y - min_y + 1)
+    # crop cropped_image if x,y offsets are non-zero or new dim x,y dimensions are different from the original dim x,y
+    if offset_x > 0 or offset_y > 0 or new_dim_x != dim_x or new_dim_y != dim_y:
+        cropped_image = cropped_image[offset_y:offset_y + new_dim_y, offset_x:offset_x + new_dim_x]
+        dim_x = new_dim_x
+        dim_y = new_dim_y
+        plot_x += offset_x
+        plot_y += offset_y
+    # Insert modified polygon and image scaling data into tbl_04_panels_lookup
+    cube_id = poly_def["cube_id"]
+    poly_id = poly_def["poly_id"]
+    face = poly_def["face"]
+    cube_x = poly_def["cube_x"]
+    cube_y = poly_def["cube_y"]
     r = poly_def["r"]
     g = poly_def["g"]
     b = poly_def["b"]
