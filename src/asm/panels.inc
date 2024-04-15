@@ -5534,8 +5534,8 @@ load_dws:
 	RST.LIL 08h
 	ld hl,BUF_DW_8
 	ld bc,320
-	ld de,22
-	ld ix,7040
+	ld de,18
+	ld ix,5760
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -5547,8 +5547,8 @@ load_dws:
 	RST.LIL 08h
 	ld hl,BUF_DW_9
 	ld bc,320
-	ld de,18
-	ld ix,5760
+	ld de,16
+	ld ix,5120
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -5573,8 +5573,8 @@ load_dws:
 	RST.LIL 08h
 	ld hl,BUF_DW_11
 	ld bc,320
-	ld de,16
-	ld ix,5120
+	ld de,14
+	ld ix,4480
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h
@@ -5586,8 +5586,8 @@ load_dws:
 	RST.LIL 08h
 	ld hl,BUF_DW_12
 	ld bc,320
-	ld de,14
-	ld ix,4480
+	ld de,12
+	ld ix,3840
 	call vdu_load_bmp2_from_file
 	LD A, '.'
 	RST.LIL 10h

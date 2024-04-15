@@ -7,20 +7,20 @@ render_background:
     push hl
 ; plot background
     xor a ; color mode
-    ld c,c_blue ; color
+    ld c,c_grey_dk ; color
     call vdu_gcol_fg
     ld bc,0 ; x0
     ld de,0 ; y0
-    ld ix,320
+    ld ix,319
     ld iy,80
     call vdu_plot_rf
     xor a ; color mode
-    ld c,c_red_dk ; color
+    ld c,c_grey ; color
     call vdu_gcol_fg
     ld bc,0 ; x0
     ld de,80 ; y0
-    ld ix,320
-    ld iy,160
+    ld ix,319
+    ld iy,159
     call vdu_plot_rf
 ; plot the background
     pop hl ; get back the buffer id

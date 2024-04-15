@@ -108,7 +108,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         full_src_base_dir = f"{project_base_dir}/src/asm"
         full_tgt_base_dir = f"{project_base_dir}/tgt"
         full_panels_path = f"{project_base_dir}/src/asm/panels.inc"
-        do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base_dir, floor_nums, room_ids, full_panels_path)
+        do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base_dir, floor_nums, room_ids, full_panels_path, view_distance, map_dim_x, map_dim_y)
 
 
 if __name__ == "__main__":

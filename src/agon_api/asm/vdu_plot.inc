@@ -115,8 +115,8 @@ c_yellow_dk: equ 3
 c_blue_dk: equ 4
 c_magenta_dk: equ 5
 c_cyan_dk: equ 6
-c_grey_dk: equ 7
-c_grey: equ 8
+c_grey: equ 7
+c_grey_dk: equ 8
 c_red: equ 9
 c_green: equ 10
 c_yellow: equ 11
