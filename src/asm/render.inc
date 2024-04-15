@@ -67,7 +67,27 @@ render_sprite:
 ; outputs: pretty pictures
 ; destroys: a, hl, bc, de, ix
 render_scene:
+; back up ix
+    push ix
+; plot background
+    xor a ; color mode
+    ld c,c_blue ; color
+    call vdu_gcol_fg
+    ld bc,0 ; x0
+    ld de,0 ; y0
+    ld ix,320
+    ld iy,80
+    call vdu_plot_rf
+    xor a ; color mode
+    ld c,c_red_dk ; color
+    call vdu_gcol_fg
+    ld bc,0 ; x0
+    ld de,80 ; y0
+    ld ix,320
+    ld iy,160
+    call vdu_plot_rf
 ; get cell info from lookup table
+    pop ix ; pointer to cell lookup
     ld hl,(ix+map_render) ; hl = pointer to base of render routiness
     ld b,3 ; 3 bytes per address label
     ld a,(orientation)
@@ -76,7 +96,7 @@ render_scene:
     add hl,bc ; hl points to routine address
     ld hl,(hl) ; don't do this on a z80
     push hl
-    call vdu_cls ; DEBUG: commented out
+    ; call vdu_cls ; no longer necessary now that we have a background
     pop hl
     ld a,(orientation)
     ld iy,(cur_x)
