@@ -29,7 +29,7 @@ def do_blender(blender_script_path, blender_executable, blender_local_prefs_path
     print(' '.join(cmd))
     subprocess.run(cmd, env=env_vars)
 
-def do_all_the_things():
+def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height):
     # build_01_make_polys_masks.py
     masks_directory = "build/panels/masks"
     min_scanlines = 2
@@ -111,6 +111,14 @@ def do_all_the_things():
 
 
 if __name__ == "__main__":
+# Set build parameters
+    # Set paths
+    db_path = 'build/data/build.db' # Literally everything the app needs to build goes through this database
+    map_dim_x, map_dim_y = 16, 16 # Don't mess with this
+    screen_size = (320,160) # you could could change this for giggles I guess
+    screen_width, screen_height = screen_size[0], screen_size[1]
+    view_distance = 5 # This you can fiddle with. A full build is required to see the results, and it pukes at around 11.
+
     # Set which maps to build
     floor_nums = list(range(1))  # This will create a list: [0]
     room_ids = list(range(1))  # This will create a list: [0]
@@ -143,20 +151,11 @@ if __name__ == "__main__":
     do_91_asm_panels = True
     do_92_asm_ez80Asmlinker = True
 
-# Set build parameters
-    map_dim_x, map_dim_y = 16, 16 # Don't mess with this
-    screen_size = (320,160) # you could could change this for giggles I guess
-    screen_width, screen_height = screen_size[0], screen_size[1]
-    view_distance = 5 # This you can fiddle with. A full build is required to see the results, and it pukes at around 11.
+    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height)
 
-    # Set paths
-    db_path = 'build/data/build.db' # Literally everything the app needs to build goes through this database
-
-    # The Blender scripts for regular map development and deployment 
-    # have been deprecated and replaced with pure python scripts, 
-    # but we leave these here for reference in case that changes.
-    blender_local_prefs_dir = "build/blender/config"
-    blender_local_prefs_path = os.path.join(blender_local_prefs_dir, "userpref.blend")
-    blender_executable="build/blender/bin/blender"
-
-    do_all_the_things()
+    # # The Blender scripts for regular map development and deployment 
+    # # have been deprecated and replaced with pure python scripts, 
+    # # but we leave these here for reference in case that changes.
+    # blender_local_prefs_dir = "build/blender/config"
+    # blender_local_prefs_path = os.path.join(blender_local_prefs_dir, "userpref.blend")
+    # blender_executable="build/blender/bin/blender"
