@@ -54,9 +54,10 @@ def do_all_the_things():
         make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
 
     # build_04a_make_distance_walls_png.py
+    db_path = f'build/data/build.db'
     distance_walls_png_dir = f'build/distance_walls/png'
     distance_walls_rgba_dir = f'tgt/distance_walls'
-    distance_walls_src_dir = f'src/assets/images/textures'
+    distance_walls_src_dir = f'src/assets/images/textures/distance_walls'
     if do_04a_make_distance_walls_png:
         from build_04a_make_distance_walls_png import make_distance_walls
         make_distance_walls(db_path, distance_walls_src_dir, distance_walls_png_dir, distance_walls_rgba_dir, view_distance, map_dim_x, map_dim_y)

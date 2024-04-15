@@ -99,7 +99,7 @@ if __name__ == "__main__":
     db_path = f'build/data/build.db'
     distance_walls_png_dir = f'build/distance_walls/png'
     distance_walls_rgba_dir = f'tgt/distance_walls'
-    distance_walls_src_dir = f'src/assets/images/textures'
+    distance_walls_src_dir = f'src/assets/images/textures/distance_walls'
     map_dim_x, map_dim_y = 16, 16 # Don't mess with this
     view_distance = 5
 
