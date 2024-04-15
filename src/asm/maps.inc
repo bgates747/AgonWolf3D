@@ -47,6 +47,14 @@ get_neighbor:
 ; inputs: ; d,e = map_y,map_x
 ; returns: ix = pointer to cell lookup address; a = obj_id
 get_cell_from_coords:
+; modulo 16 on input coords
+	ld a,e
+	and 0x0F
+	ld e,a
+	ld a,d
+	and 0x0F
+	ld d,a
+; get cell_id from x,y
 	ld b,d ; y
 	ld c,16 ; number of cells in a column
 	mlt bc ; bc = cell_id of y,0
