@@ -1,3 +1,35 @@
+; render background as a prelude to rendering panels and sprites
+; hl is the buffer id, bc and de are plot_x and plot_y
+render_background:
+; back up everything
+    push bc
+    push de
+    push hl
+; plot background
+    xor a ; color mode
+    ld c,c_blue ; color
+    call vdu_gcol_fg
+    ld bc,0 ; x0
+    ld de,0 ; y0
+    ld ix,320
+    ld iy,80
+    call vdu_plot_rf
+    xor a ; color mode
+    ld c,c_red_dk ; color
+    call vdu_gcol_fg
+    ld bc,0 ; x0
+    ld de,80 ; y0
+    ld ix,320
+    ld iy,160
+    call vdu_plot_rf
+; plot the background
+    pop hl ; get back the buffer id
+    call vdu_buff_select
+    pop de ; get back plot_y
+    pop bc ; get back plot_x
+    call vdu_plot_bmp
+    ret
+
 ; render a 3D panel
 ; inputs: uhl is to_poly_id, hl is the buffer_id
 render_panel:
@@ -67,27 +99,7 @@ render_sprite:
 ; outputs: pretty pictures
 ; destroys: a, hl, bc, de, ix
 render_scene:
-; back up ix
-    push ix
-; plot background
-    xor a ; color mode
-    ld c,c_blue ; color
-    call vdu_gcol_fg
-    ld bc,0 ; x0
-    ld de,0 ; y0
-    ld ix,320
-    ld iy,80
-    call vdu_plot_rf
-    xor a ; color mode
-    ld c,c_red_dk ; color
-    call vdu_gcol_fg
-    ld bc,0 ; x0
-    ld de,80 ; y0
-    ld ix,320
-    ld iy,160
-    call vdu_plot_rf
 ; get cell info from lookup table
-    pop ix ; pointer to cell lookup
     ld hl,(ix+map_render) ; hl = pointer to base of render routiness
     ld b,3 ; 3 bytes per address label
     ld a,(orientation)
