@@ -53,14 +53,14 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         from build_04_make_panels_png import make_panels_and_sprites
         make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
 
-    # build_04a_make_distance_walls_png.py
+    # build_04a_make_dws.py
     db_path = f'build/data/build.db'
-    distance_walls_png_dir = f'build/distance_walls/png'
-    distance_walls_rgba_dir = f'tgt/distance_walls'
-    distance_walls_src_dir = f'src/assets/images/textures/distance_walls'
-    if do_04a_make_distance_walls_png:
-        from build_04a_make_distance_walls_png import make_distance_walls
-        make_distance_walls(db_path, distance_walls_src_dir, distance_walls_png_dir, distance_walls_rgba_dir, view_distance, map_dim_x, map_dim_y)
+    dws_png_dir = f'build/dws/png'
+    dws_rgba_dir = f'tgt/dws'
+    dws_src_dir = f'src/assets/images/textures/dws'
+    if do_04a_make_dws_png:
+        from build_04a_make_dws import make_dws
+        make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
 
 # build_05_make_panels_rgba.py
     panels_rgba_dir = 'tgt/panels'
@@ -92,10 +92,11 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
 # build_91_asm_panels.py
     if do_91_asm_panels:
-        from build_91_asm_panels import make_asm_panels, make_asm_sprites
+        from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
         panels_inc_path = f"src/asm/panels.inc"
         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-        make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+        last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+        make_asm_dws(db_path, panels_inc_path, last_buffer_id)
 
 # build_92_asm_ez80Asmlinker.py
     if do_92_asm_ez80Asmlinker:
@@ -129,7 +130,7 @@ if __name__ == "__main__":
 # Start here if you've changed tile textures or definitions
     do_02_fetch_tiles = False
     do_04_make_panels_png = False
-    do_04a_make_distance_walls_png = False
+    do_04a_make_dws_png = False
     do_05_panels_rgba = False
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
@@ -143,7 +144,7 @@ if __name__ == "__main__":
     do_01_polys_masks = True
     do_02_fetch_tiles = True
     do_04_make_panels_png = True
-    do_04a_make_distance_walls_png = True
+    do_04a_make_dws_png = True
     do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True

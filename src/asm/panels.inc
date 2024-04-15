@@ -5487,3 +5487,145 @@ F52_020: db "panels/52_020.rgba",0
 F52_032: db "panels/52_032.rgba",0
 F52_040: db "panels/52_040.rgba",0
 F52_044: db "panels/52_044.rgba",0
+; Bitmap indices:
+BUF_DW_6: equ 0x026D
+BUF_DW_7: equ 0x026E
+BUF_DW_8: equ 0x026F
+BUF_DW_9: equ 0x0270
+BUF_DW_10: equ 0x0271
+BUF_DW_11: equ 0x0272
+BUF_DW_12: equ 0x0273
+BUF_DW_13: equ 0x0274
+BUF_DW_14: equ 0x0275
+
+; Import .rgba bitmap files and load them into VDP buffers
+load_dws:
+
+	ld hl,Fdw_6
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_6
+	ld bc,320
+	ld de,30
+	ld ix,9600
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_7
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_7
+	ld bc,320
+	ld de,24
+	ld ix,7680
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_8
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_8
+	ld bc,320
+	ld de,22
+	ld ix,7040
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_9
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_9
+	ld bc,320
+	ld de,18
+	ld ix,5760
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_10
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_10
+	ld bc,320
+	ld de,16
+	ld ix,5120
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_11
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_11
+	ld bc,320
+	ld de,16
+	ld ix,5120
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_12
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_12
+	ld bc,320
+	ld de,14
+	ld ix,4480
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_13
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_13
+	ld bc,320
+	ld de,12
+	ld ix,3840
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ld hl,Fdw_14
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DW_14
+	ld bc,320
+	ld de,12
+	ld ix,3840
+	call vdu_load_bmp2_from_file
+	LD A, '.'
+	RST.LIL 10h
+
+	ret
+
+Fdw_6: db "dws/dw_6.rgba",0
+Fdw_7: db "dws/dw_7.rgba",0
+Fdw_8: db "dws/dw_8.rgba",0
+Fdw_9: db "dws/dw_9.rgba",0
+Fdw_10: db "dws/dw_10.rgba",0
+Fdw_11: db "dws/dw_11.rgba",0
+Fdw_12: db "dws/dw_12.rgba",0
+Fdw_13: db "dws/dw_13.rgba",0
+Fdw_14: db "dws/dw_14.rgba",0

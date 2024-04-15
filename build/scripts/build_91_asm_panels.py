@@ -144,9 +144,72 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
             asm_writer.write(f"F{panel_base_filename}: db \"panels/{panel_base_filename}.rgba\",0\n")
 
     conn.close()
+    return buffer_id_counter
+
+def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
+    
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = dict_factory
+        cursor = conn.cursor()
+    
+        unique_query = """
+            select distance, plot_x, plot_y, panel_base_filename, dim_x, dim_y
+            from tbl_04a_dws_lookup
+            order by distance;
+        """
+        cursor.execute(unique_query)
+        unique_rows = cursor.fetchall()
+    
+        buffer_id_counter = last_buffer_id
+        with open(panels_inc_path, 'a') as asm_writer: # append to the file
+            asm_writer.write("; Bitmap indices:\n")
+            for row in unique_rows:
+                name = row['panel_base_filename'].upper()
+                asm_writer.write(f"BUF_{name}: equ 0x{buffer_id_counter:04X}\n")
+                buffer_id_counter += 1
+    
+            asm_writer.write("\n; Import .rgba bitmap files and load them into VDP buffers\n")
+            asm_writer.write("load_dws:\n")
+    
+            cursor.execute('''
+                select distance, plot_x, plot_y, panel_base_filename, dim_x, dim_y
+                from tbl_04a_dws_lookup
+                order by distance;
+            ''')
+            all_rows = cursor.fetchall()
+    
+            for row in all_rows:
+                panel_base_filename = row['panel_base_filename']
+                dim_x = row['dim_x']
+                dim_y = row['dim_y']
+                constName = "BUF_" + panel_base_filename.upper()
+                asm_writer.write(f"\n")
+                asm_writer.write(f"\tld hl,F{panel_base_filename}\n")
+                asm_writer.write(f"\tld de,filedata\n")
+                asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+                asm_writer.write("\tld a,mos_load\n")
+                asm_writer.write("\tRST.LIL 08h\n")
+
+                asm_writer.write(f"\tld hl,{constName}\n")
+                asm_writer.write(f"\tld bc,{dim_x}\n")
+                asm_writer.write(f"\tld de,{dim_y}\n")
+                asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
+                asm_writer.write("\tcall vdu_load_bmp2_from_file\n")
+                asm_writer.write("\tLD A, '.'\n")
+                asm_writer.write("\tRST.LIL 10h\n")
+
+            asm_writer.write("\n\tret\n\n")
+
+            for row in unique_rows:
+                panel_base_filename = row['panel_base_filename']
+                asm_writer.write(f"F{panel_base_filename}: db \"dws/{panel_base_filename}.rgba\",0\n")
+
+        conn.close()
+        return buffer_id_counter
 
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     panels_inc_path = "src/asm/panels.inc"
     last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-    make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+    last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+    make_asm_dws(db_path, panels_inc_path, last_buffer_id)

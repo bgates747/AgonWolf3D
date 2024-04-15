@@ -7,13 +7,13 @@ import shutil
 import PIL as pillow
 from agonImages import img_to_rgba2
 
-def make_table_04a_distance_walls_lookup(db_path):
+def make_table_04a_dws_lookup(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute('''DROP TABLE IF EXISTS tbl_04a_distance_walls_lookup;''')
+    cursor.execute('''DROP TABLE IF EXISTS tbl_04a_dws_lookup;''')
     conn.commit()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS tbl_04a_distance_walls_lookup (
+        CREATE TABLE IF NOT EXISTS tbl_04a_dws_lookup (
             distance INTEGER,
             plot_x INTEGER,
             plot_y INTEGER,
@@ -55,12 +55,12 @@ def crop_image(db_path, texture_path, distance):
         plot_x += offset_x
         plot_y += offset_y
 
-    # Insert modified polygon and image scaling data into tbl_04a_distance_walls_lookup
-    panel_base_filename  = os.path.basename(texture_path)
+    # Insert modified polygon and image scaling data into tbl_04a_dws_lookup
+    panel_base_filename  = os.path.basename(texture_path).replace(".png", "")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute(f"""
-        INSERT INTO tbl_04a_distance_walls_lookup (distance, plot_x, plot_y, dim_x, dim_y, panel_base_filename)
+        INSERT INTO tbl_04a_dws_lookup (distance, plot_x, plot_y, dim_x, dim_y, panel_base_filename)
         VALUES ({distance}, {plot_x}, {plot_y}, {dim_x}, {dim_y}, '{panel_base_filename}');
     """)
     conn.commit()
@@ -68,39 +68,39 @@ def crop_image(db_path, texture_path, distance):
     # Return the cropped image
     return Image.fromarray(texture_image) 
 
-def make_distance_walls_rgba(distance_walls_png_dir, distance_walls_rgba_dir):
-    if os.path.exists(distance_walls_rgba_dir):
-        shutil.rmtree(distance_walls_rgba_dir)
-    os.makedirs(distance_walls_rgba_dir)
+def make_dws_rgba(dws_png_dir, dws_rgba_dir):
+    if os.path.exists(dws_rgba_dir):
+        shutil.rmtree(dws_rgba_dir)
+    os.makedirs(dws_rgba_dir)
 
-    files = os.listdir(distance_walls_png_dir)
+    files = os.listdir(dws_png_dir)
     files.sort()
     for file in files:
         # open file as a PIL image
-        img = pillow.Image.open(os.path.join(distance_walls_png_dir, file))
+        img = pillow.Image.open(os.path.join(dws_png_dir, file))
         filename = os.path.splitext(file)[0].replace(".png", "")
-        tgt_filepath = os.path.join(distance_walls_rgba_dir, filename) + ".rgba"
+        tgt_filepath = os.path.join(dws_rgba_dir, filename) + ".rgba"
         # convert the transformed image to RGBA
         img_to_rgba2(img,tgt_filepath)
 
-def make_distance_walls(db_path, distance_walls_src_dir, distance_walls_png_dir, distance_walls_rgba_dir, view_distance, map_dim_x, map_dim_y):
-    if os.path.exists(distance_walls_png_dir):
-        shutil.rmtree(distance_walls_png_dir)
-    os.makedirs(distance_walls_png_dir)
-    make_table_04a_distance_walls_lookup(db_path)
+def make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y):
+    if os.path.exists(dws_png_dir):
+        shutil.rmtree(dws_png_dir)
+    os.makedirs(dws_png_dir)
+    make_table_04a_dws_lookup(db_path)
     for distance in range(view_distance + 1, max(map_dim_x,map_dim_y) - 1):
-        texture_path = f'{distance_walls_src_dir}/distance_wall_{distance}.png'
+        texture_path = f'{dws_src_dir}/dw_{distance}.png'
         image = crop_image(db_path, texture_path, distance)
-        image.save(f'{distance_walls_png_dir}/distance_wall_{distance}.png')
+        image.save(f'{dws_png_dir}/dw_{distance}.png')
 
-    make_distance_walls_rgba(distance_walls_png_dir, distance_walls_rgba_dir)
+    make_dws_rgba(dws_png_dir, dws_rgba_dir)
     
 if __name__ == "__main__":
     db_path = f'build/data/build.db'
-    distance_walls_png_dir = f'build/distance_walls/png'
-    distance_walls_rgba_dir = f'tgt/distance_walls'
-    distance_walls_src_dir = f'src/assets/images/textures/distance_walls'
+    dws_png_dir = f'build/dws/png'
+    dws_rgba_dir = f'tgt/dws'
+    dws_src_dir = f'src/assets/images/textures/dws'
     map_dim_x, map_dim_y = 16, 16 # Don't mess with this
     view_distance = 5
 
-    make_distance_walls(db_path, distance_walls_src_dir, distance_walls_png_dir, distance_walls_rgba_dir, view_distance, map_dim_x, map_dim_y)
+    make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
