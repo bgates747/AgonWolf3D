@@ -46,12 +46,20 @@ def do_all_the_things():
         from build_02_fetch_tiles import fetch_tiles
         fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir)
 
-    # build_04_open_cv_make_panels.py
+    # build_04_make_panels_png.py
     panels_png_dir = 'build/panels/png'
-    textures_dir = 'build/panels/thumbs'
+    thumbs_dir = 'build/panels/thumbs'
     if do_04_make_panels_png:
         from build_04_make_panels_png import make_panels_and_sprites
-        make_panels_and_sprites(db_path, panels_png_dir, textures_dir, screen_width, screen_height)
+        make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
+
+    # build_04a_make_distance_walls_png.py
+    distance_walls_png_dir = f'build/distance_walls/png'
+    distance_walls_rgba_dir = f'tgt/distance_walls'
+    distance_walls_src_dir = f'src/assets/images/textures'
+    if do_04a_make_distance_walls_png:
+        from build_04a_make_distance_walls_png import make_distance_walls
+        make_distance_walls(db_path, distance_walls_src_dir, distance_walls_png_dir, distance_walls_rgba_dir, view_distance, map_dim_x, map_dim_y)
 
 # build_05_make_panels_rgba.py
     panels_rgba_dir = 'tgt/panels'
@@ -112,6 +120,7 @@ if __name__ == "__main__":
 # Start here if you've changed tile textures or definitions
     do_02_fetch_tiles = False
     do_04_make_panels_png = False
+    do_04a_make_distance_walls_png = False
     do_05_panels_rgba = False
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
@@ -125,6 +134,7 @@ if __name__ == "__main__":
     do_01_polys_masks = True
     do_02_fetch_tiles = True
     do_04_make_panels_png = True
+    do_04a_make_distance_walls_png = True
     do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True

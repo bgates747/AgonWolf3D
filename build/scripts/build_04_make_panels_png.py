@@ -354,10 +354,10 @@ def update_tbl_04_panels_lookup(db_path, panels_png_dir):
     conn.commit()
     conn.close()
 
-def make_panels(db_path, panels_png_dir, textures_dir, screen_width, screen_height):
+def make_panels(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height):
     poly_def = fetch_panels_lookup_data(db_path)
     for poly_def in poly_def:
-        texture_path = os.path.join(textures_dir, f"thumb_{poly_def['render_obj_id']}.png")
+        texture_path = os.path.join(thumbs_dir, f"thumb_{poly_def['render_obj_id']}.png")
         face = poly_def['face']
         cube_x = poly_def['cube_x']
         render_type = poly_def['render_type']
@@ -406,13 +406,13 @@ def insert_south_faces(db_path):
     conn.commit()
     conn.close()
 
-def make_panels_and_sprites(db_path, panels_png_dir, textures_dir, screen_width, screen_height):
+def make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height):
     if os.path.exists(panels_png_dir):
         shutil.rmtree(panels_png_dir)
     os.makedirs(panels_png_dir)
     make_table_04_panels_lookup(db_path)
     make_view_04_panels_lookup(db_path)
-    make_panels(db_path, panels_png_dir, textures_dir, screen_width, screen_height)
+    make_panels(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
 # Ensure the polys table bounding box dimenions match the actual image sizes
 # and update tbl_01_polys accordingly; this is especially important for the south 
 # face polys as they share the same texture bitmmap, but often have slightly different
@@ -423,8 +423,8 @@ def make_panels_and_sprites(db_path, panels_png_dir, textures_dir, screen_width,
 if __name__ == "__main__":
     db_path = f'build/data/build.db'
     panels_png_dir = f'build/panels/png'
-    textures_dir = f'build/panels/thumbs'
+    thumbs_dir = f'build/panels/thumbs'
     screen_width = 320
     screen_height = 160
 
-    make_panels_and_sprites(db_path, panels_png_dir, textures_dir, screen_width, screen_height)
+    make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
