@@ -4,22 +4,70 @@ from PIL import Image
 import struct
 
 colors64 = [
-    (0, 0, 0), (170, 0, 0), (0, 170, 0), (170, 170, 0),
-    (0, 0, 170), (170, 0, 170), (0, 170, 170), (170, 170, 170),
-    (85, 85, 85), (255, 0, 0), (0, 255, 0), (255, 255, 0),
-    (0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255),
-    (0, 0, 85), (0, 85, 0), (0, 85, 85), (0, 85, 170),
-    (0, 85, 255), (0, 170, 85), (0, 170, 255), (0, 255, 85),
-    (0, 255, 170), (85, 0, 0), (85, 0, 85), (85, 0, 170),
-    (85, 0, 255), (85, 85, 0), (85, 85, 170), (85, 85, 255),
-    (85, 170, 0), (85, 170, 85), (85, 170, 170), (85, 170, 255),
-    (85, 255, 0), (85, 255, 85), (85, 255, 170), (85, 255, 255),
-    (170, 0, 85), (170, 0, 255), (170, 85, 0), (170, 85, 85),
-    (170, 85, 170), (170, 85, 255), (170, 170, 85), (170, 170, 255),
-    (170, 255, 0), (170, 255, 85), (170, 255, 170), (170, 255, 255),
-    (255, 0, 85), (255, 0, 170), (255, 85, 0), (255, 85, 85),
-    (255, 85, 170), (255, 85, 255), (255, 170, 0), (255, 170, 85),
-    (255, 170, 170), (255, 170, 255), (255, 255, 85), (255, 255, 170)
+    (0, 0, 0),         # Color 0
+    (170, 0, 0),       # Color 1
+    (0, 170, 0),       # Color 2
+    (170, 170, 0),     # Color 3
+    (0, 0, 170),       # Color 4
+    (170, 0, 170),     # Color 5
+    (0, 170, 170),     # Color 6
+    (170, 170, 170),   # Color 7
+    (85, 85, 85),      # Color 8
+    (255, 0, 0),       # Color 9
+    (0, 255, 0),       # Color 10
+    (255, 255, 0),     # Color 11
+    (0, 0, 255),       # Color 12
+    (255, 0, 255),     # Color 13
+    (0, 255, 255),     # Color 14
+    (255, 255, 255),   # Color 15
+    (0, 0, 85),        # Color 16
+    (0, 85, 0),        # Color 17
+    (0, 85, 85),       # Color 18
+    (0, 85, 170),      # Color 19
+    (0, 85, 255),      # Color 20
+    (0, 170, 85),      # Color 21
+    (0, 170, 255),     # Color 22
+    (0, 255, 85),      # Color 23
+    (0, 255, 170),     # Color 24
+    (85, 0, 0),        # Color 25
+    (85, 0, 85),       # Color 26
+    (85, 0, 170),      # Color 27
+    (85, 0, 255),      # Color 28
+    (85, 85, 0),       # Color 29
+    (85, 85, 170),     # Color 30
+    (85, 85, 255),     # Color 31
+    (85, 170, 0),      # Color 32
+    (85, 170, 85),     # Color 33
+    (85, 170, 170),    # Color 34
+    (85, 170, 255),    # Color 35
+    (85, 255, 0),      # Color 36
+    (85, 255, 85),     # Color 37
+    (85, 255, 170),    # Color 38
+    (85, 255, 255),    # Color 39
+    (170, 0, 85),      # Color 40
+    (170, 0, 255),     # Color 41
+    (170, 85, 0),      # Color 42
+    (170, 85, 85),     # Color 43
+    (170, 85, 170),    # Color 44
+    (170, 85, 255),    # Color 45
+    (170, 170, 85),    # Color 46
+    (170, 170, 255),   # Color 47
+    (170, 255, 0),     # Color 48
+    (170, 255, 85),    # Color 49
+    (170, 255, 170),   # Color 50
+    (170, 255, 255),   # Color 51
+    (255, 0, 85),      # Color 52
+    (255, 0, 170),     # Color 53
+    (255, 85, 0),      # Color 54
+    (255, 85, 85),     # Color 55
+    (255, 85, 170),    # Color 56
+    (255, 85, 255),    # Color 57
+    (255, 170, 0),     # Color 58
+    (255, 170, 85),    # Color 59
+    (255, 170, 170),   # Color 60
+    (255, 170, 255),   # Color 61
+    (255, 255, 85),    # Color 62
+    (255, 255, 170)    # Color 63
 ]
 
 colors16 = [
@@ -40,6 +88,31 @@ colors16 = [
     (0, 255, 255),     # Color 14
     (255, 255, 255)    # Color 15
 ]
+
+def get_rgba_color_by_index(index):
+    """
+    Fetches a color by index from the global 'colors64' list and adds full opacity.
+
+    Args:
+    index (int): The zero-based index for the color in the 'colors64' list.
+
+    Returns:
+    tuple: An RGBA color tuple.
+    """
+    global colors64  # Reference the global variable
+
+    if index == -1:
+        return (0, 0, 0, 0)
+
+    # Check if the index is within the bounds of the colors64 list
+    if index < 0 or index >= len(colors64):
+        raise IndexError("Color index out of range")
+
+    # Fetch the color and add an alpha value of 255 for full opacity
+    rgb = colors64[index]
+    rgba = rgb + (255,)  # Add full opacity
+
+    return rgba
 
 def rgb_to_hsv(color):
     """Convert an RGB color (with each component in the range [0, 255]) to HSV."""

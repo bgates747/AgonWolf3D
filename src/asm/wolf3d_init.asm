@@ -1,16 +1,22 @@
 ; after this we can put includes in any order we wish, even in between
 ; code blocks if there is any program-dependent or asethetic reason to do so
 	include "panels.inc"
-	include "fonts.inc"
+	include "fonts_bmp.inc"
 	include "maps.inc"
 	include "render.inc"
 	include "polys.inc"
+	include "font_itc_honda.inc"
+	; include "font_retro_computer.inc"
+	include "ui.inc"
 	; include "files.inc" ; file handling and memory allocation for loading files from disk
 
-hello_world: defb "Welcome to Agon Wolf3D!\n\r",0
+hello_world: defb "Welcome to Agon Wolf3D!",0
+; hello_world: defb "WELCOME TO AGON WOLF3D!",0
 loading_panels: defb "Loading panels...",0
 loading_sprites: defb "Loading sprites...",0
 loading_dws: defb "Loading distance walls...",0
+loading_itc_honda: defb "Loading ITC Honda font...",0
+loading_retro_computer: defb "Loading Retro Computer font...",0
 
 init:
 ; ; set fonts
@@ -36,15 +42,40 @@ init:
     xor a
     call vdu_set_scaling
 
+; set text background color
+	ld a,4 + 128
+	call vdu_colour_text
+
+; move the text cursor down a few lines
+	ld c,0 ; x
+	ld b,4 ; y
+	call vdu_move_cursor
+
+; set gfx bg color
+	xor a ; plotting mode 0
+	ld c,4 ; dark blue
+	call vdu_gcol_bg
+	call vdu_clg
+
 ; grab a bunch of sysvars and stuff
 	call vdu_init
 
 ; set the cursor off
 	call cursor_off
 
+; load ITC Honda font
+	call load_font_itc_honda
+
+; ; load Retro Computer font
+; 	call load_font_retro_computer
+
 ; print loading message
+	ld ix,font_itc_honda
+	; ld ix,font_retro_computer
 	ld hl,hello_world
-	call printString
+	ld bc,32
+	ld de,2
+	call font_bmp_print
 
 ; load panels
 	ld hl,loading_panels
@@ -62,7 +93,10 @@ init:
 	ld hl,loading_dws
 	call printString
 	call load_dws
-
+	
+; load ui images
+	call load_ui_images
+	
 ; clear the screen
 	call vdu_cls
 	call vdu_clg

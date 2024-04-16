@@ -365,8 +365,7 @@ multiPurposeDelay:
     push bc                 
     ld b, a 
     ld a,$08
-    RST.LIL	08h
-    ; MOSCALL $08                 ; get IX pointer to sysvars
+    RST.LIL	08h                 ; get IX pointer to sysvars               
 
 waitLoop:
 

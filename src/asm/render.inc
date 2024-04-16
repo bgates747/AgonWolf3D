@@ -115,4 +115,11 @@ render_scene:
     jp (hl) ; 'call' the routine
 ; we always jp back here from the render routine
 render_scene_return: 
+; draw the ui
+	ld hl,BUF_UI_001
+    call vdu_buff_select
+	ld bc,0
+	ld de,161
+	call vdu_plot_bmp
+; all done
     ret

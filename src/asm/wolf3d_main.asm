@@ -44,35 +44,35 @@ main:
 	call vdu_flip_screen
 
 main_loop:
-; wait for the next vsync
-	call vsync
+; wait for next frame
+	; ld a,00000100b ; 32 frames per second
+	ld a,00010000b ; 8 frames per second
+	; ld a,00100000b ; 4 frames per second
 
-; get player input and update sprite position
-	call player_input
+	call multiPurposeDelay
 
 ; move enemies
 	; call move_enemies
 
-; update the screen if the player or enemies have moved
-	ld a,(player_move_timer) ; if player has moved, this timer
-	cp move_timer_reset ; will be at its reset value
-	jr nz, @no_render
-	ld de,(cur_x) ; implicitly loads cur_y
-	call get_cell_from_coords
-	ld a,(orientation)
+; get player input and update sprite position
+	call player_input ; ix points to cell defs/status, a is target cell current obj_id
+
+; render the updated scene
 	call render_scene
+
+; flip the screen
 	call vdu_flip_screen
 
-@no_render:
-; poll keyboard
+; check for escape key and quit if pressed
     ld a, $08                           ; code to send to MOS
     rst.lil $08                         ; get IX pointer to System Variables
     
     ld a, (ix + $05)                    ; get ASCII code of key pressed
     cp 27                               ; check if 27 (ascii code for ESC)   
-    jp z, main_end                     ; if pressed, jump to exit
+    jr z, main_end                     ; if pressed, jump to exit
 
-    jp main_loop
+; do it again, Sam
+    jr main_loop
 
 main_end:
 	ret

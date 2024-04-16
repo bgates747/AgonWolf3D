@@ -27,7 +27,7 @@ dx:    db 0x00
 
 ; ######### PLAYER CONSTANTS ##########
 speed_player: equ 0x01 ; 1 map grid unit per movement tick
-move_timer_reset: equ 15
+move_timer_reset: equ 8 ; 4 ticks per secoond at 32 frames per second
 
 ; ######### PLAYER SPRITE PARAMETERS ##########
 ; uses the same offsets from its table base as the main sprite table:
@@ -73,19 +73,12 @@ player_init:
 ; Returns: player position updated
 ; Destroys: probably everything except maybe iy
 player_input:
-; first check player_move_timer for zero
-    ld a,(player_move_timer)
-    and a ; if zero we can move so get keyboard move input
-    jr z,@get_kb
-    dec a
-    ld (player_move_timer),a
-    ret
-@get_kb:
 ; reset player component velocities to zero as the default
     ld hl,0
     ld (xvel),hl ; implicitly sets yvel
-; we will set a to zero on a keypress, default of -1 will mean no keypress
-    ld a,-1
+; ; we will set a to zero on a keypress, default of -1 will mean no keypress
+;     ld a,-1
+;     push af
 ; check for keypresses and branch accordingly
 ; for how this works,see: https://github.com/breakintoprogram/agon-docs/wiki/MOS-API-%E2%80%90-Virtual-Keyboard
     MOSCALL	mos_getkbmap ;ix = pointer to MOS virtual keys table
@@ -161,9 +154,10 @@ player_input:
     xor a
 @Space:
 ; =====================
-; check whether player pressed a key
-    and a ; this will be -1 if player didn't press a key
-    ret nz ; non zero so no key pressed
+; ; check whether player pressed a key
+;     pop af ; a is 0 if player pressed a key, -1 if not
+;     and a ; this will be -1 if player didn't press a key
+;     ret nz ; non zero so no key pressed
 ; move player according to velocities set by keypresses
 ; TODO: this finagling could go to a conveninece function
     ld de,(xvel) ; d = yvel, e = xvel
@@ -211,19 +205,15 @@ player_input:
     ; fall through to @move_it
 @move_it:
 ; we are cleared for movement so update player position
-    ld de,(dx) ; d = dy, e = dx
+    ld de,0 ; make sure deu is zero
+    ld bc,(dx) ; b = dy, c = dx
     ld a,(cur_x)
-    add a,e
+    add a,c
+    ld e,a
     ld (cur_x),a
     ld a,(cur_y)
-    add a,d
+    add a,b
+    ld d,a
     ld (cur_y),a
-; ; #### we will do the render back in the main loop if the player moved
-; ; #### based on whether the player_move_timer is set to its max value
-; ; finally at long last, render the updated player position
-;     ld a,(orientation)
-    ; call render_scene
-@reset_move_timer:
-    ld a,move_timer_reset
-    ld (player_move_timer),a
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id
     ret
