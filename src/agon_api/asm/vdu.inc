@@ -409,24 +409,6 @@ vdu_define_character:
 @data:  ds 8
 @end: 
 
-; ; VDU 24, left; bottom; right; top;: Set graphics viewport 
-; ; inputs: bc=x0,de=y0,ix=x1,iy=y1
-; vdu_set_gfx_viewport:
-;     ld (@x0),bc
-; 	ld (@y0),de
-; 	ld (@x1),ix
-;     ld (@y1),iy
-; 	ld hl,@cmd
-; 	ld bc,@end-@cmd
-; 	rst.lil $18
-; 	ret
-; @cmd:   db 24 ; set graphics viewport command
-; @x0: 	dw 0 ; set by bc
-; @y0: 	dw 0 ; set by de
-; @x1: 	dw 0 ; set by ix
-; @y1: 	dw 0 ; set by iy
-; @end:   db 0 ; padding
-
 ; VDU 24, left; bottom; right; top;: Set graphics viewport 
 ; NOTE: the order of the y-coordinate parameters are inverted
 ; 	because we have turned off logical screen scaling
@@ -472,7 +454,21 @@ vdu_draw_char:
 @end:
 
 ; VDU 28, left, bottom, right, top: Set text viewport **
-; TODO
+; MIND THE LITTLE-ENDIANESS
+; inputs: c=left,b=bottom,e=right,d=top
+; outputs; nothing
+; destroys: a might make it out alive
+vdu_set_txt_viewport:
+    ld (@lb),bc
+	ld (@rt),de
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd:   db 28 ; set text viewport command
+@lb: 	dw 0x0000 ; set by bc
+@rt: 	dw 0x0000 ; set by de
+@end:   db 0x00	  ; padding
 
 ; PASSES
 ; VDU 29, x; y;: Set graphics origin
@@ -516,18 +512,6 @@ vdu_bksp:
     ld a,127
 	rst.lil $10  
 	ret
-
-vdu_flip_screen:
-	ld hl,@cmd         
-	ld bc,@end-@cmd    
-	rst.lil $18         
-	ret
-@cmd:
-; https://github.com/breakintoprogram/agon-docs/wiki/VDP
-; VDU 23,0,&C3: Flip the screen buffer (double-buffered modes only)
-	db 23,0,$C3
-@end:
-
 
 ; activate a bitmap in preparation to draw it
 ; inputs: a holding the bitmap index 

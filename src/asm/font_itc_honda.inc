@@ -90,7 +90,7 @@ BUF_4215: equ 0x1077 ; 119 w
 BUF_4216: equ 0x1078 ; 120 x
 BUF_4217: equ 0x1079 ; 121 y
 BUF_4218: equ 0x107A ; 122 z
-; [plot_y, dim_y, dim_x], buffer_id label: ; mind the little-endian order when fetching these!!!
+; [y_offset, dim_y, dim_x], buffer_id label: ; mind the little-endian order when fetching these!!!
 font_itc_honda:
 	dl 0x000106,BUF_4128
 	dl 0x000106,BUF_4128 ; Missing character 33
@@ -184,10 +184,10 @@ font_itc_honda:
 	dl 0x061109,BUF_4217
 	dl 0x060C09,BUF_4218
 
-; Import .rgba bitmap files and load them into VDP buffers
+; Import .rgba2 bitmap files and load them into VDP buffers
 load_font_itc_honda:
 
-	ld hl,F032
+	ld hl,Fhonda032
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -196,7 +196,7 @@ load_font_itc_honda:
 	ld bc,6
 	ld de,1
 	ld ix,6
-	call vdu_load_bmp2_from_file
+	call init_img_load
 ; Missing character 33
 ; Missing character 34
 ; Missing character 35
@@ -211,7 +211,7 @@ load_font_itc_honda:
 ; Missing character 44
 ; Missing character 45
 
-	ld hl,F046
+	ld hl,Fhonda046
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -220,10 +220,10 @@ load_font_itc_honda:
 	ld bc,5
 	ld de,5
 	ld ix,25
-	call vdu_load_bmp2_from_file
+	call init_img_load
 ; Missing character 47
 
-	ld hl,F048
+	ld hl,Fhonda048
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -232,9 +232,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F049
+	ld hl,Fhonda049
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -243,9 +243,9 @@ load_font_itc_honda:
 	ld bc,4
 	ld de,18
 	ld ix,72
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F050
+	ld hl,Fhonda050
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -254,9 +254,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F051
+	ld hl,Fhonda051
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -265,9 +265,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F052
+	ld hl,Fhonda052
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -276,9 +276,9 @@ load_font_itc_honda:
 	ld bc,12
 	ld de,18
 	ld ix,216
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F053
+	ld hl,Fhonda053
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -287,9 +287,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F054
+	ld hl,Fhonda054
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -298,9 +298,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F055
+	ld hl,Fhonda055
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -309,9 +309,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,18
 	ld ix,144
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F056
+	ld hl,Fhonda056
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -320,9 +320,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F057
+	ld hl,Fhonda057
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -331,7 +331,7 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 ; Missing character 58
 ; Missing character 59
 ; Missing character 60
@@ -340,7 +340,7 @@ load_font_itc_honda:
 ; Missing character 63
 ; Missing character 64
 
-	ld hl,F065
+	ld hl,Fhonda065
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -349,9 +349,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F066
+	ld hl,Fhonda066
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -360,9 +360,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F067
+	ld hl,Fhonda067
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -371,9 +371,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,19
 	ld ix,152
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F068
+	ld hl,Fhonda068
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -382,9 +382,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F069
+	ld hl,Fhonda069
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -393,9 +393,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,18
 	ld ix,144
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F070
+	ld hl,Fhonda070
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -404,9 +404,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,18
 	ld ix,144
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F071
+	ld hl,Fhonda071
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -415,9 +415,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F072
+	ld hl,Fhonda072
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -426,9 +426,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F073
+	ld hl,Fhonda073
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -437,9 +437,9 @@ load_font_itc_honda:
 	ld bc,3
 	ld de,18
 	ld ix,54
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F074
+	ld hl,Fhonda074
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -448,9 +448,9 @@ load_font_itc_honda:
 	ld bc,6
 	ld de,18
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F075
+	ld hl,Fhonda075
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -459,9 +459,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F076
+	ld hl,Fhonda076
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -470,9 +470,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,18
 	ld ix,144
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F077
+	ld hl,Fhonda077
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -481,9 +481,9 @@ load_font_itc_honda:
 	ld bc,14
 	ld de,18
 	ld ix,252
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F078
+	ld hl,Fhonda078
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -492,9 +492,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F079
+	ld hl,Fhonda079
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -503,9 +503,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F080
+	ld hl,Fhonda080
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -514,9 +514,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F081
+	ld hl,Fhonda081
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -525,9 +525,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,21
 	ld ix,210
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F082
+	ld hl,Fhonda082
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -536,9 +536,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F083
+	ld hl,Fhonda083
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -547,9 +547,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,19
 	ld ix,171
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F084
+	ld hl,Fhonda084
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -558,9 +558,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F085
+	ld hl,Fhonda085
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -569,9 +569,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F086
+	ld hl,Fhonda086
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -580,9 +580,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F087
+	ld hl,Fhonda087
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -591,9 +591,9 @@ load_font_itc_honda:
 	ld bc,16
 	ld de,18
 	ld ix,288
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F088
+	ld hl,Fhonda088
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -602,9 +602,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F089
+	ld hl,Fhonda089
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -613,9 +613,9 @@ load_font_itc_honda:
 	ld bc,10
 	ld de,18
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F090
+	ld hl,Fhonda090
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -624,7 +624,7 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 ; Missing character 91
 ; Missing character 92
 ; Missing character 93
@@ -632,7 +632,7 @@ load_font_itc_honda:
 ; Missing character 95
 ; Missing character 96
 
-	ld hl,F097
+	ld hl,Fhonda097
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -641,9 +641,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,12
 	ld ix,96
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F098
+	ld hl,Fhonda098
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -652,9 +652,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F099
+	ld hl,Fhonda099
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -663,9 +663,9 @@ load_font_itc_honda:
 	ld bc,7
 	ld de,12
 	ld ix,84
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F100
+	ld hl,Fhonda100
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -674,9 +674,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F101
+	ld hl,Fhonda101
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -685,9 +685,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,12
 	ld ix,96
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F102
+	ld hl,Fhonda102
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -696,9 +696,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F103
+	ld hl,Fhonda103
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -707,9 +707,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F104
+	ld hl,Fhonda104
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -718,9 +718,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F105
+	ld hl,Fhonda105
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -729,9 +729,9 @@ load_font_itc_honda:
 	ld bc,4
 	ld de,18
 	ld ix,72
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F106
+	ld hl,Fhonda106
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -740,9 +740,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,24
 	ld ix,192
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F107
+	ld hl,Fhonda107
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -751,9 +751,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F108
+	ld hl,Fhonda108
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -762,9 +762,9 @@ load_font_itc_honda:
 	ld bc,3
 	ld de,18
 	ld ix,54
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F109
+	ld hl,Fhonda109
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -773,9 +773,9 @@ load_font_itc_honda:
 	ld bc,14
 	ld de,13
 	ld ix,182
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F110
+	ld hl,Fhonda110
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -784,9 +784,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F111
+	ld hl,Fhonda111
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -795,9 +795,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F112
+	ld hl,Fhonda112
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -806,9 +806,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F113
+	ld hl,Fhonda113
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -817,9 +817,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,18
 	ld ix,162
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F114
+	ld hl,Fhonda114
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -828,9 +828,9 @@ load_font_itc_honda:
 	ld bc,6
 	ld de,13
 	ld ix,78
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F115
+	ld hl,Fhonda115
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -839,9 +839,9 @@ load_font_itc_honda:
 	ld bc,8
 	ld de,13
 	ld ix,104
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F116
+	ld hl,Fhonda116
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -850,9 +850,9 @@ load_font_itc_honda:
 	ld bc,7
 	ld de,15
 	ld ix,105
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F117
+	ld hl,Fhonda117
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -861,9 +861,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F118
+	ld hl,Fhonda118
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -872,9 +872,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F119
+	ld hl,Fhonda119
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -883,9 +883,9 @@ load_font_itc_honda:
 	ld bc,14
 	ld de,12
 	ld ix,168
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F120
+	ld hl,Fhonda120
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -894,9 +894,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F121
+	ld hl,Fhonda121
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -905,9 +905,9 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,17
 	ld ix,153
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
-	ld hl,F122
+	ld hl,Fhonda122
 	ld de,filedata
 	ld bc,102400
 	ld a,mos_load
@@ -916,71 +916,71 @@ load_font_itc_honda:
 	ld bc,9
 	ld de,12
 	ld ix,108
-	call vdu_load_bmp2_from_file
+	call init_img_load
 
 	ret
 
-F032: db "fonts/honda/032.rgba2",0
-F046: db "fonts/honda/046.rgba2",0
-F048: db "fonts/honda/048.rgba2",0
-F049: db "fonts/honda/049.rgba2",0
-F050: db "fonts/honda/050.rgba2",0
-F051: db "fonts/honda/051.rgba2",0
-F052: db "fonts/honda/052.rgba2",0
-F053: db "fonts/honda/053.rgba2",0
-F054: db "fonts/honda/054.rgba2",0
-F055: db "fonts/honda/055.rgba2",0
-F056: db "fonts/honda/056.rgba2",0
-F057: db "fonts/honda/057.rgba2",0
-F065: db "fonts/honda/065.rgba2",0
-F066: db "fonts/honda/066.rgba2",0
-F067: db "fonts/honda/067.rgba2",0
-F068: db "fonts/honda/068.rgba2",0
-F069: db "fonts/honda/069.rgba2",0
-F070: db "fonts/honda/070.rgba2",0
-F071: db "fonts/honda/071.rgba2",0
-F072: db "fonts/honda/072.rgba2",0
-F073: db "fonts/honda/073.rgba2",0
-F074: db "fonts/honda/074.rgba2",0
-F075: db "fonts/honda/075.rgba2",0
-F076: db "fonts/honda/076.rgba2",0
-F077: db "fonts/honda/077.rgba2",0
-F078: db "fonts/honda/078.rgba2",0
-F079: db "fonts/honda/079.rgba2",0
-F080: db "fonts/honda/080.rgba2",0
-F081: db "fonts/honda/081.rgba2",0
-F082: db "fonts/honda/082.rgba2",0
-F083: db "fonts/honda/083.rgba2",0
-F084: db "fonts/honda/084.rgba2",0
-F085: db "fonts/honda/085.rgba2",0
-F086: db "fonts/honda/086.rgba2",0
-F087: db "fonts/honda/087.rgba2",0
-F088: db "fonts/honda/088.rgba2",0
-F089: db "fonts/honda/089.rgba2",0
-F090: db "fonts/honda/090.rgba2",0
-F097: db "fonts/honda/097.rgba2",0
-F098: db "fonts/honda/098.rgba2",0
-F099: db "fonts/honda/099.rgba2",0
-F100: db "fonts/honda/100.rgba2",0
-F101: db "fonts/honda/101.rgba2",0
-F102: db "fonts/honda/102.rgba2",0
-F103: db "fonts/honda/103.rgba2",0
-F104: db "fonts/honda/104.rgba2",0
-F105: db "fonts/honda/105.rgba2",0
-F106: db "fonts/honda/106.rgba2",0
-F107: db "fonts/honda/107.rgba2",0
-F108: db "fonts/honda/108.rgba2",0
-F109: db "fonts/honda/109.rgba2",0
-F110: db "fonts/honda/110.rgba2",0
-F111: db "fonts/honda/111.rgba2",0
-F112: db "fonts/honda/112.rgba2",0
-F113: db "fonts/honda/113.rgba2",0
-F114: db "fonts/honda/114.rgba2",0
-F115: db "fonts/honda/115.rgba2",0
-F116: db "fonts/honda/116.rgba2",0
-F117: db "fonts/honda/117.rgba2",0
-F118: db "fonts/honda/118.rgba2",0
-F119: db "fonts/honda/119.rgba2",0
-F120: db "fonts/honda/120.rgba2",0
-F121: db "fonts/honda/121.rgba2",0
-F122: db "fonts/honda/122.rgba2",0
+Fhonda032: db "fonts/honda/032.rgba2",0
+Fhonda046: db "fonts/honda/046.rgba2",0
+Fhonda048: db "fonts/honda/048.rgba2",0
+Fhonda049: db "fonts/honda/049.rgba2",0
+Fhonda050: db "fonts/honda/050.rgba2",0
+Fhonda051: db "fonts/honda/051.rgba2",0
+Fhonda052: db "fonts/honda/052.rgba2",0
+Fhonda053: db "fonts/honda/053.rgba2",0
+Fhonda054: db "fonts/honda/054.rgba2",0
+Fhonda055: db "fonts/honda/055.rgba2",0
+Fhonda056: db "fonts/honda/056.rgba2",0
+Fhonda057: db "fonts/honda/057.rgba2",0
+Fhonda065: db "fonts/honda/065.rgba2",0
+Fhonda066: db "fonts/honda/066.rgba2",0
+Fhonda067: db "fonts/honda/067.rgba2",0
+Fhonda068: db "fonts/honda/068.rgba2",0
+Fhonda069: db "fonts/honda/069.rgba2",0
+Fhonda070: db "fonts/honda/070.rgba2",0
+Fhonda071: db "fonts/honda/071.rgba2",0
+Fhonda072: db "fonts/honda/072.rgba2",0
+Fhonda073: db "fonts/honda/073.rgba2",0
+Fhonda074: db "fonts/honda/074.rgba2",0
+Fhonda075: db "fonts/honda/075.rgba2",0
+Fhonda076: db "fonts/honda/076.rgba2",0
+Fhonda077: db "fonts/honda/077.rgba2",0
+Fhonda078: db "fonts/honda/078.rgba2",0
+Fhonda079: db "fonts/honda/079.rgba2",0
+Fhonda080: db "fonts/honda/080.rgba2",0
+Fhonda081: db "fonts/honda/081.rgba2",0
+Fhonda082: db "fonts/honda/082.rgba2",0
+Fhonda083: db "fonts/honda/083.rgba2",0
+Fhonda084: db "fonts/honda/084.rgba2",0
+Fhonda085: db "fonts/honda/085.rgba2",0
+Fhonda086: db "fonts/honda/086.rgba2",0
+Fhonda087: db "fonts/honda/087.rgba2",0
+Fhonda088: db "fonts/honda/088.rgba2",0
+Fhonda089: db "fonts/honda/089.rgba2",0
+Fhonda090: db "fonts/honda/090.rgba2",0
+Fhonda097: db "fonts/honda/097.rgba2",0
+Fhonda098: db "fonts/honda/098.rgba2",0
+Fhonda099: db "fonts/honda/099.rgba2",0
+Fhonda100: db "fonts/honda/100.rgba2",0
+Fhonda101: db "fonts/honda/101.rgba2",0
+Fhonda102: db "fonts/honda/102.rgba2",0
+Fhonda103: db "fonts/honda/103.rgba2",0
+Fhonda104: db "fonts/honda/104.rgba2",0
+Fhonda105: db "fonts/honda/105.rgba2",0
+Fhonda106: db "fonts/honda/106.rgba2",0
+Fhonda107: db "fonts/honda/107.rgba2",0
+Fhonda108: db "fonts/honda/108.rgba2",0
+Fhonda109: db "fonts/honda/109.rgba2",0
+Fhonda110: db "fonts/honda/110.rgba2",0
+Fhonda111: db "fonts/honda/111.rgba2",0
+Fhonda112: db "fonts/honda/112.rgba2",0
+Fhonda113: db "fonts/honda/113.rgba2",0
+Fhonda114: db "fonts/honda/114.rgba2",0
+Fhonda115: db "fonts/honda/115.rgba2",0
+Fhonda116: db "fonts/honda/116.rgba2",0
+Fhonda117: db "fonts/honda/117.rgba2",0
+Fhonda118: db "fonts/honda/118.rgba2",0
+Fhonda119: db "fonts/honda/119.rgba2",0
+Fhonda120: db "fonts/honda/120.rgba2",0
+Fhonda121: db "fonts/honda/121.rgba2",0
+Fhonda122: db "fonts/honda/122.rgba2",0

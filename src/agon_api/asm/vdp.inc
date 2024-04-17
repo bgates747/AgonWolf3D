@@ -17,19 +17,6 @@ VK_L: 			equ 154
 VK_R: 			equ 156
 
 ; ############# MY MODIFICATIONS / ADDITIONS #############
-; flip the screen buffer so we can see what we just drew
-; if working in a non-buffered screen mode (i.e. < 129)
-; this won't do anything and can be excluded
-vdu_flip_screen_buffer:
-	ld hl,@cmd         
-	ld bc,@end-@cmd    
-	rst.lil $18         
-	ret
-@cmd:
-; https://github.com/breakintoprogram/agon-docs/wiki/VDP
-; VDU 23,0,&C3: Flip the screen buffer (double-buffered modes only)
-	db 23,0,$C3
-@end:
 
 ; https://github.com/breakintoprogram/agon-docs/wiki/VDP
 ; VDU 23, 7: Scrolling

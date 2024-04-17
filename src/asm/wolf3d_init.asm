@@ -6,20 +6,22 @@
 	include "render.inc"
 	include "polys.inc"
 	include "font_itc_honda.inc"
-	; include "font_retro_computer.inc"
+	include "font_retro_computer.inc"
 	include "ui.inc"
+	include "ui_img.inc"
 	; include "files.inc" ; file handling and memory allocation for loading files from disk
 
 hello_world: defb "Welcome to Agon Wolf3D",0
 loading_panels: defb "Loading panels...",0
 loading_sprites: defb "Loading sprites...",0
 loading_dws: defb "Loading distance walls...",0
-loading_itc_honda: defb "Loading ITC Honda font...",0
-loading_retro_computer: defb "Loading Retro Computer font...",0
 
 init:
 ; load ITC Honda font
 	call load_font_itc_honda
+
+; load UI images
+	call load_ui_images
 
 ; set up the display
     ld a,8
@@ -37,13 +39,38 @@ init:
 	call vdu_gcol_bg
 	call vdu_clg
 
-; move the text cursor down a few lines
-	ld c,0 ; x
-	ld b,4 ; y
-	call vdu_move_cursor
+; VDU 28, left, bottom, right, top: Set text viewport **
+; MIND THE LITTLE-ENDIANESS
+; inputs: c=left,b=bottom,e=right,d=top
+	ld c,0 ; left
+	ld d,20 ; top
+	ld e,39 ; right
+	ld b,29; bottom
+	call vdu_set_txt_viewport
 
 ; set the cursor off
 	call cursor_off
+
+; display the splash screen
+	ld hl,BUF_UI_SPLASH
+	call vdu_buff_select
+	ld bc,0
+	ld de,0
+	call vdu_plot_bmp
+
+; ; display the nurples background
+; 	ld hl,BUF_UI_NURP_BG_CR 
+; 	call vdu_buff_select
+; 	ld bc,0
+; 	ld de,0
+; 	call vdu_plot_bmp
+
+; ; display the lavender background
+; 	ld hl,BUF_UI_LAVENDER
+; 	call vdu_buff_select
+; 	ld bc,0
+; 	ld de,0
+; 	call vdu_plot_bmp
 
 ; print loading message
 	ld ix,font_itc_honda
@@ -68,9 +95,9 @@ init:
 	ld hl,loading_dws
 	call printString
 	call load_dws
-	
-; load ui images
-	call load_ui_images
+
+; load retro computer font
+	call load_font_retro_computer
 	
 ; clear the screen
 	call vdu_cls
@@ -82,7 +109,41 @@ init:
 ; return things to normal state
     ld a,8
     call vdu_set_screen_mode
+
+; load nurples advert
+	ld hl,BUF_UI_NURP_BG_CR ; nurple background
+	call vdu_buff_select
+	ld bc,0
+	ld de,0
+	call vdu_plot_bmp
+
+; print a thanks for playing message
+	ld ix,font_itc_honda
+	ld hl,thanks_for_playing
+	ld bc,24
+	ld de,2
+	call font_bmp_print
+
+; print coming soon message
+	; ld ix,font_retro_computer
+
 	call cursor_on
+; VDU 31, x, y: Move text cursor to x, y text position (TAB(x, y))
+; inputs: c=x, b=y 8-bit unsigned integers
+	ld c,0
+	ld b,29 ; bottom of screen in mode 8
+	call vdu_move_cursor
+
+	ret
+
+thanks_for_playing: defb "We hope you enjoyed Wolf3D!",0
+
+init_img_load:
+	; load the image
+	call vdu_load_bmp2_from_file
+	; ; print a loading dot
+	; LD A, '.'
+	; RST.LIL 10h
 	ret
 
 ; WARNING: it may be tempting to move this routine to src/agon_api/vdp_buff.asm
@@ -137,6 +198,6 @@ vdu_load_bmp2_from_file:
 		db 23,0,0xA0
 @id2:	dw 0x0000 ; bufferId
 		db 0 
+		; CAUTION: the size argument is a 16-bit value, so the max number of bytes we can load in one chunk is 64KiB!! This corresponds to an rgba2 image size of 320x204.
 @size:	dw 0x0000 ;width * height ; length of data in bytes
-
-filedata: ; no need to allocate space for the bitmap data as we org the map data at 0x070000 just after this
+filedata: ; no need to allocate space for the bitmap data as we org the map data at 0x080000 just after this

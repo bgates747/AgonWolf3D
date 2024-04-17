@@ -79,7 +79,7 @@ def make_dws_rgba(dws_png_dir, dws_rgba_dir):
         # open file as a PIL image
         img = pillow.Image.open(os.path.join(dws_png_dir, file))
         filename = os.path.splitext(file)[0].replace(".png", "")
-        tgt_filepath = os.path.join(dws_rgba_dir, filename) + ".rgba"
+        tgt_filepath = os.path.join(dws_rgba_dir, filename) + ".rgba2"
         # convert the transformed image to RGBA
         img_to_rgba2(img,tgt_filepath)
 

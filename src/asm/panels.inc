@@ -275,7 +275,7 @@ BUF_59_042: equ 0x0210
 BUF_59_043: equ 0x0211
 BUF_59_044: equ 0x0212
 
-; Import .rgba bitmap files and load them into VDP buffers
+; Import .rgba2 bitmap files and load them into VDP buffers
 load_panels:
 
 	ld hl,F10_004
@@ -287,7 +287,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -300,7 +300,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -313,7 +313,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -326,7 +326,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -339,7 +339,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -352,7 +352,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -365,7 +365,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -378,7 +378,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -391,7 +391,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -404,7 +404,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -417,7 +417,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -430,7 +430,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -443,7 +443,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -456,7 +456,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -469,7 +469,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -482,7 +482,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -495,7 +495,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -508,7 +508,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -521,7 +521,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -534,7 +534,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -547,7 +547,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -560,7 +560,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -573,7 +573,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -586,7 +586,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -599,7 +599,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -612,7 +612,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -625,7 +625,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -638,7 +638,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -651,7 +651,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -664,7 +664,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -677,7 +677,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -690,7 +690,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -703,7 +703,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -716,7 +716,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -729,7 +729,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -742,7 +742,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -755,7 +755,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -768,7 +768,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -781,7 +781,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -794,7 +794,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -807,7 +807,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -820,7 +820,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -833,7 +833,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -846,7 +846,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -859,7 +859,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -872,7 +872,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -885,7 +885,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -898,7 +898,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -911,7 +911,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -924,7 +924,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -937,7 +937,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -950,7 +950,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -963,7 +963,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -976,7 +976,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -989,7 +989,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1002,7 +1002,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1015,7 +1015,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1028,7 +1028,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1041,7 +1041,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1054,7 +1054,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1067,7 +1067,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1080,7 +1080,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1093,7 +1093,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1106,7 +1106,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1119,7 +1119,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1132,7 +1132,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1145,7 +1145,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1158,7 +1158,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1171,7 +1171,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1184,7 +1184,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1197,7 +1197,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1210,7 +1210,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1223,7 +1223,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1236,7 +1236,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1249,7 +1249,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1262,7 +1262,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1275,7 +1275,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1288,7 +1288,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1301,7 +1301,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1314,7 +1314,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1327,7 +1327,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1340,7 +1340,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1353,7 +1353,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1366,7 +1366,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1379,7 +1379,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1392,7 +1392,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1405,7 +1405,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1418,7 +1418,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1431,7 +1431,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1444,7 +1444,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1457,7 +1457,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1470,7 +1470,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1483,7 +1483,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1496,7 +1496,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1509,7 +1509,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1522,7 +1522,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1535,7 +1535,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1548,7 +1548,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1561,7 +1561,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1574,7 +1574,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1587,7 +1587,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1600,7 +1600,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1613,7 +1613,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1626,7 +1626,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1639,7 +1639,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1652,7 +1652,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1665,7 +1665,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1678,7 +1678,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1691,7 +1691,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1704,7 +1704,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1717,7 +1717,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1730,7 +1730,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1743,7 +1743,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1756,7 +1756,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1769,7 +1769,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1782,7 +1782,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1795,7 +1795,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1808,7 +1808,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1821,7 +1821,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1834,7 +1834,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1847,7 +1847,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1860,7 +1860,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1873,7 +1873,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1886,7 +1886,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1899,7 +1899,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1912,7 +1912,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1925,7 +1925,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1938,7 +1938,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1951,7 +1951,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1964,7 +1964,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1977,7 +1977,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -1990,7 +1990,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2003,7 +2003,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2016,7 +2016,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2029,7 +2029,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2042,7 +2042,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2055,7 +2055,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2068,7 +2068,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2081,7 +2081,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2094,7 +2094,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2107,7 +2107,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2120,7 +2120,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2133,7 +2133,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2146,7 +2146,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2159,7 +2159,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2172,7 +2172,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2185,7 +2185,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2198,7 +2198,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2211,7 +2211,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2224,7 +2224,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2237,7 +2237,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2250,7 +2250,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2263,7 +2263,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2276,7 +2276,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2289,7 +2289,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2302,7 +2302,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2315,7 +2315,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2328,7 +2328,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2341,7 +2341,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2354,7 +2354,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2367,7 +2367,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2380,7 +2380,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2393,7 +2393,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2406,7 +2406,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2419,7 +2419,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2432,7 +2432,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2445,7 +2445,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2458,7 +2458,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2471,7 +2471,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2484,7 +2484,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2497,7 +2497,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2510,7 +2510,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2523,7 +2523,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2536,7 +2536,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2549,7 +2549,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2562,7 +2562,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2575,7 +2575,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2588,7 +2588,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2601,7 +2601,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2614,7 +2614,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2627,7 +2627,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2640,7 +2640,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2653,7 +2653,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2666,7 +2666,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2679,7 +2679,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2692,7 +2692,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2705,7 +2705,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2718,7 +2718,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2731,7 +2731,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2744,7 +2744,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2757,7 +2757,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2770,7 +2770,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2783,7 +2783,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2796,7 +2796,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2809,7 +2809,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2822,7 +2822,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2835,7 +2835,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2848,7 +2848,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2861,7 +2861,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2874,7 +2874,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2887,7 +2887,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2900,7 +2900,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2913,7 +2913,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2926,7 +2926,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2939,7 +2939,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2952,7 +2952,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2965,7 +2965,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2978,7 +2978,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -2991,7 +2991,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3004,7 +3004,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3017,7 +3017,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3030,7 +3030,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3043,7 +3043,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3056,7 +3056,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3069,7 +3069,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3082,7 +3082,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3095,7 +3095,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3108,7 +3108,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3121,7 +3121,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3134,7 +3134,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3147,7 +3147,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3160,7 +3160,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3173,7 +3173,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3186,7 +3186,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3199,7 +3199,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3212,7 +3212,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3225,7 +3225,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3238,7 +3238,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3251,7 +3251,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3264,7 +3264,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3277,7 +3277,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3290,7 +3290,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3303,7 +3303,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3316,7 +3316,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3329,7 +3329,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3342,7 +3342,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3355,7 +3355,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3368,7 +3368,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3381,7 +3381,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3394,7 +3394,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3407,7 +3407,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3420,7 +3420,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3433,7 +3433,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3446,7 +3446,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3459,7 +3459,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3472,7 +3472,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3485,7 +3485,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3498,7 +3498,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3511,7 +3511,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3524,7 +3524,7 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3537,7 +3537,7 @@ load_panels:
 	ld bc,35
 	ld de,35
 	ld ix,1225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3550,7 +3550,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3563,7 +3563,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3576,7 +3576,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3589,7 +3589,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3602,7 +3602,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3615,7 +3615,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3628,7 +3628,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3641,7 +3641,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3654,7 +3654,7 @@ load_panels:
 	ld bc,45
 	ld de,45
 	ld ix,2025
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3667,7 +3667,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3680,7 +3680,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3693,7 +3693,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3706,7 +3706,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3719,7 +3719,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3732,7 +3732,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3745,7 +3745,7 @@ load_panels:
 	ld bc,64
 	ld de,64
 	ld ix,4096
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3758,7 +3758,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3771,7 +3771,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3784,7 +3784,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3797,7 +3797,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3810,7 +3810,7 @@ load_panels:
 	ld bc,107
 	ld de,107
 	ld ix,11449
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3823,7 +3823,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3836,7 +3836,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -3849,287 +3849,287 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
 	ret
 
-F10_004: db "panels/10_004.rgba",0
-F10_009: db "panels/10_009.rgba",0
-F10_010: db "panels/10_010.rgba",0
-F10_011: db "panels/10_011.rgba",0
-F10_012: db "panels/10_012.rgba",0
-F10_013: db "panels/10_013.rgba",0
-F10_014: db "panels/10_014.rgba",0
-F10_015: db "panels/10_015.rgba",0
-F10_016: db "panels/10_016.rgba",0
-F10_020: db "panels/10_020.rgba",0
-F10_024: db "panels/10_024.rgba",0
-F10_025: db "panels/10_025.rgba",0
-F10_026: db "panels/10_026.rgba",0
-F10_027: db "panels/10_027.rgba",0
-F10_028: db "panels/10_028.rgba",0
-F10_029: db "panels/10_029.rgba",0
-F10_032: db "panels/10_032.rgba",0
-F10_035: db "panels/10_035.rgba",0
-F10_036: db "panels/10_036.rgba",0
-F10_037: db "panels/10_037.rgba",0
-F10_038: db "panels/10_038.rgba",0
-F10_040: db "panels/10_040.rgba",0
-F10_042: db "panels/10_042.rgba",0
-F10_043: db "panels/10_043.rgba",0
-F10_044: db "panels/10_044.rgba",0
-F11_004: db "panels/11_004.rgba",0
-F11_009: db "panels/11_009.rgba",0
-F11_010: db "panels/11_010.rgba",0
-F11_011: db "panels/11_011.rgba",0
-F11_012: db "panels/11_012.rgba",0
-F11_013: db "panels/11_013.rgba",0
-F11_014: db "panels/11_014.rgba",0
-F11_015: db "panels/11_015.rgba",0
-F11_016: db "panels/11_016.rgba",0
-F11_020: db "panels/11_020.rgba",0
-F11_024: db "panels/11_024.rgba",0
-F11_025: db "panels/11_025.rgba",0
-F11_026: db "panels/11_026.rgba",0
-F11_027: db "panels/11_027.rgba",0
-F11_028: db "panels/11_028.rgba",0
-F11_029: db "panels/11_029.rgba",0
-F11_032: db "panels/11_032.rgba",0
-F11_035: db "panels/11_035.rgba",0
-F11_036: db "panels/11_036.rgba",0
-F11_037: db "panels/11_037.rgba",0
-F11_038: db "panels/11_038.rgba",0
-F11_040: db "panels/11_040.rgba",0
-F11_042: db "panels/11_042.rgba",0
-F11_043: db "panels/11_043.rgba",0
-F11_044: db "panels/11_044.rgba",0
-F12_004: db "panels/12_004.rgba",0
-F12_009: db "panels/12_009.rgba",0
-F12_010: db "panels/12_010.rgba",0
-F12_011: db "panels/12_011.rgba",0
-F12_012: db "panels/12_012.rgba",0
-F12_013: db "panels/12_013.rgba",0
-F12_014: db "panels/12_014.rgba",0
-F12_015: db "panels/12_015.rgba",0
-F12_016: db "panels/12_016.rgba",0
-F12_020: db "panels/12_020.rgba",0
-F12_024: db "panels/12_024.rgba",0
-F12_025: db "panels/12_025.rgba",0
-F12_026: db "panels/12_026.rgba",0
-F12_027: db "panels/12_027.rgba",0
-F12_028: db "panels/12_028.rgba",0
-F12_029: db "panels/12_029.rgba",0
-F12_032: db "panels/12_032.rgba",0
-F12_035: db "panels/12_035.rgba",0
-F12_036: db "panels/12_036.rgba",0
-F12_037: db "panels/12_037.rgba",0
-F12_038: db "panels/12_038.rgba",0
-F12_040: db "panels/12_040.rgba",0
-F12_042: db "panels/12_042.rgba",0
-F12_043: db "panels/12_043.rgba",0
-F12_044: db "panels/12_044.rgba",0
-F13_004: db "panels/13_004.rgba",0
-F13_009: db "panels/13_009.rgba",0
-F13_010: db "panels/13_010.rgba",0
-F13_011: db "panels/13_011.rgba",0
-F13_012: db "panels/13_012.rgba",0
-F13_013: db "panels/13_013.rgba",0
-F13_014: db "panels/13_014.rgba",0
-F13_015: db "panels/13_015.rgba",0
-F13_016: db "panels/13_016.rgba",0
-F13_020: db "panels/13_020.rgba",0
-F13_024: db "panels/13_024.rgba",0
-F13_025: db "panels/13_025.rgba",0
-F13_026: db "panels/13_026.rgba",0
-F13_027: db "panels/13_027.rgba",0
-F13_028: db "panels/13_028.rgba",0
-F13_029: db "panels/13_029.rgba",0
-F13_032: db "panels/13_032.rgba",0
-F13_035: db "panels/13_035.rgba",0
-F13_036: db "panels/13_036.rgba",0
-F13_037: db "panels/13_037.rgba",0
-F13_038: db "panels/13_038.rgba",0
-F13_040: db "panels/13_040.rgba",0
-F13_042: db "panels/13_042.rgba",0
-F13_043: db "panels/13_043.rgba",0
-F13_044: db "panels/13_044.rgba",0
-F14_004: db "panels/14_004.rgba",0
-F14_009: db "panels/14_009.rgba",0
-F14_010: db "panels/14_010.rgba",0
-F14_011: db "panels/14_011.rgba",0
-F14_012: db "panels/14_012.rgba",0
-F14_013: db "panels/14_013.rgba",0
-F14_014: db "panels/14_014.rgba",0
-F14_015: db "panels/14_015.rgba",0
-F14_016: db "panels/14_016.rgba",0
-F14_020: db "panels/14_020.rgba",0
-F14_024: db "panels/14_024.rgba",0
-F14_025: db "panels/14_025.rgba",0
-F14_026: db "panels/14_026.rgba",0
-F14_027: db "panels/14_027.rgba",0
-F14_028: db "panels/14_028.rgba",0
-F14_029: db "panels/14_029.rgba",0
-F14_032: db "panels/14_032.rgba",0
-F14_035: db "panels/14_035.rgba",0
-F14_036: db "panels/14_036.rgba",0
-F14_037: db "panels/14_037.rgba",0
-F14_038: db "panels/14_038.rgba",0
-F14_040: db "panels/14_040.rgba",0
-F14_042: db "panels/14_042.rgba",0
-F14_043: db "panels/14_043.rgba",0
-F14_044: db "panels/14_044.rgba",0
-F15_004: db "panels/15_004.rgba",0
-F15_009: db "panels/15_009.rgba",0
-F15_010: db "panels/15_010.rgba",0
-F15_011: db "panels/15_011.rgba",0
-F15_012: db "panels/15_012.rgba",0
-F15_013: db "panels/15_013.rgba",0
-F15_014: db "panels/15_014.rgba",0
-F15_015: db "panels/15_015.rgba",0
-F15_016: db "panels/15_016.rgba",0
-F15_020: db "panels/15_020.rgba",0
-F15_024: db "panels/15_024.rgba",0
-F15_025: db "panels/15_025.rgba",0
-F15_026: db "panels/15_026.rgba",0
-F15_027: db "panels/15_027.rgba",0
-F15_028: db "panels/15_028.rgba",0
-F15_029: db "panels/15_029.rgba",0
-F15_032: db "panels/15_032.rgba",0
-F15_035: db "panels/15_035.rgba",0
-F15_036: db "panels/15_036.rgba",0
-F15_037: db "panels/15_037.rgba",0
-F15_038: db "panels/15_038.rgba",0
-F15_040: db "panels/15_040.rgba",0
-F15_042: db "panels/15_042.rgba",0
-F15_043: db "panels/15_043.rgba",0
-F15_044: db "panels/15_044.rgba",0
-F16_004: db "panels/16_004.rgba",0
-F16_009: db "panels/16_009.rgba",0
-F16_010: db "panels/16_010.rgba",0
-F16_011: db "panels/16_011.rgba",0
-F16_012: db "panels/16_012.rgba",0
-F16_013: db "panels/16_013.rgba",0
-F16_014: db "panels/16_014.rgba",0
-F16_015: db "panels/16_015.rgba",0
-F16_016: db "panels/16_016.rgba",0
-F16_020: db "panels/16_020.rgba",0
-F16_024: db "panels/16_024.rgba",0
-F16_025: db "panels/16_025.rgba",0
-F16_026: db "panels/16_026.rgba",0
-F16_027: db "panels/16_027.rgba",0
-F16_028: db "panels/16_028.rgba",0
-F16_029: db "panels/16_029.rgba",0
-F16_032: db "panels/16_032.rgba",0
-F16_035: db "panels/16_035.rgba",0
-F16_036: db "panels/16_036.rgba",0
-F16_037: db "panels/16_037.rgba",0
-F16_038: db "panels/16_038.rgba",0
-F16_040: db "panels/16_040.rgba",0
-F16_042: db "panels/16_042.rgba",0
-F16_043: db "panels/16_043.rgba",0
-F16_044: db "panels/16_044.rgba",0
-F17_004: db "panels/17_004.rgba",0
-F17_009: db "panels/17_009.rgba",0
-F17_010: db "panels/17_010.rgba",0
-F17_011: db "panels/17_011.rgba",0
-F17_012: db "panels/17_012.rgba",0
-F17_013: db "panels/17_013.rgba",0
-F17_014: db "panels/17_014.rgba",0
-F17_015: db "panels/17_015.rgba",0
-F17_016: db "panels/17_016.rgba",0
-F17_020: db "panels/17_020.rgba",0
-F17_024: db "panels/17_024.rgba",0
-F17_025: db "panels/17_025.rgba",0
-F17_026: db "panels/17_026.rgba",0
-F17_027: db "panels/17_027.rgba",0
-F17_028: db "panels/17_028.rgba",0
-F17_029: db "panels/17_029.rgba",0
-F17_032: db "panels/17_032.rgba",0
-F17_035: db "panels/17_035.rgba",0
-F17_036: db "panels/17_036.rgba",0
-F17_037: db "panels/17_037.rgba",0
-F17_038: db "panels/17_038.rgba",0
-F17_040: db "panels/17_040.rgba",0
-F17_042: db "panels/17_042.rgba",0
-F17_043: db "panels/17_043.rgba",0
-F17_044: db "panels/17_044.rgba",0
-F57_004: db "panels/57_004.rgba",0
-F57_009: db "panels/57_009.rgba",0
-F57_010: db "panels/57_010.rgba",0
-F57_011: db "panels/57_011.rgba",0
-F57_012: db "panels/57_012.rgba",0
-F57_013: db "panels/57_013.rgba",0
-F57_014: db "panels/57_014.rgba",0
-F57_015: db "panels/57_015.rgba",0
-F57_016: db "panels/57_016.rgba",0
-F57_020: db "panels/57_020.rgba",0
-F57_024: db "panels/57_024.rgba",0
-F57_025: db "panels/57_025.rgba",0
-F57_026: db "panels/57_026.rgba",0
-F57_027: db "panels/57_027.rgba",0
-F57_028: db "panels/57_028.rgba",0
-F57_029: db "panels/57_029.rgba",0
-F57_032: db "panels/57_032.rgba",0
-F57_035: db "panels/57_035.rgba",0
-F57_036: db "panels/57_036.rgba",0
-F57_037: db "panels/57_037.rgba",0
-F57_038: db "panels/57_038.rgba",0
-F57_040: db "panels/57_040.rgba",0
-F57_042: db "panels/57_042.rgba",0
-F57_043: db "panels/57_043.rgba",0
-F57_044: db "panels/57_044.rgba",0
-F58_004: db "panels/58_004.rgba",0
-F58_009: db "panels/58_009.rgba",0
-F58_010: db "panels/58_010.rgba",0
-F58_011: db "panels/58_011.rgba",0
-F58_012: db "panels/58_012.rgba",0
-F58_013: db "panels/58_013.rgba",0
-F58_014: db "panels/58_014.rgba",0
-F58_015: db "panels/58_015.rgba",0
-F58_016: db "panels/58_016.rgba",0
-F58_020: db "panels/58_020.rgba",0
-F58_024: db "panels/58_024.rgba",0
-F58_025: db "panels/58_025.rgba",0
-F58_026: db "panels/58_026.rgba",0
-F58_027: db "panels/58_027.rgba",0
-F58_028: db "panels/58_028.rgba",0
-F58_029: db "panels/58_029.rgba",0
-F58_032: db "panels/58_032.rgba",0
-F58_035: db "panels/58_035.rgba",0
-F58_036: db "panels/58_036.rgba",0
-F58_037: db "panels/58_037.rgba",0
-F58_038: db "panels/58_038.rgba",0
-F58_040: db "panels/58_040.rgba",0
-F58_042: db "panels/58_042.rgba",0
-F58_043: db "panels/58_043.rgba",0
-F58_044: db "panels/58_044.rgba",0
-F59_004: db "panels/59_004.rgba",0
-F59_009: db "panels/59_009.rgba",0
-F59_010: db "panels/59_010.rgba",0
-F59_011: db "panels/59_011.rgba",0
-F59_012: db "panels/59_012.rgba",0
-F59_013: db "panels/59_013.rgba",0
-F59_014: db "panels/59_014.rgba",0
-F59_015: db "panels/59_015.rgba",0
-F59_016: db "panels/59_016.rgba",0
-F59_020: db "panels/59_020.rgba",0
-F59_024: db "panels/59_024.rgba",0
-F59_025: db "panels/59_025.rgba",0
-F59_026: db "panels/59_026.rgba",0
-F59_027: db "panels/59_027.rgba",0
-F59_028: db "panels/59_028.rgba",0
-F59_029: db "panels/59_029.rgba",0
-F59_032: db "panels/59_032.rgba",0
-F59_035: db "panels/59_035.rgba",0
-F59_036: db "panels/59_036.rgba",0
-F59_037: db "panels/59_037.rgba",0
-F59_038: db "panels/59_038.rgba",0
-F59_040: db "panels/59_040.rgba",0
-F59_042: db "panels/59_042.rgba",0
-F59_043: db "panels/59_043.rgba",0
-F59_044: db "panels/59_044.rgba",0
+F10_004: db "panels/10_004.rgba2",0
+F10_009: db "panels/10_009.rgba2",0
+F10_010: db "panels/10_010.rgba2",0
+F10_011: db "panels/10_011.rgba2",0
+F10_012: db "panels/10_012.rgba2",0
+F10_013: db "panels/10_013.rgba2",0
+F10_014: db "panels/10_014.rgba2",0
+F10_015: db "panels/10_015.rgba2",0
+F10_016: db "panels/10_016.rgba2",0
+F10_020: db "panels/10_020.rgba2",0
+F10_024: db "panels/10_024.rgba2",0
+F10_025: db "panels/10_025.rgba2",0
+F10_026: db "panels/10_026.rgba2",0
+F10_027: db "panels/10_027.rgba2",0
+F10_028: db "panels/10_028.rgba2",0
+F10_029: db "panels/10_029.rgba2",0
+F10_032: db "panels/10_032.rgba2",0
+F10_035: db "panels/10_035.rgba2",0
+F10_036: db "panels/10_036.rgba2",0
+F10_037: db "panels/10_037.rgba2",0
+F10_038: db "panels/10_038.rgba2",0
+F10_040: db "panels/10_040.rgba2",0
+F10_042: db "panels/10_042.rgba2",0
+F10_043: db "panels/10_043.rgba2",0
+F10_044: db "panels/10_044.rgba2",0
+F11_004: db "panels/11_004.rgba2",0
+F11_009: db "panels/11_009.rgba2",0
+F11_010: db "panels/11_010.rgba2",0
+F11_011: db "panels/11_011.rgba2",0
+F11_012: db "panels/11_012.rgba2",0
+F11_013: db "panels/11_013.rgba2",0
+F11_014: db "panels/11_014.rgba2",0
+F11_015: db "panels/11_015.rgba2",0
+F11_016: db "panels/11_016.rgba2",0
+F11_020: db "panels/11_020.rgba2",0
+F11_024: db "panels/11_024.rgba2",0
+F11_025: db "panels/11_025.rgba2",0
+F11_026: db "panels/11_026.rgba2",0
+F11_027: db "panels/11_027.rgba2",0
+F11_028: db "panels/11_028.rgba2",0
+F11_029: db "panels/11_029.rgba2",0
+F11_032: db "panels/11_032.rgba2",0
+F11_035: db "panels/11_035.rgba2",0
+F11_036: db "panels/11_036.rgba2",0
+F11_037: db "panels/11_037.rgba2",0
+F11_038: db "panels/11_038.rgba2",0
+F11_040: db "panels/11_040.rgba2",0
+F11_042: db "panels/11_042.rgba2",0
+F11_043: db "panels/11_043.rgba2",0
+F11_044: db "panels/11_044.rgba2",0
+F12_004: db "panels/12_004.rgba2",0
+F12_009: db "panels/12_009.rgba2",0
+F12_010: db "panels/12_010.rgba2",0
+F12_011: db "panels/12_011.rgba2",0
+F12_012: db "panels/12_012.rgba2",0
+F12_013: db "panels/12_013.rgba2",0
+F12_014: db "panels/12_014.rgba2",0
+F12_015: db "panels/12_015.rgba2",0
+F12_016: db "panels/12_016.rgba2",0
+F12_020: db "panels/12_020.rgba2",0
+F12_024: db "panels/12_024.rgba2",0
+F12_025: db "panels/12_025.rgba2",0
+F12_026: db "panels/12_026.rgba2",0
+F12_027: db "panels/12_027.rgba2",0
+F12_028: db "panels/12_028.rgba2",0
+F12_029: db "panels/12_029.rgba2",0
+F12_032: db "panels/12_032.rgba2",0
+F12_035: db "panels/12_035.rgba2",0
+F12_036: db "panels/12_036.rgba2",0
+F12_037: db "panels/12_037.rgba2",0
+F12_038: db "panels/12_038.rgba2",0
+F12_040: db "panels/12_040.rgba2",0
+F12_042: db "panels/12_042.rgba2",0
+F12_043: db "panels/12_043.rgba2",0
+F12_044: db "panels/12_044.rgba2",0
+F13_004: db "panels/13_004.rgba2",0
+F13_009: db "panels/13_009.rgba2",0
+F13_010: db "panels/13_010.rgba2",0
+F13_011: db "panels/13_011.rgba2",0
+F13_012: db "panels/13_012.rgba2",0
+F13_013: db "panels/13_013.rgba2",0
+F13_014: db "panels/13_014.rgba2",0
+F13_015: db "panels/13_015.rgba2",0
+F13_016: db "panels/13_016.rgba2",0
+F13_020: db "panels/13_020.rgba2",0
+F13_024: db "panels/13_024.rgba2",0
+F13_025: db "panels/13_025.rgba2",0
+F13_026: db "panels/13_026.rgba2",0
+F13_027: db "panels/13_027.rgba2",0
+F13_028: db "panels/13_028.rgba2",0
+F13_029: db "panels/13_029.rgba2",0
+F13_032: db "panels/13_032.rgba2",0
+F13_035: db "panels/13_035.rgba2",0
+F13_036: db "panels/13_036.rgba2",0
+F13_037: db "panels/13_037.rgba2",0
+F13_038: db "panels/13_038.rgba2",0
+F13_040: db "panels/13_040.rgba2",0
+F13_042: db "panels/13_042.rgba2",0
+F13_043: db "panels/13_043.rgba2",0
+F13_044: db "panels/13_044.rgba2",0
+F14_004: db "panels/14_004.rgba2",0
+F14_009: db "panels/14_009.rgba2",0
+F14_010: db "panels/14_010.rgba2",0
+F14_011: db "panels/14_011.rgba2",0
+F14_012: db "panels/14_012.rgba2",0
+F14_013: db "panels/14_013.rgba2",0
+F14_014: db "panels/14_014.rgba2",0
+F14_015: db "panels/14_015.rgba2",0
+F14_016: db "panels/14_016.rgba2",0
+F14_020: db "panels/14_020.rgba2",0
+F14_024: db "panels/14_024.rgba2",0
+F14_025: db "panels/14_025.rgba2",0
+F14_026: db "panels/14_026.rgba2",0
+F14_027: db "panels/14_027.rgba2",0
+F14_028: db "panels/14_028.rgba2",0
+F14_029: db "panels/14_029.rgba2",0
+F14_032: db "panels/14_032.rgba2",0
+F14_035: db "panels/14_035.rgba2",0
+F14_036: db "panels/14_036.rgba2",0
+F14_037: db "panels/14_037.rgba2",0
+F14_038: db "panels/14_038.rgba2",0
+F14_040: db "panels/14_040.rgba2",0
+F14_042: db "panels/14_042.rgba2",0
+F14_043: db "panels/14_043.rgba2",0
+F14_044: db "panels/14_044.rgba2",0
+F15_004: db "panels/15_004.rgba2",0
+F15_009: db "panels/15_009.rgba2",0
+F15_010: db "panels/15_010.rgba2",0
+F15_011: db "panels/15_011.rgba2",0
+F15_012: db "panels/15_012.rgba2",0
+F15_013: db "panels/15_013.rgba2",0
+F15_014: db "panels/15_014.rgba2",0
+F15_015: db "panels/15_015.rgba2",0
+F15_016: db "panels/15_016.rgba2",0
+F15_020: db "panels/15_020.rgba2",0
+F15_024: db "panels/15_024.rgba2",0
+F15_025: db "panels/15_025.rgba2",0
+F15_026: db "panels/15_026.rgba2",0
+F15_027: db "panels/15_027.rgba2",0
+F15_028: db "panels/15_028.rgba2",0
+F15_029: db "panels/15_029.rgba2",0
+F15_032: db "panels/15_032.rgba2",0
+F15_035: db "panels/15_035.rgba2",0
+F15_036: db "panels/15_036.rgba2",0
+F15_037: db "panels/15_037.rgba2",0
+F15_038: db "panels/15_038.rgba2",0
+F15_040: db "panels/15_040.rgba2",0
+F15_042: db "panels/15_042.rgba2",0
+F15_043: db "panels/15_043.rgba2",0
+F15_044: db "panels/15_044.rgba2",0
+F16_004: db "panels/16_004.rgba2",0
+F16_009: db "panels/16_009.rgba2",0
+F16_010: db "panels/16_010.rgba2",0
+F16_011: db "panels/16_011.rgba2",0
+F16_012: db "panels/16_012.rgba2",0
+F16_013: db "panels/16_013.rgba2",0
+F16_014: db "panels/16_014.rgba2",0
+F16_015: db "panels/16_015.rgba2",0
+F16_016: db "panels/16_016.rgba2",0
+F16_020: db "panels/16_020.rgba2",0
+F16_024: db "panels/16_024.rgba2",0
+F16_025: db "panels/16_025.rgba2",0
+F16_026: db "panels/16_026.rgba2",0
+F16_027: db "panels/16_027.rgba2",0
+F16_028: db "panels/16_028.rgba2",0
+F16_029: db "panels/16_029.rgba2",0
+F16_032: db "panels/16_032.rgba2",0
+F16_035: db "panels/16_035.rgba2",0
+F16_036: db "panels/16_036.rgba2",0
+F16_037: db "panels/16_037.rgba2",0
+F16_038: db "panels/16_038.rgba2",0
+F16_040: db "panels/16_040.rgba2",0
+F16_042: db "panels/16_042.rgba2",0
+F16_043: db "panels/16_043.rgba2",0
+F16_044: db "panels/16_044.rgba2",0
+F17_004: db "panels/17_004.rgba2",0
+F17_009: db "panels/17_009.rgba2",0
+F17_010: db "panels/17_010.rgba2",0
+F17_011: db "panels/17_011.rgba2",0
+F17_012: db "panels/17_012.rgba2",0
+F17_013: db "panels/17_013.rgba2",0
+F17_014: db "panels/17_014.rgba2",0
+F17_015: db "panels/17_015.rgba2",0
+F17_016: db "panels/17_016.rgba2",0
+F17_020: db "panels/17_020.rgba2",0
+F17_024: db "panels/17_024.rgba2",0
+F17_025: db "panels/17_025.rgba2",0
+F17_026: db "panels/17_026.rgba2",0
+F17_027: db "panels/17_027.rgba2",0
+F17_028: db "panels/17_028.rgba2",0
+F17_029: db "panels/17_029.rgba2",0
+F17_032: db "panels/17_032.rgba2",0
+F17_035: db "panels/17_035.rgba2",0
+F17_036: db "panels/17_036.rgba2",0
+F17_037: db "panels/17_037.rgba2",0
+F17_038: db "panels/17_038.rgba2",0
+F17_040: db "panels/17_040.rgba2",0
+F17_042: db "panels/17_042.rgba2",0
+F17_043: db "panels/17_043.rgba2",0
+F17_044: db "panels/17_044.rgba2",0
+F57_004: db "panels/57_004.rgba2",0
+F57_009: db "panels/57_009.rgba2",0
+F57_010: db "panels/57_010.rgba2",0
+F57_011: db "panels/57_011.rgba2",0
+F57_012: db "panels/57_012.rgba2",0
+F57_013: db "panels/57_013.rgba2",0
+F57_014: db "panels/57_014.rgba2",0
+F57_015: db "panels/57_015.rgba2",0
+F57_016: db "panels/57_016.rgba2",0
+F57_020: db "panels/57_020.rgba2",0
+F57_024: db "panels/57_024.rgba2",0
+F57_025: db "panels/57_025.rgba2",0
+F57_026: db "panels/57_026.rgba2",0
+F57_027: db "panels/57_027.rgba2",0
+F57_028: db "panels/57_028.rgba2",0
+F57_029: db "panels/57_029.rgba2",0
+F57_032: db "panels/57_032.rgba2",0
+F57_035: db "panels/57_035.rgba2",0
+F57_036: db "panels/57_036.rgba2",0
+F57_037: db "panels/57_037.rgba2",0
+F57_038: db "panels/57_038.rgba2",0
+F57_040: db "panels/57_040.rgba2",0
+F57_042: db "panels/57_042.rgba2",0
+F57_043: db "panels/57_043.rgba2",0
+F57_044: db "panels/57_044.rgba2",0
+F58_004: db "panels/58_004.rgba2",0
+F58_009: db "panels/58_009.rgba2",0
+F58_010: db "panels/58_010.rgba2",0
+F58_011: db "panels/58_011.rgba2",0
+F58_012: db "panels/58_012.rgba2",0
+F58_013: db "panels/58_013.rgba2",0
+F58_014: db "panels/58_014.rgba2",0
+F58_015: db "panels/58_015.rgba2",0
+F58_016: db "panels/58_016.rgba2",0
+F58_020: db "panels/58_020.rgba2",0
+F58_024: db "panels/58_024.rgba2",0
+F58_025: db "panels/58_025.rgba2",0
+F58_026: db "panels/58_026.rgba2",0
+F58_027: db "panels/58_027.rgba2",0
+F58_028: db "panels/58_028.rgba2",0
+F58_029: db "panels/58_029.rgba2",0
+F58_032: db "panels/58_032.rgba2",0
+F58_035: db "panels/58_035.rgba2",0
+F58_036: db "panels/58_036.rgba2",0
+F58_037: db "panels/58_037.rgba2",0
+F58_038: db "panels/58_038.rgba2",0
+F58_040: db "panels/58_040.rgba2",0
+F58_042: db "panels/58_042.rgba2",0
+F58_043: db "panels/58_043.rgba2",0
+F58_044: db "panels/58_044.rgba2",0
+F59_004: db "panels/59_004.rgba2",0
+F59_009: db "panels/59_009.rgba2",0
+F59_010: db "panels/59_010.rgba2",0
+F59_011: db "panels/59_011.rgba2",0
+F59_012: db "panels/59_012.rgba2",0
+F59_013: db "panels/59_013.rgba2",0
+F59_014: db "panels/59_014.rgba2",0
+F59_015: db "panels/59_015.rgba2",0
+F59_016: db "panels/59_016.rgba2",0
+F59_020: db "panels/59_020.rgba2",0
+F59_024: db "panels/59_024.rgba2",0
+F59_025: db "panels/59_025.rgba2",0
+F59_026: db "panels/59_026.rgba2",0
+F59_027: db "panels/59_027.rgba2",0
+F59_028: db "panels/59_028.rgba2",0
+F59_029: db "panels/59_029.rgba2",0
+F59_032: db "panels/59_032.rgba2",0
+F59_035: db "panels/59_035.rgba2",0
+F59_036: db "panels/59_036.rgba2",0
+F59_037: db "panels/59_037.rgba2",0
+F59_038: db "panels/59_038.rgba2",0
+F59_040: db "panels/59_040.rgba2",0
+F59_042: db "panels/59_042.rgba2",0
+F59_043: db "panels/59_043.rgba2",0
+F59_044: db "panels/59_044.rgba2",0
 ; Bitmap indices:
 BUF_20_004: equ 0x0213
 BUF_20_020: equ 0x0214
@@ -4222,7 +4222,7 @@ BUF_52_032: equ 0x026A
 BUF_52_040: equ 0x026B
 BUF_52_044: equ 0x026C
 
-; Import .rgba bitmap files and load them into VDP buffers
+; Import .rgba2 bitmap files and load them into VDP buffers
 load_sprites:
 
 	ld hl,F20_004
@@ -4234,7 +4234,7 @@ load_sprites:
 	ld bc,19
 	ld de,21
 	ld ix,399
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4247,7 +4247,7 @@ load_sprites:
 	ld bc,25
 	ld de,26
 	ld ix,650
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4260,7 +4260,7 @@ load_sprites:
 	ld bc,36
 	ld de,39
 	ld ix,1404
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4273,7 +4273,7 @@ load_sprites:
 	ld bc,60
 	ld de,65
 	ld ix,3900
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4286,7 +4286,7 @@ load_sprites:
 	ld bc,120
 	ld de,115
 	ld ix,13800
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4299,7 +4299,7 @@ load_sprites:
 	ld bc,10
 	ld de,11
 	ld ix,110
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4312,7 +4312,7 @@ load_sprites:
 	ld bc,13
 	ld de,15
 	ld ix,195
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4325,7 +4325,7 @@ load_sprites:
 	ld bc,20
 	ld de,22
 	ld ix,440
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4338,7 +4338,7 @@ load_sprites:
 	ld bc,34
 	ld de,36
 	ld ix,1224
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4351,7 +4351,7 @@ load_sprites:
 	ld bc,100
 	ld de,30
 	ld ix,3000
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4364,7 +4364,7 @@ load_sprites:
 	ld bc,16
 	ld de,11
 	ld ix,176
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4377,7 +4377,7 @@ load_sprites:
 	ld bc,21
 	ld de,15
 	ld ix,315
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4390,7 +4390,7 @@ load_sprites:
 	ld bc,30
 	ld de,22
 	ld ix,660
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4403,7 +4403,7 @@ load_sprites:
 	ld bc,50
 	ld de,36
 	ld ix,1800
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4416,7 +4416,7 @@ load_sprites:
 	ld bc,150
 	ld de,30
 	ld ix,4500
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4429,7 +4429,7 @@ load_sprites:
 	ld bc,20
 	ld de,9
 	ld ix,180
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4442,7 +4442,7 @@ load_sprites:
 	ld bc,25
 	ld de,12
 	ld ix,300
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4455,7 +4455,7 @@ load_sprites:
 	ld bc,36
 	ld de,16
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4468,7 +4468,7 @@ load_sprites:
 	ld bc,60
 	ld de,27
 	ld ix,1620
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4481,7 +4481,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4494,7 +4494,7 @@ load_sprites:
 	ld bc,10
 	ld de,11
 	ld ix,110
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4507,7 +4507,7 @@ load_sprites:
 	ld bc,13
 	ld de,15
 	ld ix,195
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4520,7 +4520,7 @@ load_sprites:
 	ld bc,20
 	ld de,22
 	ld ix,440
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4533,7 +4533,7 @@ load_sprites:
 	ld bc,34
 	ld de,36
 	ld ix,1224
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4546,7 +4546,7 @@ load_sprites:
 	ld bc,100
 	ld de,30
 	ld ix,3000
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4559,7 +4559,7 @@ load_sprites:
 	ld bc,17
 	ld de,9
 	ld ix,153
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4572,7 +4572,7 @@ load_sprites:
 	ld bc,22
 	ld de,12
 	ld ix,264
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4585,7 +4585,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4598,7 +4598,7 @@ load_sprites:
 	ld bc,53
 	ld de,29
 	ld ix,1537
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4611,7 +4611,7 @@ load_sprites:
 	ld bc,90
 	ld de,10
 	ld ix,900
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4624,7 +4624,7 @@ load_sprites:
 	ld bc,17
 	ld de,15
 	ld ix,255
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4637,7 +4637,7 @@ load_sprites:
 	ld bc,22
 	ld de,20
 	ld ix,440
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4650,7 +4650,7 @@ load_sprites:
 	ld bc,32
 	ld de,30
 	ld ix,960
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4663,7 +4663,7 @@ load_sprites:
 	ld bc,53
 	ld de,49
 	ld ix,2597
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4676,7 +4676,7 @@ load_sprites:
 	ld bc,130
 	ld de,70
 	ld ix,9100
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4689,7 +4689,7 @@ load_sprites:
 	ld bc,14
 	ld de,12
 	ld ix,168
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4702,7 +4702,7 @@ load_sprites:
 	ld bc,19
 	ld de,16
 	ld ix,304
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4715,7 +4715,7 @@ load_sprites:
 	ld bc,28
 	ld de,24
 	ld ix,672
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4728,7 +4728,7 @@ load_sprites:
 	ld bc,46
 	ld de,39
 	ld ix,1794
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4741,7 +4741,7 @@ load_sprites:
 	ld bc,100
 	ld de,40
 	ld ix,4000
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4754,7 +4754,7 @@ load_sprites:
 	ld bc,17
 	ld de,6
 	ld ix,102
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4767,7 +4767,7 @@ load_sprites:
 	ld bc,22
 	ld de,8
 	ld ix,176
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4780,7 +4780,7 @@ load_sprites:
 	ld bc,32
 	ld de,12
 	ld ix,384
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4793,7 +4793,7 @@ load_sprites:
 	ld bc,53
 	ld de,19
 	ld ix,1007
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4806,7 +4806,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4819,7 +4819,7 @@ load_sprites:
 	ld bc,13
 	ld de,10
 	ld ix,130
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4832,7 +4832,7 @@ load_sprites:
 	ld bc,17
 	ld de,13
 	ld ix,221
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4845,7 +4845,7 @@ load_sprites:
 	ld bc,26
 	ld de,20
 	ld ix,520
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4858,7 +4858,7 @@ load_sprites:
 	ld bc,43
 	ld de,33
 	ld ix,1419
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4871,7 +4871,7 @@ load_sprites:
 	ld bc,90
 	ld de,20
 	ld ix,1800
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4884,7 +4884,7 @@ load_sprites:
 	ld bc,17
 	ld de,11
 	ld ix,187
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4897,7 +4897,7 @@ load_sprites:
 	ld bc,22
 	ld de,15
 	ld ix,330
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4910,7 +4910,7 @@ load_sprites:
 	ld bc,32
 	ld de,22
 	ld ix,704
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4923,7 +4923,7 @@ load_sprites:
 	ld bc,53
 	ld de,36
 	ld ix,1908
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4936,7 +4936,7 @@ load_sprites:
 	ld bc,130
 	ld de,30
 	ld ix,3900
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4949,7 +4949,7 @@ load_sprites:
 	ld bc,17
 	ld de,9
 	ld ix,153
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4962,7 +4962,7 @@ load_sprites:
 	ld bc,22
 	ld de,12
 	ld ix,264
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4975,7 +4975,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -4988,7 +4988,7 @@ load_sprites:
 	ld bc,53
 	ld de,29
 	ld ix,1537
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5001,7 +5001,7 @@ load_sprites:
 	ld bc,90
 	ld de,10
 	ld ix,900
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5014,7 +5014,7 @@ load_sprites:
 	ld bc,17
 	ld de,9
 	ld ix,153
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5027,7 +5027,7 @@ load_sprites:
 	ld bc,22
 	ld de,12
 	ld ix,264
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5040,7 +5040,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5053,7 +5053,7 @@ load_sprites:
 	ld bc,53
 	ld de,30
 	ld ix,1590
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5066,7 +5066,7 @@ load_sprites:
 	ld bc,30
 	ld de,20
 	ld ix,600
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5079,7 +5079,7 @@ load_sprites:
 	ld bc,13
 	ld de,6
 	ld ix,78
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5092,7 +5092,7 @@ load_sprites:
 	ld bc,18
 	ld de,8
 	ld ix,144
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5105,7 +5105,7 @@ load_sprites:
 	ld bc,26
 	ld de,12
 	ld ix,312
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5118,7 +5118,7 @@ load_sprites:
 	ld bc,43
 	ld de,19
 	ld ix,817
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5131,7 +5131,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5144,7 +5144,7 @@ load_sprites:
 	ld bc,14
 	ld de,6
 	ld ix,84
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5157,7 +5157,7 @@ load_sprites:
 	ld bc,19
 	ld de,9
 	ld ix,171
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5170,7 +5170,7 @@ load_sprites:
 	ld bc,28
 	ld de,12
 	ld ix,336
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5183,7 +5183,7 @@ load_sprites:
 	ld bc,46
 	ld de,20
 	ld ix,920
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5196,7 +5196,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5209,7 +5209,7 @@ load_sprites:
 	ld bc,9
 	ld de,13
 	ld ix,117
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5222,7 +5222,7 @@ load_sprites:
 	ld bc,12
 	ld de,17
 	ld ix,204
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5235,7 +5235,7 @@ load_sprites:
 	ld bc,18
 	ld de,26
 	ld ix,468
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5248,7 +5248,7 @@ load_sprites:
 	ld bc,30
 	ld de,43
 	ld ix,1290
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5261,7 +5261,7 @@ load_sprites:
 	ld bc,70
 	ld de,50
 	ld ix,3500
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5274,7 +5274,7 @@ load_sprites:
 	ld bc,18
 	ld de,26
 	ld ix,468
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5287,7 +5287,7 @@ load_sprites:
 	ld bc,23
 	ld de,33
 	ld ix,759
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5300,7 +5300,7 @@ load_sprites:
 	ld bc,33
 	ld de,48
 	ld ix,1584
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5313,7 +5313,7 @@ load_sprites:
 	ld bc,55
 	ld de,80
 	ld ix,4400
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5326,7 +5326,7 @@ load_sprites:
 	ld bc,165
 	ld de,160
 	ld ix,26400
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5339,7 +5339,7 @@ load_sprites:
 	ld bc,15
 	ld de,26
 	ld ix,390
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5352,7 +5352,7 @@ load_sprites:
 	ld bc,19
 	ld de,33
 	ld ix,627
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5365,7 +5365,7 @@ load_sprites:
 	ld bc,27
 	ld de,48
 	ld ix,1296
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5378,7 +5378,7 @@ load_sprites:
 	ld bc,45
 	ld de,80
 	ld ix,3600
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5391,102 +5391,102 @@ load_sprites:
 	ld bc,135
 	ld de,160
 	ld ix,21600
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
 	ret
 
-F20_004: db "panels/20_004.rgba",0
-F20_020: db "panels/20_020.rgba",0
-F20_032: db "panels/20_032.rgba",0
-F20_040: db "panels/20_040.rgba",0
-F20_044: db "panels/20_044.rgba",0
-F21_004: db "panels/21_004.rgba",0
-F21_020: db "panels/21_020.rgba",0
-F21_032: db "panels/21_032.rgba",0
-F21_040: db "panels/21_040.rgba",0
-F21_044: db "panels/21_044.rgba",0
-F22_004: db "panels/22_004.rgba",0
-F22_020: db "panels/22_020.rgba",0
-F22_032: db "panels/22_032.rgba",0
-F22_040: db "panels/22_040.rgba",0
-F22_044: db "panels/22_044.rgba",0
-F23_004: db "panels/23_004.rgba",0
-F23_020: db "panels/23_020.rgba",0
-F23_032: db "panels/23_032.rgba",0
-F23_040: db "panels/23_040.rgba",0
-F23_044: db "panels/23_044.rgba",0
-F24_004: db "panels/24_004.rgba",0
-F24_020: db "panels/24_020.rgba",0
-F24_032: db "panels/24_032.rgba",0
-F24_040: db "panels/24_040.rgba",0
-F24_044: db "panels/24_044.rgba",0
-F40_004: db "panels/40_004.rgba",0
-F40_020: db "panels/40_020.rgba",0
-F40_032: db "panels/40_032.rgba",0
-F40_040: db "panels/40_040.rgba",0
-F40_044: db "panels/40_044.rgba",0
-F41_004: db "panels/41_004.rgba",0
-F41_020: db "panels/41_020.rgba",0
-F41_032: db "panels/41_032.rgba",0
-F41_040: db "panels/41_040.rgba",0
-F41_044: db "panels/41_044.rgba",0
-F42_004: db "panels/42_004.rgba",0
-F42_020: db "panels/42_020.rgba",0
-F42_032: db "panels/42_032.rgba",0
-F42_040: db "panels/42_040.rgba",0
-F42_044: db "panels/42_044.rgba",0
-F43_004: db "panels/43_004.rgba",0
-F43_020: db "panels/43_020.rgba",0
-F43_032: db "panels/43_032.rgba",0
-F43_040: db "panels/43_040.rgba",0
-F43_044: db "panels/43_044.rgba",0
-F44_004: db "panels/44_004.rgba",0
-F44_020: db "panels/44_020.rgba",0
-F44_032: db "panels/44_032.rgba",0
-F44_040: db "panels/44_040.rgba",0
-F44_044: db "panels/44_044.rgba",0
-F45_004: db "panels/45_004.rgba",0
-F45_020: db "panels/45_020.rgba",0
-F45_032: db "panels/45_032.rgba",0
-F45_040: db "panels/45_040.rgba",0
-F45_044: db "panels/45_044.rgba",0
-F46_004: db "panels/46_004.rgba",0
-F46_020: db "panels/46_020.rgba",0
-F46_032: db "panels/46_032.rgba",0
-F46_040: db "panels/46_040.rgba",0
-F46_044: db "panels/46_044.rgba",0
-F47_004: db "panels/47_004.rgba",0
-F47_020: db "panels/47_020.rgba",0
-F47_032: db "panels/47_032.rgba",0
-F47_040: db "panels/47_040.rgba",0
-F47_044: db "panels/47_044.rgba",0
-F48_004: db "panels/48_004.rgba",0
-F48_020: db "panels/48_020.rgba",0
-F48_032: db "panels/48_032.rgba",0
-F48_040: db "panels/48_040.rgba",0
-F48_044: db "panels/48_044.rgba",0
-F49_004: db "panels/49_004.rgba",0
-F49_020: db "panels/49_020.rgba",0
-F49_032: db "panels/49_032.rgba",0
-F49_040: db "panels/49_040.rgba",0
-F49_044: db "panels/49_044.rgba",0
-F50_004: db "panels/50_004.rgba",0
-F50_020: db "panels/50_020.rgba",0
-F50_032: db "panels/50_032.rgba",0
-F50_040: db "panels/50_040.rgba",0
-F50_044: db "panels/50_044.rgba",0
-F51_004: db "panels/51_004.rgba",0
-F51_020: db "panels/51_020.rgba",0
-F51_032: db "panels/51_032.rgba",0
-F51_040: db "panels/51_040.rgba",0
-F51_044: db "panels/51_044.rgba",0
-F52_004: db "panels/52_004.rgba",0
-F52_020: db "panels/52_020.rgba",0
-F52_032: db "panels/52_032.rgba",0
-F52_040: db "panels/52_040.rgba",0
-F52_044: db "panels/52_044.rgba",0
+F20_004: db "panels/20_004.rgba2",0
+F20_020: db "panels/20_020.rgba2",0
+F20_032: db "panels/20_032.rgba2",0
+F20_040: db "panels/20_040.rgba2",0
+F20_044: db "panels/20_044.rgba2",0
+F21_004: db "panels/21_004.rgba2",0
+F21_020: db "panels/21_020.rgba2",0
+F21_032: db "panels/21_032.rgba2",0
+F21_040: db "panels/21_040.rgba2",0
+F21_044: db "panels/21_044.rgba2",0
+F22_004: db "panels/22_004.rgba2",0
+F22_020: db "panels/22_020.rgba2",0
+F22_032: db "panels/22_032.rgba2",0
+F22_040: db "panels/22_040.rgba2",0
+F22_044: db "panels/22_044.rgba2",0
+F23_004: db "panels/23_004.rgba2",0
+F23_020: db "panels/23_020.rgba2",0
+F23_032: db "panels/23_032.rgba2",0
+F23_040: db "panels/23_040.rgba2",0
+F23_044: db "panels/23_044.rgba2",0
+F24_004: db "panels/24_004.rgba2",0
+F24_020: db "panels/24_020.rgba2",0
+F24_032: db "panels/24_032.rgba2",0
+F24_040: db "panels/24_040.rgba2",0
+F24_044: db "panels/24_044.rgba2",0
+F40_004: db "panels/40_004.rgba2",0
+F40_020: db "panels/40_020.rgba2",0
+F40_032: db "panels/40_032.rgba2",0
+F40_040: db "panels/40_040.rgba2",0
+F40_044: db "panels/40_044.rgba2",0
+F41_004: db "panels/41_004.rgba2",0
+F41_020: db "panels/41_020.rgba2",0
+F41_032: db "panels/41_032.rgba2",0
+F41_040: db "panels/41_040.rgba2",0
+F41_044: db "panels/41_044.rgba2",0
+F42_004: db "panels/42_004.rgba2",0
+F42_020: db "panels/42_020.rgba2",0
+F42_032: db "panels/42_032.rgba2",0
+F42_040: db "panels/42_040.rgba2",0
+F42_044: db "panels/42_044.rgba2",0
+F43_004: db "panels/43_004.rgba2",0
+F43_020: db "panels/43_020.rgba2",0
+F43_032: db "panels/43_032.rgba2",0
+F43_040: db "panels/43_040.rgba2",0
+F43_044: db "panels/43_044.rgba2",0
+F44_004: db "panels/44_004.rgba2",0
+F44_020: db "panels/44_020.rgba2",0
+F44_032: db "panels/44_032.rgba2",0
+F44_040: db "panels/44_040.rgba2",0
+F44_044: db "panels/44_044.rgba2",0
+F45_004: db "panels/45_004.rgba2",0
+F45_020: db "panels/45_020.rgba2",0
+F45_032: db "panels/45_032.rgba2",0
+F45_040: db "panels/45_040.rgba2",0
+F45_044: db "panels/45_044.rgba2",0
+F46_004: db "panels/46_004.rgba2",0
+F46_020: db "panels/46_020.rgba2",0
+F46_032: db "panels/46_032.rgba2",0
+F46_040: db "panels/46_040.rgba2",0
+F46_044: db "panels/46_044.rgba2",0
+F47_004: db "panels/47_004.rgba2",0
+F47_020: db "panels/47_020.rgba2",0
+F47_032: db "panels/47_032.rgba2",0
+F47_040: db "panels/47_040.rgba2",0
+F47_044: db "panels/47_044.rgba2",0
+F48_004: db "panels/48_004.rgba2",0
+F48_020: db "panels/48_020.rgba2",0
+F48_032: db "panels/48_032.rgba2",0
+F48_040: db "panels/48_040.rgba2",0
+F48_044: db "panels/48_044.rgba2",0
+F49_004: db "panels/49_004.rgba2",0
+F49_020: db "panels/49_020.rgba2",0
+F49_032: db "panels/49_032.rgba2",0
+F49_040: db "panels/49_040.rgba2",0
+F49_044: db "panels/49_044.rgba2",0
+F50_004: db "panels/50_004.rgba2",0
+F50_020: db "panels/50_020.rgba2",0
+F50_032: db "panels/50_032.rgba2",0
+F50_040: db "panels/50_040.rgba2",0
+F50_044: db "panels/50_044.rgba2",0
+F51_004: db "panels/51_004.rgba2",0
+F51_020: db "panels/51_020.rgba2",0
+F51_032: db "panels/51_032.rgba2",0
+F51_040: db "panels/51_040.rgba2",0
+F51_044: db "panels/51_044.rgba2",0
+F52_004: db "panels/52_004.rgba2",0
+F52_020: db "panels/52_020.rgba2",0
+F52_032: db "panels/52_032.rgba2",0
+F52_040: db "panels/52_040.rgba2",0
+F52_044: db "panels/52_044.rgba2",0
 ; Bitmap indices:
 BUF_DW_6: equ 0x026D
 BUF_DW_7: equ 0x026E
@@ -5498,7 +5498,7 @@ BUF_DW_12: equ 0x0273
 BUF_DW_13: equ 0x0274
 BUF_DW_14: equ 0x0275
 
-; Import .rgba bitmap files and load them into VDP buffers
+; Import .rgba2 bitmap files and load them into VDP buffers
 load_dws:
 
 	ld hl,Fdw_6
@@ -5510,7 +5510,7 @@ load_dws:
 	ld bc,320
 	ld de,30
 	ld ix,9600
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5523,7 +5523,7 @@ load_dws:
 	ld bc,320
 	ld de,24
 	ld ix,7680
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5536,7 +5536,7 @@ load_dws:
 	ld bc,320
 	ld de,18
 	ld ix,5760
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5549,7 +5549,7 @@ load_dws:
 	ld bc,320
 	ld de,16
 	ld ix,5120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5562,7 +5562,7 @@ load_dws:
 	ld bc,320
 	ld de,16
 	ld ix,5120
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5575,7 +5575,7 @@ load_dws:
 	ld bc,320
 	ld de,14
 	ld ix,4480
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5588,7 +5588,7 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5601,7 +5601,7 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
@@ -5614,18 +5614,18 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_bmp2_from_file
+	call init_img_load
 	LD A, '.'
 	RST.LIL 10h
 
 	ret
 
-Fdw_6: db "dws/dw_6.rgba",0
-Fdw_7: db "dws/dw_7.rgba",0
-Fdw_8: db "dws/dw_8.rgba",0
-Fdw_9: db "dws/dw_9.rgba",0
-Fdw_10: db "dws/dw_10.rgba",0
-Fdw_11: db "dws/dw_11.rgba",0
-Fdw_12: db "dws/dw_12.rgba",0
-Fdw_13: db "dws/dw_13.rgba",0
-Fdw_14: db "dws/dw_14.rgba",0
+Fdw_6: db "dws/dw_6.rgba2",0
+Fdw_7: db "dws/dw_7.rgba2",0
+Fdw_8: db "dws/dw_8.rgba2",0
+Fdw_9: db "dws/dw_9.rgba2",0
+Fdw_10: db "dws/dw_10.rgba2",0
+Fdw_11: db "dws/dw_11.rgba2",0
+Fdw_12: db "dws/dw_12.rgba2",0
+Fdw_13: db "dws/dw_13.rgba2",0
+Fdw_14: db "dws/dw_14.rgba2",0

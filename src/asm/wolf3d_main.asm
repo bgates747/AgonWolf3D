@@ -33,7 +33,7 @@ main:
 	call player_init
 
 ; set screen to double-buffered mode
-	ld a,8 ;+ 128
+	ld a,8 + 128
 	call vdu_set_screen_mode
 
 ; turn off cursor ... again
@@ -43,8 +43,9 @@ main:
 	ld de,(cur_x) ; implicitly loads cur_y
 	call get_cell_from_coords
 	xor a ; north orientation
+	ld (orientation),a
 	call render_scene
-	call vdu_flip_screen
+	call vdu_flip
 
 main_loop:
 ; move enemies
@@ -57,7 +58,7 @@ main_loop:
 	call render_scene
 
 ; flip the screen
-	call vdu_flip_screen
+	call vdu_flip
 
 ; check for escape key and quit if pressed
 	MOSCALL mos_getkbmap
@@ -68,7 +69,7 @@ main_loop:
 @Escape:
 
 ; throttle the framerate
-	ld a,10 ; 4 fps at 60Hz
+	ld a,60/8; 4 fps at 60Hz
 @wait:
 	ld (@timer),a
 	call WAIT_VBLANK

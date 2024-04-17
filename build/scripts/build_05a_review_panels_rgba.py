@@ -39,7 +39,7 @@ class ImageBrowserApp:
         dim_x = row['dim_x']
         dim_y = row['dim_y']
 
-        img_path = f"{self.img_dir}/{row['panel_base_filename']}.rgba"
+        img_path = f"{self.img_dir}/{row['panel_base_filename']}.rgba2"
 
         img_tex = rgba2_to_img(img_path, row['dim_x'], row['dim_y'])
 

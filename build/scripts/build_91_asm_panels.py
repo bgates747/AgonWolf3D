@@ -36,7 +36,7 @@ def make_asm_panels(db_path, panels_inc_path):
             asm_writer.write(f"BUF_{name}: equ 0x{buffer_id_counter:04X}\n")
             buffer_id_counter += 1
 
-        asm_writer.write("\n; Import .rgba bitmap files and load them into VDP buffers\n")
+        asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
         asm_writer.write("load_panels:\n")
 
         cursor.execute('''
@@ -63,7 +63,7 @@ def make_asm_panels(db_path, panels_inc_path):
             asm_writer.write(f"\tld bc,{dim_x}\n")
             asm_writer.write(f"\tld de,{dim_y}\n")
             asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-            asm_writer.write("\tcall vdu_load_bmp2_from_file\n")
+            asm_writer.write("\tcall init_img_load\n")
             asm_writer.write("\tLD A, '.'\n")
             asm_writer.write("\tRST.LIL 10h\n")
 
@@ -71,7 +71,7 @@ def make_asm_panels(db_path, panels_inc_path):
 
         for row in unique_rows:
             panel_base_filename = row['panel_base_filename']
-            asm_writer.write(f"F{panel_base_filename}: db \"panels/{panel_base_filename}.rgba\",0\n")
+            asm_writer.write(f"F{panel_base_filename}: db \"panels/{panel_base_filename}.rgba2\",0\n")
 
     conn.close()
     return buffer_id_counter
@@ -107,7 +107,7 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
             asm_writer.write(f"BUF_{name}: equ 0x{buffer_id_counter:04X}\n")
             buffer_id_counter += 1
 
-        asm_writer.write("\n; Import .rgba bitmap files and load them into VDP buffers\n")
+        asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
         asm_writer.write("load_sprites:\n")
 
         cursor.execute('''
@@ -133,7 +133,7 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
             asm_writer.write(f"\tld bc,{dim_x}\n")
             asm_writer.write(f"\tld de,{dim_y}\n")
             asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-            asm_writer.write("\tcall vdu_load_bmp2_from_file\n")
+            asm_writer.write("\tcall init_img_load\n")
             asm_writer.write("\tLD A, '.'\n")
             asm_writer.write("\tRST.LIL 10h\n")
 
@@ -141,7 +141,7 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
 
         for row in unique_rows:
             panel_base_filename = row['panel_base_filename']
-            asm_writer.write(f"F{panel_base_filename}: db \"panels/{panel_base_filename}.rgba\",0\n")
+            asm_writer.write(f"F{panel_base_filename}: db \"panels/{panel_base_filename}.rgba2\",0\n")
 
     conn.close()
     return buffer_id_counter
@@ -168,7 +168,7 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
                 asm_writer.write(f"BUF_{name}: equ 0x{buffer_id_counter:04X}\n")
                 buffer_id_counter += 1
     
-            asm_writer.write("\n; Import .rgba bitmap files and load them into VDP buffers\n")
+            asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
             asm_writer.write("load_dws:\n")
     
             cursor.execute('''
@@ -194,7 +194,7 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
                 asm_writer.write(f"\tld bc,{dim_x}\n")
                 asm_writer.write(f"\tld de,{dim_y}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall vdu_load_bmp2_from_file\n")
+                asm_writer.write("\tcall init_img_load\n")
                 asm_writer.write("\tLD A, '.'\n")
                 asm_writer.write("\tRST.LIL 10h\n")
 
@@ -202,7 +202,7 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
 
             for row in unique_rows:
                 panel_base_filename = row['panel_base_filename']
-                asm_writer.write(f"F{panel_base_filename}: db \"dws/{panel_base_filename}.rgba\",0\n")
+                asm_writer.write(f"F{panel_base_filename}: db \"dws/{panel_base_filename}.rgba2\",0\n")
 
         conn.close()
         return buffer_id_counter

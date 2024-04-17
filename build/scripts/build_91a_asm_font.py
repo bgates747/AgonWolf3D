@@ -253,7 +253,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 asm_writer.write(f"\tdl 0x{0:02X}{1:02X}{space_width:02X},BUF_{32+buffer_offset:04d}")
                 asm_writer.write(f" ; Missing character {char_num}\n")
 
-        asm_writer.write("\n; Import .rgba bitmap files and load them into VDP buffers\n")
+        asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
         asm_writer.write(f"load_font_{font_name}:\n")
 
         # Iterate through each buffer_id
@@ -265,7 +265,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 name = f'{char_num:03d}'
                 # Write the relevant information to file
                 asm_writer.write(f"\n")
-                asm_writer.write(f"\tld hl,F{img_filename}\n")
+                asm_writer.write(f"\tld hl,F{abbr_name}{img_filename}\n")
                 asm_writer.write(f"\tld de,filedata\n")
                 asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
                 asm_writer.write("\tld a,mos_load\n")
@@ -274,7 +274,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 asm_writer.write(f"\tld bc,{dim_x}\n")
                 asm_writer.write(f"\tld de,{dim_y}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall vdu_load_bmp2_from_file\n")
+                asm_writer.write("\tcall init_img_load\n")
                 # asm_writer.write("\tLD A, '.'\n")
                 # asm_writer.write("\tRST.LIL 10h\n")
 
@@ -291,7 +291,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
                 # Write the relevant information to file
                 name = f'{char_num:03d}'
-                asm_writer.write(f"F{name}: db \"fonts/{abbr_name}/{name}.rgba2\",0\n")
+                asm_writer.write(f"F{abbr_name}{name}: db \"fonts/{abbr_name}/{name}.rgba2\",0\n")
 
 
         conn.close()
@@ -358,11 +358,17 @@ def make_space_char(db_path,font_name, font_rgba2_dir,space_width):
 def maken_zee_fonts():
     font_name = 'retro_computer'
     abbr_name = 'rc'
-    base_font_src_dir = f'src/assets/images/ui/fonts/{font_name}'
-    source_img_path = f"{base_font_src_dir}/{font_name}.png"
-    threshold = 128
+    lines_of_text = [
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "9876543210?!",
+    ]
+    line_starts = [10, 53]
+    character_height = 31
+    buffer_offset = 4096 + 256
+    space_width = 6
 
-    # itc_honda:
+    # font_name = 'itc_honda'
+    # abbr_name = 'honda'
     # lines_of_text = [
     #     "THE QUICK BROWN FOX JUMPS OVER THE",
     #     "LAZY DOG. the quick brown fox jumps",
@@ -370,19 +376,17 @@ def maken_zee_fonts():
     # ]
     # line_starts = [3, 63, 125]
     # character_height = 52
+    # buffer_offset = 4096
+    # space_width = 6
 
-    # retro_computer:
-    lines_of_text = [
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "9876543210?!",
-    ]
-    line_starts = [10, 53]
-    character_height = 31
+    base_font_src_dir = f'src/assets/images/ui/fonts/{font_name}'
+    source_img_path = f"{base_font_src_dir}/{font_name}.png"
+    threshold = 128
 
     fr_bg = get_rgba_color_by_index(15) # White
     fr_fg = get_rgba_color_by_index(0) # Black
-    to_bg = get_rgba_color_by_index(4) # Dark Blue
-    # to_bg = get_rgba_color_by_index(-1) # Transparent
+    # to_bg = get_rgba_color_by_index(4) # Dark Blue
+    to_bg = get_rgba_color_by_index(-1) # Transparent
     to_fg = get_rgba_color_by_index(15) # White
 
     scale_factor = 0.5
@@ -396,8 +400,6 @@ def maken_zee_fonts():
 
     db_path = 'build/data/build.db'
     font_inc_path = f"src/asm/font_{font_name}.inc"
-    buffer_offset = 4096
-    space_width = 6
     make_tbl_91a_font(db_path, font_def_file, font_name)
     make_space_char(db_path,font_name, font_rgba2_dir,space_width)
     make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name)

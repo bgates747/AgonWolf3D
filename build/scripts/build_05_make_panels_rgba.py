@@ -17,7 +17,7 @@ def make_panels_rgba(panels_png_dir, panels_rgba_dir):
         # to remind that this should have been taken care of upstream 
         # when the textures wre imported from Mapmaker in build_02_fetch_tiles.py
         filename = os.path.splitext(file)[0].replace(".png", "")
-        tgt_filepath = os.path.join(panels_rgba_dir, filename) + ".rgba"
+        tgt_filepath = os.path.join(panels_rgba_dir, filename) + ".rgba2"
         # convert the transformed image back to RGBA
         img_to_rgba2(img,tgt_filepath)
 
