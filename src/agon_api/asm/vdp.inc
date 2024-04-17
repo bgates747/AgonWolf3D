@@ -186,3 +186,12 @@ vdu_close:
 	db 23,1,1
 	db 12
 @end:
+
+
+WAIT_VBLANK:		PUSH 	IX			; Wait for VBLANK interrupt
+			MOSCALL	mos_sysvars		; Fetch pointer to system variables
+			LD	A, (IX + sysvar_time + 0)
+@wait:			CP 	A, (IX + sysvar_time + 0)
+			JR	Z, @wait
+			POP	IX
+			RET

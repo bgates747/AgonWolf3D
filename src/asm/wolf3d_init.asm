@@ -10,8 +10,7 @@
 	include "ui.inc"
 	; include "files.inc" ; file handling and memory allocation for loading files from disk
 
-hello_world: defb "Welcome to Agon Wolf3D!",0
-; hello_world: defb "WELCOME TO AGON WOLF3D!",0
+hello_world: defb "Welcome to Agon Wolf3D",0
 loading_panels: defb "Loading panels...",0
 loading_sprites: defb "Loading sprites...",0
 loading_dws: defb "Loading distance walls...",0
@@ -19,22 +18,8 @@ loading_itc_honda: defb "Loading ITC Honda font...",0
 loading_retro_computer: defb "Loading Retro Computer font...",0
 
 init:
-; ; set fonts
-; 	ld hl,font_nurples
-; 	ld b,144 ; loop counter for 96 chars
-; 	ld a,32 ; first char to define (space)
-; @loop:
-; 	push bc
-; 	push hl
-; 	push af
-; 	call vdu_define_character
-; 	pop af
-; 	inc a
-; 	pop hl
-; 	ld de,8
-; 	add hl,de
-; 	pop bc
-; 	djnz @loop
+; load ITC Honda font
+	call load_font_itc_honda
 
 ; set up the display
     ld a,8
@@ -46,32 +31,22 @@ init:
 	ld a,4 + 128
 	call vdu_colour_text
 
-; move the text cursor down a few lines
-	ld c,0 ; x
-	ld b,4 ; y
-	call vdu_move_cursor
-
 ; set gfx bg color
 	xor a ; plotting mode 0
 	ld c,4 ; dark blue
 	call vdu_gcol_bg
 	call vdu_clg
 
-; grab a bunch of sysvars and stuff
-	call vdu_init
+; move the text cursor down a few lines
+	ld c,0 ; x
+	ld b,4 ; y
+	call vdu_move_cursor
 
 ; set the cursor off
 	call cursor_off
 
-; load ITC Honda font
-	call load_font_itc_honda
-
-; ; load Retro Computer font
-; 	call load_font_retro_computer
-
 ; print loading message
 	ld ix,font_itc_honda
-	; ld ix,font_retro_computer
 	ld hl,hello_world
 	ld bc,32
 	ld de,2
@@ -103,6 +78,10 @@ init:
 
 ; call main
 	call main
+
+; return things to normal state
+    ld a,8
+    call vdu_set_screen_mode
 	call cursor_on
 	ret
 
