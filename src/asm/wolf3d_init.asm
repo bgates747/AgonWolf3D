@@ -12,11 +12,16 @@
 	; include "files.inc" ; file handling and memory allocation for loading files from disk
 
 hello_world: defb "Welcome to Agon Wolf3D",0
-loading_panels: defb "Loading panels...",0
-loading_sprites: defb "Loading sprites...",0
-loading_dws: defb "Loading distance walls...",0
+loading_panels: defb "Loading panels",0
+loading_sprites: defb "Loading sprites",0
+loading_dws: defb "Loading distance walls",0
+loading_ui: defb "Loading UI",0
 
 init:
+; print loading ui message
+	ld hl,loading_ui
+	call printString
+
 ; load ITC Honda font
 	call load_font_itc_honda
 
@@ -141,9 +146,9 @@ thanks_for_playing: defb "We hope you enjoyed Wolf3D!",0
 init_img_load:
 	; load the image
 	call vdu_load_bmp2_from_file
-	; ; print a loading dot
-	; LD A, '.'
-	; RST.LIL 10h
+	; print a progess breadcrumb
+	LD A, '.'
+	RST.LIL 10h
 	ret
 
 ; WARNING: it may be tempting to move this routine to src/agon_api/vdp_buff.asm

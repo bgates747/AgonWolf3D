@@ -275,7 +275,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 asm_writer.write(f"\tld de,{dim_y}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
                 asm_writer.write("\tcall init_img_load\n")
-                # asm_writer.write("\tLD A, '.'\n")
+                # asm_writer.write("\tLD A, '.'\n") # this is now handled by the init_img_load function
                 # asm_writer.write("\tRST.LIL 10h\n")
 
             else:
@@ -355,30 +355,7 @@ def make_space_char(db_path,font_name, font_rgba2_dir,space_width):
 
     return space_width
 
-def maken_zee_fonts():
-    font_name = 'retro_computer'
-    abbr_name = 'rc'
-    lines_of_text = [
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "9876543210?!",
-    ]
-    line_starts = [10, 53]
-    character_height = 31
-    buffer_offset = 4096 + 256
-    space_width = 6
-
-    # font_name = 'itc_honda'
-    # abbr_name = 'honda'
-    # lines_of_text = [
-    #     "THE QUICK BROWN FOX JUMPS OVER THE",
-    #     "LAZY DOG. the quick brown fox jumps",
-    #     "over the lazy dog. 0123456789"
-    # ]
-    # line_starts = [3, 63, 125]
-    # character_height = 52
-    # buffer_offset = 4096
-    # space_width = 6
-
+def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method):
     base_font_src_dir = f'src/assets/images/ui/fonts/{font_name}'
     source_img_path = f"{base_font_src_dir}/{font_name}.png"
     threshold = 128
@@ -390,7 +367,6 @@ def maken_zee_fonts():
     to_fg = get_rgba_color_by_index(15) # White
 
     scale_factor = 0.5
-    scale_method = Image.NEAREST
     font_rgba2_dir = f"tgt/fonts/{abbr_name}"
 
     os.makedirs(font_rgba2_dir, exist_ok=True)
@@ -403,6 +379,36 @@ def maken_zee_fonts():
     make_tbl_91a_font(db_path, font_def_file, font_name)
     make_space_char(db_path,font_name, font_rgba2_dir,space_width)
     make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name)
+
+def maken_zee_fonts():
+    scale_method = Image.NEAREST
+
+    font_name = 'retro_computer'
+    abbr_name = 'rc'
+    lines_of_text = [
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "9876543210?!",
+    ]
+    line_starts = [10, 53]
+    character_height = 31
+    buffer_offset = 4096 + 256
+    space_width = 6
+
+    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method)
+
+    font_name = 'itc_honda'
+    abbr_name = 'honda'
+    lines_of_text = [
+        "THE QUICK BROWN FOX JUMPS OVER THE",
+        "LAZY DOG. the quick brown fox jumps",
+        "over the lazy dog. 0123456789"
+    ]
+    line_starts = [3, 63, 125]
+    character_height = 52
+    buffer_offset = 4096
+    space_width = 6
+
+    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method)
 
 if __name__ == "__main__":
     maken_zee_fonts()
