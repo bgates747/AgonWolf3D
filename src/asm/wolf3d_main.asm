@@ -33,8 +33,11 @@ main:
 	call player_init
 
 ; set screen to double-buffered mode
-	ld a,8 + 128
+	ld a,8; + 128
 	call vdu_set_screen_mode
+
+; turn off cursor ... again
+	call cursor_off
 
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y
@@ -44,13 +47,6 @@ main:
 	call vdu_flip_screen
 
 main_loop:
-; wait for next frame
-	; ld a,00000100b ; 32 frames per second
-	ld a,00010000b ; 8 frames per second
-	; ld a,00100000b ; 4 frames per second
-
-	call multiPurposeDelay
-
 ; move enemies
 	; call move_enemies
 
@@ -61,7 +57,7 @@ main_loop:
 	call render_scene
 
 ; flip the screen
-	call vdu_flip_screen
+	; call vdu_flip_screen
 
 ; check for escape key and quit if pressed
     ld a, $08                           ; code to send to MOS
@@ -70,6 +66,15 @@ main_loop:
     ld a, (ix + $05)                    ; get ASCII code of key pressed
     cp 27                               ; check if 27 (ascii code for ESC)   
     jr z, main_end                     ; if pressed, jump to exit
+
+; wait for next frame
+	; ld a,00000100b ; 32 frames per second
+	ld a,00010000b ; 8 frames per second
+	; ld a,00100000b ; 4 frames per second
+
+	; call multiPurposeDelay
+	call vsync
+
 
 ; do it again, Sam
     jr main_loop
