@@ -120,8 +120,8 @@ init:
 ; print a thanks for playing message
 	ld ix,font_itc_honda
 	ld hl,thanks_for_playing
-	ld bc,24
-	ld de,2
+	ld bc,20 ; x
+	ld de,2 ; y
 	call font_bmp_print
 
 ; print coming soon message

@@ -31,8 +31,8 @@ font_bmp_plot:
 ; now set bc to the next x coordinate
     pop bc
     ld a,(ix+0) ; a has the width of the character
+    add a,2 ; add a little padding between characters
     add a,c ; bump the original x-coordinate
-    add a,2 ; plus a little more
     ld c,a
     ld a,0 ; can't xor it because we need carry
     adc a,b
