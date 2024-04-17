@@ -98,19 +98,11 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
         make_asm_dws(db_path, panels_inc_path, last_buffer_id)
 
-# build_91a_asm_font_itc_honda.py
-    if do_91a_asm_font_itc_honda:
-        from build_91a_asm_font_itc_honda import make_tbl_91a_font_itc_honda,make_asm_font_itc_honda,make_space_char
-        scale_factor = 0.50
-        font_rgba2_dir = f"tgt/fonts/honda"
-        os.makedirs(font_rgba2_dir, exist_ok=True)
-        font_def_file = f'tgt/fonts/font_itc_honda_{int(scale_factor * 100):03d}.txt'
-        font_inc_path = "src/asm/font_itc_honda.inc"
-        buffer_offset = 4096
-        space_width = 6
-        make_tbl_91a_font_itc_honda(db_path,font_def_file)
-        make_space_char(db_path,font_rgba2_dir,space_width)
-        make_asm_font_itc_honda(db_path,font_inc_path,buffer_offset,space_width)
+# build_91a_asm_font.py
+    if do_91a_asm_font:
+        from build_91a_asm_font import maken_zee_fonts
+        maken_zee_fonts()
+        
 
 # build_92_asm_ez80Asmlinker.py
     if do_92_asm_ez80Asmlinker:
@@ -151,21 +143,21 @@ if __name__ == "__main__":
     do_07_map_panels = False
     do_90_asm_polys = False
     do_91_asm_panels = False
-    do_91a_asm_font_itc_honda = False
+    do_91a_asm_font = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
     do_92_asm_ez80Asmlinker = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
-    # do_06_import_mapmaker_files = True
-    # do_07_map_panels = True
-    # do_90_asm_polys = True
-    # do_91_asm_panels = True
-    do_91a_asm_font_itc_honda = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_90_asm_polys = True
+    do_91_asm_panels = True
+    do_91a_asm_font = True
     do_92_asm_ez80Asmlinker = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height)

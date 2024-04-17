@@ -355,12 +355,23 @@ def make_space_char(db_path,font_name, font_rgba2_dir,space_width):
 
     return space_width
 
-if __name__ == "__main__":
+def maken_zee_fonts():
     font_name = 'retro_computer'
     abbr_name = 'rc'
     base_font_src_dir = f'src/assets/images/ui/fonts/{font_name}'
     source_img_path = f"{base_font_src_dir}/{font_name}.png"
     threshold = 128
+
+    # itc_honda:
+    # lines_of_text = [
+    #     "THE QUICK BROWN FOX JUMPS OVER THE",
+    #     "LAZY DOG. the quick brown fox jumps",
+    #     "over the lazy dog. 0123456789"
+    # ]
+    # line_starts = [3, 63, 125]
+    # character_height = 52
+
+    # retro_computer:
     lines_of_text = [
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "9876543210?!",
@@ -390,3 +401,7 @@ if __name__ == "__main__":
     make_tbl_91a_font(db_path, font_def_file, font_name)
     make_space_char(db_path,font_name, font_rgba2_dir,space_width)
     make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name)
+
+if __name__ == "__main__":
+    maken_zee_fonts()
+
