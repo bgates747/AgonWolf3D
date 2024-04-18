@@ -27,7 +27,8 @@ start:
 ; ###############################################
 
 ; ###############################################
-	call	init			; Initialization code
+	call init ; Initialization code
+    call main ; Call the main function
 ; ###############################################
 
 exit:

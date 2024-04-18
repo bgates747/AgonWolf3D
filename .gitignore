@@ -1,4 +1,7 @@
 ## CUSTOM PROJECT-SPECIFIC ##
+# Ignore emulator directory
+emulator/*
+
 # Ignore .python .vscode
 .python
 .vscode

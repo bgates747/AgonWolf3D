@@ -81,4 +81,98 @@ main_loop:
 @timer: ds 1
 
 main_end:
+
+; do the outro advert for purple nurples
+; set to double-buffered mode
+    ld a,8 + 128
+    call vdu_set_screen_mode
+    call cursor_off
+@loop_animation:
+; print a thanks for playing message
+	ld ix,font_itc_honda
+	ld hl,thanks_for_playing
+	ld bc,20 ; x
+	ld de,2 ; y
+	call font_bmp_print
+; print coming soon message
+	ld ix,font_retro_computer
+	ld hl,coming_soon
+	ld bc,14 ; x
+	ld de,24+160 ; y
+	call font_bmp_print
+; replot the background
+    ld hl,BUF_UI_NURP_BG_CR
+    call vdu_buff_select
+    ld bc,0
+    ld de,0
+    call vdu_plot_bmp
+; then plot the logo
+    ld hl,BUF_UI_NURP_LOG
+    call vdu_buff_select
+    ld bc,(@logo_x)
+    inc bc
+    inc bc
+    ld (@logo_x),bc
+    ld de,(@logo_y)
+    call vdu_plot_bmp
+; flip the screen buffer
+    call vdu_flip
+; wait a tick
+    call WAIT_VBLANK
+; update loop counter
+    ld a,(@loop_counter)
+    dec a
+    ld (@loop_counter),a
+    jr z,@done
+    jp @loop_animation
+@loop_counter: db 168
+@logo_x: dl -315
+@logo_y: dl 24
+@done:
+
+; return things to normal state
+    ld a,8
+    call vdu_set_screen_mode
+
+; one final render of the outro advert
+; print a thanks for playing message
+	ld ix,font_itc_honda
+	ld hl,thanks_for_playing
+	ld bc,20 ; x
+	ld de,2 ; y
+	call font_bmp_print
+; print coming soon message
+	ld ix,font_retro_computer
+	ld hl,coming_soon
+	ld bc,14 ; x
+	ld de,24+160 ; y
+	call font_bmp_print
+; replot the background
+    ld hl,BUF_UI_NURP_BG_CR
+    call vdu_buff_select
+    ld bc,0
+    ld de,0
+    call vdu_plot_bmp
+; then plot the logo
+    ld hl,BUF_UI_NURP_LOG
+    call vdu_buff_select
+    ld bc,(@logo_x)
+    inc bc
+    inc bc
+    ld (@logo_x),bc
+    ld de,(@logo_y)
+    call vdu_plot_bmp
+	
+; move the cursor to the bottom of the screen
+	ld c,0
+	ld b,29 ; bottom of screen in mode 8
+	call vdu_move_cursor
+    call cursor_on
+
+; and out
 	ret
+
+thanks_for_playing: defb "We hope you enjoyed Wolf3D",0
+be_sure_not_to_miss: defb "BE SURE NOT TO MISS",0
+attack_of: defb "ATTACK OF THE",0
+coming_soon: defb "COMING SOON TO AN AGON NEAR YOU!",0

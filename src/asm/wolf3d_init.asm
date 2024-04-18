@@ -22,8 +22,9 @@ init:
 	ld hl,loading_ui
 	call printString
 
-; load ITC Honda font
+; load fonts
 	call load_font_itc_honda
+	call load_font_retro_computer
 
 ; load UI images
 	call load_ui_images
@@ -84,10 +85,10 @@ init:
 	ld de,2
 	call font_bmp_print
 
-; load panels
-	ld hl,loading_panels
-	call printString
-	call load_panels
+; ; load panels
+; 	ld hl,loading_panels
+; 	call printString
+; 	call load_panels
 
 ; load sprites
 	call printNewline
@@ -100,48 +101,13 @@ init:
 	ld hl,loading_dws
 	call printString
 	call load_dws
-
-; load retro computer font
-	call load_font_retro_computer
 	
 ; clear the screen
 	call vdu_cls
 	call vdu_clg
 
-; call main
-	call main
-
-; return things to normal state
-    ld a,8
-    call vdu_set_screen_mode
-
-; load nurples advert
-	ld hl,BUF_UI_NURP_BG_CR ; nurple background
-	call vdu_buff_select
-	ld bc,0
-	ld de,0
-	call vdu_plot_bmp
-
-; print a thanks for playing message
-	ld ix,font_itc_honda
-	ld hl,thanks_for_playing
-	ld bc,20 ; x
-	ld de,2 ; y
-	call font_bmp_print
-
-; print coming soon message
-	; ld ix,font_retro_computer
-
-	call cursor_on
-; VDU 31, x, y: Move text cursor to x, y text position (TAB(x, y))
-; inputs: c=x, b=y 8-bit unsigned integers
-	ld c,0
-	ld b,29 ; bottom of screen in mode 8
-	call vdu_move_cursor
-
+; initialization done
 	ret
-
-thanks_for_playing: defb "We hope you enjoyed Wolf3D!",0
 
 init_img_load:
 	; load the image
