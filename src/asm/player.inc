@@ -27,7 +27,8 @@ dx:    db 0x00
 
 ; ######### PLAYER CONSTANTS ##########
 speed_player: equ 0x01 ; 1 map grid unit per movement tick
-move_timer_reset: equ 15
+; move_timer_reset: equ 15
+move_timer_reset: equ 8 ; DEBUG: faster movement
 
 ; ######### PLAYER SPRITE PARAMETERS ##########
 ; uses the same offsets from its table base as the main sprite table:
@@ -182,11 +183,6 @@ player_input:
     push de
     call get_cell_from_coords ; a is target cell obj_id
     pop de
-
-    ; call dumpRegistersHex
-
-    ; jr @move_it ; debug
-
     cp blank_cell
     jr z,@move_it
     cp door_cell
@@ -218,8 +214,6 @@ player_input:
 
 @move_it:
 ; we are cleared for movement so update player position
-    ; call dumpRegistersHex
-
     ld de,(dx) ; d = dy, e = dx
     ld a,(cur_x)
     add a,e
@@ -227,9 +221,6 @@ player_input:
     ld a,(cur_y)
     add a,d
     ld (cur_y),a
-; finally at long last, render the updated player position
-    ld a,(orientation)
-    call render_scene
 @reset_move_timer:
     ld a,move_timer_reset
     ld (player_move_timer),a

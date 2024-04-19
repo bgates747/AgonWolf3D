@@ -55,6 +55,10 @@ init:
 
 ; call main
 	call main
+
+; set display back to nomralish
+    ld a,0
+    call vdu_set_screen_mode
 	call cursor_on
 	ret
 

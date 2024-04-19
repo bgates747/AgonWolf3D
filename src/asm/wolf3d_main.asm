@@ -29,13 +29,14 @@
 ; ; #### BEGIN GAME VARIABLES ####
 
 main:
-; ; test get_cell_from_coords
-; 	ld d,2
-; 	ld e,6
-; 	call get_cell_from_coords
-; 	ld bc,(ix+map_obj_id)
-; 	ld de,(ix+map_render)
-; 	call dumpRegistersHex
+; set up the display
+    ld a,8 + 128 ; DEUBG: retconning double-buffering to see if flickers go away
+    call vdu_set_screen_mode
+    xor a
+    call vdu_set_scaling
+	
+; set the cursor off
+	call cursor_off
 
 ; initialize player position
 	call player_init
@@ -47,10 +48,16 @@ main:
 	ld de,(cur_x) ; implicitly loads cur_y
 	call get_cell_from_coords
 	call render_scene
+	call vdu_flip
 
 main_loop:
 ; get player input and update sprite position
 	call player_input
+	ld de,(cur_x) ; implicitly loads cur_y
+	call get_cell_from_coords
+	; ld a,(orientation) ; TODO: NOT NEEDED
+    call render_scene
+    call vdu_flip ; DEBUG: see if this solves flicker problem
 
 ; move enemies
 	; call move_enemies

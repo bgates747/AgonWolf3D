@@ -116,10 +116,10 @@ if __name__ == "__main__":
     do_92_asm_ez80Asmlinker = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_open_cv_panels = True
-    # do_05_panels_rgba = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_open_cv_panels = True
+    do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_90_asm_polys = True
