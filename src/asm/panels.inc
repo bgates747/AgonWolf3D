@@ -284,9 +284,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_10_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F10_009
@@ -383,9 +383,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_10_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F10_024
@@ -460,9 +460,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_10_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F10_035
@@ -515,9 +515,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_10_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F10_042
@@ -559,9 +559,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_11_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F11_009
@@ -658,9 +658,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_11_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F11_024
@@ -735,9 +735,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_11_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F11_035
@@ -790,9 +790,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_11_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F11_042
@@ -834,9 +834,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_12_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F12_009
@@ -933,9 +933,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_12_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F12_024
@@ -1010,9 +1010,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_12_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F12_035
@@ -1065,9 +1065,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_12_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F12_042
@@ -1109,9 +1109,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_13_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F13_009
@@ -1208,9 +1208,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_13_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F13_024
@@ -1285,9 +1285,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_13_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F13_035
@@ -1340,9 +1340,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_13_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F13_042
@@ -1384,9 +1384,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_14_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F14_009
@@ -1483,9 +1483,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_14_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F14_024
@@ -1560,9 +1560,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_14_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F14_035
@@ -1615,9 +1615,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_14_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F14_042
@@ -1659,9 +1659,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_15_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F15_009
@@ -1758,9 +1758,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_15_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F15_024
@@ -1835,9 +1835,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_15_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F15_035
@@ -1890,9 +1890,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_15_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F15_042
@@ -1934,9 +1934,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_16_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F16_009
@@ -2033,9 +2033,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_16_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F16_024
@@ -2110,9 +2110,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_16_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F16_035
@@ -2165,9 +2165,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_16_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F16_042
@@ -2209,9 +2209,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_17_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F17_009
@@ -2308,9 +2308,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_17_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F17_024
@@ -2385,9 +2385,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_17_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F17_035
@@ -2440,9 +2440,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_17_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F17_042
@@ -2484,9 +2484,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_57_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F57_009
@@ -2583,9 +2583,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_57_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F57_024
@@ -2660,9 +2660,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_57_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F57_035
@@ -2715,9 +2715,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_57_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F57_042
@@ -2759,9 +2759,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_58_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F58_009
@@ -2858,9 +2858,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_58_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F58_024
@@ -2935,9 +2935,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_58_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F58_035
@@ -2990,9 +2990,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_58_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F58_042
@@ -3034,9 +3034,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_59_004
-	ld bc,35
+	ld bc,36
 	ld de,35
-	ld ix,1225
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F59_009
@@ -3133,9 +3133,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_59_020
-	ld bc,45
+	ld bc,46
 	ld de,45
-	ld ix,2025
+	ld ix,2070
 	call init_img_load
 
 	ld hl,F59_024
@@ -3210,9 +3210,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_59_032
-	ld bc,64
+	ld bc,65
 	ld de,64
-	ld ix,4096
+	ld ix,4160
 	call init_img_load
 
 	ld hl,F59_035
@@ -3265,9 +3265,9 @@ load_panels:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_59_040
-	ld bc,107
+	ld bc,108
 	ld de,107
-	ld ix,11449
+	ld ix,11556
 	call init_img_load
 
 	ld hl,F59_042
@@ -3681,9 +3681,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_004
-	ld bc,19
-	ld de,21
-	ld ix,399
+	ld bc,20
+	ld de,20
+	ld ix,400
 	call init_img_load
 
 	ld hl,F20_020
@@ -3703,9 +3703,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_032
-	ld bc,36
+	ld bc,37
 	ld de,39
-	ld ix,1404
+	ld ix,1443
 	call init_img_load
 
 	ld hl,F20_040
@@ -3715,8 +3715,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_20_040
 	ld bc,60
-	ld de,65
-	ld ix,3900
+	ld de,64
+	ld ix,3840
 	call init_img_load
 
 	ld hl,F20_044
@@ -3725,9 +3725,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_044
-	ld bc,120
+	ld bc,121
 	ld de,115
-	ld ix,13800
+	ld ix,13915
 	call init_img_load
 
 	ld hl,F21_004
@@ -3736,9 +3736,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_004
-	ld bc,10
+	ld bc,11
 	ld de,11
-	ld ix,110
+	ld ix,121
 	call init_img_load
 
 	ld hl,F21_020
@@ -3747,9 +3747,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_020
-	ld bc,13
-	ld de,15
-	ld ix,195
+	ld bc,14
+	ld de,14
+	ld ix,196
 	call init_img_load
 
 	ld hl,F21_032
@@ -3769,9 +3769,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_040
-	ld bc,34
+	ld bc,33
 	ld de,36
-	ld ix,1224
+	ld ix,1188
 	call init_img_load
 
 	ld hl,F21_044
@@ -3791,9 +3791,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_22_004
-	ld bc,16
+	ld bc,17
 	ld de,11
-	ld ix,176
+	ld ix,187
 	call init_img_load
 
 	ld hl,F22_020
@@ -3802,9 +3802,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_22_020
-	ld bc,21
-	ld de,15
-	ld ix,315
+	ld bc,22
+	ld de,14
+	ld ix,308
 	call init_img_load
 
 	ld hl,F22_032
@@ -3824,9 +3824,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_22_040
-	ld bc,50
+	ld bc,51
 	ld de,36
-	ld ix,1800
+	ld ix,1836
 	call init_img_load
 
 	ld hl,F22_044
@@ -3846,9 +3846,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_004
-	ld bc,20
+	ld bc,21
 	ld de,9
-	ld ix,180
+	ld ix,189
 	call init_img_load
 
 	ld hl,F23_020
@@ -3857,9 +3857,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_020
-	ld bc,25
+	ld bc,26
 	ld de,12
-	ld ix,300
+	ld ix,312
 	call init_img_load
 
 	ld hl,F23_032
@@ -3869,8 +3869,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_23_032
 	ld bc,36
-	ld de,16
-	ld ix,576
+	ld de,17
+	ld ix,612
 	call init_img_load
 
 	ld hl,F23_040
@@ -3879,9 +3879,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_040
-	ld bc,60
+	ld bc,61
 	ld de,27
-	ld ix,1620
+	ld ix,1647
 	call init_img_load
 
 	ld hl,F23_044
@@ -3890,9 +3890,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_044
-	ld bc,1
+	ld bc,180
 	ld de,1
-	ld ix,1
+	ld ix,180
 	call init_img_load
 
 	ld hl,F24_004
@@ -3901,9 +3901,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_004
-	ld bc,10
+	ld bc,11
 	ld de,11
-	ld ix,110
+	ld ix,121
 	call init_img_load
 
 	ld hl,F24_020
@@ -3912,9 +3912,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_020
-	ld bc,13
-	ld de,15
-	ld ix,195
+	ld bc,14
+	ld de,14
+	ld ix,196
 	call init_img_load
 
 	ld hl,F24_032
@@ -3934,9 +3934,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_040
-	ld bc,34
+	ld bc,33
 	ld de,36
-	ld ix,1224
+	ld ix,1188
 	call init_img_load
 
 	ld hl,F24_044
@@ -3956,9 +3956,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_004
-	ld bc,17
+	ld bc,18
 	ld de,9
-	ld ix,153
+	ld ix,162
 	call init_img_load
 
 	ld hl,F40_020
@@ -3967,9 +3967,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_020
-	ld bc,22
-	ld de,12
-	ld ix,264
+	ld bc,23
+	ld de,11
+	ld ix,253
 	call init_img_load
 
 	ld hl,F40_032
@@ -3989,9 +3989,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_040
-	ld bc,53
+	ld bc,54
 	ld de,29
-	ld ix,1537
+	ld ix,1566
 	call init_img_load
 
 	ld hl,F40_044
@@ -4011,9 +4011,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_004
-	ld bc,17
+	ld bc,18
 	ld de,15
-	ld ix,255
+	ld ix,270
 	call init_img_load
 
 	ld hl,F41_020
@@ -4022,9 +4022,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_020
-	ld bc,22
+	ld bc,23
 	ld de,20
-	ld ix,440
+	ld ix,460
 	call init_img_load
 
 	ld hl,F41_032
@@ -4044,9 +4044,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_040
-	ld bc,53
+	ld bc,54
 	ld de,49
-	ld ix,2597
+	ld ix,2646
 	call init_img_load
 
 	ld hl,F41_044
@@ -4066,9 +4066,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_004
-	ld bc,14
+	ld bc,15
 	ld de,12
-	ld ix,168
+	ld ix,180
 	call init_img_load
 
 	ld hl,F42_020
@@ -4077,9 +4077,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_020
-	ld bc,19
+	ld bc,20
 	ld de,16
-	ld ix,304
+	ld ix,320
 	call init_img_load
 
 	ld hl,F42_032
@@ -4099,9 +4099,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_040
-	ld bc,46
+	ld bc,47
 	ld de,39
-	ld ix,1794
+	ld ix,1833
 	call init_img_load
 
 	ld hl,F42_044
@@ -4121,9 +4121,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_004
-	ld bc,17
-	ld de,6
-	ld ix,102
+	ld bc,18
+	ld de,5
+	ld ix,90
 	call init_img_load
 
 	ld hl,F43_020
@@ -4132,9 +4132,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_020
-	ld bc,22
-	ld de,8
-	ld ix,176
+	ld bc,23
+	ld de,7
+	ld ix,161
 	call init_img_load
 
 	ld hl,F43_032
@@ -4154,9 +4154,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_040
-	ld bc,53
+	ld bc,54
 	ld de,19
-	ld ix,1007
+	ld ix,1026
 	call init_img_load
 
 	ld hl,F43_044
@@ -4210,8 +4210,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_44_040
 	ld bc,43
-	ld de,33
-	ld ix,1419
+	ld de,32
+	ld ix,1376
 	call init_img_load
 
 	ld hl,F44_044
@@ -4231,9 +4231,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_004
-	ld bc,17
+	ld bc,18
 	ld de,11
-	ld ix,187
+	ld ix,198
 	call init_img_load
 
 	ld hl,F45_020
@@ -4242,9 +4242,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_020
-	ld bc,22
-	ld de,15
-	ld ix,330
+	ld bc,23
+	ld de,14
+	ld ix,322
 	call init_img_load
 
 	ld hl,F45_032
@@ -4264,9 +4264,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_040
-	ld bc,53
+	ld bc,54
 	ld de,36
-	ld ix,1908
+	ld ix,1944
 	call init_img_load
 
 	ld hl,F45_044
@@ -4286,9 +4286,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_004
-	ld bc,17
+	ld bc,18
 	ld de,9
-	ld ix,153
+	ld ix,162
 	call init_img_load
 
 	ld hl,F46_020
@@ -4297,9 +4297,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_020
-	ld bc,22
-	ld de,12
-	ld ix,264
+	ld bc,23
+	ld de,11
+	ld ix,253
 	call init_img_load
 
 	ld hl,F46_032
@@ -4319,9 +4319,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_040
-	ld bc,53
+	ld bc,54
 	ld de,29
-	ld ix,1537
+	ld ix,1566
 	call init_img_load
 
 	ld hl,F46_044
@@ -4341,9 +4341,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_004
-	ld bc,17
-	ld de,9
-	ld ix,153
+	ld bc,18
+	ld de,10
+	ld ix,180
 	call init_img_load
 
 	ld hl,F47_020
@@ -4352,9 +4352,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_020
-	ld bc,22
-	ld de,12
-	ld ix,264
+	ld bc,23
+	ld de,13
+	ld ix,299
 	call init_img_load
 
 	ld hl,F47_032
@@ -4374,9 +4374,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_040
-	ld bc,53
+	ld bc,54
 	ld de,30
-	ld ix,1590
+	ld ix,1620
 	call init_img_load
 
 	ld hl,F47_044
@@ -4397,8 +4397,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_48_004
 	ld bc,13
-	ld de,6
-	ld ix,78
+	ld de,5
+	ld ix,65
 	call init_img_load
 
 	ld hl,F48_020
@@ -4408,8 +4408,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_48_020
 	ld bc,18
-	ld de,8
-	ld ix,144
+	ld de,7
+	ld ix,126
 	call init_img_load
 
 	ld hl,F48_032
@@ -4429,9 +4429,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_48_040
-	ld bc,43
+	ld bc,44
 	ld de,19
-	ld ix,817
+	ld ix,836
 	call init_img_load
 
 	ld hl,F48_044
@@ -4451,9 +4451,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_004
-	ld bc,14
-	ld de,6
-	ld ix,84
+	ld bc,15
+	ld de,7
+	ld ix,105
 	call init_img_load
 
 	ld hl,F49_020
@@ -4462,9 +4462,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_020
-	ld bc,19
+	ld bc,20
 	ld de,9
-	ld ix,171
+	ld ix,180
 	call init_img_load
 
 	ld hl,F49_032
@@ -4484,9 +4484,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_040
-	ld bc,46
-	ld de,20
-	ld ix,920
+	ld bc,47
+	ld de,21
+	ld ix,987
 	call init_img_load
 
 	ld hl,F49_044
@@ -4506,9 +4506,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_50_004
-	ld bc,9
+	ld bc,10
 	ld de,13
-	ld ix,117
+	ld ix,130
 	call init_img_load
 
 	ld hl,F50_020
@@ -4517,9 +4517,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_50_020
-	ld bc,12
+	ld bc,13
 	ld de,17
-	ld ix,204
+	ld ix,221
 	call init_img_load
 
 	ld hl,F50_032
@@ -4540,8 +4540,8 @@ load_sprites:
 	RST.LIL 08h
 	ld hl,BUF_50_040
 	ld bc,30
-	ld de,43
-	ld ix,1290
+	ld de,42
+	ld ix,1260
 	call init_img_load
 
 	ld hl,F50_044
@@ -4583,9 +4583,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_032
-	ld bc,33
+	ld bc,34
 	ld de,48
-	ld ix,1584
+	ld ix,1632
 	call init_img_load
 
 	ld hl,F51_040
@@ -4605,9 +4605,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_044
-	ld bc,165
+	ld bc,166
 	ld de,160
-	ld ix,26400
+	ld ix,26560
 	call init_img_load
 
 	ld hl,F52_004
@@ -4638,9 +4638,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_032
-	ld bc,27
+	ld bc,28
 	ld de,48
-	ld ix,1296
+	ld ix,1344
 	call init_img_load
 
 	ld hl,F52_040
@@ -4660,9 +4660,9 @@ load_sprites:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_044
-	ld bc,135
+	ld bc,136
 	ld de,160
-	ld ix,21600
+	ld ix,21760
 	call init_img_load
 
 	ret
