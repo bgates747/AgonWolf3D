@@ -95,21 +95,21 @@ render_sprite:
     ret
 
 ; render a full 3d scene
-; inputs: ix pointed to cell lookup, (orietation) set
+; inputs: cur_x, cur_y, orientation set
 ; outputs: pretty pictures
 ; destroys: a, hl, bc, de, ix
 render_scene:
+; get current map position and camera orientation
+    ld de,(cur_x) ; d,e = cur_y,x
+    call get_cell_from_coords ; ix=cell lookup address; a=obj_id
 ; get cell info from lookup table
-    ld hl,(ix+map_render) ; hl = pointer to base of render routiness
+    ld hl,(ix+map_render) ; hl = pointer to base of render routines
     ld b,3 ; 3 bytes per address label
     ld a,(orientation)
     ld c,a
     mlt bc ; bc = offset from base address
     add hl,bc ; hl points to routine address
     ld hl,(hl) ; don't do this on a z80
-    push hl
-    ; call vdu_cls ; no longer necessary now that we have a background
-    pop hl
     ld a,(orientation)
     ld iy,(cur_x)
     jp (hl) ; 'call' the routine
