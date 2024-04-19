@@ -73,12 +73,19 @@ player_init:
 ; Returns: player position updated
 ; Destroys: probably everything except maybe iy
 player_input:
+; first check player_move_timer for zero
+    ld a,(player_move_timer)
+    and a ; if zero we can move so get keyboard move input
+    jr z,@get_kb
+    dec a ; otherwise decrement timer and return
+    ld (player_move_timer),a
+    ret
+@get_kb:
 ; reset player component velocities to zero as the default
     ld hl,0
     ld (xvel),hl ; implicitly sets yvel
-; ; we will set a to zero on a keypress, default of -1 will mean no keypress
-;     ld a,-1
-;     push af
+; we will set a to zero on a keypress, default of -1 will mean no keypress
+    ld a,-1
 ; check for keypresses and branch accordingly
 ; for how this works,see: https://github.com/breakintoprogram/agon-docs/wiki/MOS-API-%E2%80%90-Virtual-Keyboard
     MOSCALL	mos_getkbmap ;ix = pointer to MOS virtual keys table
@@ -154,10 +161,9 @@ player_input:
     xor a
 @Space:
 ; =====================
-; ; check whether player pressed a key
-;     pop af ; a is 0 if player pressed a key, -1 if not
-;     and a ; this will be -1 if player didn't press a key
-;     ret nz ; non zero so no key pressed
+; check whether player pressed a key
+    and a ; this will be -1 if player didn't press a key
+    ret nz ; non zero so no key pressed
 ; move player according to velocities set by keypresses
 ; TODO: this finagling could go to a conveninece function
     ld de,(xvel) ; d = yvel, e = xvel
@@ -215,5 +221,7 @@ player_input:
     add a,b
     ld d,a
     ld (cur_y),a
-    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id
+@reset_move_timer:
+    ld a,move_timer_reset
+    ld (player_move_timer),a
     ret

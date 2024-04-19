@@ -57,9 +57,10 @@ main_loop:
 
 ; render the updated scene
 	call render_scene
-
 ; flip the screen
 	call vdu_flip
+; wait for the next VBLANK
+	call WAIT_VBLANK
 
 ; check for escape key and quit if pressed
 	MOSCALL mos_getkbmap
@@ -69,18 +70,9 @@ main_loop:
 	jr main_end
 @Escape:
 
-; throttle the framerate
-	ld a,60/8; 4 fps at 60Hz
-@wait:
-	ld (@timer),a
-	call WAIT_VBLANK
-	ld a,(@timer)
-	dec a
-	jr nz,@wait
 ; do it again, Sam
     jr main_loop
-@timer: ds 1
 
 main_end:
-	call do_outro
+	; call do_outro
 	ret

@@ -110,10 +110,6 @@ render_scene:
     mlt bc ; bc = offset from base address
     add hl,bc ; hl points to routine address
     ld hl,(hl) ; don't do this on a z80
-; TODO: figure out wtf this was here b/c it seems to be unnecessary
-    ; ld a,(orientation)
-    ; ld iy,(cur_x)
-; END TODO
     jp (hl) ; 'call' the routine
 ; we always jp back here from the render routine
 render_scene_return: 
