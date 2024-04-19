@@ -97,7 +97,7 @@ render_sprite:
 ; render a full 3d scene
 ; inputs: cur_x, cur_y, orientation set
 ; outputs: pretty pictures
-; destroys: a, hl, bc, de, ix
+; destroys: a, hl, bc, de, ix, iy
 render_scene:
 ; get current map position and camera orientation
     ld de,(cur_x) ; d,e = cur_y,x
@@ -110,8 +110,10 @@ render_scene:
     mlt bc ; bc = offset from base address
     add hl,bc ; hl points to routine address
     ld hl,(hl) ; don't do this on a z80
-    ld a,(orientation)
-    ld iy,(cur_x)
+; TODO: figure out wtf this was here b/c it seems to be unnecessary
+    ; ld a,(orientation)
+    ; ld iy,(cur_x)
+; END TODO
     jp (hl) ; 'call' the routine
 ; we always jp back here from the render routine
 render_scene_return: 
