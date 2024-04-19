@@ -64,20 +64,6 @@ init:
 	ld de,0
 	call vdu_plot_bmp
 
-; ; display the nurples background
-; 	ld hl,BUF_UI_NURP_BG_CR 
-; 	call vdu_buff_select
-; 	ld bc,0
-; 	ld de,0
-; 	call vdu_plot_bmp
-
-; ; display the lavender background
-; 	ld hl,BUF_UI_LAVENDER
-; 	call vdu_buff_select
-; 	ld bc,0
-; 	ld de,0
-; 	call vdu_plot_bmp
-
 ; print loading message
 	ld ix,font_itc_honda
 	ld hl,hello_world
@@ -85,10 +71,10 @@ init:
 	ld de,2
 	call font_bmp_print
 
-; ; load panels
-; 	ld hl,loading_panels
-; 	call printString
-; 	call load_panels
+; load panels
+	ld hl,loading_panels
+	call printString
+	call load_panels
 
 ; load sprites
 	call printNewline
@@ -110,9 +96,9 @@ init:
 	ret
 
 init_img_load:
-	; load the image
+; load the image
 	call vdu_load_bmp2_from_file
-	; print a progess breadcrumb
+; print a progess breadcrumb
 	LD A, '.'
 	RST.LIL 10h
 	ret

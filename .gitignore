@@ -1,4 +1,6 @@
 ## CUSTOM PROJECT-SPECIFIC ##
+# Ignore flicker directory
+flicker/
 # Ignore emulator directory
 emulator/*
 
