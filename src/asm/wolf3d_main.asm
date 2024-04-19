@@ -75,4 +75,8 @@ main_loop:
 
 main_end:
 	; call do_outro
+; restore screen to something normalish
+	xor a
+	call vdu_set_screen_mode
+	call cursor_on
 	ret
