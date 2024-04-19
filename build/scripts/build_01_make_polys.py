@@ -251,6 +251,20 @@ def scale_polys_to_screen(db_path, screen_width, screen_height):
     ''')
     conn.commit()
 
+    # Additional updates for 'south' facing polys to close gaps
+    cursor.execute('''
+        UPDATE tbl_01_polys
+        SET
+            poly_x1 = poly_x1 + 1, 
+            poly_x2 = poly_x2 + 1,
+            poly_y2 = poly_y2 + 0, 
+            poly_y3 = poly_y3 + 0,
+            dim_x = dim_x +1,
+            dim_y = dim_y +0
+        WHERE face = 'south';
+    ''')
+    conn.commit()
+
     cursor = conn.cursor()
     cursor.execute('''
         update tbl_01_polys

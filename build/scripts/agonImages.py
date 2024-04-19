@@ -4,70 +4,70 @@ from PIL import Image
 import struct
 
 colors64 = [
-    (0, 0, 0),         # Color 0
-    (170, 0, 0),       # Color 1
-    (0, 170, 0),       # Color 2
-    (170, 170, 0),     # Color 3
-    (0, 0, 170),       # Color 4
-    (170, 0, 170),     # Color 5
-    (0, 170, 170),     # Color 6
-    (170, 170, 170),   # Color 7
-    (85, 85, 85),      # Color 8
-    (255, 0, 0),       # Color 9
-    (0, 255, 0),       # Color 10
-    (255, 255, 0),     # Color 11
-    (0, 0, 255),       # Color 12
-    (255, 0, 255),     # Color 13
-    (0, 255, 255),     # Color 14
-    (255, 255, 255),   # Color 15
-    (0, 0, 85),        # Color 16
-    (0, 85, 0),        # Color 17
-    (0, 85, 85),       # Color 18
-    (0, 85, 170),      # Color 19
-    (0, 85, 255),      # Color 20
-    (0, 170, 85),      # Color 21
-    (0, 170, 255),     # Color 22
-    (0, 255, 85),      # Color 23
-    (0, 255, 170),     # Color 24
-    (85, 0, 0),        # Color 25
-    (85, 0, 85),       # Color 26
-    (85, 0, 170),      # Color 27
-    (85, 0, 255),      # Color 28
-    (85, 85, 0),       # Color 29
-    (85, 85, 170),     # Color 30
-    (85, 85, 255),     # Color 31
-    (85, 170, 0),      # Color 32
-    (85, 170, 85),     # Color 33
-    (85, 170, 170),    # Color 34
-    (85, 170, 255),    # Color 35
-    (85, 255, 0),      # Color 36
-    (85, 255, 85),     # Color 37
-    (85, 255, 170),    # Color 38
-    (85, 255, 255),    # Color 39
-    (170, 0, 85),      # Color 40
-    (170, 0, 255),     # Color 41
-    (170, 85, 0),      # Color 42
-    (170, 85, 85),     # Color 43
-    (170, 85, 170),    # Color 44
-    (170, 85, 255),    # Color 45
-    (170, 170, 85),    # Color 46
-    (170, 170, 255),   # Color 47
-    (170, 255, 0),     # Color 48
-    (170, 255, 85),    # Color 49
-    (170, 255, 170),   # Color 50
-    (170, 255, 255),   # Color 51
-    (255, 0, 85),      # Color 52
-    (255, 0, 170),     # Color 53
-    (255, 85, 0),      # Color 54
-    (255, 85, 85),     # Color 55
-    (255, 85, 170),    # Color 56
-    (255, 85, 255),    # Color 57
-    (255, 170, 0),     # Color 58
-    (255, 170, 85),    # Color 59
-    (255, 170, 170),   # Color 60
-    (255, 170, 255),   # Color 61
-    (255, 255, 85),    # Color 62
-    (255, 255, 170)    # Color 63
+    (0, 0, 0), # 0 Black
+    (170, 0, 0), # 1 Dark red
+    (0, 170, 0), # 2 Dark green
+    (170, 170, 0), # 3 Olive
+    (0, 0, 170), # 4 Dark blue
+    (170, 0, 170), # 5 Dark magenta
+    (0, 170, 170), # 6 Teal
+    (170, 170, 170), # 7 Light gray
+    (85, 85, 85), # 8 Gray
+    (255, 0, 0), # 9 Red
+    (0, 255, 0), # 10 Lime
+    (255, 255, 0), # 11 Yellow
+    (0, 0, 255), # 12 Blue
+    (255, 0, 255), # 13 Magenta
+    (0, 255, 255), # 14 Aqua
+    (255, 255, 255), # 15 White
+    (0, 0, 85), # 16 Navy (darkest blue)
+    (0, 85, 0), # 17 Dark olive green
+    (0, 85, 85), # 18 Darker teal
+    (0, 85, 170), # 19 Azure
+    (0, 85, 255), # 20 Lighter azure
+    (0, 170, 85), # 21 Spring green
+    (0, 170, 255), # 22 Sky blue
+    (0, 255, 85), # 23 Light spring green
+    (0, 255, 170), # 24 Medium spring green
+    (85, 0, 0), # 25 Maroon
+    (85, 0, 85), # 26 Violet
+    (85, 0, 170), # 27 Indigo
+    (85, 0, 255), # 28 Electric indigo
+    (85, 85, 0), # 29 Dark khaki
+    (85, 85, 170), # 30 Slate blue
+    (85, 85, 255), # 31 Light slate blue
+    (85, 170, 0), # 32 Chartreuse
+    (85, 170, 85), # 33 Medium sea green
+    (85, 170, 170), # 34 Light sea green
+    (85, 170, 255), # 35 Deep sky blue
+    (85, 255, 0), # 36 Lawn green
+    (85, 255, 85), # 37 Light green
+    (85, 255, 170), # 38 Pale green
+    (85, 255, 255), # 39 Pale turquoise
+    (170, 0, 85), # 40 Medium violet
+    (170, 0, 255), # 41 Medium blue
+    (170, 85, 0), # 42 Golden brown
+    (170, 85, 85), # 43 Rosy brown
+    (170, 85, 170), # 44 Medium orchid
+    (170, 85, 255), # 45 Medium purple
+    (170, 170, 85), # 46 Tan
+    (170, 170, 255), # 47 Light steel blue
+    (170, 255, 0), # 48 Bright green
+    (170, 255, 85), # 49 Pale lime green
+    (170, 255, 170), # 50 Pale light green
+    (170, 255, 255), # 51 Light cyan
+    (255, 0, 85), # 52 Hot pink
+    (255, 0, 170), # 53 Deep pink
+    (255, 85, 0), # 54 Dark orange
+    (255, 85, 85), # 55 Salmon
+    (255, 85, 170), # 56 Orchid
+    (255, 85, 255), # 57 Bright magenta
+    (255, 170, 0), # 58 Orange
+    (255, 170, 85), # 59 Light salmon
+    (255, 170, 170), # 60 Light pink
+    (255, 170, 255), # 61 Lavender pink
+    (255, 255, 85), # 62 Pale yellow
+    (255, 255, 170) # 63 Light yellow
 ]
 
 colors16 = [

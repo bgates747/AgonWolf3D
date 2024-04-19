@@ -218,12 +218,29 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
                 mask = Image.open(mask_path)
                 img.paste(mask, (0, 0), mask)
             elif to_face == 'south':
-                draw.line([(to_plot_x, to_plot_y), (to_plot_x + to_dim_x, to_plot_y)], fill=(to_r, to_g, to_b, 255), width=1)
+                draw.line([(to_plot_x, to_plot_y), (to_plot_x + to_dim_x, to_plot_y)], fill=(to_r, to_g, to_b, 255), width=4)
 
 
-        # Get unique colors (excluding fully transparent pixels)
-        colors = img.getcolors(screen_width * screen_height) or []
-        unique_colors = {color[1][:3] for color in colors if color[1][3] != 0}  # Exclude alpha
+        # # Get unique colors (excluding fully transparent pixels)
+        # colors = img.getcolors(screen_width * screen_height) or []
+        # unique_colors = {color[1][:3] for color in colors if color[1][3] != 0}  # Exclude alpha
+
+        # Get all colors and their counts from the image
+        colors = img.getcolors(img.width * img.height)
+
+        if colors is None:
+            raise ValueError("Image has more colors than getcolors() can handle with the specified limit.")
+
+        # Define a threshold for the minimum number of pixels to consider a color significant
+        threshold = 36*3
+
+        # Create a set of unique colors that exceed the threshold
+        unique_colors = set()
+        for count, color in colors:
+            if count >= threshold and color[3] != 0:  # Exclude colors below threshold and fully transparent pixels
+                unique_colors.add(color[:3])  # Add only the RGB part
+
+        # Now unique_colors contains all significant colors (excluding transparency and below threshold counts)
 
         # Insert panels into tbl_07_render_panels if its unique color is found in the image
         for panel in panels:

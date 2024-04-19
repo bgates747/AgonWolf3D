@@ -16,7 +16,7 @@ def make_asm_polys(db_path, polys_inc_path):
             plot_x_hex = '0x' + format(plot_x & 0xFFFFFF, '06X') 
             plot_y_hex = '0x' + format(plot_y & 0xFFFFFF, '06X') 
             
-            writer.write(f"\tdl {plot_x_hex},{plot_y_hex} ; poly_id:{poly_id}\n")
+            writer.write(f"\tdl {plot_x_hex},{plot_y_hex} ; poly_id:{poly_id} {poly_id:02X}\n")
 
     conn.close()
 
