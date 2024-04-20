@@ -66,7 +66,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     panels_rgba_dir = 'tgt/panels'
     if do_05_panels_rgba:
         from build_05_make_panels_rgba import make_panels_rgba
-        make_panels_rgba(panels_png_dir, panels_rgba_dir)
+        make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)
 
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'

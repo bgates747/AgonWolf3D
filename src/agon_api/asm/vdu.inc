@@ -609,3 +609,27 @@ vdu_flip:
 	ret
 @cmd: db 23,0,0xC3
 @end:
+
+; Command 64: Compress a buffer
+; VDU 23, 0, &A0, targetBufferId; 64, sourceBufferId;
+; This command will compress the contents of a buffer, replacing the target buffer with the compressed data. Unless the target buffer is the same as the source, the source buffer will be left unchanged.
+
+
+; Command 65: Decompress a buffer
+; VDU 23, 0, &A0, targetBufferId; 65, sourceBufferId;
+; This command will decompress the contents of a buffer, replacing the target buffer with the decompressed data. Unless the target buffer is the same as the source, the source buffer will be left unchanged.
+; inputs: hl=sourceBufferId, de=targetBufferId
+vdu_decompress_buffer:
+	ld (@targetBufferId),de
+	ld (@sourceBufferId),hl
+	ld a,65
+	ld (@cmd1),a ; restore the part of command that got stomped on
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd: 	db 23,0,0xA0
+@targetBufferId: dw 0x0000
+@cmd1:	db 65
+@sourceBufferId: dw 0x0000
+@end: 	db 0x00 ; padding
