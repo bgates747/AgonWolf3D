@@ -122,7 +122,6 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
         make_asm_ui(db_path, ui_inc_path, buffer_id)
         
-
 # build_92_asm_ez80Asmlinker.py
     if do_92_asm_ez80Asmlinker:
         from build_92_asm_ez80asmLinker import do_assembly

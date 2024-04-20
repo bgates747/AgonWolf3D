@@ -1,5 +1,6 @@
 import subprocess
 import os
+import shutil
 
 def do_blender(blender_script_path, blender_executable, blender_local_prefs_path, *args):
     """
@@ -29,7 +30,14 @@ def do_blender(blender_script_path, blender_executable, blender_local_prefs_path
     print(' '.join(cmd))
     subprocess.run(cmd, env=env_vars)
 
-def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height):
+def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir):
+    # build_00_delete_tgt_dir.py
+    if do_00_delete_tgt_dir:
+        # Check and delete the target directory if necessary
+        if os.path.exists(tgt_dir):
+            shutil.rmtree(tgt_dir)
+        os.makedirs(tgt_dir)
+
     # build_01_make_polys_masks.py
     masks_directory = "build/panels/masks"
     min_scanlines = 2
@@ -102,8 +110,18 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     if do_91a_asm_font:
         from build_91a_asm_font import maken_zee_fonts
         maken_zee_fonts()
-        
 
+# build_91b_asm_ui.py
+    if do_91b_asm_ui:
+        from build_91b_asm_ui import make_tbl_91b_UI, make_rgba2_files, make_asm_ui
+        ui_inc_path = "src/asm/ui_img.inc"
+        src_png_dir = "src/assets/images/ui"
+        tgt_cmp_rgba2_dir = "tgt/ui"
+        buffer_id = 0x2000
+        make_tbl_91b_UI(db_path, src_png_dir)
+        make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
+        make_asm_ui(db_path, ui_inc_path, buffer_id)
+        
 # build_92_asm_ez80Asmlinker.py
     if do_92_asm_ez80Asmlinker:
         from build_92_asm_ez80asmLinker import do_assembly
@@ -121,6 +139,7 @@ if __name__ == "__main__":
 # Set build parameters
     # Set paths
     db_path = 'build/data/build.db' # Literally everything the app needs to build goes through this database
+    tgt_dir = 'tgt' # This is where all the build artifacts go
     map_dim_x, map_dim_y = 16, 16 # Don't mess with this
     screen_size = (320,160) # you could could change this for giggles I guess
     screen_width, screen_height = screen_size[0], screen_size[1]
@@ -131,6 +150,7 @@ if __name__ == "__main__":
     room_ids = list(range(1))  # This will create a list: [0]
 
 # By default don't run any scripts
+    do_00_delete_tgt_dir = False
 # Start here if you've mucked with the view distance
     do_01_polys_masks = False
 # Start here if you've changed tile textures or definitions
@@ -144,10 +164,12 @@ if __name__ == "__main__":
     do_90_asm_polys = False
     do_91_asm_panels = False
     do_91a_asm_font = False
+    do_91b_asm_ui = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
     do_92_asm_ez80Asmlinker = False
 
 # I find it easier to simply comment out the scripts I don't want to run
+    do_00_delete_tgt_dir = True
     do_01_polys_masks = True
     do_02_fetch_tiles = True
     do_04_make_panels_png = True
@@ -158,9 +180,10 @@ if __name__ == "__main__":
     do_90_asm_polys = True
     do_91_asm_panels = True
     do_91a_asm_font = True
+    do_91b_asm_ui = True
     do_92_asm_ez80Asmlinker = True
 
-    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height)
+    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir)
 
     # # The Blender scripts for regular map development and deployment 
     # # have been deprecated and replaced with pure python scripts, 

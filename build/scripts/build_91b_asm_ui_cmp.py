@@ -33,7 +33,7 @@ def make_asm_ui(db_path, ui_inc_path, last_buffer_id):
             asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
             asm_writer.write("load_ui_images:\n")
     
-            for row in all_rows:
+            for row in img_rows:
                 panel_base_filename = row['panel_base_filename']
                 dim_x = row['dim_x']
                 dim_y = row['dim_y']
