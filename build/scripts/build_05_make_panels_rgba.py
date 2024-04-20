@@ -3,7 +3,7 @@ import os
 import shutil
 import PIL as pillow
 
-def make_panels_rgba(panels_png_dir, panels_rgba_dir):
+def make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir):
     if os.path.exists(panels_rgba_dir):
         shutil.rmtree(panels_rgba_dir)
     os.makedirs(panels_rgba_dir)
@@ -27,4 +27,4 @@ if __name__ == "__main__":
     panels_png_dir = 'build/panels/png'
     panels_rgba_dir = 'tgt/panels'
 
-    make_panels_rgba(panels_png_dir, panels_rgba_dir)
+    make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)
