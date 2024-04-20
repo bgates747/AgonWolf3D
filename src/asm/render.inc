@@ -48,11 +48,8 @@ render_panel:
 ; add the offset to the lookup table
     add ix,bc
 ; get the panel coordinates
-    ld hl,(ix) ; plot_x
-    push hl
-    pop bc
-    ld hl,(ix+3) ; plot_y
-    ex de,hl
+    ld bc,(ix) ; plot_x
+    ld de,(ix+3) ; plot_y
 ; plot that mofo and go home
     call vdu_plot_bmp
     ret
