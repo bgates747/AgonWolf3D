@@ -46,6 +46,6 @@ def make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir):
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     panels_png_dir = 'build/panels/png'
-    panels_rgba_dir = 'tgt/panels'
+    panels_rgba_dir = 'tgt_cmp/panels'
 
     make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)

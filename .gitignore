@@ -24,8 +24,9 @@ build/*
 src/agon_api/*
 !src/agon_api/asm/
 
-# Ignore everyting in tgt
+# Ignore everyting in tgt and tgt_cmp
 tgt/*
+tgt_cmp/*
 
 # Ignore Agon autoexec files
 autoexec*.txt

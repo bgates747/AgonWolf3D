@@ -57,18 +57,21 @@ def make_asm_panels(db_path, panels_inc_path):
             asm_writer.write(f"\n")
             asm_writer.write(f"\tld hl,F{panel_base_filename}\n")
             asm_writer.write(f"\tld de,filedata\n")
-            asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+            asm_writer.write(f"\tld bc,{65536}\n") # the max possible load size
             asm_writer.write("\tld a,mos_load\n")
             asm_writer.write("\tRST.LIL 08h\n")
             asm_writer.write(f"\tld hl,{constName}\n")
-            asm_writer.write(f"\tld bc,{dim_x}\n")
-            asm_writer.write(f"\tld de,{dim_y}\n")
             asm_writer.write(f"\tld ix,{filesize}\n")
             asm_writer.write("\tcall init_img_load\n")
-            # decompres buffer
+            # decompress buffer
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld de,{constName}\n")
             asm_writer.write(f"\tcall vdu_decompress_buffer\n")
+            # make it a bitmap
+            asm_writer.write(f"\tld bc,{dim_x}\n")
+            asm_writer.write(f"\tld de,{dim_y}\n")
+		    asm_writer.write(f"\tld a,1\n") # the magic number for rgba2222
+		    asm_writer.write(f"\tjp vdu_bmp_create\n") # will return to caller from there
 
         asm_writer.write("\n\tret\n\n")
 
@@ -130,18 +133,21 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
             asm_writer.write(f"\n")
             asm_writer.write(f"\tld hl,F{panel_base_filename}\n")
             asm_writer.write(f"\tld de,filedata\n")
-            asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+            asm_writer.write(f"\tld bc,{65536}\n") # the max possible load size
             asm_writer.write("\tld a,mos_load\n")
             asm_writer.write("\tRST.LIL 08h\n")
             asm_writer.write(f"\tld hl,{constName}\n")
-            asm_writer.write(f"\tld bc,{dim_x}\n")
-            asm_writer.write(f"\tld de,{dim_y}\n")
             asm_writer.write(f"\tld ix,{filesize}\n")
             asm_writer.write("\tcall init_img_load\n")
-            # decompres buffer
+            # decompress buffer
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld de,{constName}\n")
             asm_writer.write(f"\tcall vdu_decompress_buffer\n")
+            # make it a bitmap
+            asm_writer.write(f"\tld bc,{dim_x}\n")
+            asm_writer.write(f"\tld de,{dim_y}\n")
+		    asm_writer.write(f"\tld a,1\n") # the magic number for rgba2222
+		    asm_writer.write(f"\tjp vdu_bmp_create\n") # will return to caller from there
 
         asm_writer.write("\n\tret\n\n")
 
@@ -188,21 +194,27 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
                 panel_base_filename = row['panel_base_filename']
                 dim_x = row['dim_x']
                 dim_y = row['dim_y']
+                filesize = row['compressed_file_size']
                 constName = "BUF_" + panel_base_filename.upper()
                 asm_writer.write(f"\n")
                 asm_writer.write(f"\tld hl,F{panel_base_filename}\n")
                 asm_writer.write(f"\tld de,filedata\n")
-                asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+                asm_writer.write(f"\tld bc,{65536}\n") # the max possible load size
                 asm_writer.write("\tld a,mos_load\n")
                 asm_writer.write("\tRST.LIL 08h\n")
-
                 asm_writer.write(f"\tld hl,{constName}\n")
+                asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
+                # asm_writer.write(f"\tld ix,{filesize}\n")
+                asm_writer.write("\tcall init_img_load\n")
+                # # decompress buffer # TODO: do compress for distance walls
+                # asm_writer.write(f"\tld hl,{constName}\n")
+                # asm_writer.write(f"\tld de,{constName}\n")
+                # asm_writer.write(f"\tcall vdu_decompress_buffer\n")
+                # make it a bitmap
                 asm_writer.write(f"\tld bc,{dim_x}\n")
                 asm_writer.write(f"\tld de,{dim_y}\n")
-                asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall init_img_load\n")
-                # asm_writer.write("\tLD A, '.'\n") # this is now handled by the init_img_load function
-                # asm_writer.write("\tRST.LIL 10h\n")
+                asm_writer.write(f"\tld a,1\n") # the magic number for rgba2222
+                asm_writer.write(f"\tjp vdu_bmp_create\n") # will return to caller from there
 
             asm_writer.write("\n\tret\n\n")
 
