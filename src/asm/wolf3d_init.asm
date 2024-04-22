@@ -18,6 +18,20 @@ loading_dws: defb "Loading distance walls",0
 loading_ui: defb "Loading UI",0
 
 init:
+; set the cursor off
+	call cursor_off
+
+; print loading ui message
+	ld hl,loading_ui
+	call printString
+
+; load fonts
+	call load_font_itc_honda
+	call load_font_retro_computer
+
+; load UI images
+	call load_ui_images
+
 ; set up the display
     ld a,8 + 128
     call vdu_set_screen_mode
@@ -43,50 +57,32 @@ init:
 	ld b,29; bottom
 	call vdu_set_txt_viewport
 
-; set the cursor off
-	call cursor_off
-
-; print loading ui message
-	ld hl,loading_ui
-	call printString
-
-; load fonts
-	call load_font_itc_honda
-	call load_font_retro_computer
-
-; load UI images
-	call load_ui_images
-
-; display the splash screen
-	ld hl,BUF_UI_SPLASH
-	call vdu_buff_select
-	ld bc,0
-	ld de,0
-	call vdu_plot_bmp
-
-; print loading message
-	ld ix,font_itc_honda
-	ld hl,hello_world
-	ld bc,32
-	ld de,2
-	call font_bmp_print
+; initialize image load routine
+	call img_load_init
 
 ; load panels
-	ld hl,loading_panels
-	call printString
-	call load_panels
+	ld bc,(cube_num_panels)
+	ld hl,cube_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,cube_load_panels_table
+	ld (cur_load_jump_table),hl
+	call img_load_main
 
 ; load sprites
-	call printNewline
-	ld hl,loading_sprites
-	call printString
-	call load_sprites
+	ld bc,(sprite_num_panels)
+	ld hl,sprite_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,sprite_load_panels_table
+	ld (cur_load_jump_table),hl
+	call img_load_main
 
 ; load distance walls
-	call printNewline
-	ld hl,loading_dws
-	call printString
-	call load_dws
+	ld bc,(dws_num_panels)
+	ld hl,dws_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,dws_load_panels_table
+	ld (cur_load_jump_table),hl
+	call img_load_main
 	
 ; clear the screen
 	call vdu_cls
