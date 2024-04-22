@@ -48,8 +48,8 @@ def make_asm_ui(db_path, ui_inc_path, last_buffer_id):
                 asm_writer.write(f"\tld bc,{dim_x}\n")
                 asm_writer.write(f"\tld de,{dim_y}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall init_img_load\n")
-                # asm_writer.write("\tLD A, '.'\n") # breadcrumbs now handled by init_img_load
+                asm_writer.write("\tcall vdu_load_img\n")
+                # asm_writer.write("\tLD A, '.'\n") # breadcrumbs now handled by vdu_load_img
                 # asm_writer.write("\tRST.LIL 10h\n")
 
             asm_writer.write("\n\tret\n\n")

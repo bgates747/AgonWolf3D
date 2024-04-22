@@ -15,6 +15,7 @@
 mos_load:			EQU	01h
 mos_sysvars:		EQU	08h
 sysvar_time:		EQU	00h
+mos_getkbmap:		EQU	1Eh
 
 plot_bmp: equ 0xE8
 dr_abs_fg: equ 5
@@ -68,16 +69,28 @@ exit:
 ; ###############################################
 
 main:
-; load the bitmaps
-	call load_ui_images
-    call load_panels
-
 ; prepare the screen
 
     SET_MODE 8 + 128 ; 320x240x64 double-buffered   
 
     xor a
     call vdu_set_scaling ; turn off screen scaling  
+
+; VDU 28, left, bottom, right, top: Set text viewport **
+; MIND THE LITTLE-ENDIANESS
+; inputs: c=left,b=bottom,e=right,d=top
+	ld c,0 ; left
+	ld d,20 ; top
+	ld e,39 ; right
+	ld b,29; bottom
+	call vdu_set_txt_viewport
+
+; set the cursor off
+	call cursor_off
+
+; load the bitmaps
+	call load_ui_images
+    call load_panels_init
 
 ; initialize the moving position parameters
 	ld hl,0
@@ -87,7 +100,7 @@ main:
 
 	ld hl,1
 	ld (box_x_vel),hl
-	ld hl,-320
+	ld hl,-120
 	ld (box_x_cur),hl
 	ld (box_x_min),hl
 
@@ -96,22 +109,51 @@ main:
 	ld hl,240
 	ld (box_y_max),hl
 
+; initialize load timer 
+	ld a,load_timer_reset
+	ld (load_timer),a
 
 main_loop:
 ; draw all the things
     call tmp_draw_all_the_things
 ; move moving
 	call move_moving
-; flip screen and wait for vblank
+; draw the most recently loaded panel
+	ld hl,(cur_buffer_id)
+	call vdu_buff_select
+	ld bc,0
+	ld de,0
+	call vdu_plot_bmp
+; print current filename
+	call vdu_cls
+	ld hl,(cur_filename)
+	call printString
+; flip screen and wait for next vblank
     call vdu_flip 
-	call WAIT_VBLANK ; emulator doesn't ficker
+	call WAIT_VBLANK ;
 
-; exit if ESC key pressed
-    ld a, $08   
-    rst.lil $08 
-    ld a, (ix + $05) 
-    cp 27   
-    jp z, EXIT_HERE 
+; check for keypress
+	MOSCALL	mos_getkbmap
+; 113 Escape
+    bit 0,(ix+14)
+    jr z,@Escape
+	jp 	EXIT_HERE
+@Escape:
+; load next bitmap if load time is zero and user presses space
+	ld a,(load_timer)
+	or a
+	jr z,@is_space_pressed
+	dec a
+	ld (load_timer),a
+	jr @Space
+@is_space_pressed:
+; 99 Space
+    bit 2,(ix+12)
+    jr z,@Space
+	call load_next_panel
+	ld a,load_timer_reset
+	ld (load_timer),a
+@Space:
 
 ; ESC not pressed so loop
     jr main_loop
@@ -121,9 +163,63 @@ EXIT_HERE:
     call vdu_cls
     ret   
 
+cur_file_idx: dl 0
+cur_filename: dl 0
+cur_buffer_id: dl 0
+load_timer: db 0
+load_timer_reset: equ 2
+
+load_panels_init:
+	ld b,25 ; initial load of 25 panels
+	ld hl,load_panels_table ; base address of load panels jump table
+@loop:
+	push bc
+	push hl
+	ld hl,(hl)
+	ld (@jump_addr+1),hl ; self-modifying code
+@jump_addr:
+	call 0 ; call the panel load routine
+	pop hl
+; bump pointer to next panel
+	inc hl
+	inc hl
+	inc hl
+	pop bc
+	djnz @loop
+	ld hl,25
+	ld (cur_file_idx),hl
+	ret
+
+load_next_panel:
+; bump the current file index
+	ld hl,(cur_file_idx)
+	inc hl
+	ld (cur_file_idx),hl
+; look up the load routine for the current file index
+	ld hl,(cur_file_idx) 
+	add hl,hl ; multiply current index by 2 ...
+	ld de,(cur_file_idx)
+	add hl,de ; ... now by 3
+	ld de,load_panels_table ; tack it on to the base address of the jump table
+	add hl,de 
+	ld hl,(hl) ; hl is pointing to load routine address
+	ld (@jump_addr+1),hl ; self-modifying code ...
+@jump_addr:
+	call 0 ; call the panel load routine
+; look up the buffer id for the current file
+	ld hl,(cur_file_idx) 
+	add hl,hl ; multiply current index by 2 ...
+	ld de,(cur_file_idx)
+	add hl,de ; ... now by 3
+	ld de,buffer_id_lut ; tack it on to the base address of the lookup table
+	add hl,de 
+	ld hl,(hl)
+	ld (cur_buffer_id),hl
+	ret
+
 move_moving:
 ; activate moving bitmap
-	ld hl, BUF_UI_NURP_LOG
+	ld hl, BUF_UI_BJ_120_120
 	call vdu_buff_select
 ; update position based on velocity parameters
 	ld hl, (box_x_cur)
@@ -209,6 +305,47 @@ vdu_clg:
     ld a,16
 	rst.lil $10  
 	ret
+
+cursor_on:
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd:
+	db 23,1,1
+@end:
+
+cursor_off:	
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd:
+	db 23,1,0
+@end:
+
+; VDU 30: Home cursor
+vdu_home_cursor:
+    ld a,30
+	rst.lil $10  
+	ret
+
+; VDU 28, left, bottom, right, top: Set text viewport **
+; MIND THE LITTLE-ENDIANESS
+; inputs: c=left,b=bottom,e=right,d=top
+; outputs; nothing
+; destroys: a might make it out alive
+vdu_set_txt_viewport:
+    ld (@lb),bc
+	ld (@rt),de
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd:   db 28 ; set text viewport command
+@lb: 	dw 0x0000 ; set by bc
+@rt: 	dw 0x0000 ; set by de
+@end:   db 0x00	  ; padding
 
 ; VDU 23, 27, &21, w; h; format: Create bitmap from selected buffer
 ; inputs: a=format; bc=width; de=height
@@ -535,12 +672,19 @@ tmp_draw_all_the_things:
 
 	 ret
 
+; Print a zero-terminated string
+; HL: Pointer to string
+printString:
+	PUSH	BC
+	LD		BC,0
+	LD 	 	A,0
+	RST.LIL 18h
+	POP		BC
+	RET
+
 vdu_load_img:
 	; load the image
 	call vdu_load_buffer_from_file
-	; print a progess breadcrumb
-	LD A, '.'
-	RST.LIL 10h
 	ret
 
 ; WARNING: it may be tempting to move this routine to src/agon_api/vdp_buff.asm
