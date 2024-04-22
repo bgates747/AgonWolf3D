@@ -287,7 +287,7 @@ load_panels:
 	ld bc,36
 	ld de,35
 	ld ix,1260
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_009
 	ld de,filedata
@@ -298,7 +298,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_010
 	ld de,filedata
@@ -309,7 +309,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_011
 	ld de,filedata
@@ -320,7 +320,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_012
 	ld de,filedata
@@ -331,7 +331,7 @@ load_panels:
 	ld bc,5
 	ld de,45
 	ld ix,225
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_013
 	ld de,filedata
@@ -342,7 +342,7 @@ load_panels:
 	ld bc,5
 	ld de,43
 	ld ix,215
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_014
 	ld de,filedata
@@ -353,7 +353,7 @@ load_panels:
 	ld bc,15
 	ld de,45
 	ld ix,675
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_015
 	ld de,filedata
@@ -364,7 +364,7 @@ load_panels:
 	ld bc,25
 	ld de,45
 	ld ix,1125
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_016
 	ld de,filedata
@@ -375,7 +375,7 @@ load_panels:
 	ld bc,35
 	ld de,45
 	ld ix,1575
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_020
 	ld de,filedata
@@ -386,7 +386,7 @@ load_panels:
 	ld bc,46
 	ld de,45
 	ld ix,2070
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_024
 	ld de,filedata
@@ -397,7 +397,7 @@ load_panels:
 	ld bc,46
 	ld de,64
 	ld ix,2944
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_025
 	ld de,filedata
@@ -408,7 +408,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_026
 	ld de,filedata
@@ -419,7 +419,7 @@ load_panels:
 	ld bc,9
 	ld de,64
 	ld ix,576
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_027
 	ld de,filedata
@@ -430,7 +430,7 @@ load_panels:
 	ld bc,10
 	ld de,62
 	ld ix,620
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_028
 	ld de,filedata
@@ -441,7 +441,7 @@ load_panels:
 	ld bc,28
 	ld de,64
 	ld ix,1792
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_029
 	ld de,filedata
@@ -452,7 +452,7 @@ load_panels:
 	ld bc,47
 	ld de,64
 	ld ix,3008
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_032
 	ld de,filedata
@@ -463,7 +463,7 @@ load_panels:
 	ld bc,65
 	ld de,64
 	ld ix,4160
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_035
 	ld de,filedata
@@ -474,7 +474,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_036
 	ld de,filedata
@@ -485,7 +485,7 @@ load_panels:
 	ld bc,22
 	ld de,107
 	ld ix,2354
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_037
 	ld de,filedata
@@ -496,7 +496,7 @@ load_panels:
 	ld bc,21
 	ld de,105
 	ld ix,2205
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_038
 	ld de,filedata
@@ -507,7 +507,7 @@ load_panels:
 	ld bc,63
 	ld de,107
 	ld ix,6741
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_040
 	ld de,filedata
@@ -518,7 +518,7 @@ load_panels:
 	ld bc,108
 	ld de,107
 	ld ix,11556
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_042
 	ld de,filedata
@@ -529,7 +529,7 @@ load_panels:
 	ld bc,106
 	ld de,160
 	ld ix,16960
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_043
 	ld de,filedata
@@ -540,7 +540,7 @@ load_panels:
 	ld bc,107
 	ld de,160
 	ld ix,17120
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F10_044
 	ld de,filedata
@@ -551,2757 +551,2757 @@ load_panels:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call vdu_load_img
-
-	; ld hl,F11_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F11_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F11_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F11_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F11_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F11_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F11_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F11_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F11_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F11_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F11_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F11_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F11_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F11_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F11_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F11_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F11_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F11_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F11_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F11_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F11_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F11_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F11_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F11_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F11_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_11_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F12_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F12_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F12_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F12_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F12_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F12_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F12_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F12_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F12_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F12_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F12_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F12_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F12_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F12_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F12_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F12_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F12_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F12_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F12_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F12_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F12_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F12_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F12_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F12_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F12_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_12_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F13_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F13_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F13_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F13_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F13_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F13_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F13_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F13_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F13_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F13_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F13_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F13_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F13_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F13_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F13_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F13_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F13_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F13_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F13_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F13_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F13_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F13_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F13_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F13_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F13_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_13_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F14_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F14_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F14_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F14_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F14_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F14_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F14_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F14_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F14_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F14_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F14_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F14_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F14_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F14_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F14_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F14_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F14_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F14_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F14_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F14_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F14_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F14_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F14_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F14_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F14_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_14_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F15_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F15_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F15_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F15_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F15_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F15_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F15_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F15_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F15_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F15_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F15_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F15_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F15_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F15_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F15_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F15_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F15_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F15_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F15_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F15_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F15_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F15_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F15_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F15_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F15_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_15_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F16_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F16_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F16_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F16_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F16_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F16_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F16_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F16_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F16_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F16_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F16_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F16_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F16_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F16_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F16_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F16_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F16_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F16_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F16_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F16_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F16_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F16_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F16_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F16_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F16_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_16_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F17_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F17_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F17_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F17_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F17_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F17_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F17_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F17_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F17_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F17_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F17_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F17_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F17_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F17_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F17_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F17_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F17_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F17_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F17_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F17_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F17_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F17_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F17_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F17_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F17_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_17_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F57_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F57_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F57_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F57_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F57_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F57_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F57_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F57_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F57_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F57_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F57_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F57_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F57_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F57_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F57_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F57_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F57_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F57_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F57_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F57_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F57_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F57_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F57_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F57_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F57_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_57_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F58_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F58_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F58_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F58_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F58_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F58_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F58_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F58_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F58_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F58_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F58_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F58_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F58_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F58_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F58_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F58_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F58_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F58_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F58_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F58_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F58_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F58_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F58_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F58_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F58_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_58_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
-
-	; ld hl,F59_004
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_004
-	; ld bc,36
-	; ld de,35
-	; ld ix,1260
-	; call vdu_load_img
-
-	; ld hl,F59_009
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_009
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F59_010
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_010
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F59_011
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_011
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F59_012
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_012
-	; ld bc,5
-	; ld de,45
-	; ld ix,225
-	; call vdu_load_img
-
-	; ld hl,F59_013
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_013
-	; ld bc,5
-	; ld de,43
-	; ld ix,215
-	; call vdu_load_img
-
-	; ld hl,F59_014
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_014
-	; ld bc,15
-	; ld de,45
-	; ld ix,675
-	; call vdu_load_img
-
-	; ld hl,F59_015
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_015
-	; ld bc,25
-	; ld de,45
-	; ld ix,1125
-	; call vdu_load_img
-
-	; ld hl,F59_016
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_016
-	; ld bc,35
-	; ld de,45
-	; ld ix,1575
-	; call vdu_load_img
-
-	; ld hl,F59_020
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_020
-	; ld bc,46
-	; ld de,45
-	; ld ix,2070
-	; call vdu_load_img
-
-	; ld hl,F59_024
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_024
-	; ld bc,46
-	; ld de,64
-	; ld ix,2944
-	; call vdu_load_img
-
-	; ld hl,F59_025
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_025
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F59_026
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_026
-	; ld bc,9
-	; ld de,64
-	; ld ix,576
-	; call vdu_load_img
-
-	; ld hl,F59_027
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_027
-	; ld bc,10
-	; ld de,62
-	; ld ix,620
-	; call vdu_load_img
-
-	; ld hl,F59_028
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_028
-	; ld bc,28
-	; ld de,64
-	; ld ix,1792
-	; call vdu_load_img
-
-	; ld hl,F59_029
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_029
-	; ld bc,47
-	; ld de,64
-	; ld ix,3008
-	; call vdu_load_img
-
-	; ld hl,F59_032
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_032
-	; ld bc,65
-	; ld de,64
-	; ld ix,4160
-	; call vdu_load_img
-
-	; ld hl,F59_035
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_035
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F59_036
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_036
-	; ld bc,22
-	; ld de,107
-	; ld ix,2354
-	; call vdu_load_img
-
-	; ld hl,F59_037
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_037
-	; ld bc,21
-	; ld de,105
-	; ld ix,2205
-	; call vdu_load_img
-
-	; ld hl,F59_038
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_038
-	; ld bc,63
-	; ld de,107
-	; ld ix,6741
-	; call vdu_load_img
-
-	; ld hl,F59_040
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_040
-	; ld bc,108
-	; ld de,107
-	; ld ix,11556
-	; call vdu_load_img
-
-	; ld hl,F59_042
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_042
-	; ld bc,106
-	; ld de,160
-	; ld ix,16960
-	; call vdu_load_img
-
-	; ld hl,F59_043
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_043
-	; ld bc,107
-	; ld de,160
-	; ld ix,17120
-	; call vdu_load_img
-
-	; ld hl,F59_044
-	; ld de,filedata
-	; ld bc,102400
-	; ld a,mos_load
-	; RST.LIL 08h
-	; ld hl,BUF_59_044
-	; ld bc,320
-	; ld de,160
-	; ld ix,51200
-	; call vdu_load_img
+	call init_img_load
+
+	ld hl,F11_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F11_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F11_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F11_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F11_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F11_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F11_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F11_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F11_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F11_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F11_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F11_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F11_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F11_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F11_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F11_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F11_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F11_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F11_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F11_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F11_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F11_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F11_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F11_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F11_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_11_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F12_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F12_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F12_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F12_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F12_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F12_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F12_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F12_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F12_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F12_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F12_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F12_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F12_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F12_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F12_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F12_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F12_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F12_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F12_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F12_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F12_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F12_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F12_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F12_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F12_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_12_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F13_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F13_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F13_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F13_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F13_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F13_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F13_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F13_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F13_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F13_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F13_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F13_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F13_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F13_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F13_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F13_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F13_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F13_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F13_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F13_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F13_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F13_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F13_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F13_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F13_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_13_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F14_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F14_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F14_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F14_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F14_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F14_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F14_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F14_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F14_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F14_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F14_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F14_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F14_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F14_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F14_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F14_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F14_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F14_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F14_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F14_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F14_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F14_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F14_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F14_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F14_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_14_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F15_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F15_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F15_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F15_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F15_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F15_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F15_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F15_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F15_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F15_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F15_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F15_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F15_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F15_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F15_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F15_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F15_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F15_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F15_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F15_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F15_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F15_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F15_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F15_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F15_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_15_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F16_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F16_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F16_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F16_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F16_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F16_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F16_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F16_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F16_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F16_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F16_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F16_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F16_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F16_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F16_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F16_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F16_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F16_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F16_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F16_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F16_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F16_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F16_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F16_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F16_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_16_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F17_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F17_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F17_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F17_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F17_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F17_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F17_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F17_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F17_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F17_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F17_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F17_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F17_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F17_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F17_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F17_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F17_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F17_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F17_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F17_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F17_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F17_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F17_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F17_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F17_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_17_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F57_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F57_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F57_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F57_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F57_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F57_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F57_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F57_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F57_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F57_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F57_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F57_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F57_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F57_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F57_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F57_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F57_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F57_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F57_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F57_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F57_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F57_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F57_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F57_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F57_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_57_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F58_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F58_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F58_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F58_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F58_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F58_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F58_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F58_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F58_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F58_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F58_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F58_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F58_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F58_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F58_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F58_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F58_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F58_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F58_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F58_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F58_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F58_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F58_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F58_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F58_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_58_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
+
+	ld hl,F59_004
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_004
+	ld bc,36
+	ld de,35
+	ld ix,1260
+	call init_img_load
+
+	ld hl,F59_009
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_009
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F59_010
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_010
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F59_011
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_011
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F59_012
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_012
+	ld bc,5
+	ld de,45
+	ld ix,225
+	call init_img_load
+
+	ld hl,F59_013
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_013
+	ld bc,5
+	ld de,43
+	ld ix,215
+	call init_img_load
+
+	ld hl,F59_014
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_014
+	ld bc,15
+	ld de,45
+	ld ix,675
+	call init_img_load
+
+	ld hl,F59_015
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_015
+	ld bc,25
+	ld de,45
+	ld ix,1125
+	call init_img_load
+
+	ld hl,F59_016
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_016
+	ld bc,35
+	ld de,45
+	ld ix,1575
+	call init_img_load
+
+	ld hl,F59_020
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_020
+	ld bc,46
+	ld de,45
+	ld ix,2070
+	call init_img_load
+
+	ld hl,F59_024
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_024
+	ld bc,46
+	ld de,64
+	ld ix,2944
+	call init_img_load
+
+	ld hl,F59_025
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_025
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F59_026
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_026
+	ld bc,9
+	ld de,64
+	ld ix,576
+	call init_img_load
+
+	ld hl,F59_027
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_027
+	ld bc,10
+	ld de,62
+	ld ix,620
+	call init_img_load
+
+	ld hl,F59_028
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_028
+	ld bc,28
+	ld de,64
+	ld ix,1792
+	call init_img_load
+
+	ld hl,F59_029
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_029
+	ld bc,47
+	ld de,64
+	ld ix,3008
+	call init_img_load
+
+	ld hl,F59_032
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_032
+	ld bc,65
+	ld de,64
+	ld ix,4160
+	call init_img_load
+
+	ld hl,F59_035
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_035
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F59_036
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_036
+	ld bc,22
+	ld de,107
+	ld ix,2354
+	call init_img_load
+
+	ld hl,F59_037
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_037
+	ld bc,21
+	ld de,105
+	ld ix,2205
+	call init_img_load
+
+	ld hl,F59_038
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_038
+	ld bc,63
+	ld de,107
+	ld ix,6741
+	call init_img_load
+
+	ld hl,F59_040
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_040
+	ld bc,108
+	ld de,107
+	ld ix,11556
+	call init_img_load
+
+	ld hl,F59_042
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_042
+	ld bc,106
+	ld de,160
+	ld ix,16960
+	call init_img_load
+
+	ld hl,F59_043
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_043
+	ld bc,107
+	ld de,160
+	ld ix,17120
+	call init_img_load
+
+	ld hl,F59_044
+	ld de,filedata
+	ld bc,102400
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_59_044
+	ld bc,320
+	ld de,160
+	ld ix,51200
+	call init_img_load
 
 	ret
 
@@ -3322,7 +3322,6 @@ F10_027: db "panels/10_027.rgba2",0
 F10_028: db "panels/10_028.rgba2",0
 F10_029: db "panels/10_029.rgba2",0
 F10_032: db "panels/10_032.rgba2",0
-
 F10_035: db "panels/10_035.rgba2",0
 F10_036: db "panels/10_036.rgba2",0
 F10_037: db "panels/10_037.rgba2",0
@@ -3685,7 +3684,7 @@ load_sprites:
 	ld bc,20
 	ld de,20
 	ld ix,400
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F20_020
 	ld de,filedata
@@ -3696,7 +3695,7 @@ load_sprites:
 	ld bc,25
 	ld de,26
 	ld ix,650
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F20_032
 	ld de,filedata
@@ -3707,7 +3706,7 @@ load_sprites:
 	ld bc,37
 	ld de,39
 	ld ix,1443
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F20_040
 	ld de,filedata
@@ -3718,7 +3717,7 @@ load_sprites:
 	ld bc,60
 	ld de,64
 	ld ix,3840
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F20_044
 	ld de,filedata
@@ -3729,7 +3728,7 @@ load_sprites:
 	ld bc,121
 	ld de,115
 	ld ix,13915
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F21_004
 	ld de,filedata
@@ -3740,7 +3739,7 @@ load_sprites:
 	ld bc,11
 	ld de,11
 	ld ix,121
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F21_020
 	ld de,filedata
@@ -3751,7 +3750,7 @@ load_sprites:
 	ld bc,14
 	ld de,14
 	ld ix,196
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F21_032
 	ld de,filedata
@@ -3762,7 +3761,7 @@ load_sprites:
 	ld bc,20
 	ld de,22
 	ld ix,440
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F21_040
 	ld de,filedata
@@ -3773,7 +3772,7 @@ load_sprites:
 	ld bc,33
 	ld de,36
 	ld ix,1188
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F21_044
 	ld de,filedata
@@ -3784,7 +3783,7 @@ load_sprites:
 	ld bc,100
 	ld de,30
 	ld ix,3000
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F22_004
 	ld de,filedata
@@ -3795,7 +3794,7 @@ load_sprites:
 	ld bc,17
 	ld de,11
 	ld ix,187
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F22_020
 	ld de,filedata
@@ -3806,7 +3805,7 @@ load_sprites:
 	ld bc,22
 	ld de,14
 	ld ix,308
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F22_032
 	ld de,filedata
@@ -3817,7 +3816,7 @@ load_sprites:
 	ld bc,30
 	ld de,22
 	ld ix,660
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F22_040
 	ld de,filedata
@@ -3828,7 +3827,7 @@ load_sprites:
 	ld bc,51
 	ld de,36
 	ld ix,1836
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F22_044
 	ld de,filedata
@@ -3839,7 +3838,7 @@ load_sprites:
 	ld bc,150
 	ld de,30
 	ld ix,4500
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F23_004
 	ld de,filedata
@@ -3850,7 +3849,7 @@ load_sprites:
 	ld bc,21
 	ld de,9
 	ld ix,189
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F23_020
 	ld de,filedata
@@ -3861,7 +3860,7 @@ load_sprites:
 	ld bc,26
 	ld de,12
 	ld ix,312
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F23_032
 	ld de,filedata
@@ -3872,7 +3871,7 @@ load_sprites:
 	ld bc,36
 	ld de,17
 	ld ix,612
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F23_040
 	ld de,filedata
@@ -3883,7 +3882,7 @@ load_sprites:
 	ld bc,61
 	ld de,27
 	ld ix,1647
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F23_044
 	ld de,filedata
@@ -3894,7 +3893,7 @@ load_sprites:
 	ld bc,180
 	ld de,1
 	ld ix,180
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F24_004
 	ld de,filedata
@@ -3905,7 +3904,7 @@ load_sprites:
 	ld bc,11
 	ld de,11
 	ld ix,121
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F24_020
 	ld de,filedata
@@ -3916,7 +3915,7 @@ load_sprites:
 	ld bc,14
 	ld de,14
 	ld ix,196
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F24_032
 	ld de,filedata
@@ -3927,7 +3926,7 @@ load_sprites:
 	ld bc,20
 	ld de,22
 	ld ix,440
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F24_040
 	ld de,filedata
@@ -3938,7 +3937,7 @@ load_sprites:
 	ld bc,33
 	ld de,36
 	ld ix,1188
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F24_044
 	ld de,filedata
@@ -3949,7 +3948,7 @@ load_sprites:
 	ld bc,100
 	ld de,30
 	ld ix,3000
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F40_004
 	ld de,filedata
@@ -3960,7 +3959,7 @@ load_sprites:
 	ld bc,18
 	ld de,9
 	ld ix,162
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F40_020
 	ld de,filedata
@@ -3971,7 +3970,7 @@ load_sprites:
 	ld bc,23
 	ld de,11
 	ld ix,253
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F40_032
 	ld de,filedata
@@ -3982,7 +3981,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F40_040
 	ld de,filedata
@@ -3993,7 +3992,7 @@ load_sprites:
 	ld bc,54
 	ld de,29
 	ld ix,1566
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F40_044
 	ld de,filedata
@@ -4004,7 +4003,7 @@ load_sprites:
 	ld bc,90
 	ld de,10
 	ld ix,900
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F41_004
 	ld de,filedata
@@ -4015,7 +4014,7 @@ load_sprites:
 	ld bc,18
 	ld de,15
 	ld ix,270
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F41_020
 	ld de,filedata
@@ -4026,7 +4025,7 @@ load_sprites:
 	ld bc,23
 	ld de,20
 	ld ix,460
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F41_032
 	ld de,filedata
@@ -4037,7 +4036,7 @@ load_sprites:
 	ld bc,32
 	ld de,30
 	ld ix,960
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F41_040
 	ld de,filedata
@@ -4048,7 +4047,7 @@ load_sprites:
 	ld bc,54
 	ld de,49
 	ld ix,2646
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F41_044
 	ld de,filedata
@@ -4059,7 +4058,7 @@ load_sprites:
 	ld bc,130
 	ld de,70
 	ld ix,9100
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F42_004
 	ld de,filedata
@@ -4070,7 +4069,7 @@ load_sprites:
 	ld bc,15
 	ld de,12
 	ld ix,180
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F42_020
 	ld de,filedata
@@ -4081,7 +4080,7 @@ load_sprites:
 	ld bc,20
 	ld de,16
 	ld ix,320
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F42_032
 	ld de,filedata
@@ -4092,7 +4091,7 @@ load_sprites:
 	ld bc,28
 	ld de,24
 	ld ix,672
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F42_040
 	ld de,filedata
@@ -4103,7 +4102,7 @@ load_sprites:
 	ld bc,47
 	ld de,39
 	ld ix,1833
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F42_044
 	ld de,filedata
@@ -4114,7 +4113,7 @@ load_sprites:
 	ld bc,100
 	ld de,40
 	ld ix,4000
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F43_004
 	ld de,filedata
@@ -4125,7 +4124,7 @@ load_sprites:
 	ld bc,18
 	ld de,5
 	ld ix,90
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F43_020
 	ld de,filedata
@@ -4136,7 +4135,7 @@ load_sprites:
 	ld bc,23
 	ld de,7
 	ld ix,161
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F43_032
 	ld de,filedata
@@ -4147,7 +4146,7 @@ load_sprites:
 	ld bc,32
 	ld de,12
 	ld ix,384
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F43_040
 	ld de,filedata
@@ -4158,7 +4157,7 @@ load_sprites:
 	ld bc,54
 	ld de,19
 	ld ix,1026
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F43_044
 	ld de,filedata
@@ -4169,7 +4168,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F44_004
 	ld de,filedata
@@ -4180,7 +4179,7 @@ load_sprites:
 	ld bc,13
 	ld de,10
 	ld ix,130
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F44_020
 	ld de,filedata
@@ -4191,7 +4190,7 @@ load_sprites:
 	ld bc,17
 	ld de,13
 	ld ix,221
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F44_032
 	ld de,filedata
@@ -4202,7 +4201,7 @@ load_sprites:
 	ld bc,26
 	ld de,20
 	ld ix,520
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F44_040
 	ld de,filedata
@@ -4213,7 +4212,7 @@ load_sprites:
 	ld bc,43
 	ld de,32
 	ld ix,1376
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F44_044
 	ld de,filedata
@@ -4224,7 +4223,7 @@ load_sprites:
 	ld bc,90
 	ld de,20
 	ld ix,1800
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F45_004
 	ld de,filedata
@@ -4235,7 +4234,7 @@ load_sprites:
 	ld bc,18
 	ld de,11
 	ld ix,198
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F45_020
 	ld de,filedata
@@ -4246,7 +4245,7 @@ load_sprites:
 	ld bc,23
 	ld de,14
 	ld ix,322
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F45_032
 	ld de,filedata
@@ -4257,7 +4256,7 @@ load_sprites:
 	ld bc,32
 	ld de,22
 	ld ix,704
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F45_040
 	ld de,filedata
@@ -4268,7 +4267,7 @@ load_sprites:
 	ld bc,54
 	ld de,36
 	ld ix,1944
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F45_044
 	ld de,filedata
@@ -4279,7 +4278,7 @@ load_sprites:
 	ld bc,130
 	ld de,30
 	ld ix,3900
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F46_004
 	ld de,filedata
@@ -4290,7 +4289,7 @@ load_sprites:
 	ld bc,18
 	ld de,9
 	ld ix,162
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F46_020
 	ld de,filedata
@@ -4301,7 +4300,7 @@ load_sprites:
 	ld bc,23
 	ld de,11
 	ld ix,253
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F46_032
 	ld de,filedata
@@ -4312,7 +4311,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F46_040
 	ld de,filedata
@@ -4323,7 +4322,7 @@ load_sprites:
 	ld bc,54
 	ld de,29
 	ld ix,1566
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F46_044
 	ld de,filedata
@@ -4334,7 +4333,7 @@ load_sprites:
 	ld bc,90
 	ld de,10
 	ld ix,900
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F47_004
 	ld de,filedata
@@ -4345,7 +4344,7 @@ load_sprites:
 	ld bc,18
 	ld de,10
 	ld ix,180
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F47_020
 	ld de,filedata
@@ -4356,7 +4355,7 @@ load_sprites:
 	ld bc,23
 	ld de,13
 	ld ix,299
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F47_032
 	ld de,filedata
@@ -4367,7 +4366,7 @@ load_sprites:
 	ld bc,32
 	ld de,18
 	ld ix,576
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F47_040
 	ld de,filedata
@@ -4378,7 +4377,7 @@ load_sprites:
 	ld bc,54
 	ld de,30
 	ld ix,1620
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F47_044
 	ld de,filedata
@@ -4389,7 +4388,7 @@ load_sprites:
 	ld bc,30
 	ld de,20
 	ld ix,600
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F48_004
 	ld de,filedata
@@ -4400,7 +4399,7 @@ load_sprites:
 	ld bc,13
 	ld de,5
 	ld ix,65
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F48_020
 	ld de,filedata
@@ -4411,7 +4410,7 @@ load_sprites:
 	ld bc,18
 	ld de,7
 	ld ix,126
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F48_032
 	ld de,filedata
@@ -4422,7 +4421,7 @@ load_sprites:
 	ld bc,26
 	ld de,12
 	ld ix,312
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F48_040
 	ld de,filedata
@@ -4433,7 +4432,7 @@ load_sprites:
 	ld bc,44
 	ld de,19
 	ld ix,836
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F48_044
 	ld de,filedata
@@ -4444,7 +4443,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F49_004
 	ld de,filedata
@@ -4455,7 +4454,7 @@ load_sprites:
 	ld bc,15
 	ld de,7
 	ld ix,105
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F49_020
 	ld de,filedata
@@ -4466,7 +4465,7 @@ load_sprites:
 	ld bc,20
 	ld de,9
 	ld ix,180
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F49_032
 	ld de,filedata
@@ -4477,7 +4476,7 @@ load_sprites:
 	ld bc,28
 	ld de,12
 	ld ix,336
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F49_040
 	ld de,filedata
@@ -4488,7 +4487,7 @@ load_sprites:
 	ld bc,47
 	ld de,21
 	ld ix,987
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F49_044
 	ld de,filedata
@@ -4499,7 +4498,7 @@ load_sprites:
 	ld bc,1
 	ld de,1
 	ld ix,1
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F50_004
 	ld de,filedata
@@ -4510,7 +4509,7 @@ load_sprites:
 	ld bc,10
 	ld de,13
 	ld ix,130
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F50_020
 	ld de,filedata
@@ -4521,7 +4520,7 @@ load_sprites:
 	ld bc,13
 	ld de,17
 	ld ix,221
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F50_032
 	ld de,filedata
@@ -4532,7 +4531,7 @@ load_sprites:
 	ld bc,18
 	ld de,26
 	ld ix,468
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F50_040
 	ld de,filedata
@@ -4543,7 +4542,7 @@ load_sprites:
 	ld bc,30
 	ld de,42
 	ld ix,1260
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F50_044
 	ld de,filedata
@@ -4554,7 +4553,7 @@ load_sprites:
 	ld bc,70
 	ld de,50
 	ld ix,3500
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F51_004
 	ld de,filedata
@@ -4565,7 +4564,7 @@ load_sprites:
 	ld bc,18
 	ld de,26
 	ld ix,468
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F51_020
 	ld de,filedata
@@ -4576,7 +4575,7 @@ load_sprites:
 	ld bc,23
 	ld de,33
 	ld ix,759
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F51_032
 	ld de,filedata
@@ -4587,7 +4586,7 @@ load_sprites:
 	ld bc,34
 	ld de,48
 	ld ix,1632
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F51_040
 	ld de,filedata
@@ -4598,7 +4597,7 @@ load_sprites:
 	ld bc,55
 	ld de,80
 	ld ix,4400
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F51_044
 	ld de,filedata
@@ -4609,7 +4608,7 @@ load_sprites:
 	ld bc,166
 	ld de,160
 	ld ix,26560
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F52_004
 	ld de,filedata
@@ -4620,7 +4619,7 @@ load_sprites:
 	ld bc,15
 	ld de,26
 	ld ix,390
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F52_020
 	ld de,filedata
@@ -4631,7 +4630,7 @@ load_sprites:
 	ld bc,19
 	ld de,33
 	ld ix,627
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F52_032
 	ld de,filedata
@@ -4642,7 +4641,7 @@ load_sprites:
 	ld bc,28
 	ld de,48
 	ld ix,1344
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F52_040
 	ld de,filedata
@@ -4653,7 +4652,7 @@ load_sprites:
 	ld bc,45
 	ld de,80
 	ld ix,3600
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,F52_044
 	ld de,filedata
@@ -4664,7 +4663,7 @@ load_sprites:
 	ld bc,136
 	ld de,160
 	ld ix,21760
-	call vdu_load_img
+	call init_img_load
 
 	ret
 
@@ -4781,7 +4780,7 @@ load_dws:
 	ld bc,320
 	ld de,30
 	ld ix,9600
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_7
 	ld de,filedata
@@ -4792,7 +4791,7 @@ load_dws:
 	ld bc,320
 	ld de,24
 	ld ix,7680
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_8
 	ld de,filedata
@@ -4803,7 +4802,7 @@ load_dws:
 	ld bc,320
 	ld de,18
 	ld ix,5760
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_9
 	ld de,filedata
@@ -4814,7 +4813,7 @@ load_dws:
 	ld bc,320
 	ld de,16
 	ld ix,5120
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_10
 	ld de,filedata
@@ -4825,7 +4824,7 @@ load_dws:
 	ld bc,320
 	ld de,16
 	ld ix,5120
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_11
 	ld de,filedata
@@ -4836,7 +4835,7 @@ load_dws:
 	ld bc,320
 	ld de,14
 	ld ix,4480
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_12
 	ld de,filedata
@@ -4847,7 +4846,7 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_13
 	ld de,filedata
@@ -4858,7 +4857,7 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_img
+	call init_img_load
 
 	ld hl,Fdw_14
 	ld de,filedata
@@ -4869,7 +4868,7 @@ load_dws:
 	ld bc,320
 	ld de,12
 	ld ix,3840
-	call vdu_load_img
+	call init_img_load
 
 	ret
 
