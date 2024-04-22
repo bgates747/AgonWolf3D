@@ -18,19 +18,8 @@ loading_dws: defb "Loading distance walls",0
 loading_ui: defb "Loading UI",0
 
 init:
-; print loading ui message
-	ld hl,loading_ui
-	call printString
-
-; load fonts
-	call load_font_itc_honda
-	call load_font_retro_computer
-
-; load UI images
-	call load_ui_images
-
 ; set up the display
-    ld a,8
+    ld a,8 + 128
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
@@ -56,6 +45,17 @@ init:
 
 ; set the cursor off
 	call cursor_off
+
+; print loading ui message
+	ld hl,loading_ui
+	call printString
+
+; load fonts
+	call load_font_itc_honda
+	call load_font_retro_computer
+
+; load UI images
+	call load_ui_images
 
 ; display the splash screen
 	ld hl,BUF_UI_SPLASH
@@ -99,6 +99,11 @@ init_img_load:
 ; load the image
 	call vdu_load_bmp2_from_file
 ; print a progess breadcrumb
+	LD A, '.'
+	RST.LIL 10h
+
+	call vdu_flip
+
 	LD A, '.'
 	RST.LIL 10h
 	ret

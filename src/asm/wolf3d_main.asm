@@ -33,12 +33,14 @@ main:
 ; initialize player position
 	call player_init
 
-; set screen to double-buffered mode
-	ld a,8 + 128
-	call vdu_set_screen_mode
+; ; #### NOTE: mode switch happens in image load phase now ####
+; ; set screen to double-buffered mode
+; 	ld a,8 + 128
+; 	call vdu_set_screen_mode
 
-; turn off cursor ... again
-	call cursor_off
+; ; turn off cursor ... again
+; 	call cursor_off
+; ; #### END NOTE ####
 
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y
