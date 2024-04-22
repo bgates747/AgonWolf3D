@@ -4,6 +4,7 @@ flicker/
 
 # Ignore all emulator directories
 **/emulator/
+**.emulator/
 
 # Ignore .python .vscode
 .python
