@@ -1,6 +1,6 @@
 ## CUSTOM PROJECT-SPECIFIC ##
 # Ignore flicker directory
-flicker/
+# flicker/
 
 # Ignore all emulator directories
 **/emulator/
