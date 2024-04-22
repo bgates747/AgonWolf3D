@@ -8,7 +8,7 @@ load_ui_images:
 
 	ld hl,F_UI_bj_120_120
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_UI_BJ_120_120
@@ -19,7 +19,7 @@ load_ui_images:
 
 	ld hl,F_UI_lower_panel
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_UI_LOWER_PANEL
@@ -30,7 +30,7 @@ load_ui_images:
 
 	ld hl,F_UI_splash
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_UI_SPLASH
