@@ -98,13 +98,20 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_asm_polys_south(db_path, polys_inc_path)
         make_asm_plot_sprites(db_path, polys_inc_path)
 
-# build_91_asm_panels.py
-    if do_91_asm_panels:
-        from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
-        panels_inc_path = f"src/asm/panels.inc"
-        last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-        last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
-        make_asm_dws(db_path, panels_inc_path, last_buffer_id)
+# # build_91_asm_panels.py
+#     if do_91_asm_panels:
+#         from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
+#         panels_inc_path = f"src/asm/panels.inc"
+#         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
+#         last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+#         make_asm_dws(db_path, panels_inc_path, last_buffer_id)
+
+    # build_91_asm_img_load.py
+    if do_91_asm_img_load:
+        from build_91_asm_img_load import make_asm_images_inc
+        panels_inc_path = f"src/asm/images.inc"
+        next_buffer_id_counter = 256
+        make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)
 
 # build_91a_asm_font.py
     if do_91a_asm_font:
@@ -162,7 +169,8 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
     do_90_asm_polys = False
-    do_91_asm_panels = False
+    # do_91_asm_panels = False
+    do_91_asm_img_load = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
@@ -178,7 +186,8 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_90_asm_polys = True
-    do_91_asm_panels = True
+    # do_91_asm_panels = True
+    do_91_asm_img_load = True
     do_91a_asm_font = True
     do_91b_asm_ui = True
     do_92_asm_ez80Asmlinker = True

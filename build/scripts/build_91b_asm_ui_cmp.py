@@ -48,7 +48,7 @@ def make_asm_ui(db_path, ui_inc_path, last_buffer_id):
                 asm_writer.write(f"\tld hl,{constName}\n")
                 # asm_writer.write(f"\tld ix,{filesize}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall init_img_load\n")
+                asm_writer.write("\tcall vdu_load_img\n")
                 # # decompress buffer # TODO: do compress for ui
                 # asm_writer.write(f"\tld hl,{constName}\n")
                 # asm_writer.write(f"\tld de,{constName}\n")

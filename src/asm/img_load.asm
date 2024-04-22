@@ -55,10 +55,19 @@ img_load_main_loop:
 	call vdu_cls
 	ld hl,(cur_filename)
 	call printString
-; flip screen 
-    call vdu_flip 
+	call printNewline
+; ; flip screen 
+;     call vdu_flip 
 ; decrement loop counter
     pop bc
+	dec bc
+; DEBUG: DUMP REGISTERS
+	push bc
+	call dumpRegistersHex
+	call vdu_flip
+	pop bc
+; END DEBUG
+
     ld a,c
     or a
     jp nz,img_load_main_loop

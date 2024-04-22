@@ -277,7 +277,7 @@ BUF_59_042: equ 0x0210
 BUF_59_043: equ 0x0211
 BUF_59_044: equ 0x0212
 
-cube_num_panels: equ 529 
+cube_num_panels: equ 273 
 
 ; cube buffer id reverse lookup:
 cube_buffer_id_lut:
@@ -5056,7 +5056,7 @@ BUF_52_032: equ 0x026A
 BUF_52_040: equ 0x026B
 BUF_52_044: equ 0x026C
 
-sprite_num_panels: equ 619 
+sprite_num_panels: equ 88 
 
 ; sprite buffer id reverse lookup:
 sprite_buffer_id_lut:
@@ -6609,7 +6609,7 @@ BUF_DW_12: equ 0x0273
 BUF_DW_13: equ 0x0274
 BUF_DW_14: equ 0x0275
 
-dws_num_panels: equ 628 
+dws_num_panels: equ 7 
 
 ; dws buffer id reverse lookup:
 dws_buffer_id_lut:
@@ -6625,15 +6625,15 @@ dws_buffer_id_lut:
 
 ; dws load routines jump table:
 dws_load_panels_table:
-	dl ld_DW_6
-	dl ld_DW_7
-	dl ld_DW_8
-	dl ld_DW_9
-	dl ld_DW_10
-	dl ld_DW_11
-	dl ld_DW_12
-	dl ld_DW_13
-	dl ld_DW_14
+	dl ld_dw_6
+	dl ld_dw_7
+	dl ld_dw_8
+	dl ld_dw_9
+	dl ld_dw_10
+	dl ld_dw_11
+	dl ld_dw_12
+	dl ld_dw_13
+	dl ld_dw_14
 
 ; Import dws .rgba2 bitmap files and load them into VDP buffers
 

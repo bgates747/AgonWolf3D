@@ -62,7 +62,7 @@ def make_asm_panels(db_path, panels_inc_path):
             asm_writer.write("\tRST.LIL 08h\n")
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld ix,{filesize}\n")
-            asm_writer.write("\tcall init_img_load\n")
+            asm_writer.write("\tcall vdu_load_img\n")
             # decompress buffer
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld de,{constName}\n")
@@ -138,7 +138,7 @@ def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
             asm_writer.write("\tRST.LIL 08h\n")
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld ix,{filesize}\n")
-            asm_writer.write("\tcall init_img_load\n")
+            asm_writer.write("\tcall vdu_load_img\n")
             # decompress buffer
             asm_writer.write(f"\tld hl,{constName}\n")
             asm_writer.write(f"\tld de,{constName}\n")
@@ -205,7 +205,7 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
                 asm_writer.write(f"\tld hl,{constName}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
                 # asm_writer.write(f"\tld ix,{filesize}\n")
-                asm_writer.write("\tcall init_img_load\n")
+                asm_writer.write("\tcall vdu_load_img\n")
                 # # decompress buffer # TODO: do compress for distance walls
                 # asm_writer.write(f"\tld hl,{constName}\n")
                 # asm_writer.write(f"\tld de,{constName}\n")

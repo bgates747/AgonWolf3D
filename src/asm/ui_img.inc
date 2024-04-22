@@ -19,7 +19,7 @@ load_ui_images:
 	ld bc,120
 	ld de,120
 	ld ix,14400
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_box_art
 	ld de,filedata
@@ -30,7 +30,7 @@ load_ui_images:
 	ld bc,256
 	ld de,240
 	ld ix,61440
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_lavender
 	ld de,filedata
@@ -41,7 +41,7 @@ load_ui_images:
 	ld bc,320
 	ld de,204
 	ld ix,65280
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_lower_panel
 	ld de,filedata
@@ -52,7 +52,7 @@ load_ui_images:
 	ld bc,320
 	ld de,79
 	ld ix,25280
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_nurp_bg_cr
 	ld de,filedata
@@ -63,7 +63,7 @@ load_ui_images:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_nurp_log
 	ld de,filedata
@@ -74,7 +74,7 @@ load_ui_images:
 	ld bc,305
 	ld de,180
 	ld ix,54900
-	call init_img_load
+	call vdu_load_img
 
 	ld hl,F_UI_splash
 	ld de,filedata
@@ -85,7 +85,7 @@ load_ui_images:
 	ld bc,320
 	ld de,160
 	ld ix,51200
-	call init_img_load
+	call vdu_load_img
 
 	ret
 

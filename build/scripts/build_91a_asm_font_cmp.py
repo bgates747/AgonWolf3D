@@ -273,7 +273,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 asm_writer.write(f"\tld hl,BUF_{buffer_id}\n")
                 # asm_writer.write(f"\tld ix,{filesize}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall init_img_load\n")
+                asm_writer.write("\tcall vdu_load_img\n")
                 # # decompress buffer # TODO: do compress for fonts
                 # asm_writer.write(f"\tld hl,BUF_{buffer_id}\n")
                 # asm_writer.write(f"\tld de,BUF_{buffer_id}\n")

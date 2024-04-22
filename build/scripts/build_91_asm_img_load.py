@@ -38,12 +38,13 @@ def get_dws_data(db_path):
     return rows
 
 # This script is responsible for creating the panels.inc file which is used by the assembly code to load the panels into VDP buffers.
-def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, buffer_id_counter, unique_rows):
+def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, next_buffer_id_counter, unique_rows):
+    buffer_id_counter = 0
     with open(panels_inc_path, 'a') as asm_writer: # append to the file
         asm_writer.write(f"\n; {render_type} buffer ids:\n")
         for row in unique_rows:
             name = row['panel_base_filename'].upper()
-            asm_writer.write(f"BUF_{name}: equ 0x{buffer_id_counter:04X}\n")
+            asm_writer.write(f"BUF_{name}: equ 0x{next_buffer_id_counter + buffer_id_counter:04X}\n")
             buffer_id_counter += 1
 
         asm_writer.write(f"\n{render_type}_num_panels: equ {buffer_id_counter-2} \n")
@@ -57,7 +58,7 @@ def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, buffer
         asm_writer.write(f"\n; {render_type} load routines jump table:\n")
         asm_writer.write(f"{render_type}_load_panels_table:\n")
         for row in unique_rows:
-            name = row['panel_base_filename'].upper()
+            name = row['panel_base_filename']
             asm_writer.write(f"\tdl ld_{name}\n")
 
         asm_writer.write(f"\n; Import {render_type} .rgba2 bitmap files and load them into VDP buffers\n")
@@ -87,7 +88,7 @@ def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, buffer
             panel_base_filename = row['panel_base_filename']
             asm_writer.write(f"F{panel_base_filename}: db \"{src_img_dir}/{panel_base_filename}.rgba2\",0\n")
 
-    return buffer_id_counter
+    return next_buffer_id_counter + buffer_id_counter
 
 def make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter):
     # create target assembly file and write header information

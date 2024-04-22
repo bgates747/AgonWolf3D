@@ -274,8 +274,8 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
                 asm_writer.write(f"\tld bc,{dim_x}\n")
                 asm_writer.write(f"\tld de,{dim_y}\n")
                 asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall init_img_load\n")
-                # asm_writer.write("\tLD A, '.'\n") # this is now handled by the init_img_load function
+                asm_writer.write("\tcall vdu_load_img\n")
+                # asm_writer.write("\tLD A, '.'\n") # this is now handled by the vdu_load_img function
                 # asm_writer.write("\tRST.LIL 10h\n")
 
             else:
