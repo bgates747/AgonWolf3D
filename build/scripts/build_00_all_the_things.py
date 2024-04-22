@@ -100,11 +100,11 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
 # build_91_asm_panels.py
     if do_91_asm_panels:
-        from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
+        from build_91_asm_panels import make_asm_panels #, make_asm_sprites, make_asm_dws
         panels_inc_path = f"src/asm/panels.inc"
         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-        last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
-        make_asm_dws(db_path, panels_inc_path, last_buffer_id)
+        # last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
+        # make_asm_dws(db_path, panels_inc_path, last_buffer_id)
 
 # build_91a_asm_font.py
     if do_91a_asm_font:

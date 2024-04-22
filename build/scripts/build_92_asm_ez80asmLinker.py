@@ -460,25 +460,26 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
             for orientation in range(4):
                 # Write the routine label
                 writer.write(f'rend_{cell_id:03d}_{orientation}:\n')
-                # Compute the distance to the the edge of the map the player is facing based on orientation and map dimensions
-                if orientation == 2: distance = map_dim_y - cell['map_y'] - 1
-                elif orientation == 3: distance = cell['map_x']
-                elif orientation == 0: distance = cell['map_y']
-                elif orientation == 1: distance = map_dim_x - cell['map_x'] - 1
-                distance = max(view_distance + 1, distance - 2)
-                # Create a cursor to get the distance wall image to render
-                cursor.execute(f"""
-                    SELECT 'BUF_' || panel_base_filename AS buffer_label, plot_x, plot_y
-                    FROM tbl_04a_dws_lookup
-                    WHERE distance = {distance}""")
-                distance_wall = cursor.fetchone()
-                buffer_label = distance_wall['buffer_label'].upper()
-                plot_x = distance_wall['plot_x']
-                plot_y = distance_wall['plot_y']
-                buff_id = buff_id_dict[buffer_label]
-                writer.write(f'\tld bc,0x{plot_x:02X}\n')
-                writer.write(f'\tld de,0x{plot_y:02X}\n')
-                writer.write(f'\tld hl,{buffer_label}\n')
+                # # Compute the distance to the the edge of the map the player is facing based on orientation and map dimensions
+                # if orientation == 2: distance = map_dim_y - cell['map_y'] - 1
+                # elif orientation == 3: distance = cell['map_x']
+                # elif orientation == 0: distance = cell['map_y']
+                # elif orientation == 1: distance = map_dim_x - cell['map_x'] - 1
+                # distance = max(view_distance + 1, distance - 2)
+                # # Create a cursor to get the distance wall image to render
+                # cursor.execute(f"""
+                #     SELECT 'BUF_' || panel_base_filename AS buffer_label, plot_x, plot_y
+                #     FROM tbl_04a_dws_lookup
+                #     WHERE distance = {distance}""")
+                # distance_wall = cursor.fetchone()
+                # buffer_label = distance_wall['buffer_label'].upper()
+                # plot_x = distance_wall['plot_x']
+                # plot_y = distance_wall['plot_y']
+                # buff_id = buff_id_dict[buffer_label]
+                # writer.write(f'\tld bc,0x{plot_x:02X}\n')
+                # writer.write(f'\tld de,0x{plot_y:02X}\n')
+                # writer.write(f'\tld hl,{buffer_label}\n')
+                
                 writer.write('\tcall render_background\n')
                 # Create a cursor to get the panels to render
                 cursor.execute(f"""

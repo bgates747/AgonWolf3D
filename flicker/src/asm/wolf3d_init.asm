@@ -95,9 +95,9 @@ init:
 ; initialization done
 	ret
 
-init_img_load:
+vdu_load_img:
 ; load the image
-	call vdu_load_bmp2_from_file
+	call vdu_load_buffer_from_file
 ; print a progess breadcrumb
 	LD A, '.'
 	RST.LIL 10h
@@ -112,7 +112,7 @@ init_img_load:
 ; https://discord.com/channels/1158535358624039014/1158536809916149831/1208492884861653145
 ; load an rgba2222 bitmap to a 16-bit bufferId
 ; inputs: bc = width, de = height, hl = bufferId, ix = size
-vdu_load_bmp2_from_file:
+vdu_load_buffer_from_file:
 		; load bitmap ids
 		ld (@id0),hl
 		ld (@id1),hl
@@ -157,4 +157,4 @@ vdu_load_bmp2_from_file:
 		db 0 
 		; CAUTION: the size argument is a 16-bit value, so the max number of bytes we can load in one chunk is 64KiB!! This corresponds to an rgba2 image size of 320x204.
 @size:	dw 0x0000 ;width * height ; length of data in bytes
-filedata: ; no need to allocate space for the bitmap data as we org the map data at 0x080000 just after this
+filedata: ; no need to allocate space for the bitmap data as we org the map data at 0x070000 just after this

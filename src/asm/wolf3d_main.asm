@@ -10,7 +10,7 @@
 ; SPRITE TABLE NEEDS TO BE HERE SO THAT IT ALIGNS WITH table_base
 	include "sprites.inc"
 ; API includes
-    include "../agon_api/asm/mos_api.inc"
+    ; include "../agon_api/asm/mos_api.inc"
     include "../agon_api/asm/functions.inc"
     include "../agon_api/asm/vdu.inc"
     ; include "../agon_api/asm/vdu_buff.inc"
@@ -25,7 +25,7 @@
 	; include "tiles.inc"
 	; include "enemies.inc"
 	; include "laser.inc"
-	include "outro.inc"
+	; include "outro.inc"
 
 ; ; #### BEGIN GAME VARIABLES ####
 

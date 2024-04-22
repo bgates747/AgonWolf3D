@@ -1,10 +1,10 @@
 ; render background as a prelude to rendering panels and sprites
 ; hl is the buffer id, bc and de are plot_x and plot_y
 render_background:
-; back up everything
-    push bc
-    push de
-    push hl
+; ; back up everything
+;     push bc
+;     push de
+;     push hl
 ; plot background
     xor a ; color mode
     ld c,c_grey_dk ; color
@@ -22,12 +22,12 @@ render_background:
     ld ix,319
     ld iy,159
     call vdu_plot_rf
-; plot the background
-    pop hl ; get back the buffer id
-    call vdu_buff_select
-    pop de ; get back plot_y
-    pop bc ; get back plot_x
-    call vdu_plot_bmp
+; ; plot the background
+;     pop hl ; get back the buffer id
+;     call vdu_buff_select
+;     pop de ; get back plot_y
+;     pop bc ; get back plot_x
+;     call vdu_plot_bmp
     ret
 
 ; render a 3D panel

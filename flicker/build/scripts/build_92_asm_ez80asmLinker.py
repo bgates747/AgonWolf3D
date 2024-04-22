@@ -417,7 +417,7 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
     map_tgt_path = f'{project_base_dir}/src/asm/map{floor_num:02d}_{room_id}.inc'
 
     with open(map_tgt_path, 'w') as writer:
-        writer.write('\t.org 0x080000\n\n')
+        writer.write('\t.org 0x070000\n\n')
         writer.write('cells:\n')
         writer.write('; cell label: (obj_id render_obj type/status mask), render routine address\n')
         writer.write('; Type/status mask: 0x80 = door, 0x40 = wall, 0x20 = trigger, 0x10 = blocking\n\n')

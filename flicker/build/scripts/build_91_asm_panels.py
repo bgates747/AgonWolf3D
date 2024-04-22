@@ -67,7 +67,7 @@ def make_asm_panels(db_path, panels_inc_path):
             asm_writer.write(f"\tld hl,F{panel_base_filename}\n")
             asm_writer.write(f"\tld (cur_filename),hl\n")
             asm_writer.write(f"\tld de,filedata\n")
-            asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+            asm_writer.write(f"\tld bc,{65536}\n") 
             asm_writer.write("\tld a,mos_load\n")
             asm_writer.write("\tRST.LIL 08h\n")
             asm_writer.write(f"\tld hl,{constName}\n")

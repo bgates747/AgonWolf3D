@@ -1,4 +1,4 @@
-	.org 0x080000
+	.org 0x070000
 
 cells:
 ; cell label: (obj_id render_obj type/status mask), render routine address

@@ -1,8 +1,12 @@
-; macro files generally want to go here, before any of the other includes
-; which call the macro, otherwise the assembler won't have the macro
-; available to run when it is called, and will fail with something 
-; along the lines of 'invalid label' at such and such a line
-    ; include "agon_api/asm/macros.inc"
+; ###### macros go here ######
+	macro SET_MODE mode
+	ld a, 22					; set mode...
+	rst.lil $10
+	ld a, mode					; to mode
+	rst.lil $10
+	endmacro
+
+    include "../agon_api/asm/mos_api.inc"
 
 ;MOS INITIALIATION MUST GO HERE BEFORE ANY OTHER CODE
     .assume adl=1   
