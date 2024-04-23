@@ -22,19 +22,16 @@ sprite_points:          equ 36 ; 1 bytes points awarded for killing this sprite 
 sprite_shield_damage:   equ 37 ; 1 bytes shield points deducted for collision, binary
 
 ; ###### SPRITE TABLE VARIABLES ######
-; On-chip 8KB high-speed SRAM from 0xB7.E000 to 0xB7.FFFF.
-; sprite table high address
-table_base: equ 0xB7E000  
 ; maximum number of sprites
 table_max_records: equ 4 ; it can handle more but this is pushing it
 table_total_bytes: equ table_max_records*table_bytes_per_record
 
 ; #### THIS IS THE SPACE ALLOCATED TO THE SPRITE TABLE ####
-sprite_start_variables: ds table_total_bytes, 0 ; fill with zeroes
-sprite_end_variables: ; in case we want to traverse the table in reverse
+spite_table_base: ds table_total_bytes, 0 ; fill with zeroes
+spite_table_limit: ; in case we ever need to know where it ends
 
-; pointer to top address of current record, initialized to table_base
-table_pointer: dl table_base
+; pointer to top address of current record, initialized to spite_table_base
+table_pointer: dl spite_table_base
 ; how many active sprites
 table_active_sprites: db 0x00
 ; flag indicating collision with screen edge
@@ -73,7 +70,7 @@ cos_sprite_heading: dl 0x000000 ; signed fixed 16.8
 ; destroys: a,b,hl,ix
 ; affects: bumps table_active_sprites by one
 table_get_next_id:
-    ld ix,table_base
+    ld ix,spite_table_base
     ld de,table_bytes_per_record
     ld b,table_max_records
 @loop:
@@ -110,7 +107,7 @@ table_deactivate_sprite:
     ld d,a
     ld e,table_bytes_per_record
     mlt de
-    ld ix,table_base
+    ld ix,spite_table_base
     add ix,de
     xor a
     ld (ix+sprite_type),a

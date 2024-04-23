@@ -97,15 +97,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_asm_polys(db_path, polys_inc_path)
         make_asm_polys_south(db_path, polys_inc_path)
         make_asm_plot_sprites(db_path, polys_inc_path)
-
-# # build_91_asm_panels.py
-#     if do_91_asm_panels:
-#         from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
-#         panels_inc_path = f"src/asm/panels.asm"
-#         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-#         last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
-#         make_asm_dws(db_path, panels_inc_path, last_buffer_id)
-
+        
     # build_91_asm_img_load.py
     if do_91_asm_img_load:
         from build_91_asm_img_load import make_asm_images_inc
@@ -169,7 +161,6 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
     do_90_asm_polys = False
-    # do_91_asm_panels = False
     do_91_asm_img_load = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
@@ -177,16 +168,15 @@ if __name__ == "__main__":
     do_92_asm_ez80Asmlinker = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_00_delete_tgt_dir = True
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
+    do_00_delete_tgt_dir = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_90_asm_polys = True
-    # do_91_asm_panels = True
     do_91_asm_img_load = True
     do_91a_asm_font = True
     do_91b_asm_ui = True

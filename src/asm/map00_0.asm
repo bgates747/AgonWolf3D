@@ -1,5 +1,3 @@
-	.org 0x080000
-
 cells:
 ; cell label: (obj_id render_obj type/status mask), render routine address
 ; Type/status mask: 0x80 = door, 0x40 = wall, 0x20 = trigger, 0x10 = blocking

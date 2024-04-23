@@ -277,15 +277,15 @@ dumpUDEUHLHex:
 
 @str_udeuhl: db "ude.uhl=",0
 
-; ; global scratch memory for registers
-; uaf: dl 0
-; uhl: dl 0
-; ubc: dl 0
-; ude: dl 0
-; uix: dl 0
-; uiy: dl 0
-; usp: dl 0
-; upc: dl 0
+; global scratch memory for registers
+uaf: dl 0
+uhl: dl 0
+ubc: dl 0
+ude: dl 0
+uix: dl 0
+uiy: dl 0
+usp: dl 0
+upc: dl 0
 
 ; inputs: whatever is in the flags register
 ; outputs: binary representation of flags
