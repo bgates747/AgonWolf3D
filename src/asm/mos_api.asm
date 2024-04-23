@@ -1,4 +1,4 @@
-; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/mos_api.inc
+; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/mos_api.asm
 ; Title:	AGON MOS - API for user projects
 ; Author:	Dean Belfield
 ;			Adapted for agon-ez80asm by Jeroen Venema

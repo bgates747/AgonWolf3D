@@ -1,7 +1,7 @@
 ; ###### SPRITE TABLE FIELD INDICES ######
 table_bytes_per_record: equ 38 ; 38 bytes per sprite record
 sprite_id:              equ 00 ; 1 bytes unique spriteId, zero-based
-sprite_type:            equ 01 ; 1 bytes type of sprite as defined in enemies.inc
+sprite_type:            equ 01 ; 1 bytes type of sprite as defined in enemies.asm
 sprite_base_bufferId:   equ 02 ; 3 bytes bitmap bufferId
 sprite_move_program:    equ 05 ; 3 bytes address of sprite's behavior subroutine
 sprite_collisions:      equ 08 ; 1 bytes low/high nibble: collision details

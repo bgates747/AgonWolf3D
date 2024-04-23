@@ -2,7 +2,7 @@
 ; which call the macro, otherwise the assembler won't have the macro
 ; available to run when it is called, and will fail with something 
 ; along the lines of 'invalid label' at such and such a line
-    ; include "agon_api/asm/macros.inc"
+    ; include "agon_api/asm/macros.asm"
 
 ;MOS INITIALIATION MUST GO HERE BEFORE ANY OTHER CODE
     .assume adl=1   

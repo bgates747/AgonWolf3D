@@ -31,10 +31,10 @@ dr_abs_fg: equ 5
     .db 01h  
 
 ; ###### includes can go here ######  
-	include "src/asm/panels.inc"
-	; include "src/asm/font_itc_honda.inc"
-	; include "src/asm/font_retro_computer.inc"
-	include "src/asm/ui_img.inc"
+	include "src/asm/panels.asm"
+	; include "src/asm/font_itc_honda.asm"
+	; include "src/asm/font_retro_computer.asm"
+	include "src/asm/ui_img.asm"
 
 ; ###### BEGINNING OF CODE ######
 start:              

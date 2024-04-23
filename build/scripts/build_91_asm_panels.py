@@ -6,7 +6,7 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-# This script is responsible for creating the panels.inc file which is used by the assembly code to load the panels into VDP buffers.
+# This script is responsible for creating the panels.asm file which is used by the assembly code to load the panels into VDP buffers.
 def make_asm_panels(db_path, panels_inc_path):
     conn = sqlite3.connect(db_path)
     conn.row_factory = dict_factory
@@ -76,7 +76,7 @@ def make_asm_panels(db_path, panels_inc_path):
     conn.close()
     return buffer_id_counter
 
-# This script is responsible for creating the panels.inc file which is used by the assembly code to load the panels into VDP buffers.
+# This script is responsible for creating the panels.asm file which is used by the assembly code to load the panels into VDP buffers.
 def make_asm_sprites(db_path, panels_inc_path, last_buffer_id):
 
     conn = sqlite3.connect(db_path)
@@ -209,7 +209,7 @@ def make_asm_dws(db_path, panels_inc_path, last_buffer_id):
 
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
-    panels_inc_path = "src/asm/panels.inc"
+    panels_inc_path = "src/asm/panels.asm"
     last_buffer_id = make_asm_panels(db_path, panels_inc_path)
     last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
     make_asm_dws(db_path, panels_inc_path, last_buffer_id)

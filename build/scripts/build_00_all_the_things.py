@@ -93,7 +93,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # build_90_asm_polys.py
     if do_90_asm_polys:
         from build_90_asm_polys import make_asm_polys, make_asm_polys_south, make_asm_plot_sprites
-        polys_inc_path = f"src/asm/polys.inc"
+        polys_inc_path = f"src/asm/polys.asm"
         make_asm_polys(db_path, polys_inc_path)
         make_asm_polys_south(db_path, polys_inc_path)
         make_asm_plot_sprites(db_path, polys_inc_path)
@@ -101,7 +101,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # # build_91_asm_panels.py
 #     if do_91_asm_panels:
 #         from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
-#         panels_inc_path = f"src/asm/panels.inc"
+#         panels_inc_path = f"src/asm/panels.asm"
 #         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
 #         last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
 #         make_asm_dws(db_path, panels_inc_path, last_buffer_id)
@@ -109,7 +109,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     # build_91_asm_img_load.py
     if do_91_asm_img_load:
         from build_91_asm_img_load import make_asm_images_inc
-        panels_inc_path = f"src/asm/images.inc"
+        panels_inc_path = f"src/asm/images.asm"
         next_buffer_id_counter = 256
         make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)
 
@@ -121,7 +121,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # build_91b_asm_ui.py
     if do_91b_asm_ui:
         from build_91b_asm_ui import make_tbl_91b_UI, make_rgba2_files, make_asm_ui
-        ui_inc_path = "src/asm/ui_img.inc"
+        ui_inc_path = "src/asm/ui_img.asm"
         src_png_dir = "src/assets/images/ui"
         tgt_cmp_rgba2_dir = "tgt/ui"
         buffer_id = 0x2000
@@ -138,7 +138,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         full_db_path = f'{project_base_dir}/build/data/build.db'
         full_src_base_dir = f"{project_base_dir}/src/asm"
         full_tgt_base_dir = f"{project_base_dir}/tgt"
-        full_panels_path = f"{project_base_dir}/src/asm/panels.inc"
+        full_panels_path = f"{project_base_dir}/src/asm/panels.asm"
         do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base_dir, floor_nums, room_ids, full_panels_path, view_distance, map_dim_x, map_dim_y)
 
 

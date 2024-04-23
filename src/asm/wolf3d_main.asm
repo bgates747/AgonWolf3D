@@ -8,24 +8,24 @@
     org 0xB7E000
 ; now these includes and any code below it will be loaded into the fast SRAM
 ; SPRITE TABLE NEEDS TO BE HERE SO THAT IT ALIGNS WITH table_base
-	include "sprites.inc"
+	include "sprites.asm"
 ; API includes
-    include "../agon_api/asm/mos_api.inc"
-    include "../agon_api/asm/functions.inc"
-    include "../agon_api/asm/vdu.inc"
-    ; include "../agon_api/asm/vdu_buff.inc"
-    include "../agon_api/asm/vdu_plot.inc"
-	include "../agon_api/asm/vdu_sprites.inc"
-	include "../agon_api/asm/vdp.inc"
-	include "../agon_api/asm/div_168_signed.inc"
-	; include "../agon_api/asm/maths24.inc"
-	include "../agon_api/asm/maths.inc"
+    include "../agon_api/asm/mos_api.asm"
+    include "../agon_api/asm/functions.asm"
+    include "../agon_api/asm/vdu.asm"
+    ; include "../agon_api/asm/vdu_buff.asm"
+    include "../agon_api/asm/vdu_plot.asm"
+	include "../agon_api/asm/vdu_sprites.asm"
+	include "../agon_api/asm/vdp.asm"
+	include "../agon_api/asm/div_168_signed.asm"
+	; include "../agon_api/asm/maths24.asm"
+	include "../agon_api/asm/maths.asm"
 ; App-specific includes
-	include "player.inc"
-	; include "tiles.inc"
-	; include "enemies.inc"
-	; include "laser.inc"
-	; include "outro.inc"
+	include "player.asm"
+	; include "tiles.asm"
+	; include "enemies.asm"
+	; include "laser.asm"
+	; include "outro.asm"
 
 ; ; #### BEGIN GAME VARIABLES ####
 

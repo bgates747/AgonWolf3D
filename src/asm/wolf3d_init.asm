@@ -1,16 +1,16 @@
 ; after this we can put includes in any order we wish, even in between
 ; code blocks if there is any program-dependent or asethetic reason to do so
-	; include "panels.inc" ; replaced by images.inc
-	include "images.inc"
-	include "fonts_bmp.inc"
-	include "maps.inc"
-	include "render.inc"
-	include "polys.inc"
-	include "font_itc_honda.inc"
-	include "font_retro_computer.inc"
-	include "ui.inc"
-	include "ui_img.inc"
-	; include "files.inc" ; file handling and memory allocation for loading files from disk
+	; include "panels.asm" ; replaced by images.asm
+	include "images.asm"
+	include "fonts_bmp.asm"
+	include "maps.asm"
+	include "render.asm"
+	include "polys.asm"
+	include "font_itc_honda.asm"
+	include "font_retro_computer.asm"
+	include "ui.asm"
+	include "ui_img.asm"
+	; include "files.asm" ; file handling and memory allocation for loading files from disk
 
 hello_world: defb "Welcome to Agon Wolf3D",0
 loading_panels: defb "Loading panels",0

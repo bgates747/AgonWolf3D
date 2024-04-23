@@ -352,7 +352,7 @@ def do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base
             # Wolf3D does that for the core api and associated functions
             # but it also does this so that each room of the map can have its own
             # .bin file that is loaded to the same starting address in memory as all the others
-            src_filenames = ['wolf3d.asm', 'wolf3d_init.asm', f'map{floor_num:02d}_{room_id}.inc', 'wolf3d_main.asm']
+            src_filenames = ['wolf3d.asm', 'wolf3d_init.asm', f'map{floor_num:02d}_{room_id}.asm', 'wolf3d_main.asm']
             # ... but before that happens, the "cmb" files 
             # get combined into one big temp "cmb of cmbs" file
             # and then assembled into a temp "bin" file
@@ -414,7 +414,7 @@ def asm_make_map_render_routines(project_base_dir, full_db_path, floor_num, room
     buff_ids = make_df_buff_ids(full_panels_path)
     buff_id_dict = {label: value for label, value in buff_ids}
 
-    map_tgt_path = f'{project_base_dir}/src/asm/map{floor_num:02d}_{room_id}.inc'
+    map_tgt_path = f'{project_base_dir}/src/asm/map{floor_num:02d}_{room_id}.asm'
 
     with open(map_tgt_path, 'w') as writer:
         writer.write('\t.org 0x080000\n\n')
@@ -513,7 +513,7 @@ if __name__ == "__main__":
     # Set project_base_dir to the directory from which this script is executed
     project_base_dir = os.getcwd() 
     full_db_path = f'{project_base_dir}/build/data/build.db'
-    full_panels_path = f'{project_base_dir}/src/asm/panels.inc'
+    full_panels_path = f'{project_base_dir}/src/asm/panels.asm'
     # Set which maps to build
     floor_nums = list(range(1))  # This will create a list: [0]
     room_ids = list(range(1))  # This will create a list: [0]
