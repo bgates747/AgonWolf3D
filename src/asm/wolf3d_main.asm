@@ -25,7 +25,7 @@
 	; include "tiles.inc"
 	; include "enemies.inc"
 	; include "laser.inc"
-	include "outro.inc"
+	; include "outro.inc"
 
 ; ; #### BEGIN GAME VARIABLES ####
 

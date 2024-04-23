@@ -392,9 +392,9 @@ def do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base
                 if assembled == 0:
                     print("ASSEMBLY SUCCEEDED")
 
-                    # # comment this out when debugging
-                    # # because it often useful to review especially the tmp.lst file
-                    # delete_temp_files(full_tgt_base_dir)
+                    # comment this out when debugging
+                    # because it often useful to review especially the tmp.lst file
+                    delete_temp_files(full_tgt_base_dir)
 
                 else :
                     print("PASS TWO ASSEMBLY FAILED")

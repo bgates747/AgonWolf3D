@@ -114,7 +114,7 @@ render_scene_return:
 	ld hl,BUF_UI_LOWER_PANEL
     call vdu_buff_select
 	ld bc,0
-	ld de,161
+	ld de,160
 	call vdu_plot_bmp
 ; all done
     ret
