@@ -104,7 +104,7 @@ main_loop:
 	call move_moving
 ; flip screen and wait for vblank
     call vdu_flip 
-	call WAIT_VBLANK ; emulator doesn't ficker
+	call vdu_vblank ; emulator doesn't ficker
 
 ; exit if ESC key pressed
     ld a, $08   
@@ -169,7 +169,7 @@ box_y_cur: dl 0
 box_y_min: dl 0
 box_y_max: dl 0
 
-WAIT_VBLANK:		PUSH 	IX			; Wait for VBLANK interrupt
+vdu_vblank:		PUSH 	IX			; Wait for VBLANK interrupt
 			MOSCALL	mos_sysvars		; Fetch pointer to system variables
 			LD	A, (IX + sysvar_time + 0)
 @wait:			CP 	A, (IX + sysvar_time + 0)

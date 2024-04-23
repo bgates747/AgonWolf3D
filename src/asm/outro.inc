@@ -31,8 +31,8 @@ outro1:
 	ld (@loop_counter),a
 	jr z,outro1_end
 	call vdu_flip
-	call WAIT_VBLANK
-	call WAIT_VBLANK
+	call vdu_vblank
+	call vdu_vblank
 	jp outro1
 @text_y: dl 240
 @loop_counter: db 240
@@ -42,7 +42,7 @@ outro1_end:
 	ld a,128
 	push af
 @wait_loop:
-	call WAIT_VBLANK
+	call vdu_vblank
 	pop af
 	dec a
 	jr z,@wait_done
@@ -88,7 +88,7 @@ outro2:
 ; flip the screen buffer
     call vdu_flip
 ; wait a tick
-    call WAIT_VBLANK
+    call vdu_vblank
 ; update loop counter
     ld a,(@loop_counter)
     dec a
@@ -137,7 +137,7 @@ outro3:
 ; flip the screen buffer
     call vdu_flip
 ; wait a tick
-    call WAIT_VBLANK
+    call vdu_vblank
 ; update loop counter
     ld a,(@loop_counter)
     dec a

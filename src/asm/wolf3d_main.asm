@@ -56,7 +56,7 @@ main_loop:
 ; flip the screen
 	call vdu_flip
 ; wait for the next VBLANK
-	call WAIT_VBLANK
+	call vdu_vblank
 
 ; check for escape key and quit if pressed
 	MOSCALL mos_getkbmap
