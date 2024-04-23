@@ -16,7 +16,7 @@ def make_df_buff_ids(panels_path):
     return parsed_data  
 
 # Main function to generate map render routines
-def asm_make_map_render_routines(db_path, floor_nums, room_ids, panels_path, view_distance, map_dim_x, map_dim_y):
+def asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance, map_dim_x, map_dim_y):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -25,7 +25,7 @@ def asm_make_map_render_routines(db_path, floor_nums, room_ids, panels_path, vie
     buff_id_dict = {label: value for label, value in buff_ids}
 
     for floor_num in floor_nums:
-        for room_id in room_ids:
+        for room_id in range(1):
             map_tgt_path = f'src/asm/map{floor_num:02d}_{room_id}.asm'
 
             with open(map_tgt_path, 'w') as writer:
@@ -123,11 +123,10 @@ if __name__ == "__main__":
     db_path = f'build/data/build.db'
     panels_path = f'src/asm/panels.asm'
     # Set which maps to build
-    floor_nums = list(range(1))  # This will create a list: [0]
-    room_ids = list(range(1))  # This will create a list: [0]
+    floor_nums = list(range(1))
     src_base_dir = f'src/asm'
     tgt_base_dir = f'tgt'
     view_distance = 5
     map_dim_x, map_dim_y = 16, 16
 
-    asm_make_map_render_routines(db_path, floor_nums, room_ids, panels_path, view_distance, map_dim_x, map_dim_y)
+    asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance, map_dim_x, map_dim_y)
