@@ -3011,134 +3011,24 @@ rend_015_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_015_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_004
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld ix,cell_003
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_002
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_001
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_017
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_000
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_015_2:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_015_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_074
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_059
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_011
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_044
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_012
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_029
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_013
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_014
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_016: dl rend_016_0,rend_016_1,rend_016_2,rend_016_3
@@ -6233,154 +6123,24 @@ rend_031_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_031_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_004
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld ix,cell_003
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x17
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld ix,cell_002
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_001
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_017
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_016
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_031_2:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_031_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_090
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x05
-	call render_sprite
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_075
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_011
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_060
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_012
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_045
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_029
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_013
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_030
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_032: dl rend_032_0,rend_032_1,rend_032_2,rend_032_3
@@ -9822,168 +9582,24 @@ rend_047_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_047_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_004
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_003
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x17
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld ix,cell_002
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_017
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_032
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_047_2:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_047_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_106
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x06
-	call render_sprite
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_091
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_011
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_076
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_012
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_029
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_046
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_048: dl rend_048_0,rend_048_1,rend_048_2,rend_048_3
@@ -13778,176 +13394,24 @@ rend_063_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_063_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_004
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x08
-	call render_sprite
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld ix,cell_003
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_048
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_063_2:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_063_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_122
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x07
-	call render_sprite
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_107
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_011
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_062
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_064: dl rend_064_0,rend_064_1,rend_064_2,rend_064_3
@@ -18101,178 +17565,24 @@ rend_079_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_079_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_004
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_079_2:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_079_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_138
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_078
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_080: dl rend_080_0,rend_080_1,rend_080_2,rend_080_3
@@ -22426,178 +21736,24 @@ rend_095_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_095_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_020
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_080
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_095_2:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_095_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_154
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_096: dl rend_096_0,rend_096_1,rend_096_2,rend_096_3
@@ -26392,176 +25548,24 @@ rend_111_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_111_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_036
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x07
-	call render_sprite
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_051
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_147
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_096
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_111_2:
 	ld bc,0x00
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_111_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_154
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x08
-	call render_sprite
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld ix,cell_155
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_110
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_112: dl rend_112_0,rend_112_1,rend_112_2,rend_112_3
@@ -30003,168 +29007,24 @@ rend_127_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_127_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_052
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x06
-	call render_sprite
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_067
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_147
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1D01BE ; BUF_17_029
-	call render_panel
-	ld ix,cell_082
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_146
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_129
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_112
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_127_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_127_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_154
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_155
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1801B9 ; BUF_17_024
-	call render_panel
-	ld ix,cell_156
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_141
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_126
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_128: dl rend_128_0,rend_128_1,rend_128_2,rend_128_3
@@ -33259,154 +32119,24 @@ rend_143_0:
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_143_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_068
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x05
-	call render_sprite
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_083
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_147
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1C01BD ; BUF_17_028
-	call render_panel
-	ld ix,cell_098
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_146
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_113
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_129
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_145
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_128
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_143_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_143_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_154
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld ix,cell_155
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1901BA ; BUF_17_025
-	call render_panel
-	ld ix,cell_156
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_157
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_141
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_142
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_144: dl rend_144_0,rend_144_1,rend_144_2,rend_144_3
@@ -36160,134 +34890,24 @@ rend_159_0:
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_159_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_084
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_099
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_147
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B01BC ; BUF_17_027
-	call render_panel
-	ld ix,cell_114
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_146
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_129
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_145
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01C6 ; BUF_17_043
-	call render_panel
-	ld ix,cell_144
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_159_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_159_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld ix,cell_154
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld ix,cell_155
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A01BB ; BUF_17_026
-	call render_panel
-	ld ix,cell_156
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_157
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_141
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A01C5 ; BUF_17_042
-	call render_panel
-	ld ix,cell_158
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_160: dl rend_160_0,rend_160_1,rend_160_2,rend_160_3
@@ -36296,90 +34916,24 @@ rend_160_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_080
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld ix,cell_096
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_112
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_128
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_129
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_144
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_160_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_160_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x270179 ; BUF_14_040
-	call render_panel
-	ld hl,0x280179 ; BUF_14_040
-	call render_panel
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_176
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_160_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_161: dl rend_161_0,rend_161_1,rend_161_2,rend_161_3
@@ -36388,100 +34942,24 @@ rend_161_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_080
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld ix,cell_096
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x17
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld ix,cell_112
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_128
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_129
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_145
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_161_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_161_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x270179 ; BUF_14_040
-	call render_panel
-	ld hl,0x280179 ; BUF_14_040
-	call render_panel
-	ld hl,0x290179 ; BUF_14_040
-	call render_panel
-	ld ix,cell_177
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_161_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_162: dl rend_162_0,rend_162_1,rend_162_2,rend_162_3
@@ -36490,123 +34968,24 @@ rend_162_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_080
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_096
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x17
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld ix,cell_112
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_129
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_146
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_162_1:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_162_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_228
-	ld a,0x12
-	call render_sprite
-	ld hl,0x1801D2 ; BUF_57_024
-	call render_panel
-	ld ix,cell_212
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x27
-	call render_sprite
-	ld hl,0x280179 ; BUF_14_040
-	call render_panel
-	ld hl,0x290179 ; BUF_14_040
-	call render_panel
-	ld ix,cell_178
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_162_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_163: dl rend_163_0,rend_163_1,rend_163_2,rend_163_3
@@ -36615,141 +34994,24 @@ rend_163_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_080
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x08
-	call render_sprite
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld ix,cell_096
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_113
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_117
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_130
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_147
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_163_1:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_163_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld hl,0x0D0169 ; BUF_14_013
-	call render_panel
-	ld ix,cell_228
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_227
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1901D3 ; BUF_57_025
-	call render_panel
-	ld hl,0x1B0207 ; BUF_59_027
-	call render_panel
-	ld ix,cell_212
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x20
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld hl,0x250177 ; BUF_14_037
-	call render_panel
-	ld ix,cell_196
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x28
-	call render_sprite
-	ld hl,0x290179 ; BUF_14_040
-	call render_panel
-	ld ix,cell_179
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_163_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_164: dl rend_164_0,rend_164_1,rend_164_2,rend_164_3
@@ -36758,142 +35020,24 @@ rend_164_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_080
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_081
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_097
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_114
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_117
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_118
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_131
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_133
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_148
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_164_1:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_164_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld hl,0x0E016A ; BUF_14_014
-	call render_panel
-	ld ix,cell_228
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_227
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1A01D4 ; BUF_57_026
-	call render_panel
-	ld hl,0x1C0208 ; BUF_59_028
-	call render_panel
-	ld ix,cell_212
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x21
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld hl,0x260178 ; BUF_14_038
-	call render_panel
-	ld ix,cell_196
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A01C5 ; BUF_17_042
-	call render_panel
-	ld ix,cell_180
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_164_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_165: dl rend_165_0,rend_165_1,rend_165_2,rend_165_3
@@ -36902,105 +35046,24 @@ rend_165_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_081
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_082
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_098
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_115
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_117
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_118
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_119
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_132
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_133
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_134
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_149
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_165_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_165_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_165_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_166: dl rend_166_0,rend_166_1,rend_166_2,rend_166_3
@@ -37009,151 +35072,24 @@ rend_166_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_082
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_083
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_099
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_116
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_117
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_118
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_119
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_120
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_133
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_134
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_135
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_150
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_166_1:
 	ld bc,0x00
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_166_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x010100 ; BUF_10_004
-	call render_panel
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0901B0 ; BUF_17_009
-	call render_panel
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_233
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_230
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B01D5 ; BUF_57_027
-	call render_panel
-	ld ix,cell_216
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_199
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01C6 ; BUF_17_043
-	call render_panel
-	ld ix,cell_182
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_166_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_167: dl rend_167_0,rend_167_1,rend_167_2,rend_167_3
@@ -37162,157 +35098,24 @@ rend_167_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_083
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_084
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_100
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_117
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_118
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_119
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_120
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_121
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_134
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_135
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_136
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_151
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_167_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_167_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A01B1 ; BUF_17_010
-	call render_panel
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_233
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_230
-	ld a,0x15
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C01D6 ; BUF_57_028
-	call render_panel
-	ld ix,cell_217
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_200
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_167_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_168: dl rend_168_0,rend_168_1,rend_168_2,rend_168_3
@@ -37321,157 +35124,24 @@ rend_168_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_084
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_085
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_101
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_118
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_119
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_120
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_121
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_135
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_136
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_137
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_152
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_168_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_168_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0B01B2 ; BUF_17_011
-	call render_panel
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_233
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_230
-	ld a,0x16
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld hl,0x1D01D7 ; BUF_57_029
-	call render_panel
-	ld ix,cell_217
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2301D9 ; BUF_57_035
-	call render_panel
-	ld ix,cell_201
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_168_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_169: dl rend_169_0,rend_169_1,rend_169_2,rend_169_3
@@ -37480,151 +35150,24 @@ rend_169_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_085
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_086
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_102
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_119
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_120
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_121
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_136
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_137
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_153
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_169_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_169_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x070100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0C01B3 ; BUF_17_012
-	call render_panel
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_233
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_230
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_217
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2401DA ; BUF_57_036
-	call render_panel
-	ld ix,cell_201
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_185
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_169_3:
 	ld bc,0x00
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_170: dl rend_170_0,rend_170_1,rend_170_2,rend_170_3
@@ -37633,105 +35176,24 @@ rend_170_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_086
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_087
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_103
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_104
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_120
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_121
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_137
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_154
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_170_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_170_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_170_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_171: dl rend_171_0,rend_171_1,rend_171_2,rend_171_3
@@ -37740,147 +35202,24 @@ rend_171_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_087
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_088
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x07
-	call render_sprite
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_104
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_105
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_110
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_121
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_122
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_138
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_155
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_171_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_171_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A01CA ; BUF_57_010
-	call render_panel
-	ld hl,0x0D01B4 ; BUF_17_013
-	call render_panel
-	ld hl,0x1101D1 ; BUF_57_020
-	call render_panel
-	ld ix,cell_237
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_235
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_221
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x20
-	call render_sprite
-	ld hl,0x2501DB ; BUF_57_037
-	call render_panel
-	ld ix,cell_204
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_187
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_171_3:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_172: dl rend_172_0,rend_172_1,rend_172_2,rend_172_3
@@ -37889,149 +35228,24 @@ rend_172_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_088
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_089
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x06
-	call render_sprite
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_105
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_106
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_110
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_122
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_123
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_126
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_139
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_140
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_141
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_156
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_172_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_172_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0B01CB ; BUF_57_011
-	call render_panel
-	ld hl,0x0E01B5 ; BUF_17_014
-	call render_panel
-	ld hl,0x1201D1 ; BUF_57_020
-	call render_panel
-	ld ix,cell_237
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_235
-	ld a,0x15
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_222
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x21
-	call render_sprite
-	ld hl,0x2601DC ; BUF_57_038
-	call render_panel
-	ld ix,cell_205
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_172_3:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_173: dl rend_173_0,rend_173_1,rend_173_2,rend_173_3
@@ -38040,142 +35254,24 @@ rend_173_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_089
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_090
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x05
-	call render_sprite
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_106
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_107
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_110
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_123
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_124
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_126
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_140
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_141
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_142
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_157
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_173_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_173_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0C01CC ; BUF_57_012
-	call render_panel
-	ld hl,0x0F01B6 ; BUF_17_015
-	call render_panel
-	ld hl,0x1301D1 ; BUF_57_020
-	call render_panel
-	ld ix,cell_237
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_235
-	ld a,0x16
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_222
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_206
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_173_3:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_174: dl rend_174_0,rend_174_1,rend_174_2,rend_174_3
@@ -38184,124 +35280,24 @@ rend_174_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld ix,cell_090
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_091
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_092
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_093
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_094
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_107
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_108
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_109
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_110
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_124
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_125
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_126
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_141
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_142
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_158
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_174_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_174_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x070100 ; BUF_10_004
-	call render_panel
-	ld hl,0x1001B7 ; BUF_17_016
-	call render_panel
-	ld hl,0x1401D1 ; BUF_57_020
-	call render_panel
-	ld ix,cell_237
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_235
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_222
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_206
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_190
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_174_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_175: dl rend_175_0,rend_175_1,rend_175_2,rend_175_3
@@ -38310,32 +35306,24 @@ rend_175_0:
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_175_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_175_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_175_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 
 rend_176: dl rend_176_0,rend_176_1,rend_176_2,rend_176_3
@@ -38707,110 +35695,24 @@ rend_181_0:
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_181_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0701AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_185
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_233
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A01BB ; BUF_17_026
-	call render_panel
-	ld ix,cell_184
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_183
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A01C5 ; BUF_17_042
-	call render_panel
-	ld ix,cell_182
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_181_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_181_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_176
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0C0168 ; BUF_14_012
-	call render_panel
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_177
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1A0170 ; BUF_14_026
-	call render_panel
-	ld hl,0x1B01BC ; BUF_17_027
-	call render_panel
-	ld hl,0x1E020A ; BUF_59_032
-	call render_panel
-	ld hl,0x1F0174 ; BUF_14_032
-	call render_panel
-	ld ix,cell_178
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_195
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_179
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01C6 ; BUF_17_043
-	call render_panel
-	ld ix,cell_180
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_182: dl rend_182_0,rend_182_1,rend_182_2,rend_182_3
@@ -39195,121 +36097,24 @@ rend_186_0:
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_186_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0C01B3 ; BUF_17_012
-	call render_panel
-	ld hl,0x0F01CF ; BUF_57_015
-	call render_panel
-	ld ix,cell_190
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_222
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1701D1 ; BUF_57_020
-	call render_panel
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_189
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2401C1 ; BUF_17_036
-	call render_panel
-	ld ix,cell_188
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_187
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_186_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 rend_186_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x010100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0201C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld hl,0x0D01B4 ; BUF_17_013
-	call render_panel
-	ld ix,cell_230
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_182
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_215
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x20
-	call render_sprite
-	ld hl,0x2501C2 ; BUF_17_037
-	call render_panel
-	ld ix,cell_200
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_185
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_187: dl rend_187_0,rend_187_1,rend_187_2,rend_187_3
@@ -39683,105 +36488,24 @@ rend_191_0:
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_191_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_180
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld ix,cell_179
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1A01BB ; BUF_17_026
-	call render_panel
-	ld hl,0x1B0171 ; BUF_14_027
-	call render_panel
-	ld ix,cell_178
-	ld a,0x20
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld hl,0x250177 ; BUF_14_037
-	call render_panel
-	ld ix,cell_177
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2A01C5 ; BUF_17_042
-	call render_panel
-	ld hl,0x2B017B ; BUF_14_043
-	call render_panel
-	ld ix,cell_176
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_191_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_191_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0101AF ; BUF_17_004
-	call render_panel
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0301C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_235
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_187
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B01BC ; BUF_17_027
-	call render_panel
-	ld ix,cell_220
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_205
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01C6 ; BUF_17_043
-	call render_panel
-	ld ix,cell_190
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_192: dl rend_192_0,rend_192_1,rend_192_2,rend_192_3
@@ -39790,39 +36514,24 @@ rend_192_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2801C4 ; BUF_17_040
-	call render_panel
-	ld hl,0x290115 ; BUF_10_040
-	call render_panel
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_176
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_192_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_192_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01F9 ; BUF_58_044
-	call render_panel
 	jp render_scene_return
 rend_192_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_193: dl rend_193_0,rend_193_1,rend_193_2,rend_193_3
@@ -39831,46 +36540,24 @@ rend_193_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2701C4 ; BUF_17_040
-	call render_panel
-	ld hl,0x280115 ; BUF_10_040
-	call render_panel
-	ld hl,0x2901C4 ; BUF_17_040
-	call render_panel
-	ld ix,cell_177
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_193_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_193_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x280179 ; BUF_14_040
-	call render_panel
-	ld hl,0x2A0210 ; BUF_59_042
-	call render_panel
-	ld hl,0x2B01F8 ; BUF_58_043
-	call render_panel
-	ld ix,cell_209
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_193_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 
 rend_194: dl rend_194_0,rend_194_1,rend_194_2,rend_194_3
@@ -39879,59 +36566,24 @@ rend_194_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x270115 ; BUF_10_040
-	call render_panel
-	ld hl,0x2801C4 ; BUF_17_040
-	call render_panel
-	ld hl,0x290115 ; BUF_10_040
-	call render_panel
-	ld ix,cell_178
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_194_1:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x1F01BF ; BUF_17_032
-	call render_panel
-	ld hl,0x200110 ; BUF_10_032
-	call render_panel
-	ld hl,0x2101D8 ; BUF_57_032
-	call render_panel
-	ld hl,0x220110 ; BUF_10_032
-	call render_panel
-	ld hl,0x2301C0 ; BUF_17_035
-	call render_panel
-	ld ix,cell_180
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_196
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_212
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_194_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0212 ; BUF_59_044
-	call render_panel
 	jp render_scene_return
 rend_194_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 
 rend_195: dl rend_195_0,rend_195_1,rend_195_2,rend_195_3
@@ -40080,112 +36732,24 @@ rend_197_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_197_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0601AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_185
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_233
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1901BA ; BUF_17_025
-	call render_panel
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_184
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_183
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_197_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 rend_197_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_177
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1C01BD ; BUF_17_028
-	call render_panel
-	ld hl,0x1E0174 ; BUF_14_032
-	call render_panel
-	ld hl,0x1F020A ; BUF_59_032
-	call render_panel
-	ld hl,0x200174 ; BUF_14_032
-	call render_panel
-	ld ix,cell_178
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_211
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_179
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_196
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_198: dl rend_198_0,rend_198_1,rend_198_2,rend_198_3
@@ -40558,133 +37122,24 @@ rend_202_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_202_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0B01B2 ; BUF_17_011
-	call render_panel
-	ld hl,0x0E01CE ; BUF_57_014
-	call render_panel
-	ld ix,cell_190
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_222
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1601D1 ; BUF_57_020
-	call render_panel
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_189
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_237
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2301C0 ; BUF_17_035
-	call render_panel
-	ld ix,cell_188
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_202_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_202_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0301C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld hl,0x0E01B5 ; BUF_17_014
-	call render_panel
-	ld ix,cell_230
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_182
-	ld a,0x15
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_231
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x21
-	call render_sprite
-	ld hl,0x2601C3 ; BUF_17_038
-	call render_panel
-	ld ix,cell_216
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_203: dl rend_203_0,rend_203_1,rend_203_2,rend_203_3
@@ -41046,84 +37501,24 @@ rend_207_0:
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_207_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_207_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_207_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0201AF ; BUF_17_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_235
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_187
-	ld a,0x15
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C01BD ; BUF_17_028
-	call render_panel
-	ld ix,cell_236
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_221
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_208: dl rend_208_0,rend_208_1,rend_208_2,rend_208_3
@@ -41132,39 +37527,24 @@ rend_208_0:
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_208_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x28020F ; BUF_59_040
-	call render_panel
-	ld hl,0x2A017A ; BUF_14_042
-	call render_panel
-	ld hl,0x2B017B ; BUF_14_043
-	call render_panel
-	ld ix,cell_209
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_208_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_208_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_209: dl rend_209_0,rend_209_1,rend_209_2,rend_209_3
@@ -41207,59 +37587,24 @@ rend_210_0:
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_210_1:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x1E01BF ; BUF_17_032
-	call render_panel
-	ld hl,0x1F0110 ; BUF_10_032
-	call render_panel
-	ld hl,0x2001D8 ; BUF_57_032
-	call render_panel
-	ld hl,0x210110 ; BUF_10_032
-	call render_panel
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_196
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_212
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_228
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_210_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_210_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2801F6 ; BUF_58_040
-	call render_panel
-	ld hl,0x2A017A ; BUF_14_042
-	call render_panel
-	ld hl,0x2B017B ; BUF_14_043
-	call render_panel
-	ld ix,cell_209
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_211: dl rend_211_0,rend_211_1,rend_211_2,rend_211_3
@@ -41398,109 +37743,24 @@ rend_213_0:
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_213_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0301C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_185
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_233
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1801B9 ; BUF_17_024
-	call render_panel
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_184
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_199
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_213_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_213_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld hl,0x1D01BE ; BUF_17_029
-	call render_panel
-	ld hl,0x1F0174 ; BUF_14_032
-	call render_panel
-	ld hl,0x20020A ; BUF_59_032
-	call render_panel
-	ld hl,0x210174 ; BUF_14_032
-	call render_panel
-	ld ix,cell_178
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_227
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_195
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_212
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_214: dl rend_214_0,rend_214_1,rend_214_2,rend_214_3
@@ -41873,133 +38133,24 @@ rend_218_0:
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 rend_218_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A01B1 ; BUF_17_010
-	call render_panel
-	ld hl,0x0D01CD ; BUF_57_013
-	call render_panel
-	ld ix,cell_190
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_222
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1501D1 ; BUF_57_020
-	call render_panel
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_189
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_237
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_204
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_218_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_218_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0601AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld hl,0x0F01B6 ; BUF_17_015
-	call render_panel
-	ld ix,cell_230
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_182
-	ld a,0x16
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_231
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_232
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_219: dl rend_219_0,rend_219_1,rend_219_2,rend_219_3
@@ -42359,74 +38510,24 @@ rend_223_0:
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_223_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C01F9 ; BUF_58_044
-	call render_panel
 	jp render_scene_return
 rend_223_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_223_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0301AF ; BUF_17_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_235
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_219
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_203
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_187
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1D01BE ; BUF_17_029
-	call render_panel
-	ld ix,cell_220
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A01DE ; BUF_57_042
-	call render_panel
-	ld ix,cell_222
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_224: dl rend_224_0,rend_224_1,rend_224_2,rend_224_3
@@ -42435,32 +38536,24 @@ rend_224_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C01F9 ; BUF_58_044
-	call render_panel
 	jp render_scene_return
 rend_224_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_224_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_224_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_225: dl rend_225_0,rend_225_1,rend_225_2,rend_225_3
@@ -42469,39 +38562,24 @@ rend_225_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x280179 ; BUF_14_040
-	call render_panel
-	ld hl,0x2A01F7 ; BUF_58_042
-	call render_panel
-	ld hl,0x2B0211 ; BUF_59_043
-	call render_panel
-	ld ix,cell_209
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_225_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_225_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_225_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 
 rend_226: dl rend_226_0,rend_226_1,rend_226_2,rend_226_3
@@ -42510,49 +38588,24 @@ rend_226_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0212 ; BUF_59_044
-	call render_panel
 	jp render_scene_return
 rend_226_1:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x1E0110 ; BUF_10_032
-	call render_panel
-	ld hl,0x1F01D8 ; BUF_57_032
-	call render_panel
-	ld hl,0x200110 ; BUF_10_032
-	call render_panel
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_212
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_228
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_227
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_226_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_226_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 
 rend_227: dl rend_227_0,rend_227_1,rend_227_2,rend_227_3
@@ -42697,95 +38750,24 @@ rend_229_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 rend_229_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x010100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0201C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_185
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_233
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_200
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_215
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_230
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_229_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_229_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x200174 ; BUF_14_032
-	call render_panel
-	ld hl,0x21020A ; BUF_59_032
-	call render_panel
-	ld hl,0x220174 ; BUF_14_032
-	call render_panel
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_227
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_211
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_228
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_230: dl rend_230_0,rend_230_1,rend_230_2,rend_230_3
@@ -43170,119 +39152,24 @@ rend_234_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_234_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x010100 ; BUF_10_004
-	call render_panel
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0901B0 ; BUF_17_009
-	call render_panel
-	ld ix,cell_190
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_222
-	ld a,0x13
-	call render_sprite
-	ld hl,0x1401D1 ; BUF_57_020
-	call render_panel
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_205
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_237
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_220
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_235
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_234_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_234_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501C8 ; BUF_57_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0701AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld hl,0x1001B7 ; BUF_17_016
-	call render_panel
-	ld ix,cell_230
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_214
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_198
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_182
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_231
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_232
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_233
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 
 rend_235: dl rend_235_0,rend_235_1,rend_235_2,rend_235_3
@@ -43650,32 +39537,24 @@ rend_239_0:
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_239_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_239_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_239_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 
 rend_240: dl rend_240_0,rend_240_1,rend_240_2,rend_240_3
@@ -43684,83 +39563,24 @@ rend_240_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_240_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_240_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_068
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x04
-	call render_sprite
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_051
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_048
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_034
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_032
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_017
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_016
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_000
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_240_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_241: dl rend_241_0,rend_241_1,rend_241_2,rend_241_3
@@ -43769,93 +39589,24 @@ rend_241_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_241_1:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_241_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_069
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x05
-	call render_sprite
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_052
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_048
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_035
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_032
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_018
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_017
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_016
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_001
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_241_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_242: dl rend_242_0,rend_242_1,rend_242_2,rend_242_3
@@ -43864,100 +39615,24 @@ rend_242_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C017C ; BUF_14_044
-	call render_panel
 	jp render_scene_return
 rend_242_1:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_242_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_070
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x06
-	call render_sprite
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_053
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_048
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_036
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_032
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_017
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_002
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_242_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_243: dl rend_243_0,rend_243_1,rend_243_2,rend_243_3
@@ -43966,141 +39641,24 @@ rend_243_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0301AF ; BUF_17_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0E01B5 ; BUF_17_014
-	call render_panel
-	ld ix,cell_179
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_180
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1A0170 ; BUF_14_026
-	call render_panel
-	ld hl,0x1C010E ; BUF_10_028
-	call render_panel
-	ld ix,cell_195
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_196
-	ld a,0x21
-	call render_sprite
-	ld hl,0x24020C ; BUF_59_036
-	call render_panel
-	ld hl,0x2601DC ; BUF_57_038
-	call render_panel
-	ld ix,cell_211
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_212
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A017A ; BUF_14_042
-	call render_panel
-	ld ix,cell_227
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_243_1:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_243_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_071
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x07
-	call render_sprite
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_054
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_048
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_037
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_033
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_018
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_003
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_243_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_244: dl rend_244_0,rend_244_1,rend_244_2,rend_244_3
@@ -44109,142 +39667,24 @@ rend_244_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0201AF ; BUF_17_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0D01B4 ; BUF_17_013
-	call render_panel
-	ld ix,cell_179
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_180
-	ld a,0x14
-	call render_sprite
-	ld hl,0x19016F ; BUF_14_025
-	call render_panel
-	ld hl,0x1B010D ; BUF_10_027
-	call render_panel
-	ld ix,cell_195
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_196
-	ld a,0x20
-	call render_sprite
-	ld hl,0x23020B ; BUF_59_035
-	call render_panel
-	ld hl,0x2501DB ; BUF_57_037
-	call render_panel
-	ld ix,cell_211
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_212
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B0117 ; BUF_10_043
-	call render_panel
-	ld ix,cell_228
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_244_1:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_244_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_072
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_064
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_049
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_038
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_037
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_034
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_021
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_019
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_004
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_244_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_245: dl rend_245_0,rend_245_1,rend_245_2,rend_245_3
@@ -44253,105 +39693,24 @@ rend_245_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_245_1:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_245_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_073
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_065
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_050
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_039
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_038
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_037
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_035
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_022
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_021
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_020
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_005
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_245_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_246: dl rend_246_0,rend_246_1,rend_246_2,rend_246_3
@@ -44360,151 +39719,24 @@ rend_246_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0601AF ; BUF_17_004
-	call render_panel
-	ld hl,0x070100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0C01B3 ; BUF_17_012
-	call render_panel
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_182
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_185
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_198
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2401DA ; BUF_57_036
-	call render_panel
-	ld ix,cell_214
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_230
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_246_1:
 	ld bc,0x00
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_246_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_074
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_066
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_051
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_040
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_039
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_038
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_037
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_036
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_023
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_022
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_021
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_006
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_246_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_247: dl rend_247_0,rend_247_1,rend_247_2,rend_247_3
@@ -44513,157 +39745,24 @@ rend_247_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0301AF ; BUF_17_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0B01B2 ; BUF_17_011
-	call render_panel
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_182
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_185
-	ld a,0x16
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld hl,0x1D01D7 ; BUF_57_029
-	call render_panel
-	ld ix,cell_198
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x22
-	call render_sprite
-	ld hl,0x2301D9 ; BUF_57_035
-	call render_panel
-	ld ix,cell_214
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_215
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_231
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_247_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_247_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_075
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_067
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_052
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_041
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_040
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_039
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_038
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_037
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_024
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_023
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_022
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_007
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_247_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_248: dl rend_248_0,rend_248_1,rend_248_2,rend_248_3
@@ -44672,157 +39771,24 @@ rend_248_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0201AF ; BUF_17_004
-	call render_panel
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0A01B1 ; BUF_17_010
-	call render_panel
-	ld hl,0x0E0106 ; BUF_10_014
-	call render_panel
-	ld ix,cell_182
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_185
-	ld a,0x15
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld hl,0x1C01D6 ; BUF_57_028
-	call render_panel
-	ld ix,cell_198
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_199
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x21
-	call render_sprite
-	ld hl,0x260114 ; BUF_10_038
-	call render_panel
-	ld ix,cell_215
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_216
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_232
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_248_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_248_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_076
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_068
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_053
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_041
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_040
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_039
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_038
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_025
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_024
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_023
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_008
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_248_3:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_249: dl rend_249_0,rend_249_1,rend_249_2,rend_249_3
@@ -44831,151 +39797,24 @@ rend_249_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x0101AF ; BUF_17_004
-	call render_panel
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0301AF ; BUF_17_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0901B0 ; BUF_17_009
-	call render_panel
-	ld hl,0x0D0105 ; BUF_10_013
-	call render_panel
-	ld ix,cell_182
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_183
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_184
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_185
-	ld a,0x14
-	call render_sprite
-	ld hl,0x1B01D5 ; BUF_57_027
-	call render_panel
-	ld ix,cell_199
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_200
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_201
-	ld a,0x20
-	call render_sprite
-	ld hl,0x250113 ; BUF_10_037
-	call render_panel
-	ld ix,cell_216
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_217
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01C6 ; BUF_17_043
-	call render_panel
-	ld ix,cell_233
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_249_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_249_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_077
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_069
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_054
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_041
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_040
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_039
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_025
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_024
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_009
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_249_3:
 	ld bc,0x00
 	ld de,0x44
 	ld hl,BUF_DW_7
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_250: dl rend_250_0,rend_250_1,rend_250_2,rend_250_3
@@ -44984,105 +39823,24 @@ rend_250_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C01C7 ; BUF_17_044
-	call render_panel
 	jp render_scene_return
 rend_250_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_250_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_078
-	ld a,0x00
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_070
-	ld a,0x08
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_055
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_041
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_040
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_025
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_010
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_250_3:
 	ld bc,0x00
 	ld de,0x47
 	ld hl,BUF_DW_8
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_251: dl rend_251_0,rend_251_1,rend_251_2,rend_251_3
@@ -45091,150 +39849,24 @@ rend_251_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x060100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0701AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld hl,0x100108 ; BUF_10_016
-	call render_panel
-	ld ix,cell_187
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_190
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A01D4 ; BUF_57_026
-	call render_panel
-	ld ix,cell_203
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_219
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A01C5 ; BUF_17_042
-	call render_panel
-	ld ix,cell_235
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_251_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_251_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_078
-	ld a,0x01
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_071
-	ld a,0x08
-	call render_sprite
-	ld hl,0x090101 ; BUF_10_009
-	call render_panel
-	ld ix,cell_062
-	ld a,0x11
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_056
-	ld a,0x17
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_041
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_026
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_011
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_251_3:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_9
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_252: dl rend_252_0,rend_252_1,rend_252_2,rend_252_3
@@ -45243,152 +39875,24 @@ rend_252_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x030100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0401AF ; BUF_17_004
-	call render_panel
-	ld hl,0x050100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0601AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld hl,0x0F0107 ; BUF_10_015
-	call render_panel
-	ld ix,cell_187
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_190
-	ld a,0x16
-	call render_sprite
-	ld hl,0x1901D3 ; BUF_57_025
-	call render_panel
-	ld hl,0x1D010F ; BUF_10_029
-	call render_panel
-	ld ix,cell_203
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_206
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_219
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_236
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_252_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_252_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_078
-	ld a,0x02
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_072
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_062
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_057
-	ld a,0x17
-	call render_sprite
-	ld hl,0x18010A ; BUF_10_024
-	call render_panel
-	ld ix,cell_046
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_042
-	ld a,0x22
-	call render_sprite
-	ld ix,cell_029
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_027
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_012
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_252_3:
 	ld bc,0x00
 	ld de,0x48
 	ld hl,BUF_DW_10
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_253: dl rend_253_0,rend_253_1,rend_253_2,rend_253_3
@@ -45397,135 +39901,24 @@ rend_253_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x020100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0301AF ; BUF_17_004
-	call render_panel
-	ld hl,0x040100 ; BUF_10_004
-	call render_panel
-	ld hl,0x0501AF ; BUF_17_004
-	call render_panel
-	ld hl,0x0A0102 ; BUF_10_010
-	call render_panel
-	ld ix,cell_187
-	ld a,0x12
-	call render_sprite
-	ld ix,cell_188
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_189
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_190
-	ld a,0x15
-	call render_sprite
-	ld hl,0x1801D2 ; BUF_57_024
-	call render_panel
-	ld ix,cell_203
-	ld a,0x1E
-	call render_sprite
-	ld ix,cell_204
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_205
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_220
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_221
-	ld a,0x28
-	call render_sprite
-	ld hl,0x2B01DF ; BUF_57_043
-	call render_panel
-	ld ix,cell_237
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_253_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_253_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_078
-	ld a,0x03
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_073
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0B0103 ; BUF_10_011
-	call render_panel
-	ld ix,cell_062
-	ld a,0x13
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_058
-	ld a,0x17
-	call render_sprite
-	ld hl,0x19010B ; BUF_10_025
-	call render_panel
-	ld ix,cell_046
-	ld a,0x1F
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_043
-	ld a,0x22
-	call render_sprite
-	ld hl,0x230111 ; BUF_10_035
-	call render_panel
-	ld ix,cell_030
-	ld a,0x27
-	call render_sprite
-	ld ix,cell_029
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_028
-	ld a,0x29
-	call render_sprite
-	ld ix,cell_013
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_253_3:
 	ld bc,0x00
 	ld de,0x49
 	ld hl,BUF_DW_11
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_254: dl rend_254_0,rend_254_1,rend_254_2,rend_254_3
@@ -45534,83 +39927,24 @@ rend_254_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C01E0 ; BUF_57_044
-	call render_panel
 	jp render_scene_return
 rend_254_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_254_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld ix,cell_078
-	ld a,0x04
-	call render_sprite
-	ld ix,cell_077
-	ld a,0x05
-	call render_sprite
-	ld ix,cell_076
-	ld a,0x06
-	call render_sprite
-	ld ix,cell_075
-	ld a,0x07
-	call render_sprite
-	ld ix,cell_074
-	ld a,0x08
-	call render_sprite
-	ld hl,0x0C0104 ; BUF_10_012
-	call render_panel
-	ld ix,cell_062
-	ld a,0x14
-	call render_sprite
-	ld ix,cell_061
-	ld a,0x15
-	call render_sprite
-	ld ix,cell_060
-	ld a,0x16
-	call render_sprite
-	ld ix,cell_059
-	ld a,0x17
-	call render_sprite
-	ld hl,0x1A010C ; BUF_10_026
-	call render_panel
-	ld ix,cell_046
-	ld a,0x20
-	call render_sprite
-	ld ix,cell_045
-	ld a,0x21
-	call render_sprite
-	ld ix,cell_044
-	ld a,0x22
-	call render_sprite
-	ld hl,0x240112 ; BUF_10_036
-	call render_panel
-	ld ix,cell_030
-	ld a,0x28
-	call render_sprite
-	ld ix,cell_029
-	ld a,0x29
-	call render_sprite
-	ld hl,0x2A0116 ; BUF_10_042
-	call render_panel
-	ld ix,cell_014
-	ld a,0x2C
-	call render_sprite
 	jp render_scene_return
 rend_254_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_12
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 
 rend_255: dl rend_255_0,rend_255_1,rend_255_2,rend_255_3
@@ -45619,30 +39953,22 @@ rend_255_0:
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_255_1:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_255_2:
 	ld bc,0x00
 	ld de,0x41
 	ld hl,BUF_DW_6
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return
 rend_255_3:
 	ld bc,0x00
 	ld de,0x4A
 	ld hl,BUF_DW_13
 	call render_background
-	ld hl,0x2C0118 ; BUF_10_044
-	call render_panel
 	jp render_scene_return

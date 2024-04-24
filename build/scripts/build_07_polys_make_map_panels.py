@@ -88,7 +88,7 @@ def make_qry_07_map_orientations(db_path, floor_num):
                         UNION ALL
                         SELECT 3
         ) AS o
-        WHERE m.floor_num = {floor_num}
+        -- WHERE m.floor_num = {floor_num}
     """)
     conn.commit()
     conn.close()
@@ -103,7 +103,7 @@ def make_qry_07_map_polys(db_path, floor_num):
         SELECT t1.*, t2.poly_id, t2.cube_x, t2.cube_y, t2.plot_x, t2.plot_y, t2.dim_x, t2.dim_y, t2.r, t2.g, t2.b, t2.mask_filename, t2.face
         FROM tbl_06_maps AS t1
         CROSS JOIN qry_01_polys AS t2
-        WHERE t1.floor_num = {floor_num}
+        -- WHERE t1.floor_num = {floor_num}
     """)
     conn.commit()
     conn.close()
@@ -119,12 +119,12 @@ def make_qry_07_potential_panels(db_path, floor_num, map_dim_x, map_dim_y):
     FROM (
             SELECT mo.*
             FROM qry_07_map_orientations AS mo
-            WHERE mo.floor_num = {floor_num}
+            -- WHERE mo.floor_num = {floor_num}
     ) AS f 
     INNER JOIN (
             SELECT mp.*
             FROM qry_07_map_polys AS mp
-            WHERE mp.floor_num = {floor_num}
+            -- WHERE mp.floor_num = {floor_num}
     ) AS t 
     ON f.floor_num = t.floor_num AND f.room_id = t.room_id AND (
     (f.orientation = 0 and t.map_x = (f.map_x + t.cube_x + {map_dim_x}) % {map_dim_x} and t.map_y = (f.map_y - t.cube_y + {map_dim_y}) % {map_dim_y}) OR
@@ -185,8 +185,7 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
     cursor.execute(f"""
         SELECT floor_num, room_id, cell_id, orientation
         FROM qry_07_map_orientations
-        WHERE floor_num = {floor_num}
-        GROUP BY floor_num, room_id, cell_id, orientation
+        WHERE floor_num = {floor_num} AND is_door = 0 and is_wall = 0
         ORDER BY floor_num, room_id, cell_id, orientation""")
     unique_groups = cursor.fetchall()
 
