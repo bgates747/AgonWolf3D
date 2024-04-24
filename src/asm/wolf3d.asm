@@ -15,8 +15,8 @@
 ; END OF MOS INITIALIZATION
 
 ; include files can go here
-	; include "src/asm/images.asm"
-	include "src/asm/images_CMP.asm"
+	include "src/asm/images.asm"
+	; include "src/asm/images_CMP.asm"
 	include "src/asm/fonts_bmp.asm"
 	include "src/asm/maps.asm"
 	include "src/asm/render.asm"
@@ -81,7 +81,7 @@ init:
 	call load_ui_images
 
 ; set up the display
-    ld a,8 ;+ 128
+    ld a,8 + 128
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
