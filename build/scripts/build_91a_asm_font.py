@@ -375,7 +375,7 @@ def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buf
     scale_font_images(font_def_file, base_font_src_dir, font_rgba2_dir, scale_factor, scale_method, fr_bg, fr_fg, to_bg, to_fg)
 
     db_path = 'build/data/build.db'
-    font_inc_path = f"src/asm/font_{font_name}.inc"
+    font_inc_path = f"src/asm/font_{font_name}.asm"
     make_tbl_91a_font(db_path, font_def_file, font_name)
     make_space_char(db_path,font_name, font_rgba2_dir,space_width)
     make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name)

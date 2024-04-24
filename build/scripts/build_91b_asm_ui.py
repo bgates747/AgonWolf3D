@@ -121,7 +121,7 @@ def make_rgba2_files(db_path, src_png_dir, tgt_rgba2_dir):
 
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
-    ui_inc_path = "src/asm/ui_img.inc"
+    ui_inc_path = "src/asm/ui_img.asm"
     src_png_dir = "src/assets/images/ui"
     tgt_rgba2_dir = "tgt/ui"
     buffer_id = 0x2000

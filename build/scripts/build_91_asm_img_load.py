@@ -37,7 +37,7 @@ def get_dws_data(db_path):
     conn.close()
     return rows
 
-# This script is responsible for creating the panels.inc file which is used by the assembly code to load the panels into VDP buffers.
+# This script is responsible for creating the panels.asm file which is used by the assembly code to load the panels into VDP buffers.
 def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, next_buffer_id_counter, unique_rows):
     buffer_id_counter = 0
     with open(panels_inc_path, 'a') as asm_writer: # append to the file
@@ -117,6 +117,6 @@ def make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter):
 
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
-    panels_inc_path = "src/asm/images.inc"
+    panels_inc_path = "src/asm/images.asm"
     next_buffer_id_counter = 256
     make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)

@@ -159,13 +159,41 @@ tmp_draw_all_the_things:
     call vdu_plot_bmp
 	ret
 
+; load an uncompressed rgba2222 image file to a buffer
+; inputs: bc,de image width,height ; hl = bufferId ; ix = file size
 vdu_load_img:
+; back up image dimension parameters
+	push bc
+	push de
 ; load the image
 	call vdu_load_buffer_from_file
-	ret
+; now make it a bitmap
+	pop de
+	pop bc
+	ld a,1 ; the magic number for rgba2222
+	jp vdu_bmp_create ; will return to caller from there
+
+; load a compressed rgba2222 image file to a buffer
+; inputs: bc,de image width,height ; hl = bufferId ; ix = file size
+vdu_load_img_cmp:
+; back up image dimension parameters
+	push bc
+	push de
+; back up the buffer id
+	push hl
+; load the image
+	call vdu_load_buffer_from_file
+; decompress the buffer
+	pop hl ; bufferId
+	call vdu_decompress_buffer
+; now make it a bitmap
+	pop de ; image height
+	pop bc ; image width
+	ld a,1 ; the magic number for rgba2222
+	jp vdu_bmp_create ; will return to caller from there
 
 ; WARNING: this routine must be the last one loaded in the main program so that filedata doesn't stomp on any program code
-; inputs: bc = width, de = height, hl = bufferId, ix = size
+; inputs: hl = bufferId, ix = file size
 vdu_load_buffer_from_file:
 		; load bitmap ids
 		ld (@id0),hl
@@ -179,8 +207,6 @@ vdu_load_buffer_from_file:
 		xor a
 		ld (@id2+2),a
 	; read size from ix
-		push bc ; we need these later
-		push de
 		ld a,ixl
 		ld (@size),a
 		ld a,ixh
@@ -193,13 +219,10 @@ vdu_load_buffer_from_file:
 		ld hl,@start
 	; push the button
 		rst.lil $18
-	; now make it a bitmap
-		pop de
-		pop bc
-		ld a,1 ; the magic number for rgba2222
-		jp vdu_bmp_create ; will return to caller from there
-	; Clear buffer
-@start: db 23,0,0xA0
+	; back to caller
+		ret
+; vdp command string:
+@start: db 23,0,0xA0 ; Clear buffer
 @id0:	dw 0x0000 ; bufferId
 		db 2
 	; select buffer VDU 23, 27, &20, bufferId;

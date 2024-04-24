@@ -30,7 +30,7 @@ def do_blender(blender_script_path, blender_executable, blender_local_prefs_path
     print(' '.join(cmd))
     subprocess.run(cmd, env=env_vars)
 
-def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir):
+def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums):
     # build_00_delete_tgt_dir.py
     if do_00_delete_tgt_dir:
         # Check and delete the target directory if necessary
@@ -93,23 +93,15 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # build_90_asm_polys.py
     if do_90_asm_polys:
         from build_90_asm_polys import make_asm_polys, make_asm_polys_south, make_asm_plot_sprites
-        polys_inc_path = f"src/asm/polys.inc"
+        polys_inc_path = f"src/asm/polys.asm"
         make_asm_polys(db_path, polys_inc_path)
         make_asm_polys_south(db_path, polys_inc_path)
         make_asm_plot_sprites(db_path, polys_inc_path)
-
-# # build_91_asm_panels.py
-#     if do_91_asm_panels:
-#         from build_91_asm_panels import make_asm_panels, make_asm_sprites, make_asm_dws
-#         panels_inc_path = f"src/asm/panels.inc"
-#         last_buffer_id = make_asm_panels(db_path, panels_inc_path)
-#         last_buffer_id = make_asm_sprites(db_path, panels_inc_path, last_buffer_id)
-#         make_asm_dws(db_path, panels_inc_path, last_buffer_id)
-
+        
     # build_91_asm_img_load.py
     if do_91_asm_img_load:
         from build_91_asm_img_load import make_asm_images_inc
-        panels_inc_path = f"src/asm/images.inc"
+        panels_inc_path = f"src/asm/images.asm"
         next_buffer_id_counter = 256
         make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)
 
@@ -121,7 +113,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # build_91b_asm_ui.py
     if do_91b_asm_ui:
         from build_91b_asm_ui import make_tbl_91b_UI, make_rgba2_files, make_asm_ui
-        ui_inc_path = "src/asm/ui_img.inc"
+        ui_inc_path = "src/asm/ui_img.asm"
         src_png_dir = "src/assets/images/ui"
         tgt_cmp_rgba2_dir = "tgt/ui"
         buffer_id = 0x2000
@@ -129,17 +121,15 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
         make_asm_ui(db_path, ui_inc_path, buffer_id)
         
-# build_92_asm_ez80Asmlinker.py
-    if do_92_asm_ez80Asmlinker:
-        from build_92_asm_ez80asmLinker import do_assembly
-        # Set project directory to the directory from which this script is executed
-        # because build_92_asm_ez80Asmlinker.py needs to use absolute paths
-        project_base_dir = os.getcwd()
-        full_db_path = f'{project_base_dir}/build/data/build.db'
-        full_src_base_dir = f"{project_base_dir}/src/asm"
-        full_tgt_base_dir = f"{project_base_dir}/tgt"
-        full_panels_path = f"{project_base_dir}/src/asm/panels.inc"
-        do_assembly(project_base_dir, full_db_path, full_tgt_base_dir, full_src_base_dir, floor_nums, room_ids, full_panels_path, view_distance, map_dim_x, map_dim_y)
+# build_92_asm_make_map_render_routines.py
+    if do_92_asm_make_map_render_routines:
+        from build_92_asm_make_map_render_routines import asm_make_map_render_routines
+        panels_path = f'src/asm/panels.asm'
+        src_base_dir = f'src/asm'
+        tgt_base_dir = f'tgt'
+        view_distance = 5
+        map_dim_x, map_dim_y = 16, 16
+        asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance, map_dim_x, map_dim_y)
 
 
 if __name__ == "__main__":
@@ -153,8 +143,7 @@ if __name__ == "__main__":
     view_distance = 5 # This you can fiddle with. A full build is required to see the results, and it pukes at around 11.
 
     # Set which maps to build
-    floor_nums = list(range(1))  # This will create a list: [0]
-    room_ids = list(range(1))  # This will create a list: [0]
+    floor_nums = list(range(1))
 
 # By default don't run any scripts
     do_00_delete_tgt_dir = False
@@ -169,12 +158,11 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
     do_90_asm_polys = False
-    # do_91_asm_panels = False
     do_91_asm_img_load = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
-    do_92_asm_ez80Asmlinker = False
+    do_92_asm_make_map_render_routines = False
 
 # I find it easier to simply comment out the scripts I don't want to run
     do_00_delete_tgt_dir = True
@@ -186,13 +174,12 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_90_asm_polys = True
-    # do_91_asm_panels = True
     do_91_asm_img_load = True
     do_91a_asm_font = True
     do_91b_asm_ui = True
-    do_92_asm_ez80Asmlinker = True
+    do_92_asm_make_map_render_routines = True
 
-    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir)
+    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
 
     # # The Blender scripts for regular map development and deployment 
     # # have been deprecated and replaced with pure python scripts, 

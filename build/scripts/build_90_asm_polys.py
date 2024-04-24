@@ -93,7 +93,7 @@ def make_asm_plot_sprites(db_path, polys_inc_path):
 
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
-    polys_inc_path = "src/asm/polys.inc"
+    polys_inc_path = "src/asm/polys.asm"
     make_asm_polys(db_path, polys_inc_path)
     make_asm_polys_south(db_path, polys_inc_path)
     make_asm_plot_sprites(db_path, polys_inc_path)
