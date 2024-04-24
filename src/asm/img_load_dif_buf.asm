@@ -179,13 +179,15 @@ vdu_load_img_cmp:
 ; back up image dimension parameters
 	push bc
 	push de
-; back up the buffer id
+; back up the target decompressed buffer id
 	push hl
+; load hl with the temporary compressed buffer id
+    ld hl,0x7FFF
 ; load the image
 	call vdu_load_buffer_from_file
 ; decompress the buffer
 	pop hl ; bufferId
-	call vdu_decompress_buffer
+	call vdu_decompress_buffer_different
 ; now make it a bitmap
 	pop de ; image height
 	pop bc ; image width
