@@ -131,6 +131,12 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         map_dim_x, map_dim_y = 16, 16
         asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance, map_dim_x, map_dim_y)
 
+# build_91c_asm_map_masks.py
+    if do_91c_asm_map_masks:
+        from build_91c_asm_map_masks import asm_make_map_masks
+        tgt_dir = 'tgt'
+        asm_make_map_masks(db_path, floor_nums, tgt_dir)
+
 # build_93_asm_assemble.py
     if do_93_asm_assemble:
         from build_93_asm_assemble import do_assembly
@@ -167,6 +173,7 @@ if __name__ == "__main__":
     do_91_asm_img_load = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
+    do_91c_asm_map_masks = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
     do_92_asm_make_map_render_routines = False
     do_93_asm_assemble = False
@@ -174,16 +181,17 @@ if __name__ == "__main__":
 # I find it easier to simply comment out the scripts I don't want to run
     # do_00_delete_tgt_dir = True
     # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
-    # do_06_import_mapmaker_files = True
-    # do_07_map_panels = True
-    # do_90_asm_polys = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_90_asm_polys = True
     do_91_asm_img_load = True
     do_91a_asm_font = True
     do_91b_asm_ui = True
+    do_91c_asm_map_masks = True
     do_92_asm_make_map_render_routines = True
     do_93_asm_assemble = True
 

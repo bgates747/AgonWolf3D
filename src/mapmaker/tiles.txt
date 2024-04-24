@@ -47,8 +47,8 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 5	55		0										normal	
 5	56		0										normal	
 5	57	"REGULAR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
-5	58	"ELEVATOR SWITCH"	1	0	0	1	1	cube		100	center	center	elevator	
-5	59	"ELEVATOR DOOR"	1	1	1	0	1	cube		100	center	center	normal	
+5	58	"ELEVATOR SWITCH"	1	0	1	1	1	cube		100	center	center	elevator	
+5	59	"ELEVATOR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
 6	60		0										normal	
 6	61		0										normal	
 6	62		0										normal	

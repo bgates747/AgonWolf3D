@@ -25,7 +25,17 @@ def asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance
     buff_id_dict = {label: value for label, value in buff_ids}
 
     for floor_num in floor_nums:
-        for room_id in range(1):
+        for room_id in range(0,10):
+            cursor.execute(f"""
+                SELECT cell_id, map_x, map_y, obj_id, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, special
+                FROM tbl_06_maps
+                WHERE floor_num = {floor_num} AND room_id = {room_id}
+                ORDER BY cell_id""")
+            map_cells = cursor.fetchall()
+
+            if not map_cells:
+                continue
+
             map_tgt_path = f'src/asm/map{floor_num:02d}_{room_id}.asm'
 
             with open(map_tgt_path, 'w') as writer:
@@ -33,13 +43,6 @@ def asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance
                 writer.write('cells:\n')
                 writer.write('; cell label: (obj_id render_obj type/status mask), render routine address\n')
                 writer.write('; Type/status mask: 0x80 = door, 0x40 = wall, 0x20 = trigger, 0x10 = blocking\n\n')
-
-                cursor.execute(f"""
-                    SELECT cell_id, map_x, map_y, obj_id, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, special
-                    FROM tbl_06_maps
-                    WHERE floor_num = {floor_num} AND room_id = {room_id}
-                    ORDER BY cell_id""")
-                map_cells = cursor.fetchall()
 
                 for cell in map_cells:
                     cell_id = cell['cell_id']
