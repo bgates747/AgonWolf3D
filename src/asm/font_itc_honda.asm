@@ -189,7 +189,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda032
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4128
@@ -213,7 +213,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda046
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4142
@@ -225,7 +225,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda048
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4144
@@ -236,7 +236,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda049
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4145
@@ -247,7 +247,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda050
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4146
@@ -258,7 +258,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda051
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4147
@@ -269,7 +269,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda052
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4148
@@ -280,7 +280,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda053
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4149
@@ -291,7 +291,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda054
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4150
@@ -302,7 +302,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda055
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4151
@@ -313,7 +313,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda056
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4152
@@ -324,7 +324,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda057
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4153
@@ -342,7 +342,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda065
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4161
@@ -353,7 +353,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda066
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4162
@@ -364,7 +364,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda067
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4163
@@ -375,7 +375,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda068
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4164
@@ -386,7 +386,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda069
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4165
@@ -397,7 +397,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda070
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4166
@@ -408,7 +408,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda071
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4167
@@ -419,7 +419,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda072
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4168
@@ -430,7 +430,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda073
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4169
@@ -441,7 +441,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda074
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4170
@@ -452,7 +452,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda075
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4171
@@ -463,7 +463,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda076
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4172
@@ -474,7 +474,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda077
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4173
@@ -485,7 +485,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda078
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4174
@@ -496,7 +496,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda079
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4175
@@ -507,7 +507,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda080
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4176
@@ -518,7 +518,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda081
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4177
@@ -529,7 +529,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda082
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4178
@@ -540,7 +540,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda083
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4179
@@ -551,7 +551,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda084
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4180
@@ -562,7 +562,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda085
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4181
@@ -573,7 +573,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda086
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4182
@@ -584,7 +584,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda087
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4183
@@ -595,7 +595,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda088
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4184
@@ -606,7 +606,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda089
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4185
@@ -617,7 +617,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda090
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4186
@@ -634,7 +634,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda097
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4193
@@ -645,7 +645,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda098
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4194
@@ -656,7 +656,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda099
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4195
@@ -667,7 +667,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda100
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4196
@@ -678,7 +678,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda101
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4197
@@ -689,7 +689,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda102
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4198
@@ -700,7 +700,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda103
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4199
@@ -711,7 +711,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda104
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4200
@@ -722,7 +722,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda105
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4201
@@ -733,7 +733,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda106
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4202
@@ -744,7 +744,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda107
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4203
@@ -755,7 +755,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda108
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4204
@@ -766,7 +766,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda109
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4205
@@ -777,7 +777,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda110
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4206
@@ -788,7 +788,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda111
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4207
@@ -799,7 +799,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda112
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4208
@@ -810,7 +810,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda113
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4209
@@ -821,7 +821,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda114
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4210
@@ -832,7 +832,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda115
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4211
@@ -843,7 +843,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda116
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4212
@@ -854,7 +854,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda117
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4213
@@ -865,7 +865,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda118
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4214
@@ -876,7 +876,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda119
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4215
@@ -887,7 +887,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda120
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4216
@@ -898,7 +898,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda121
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4217
@@ -909,7 +909,7 @@ load_font_itc_honda:
 
 	ld hl,Fhonda122
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4218

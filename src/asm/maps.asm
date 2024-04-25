@@ -176,3 +176,17 @@ trans_dx_dy:
 	neg ; -x
 	ld d,a ; -x
 	ret
+
+; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
+; number of rooms
+floors:
+	db 0x02 ; floor 00
+
+; map room filename label
+rooms:
+	dl map_00_0
+	dl map_00_1
+
+; map data filenames
+map_00_0: db "maps/map_00_0.bin",0
+map_00_1: db "maps/map_00_1.bin",0

@@ -134,8 +134,8 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 # build_91c_asm_map_masks.py
     if do_91c_asm_map_masks:
         from build_91c_asm_map_masks import asm_make_map_masks
-        tgt_dir = 'tgt'
-        asm_make_map_masks(db_path, floor_nums, tgt_dir)
+        maps_tgt_dir = 'tgt/maps'
+        asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
 
 # build_93_asm_assemble.py
     if do_93_asm_assemble:
@@ -187,11 +187,11 @@ if __name__ == "__main__":
     # do_05_panels_rgba = True
     # do_06_import_mapmaker_files = True
     # do_07_map_panels = True
-    do_90_asm_polys = True
+    # do_90_asm_polys = True
     do_91_asm_img_load = True
     do_91a_asm_font = True
     do_91b_asm_ui = True
-    # do_91c_asm_map_masks = True
+    do_91c_asm_map_masks = True
     do_92_asm_make_map_render_routines = True
     do_93_asm_assemble = True
 

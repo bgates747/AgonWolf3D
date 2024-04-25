@@ -189,7 +189,7 @@ load_font_retro_computer:
 
 	ld hl,Frc032
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4384
@@ -200,7 +200,7 @@ load_font_retro_computer:
 
 	ld hl,Frc033
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4385
@@ -225,7 +225,7 @@ load_font_retro_computer:
 
 	ld hl,Frc048
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4400
@@ -236,7 +236,7 @@ load_font_retro_computer:
 
 	ld hl,Frc049
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4401
@@ -247,7 +247,7 @@ load_font_retro_computer:
 
 	ld hl,Frc050
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4402
@@ -258,7 +258,7 @@ load_font_retro_computer:
 
 	ld hl,Frc051
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4403
@@ -269,7 +269,7 @@ load_font_retro_computer:
 
 	ld hl,Frc052
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4404
@@ -280,7 +280,7 @@ load_font_retro_computer:
 
 	ld hl,Frc053
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4405
@@ -291,7 +291,7 @@ load_font_retro_computer:
 
 	ld hl,Frc054
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4406
@@ -302,7 +302,7 @@ load_font_retro_computer:
 
 	ld hl,Frc055
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4407
@@ -313,7 +313,7 @@ load_font_retro_computer:
 
 	ld hl,Frc056
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4408
@@ -324,7 +324,7 @@ load_font_retro_computer:
 
 	ld hl,Frc057
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4409
@@ -340,7 +340,7 @@ load_font_retro_computer:
 
 	ld hl,Frc063
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4415
@@ -352,7 +352,7 @@ load_font_retro_computer:
 
 	ld hl,Frc065
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4417
@@ -363,7 +363,7 @@ load_font_retro_computer:
 
 	ld hl,Frc066
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4418
@@ -374,7 +374,7 @@ load_font_retro_computer:
 
 	ld hl,Frc067
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4419
@@ -385,7 +385,7 @@ load_font_retro_computer:
 
 	ld hl,Frc068
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4420
@@ -396,7 +396,7 @@ load_font_retro_computer:
 
 	ld hl,Frc069
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4421
@@ -407,7 +407,7 @@ load_font_retro_computer:
 
 	ld hl,Frc070
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4422
@@ -418,7 +418,7 @@ load_font_retro_computer:
 
 	ld hl,Frc071
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4423
@@ -429,7 +429,7 @@ load_font_retro_computer:
 
 	ld hl,Frc072
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4424
@@ -440,7 +440,7 @@ load_font_retro_computer:
 
 	ld hl,Frc073
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4425
@@ -451,7 +451,7 @@ load_font_retro_computer:
 
 	ld hl,Frc074
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4426
@@ -462,7 +462,7 @@ load_font_retro_computer:
 
 	ld hl,Frc075
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4427
@@ -473,7 +473,7 @@ load_font_retro_computer:
 
 	ld hl,Frc076
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4428
@@ -484,7 +484,7 @@ load_font_retro_computer:
 
 	ld hl,Frc077
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4429
@@ -495,7 +495,7 @@ load_font_retro_computer:
 
 	ld hl,Frc078
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4430
@@ -506,7 +506,7 @@ load_font_retro_computer:
 
 	ld hl,Frc079
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4431
@@ -517,7 +517,7 @@ load_font_retro_computer:
 
 	ld hl,Frc080
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4432
@@ -528,7 +528,7 @@ load_font_retro_computer:
 
 	ld hl,Frc081
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4433
@@ -539,7 +539,7 @@ load_font_retro_computer:
 
 	ld hl,Frc082
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4434
@@ -550,7 +550,7 @@ load_font_retro_computer:
 
 	ld hl,Frc083
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4435
@@ -561,7 +561,7 @@ load_font_retro_computer:
 
 	ld hl,Frc084
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4436
@@ -572,7 +572,7 @@ load_font_retro_computer:
 
 	ld hl,Frc085
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4437
@@ -583,7 +583,7 @@ load_font_retro_computer:
 
 	ld hl,Frc086
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4438
@@ -594,7 +594,7 @@ load_font_retro_computer:
 
 	ld hl,Frc087
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4439
@@ -605,7 +605,7 @@ load_font_retro_computer:
 
 	ld hl,Frc088
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4440
@@ -616,7 +616,7 @@ load_font_retro_computer:
 
 	ld hl,Frc089
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4441
@@ -627,7 +627,7 @@ load_font_retro_computer:
 
 	ld hl,Frc090
 	ld de,filedata
-	ld bc,102400
+	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_4442

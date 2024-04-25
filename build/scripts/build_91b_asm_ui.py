@@ -41,7 +41,7 @@ def make_asm_ui(db_path, ui_inc_path, last_buffer_id):
                 asm_writer.write(f"\n")
                 asm_writer.write(f"\tld hl,F_UI_{panel_base_filename}\n")
                 asm_writer.write(f"\tld de,filedata\n")
-                asm_writer.write(f"\tld bc,{320*320}\n") # some extra padding just in case
+                asm_writer.write(f"\tld bc,{65536}\n") # some extra padding just in case
                 asm_writer.write("\tld a,mos_load\n")
                 asm_writer.write("\tRST.LIL 08h\n")
                 asm_writer.write(f"\tld hl,{constName}\n")
