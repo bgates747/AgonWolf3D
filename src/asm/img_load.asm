@@ -235,3 +235,4 @@ vdu_load_buffer_from_file:
 		; CAUTION: the size argument is a 16-bit value, so the max number of bytes we can load in one chunk is 64KiB!! This corresponds to an rgba2 image size of 320x204.
 @size:	dw 0x0000 ;width * height ; length of data in bytes
 filedata: ; no need to allocate space here if this is the final include of the application
+	ds 65536 ; placeholder for file data	

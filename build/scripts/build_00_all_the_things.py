@@ -92,11 +92,9 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
 # build_90_asm_polys.py
     if do_90_asm_polys:
-        from build_90_asm_polys import make_asm_polys, make_asm_polys_south, make_asm_plot_sprites
+        from build_90_asm_polys import do_all_the_polys
         polys_inc_path = f"src/asm/polys.asm"
-        make_asm_polys(db_path, polys_inc_path)
-        make_asm_polys_south(db_path, polys_inc_path)
-        make_asm_plot_sprites(db_path, polys_inc_path)
+        do_all_the_polys(db_path, polys_inc_path)
         
     # build_91_asm_img_load.py
     if do_91_asm_img_load:
@@ -188,11 +186,11 @@ if __name__ == "__main__":
     # do_06_import_mapmaker_files = True
     # do_07_map_panels = True
     # do_90_asm_polys = True
-    do_91_asm_img_load = True
-    do_91a_asm_font = True
-    do_91b_asm_ui = True
-    do_91c_asm_map_masks = True
-    do_92_asm_make_map_render_routines = True
+    # do_91_asm_img_load = True
+    # do_91a_asm_font = True
+    # do_91b_asm_ui = True
+    # do_91c_asm_map_masks = True
+    # do_92_asm_make_map_render_routines = True
     do_93_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)

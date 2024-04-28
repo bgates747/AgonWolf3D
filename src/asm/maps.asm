@@ -1,16 +1,14 @@
 ; ############# MAP CONSTANTS #############
-; ; temporary hardcoded until we implement 
-; ; dynamically from tiles defs
-; null_cell: equ 19 ; 0x13
-; blank_cell: equ 29 ; 0x1D
-; door_cell: equ 57 ; 0x39
-; elevator_cell: equ 59 ; 0x3B
+; map tables addresses
+cell_status: 		equ 0x080000 ; base of on-chip high speed SRAM
+cell_views: 		equ 0x080400 ; cell_status + 256*4
 
 ; map type/status flags
-cell_is_door:     EQU %10000000  ; Bit 7: door flag
-cell_is_wall:     EQU %01000000  ; Bit 6: wall flag
-cell_is_trigger:  EQU %00100000  ; Bit 5: trigger flag
-cell_is_blocking: EQU %00010000  ; Bit 4: blocking flag
+cell_is_door:     	EQU %10000000  ; Bit 7: door flag
+cell_is_wall:     	EQU %01000000  ; Bit 6: wall flag
+cell_is_trigger:  	EQU %00100000  ; Bit 5: trigger flag
+cell_is_blocking: 	EQU %00010000  ; Bit 4: blocking flag
+cell_is_start:		EQU %00001000  ; Bit 3: start flag
 
 ; HOW THE MAP TABLE IS LAID OUT
 ; (obj_id render_obj type/status mask), render routine address
@@ -18,15 +16,16 @@ cell_is_blocking: EQU %00010000  ; Bit 4: blocking flag
 ;
 ; map table field offset constants
 ; (mind the little-endianess)
-map_type_status: equ 0
-map_render_obj: equ 1
-map_obj_id: equ 2
-map_render: equ 3
-map_record_size: equ 6
+map_type_status: 	equ 0
+map_img_idx: 		equ 1
+map_obj_id: 		equ 2
+; map_render: 		equ 3 ; deprecated
+map_sprite_id: 		equ 3
+map_record_size: 	equ 4 ; bytes per cell_status record
 
 ; gets cell info from a directional displacement from a given map location
 ; inputs: ; d = distance ; e = direction, b,c = y,x
-; returns: ix = pointer to cell lookup address; a = obj_id; hl = address of cell base render routine
+; returns: ix = pointer to cell_status lut; a = obj_id; hl = address of cell base render routine
 ; calls: get_dx_dy, get_cell_from_coords
 get_neighbor:
 ; modulo 4 on orientation
@@ -45,7 +44,7 @@ get_neighbor:
 
 ; gets cell info from a given x,y map coordinate
 ; inputs: ; d,e = map_y,map_x
-; returns: ix = pointer to cell lookup address; a = obj_id
+; returns: ix = pointer to cell_status lut; a = obj_id, bc = cell_id
 get_cell_from_coords:
 ; modulo 16 on input coords
 	ld a,e
@@ -61,15 +60,15 @@ get_cell_from_coords:
 	ld hl,0 ; make sure uhl is zero
 	ld l,e ; x
 	add hl,bc ; hl = cell_id of x,y
-	push hl ; now account for 6 bytes per record
-	add hl,hl ; hl * 2
-	pop bc
-	add hl,bc ; hl * 3
-	add hl,hl ; hl * 6
-	ex de,hl
-	ld ix,cells ; base address of lookup table
-	add ix,de ; ix = address of cell record
+	push hl ; so we can return cell_id
+	ld c,l ; c = cell_id
+; get address of cell record in cell_status table
+	ld b,map_record_size ; b = bytes per record
+	mlt bc ; bc = offset to cell record
+	ld ix,cell_status ; base address of lookup table
+	add ix,bc ; ix = address of cell record
 	ld a,(ix+map_obj_id) ; a = obj_id
+	pop bc ; bc = cell_id
 	ret
 
 ; gets dx,dy from orientation and distance
@@ -177,16 +176,54 @@ trans_dx_dy:
 	ld d,a ; -x
 	ret
 
-; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
-; number of rooms
-floors:
-	db 0x02 ; floor 00
+; initialize map variables and load map file
+; inputs: none
+map_init:
+	xor a
+	ld (cur_floor),a
+	ld (cur_room),a
+; load room file
+	call map_load
+; set player initial position
+	ret
 
-; map room filename label
-rooms:
-	dl map_00_0
-	dl map_00_1
+; load map file
+; inputs: cur_floor, cur_room set
+map_load:
+	ld hl,floors ; address of floors lut
+	ld a,(cur_floor)
+	ld e,a
+	ld d,3 ; three bytes per lookup record
+	mlt de ; de = offset to floor lut entry
+	add hl,de ; hl = address of floor lut entry
+	ld hl,(hl) ; hl = base address of rooms for given floor
+	ld a,(cur_room)
+	ld e,a
+	ld d,3 ; three bytes per lookup record
+	mlt de ; de = offset to room lut entry
+	add hl,de ; hl = address of room lut entry
+	ld hl,(hl) ; hl = address of room file name
+	ld (cur_filename),hl ; DEBUG
+	ld de,cell_status ; address to load map data
+	ld bc,8*1024 ; size of map data in bytes
+	ld a,mos_load
+	RST.LIL 08h
+; DEBUG: print filename
+	ld hl,(cur_filename)
+	call printString
+	ret
+
+; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
+
+floors:
+	dl floor_00
+
+; map room filename labels
+room_files:
+floor_00:
+	dl room_00_0
+	dl room_00_1
 
 ; map data filenames
-map_00_0: db "maps/map_00_0.bin",0
-map_00_1: db "maps/map_00_1.bin",0
+room_00_0: db "maps/map_00_0.bin",0
+room_00_1: db "maps/map_00_1.bin",0

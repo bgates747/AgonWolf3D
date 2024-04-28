@@ -1,3 +1,17 @@
+; #### RENDERING SCRATCH VARIABLES ####
+; first three bytes of cell_status record in little-endian order
+to_cell_status: 
+to_map_type_status: ds 1
+to_img_idx: ds 1
+to_obj_id: ds 1
+; fourth byte of cell_status record
+to_sprite_id: ds 1
+
+to_poly_id: ds 1
+to_buffer_id: ds 3
+
+cur_cell_views: ds 3
+
 ; render background as a prelude to rendering panels and sprites
 ; hl is the buffer id, bc and de are plot_x and plot_y
 render_background:
@@ -30,17 +44,55 @@ render_background:
     call vdu_plot_bmp
     ret
 
+; render a 3D sprite
+; inputs: to_sprite_id set, to_poly_id set, to_cell_status fields set
+; (ix should also be pointed to cell_status record but we don't depend on it for the time being)
+render_sprite:
+    ret ; TODO: SPRITE TABLE IS NOT IMPLEMENTED YET AND THIS WON'T WORK UNTIL IT IS
+; look up sprite_obj in sprite table
+    ld iy,spite_table_base
+    ld a,(to_sprite_id)
+    ld b,a ; sprite id
+    ld c,table_bytes_per_record
+    mlt bc
+    add iy,bc ; hl points to sprite record
+    ld a,(iy+sprite_obj) ; a is sprite_obj
+; get sprite poly lookup address
+    ld iy,sprites_lookup
+    ld b,a
+    ld c,num_polys
+    mlt bc
+    add iy,bc ; iy points to base of sprite polys definitions
+; look up south_poly from poly_id
+    ld hl,polys_south_lookup
+    ld bc,0 ; make sure bcu is zero
+    ld a,(to_poly_id) ; poly id
+    ld c,a
+    add hl,bc ; hl points to south poly id
+    ld a,(hl) ; a is south poly id
+    ld c,a
+    ld b,9 ; nine byte per record in lut
+    mlt bc
+    add iy,bc ; iy points to sprite poly defs
+; select buffer
+    ld hl,(iy+6)
+    call vdu_buff_select
+; plot sprite 
+    ld bc,(iy+0) ; plot_x
+    ld de,(iy+3) ; plot_y
+    call vdu_plot_bmp
+    ret
+
 ; render a 3D panel
-; inputs: uhl is to_poly_id, hl is the buffer_id
+; inputs: to_poly_id set, to_buffer_id set
 render_panel:
-; write hl to scratch
-    ld (@hlu),hl
 ; make the bitmap buffer active
+    ld hl,(to_buffer_id)
     call vdu_buff_select
 ; get the coordinates of the panel
-    ld ix,polys_lookup ; pointer to polys lookup table
-; put hlu in a
-    ld a,(@hlu+2)
+    ld ix,polys_lookup_plot ; pointer to polys lookup table
+; get the panel's poly_id
+    ld a,(to_poly_id)
 ; multiply a by 6 to get the offset
     ld b,a
     ld c,6
@@ -53,63 +105,122 @@ render_panel:
 ; plot that mofo and go home
     call vdu_plot_bmp
     ret
-@hlu: ds 3
 
-; render a 3D sprite
-; inputs: a is the poly_id of the cell to render, ix pointed to cell lookup
-render_sprite:
+; render the object in a given cell and poly_id
+; inputs: to_poly_id set, d,e are the cell coords
+render_cell:
+; get the cell to render's cell_status data and store it in scratch
+    call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
+    ld hl,(ix) ; l = to_map_type_status, h = to_img_idx, hlu = to_obj_id
+    ld (to_cell_status),hl
+; get cell's render_type
+    ld a,l ; map_type_status
+    and 2 ; mask off everything but lowest two bits
+    cp 1 ; intentionally out of order for efficiency
+    jr z,@floor
+    cp 0
+    jr z,@cube
+    cp 3
+    jr z,@sprite
+    jr @nodraw
+@sprite:
+; get sprite_id from cell_status lut
+    ld a,(ix+map_sprite_id)
+    ld (to_sprite_id),a
+    cp 255 ; value if no sprite present
+    jr z,@nodraw
+    jp render_sprite
+@floor:
+    jr @nodraw ; placeholder for future implementation TODO
+@cube:
+; get map_img_idx from cell_status lut
+    ld a,(to_img_idx)
+    cp 255 ; value for cell with nothing to draw
+    jr z,@nodraw
+; prepare render_panel ; inputs: to_poly_id set, to_buffer_id set
+    ld hl,cube_img_idx_lookup
+    ld b,a
+    ld c,3 ; three bytes per record
+    mlt bc
+    add hl,bc ; hl points to the cube's base buffer id
+    ld hl,(hl) ; hl is the base buffer id
+    ex de,hl ; stash the base buffer id in de for later
+    ld hl,cube_poly_idx_lookup
+    ld a,(to_poly_id)
     ld bc,0 ; make sure bcu is zero
-    ld c,a ; bc is poly_id
-; find the current map_render_obj of the target cell
-    ld a,(ix+map_render_obj)
-; if zero, nothing to draw
-    and a
-    jr nz,@not_zero
-    ret 
-@not_zero:
-; look up sprite_obj from render_obj
-    ld iy,render_obj_to_sprite_obj
-    ld e,a ; render_obj
-    ld d,3 ; three byte per record in lut
-    mlt de
-    add iy,de ; iy points to label
-    ld iy,(iy) ; iy has base address of sprite polys
-; look up south_poly from poly_id
-    ld hl,polys_south_lookup
-    add hl,bc ; hl points to south poly id
-    ld a,(hl) ; a is south poly id
-    ld e,a
-    ld d,9 ; nine byte per record in lut
-    mlt de
-    add iy,de ; iy points to sprite poly defs
-; select buffer
-    ld hl,(iy+6)
-    call vdu_buff_select
-; plot sprite 
-    ld bc,(iy+0) ; plot_x
-    ld de,(iy+3) ; plot_y
-    call vdu_plot_bmp
+    ld c,a
+    add hl,bc ; hl is the buffer id index address
+    ld a,(hl) ; a is the buffer id index value
+    ld hl,0 ; make sure hlu is zero
+    ld l,a ; hl is the buffer id index value
+    add hl,de ; hl is the buffer id
+    ld (to_buffer_id),hl
+    jp render_panel
+@nodraw:
     ret
 
 ; render a full 3d scene
 ; inputs: cur_x, cur_y, orientation set
 ; outputs: pretty pictures
-; destroys: a, hl, bc, de, ix, iy
+; destroys: everything
 render_scene:
+; clear the screen
+    call render_background
 ; get current map position and camera orientation
     ld de,(cur_x) ; d,e = cur_y,x
-    call get_cell_from_coords ; ix=cell lookup address; a=obj_id
-; get cell info from lookup table
-    ld hl,(ix+map_render) ; hl = pointer to base of render routines
-    ld b,3 ; 3 bytes per address label
+    call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
+; get cell_views address for this cell and orientation
     ld a,(orientation)
-    ld c,a
-    mlt bc ; bc = offset from base address
-    add hl,bc ; hl points to routine address
-    ld hl,(hl) ; don't do this on a z80
-    jp (hl) ; 'call' the routine
-; we always jp back here from the render routine
-render_scene_return: 
+    ld e,a
+    ld d,6 ; 6 bytes per orientation
+    mlt de ; de = orientation offset 
+    ex de,hl ; hl = orientation offset
+    ld b,24 ; 24 bytes per cell in cell_views lut
+    mlt bc ; bc = offset from base address of cell_views lut
+    add hl,bc ; hl = total offset from cell_views base address
+    ex de,hl ; becaue we can't add iy to hl
+    ld iy,cell_views ; base address of cell_views lut
+    add iy,de ; iy = cell_views address
+    ld (cur_cell_views),iy
+; cycle through the cell views masks and render the appropriate objects
+    ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
+    xor a ; poly_id
+    ld (to_poly_id),a
+@loop: 
+    ld (@bit_iy+2),bc
+    ld iy,(cur_cell_views)
+@bit_iy:
+    bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
+    jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
+; get_polys_deltas inputs: a is the orientation, c is the poly_id
+    ld a,(to_poly_id)
+    ld c,a ; poly_id
+    ld a,(orientation)
+    call get_polys_deltas ; d,e = y,x deltas
+    ld a,(cur_x)
+    add a,e
+    ld e,a
+    ld a,(cur_y)
+    add a,d
+    ld d,a
+    ld a,(to_poly_id)
+    call render_cell ; d,e = to_render y,x coords, we don't need to worry about the modulo 16
+@next_poly:
+    ld bc,(@bit_iy+2)
+    ld a,(to_poly_id)
+    inc a ; a is next poly_id
+    ld (to_poly_id),a
+    cp num_polys
+    jr z,@end
+    ld a,8
+    add a,b
+    ld b,a ; bit tested codes to 0x46 + b/8
+    cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
+    jr nz,@loop
+    ld b,0x46
+    inc c ; iy address offset 
+    jr @loop
+@end:
 ; draw the ui
 	ld hl,BUF_UI_LOWER_PANEL
     call vdu_buff_select
@@ -117,4 +228,38 @@ render_scene_return:
 	ld de,160
 	call vdu_plot_bmp
 ; all done
+    ret
+
+; get the map coordinates deltas for a given orientation and poly_id
+; inputs: a is the orientation, c is the poly_id
+; returns: d,e are the y,x deltas, deu will be the next byte in the lookup table and should be ignored
+get_polys_deltas:
+; get the base address of the orientation-specific deltas lookup table
+    cp 0
+    jr z,@orientation_0
+    cp 1
+    jr z,@orientation_1
+    cp 2
+    jr z,@orientation_2
+    cp 3
+    jr z,@orientation_3
+; return zeros if not found
+    ld de,0
+    ret
+@orientation_0: ; north
+    ld hl,polys_map_deltas_0
+    jr @get_deltas
+@orientation_1: ; east
+    ld hl,polys_map_deltas_1
+    jr @get_deltas
+@orientation_2: ; south
+    ld hl,polys_map_deltas_2
+    jr @get_deltas
+@orientation_3: ; west
+    ld hl,polys_map_deltas_3
+@get_deltas:
+    ld b,2 ; 2 bytes per record
+    mlt bc ; poly_id * 2
+    add hl,bc ; hl points to the deltas
+    ld de,(hl) ;d,e = dy,dx
     ret

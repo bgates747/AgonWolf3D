@@ -12,8 +12,8 @@ def do_assembly(src_file, tgt_dir, tgt_filename=None):
         tgt_filename = os.path.join(tgt_dir, tgt_filename)
 
     # Assembler command and arguments
-    # command = ['ez80asm', '-l', src_file, tgt_filename]
-    command = ['ez80asm', src_file, tgt_filename]
+    command = ['ez80asm', '-l', src_file, tgt_filename]
+    # command = ['ez80asm', src_file, tgt_filename]
 
     # Execute the assembler command
     print(f"\nExecuting: {command}\n")

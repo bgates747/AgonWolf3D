@@ -1,6 +1,6 @@
 bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render_type	render_obj_id	scale	align_vert	align_horiz	special	notes
 1	10	"LIGHT GREY WALL"	1	0	1	0	1	cube		100	center	center	outer	"texture used to render the outer boundaries of the map"
-1	11	CELL	1	0	1	0	1	cube		100	center	center	normal	
+1	11	"JAIL CELL"	1	0	1	0	1	cube		100	center	center	normal	
 1	12	"STONE ARCH BIRD"	1	0	1	0	1	cube		100	center	center	normal	
 1	13	"DARK GREY WALL"	1	0	1	0	1	cube		100	center	center	normal	
 1	14	"WOOD WALL"	1	0	1	0	1	cube		100	center	center	normal	

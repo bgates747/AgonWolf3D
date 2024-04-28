@@ -1,19 +1,23 @@
 ; ######## GAME STATE VARIABLES #######
 ; THESE MUST BE IN THIS ORDER FOR new_game TO WORK PROPERLY
 player_score: db 0x00,#00,#00 ; bcd
-; player current shields,binary
+; player current healths,binary
 ; when < 0 player splodes
-; restores to player_max_shields when new ship spawns
-player_shields: db 16 ; binary
-; max player shields,binary
+; restores to player_max_healths when new ship spawns
+player_healths: db 16 ; binary
+; max player healths,binary
 ; can increase with power-ups (todo)
-player_max_shields: db 16 ; binary
+player_max_healths: db 16 ; binary
 ; when reaches zero,game ends
 ; can increase based on TODO
 player_ships: db 0x03 ; binary
 
 ; ######### Player Variables ##########
 ; player position on the map and orientation
+cur_floor: db 0x00 ; 0-255, corresponds to floor_num in build scripts
+cur_room: db 0x00 ; 0-9, corresponds to room_num in build scripts
+from_floor: db 0x00 ; 0-255, corresponds to floor_num in build scripts
+from_room: db 0x00 ; 0-9, corresponds to room_num in build scripts
 orientation: db 0x00 ; 0-3 north,east,south,west
 cur_x: db 0x00
 cur_y: db 0x00
@@ -51,7 +55,7 @@ player_animation_timer:  db     0x00 ; 1 bytes not currently used
 player_move_timer:       db     0x00 ; 1 bytes not currently used
 player_move_step:        db     0x00 ; 1 bytes not currently used
 player_points:           db     0x00 ; 1 bytes not currently used
-player_shield_damage:    db     0x00 ; 1 bytes not currently used
+player_health_damage:    db     0x00 ; 1 bytes not currently used
 player_end_variables: ; for when we want to traverse this table in reverse
 
 ; set initial player position
@@ -59,7 +63,7 @@ player_end_variables: ; for when we want to traverse this table in reverse
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 player_init:
-    ld l,14 ; x
+    ld l,8 ; x
     ld h,14 ; y
     ld (cur_x),hl
     xor a
@@ -177,7 +181,7 @@ player_input:
     add a,d
     ld d,a
     push de ; save y_vel,x_vel
-    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
     pop de ; restore y_vel,x_vel
 ; read map type/status mask from target cell
     ld a,(ix+map_type_status)

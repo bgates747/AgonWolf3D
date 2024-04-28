@@ -1,4 +1,6 @@
-polys_lookup:
+num_polys: equ 45
+
+polys_lookup_plot:
 ;	   plot_x,  plot_y:
 	dl 0x000000,0x00003E ; poly_id:0 00
 	dl 0x000023,0x00003E ; poly_id:1 01
@@ -45,6 +47,257 @@ polys_lookup:
 	dl 0x000000,0x000000 ; poly_id:42 2A
 	dl 0x0000D5,0x000000 ; poly_id:43 2B
 	dl 0x000000,0x000000 ; poly_id:44 2C
+
+cube_poly_idx_lookup:
+;	 img_idx,  poly_id
+	db 0 ; poly_id:0 0
+	db 0 ; poly_id:1 1
+	db 0 ; poly_id:2 2
+	db 0 ; poly_id:3 3
+	db 0 ; poly_id:4 4
+	db 0 ; poly_id:5 5
+	db 0 ; poly_id:6 6
+	db 0 ; poly_id:7 7
+	db 0 ; poly_id:8 8
+	db 1 ; poly_id:9 9
+	db 2 ; poly_id:10 10
+	db 3 ; poly_id:11 11
+	db 4 ; poly_id:12 12
+	db 5 ; poly_id:13 13
+	db 6 ; poly_id:14 14
+	db 7 ; poly_id:15 15
+	db 8 ; poly_id:16 16
+	db 9 ; poly_id:17 17
+	db 9 ; poly_id:18 18
+	db 9 ; poly_id:19 19
+	db 9 ; poly_id:20 20
+	db 9 ; poly_id:21 21
+	db 9 ; poly_id:22 22
+	db 9 ; poly_id:23 23
+	db 10 ; poly_id:24 24
+	db 11 ; poly_id:25 25
+	db 12 ; poly_id:26 26
+	db 13 ; poly_id:27 27
+	db 14 ; poly_id:28 28
+	db 15 ; poly_id:29 29
+	db 16 ; poly_id:30 30
+	db 16 ; poly_id:31 31
+	db 16 ; poly_id:32 32
+	db 16 ; poly_id:33 33
+	db 16 ; poly_id:34 34
+	db 17 ; poly_id:35 35
+	db 18 ; poly_id:36 36
+	db 19 ; poly_id:37 37
+	db 20 ; poly_id:38 38
+	db 21 ; poly_id:39 39
+	db 21 ; poly_id:40 40
+	db 21 ; poly_id:41 41
+	db 22 ; poly_id:42 42
+	db 23 ; poly_id:43 43
+	db 24 ; poly_id:44 44
+
+cube_img_idx_lookup:
+;	 img_idx,  bank_id,  obj_id,  tile_name
+	dl BUF_10_004 ; idx:0 render_obj_id:10 LIGHT GREY WALL
+	dl BUF_11_004 ; idx:1 render_obj_id:11 JAIL CELL
+	dl BUF_12_004 ; idx:2 render_obj_id:12 STONE ARCH BIRD
+	dl BUF_13_004 ; idx:3 render_obj_id:13 DARK GREY WALL
+	dl BUF_14_004 ; idx:4 render_obj_id:14 WOOD WALL
+	dl BUF_15_004 ; idx:5 render_obj_id:15 HANGING FLAG
+	dl BUF_16_004 ; idx:6 render_obj_id:16 WOOD EAGLE
+	dl BUF_17_004 ; idx:7 render_obj_id:17 BLUE WALL
+	dl BUF_57_004 ; idx:8 render_obj_id:57 REGULAR DOOR
+	dl BUF_58_004 ; idx:9 render_obj_id:58 ELEVATOR SWITCH
+	dl BUF_59_004 ; idx:10 render_obj_id:59 ELEVATOR DOOR
+
+; map_delta_x,  map_delta_y
+polys_map_deltas_0: ; north orientation
+	db 0xFC,0xFB ; poly_id:0 00
+	db 0xFD,0xFB ; poly_id:1 01
+	db 0xFE,0xFB ; poly_id:2 02
+	db 0xFF,0xFB ; poly_id:3 03
+	db 0x00,0xFB ; poly_id:4 04
+	db 0x01,0xFB ; poly_id:5 05
+	db 0x02,0xFB ; poly_id:6 06
+	db 0x03,0xFB ; poly_id:7 07
+	db 0x04,0xFB ; poly_id:8 08
+	db 0xFC,0xFC ; poly_id:9 09
+	db 0xFD,0xFC ; poly_id:10 0A
+	db 0xFE,0xFC ; poly_id:11 0B
+	db 0xFF,0xFC ; poly_id:12 0C
+	db 0x01,0xFC ; poly_id:13 0D
+	db 0x02,0xFC ; poly_id:14 0E
+	db 0x03,0xFC ; poly_id:15 0F
+	db 0x04,0xFC ; poly_id:16 10
+	db 0xFD,0xFC ; poly_id:17 11
+	db 0xFE,0xFC ; poly_id:18 12
+	db 0xFF,0xFC ; poly_id:19 13
+	db 0x00,0xFC ; poly_id:20 14
+	db 0x01,0xFC ; poly_id:21 15
+	db 0x02,0xFC ; poly_id:22 16
+	db 0x03,0xFC ; poly_id:23 17
+	db 0xFD,0xFD ; poly_id:24 18
+	db 0xFE,0xFD ; poly_id:25 19
+	db 0xFF,0xFD ; poly_id:26 1A
+	db 0x01,0xFD ; poly_id:27 1B
+	db 0x02,0xFD ; poly_id:28 1C
+	db 0x03,0xFD ; poly_id:29 1D
+	db 0xFE,0xFD ; poly_id:30 1E
+	db 0xFF,0xFD ; poly_id:31 1F
+	db 0x00,0xFD ; poly_id:32 20
+	db 0x01,0xFD ; poly_id:33 21
+	db 0x02,0xFD ; poly_id:34 22
+	db 0xFE,0xFE ; poly_id:35 23
+	db 0xFF,0xFE ; poly_id:36 24
+	db 0x01,0xFE ; poly_id:37 25
+	db 0x02,0xFE ; poly_id:38 26
+	db 0xFF,0xFE ; poly_id:39 27
+	db 0x00,0xFE ; poly_id:40 28
+	db 0x01,0xFE ; poly_id:41 29
+	db 0xFF,0xFF ; poly_id:42 2A
+	db 0x01,0xFF ; poly_id:43 2B
+	db 0x00,0xFF ; poly_id:44 2C
+
+polys_map_deltas_1: ; east orientation
+	db 0x05,0xFC ; poly_id:0 00
+	db 0x05,0xFD ; poly_id:1 01
+	db 0x05,0xFE ; poly_id:2 02
+	db 0x05,0xFF ; poly_id:3 03
+	db 0x05,0x00 ; poly_id:4 04
+	db 0x05,0x01 ; poly_id:5 05
+	db 0x05,0x02 ; poly_id:6 06
+	db 0x05,0x03 ; poly_id:7 07
+	db 0x05,0x04 ; poly_id:8 08
+	db 0x04,0xFC ; poly_id:9 09
+	db 0x04,0xFD ; poly_id:10 0A
+	db 0x04,0xFE ; poly_id:11 0B
+	db 0x04,0xFF ; poly_id:12 0C
+	db 0x04,0x01 ; poly_id:13 0D
+	db 0x04,0x02 ; poly_id:14 0E
+	db 0x04,0x03 ; poly_id:15 0F
+	db 0x04,0x04 ; poly_id:16 10
+	db 0x04,0xFD ; poly_id:17 11
+	db 0x04,0xFE ; poly_id:18 12
+	db 0x04,0xFF ; poly_id:19 13
+	db 0x04,0x00 ; poly_id:20 14
+	db 0x04,0x01 ; poly_id:21 15
+	db 0x04,0x02 ; poly_id:22 16
+	db 0x04,0x03 ; poly_id:23 17
+	db 0x03,0xFD ; poly_id:24 18
+	db 0x03,0xFE ; poly_id:25 19
+	db 0x03,0xFF ; poly_id:26 1A
+	db 0x03,0x01 ; poly_id:27 1B
+	db 0x03,0x02 ; poly_id:28 1C
+	db 0x03,0x03 ; poly_id:29 1D
+	db 0x03,0xFE ; poly_id:30 1E
+	db 0x03,0xFF ; poly_id:31 1F
+	db 0x03,0x00 ; poly_id:32 20
+	db 0x03,0x01 ; poly_id:33 21
+	db 0x03,0x02 ; poly_id:34 22
+	db 0x02,0xFE ; poly_id:35 23
+	db 0x02,0xFF ; poly_id:36 24
+	db 0x02,0x01 ; poly_id:37 25
+	db 0x02,0x02 ; poly_id:38 26
+	db 0x02,0xFF ; poly_id:39 27
+	db 0x02,0x00 ; poly_id:40 28
+	db 0x02,0x01 ; poly_id:41 29
+	db 0x01,0xFF ; poly_id:42 2A
+	db 0x01,0x01 ; poly_id:43 2B
+	db 0x01,0x00 ; poly_id:44 2C
+
+polys_map_deltas_2: ; south orientation
+	db 0x04,0x05 ; poly_id:0 00
+	db 0x03,0x05 ; poly_id:1 01
+	db 0x02,0x05 ; poly_id:2 02
+	db 0x01,0x05 ; poly_id:3 03
+	db 0x00,0x05 ; poly_id:4 04
+	db 0xFF,0x05 ; poly_id:5 05
+	db 0xFE,0x05 ; poly_id:6 06
+	db 0xFD,0x05 ; poly_id:7 07
+	db 0xFC,0x05 ; poly_id:8 08
+	db 0x04,0x04 ; poly_id:9 09
+	db 0x03,0x04 ; poly_id:10 0A
+	db 0x02,0x04 ; poly_id:11 0B
+	db 0x01,0x04 ; poly_id:12 0C
+	db 0xFF,0x04 ; poly_id:13 0D
+	db 0xFE,0x04 ; poly_id:14 0E
+	db 0xFD,0x04 ; poly_id:15 0F
+	db 0xFC,0x04 ; poly_id:16 10
+	db 0x03,0x04 ; poly_id:17 11
+	db 0x02,0x04 ; poly_id:18 12
+	db 0x01,0x04 ; poly_id:19 13
+	db 0x00,0x04 ; poly_id:20 14
+	db 0xFF,0x04 ; poly_id:21 15
+	db 0xFE,0x04 ; poly_id:22 16
+	db 0xFD,0x04 ; poly_id:23 17
+	db 0x03,0x03 ; poly_id:24 18
+	db 0x02,0x03 ; poly_id:25 19
+	db 0x01,0x03 ; poly_id:26 1A
+	db 0xFF,0x03 ; poly_id:27 1B
+	db 0xFE,0x03 ; poly_id:28 1C
+	db 0xFD,0x03 ; poly_id:29 1D
+	db 0x02,0x03 ; poly_id:30 1E
+	db 0x01,0x03 ; poly_id:31 1F
+	db 0x00,0x03 ; poly_id:32 20
+	db 0xFF,0x03 ; poly_id:33 21
+	db 0xFE,0x03 ; poly_id:34 22
+	db 0x02,0x02 ; poly_id:35 23
+	db 0x01,0x02 ; poly_id:36 24
+	db 0xFF,0x02 ; poly_id:37 25
+	db 0xFE,0x02 ; poly_id:38 26
+	db 0x01,0x02 ; poly_id:39 27
+	db 0x00,0x02 ; poly_id:40 28
+	db 0xFF,0x02 ; poly_id:41 29
+	db 0x01,0x01 ; poly_id:42 2A
+	db 0xFF,0x01 ; poly_id:43 2B
+	db 0x00,0x01 ; poly_id:44 2C
+
+polys_map_deltas_3: ; west orientation
+	db 0xFB,0x04 ; poly_id:0 00
+	db 0xFB,0x03 ; poly_id:1 01
+	db 0xFB,0x02 ; poly_id:2 02
+	db 0xFB,0x01 ; poly_id:3 03
+	db 0xFB,0x00 ; poly_id:4 04
+	db 0xFB,0xFF ; poly_id:5 05
+	db 0xFB,0xFE ; poly_id:6 06
+	db 0xFB,0xFD ; poly_id:7 07
+	db 0xFB,0xFC ; poly_id:8 08
+	db 0xFC,0x04 ; poly_id:9 09
+	db 0xFC,0x03 ; poly_id:10 0A
+	db 0xFC,0x02 ; poly_id:11 0B
+	db 0xFC,0x01 ; poly_id:12 0C
+	db 0xFC,0xFF ; poly_id:13 0D
+	db 0xFC,0xFE ; poly_id:14 0E
+	db 0xFC,0xFD ; poly_id:15 0F
+	db 0xFC,0xFC ; poly_id:16 10
+	db 0xFC,0x03 ; poly_id:17 11
+	db 0xFC,0x02 ; poly_id:18 12
+	db 0xFC,0x01 ; poly_id:19 13
+	db 0xFC,0x00 ; poly_id:20 14
+	db 0xFC,0xFF ; poly_id:21 15
+	db 0xFC,0xFE ; poly_id:22 16
+	db 0xFC,0xFD ; poly_id:23 17
+	db 0xFD,0x03 ; poly_id:24 18
+	db 0xFD,0x02 ; poly_id:25 19
+	db 0xFD,0x01 ; poly_id:26 1A
+	db 0xFD,0xFF ; poly_id:27 1B
+	db 0xFD,0xFE ; poly_id:28 1C
+	db 0xFD,0xFD ; poly_id:29 1D
+	db 0xFD,0x02 ; poly_id:30 1E
+	db 0xFD,0x01 ; poly_id:31 1F
+	db 0xFD,0x00 ; poly_id:32 20
+	db 0xFD,0xFF ; poly_id:33 21
+	db 0xFD,0xFE ; poly_id:34 22
+	db 0xFE,0x02 ; poly_id:35 23
+	db 0xFE,0x01 ; poly_id:36 24
+	db 0xFE,0xFF ; poly_id:37 25
+	db 0xFE,0xFE ; poly_id:38 26
+	db 0xFE,0x01 ; poly_id:39 27
+	db 0xFE,0x00 ; poly_id:40 28
+	db 0xFE,0xFF ; poly_id:41 29
+	db 0xFF,0x01 ; poly_id:42 2A
+	db 0xFF,0xFF ; poly_id:43 2B
+	db 0xFF,0x00 ; poly_id:44 2C
 
 polys_south_lookup:
 ;south_id 	; poly_id
@@ -93,265 +346,6 @@ polys_south_lookup:
 	db 255	; 42
 	db 255	; 43
 	db 24	; 44
-
-render_obj_to_sprite_obj:
-;	 sprite_obj; render_obj_id
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_000 ; render_obj_id:20
-	dl sprite_obj_001 ; render_obj_id:21
-	dl sprite_obj_002 ; render_obj_id:22
-	dl sprite_obj_003 ; render_obj_id:23
-	dl sprite_obj_004 ; render_obj_id:24
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_005 ; render_obj_id:40
-	dl sprite_obj_006 ; render_obj_id:41
-	dl sprite_obj_007 ; render_obj_id:42
-	dl sprite_obj_008 ; render_obj_id:43
-	dl sprite_obj_009 ; render_obj_id:44
-	dl sprite_obj_010 ; render_obj_id:45
-	dl sprite_obj_011 ; render_obj_id:46
-	dl sprite_obj_012 ; render_obj_id:47
-	dl sprite_obj_013 ; render_obj_id:48
-	dl sprite_obj_014 ; render_obj_id:49
-	dl sprite_obj_015 ; render_obj_id:50
-	dl sprite_obj_016 ; render_obj_id:51
-	dl sprite_obj_017 ; render_obj_id:52
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
-	dl sprite_obj_255
 
 sprites_lookup:
 ;	 plot_x,  plot_y, buffer_label

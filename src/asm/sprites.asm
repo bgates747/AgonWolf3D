@@ -1,34 +1,29 @@
 ; ###### SPRITE TABLE FIELD INDICES ######
-table_bytes_per_record: equ 38 ; 38 bytes per sprite record
-sprite_id:              equ 00 ; 1 bytes unique spriteId, zero-based
-sprite_type:            equ 01 ; 1 bytes type of sprite as defined in enemies.asm
-sprite_base_bufferId:   equ 02 ; 3 bytes bitmap bufferId
-sprite_move_program:    equ 05 ; 3 bytes address of sprite's behavior subroutine
-sprite_collisions:      equ 08 ; 1 bytes low/high nibble: collision details
-sprite_dim_x:           equ 09 ; 1 bytes sprite width in pixels
-sprite_dim_y:           equ 10 ; 1 bytes sprite height in pixels
-sprite_x:               equ 11 ; 3 bytes 16.8 fractional x position in pixels
-sprite_y:               equ 14 ; 3 bytes 16.8 fractional y position in pixels
-sprite_xvel:            equ 17 ; 3 bytes x-component velocity, 16.8 fixed, pixels
-sprite_yvel:            equ 20 ; 3 bytes y-component velocity, 16.8 fixed, pixels
-sprite_vel:             equ 23 ; 3 bytes velocity px/frame (16.8 fixed)
-sprite_heading:         equ 26 ; 3 bytes sprite movement direction deg256 16.8 fixed
-sprite_orientation:     equ 29 ; 3 bytes orientation bits
-sprite_animation:       equ 32 ; 1 bytes current animation index, zero-based
-sprite_animation_timer: equ 33 ; 1 bytes when hits zero, draw next animation
-sprite_move_timer:      equ 34 ; 1 bytes when zero, go to next move program, or step
-sprite_move_step:       equ 35 ; 1 bytes stage in a move program sequence, varies
-sprite_points:          equ 36 ; 1 bytes points awarded for killing this sprite type, BCD
-sprite_shield_damage:   equ 37 ; 1 bytes shield points deducted for collision, binary
+sprite_id:              equ 00 ; 1 byte  - unique spriteId, zero-based
+sprite_obj:             equ 01 ; 1 byte  - type of sprite as defined in polys.asm, 255 is dead
+sprite_health:          equ 02 ; 1 byte  - health points, signed binary, negative is dead
+sprite_behavior_index:  equ 03 ; 1 byte  - index of sprite's behavior subroutine in enemies.asm
+sprite_x:               equ 04 ; 1 byte  - map x position
+sprite_y:               equ 05 ; 1 byte  - map y position
+sprite_orientation:     equ 06 ; 1 byte  - orientation
+sprite_animation:       equ 07 ; 1 byte  - current animation index, zero-based
+sprite_animation_timer: equ 08 ; 1 byte  - when hits zero, draw next animation frame
+sprite_move_timer:      equ 09 ; 1 byte  - when zero, go to next move program, or step
+sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, varies
+sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
+sprite_health_damage:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (negative gains health)
+sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
+table_bytes_per_record: equ 16 ; 16 bytes per sprite record
+
 
 ; ###### SPRITE TABLE VARIABLES ######
 ; maximum number of sprites
-table_max_records: equ 4 ; it can handle more but this is pushing it
-table_total_bytes: equ table_max_records*table_bytes_per_record
+table_max_records:      equ 64 ; at 16 bytes per record = 1024 bytes + 7 KiB for the map is an even 8 KiB
+table_total_bytes:      equ table_max_records*table_bytes_per_record
 
-; #### THIS IS THE SPACE ALLOCATED TO THE SPRITE TABLE ####
-spite_table_base: ds table_total_bytes, 0 ; fill with zeroes
-spite_table_limit: ; in case we ever need to know where it ends
+; #### THIS DEFINES THE SPACE ALLOCATED TO THE SPRITE TABLE IN EACH MAP FILE ####
+spite_table_base:       equ 0x081C00
+spite_table_limit:      equ sprite_table_base + table_total_bytes ; in case we ever need to know where it ends
 
 ; pointer to top address of current record, initialized to spite_table_base
 table_pointer: dl spite_table_base
@@ -74,7 +69,7 @@ table_get_next_id:
     ld de,table_bytes_per_record
     ld b,table_max_records
 @loop:
-    ld a,(ix+sprite_type)
+    ld a,(ix+sprite_obj)
     and a
     jr z,@found
     add ix,de
@@ -110,7 +105,157 @@ table_deactivate_sprite:
     ld ix,spite_table_base
     add ix,de
     xor a
-    ld (ix+sprite_type),a
+    ld (ix+sprite_obj),a
     ld ix,table_active_sprites
     dec (ix)
+    ret
+
+; #### SPRITE BEHAVIOR SUBROUTINES ####
+sprite_behavior_lookup:
+    dl LAMP
+    dl BARREL
+    dl TABLE
+    dl OVERHEAD_LIGHT
+    dl RADIOACTIVE_BARREL
+    dl HEALTH_PACK
+    dl GOLD_CHALISE
+    dl GOLD_CROSS
+    dl PLATE_OF_FOOD
+    dl KEYCARD
+    dl GOLD_CHEST
+    dl MACHINE_GUN
+    dl GATLING_GUN
+    dl DOG_FOOD
+    dl GOLD_KEY
+    dl DOG
+    dl GERMAN_TROOPER
+    dl SS_GUARD
+
+LAMP:
+    ret
+
+BARREL:
+    ret
+
+TABLE:
+    ret
+
+OVERHEAD_LIGHT:
+    ret
+
+RADIOACTIVE_BARREL:
+    ret
+
+HEALTH_PACK:
+    ret
+
+GOLD_CHALISE:
+    ret
+
+GOLD_CROSS:
+    ret
+
+PLATE_OF_FOOD:
+    ret
+
+KEYCARD:
+    ret
+
+GOLD_CHEST:
+    ret
+
+MACHINE_GUN:
+    ret
+
+GATLING_GUN:
+    ret
+
+DOG_FOOD:
+    ret
+
+GOLD_KEY:
+    ret
+
+DOG:
+    ret
+
+GERMAN_TROOPER:
+    ret
+
+SS_GUARD:
+    ret
+
+; #### SPRITE INITIALIZATION SUBROUTINES ####
+sprite_init_lookup:
+    dl INIT_LAMP
+    dl INIT_BARREL
+    dl INIT_TABLE
+    dl INIT_OVERHEAD_LIGHT
+    dl INIT_RADIOACTIVE_BARREL
+    dl INIT_HEALTH_PACK
+    dl INIT_GOLD_CHALISE
+    dl INIT_GOLD_CROSS
+    dl INIT_PLATE_OF_FOOD
+    dl INIT_KEYCARD
+    dl INIT_GOLD_CHEST
+    dl INIT_MACHINE_GUN
+    dl INIT_GATLING_GUN
+    dl INIT_DOG_FOOD
+    dl INIT_GOLD_KEY
+    dl INIT_DOG
+    dl INIT_GERMAN_TROOPER
+    dl INIT_SS_GUARD
+
+INIT_LAMP:
+    ret
+
+INIT_BARREL:
+    ret
+
+INIT_TABLE:
+    ret
+
+INIT_OVERHEAD_LIGHT:
+    ret
+
+INIT_RADIOACTIVE_BARREL:
+    ret
+
+INIT_HEALTH_PACK:
+    ret
+
+INIT_GOLD_CHALISE:
+    ret
+
+INIT_GOLD_CROSS:
+    ret
+
+INIT_PLATE_OF_FOOD:
+    ret
+
+INIT_KEYCARD:
+    ret
+
+INIT_GOLD_CHEST:
+    ret
+
+INIT_MACHINE_GUN:
+    ret
+
+INIT_GATLING_GUN:
+    ret
+
+INIT_DOG_FOOD:
+    ret
+
+INIT_GOLD_KEY:
+    ret
+
+INIT_DOG:
+    ret
+
+INIT_GERMAN_TROOPER:
+    ret
+
+INIT_SS_GUARD:
     ret

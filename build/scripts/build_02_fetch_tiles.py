@@ -137,8 +137,23 @@ def make_tbl_tiles(db_path, src_tiles_path):
     conn.commit()
     conn.close()
 
+def make_qry_img_idx(db_path):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute(f'DROP VIEW IF EXISTS qry_02_img_idx')
+    cursor.execute(f'''
+        CREATE VIEW qry_02_img_idx AS
+        SELECT ROW_NUMBER() OVER (PARTITION BY render_type ORDER BY obj_id)-1 AS img_idx,
+        bank_id, obj_id, tile_name, is_active, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, align_vert, align_horiz, special, notes
+        FROM tbl_02_tiles
+        WHERE obj_id = render_obj_id
+    ''')
+    conn.commit()
+    conn.close()
+
 def fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir):
     make_tbl_tiles(db_path, src_tiles_path)
+    make_qry_img_idx(db_path)
     make_uvs(db_path, mapmaker_tiles_dir, uvs_tgt_dir)
     make_thumbs(db_path, mapmaker_tiles_dir, thumbs_tgt_dir)
 

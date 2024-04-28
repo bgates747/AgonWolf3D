@@ -168,6 +168,89 @@ printBin8:
 ; outputs: values of every register printed to screen
 ;    values of each register in global scratch memory
 ; destroys: nothing
+stepRegistersHex:
+; store everything in scratch
+    ld (uhl),hl
+    ld (ubc),bc
+    ld (ude),de
+    ld (uix),ix
+    ld (uiy),iy
+    push af ; fml
+    pop hl  ; thanks, zilog
+    ld (uaf),hl
+    push af ; dammit
+
+; home the cursor
+    call vdu_home_cursor
+
+; print each register
+    ld hl,str_afu
+    call printString
+    ld hl,(uaf)
+    call printHex24
+    call printNewline
+
+    ld hl,str_hlu
+    call printString
+    ld hl,(uhl)
+    call printHex24
+    call printNewline
+
+    ld hl,str_bcu
+    call printString
+    ld hl,(ubc)
+    call printHex24
+    call printNewline
+
+    ld hl,str_deu
+    call printString
+    ld hl,(ude)
+    call printHex24
+    call printNewline
+
+    ld hl,str_ixu
+    call printString
+    ld hl,(uix)
+    call printHex24
+    call printNewline
+
+    ld hl,str_iyu
+    call printString
+    ld hl,(uiy)
+    call printHex24
+    call printNewline
+
+    ; call vsync
+
+    call printNewline
+
+; check for escape key and quit if pressed
+	MOSCALL mos_getkbmap
+@stayhere:
+; 113 Escape
+    bit 0,(ix+14)
+    jr nz,@Escape
+	jr @stayhere
+@Escape:
+    res 0,(ix+14) ; debounce the key (hopefully)
+    ld a,%10000000
+    call multiPurposeDelay
+
+; restore everything
+    ld hl, (uhl)
+    ld bc, (ubc)
+    ld de, (ude)
+    ld ix, (uix)
+    ld iy, (uiy)
+    pop af
+; all done
+    ret
+
+; print registers to screen in hexidecimal format
+; inputs: none
+; outputs: values of every register printed to screen
+;    values of each register in global scratch memory
+; destroys: nothing
 dumpRegistersHex:
 ; store everything in scratch
     ld (uhl),hl
@@ -181,46 +264,46 @@ dumpRegistersHex:
     push af ; dammit
 
 ; home the cursor
-    ; call vdu_home_cursor
+    call vdu_home_cursor
 
 ; print each register
-    ld hl,@str_afu
+    ld hl,str_afu
     call printString
     ld hl,(uaf)
     call printHex24
     call printNewline
 
-    ld hl,@str_hlu
+    ld hl,str_hlu
     call printString
     ld hl,(uhl)
     call printHex24
     call printNewline
 
-    ld hl,@str_bcu
+    ld hl,str_bcu
     call printString
     ld hl,(ubc)
     call printHex24
     call printNewline
 
-    ld hl,@str_deu
+    ld hl,str_deu
     call printString
     ld hl,(ude)
     call printHex24
     call printNewline
 
-    ld hl,@str_ixu
+    ld hl,str_ixu
     call printString
     ld hl,(uix)
     call printHex24
     call printNewline
 
-    ld hl,@str_iyu
+    ld hl,str_iyu
     call printString
     ld hl,(uiy)
     call printHex24
     call printNewline
 
-    ; call vsync
+    call vdu_vblank
 
     call printNewline
 ; restore everything
@@ -233,12 +316,12 @@ dumpRegistersHex:
 ; all done
     ret
 
-@str_afu: db "af=",0
-@str_hlu: db "hl=",0
-@str_bcu: db "bc=",0
-@str_deu: db "de=",0
-@str_ixu: db "ix=",0
-@str_iyu: db "iy=",0
+str_afu: db "af=",0
+str_hlu: db "hl=",0
+str_bcu: db "bc=",0
+str_deu: db "de=",0
+str_ixu: db "ix=",0
+str_iyu: db "iy=",0
 
 ; print udeuhl to screen in hexidecimal format
 ; inputs: none
@@ -255,7 +338,7 @@ dumpUDEUHLHex:
 
 ; print each register
 
-    ld hl,@str_udeuhl
+    ld hl,str_udeuhl
     call printString
     ld hl,(ude)
     call printHex24
@@ -275,7 +358,7 @@ dumpUDEUHLHex:
 ; all done
     ret
 
-@str_udeuhl: db "ude.uhl=",0
+str_udeuhl: db "ude.uhl=",0
 
 ; global scratch memory for registers
 uaf: dl 0
@@ -361,8 +444,10 @@ resetAllFlags:
 ; arrive with A =  the delay byte. One bit to be set only.
 ; eg. ld A, 00000100b
 
-multiPurposeDelay:                      
-    push bc                 
+multiPurposeDelay:
+    push af                      
+    push bc
+    push ix                 
     ld b, a 
     ld a,$08
     RST.LIL	08h                 ; get IX pointer to sysvars               
@@ -389,7 +474,9 @@ waitLoop:
     ld a, c 
     ld (oldTimeStamp), a        ; set new value
 
+    pop ix
     pop bc
+    pop af
     ret
 
 oldTimeStamp:   .db 00h

@@ -30,7 +30,7 @@
 	include "src/asm/vdu.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
-    include "src/asm/map00_0.asm"
+    ; include "src/asm/map00_0.asm" ; deprecated now that we load map binaries from files
 
 start:              
     push af
@@ -81,7 +81,7 @@ init:
 	call load_ui_images
 
 ; set up the display
-    ld a,8 + 128
+    ld a,8 + 128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
@@ -141,12 +141,15 @@ init:
 	ret
 
 main:
+; set map variables and load initial map file
+	call map_init
+
 ; initialize player position
 	call player_init
 	
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y
-	call get_cell_from_coords
+	call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is target cell_id
 	xor a ; north orientation
 	ld (orientation),a
 	call render_scene
