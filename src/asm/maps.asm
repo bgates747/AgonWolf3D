@@ -1,7 +1,7 @@
 ; ############# MAP CONSTANTS #############
 ; map tables addresses
-cell_status: 		equ 0x080000 ; base of on-chip high speed SRAM
-cell_views: 		equ 0x080400 ; cell_status + 256*4
+cell_status: 		equ 0xB7E000 ; base of on-chip high speed SRAM
+cell_views: 		equ 0xB7E400 ; cell_status + 256*4
 
 ; map type/status flags
 cell_is_door:     	EQU %10000000  ; Bit 7: door flag

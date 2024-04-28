@@ -22,7 +22,7 @@ table_max_records:      equ 64 ; at 16 bytes per record = 1024 bytes + 7 KiB for
 table_total_bytes:      equ table_max_records*table_bytes_per_record
 
 ; #### THIS DEFINES THE SPACE ALLOCATED TO THE SPRITE TABLE IN EACH MAP FILE ####
-spite_table_base:       equ 0x081C00
+spite_table_base:       equ 0xB7FC00
 spite_table_limit:      equ sprite_table_base + table_total_bytes ; in case we ever need to know where it ends
 
 ; pointer to top address of current record, initialized to spite_table_base
