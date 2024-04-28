@@ -118,16 +118,6 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_tbl_91b_UI(db_path, src_png_dir)
         make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
         make_asm_ui(db_path, ui_inc_path, buffer_id)
-        
-# build_92_asm_make_map_render_routines.py
-    if do_92_asm_make_map_render_routines:
-        from build_92_asm_make_map_render_routines import asm_make_map_render_routines
-        panels_path = f'src/asm/panels.asm'
-        src_base_dir = f'src/asm'
-        tgt_base_dir = f'tgt'
-        view_distance = 5
-        map_dim_x, map_dim_y = 16, 16
-        asm_make_map_render_routines(db_path, floor_nums, panels_path, view_distance, map_dim_x, map_dim_y)
 
 # build_91c_asm_map_masks.py
     if do_91c_asm_map_masks:
@@ -173,24 +163,22 @@ if __name__ == "__main__":
     do_91b_asm_ui = False
     do_91c_asm_map_masks = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
-    do_92_asm_make_map_render_routines = False
     do_93_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
     # do_00_delete_tgt_dir = True
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
-    # do_06_import_mapmaker_files = True
-    # do_07_map_panels = True
-    # do_90_asm_polys = True
-    # do_91_asm_img_load = True
-    # do_91a_asm_font = True
-    # do_91b_asm_ui = True
-    # do_91c_asm_map_masks = True
-    # do_92_asm_make_map_render_routines = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_90_asm_polys = True
+    do_91_asm_img_load = True
+    do_91a_asm_font = True
+    do_91b_asm_ui = True
+    do_91c_asm_map_masks = True
     do_93_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
