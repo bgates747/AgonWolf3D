@@ -123,7 +123,10 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
                 for cell in map_cells:
                     cell_id = cell['cell_id']
                     render_type = cell['render_type']
-                    render_type_mask = render_types_dict[cell['render_type']]
+                    if render_type == 'ui':
+                        render_type_mask = 1 # floor (the only ui element on a map should be BJ's starting position, which renders as floor)
+                    else:
+                        render_type_mask = render_types_dict[cell['render_type']]
                     sprite_id, tile_name = sprite_ids.get(cell_id, (-1, 'no sprite'))
                     hex_sprite_id = format(sprite_id & 0xFF, "02X")
                     map_type_status = f'{cell["is_door"]}{cell["is_wall"]}{cell["is_trigger"]}{cell["is_blocking"]}{int(cell["special"] == "start")}{int(cell["special"] == "to room")}{render_type_mask}'
