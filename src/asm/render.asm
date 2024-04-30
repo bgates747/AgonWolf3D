@@ -44,45 +44,6 @@ render_background:
     call vdu_plot_bmp
     ret
 
-; render a 3D sprite
-; inputs: to_sprite_id set, to_poly_id set, to_cell_status fields set
-; (ix should also be pointed to cell_status record but we don't depend on it for the time being)
-render_sprite:
-    ret ; TODO: SPRITE TABLE IS NOT IMPLEMENTED YET AND THIS WON'T WORK UNTIL IT IS
-; look up sprite_obj in sprite table
-    ld iy,spite_table_base
-    ld a,(to_sprite_id)
-    ld b,a ; sprite id
-    ld c,table_bytes_per_record
-    mlt bc
-    add iy,bc ; hl points to sprite record
-    ld a,(iy+sprite_obj) ; a is sprite_obj
-; get sprite poly lookup address
-    ld iy,sprites_lookup
-    ld b,a
-    ld c,num_polys
-    mlt bc
-    add iy,bc ; iy points to base of sprite polys definitions
-; look up south_poly from poly_id
-    ld hl,polys_south_lookup
-    ld bc,0 ; make sure bcu is zero
-    ld a,(to_poly_id) ; poly id
-    ld c,a
-    add hl,bc ; hl points to south poly id
-    ld a,(hl) ; a is south poly id
-    ld c,a
-    ld b,9 ; nine byte per record in lut
-    mlt bc
-    add iy,bc ; iy points to sprite poly defs
-; select buffer
-    ld hl,(iy+6)
-    call vdu_buff_select
-; plot sprite 
-    ld bc,(iy+0) ; plot_x
-    ld de,(iy+3) ; plot_y
-    call vdu_plot_bmp
-    ret
-
 ; render a 3D panel
 ; inputs: to_poly_id set, to_buffer_id set
 render_panel:
@@ -106,6 +67,55 @@ render_panel:
     call vdu_plot_bmp
     ret
 
+; render a 3D sprite
+; inputs: a is sprite_id, to_poly_id set, to_cell_status fields set
+; (ix should also be pointed to cell_status record but we don't depend on it for the time being)
+render_sprite:
+; look up sprite_obj in sprite table
+    ld iy,sprite_table_base
+    ld b,a ; sprite id
+    ld c,sprite_record_size
+    mlt bc
+    add iy,bc ; iy points to sprite record
+    ld (sprite_table_pointer),iy
+; get sprite imgs lookup
+    ld a,(iy+sprite_obj) ; a is sprite_obj
+    ld iy,sprite_imgs_lookup ; base address of sprite_imgs lookup table
+    ld b,a
+    ld c,3 ; 3 bytes per record
+    mlt bc
+    add iy,bc ; iy points to the sprite's sprite_imgs_lookup record
+    ld iy,(iy) ; iy is the base address of the sprite's image defs lookup
+
+    ; call stepRegistersHex
+
+; convert to_poly_id to sprite_poly
+    ld hl,sprite_polys_lookup
+    ld a,(to_poly_id)
+    ld bc,0  ; make sure bcu and b are zero
+    ld c,a
+    add hl,bc ; hl points to the sprite's poly id
+
+    ; call stepRegistersHex
+
+; get the sprites image defs for the particular poly id
+    ld a,(hl)
+    ld b,a
+    ld c,9  ; 9 bytes per record
+    mlt bc
+    add iy,bc ; iy is the offset to the sprite's image def
+
+    ; call stepRegistersHex
+
+; select buffer
+    ld hl,(iy+6)
+    call vdu_buff_select
+; plot sprite 
+    ld bc,(iy+0) ; plot_x
+    ld de,(iy+3) ; plot_y
+    call vdu_plot_bmp
+    ret
+
 ; render the object in a given cell and poly_id
 ; inputs: to_poly_id set, d,e are the cell coords
 render_cell:
@@ -113,24 +123,14 @@ render_cell:
     call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
     ld hl,(ix) ; l = to_map_type_status, h = to_img_idx, hlu = to_obj_id
     ld (to_cell_status),hl
+; get sprite_id from cell_status lut
+    ld a,(ix+map_sprite_id)
+    cp 255 ; value if no sprite present
+    jp nz,render_sprite
 ; get cell's render_type
     ld a,l ; map_type_status
     and 2 ; mask off everything but lowest two bits
-    cp 1 ; intentionally out of order for efficiency
-    jr z,@floor
-    cp 0
     jr z,@cube
-    cp 3
-    jr z,@sprite
-    jr @nodraw
-@sprite:
-; get sprite_id from cell_status lut
-    ld a,(ix+map_sprite_id)
-    ld (to_sprite_id),a
-    cp 255 ; value if no sprite present
-    jr z,@nodraw
-    jp render_sprite
-@floor:
     jr @nodraw ; placeholder for future implementation TODO
 @cube:
 ; get map_img_idx from cell_status lut

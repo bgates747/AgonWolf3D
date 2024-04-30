@@ -157,11 +157,11 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
 
                 # Write sprite table base and limit to the asm file
                 asm_file.write(f'\n')
-                asm_file.write('sprite_table_base: ds 1024\n')
+                asm_file.write('sprite_table_base: ds 1024,255 ; so that sprite_id and sprite_obj default to no sprite\n')
                 asm_file.write('sprite_table_limit:\n')
 
                 # Write placeholder data for the sprite table to the binary file
-                bin_file.write(bytes([0]*1024))
+                bin_file.write(bytes([255]*1024))
             
             # Assemble the generated assembly file
             do_assembly(asm_filename, maps_tgt_dir, asm_bin_filename)

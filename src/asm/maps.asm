@@ -211,6 +211,40 @@ map_load:
 ; DEBUG: print filename
 	ld hl,(cur_filename)
 	call printString
+; load sprite data
+	call map_init_sprites
+	ret
+
+; initialize sprite data for the current room into sprite table
+; inputs: map data loaded
+map_init_sprites:
+; initialize pointers
+	ld ix,cell_status
+	ld iy,sprite_table_base
+@loop:
+	ld (sprite_table_pointer),iy ; probably don't strictly need this but why not
+	ld a,(ix+map_sprite_id)
+	cp 255 ; check for no sprite
+	jr z,@next_cell
+	ld (iy+sprite_id),a
+	ld a,(ix+map_img_idx)
+	ld (iy+sprite_obj),a
+
+	; call stepRegistersHex
+
+	call sprite_init_data
+	lea iy,iy+sprite_record_size ; advance pointer to next sprite record
+@next_cell:
+	lea ix,ix+map_record_size ; advance pointer to next cell
+; check if we've reached the end of the map data
+	ld de,cell_views ; this address is the end of cell_status table + 1
+	push ix ; why no sbc ix,rr, zilog?
+	pop hl
+	xor a ; clear carry
+	sbc hl,de
+	jr nz,@loop
+	ld iy,sprite_table_base ; reset pointer
+	ld (sprite_table_pointer),iy
 	ret
 
 ; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####

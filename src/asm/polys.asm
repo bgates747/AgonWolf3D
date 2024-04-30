@@ -299,7 +299,9 @@ polys_map_deltas_3: ; west orientation
 	db 0xFF,0xFF ; poly_id:43 2B
 	db 0xFF,0x00 ; poly_id:44 2C
 
-polys_south_lookup:
+num_sprite_polys: equ 25
+
+sprite_polys_lookup:
 ;south_id 	; poly_id
 	db 0	; 0
 	db 1	; 1
@@ -347,7 +349,26 @@ polys_south_lookup:
 	db 255	; 43
 	db 24	; 44
 
-sprites_lookup:
+sprite_imgs_lookup:
+;	 sprite_obj; render_obj_id
+	dl sprite_obj_000 ; render_obj_id:20
+	dl sprite_obj_001 ; render_obj_id:21
+	dl sprite_obj_002 ; render_obj_id:22
+	dl sprite_obj_003 ; render_obj_id:23
+	dl sprite_obj_004 ; render_obj_id:24
+	dl sprite_obj_005 ; render_obj_id:40
+	dl sprite_obj_006 ; render_obj_id:41
+	dl sprite_obj_007 ; render_obj_id:42
+	dl sprite_obj_008 ; render_obj_id:43
+	dl sprite_obj_009 ; render_obj_id:44
+	dl sprite_obj_010 ; render_obj_id:45
+	dl sprite_obj_011 ; render_obj_id:46
+	dl sprite_obj_012 ; render_obj_id:47
+	dl sprite_obj_013 ; render_obj_id:48
+	dl sprite_obj_014 ; render_obj_id:49
+	dl sprite_obj_015 ; render_obj_id:50
+	dl sprite_obj_016 ; render_obj_id:51
+	dl sprite_obj_017 ; render_obj_id:52
 ;	 plot_x,  plot_y, buffer_label
 
 ; render_obj_id:20

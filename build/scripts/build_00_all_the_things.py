@@ -167,17 +167,17 @@ if __name__ == "__main__":
 
 # I find it easier to simply comment out the scripts I don't want to run
     # do_00_delete_tgt_dir = True
-    do_01_polys_masks = True
-    do_02_fetch_tiles = True
-    do_04_make_panels_png = True
-    do_04a_make_dws_png = True
-    do_05_panels_rgba = True
-    do_06_import_mapmaker_files = True
-    do_07_map_panels = True
-    do_90_asm_polys = True
-    do_91_asm_img_load = True
-    do_91a_asm_font = True
-    do_91b_asm_ui = True
+    # do_01_polys_masks = True
+    # do_02_fetch_tiles = True
+    # do_04_make_panels_png = True
+    # do_04a_make_dws_png = True
+    # do_05_panels_rgba = True
+    # do_06_import_mapmaker_files = True
+    # do_07_map_panels = True
+    # do_90_asm_polys = True
+    # do_91_asm_img_load = True
+    # do_91a_asm_font = True
+    # do_91b_asm_ui = True
     do_91c_asm_map_masks = True
     do_93_asm_assemble = True
 

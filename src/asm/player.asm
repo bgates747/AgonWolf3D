@@ -63,7 +63,7 @@ player_end_variables: ; for when we want to traverse this table in reverse
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 player_init:
-    ld l,8 ; x
+    ld l,7 ; x
     ld h,14 ; y
     ld (cur_x),hl
     xor a

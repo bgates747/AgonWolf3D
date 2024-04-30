@@ -140,8 +140,12 @@ def make_asm_polys_south(db_path, polys_inc_path):
         ) as t2 on t1.poly_id = t2.poly_id
         order by t1.poly_id""")
     polys = cursor.fetchall()
+
+    num_sprite_polys = len([poly for poly in polys if poly[1] != 255])
+
     with open(polys_inc_path, 'a') as writer: # append to the file
-        writer.write("\npolys_south_lookup:\n")
+        writer.write(f"\nnum_sprite_polys: equ {num_sprite_polys}\n")
+        writer.write("\nsprite_polys_lookup:\n")
         writer.write(";south_id \t; poly_id\n")
         for poly in polys:
             poly_id, south_id = poly
@@ -158,19 +162,13 @@ def make_asm_plot_sprites(db_path, polys_inc_path):
         FROM tbl_02_tiles
         WHERE render_type = 'sprite' AND is_active = 1""")
     sprites = cursor.fetchall()
-    sprite_lookup = {render_obj_id: sprite_obj for sprite_obj, render_obj_id in sprites}
-    n = 255 # If we need more than 8 bits can hold, much other code will need to change
-    # with open(polys_inc_path, 'a') as writer: # append to the file
-    #     writer.write("\nrender_obj_to_sprite_obj:\n")
-    #     writer.write(";\t sprite_obj; render_obj_id\n")
-    #     for idx in range(n + 1):
-    #         # Get the sprite object number if idx matches a render_obj_id, else return 255
-    #         sprite_obj = sprite_lookup.get(idx, 255)
-    #         writer.write(f"\tdl sprite_obj_{sprite_obj:03d}")
-    #         if sprite_obj != 255:
-    #             writer.write(f" ; render_obj_id:{idx}")
-    #         writer.write("\n")
-
+    sprite_lookup = {sprite[1]:sprite[0] for sprite in sprites}
+    with open(polys_inc_path, 'a') as writer: # append to the file
+        writer.write("\nsprite_imgs_lookup:\n")
+        writer.write(";\t sprite_obj; render_obj_id\n")
+        for sprite in sprites:
+            sprite_obj, render_obj_id = sprite
+            writer.write(f"\tdl sprite_obj_{sprite_obj:03d} ; render_obj_id:{render_obj_id}\n")
 
     cursor.execute("""
         select render_obj_id, plot_x, plot_y, 'BUF_' || panel_base_filename as buffer_label
@@ -180,7 +178,6 @@ def make_asm_plot_sprites(db_path, polys_inc_path):
     sprites = cursor.fetchall()
     last_render_obj_id = -1
     with open(polys_inc_path, 'a') as writer: # append to the file
-        writer.write("\nsprites_lookup:\n")
         writer.write(";\t plot_x,  plot_y, buffer_label\n")
         for sprite in sprites:
             render_obj_id, plot_x, plot_y, buffer_label = sprite 

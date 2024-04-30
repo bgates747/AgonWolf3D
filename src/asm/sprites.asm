@@ -1,7 +1,7 @@
 ; ###### SPRITE TABLE FIELD INDICES ######
 sprite_id:              equ 00 ; 1 byte  - unique spriteId, zero-based
 sprite_obj:             equ 01 ; 1 byte  - type of sprite as defined in polys.asm, 255 is dead
-sprite_health:          equ 02 ; 1 byte  - health points, signed binary, negative is dead
+sprite_health:          equ 02 ; 1 byte  - health points, signed binary, zero or negative is dead
 sprite_behavior_index:  equ 03 ; 1 byte  - index of sprite's behavior subroutine in enemies.asm
 sprite_x:               equ 04 ; 1 byte  - map x position
 sprite_y:               equ 05 ; 1 byte  - map y position
@@ -13,20 +13,20 @@ sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, var
 sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
 sprite_health_damage:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (negative gains health)
 sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
-table_bytes_per_record: equ 16 ; 16 bytes per sprite record
+sprite_record_size: equ 16 ; 16 bytes per sprite record
 
 
 ; ###### SPRITE TABLE VARIABLES ######
 ; maximum number of sprites
 table_max_records:      equ 64 ; at 16 bytes per record = 1024 bytes + 7 KiB for the map is an even 8 KiB
-table_total_bytes:      equ table_max_records*table_bytes_per_record
+table_total_bytes:      equ table_max_records*sprite_record_size
 
 ; #### THIS DEFINES THE SPACE ALLOCATED TO THE SPRITE TABLE IN EACH MAP FILE ####
-spite_table_base:       equ 0xB7FC00
-spite_table_limit:      equ sprite_table_base + table_total_bytes ; in case we ever need to know where it ends
+sprite_table_base:       equ 0xB7FC00
+sprite_table_limit:      equ sprite_table_base + table_total_bytes + 1 ; in case we ever need to know where it ends
 
-; pointer to top address of current record, initialized to spite_table_base
-table_pointer: dl spite_table_base
+; pointer to top address of current record, initialized to sprite_table_base
+sprite_table_pointer: dl sprite_table_base
 ; how many active sprites
 table_active_sprites: db 0x00
 ; flag indicating collision with screen edge
@@ -65,8 +65,8 @@ cos_sprite_heading: dl 0x000000 ; signed fixed 16.8
 ; destroys: a,b,hl,ix
 ; affects: bumps table_active_sprites by one
 table_get_next_id:
-    ld ix,spite_table_base
-    ld de,table_bytes_per_record
+    ld ix,sprite_table_base
+    ld de,sprite_record_size
     ld b,table_max_records
 @loop:
     ld a,(ix+sprite_obj)
@@ -100,9 +100,9 @@ table_deactivate_sprite:
     pop af ; restore sprite id
     ld de,0 ; clear deu
     ld d,a
-    ld e,table_bytes_per_record
+    ld e,sprite_record_size
     mlt de
-    ld ix,spite_table_base
+    ld ix,sprite_table_base
     add ix,de
     xor a
     ld (ix+sprite_obj),a
@@ -131,131 +131,650 @@ sprite_behavior_lookup:
     dl GERMAN_TROOPER
     dl SS_GUARD
 
+; initializes sprite data for a particular sprite type and id
+; inputs: iy = sprite_table_pointer to correct sprite record, sprite_obj set for that record
+sprite_init_data:
+    ; call stepRegistersHex
+
+    xor a ; index for sprite init routine
+    call do_sprite_behavior ; hl points at address to copy from
+    lea de,iy+sprite_health ; de points at the address for LDIR to copy to
+    ld bc,sprite_record_size-2 ; copy all but the first two bytes
+
+    ; call stepRegistersHex
+    
+    ldir ; hl came back with the copy from address, so we're ready to copy the data
+    ret ; done
+
+; #### SPRITE BEHAVIOR ROUTINES ####
+; inputs: iy points to sprite record, sprite_obj set for that record, 
+;         a = type index of routine to call
+do_sprite_behavior:
+    push af ; save routine index for later
+    ld a,(iy+sprite_obj)
+    ld b,a
+    ld c,3 ; three bytes per lookup record
+    mlt bc ; bc is offset from the base of the lookup table
+    ld hl,sprite_behavior_lookup
+    add hl,bc
+    ld hl,(hl) ; hl points to the base address of the sprite behavior routines
+    pop bc ; b holds the routine index
+    ld c,3 ; three bytes per lookup record
+    mlt bc ; bc is offset from the base of the lookup table
+    add hl,bc ; hl points to the label of the routine to call
+    ld hl,(hl) ; hl points to the routine to call
+    jp (hl) ; call the behavior routine
+sprite_behavior_return: ; we always return here from a sprite behavior call
+    ret
+
 LAMP:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 BARREL:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 TABLE:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 OVERHEAD_LIGHT:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 RADIOACTIVE_BARREL:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 HEALTH_PACK:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GOLD_CHALISE:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GOLD_CROSS:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 PLATE_OF_FOOD:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 KEYCARD:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GOLD_CHEST:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 MACHINE_GUN:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GATLING_GUN:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 DOG_FOOD:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GOLD_KEY:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 DOG:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 GERMAN_TROOPER:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
+    ret
+@shoot:
+    ret
+@see:
+    ret
+@kill:
     ret
 
 SS_GUARD:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @shoot
+    dl @see
+    dl @kill
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ;sprite_health
+    db 000 ;sprite_behavior_index
+    db 000 ;sprite_x
+    db 000 ;sprite_y
+    db 000 ;sprite_orientation
+    db 000 ;sprite_animation
+    db 000 ;sprite_animation_timer
+    db 000 ;sprite_move_timer
+    db 000 ;sprite_move_step
+    db 100 ;sprite_points
+    db 020 ;sprite_health_damage
+    db 000 ;sprite_unassigned_0
+    db 000 ;sprite_unassigned_1
+    db 000 ;sprite_unassigned_2
+@use:
     ret
-
-; #### SPRITE INITIALIZATION SUBROUTINES ####
-sprite_init_lookup:
-    dl INIT_LAMP
-    dl INIT_BARREL
-    dl INIT_TABLE
-    dl INIT_OVERHEAD_LIGHT
-    dl INIT_RADIOACTIVE_BARREL
-    dl INIT_HEALTH_PACK
-    dl INIT_GOLD_CHALISE
-    dl INIT_GOLD_CROSS
-    dl INIT_PLATE_OF_FOOD
-    dl INIT_KEYCARD
-    dl INIT_GOLD_CHEST
-    dl INIT_MACHINE_GUN
-    dl INIT_GATLING_GUN
-    dl INIT_DOG_FOOD
-    dl INIT_GOLD_KEY
-    dl INIT_DOG
-    dl INIT_GERMAN_TROOPER
-    dl INIT_SS_GUARD
-
-INIT_LAMP:
+@shoot:
     ret
-
-INIT_BARREL:
+@see:
     ret
-
-INIT_TABLE:
-    ret
-
-INIT_OVERHEAD_LIGHT:
-    ret
-
-INIT_RADIOACTIVE_BARREL:
-    ret
-
-INIT_HEALTH_PACK:
-    ret
-
-INIT_GOLD_CHALISE:
-    ret
-
-INIT_GOLD_CROSS:
-    ret
-
-INIT_PLATE_OF_FOOD:
-    ret
-
-INIT_KEYCARD:
-    ret
-
-INIT_GOLD_CHEST:
-    ret
-
-INIT_MACHINE_GUN:
-    ret
-
-INIT_GATLING_GUN:
-    ret
-
-INIT_DOG_FOOD:
-    ret
-
-INIT_GOLD_KEY:
-    ret
-
-INIT_DOG:
-    ret
-
-INIT_GERMAN_TROOPER:
-    ret
-
-INIT_SS_GUARD:
+@kill:
     ret
