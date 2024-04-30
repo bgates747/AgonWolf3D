@@ -178,7 +178,7 @@ if __name__ == "__main__":
     # do_91_asm_img_load = True
     # do_91a_asm_font = True
     # do_91b_asm_ui = True
-    do_91c_asm_map_masks = True
+    # do_91c_asm_map_masks = True
     do_93_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)

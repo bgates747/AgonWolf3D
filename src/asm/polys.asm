@@ -369,7 +369,6 @@ sprite_imgs_lookup:
 	dl sprite_obj_015 ; render_obj_id:50
 	dl sprite_obj_016 ; render_obj_id:51
 	dl sprite_obj_017 ; render_obj_id:52
-	dl sprite_obj_018 ; render_obj_id:53
 ;	 plot_x,  plot_y, buffer_label
 
 ; render_obj_id:20
@@ -875,33 +874,5 @@ sprite_obj_017:
 	dl 0x00008C,0x000034,BUF_52_040
 	dl 0x0000F7,0x000034,BUF_52_040
 	dl 0x000064,0x000000,BUF_52_044
-
-; render_obj_id:53
-sprite_obj_018:
-	dl 0x000024,0x000061,BUF_53_004
-	dl 0x000047,0x000061,BUF_53_004
-	dl 0x00006B,0x000061,BUF_53_004
-	dl 0x00008E,0x000061,BUF_53_004
-	dl 0x0000B2,0x000061,BUF_53_004
-	dl 0x0000D5,0x000061,BUF_53_004
-	dl 0x0000F9,0x000061,BUF_53_004
-	dl 0x00011C,0x000061,BUF_53_004
-	dl 0x000140,0x000061,BUF_53_004
-	dl 0x00002E,0x000066,BUF_53_020
-	dl 0x00005C,0x000066,BUF_53_020
-	dl 0x000089,0x000066,BUF_53_020
-	dl 0x0000B7,0x000066,BUF_53_020
-	dl 0x0000E4,0x000066,BUF_53_020
-	dl 0x000112,0x000066,BUF_53_020
-	dl 0x00013F,0x000066,BUF_53_020
-	dl 0x000041,0x000070,BUF_53_032
-	dl 0x000080,0x000070,BUF_53_032
-	dl 0x0000C1,0x000070,BUF_53_032
-	dl 0x000101,0x000070,BUF_53_032
-	dl 0x000141,0x000070,BUF_53_032
-	dl 0x00006C,0x000085,BUF_53_040
-	dl 0x0000D6,0x000085,BUF_53_040
-	dl 0x000141,0x000085,BUF_53_040
-	dl 0x000140,0x0000A0,BUF_53_044
 
 sprite_obj_255: ; placeholder to keep the assembler happy, CANNOT BE A VALID sprite_obj

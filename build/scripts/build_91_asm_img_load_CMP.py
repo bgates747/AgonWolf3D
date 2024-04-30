@@ -48,7 +48,7 @@ def make_asm_img_load(db_path, panels_inc_path, render_type, src_img_dir, next_b
             asm_writer.write(f"BUF_{name}: equ 0x{next_buffer_id_counter + buffer_id_counter:04X}\n")
             buffer_id_counter += 1
 
-        asm_writer.write(f"\n{render_type}_num_panels: equ {buffer_id_counter-2} \n")
+        asm_writer.write(f"\n{render_type}_num_panels: equ {buffer_id_counter} \n")
 
         asm_writer.write(f"\n; {render_type} buffer id reverse lookup:\n")
         asm_writer.write(f"{render_type}_buffer_id_lut:\n")

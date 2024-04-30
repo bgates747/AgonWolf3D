@@ -42,7 +42,7 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 5	50	DOG	1	0	0	1	0	sprite		50	bottom	center	normal	
 5	51	"GERMAN TROOPER"	1	0	0	1	0	sprite		75	bottom	center	normal	
 5	52	"SS GUARD"	1	0	0	1	0	sprite		75	bottom	center	normal	
-5	53	TRANSPARENT	1	0	0	0	0	sprite		100	center	center	normal	
+5	53		0										normal	
 5	54		0										normal	
 5	55		0										normal	
 5	56		0										normal	

@@ -81,7 +81,7 @@ init:
 	call load_ui_images
 
 ; set up the display
-    ld a,8 ;+ 128 ; 320x240x64 double-buffered
+    ld a,8 + 128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
