@@ -5055,8 +5055,13 @@ BUF_52_020: equ 0x0269
 BUF_52_032: equ 0x026A
 BUF_52_040: equ 0x026B
 BUF_52_044: equ 0x026C
+BUF_53_004: equ 0x026D
+BUF_53_020: equ 0x026E
+BUF_53_032: equ 0x026F
+BUF_53_040: equ 0x0270
+BUF_53_044: equ 0x0271
 
-sprite_num_panels: equ 88 
+sprite_num_panels: equ 93 
 
 ; sprite buffer id reverse lookup:
 sprite_buffer_id_lut:
@@ -5150,6 +5155,11 @@ sprite_buffer_id_lut:
 	dl BUF_52_032
 	dl BUF_52_040
 	dl BUF_52_044
+	dl BUF_53_004
+	dl BUF_53_020
+	dl BUF_53_032
+	dl BUF_53_040
+	dl BUF_53_044
 
 ; sprite load routines jump table:
 sprite_load_panels_table:
@@ -5243,6 +5253,11 @@ sprite_load_panels_table:
 	dl ld_52_032
 	dl ld_52_040
 	dl ld_52_044
+	dl ld_53_004
+	dl ld_53_020
+	dl ld_53_032
+	dl ld_53_040
+	dl ld_53_044
 
 ; Import sprite .rgba2 bitmap files and load them into VDP buffers
 
@@ -5324,9 +5339,9 @@ ld_21_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_004
-	ld bc,11
-	ld de,11
-	ld ix,121
+	ld bc,16
+	ld de,17
+	ld ix,272
 	call vdu_load_img
 	ret
 
@@ -5338,9 +5353,9 @@ ld_21_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_020
-	ld bc,14
-	ld de,14
-	ld ix,196
+	ld bc,21
+	ld de,22
+	ld ix,462
 	call vdu_load_img
 	ret
 
@@ -5352,9 +5367,9 @@ ld_21_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_032
-	ld bc,20
-	ld de,22
-	ld ix,440
+	ld bc,31
+	ld de,33
+	ld ix,1023
 	call vdu_load_img
 	ret
 
@@ -5366,9 +5381,9 @@ ld_21_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_040
-	ld bc,33
-	ld de,36
-	ld ix,1188
+	ld bc,50
+	ld de,54
+	ld ix,2700
 	call vdu_load_img
 	ret
 
@@ -5380,9 +5395,9 @@ ld_21_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_044
-	ld bc,100
-	ld de,30
-	ld ix,3000
+	ld bc,151
+	ld de,85
+	ld ix,12835
 	call vdu_load_img
 	ret
 
@@ -5534,9 +5549,9 @@ ld_24_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_004
-	ld bc,11
-	ld de,11
-	ld ix,121
+	ld bc,16
+	ld de,17
+	ld ix,272
 	call vdu_load_img
 	ret
 
@@ -5548,9 +5563,9 @@ ld_24_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_020
-	ld bc,14
-	ld de,14
-	ld ix,196
+	ld bc,21
+	ld de,22
+	ld ix,462
 	call vdu_load_img
 	ret
 
@@ -5562,9 +5577,9 @@ ld_24_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_032
-	ld bc,20
-	ld de,22
-	ld ix,440
+	ld bc,31
+	ld de,33
+	ld ix,1023
 	call vdu_load_img
 	ret
 
@@ -5576,9 +5591,9 @@ ld_24_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_040
-	ld bc,33
-	ld de,36
-	ld ix,1188
+	ld bc,50
+	ld de,54
+	ld ix,2700
 	call vdu_load_img
 	ret
 
@@ -5590,9 +5605,9 @@ ld_24_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_044
-	ld bc,100
-	ld de,30
-	ld ix,3000
+	ld bc,151
+	ld de,85
+	ld ix,12835
 	call vdu_load_img
 	ret
 
@@ -6506,6 +6521,76 @@ ld_52_044:
 	call vdu_load_img
 	ret
 
+ld_53_004:
+	ld hl,F53_004
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_53_004
+	ld bc,1
+	ld de,1
+	ld ix,1
+	call vdu_load_img
+	ret
+
+ld_53_020:
+	ld hl,F53_020
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_53_020
+	ld bc,1
+	ld de,1
+	ld ix,1
+	call vdu_load_img
+	ret
+
+ld_53_032:
+	ld hl,F53_032
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_53_032
+	ld bc,1
+	ld de,1
+	ld ix,1
+	call vdu_load_img
+	ret
+
+ld_53_040:
+	ld hl,F53_040
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_53_040
+	ld bc,1
+	ld de,1
+	ld ix,1
+	call vdu_load_img
+	ret
+
+ld_53_044:
+	ld hl,F53_044
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_53_044
+	ld bc,1
+	ld de,1
+	ld ix,1
+	call vdu_load_img
+	ret
+
 ; File name lookups:
 F20_004: db "panels/20_004.rgba2",0
 F20_020: db "panels/20_020.rgba2",0
@@ -6597,17 +6682,22 @@ F52_020: db "panels/52_020.rgba2",0
 F52_032: db "panels/52_032.rgba2",0
 F52_040: db "panels/52_040.rgba2",0
 F52_044: db "panels/52_044.rgba2",0
+F53_004: db "panels/53_004.rgba2",0
+F53_020: db "panels/53_020.rgba2",0
+F53_032: db "panels/53_032.rgba2",0
+F53_040: db "panels/53_040.rgba2",0
+F53_044: db "panels/53_044.rgba2",0
 
 ; dws buffer ids:
-BUF_DW_6: equ 0x026D
-BUF_DW_7: equ 0x026E
-BUF_DW_8: equ 0x026F
-BUF_DW_9: equ 0x0270
-BUF_DW_10: equ 0x0271
-BUF_DW_11: equ 0x0272
-BUF_DW_12: equ 0x0273
-BUF_DW_13: equ 0x0274
-BUF_DW_14: equ 0x0275
+BUF_DW_6: equ 0x0272
+BUF_DW_7: equ 0x0273
+BUF_DW_8: equ 0x0274
+BUF_DW_9: equ 0x0275
+BUF_DW_10: equ 0x0276
+BUF_DW_11: equ 0x0277
+BUF_DW_12: equ 0x0278
+BUF_DW_13: equ 0x0279
+BUF_DW_14: equ 0x027A
 
 dws_num_panels: equ 7 
 

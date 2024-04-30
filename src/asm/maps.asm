@@ -229,9 +229,6 @@ map_init_sprites:
 	ld (iy+sprite_id),a
 	ld a,(ix+map_img_idx)
 	ld (iy+sprite_obj),a
-
-	; call stepRegistersHex
-
 	call sprite_init_data
 	lea iy,iy+sprite_record_size ; advance pointer to next sprite record
 @next_cell:

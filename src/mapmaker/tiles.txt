@@ -10,10 +10,10 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 1	18		0										normal	
 1	19	"NULL CELL"	1	0	1	0	0	"null cell"					"null cell"	
 2	20	LAMP	1	0	1	0	0	sprite		75	bottom	center	normal	
-2	21	BARREL	1	0	1	0	0	sprite		50	bottom	center	normal	
+2	21	BARREL	1	0	1	0	0	sprite		75	bottom	center	normal	
 2	22	TABLE	1	0	1	0	0	sprite		50	bottom	center	normal	
 2	23	"OVERHEAD LIGHT"	1	0	0	0	0	sprite		100	top	center	normal	
-2	24	"RADIOACTIVE BARREL"	1	0	1	0	0	sprite		50	bottom	center	normal	
+2	24	"RADIOACTIVE BARREL"	1	0	1	0	0	sprite		75	bottom	center	normal	
 2	25	"BJ 25%"	1	0	0	0	0	ui					normal	
 2	26	"BJ 50%"	1	0	0	0	0	ui					normal	
 2	27	"BJ 75%"	1	0	0	0	0	ui					normal	
@@ -42,7 +42,7 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 5	50	DOG	1	0	0	1	0	sprite		50	bottom	center	normal	
 5	51	"GERMAN TROOPER"	1	0	0	1	0	sprite		75	bottom	center	normal	
 5	52	"SS GUARD"	1	0	0	1	0	sprite		75	bottom	center	normal	
-5	53		0										normal	
+5	53	TRANSPARENT	1	0	0	0	0	sprite		100	center	center	normal	
 5	54		0										normal	
 5	55		0										normal	
 5	56		0										normal	
