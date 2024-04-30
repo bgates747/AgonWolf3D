@@ -134,15 +134,10 @@ sprite_behavior_lookup:
 ; initializes sprite data for a particular sprite type and id
 ; inputs: iy = sprite_table_pointer to correct sprite record, sprite_obj set for that record
 sprite_init_data:
-    ; call stepRegistersHex
-
     xor a ; index for sprite init routine
     call do_sprite_behavior ; hl points at address to copy from
     lea de,iy+sprite_health ; de points at the address for LDIR to copy to
     ld bc,sprite_record_size-2 ; copy all but the first two bytes
-
-    ; call stepRegistersHex
-    
     ldir ; hl came back with the copy from address, so we're ready to copy the data
     ret ; done
 

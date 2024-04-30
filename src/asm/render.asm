@@ -86,27 +86,18 @@ render_sprite:
     mlt bc
     add iy,bc ; iy points to the sprite's sprite_imgs_lookup record
     ld iy,(iy) ; iy is the base address of the sprite's image defs lookup
-
-    ; call stepRegistersHex
-
 ; convert to_poly_id to sprite_poly
     ld hl,sprite_polys_lookup
     ld a,(to_poly_id)
     ld bc,0  ; make sure bcu and b are zero
     ld c,a
     add hl,bc ; hl points to the sprite's poly id
-
-    ; call stepRegistersHex
-
 ; get the sprites image defs for the particular poly id
     ld a,(hl)
     ld b,a
     ld c,9  ; 9 bytes per record
     mlt bc
     add iy,bc ; iy is the offset to the sprite's image def
-
-    ; call stepRegistersHex
-
 ; select buffer
     ld hl,(iy+6)
     call vdu_buff_select
@@ -130,10 +121,10 @@ render_cell:
 ; get cell's render_type
     ld a,l ; map_type_status
     and 2 ; mask off everything but lowest two bits
-    jr z,@cube
+    jr z,@cube ; render_type_cube is 0
     jr @nodraw ; placeholder for future implementation TODO
 @cube:
-; get map_img_idx from cell_status lut
+    ; get map_img_idx from cell_status lut
     ld a,(to_img_idx)
     cp 255 ; value for cell with nothing to draw
     jr z,@nodraw

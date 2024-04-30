@@ -4,17 +4,17 @@ cell_status: 		equ 0xB7E000 ; base of on-chip high speed SRAM
 cell_views: 		equ 0xB7E400 ; cell_status + 256*4
 
 ; map status/type flags
-cell_is_door:     	EQU %10000000  ; Bit 7: door flag
-cell_is_wall:     	EQU %01000000  ; Bit 6: wall flag
-cell_is_trigger:  	EQU %00100000  ; Bit 5: trigger flag
-cell_is_blocking: 	EQU %00010000  ; Bit 4: blocking flag
-cell_is_start:		EQU %00001000  ; Bit 3: start flag
-cell_is_to_room:    EQU %00000100  ; Bit 2: to room flag
+cell_is_door:     	equ %10000000  ; Bit 7: door flag
+cell_is_wall:     	equ %01000000  ; Bit 6: wall flag
+cell_is_trigger:  	equ %00100000  ; Bit 5: trigger flag
+cell_is_blocking: 	equ %00010000  ; Bit 4: blocking flag
+cell_is_start:		equ %00001000  ; Bit 3: start flag
+cell_is_to_room:    equ %00000100  ; Bit 2: to room flag
 ; bits 1 and 0 are the render_type mask
-render_type_cube:    	EQU %00000000  ; 0
-render_type_floor:   	EQU %00000001  ; 1
-render_type_null:    	EQU %00000010  ; 2
-render_type_sprite:  	EQU %00000011  ; 3
+render_type_cube:   equ %00000000  ; 0
+render_type_floor:  equ %00000001  ; 1
+render_type_null:   equ %00000010  ; 2
+render_type_sprite: equ %00000011  ; 3
 
 ; HOW THE MAP TABLE IS LAID OUT
 ; map table field offset constants
