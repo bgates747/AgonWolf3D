@@ -15,9 +15,10 @@ player_ships: db 0x03 ; binary
 ; ######### Player Variables ##########
 ; player position on the map and orientation
 cur_floor: db 0x00 ; 0-255, corresponds to floor_num in build scripts
-cur_room: db 0x00 ; 0-9, corresponds to room_num in build scripts
+cur_room: db 0x00 ; 0-9, corresponds to room_id in build scripts
+cur_cell: db 0x00 ; 0-255, corresponds to cell_id in build scripts
 from_floor: db 0x00 ; 0-255, corresponds to floor_num in build scripts
-from_room: db 0x00 ; 0-9, corresponds to room_num in build scripts
+from_room: db 0x00 ; 0-9, corresponds to room_id in build scripts
 orientation: db 0x00 ; 0-3 north,east,south,west
 cur_x: db 0x00
 cur_y: db 0x00
@@ -63,10 +64,10 @@ player_end_variables: ; for when we want to traverse this table in reverse
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 player_init:
-    ld l,7 ; x
-    ld h,14 ; y
-    ld (cur_x),hl
-    xor a
+    call get_start_pos ; a = cell_id, d = map_y, e = map_x
+    ld (cur_cell),a
+    ld (cur_x),de ; implicitly populates cur_y
+    xor a ; north is default orientation
     ld (orientation),a
     ld a,move_timer_reset
     ld (player_move_timer),a

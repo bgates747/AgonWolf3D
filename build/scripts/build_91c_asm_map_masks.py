@@ -81,8 +81,7 @@ def get_render_type_masks(db_path):
         ) AS t1""")
     render_types = cursor.fetchall()
     conn.close()
-    # Convert results to a dictionary with render_type as keys and two-digit binary strings as values
-    render_types_dict = {rt['render_type']: format(int(rt['render_type_idx']), '02b') for rt in render_types}
+    render_types_dict = {rt['render_type']: rt['render_type_idx'] for rt in render_types}
     return render_types_dict
 
 def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
@@ -127,9 +126,12 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
                         render_type_mask = 1 # floor (the only ui element on a map should be BJ's starting position, which renders as floor)
                     else:
                         render_type_mask = render_types_dict[cell['render_type']]
+                    render_type_mask = format(int(render_type_mask), '02b')
+                    
                     sprite_id, tile_name = sprite_ids.get(cell_id, (-1, 'no sprite'))
                     hex_sprite_id = format(sprite_id & 0xFF, "02X")
                     map_type_status = f'{cell["is_door"]}{cell["is_wall"]}{cell["is_trigger"]}{cell["is_blocking"]}{int(cell["special"] == "start")}{int(cell["special"] == "to room")}{render_type_mask}'
+                    
                     hex_type_status = format(int(map_type_status, 2), "02X")
                     hex_obj_id = format(cell['obj_id'] & 0xFF, "02X")
                     hex_img_idx = format(cell['img_idx'] & 0xFF, "02X")

@@ -3,23 +3,25 @@
 cell_status: 		equ 0xB7E000 ; base of on-chip high speed SRAM
 cell_views: 		equ 0xB7E400 ; cell_status + 256*4
 
-; map type/status flags
+; map status/type flags
 cell_is_door:     	EQU %10000000  ; Bit 7: door flag
 cell_is_wall:     	EQU %01000000  ; Bit 6: wall flag
 cell_is_trigger:  	EQU %00100000  ; Bit 5: trigger flag
 cell_is_blocking: 	EQU %00010000  ; Bit 4: blocking flag
 cell_is_start:		EQU %00001000  ; Bit 3: start flag
+cell_is_to_room:    EQU %00000100  ; Bit 2: to room flag
+; bits 1 and 0 are the render_type mask
+render_type_cube:    	EQU %00000000  ; 0
+render_type_floor:   	EQU %00000001  ; 1
+render_type_null:    	EQU %00000010  ; 2
+render_type_sprite:  	EQU %00000011  ; 3
 
 ; HOW THE MAP TABLE IS LAID OUT
-; (obj_id render_obj type/status mask), render routine address
-; cell_000: dl 0x110000,rend_000; 0x00 : 00,00 : 0x00,0x00 
-;
 ; map table field offset constants
 ; (mind the little-endianess)
 map_type_status: 	equ 0
 map_img_idx: 		equ 1
 map_obj_id: 		equ 2
-; map_render: 		equ 3 ; deprecated
 map_sprite_id: 		equ 3
 map_record_size: 	equ 4 ; bytes per cell_status record
 
@@ -243,6 +245,45 @@ map_init_sprites:
 	ld iy,sprite_table_base ; reset pointer
 	ld (sprite_table_pointer),iy
 	ret
+
+; get the x,y map coordinates from a cell_id
+; inputs: a = cell_id
+; returns: a = cell_id, d = map_y, e = map_x
+cell_id_to_coords:
+	push af	; Save the cell id
+; Calculate the y coordinate by dividing the index by 16
+	ld d,a      ; Move index into d
+	sra d        ; Shift right once (d = d / 2)
+	sra d        ; Shift right again (d = d / 4)
+	sra d        ; Shift right again (d = d / 8)
+	sra d        ; Shift right again (d = d / 16)
+; Calculate the x coordinate by taking the index modulo 16
+	and 15       ; e = e & 15 (retain the lower 4 bits of the cell id, which is modulo 16)
+	ld e,a      ; e is now the x coordinate
+	pop af	; a is cell id
+	ret
+
+; get starting position based on the start flag
+; inputs: none
+; returns: a = cell_id, d = map_y, e = map_x
+get_start_pos:
+	ld de,0 ; initialize to 0,0 as a default
+	ld ix,cell_status ; ix points to the start of the map data
+	xor a ; start at cell 0
+@loop:
+	push af ; save cell_id
+	ld a,(ix+map_type_status) ; a is the cell status bitmmask
+	and cell_is_start ; testing whether the cell start bit is lit
+	jr z,@not_start ; go to the next cell if not
+	pop	af ; a is cell_id
+	call cell_id_to_coords ; d = map_y, e = map_x
+	ret
+@not_start:
+	pop	af ; a is cell_id
+	inc a ; bump cell id
+	ret z ; if zero we've wrapped around so we return 0,0 in de and 0 in a as cell_id
+	lea ix,ix+map_record_size ; otherwise bump pointer to next map record
+	jr @loop
 
 ; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
 
