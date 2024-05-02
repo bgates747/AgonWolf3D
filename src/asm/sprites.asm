@@ -11,7 +11,7 @@ sprite_animation_timer: equ 08 ; 1 byte  - when hits zero, draw next animation f
 sprite_move_timer:      equ 09 ; 1 byte  - when zero, go to next move program, or step
 sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, varies
 sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
-sprite_health_damage:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (negative gains health)
+sprite_health_damage:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (positive gains health)
 sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
 sprite_record_size: equ 16 ; 16 bytes per sprite record
 
@@ -110,6 +110,11 @@ table_deactivate_sprite:
     dec (ix)
     ret
 
+; set the active sprite record to no sprite and remove it from the map cell it was in
+; inputs: iy pointed to sprite record
+sprite_kill:
+    ret
+
 ; #### SPRITE BEHAVIOR SUBROUTINES ####
 sprite_behavior_lookup:
     dl LAMP
@@ -134,7 +139,7 @@ sprite_behavior_lookup:
 ; initializes sprite data for a particular sprite type and id
 ; inputs: iy = sprite_table_pointer to correct sprite record, sprite_obj set for that record
 sprite_init_data:
-    xor a ; index for sprite init routine
+    ld a,sp_init ; index for sprite init routine
     call do_sprite_behavior ; hl points at address to copy from
     lea de,iy+sprite_health ; de points at the address for LDIR to copy to
     ld bc,sprite_record_size-2 ; copy all but the first two bytes
@@ -142,18 +147,24 @@ sprite_init_data:
     ret ; done
 
 ; #### SPRITE BEHAVIOR ROUTINES ####
+; sprite behavior indices
+sp_init:   equ 0
+sp_use:    equ 1
+sp_shoot:  equ 2
+sp_see:    equ 3
+sp_kill:   equ 4
+
+; calls the sprite behavior routine for the sprite pointed to by iy
 ; inputs: iy points to sprite record, sprite_obj set for that record, 
 ;         a = type index of routine to call
 do_sprite_behavior:
-    push af ; save routine index for later
-    ld a,(iy+sprite_obj)
-    ld b,a
+    ld b,(iy+sprite_obj)
     ld c,3 ; three bytes per lookup record
     mlt bc ; bc is offset from the base of the lookup table
     ld hl,sprite_behavior_lookup
     add hl,bc
     ld hl,(hl) ; hl points to the base address of the sprite behavior routines
-    pop bc ; b holds the routine index
+    ld b,a ; b holds the routine index
     ld c,3 ; three bytes per lookup record
     mlt bc ; bc is offset from the base of the lookup table
     add hl,bc ; hl points to the label of the routine to call
@@ -182,19 +193,20 @@ LAMP:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 BARREL:
 ; behavior routine address lookup
@@ -216,19 +228,20 @@ BARREL:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db -20 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 TABLE:
 ; behavior routine address lookup
@@ -250,19 +263,20 @@ TABLE:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 OVERHEAD_LIGHT:
 ; behavior routine address lookup
@@ -284,19 +298,20 @@ OVERHEAD_LIGHT:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 RADIOACTIVE_BARREL:
 ; behavior routine address lookup
@@ -318,19 +333,20 @@ RADIOACTIVE_BARREL:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db -50;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 HEALTH_PACK:
 ; behavior routine address lookup
@@ -352,19 +368,24 @@ HEALTH_PACK:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
+    db 000 ;sprite_points
     db 020 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    ld a,(iy+sprite_health_damage)
+    call player_mod_health
+    ld a,sp_kill
+    call do_sprite_behavior
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GOLD_CHALISE:
 ; behavior routine address lookup
@@ -387,18 +408,19 @@ GOLD_CHALISE:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GOLD_CROSS:
 ; behavior routine address lookup
@@ -420,19 +442,20 @@ GOLD_CROSS:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 050 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 PLATE_OF_FOOD:
 ; behavior routine address lookup
@@ -454,19 +477,24 @@ PLATE_OF_FOOD:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 010 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    ld a,(iy+sprite_health_damage)
+    call player_mod_health
+    ld a,sp_kill
+    call do_sprite_behavior
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 KEYCARD:
 ; behavior routine address lookup
@@ -488,19 +516,20 @@ KEYCARD:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GOLD_CHEST:
 ; behavior routine address lookup
@@ -522,19 +551,20 @@ GOLD_CHEST:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 250 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 MACHINE_GUN:
 ; behavior routine address lookup
@@ -556,19 +586,20 @@ MACHINE_GUN:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GATLING_GUN:
 ; behavior routine address lookup
@@ -590,19 +621,20 @@ GATLING_GUN:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 DOG_FOOD:
 ; behavior routine address lookup
@@ -624,19 +656,24 @@ DOG_FOOD:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 005 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    ld a,(iy+sprite_health_damage)
+    call player_mod_health
+    ld a,sp_kill
+    call do_sprite_behavior
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GOLD_KEY:
 ; behavior routine address lookup
@@ -658,19 +695,20 @@ GOLD_KEY:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 000 ;sprite_points
+    db 000 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 DOG:
 ; behavior routine address lookup
@@ -692,19 +730,20 @@ DOG:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 010 ;sprite_points
+    db -10 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 GERMAN_TROOPER:
 ; behavior routine address lookup
@@ -726,19 +765,20 @@ GERMAN_TROOPER:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 020 ;sprite_points
+    db -20 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return
 
 SS_GUARD:
 ; behavior routine address lookup
@@ -760,16 +800,17 @@ SS_GUARD:
     db 000 ;sprite_animation_timer
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 030 ;sprite_points
+    db -30 ;sprite_health_damage
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ret
+    jp sprite_behavior_return
 @shoot:
-    ret
+    jp sprite_behavior_return
 @see:
-    ret
+    jp sprite_behavior_return
 @kill:
-    ret
+    call sprite_kill
+    jp sprite_behavior_return

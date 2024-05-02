@@ -212,12 +212,19 @@ render_scene:
     inc c ; iy address offset 
     jr @loop
 @end:
-; draw the ui
-	ld hl,BUF_UI_LOWER_PANEL
-    call vdu_buff_select
-	ld bc,0
-	ld de,160
-	call vdu_plot_bmp
+; debug
+; display player's health
+    ld a,(player_health)
+    call dumpRegistersHex
+; end debug
+
+; ; TODO: properly implement this
+; ; draw the ui
+; 	ld hl,BUF_UI_LOWER_PANEL
+;     call vdu_buff_select
+; 	ld bc,0
+; 	ld de,160
+; 	call vdu_plot_bmp
 ; all done
     ret
 

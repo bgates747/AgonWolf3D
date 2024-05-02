@@ -1,16 +1,16 @@
 ; ######## GAME STATE VARIABLES #######
 ; THESE MUST BE IN THIS ORDER FOR new_game TO WORK PROPERLY
 player_score: db 0x00,#00,#00 ; bcd
-; player current healths,binary
+; player current health,binary
 ; when < 0 player splodes
-; restores to player_max_healths when new ship spawns
-player_healths: db 16 ; binary
-; max player healths,binary
+; restores to player_max_health when new ship spawns
+player_health: db 50 ; binary TODO: temp set at 50% for testing, set to 100 for actual game
+; max player health,binary
 ; can increase with power-ups (todo)
-player_max_healths: db 16 ; binary
+player_max_health: db 100 ; binary
 ; when reaches zero,game ends
 ; can increase based on TODO
-player_ships: db 0x03 ; binary
+player_lives: db 0x03 ; binary
 
 ; ######### Player Variables ##########
 ; player position on the map and orientation
@@ -48,7 +48,7 @@ player_x:                dl 0x000000 ; 3 bytes 16.8 fractional x position in pix
 player_y:                dl 0x000000 ; 3 bytes 16.8 fractional y position in pixels
 player_xvel:             dl 0x000000 ; 3 bytes x-component velocity, 16.8 fixed, pixels
 player_yvel:             dl 0x000000 ; 3 bytes y-component velocity, 16.8 fixed, pixels
-player_vel:              dl 0x000000 ; 3 bytes velocity px/frame (16.8 fixed)
+playervel:              dl 0x000000 ; 3 bytes velocity px/frame (16.8 fixed)
 player_heading:          dl 0x000000 ; 3 bytes sprite movement direction deg256 16.8 fixed
 player_orientation:      dl 0x000000 ; 3 bytes not currently used
 player_animation:        db     0x00 ; 1 bytes not currently used
@@ -71,6 +71,14 @@ player_init:
     ld (orientation),a
     ld a,move_timer_reset
     ld (player_move_timer),a
+    ret
+
+; modifies the players health by a set amount
+; inputs: a is the signed amount to modify health
+player_mod_health:
+    ld hl,player_health
+    add a,(hl)
+    ld (hl),a
     ret
 
 ; process player keyboard input
@@ -181,9 +189,23 @@ player_input:
     ld a,(cur_y)
     add a,d
     ld d,a
-    push de ; save y_vel,x_vel
+    ; push de ; save yvel,xvel
+    ld (xvel),de ; save yvel,xvel from d,e
     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
-    pop de ; restore y_vel,x_vel
+; check whether target cell contains a sprite
+    ld a,(ix+map_sprite_id)
+    cp 255 ; value if not sprite
+    jr z,@not_sprite
+    ld b,a
+    ld c,sprite_record_size
+    mlt bc
+    ld iy,sprite_table_base
+    add iy,bc
+    ld a,sp_use
+    call do_sprite_behavior
+@not_sprite:
+    ; pop de ; restore yvel,xvel
+    ld de,(xvel) ; restore yvel,xvel to d,e
 ; read map type/status mask from target cell
     ld a,(ix+map_type_status)
     ld b,a ; b = target cell type/status

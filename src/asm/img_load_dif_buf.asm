@@ -7,7 +7,7 @@ cur_load_jump_table: dl 0
 img_load_init:
 ; initialize bj's position parameters
 	ld hl,0
-	ld (bj_y_vel),hl
+	ld (bj_yvel),hl
 
     ld hl,45
 	ld (bj_y_cur),hl
@@ -15,7 +15,7 @@ img_load_init:
     ld (bj_y_max),hl
 
 	ld hl,1
-	ld (bj_x_vel),hl
+	ld (bj_xvel),hl
 
 	ld hl,10
 	ld (bj_x_cur),hl
@@ -109,7 +109,7 @@ move_bj:
 	call vdu_buff_select
 ; update position based on velocity parameters
 	ld hl, (bj_x_cur)
-	ld de, (bj_x_vel)
+	ld de, (bj_xvel)
 	add hl, de
 	ld (bj_x_cur), hl
 	ex de,hl ; store x_cur in de
@@ -131,22 +131,22 @@ draw_bj:
 	ret
 move_bj_x_min:
 	ld hl,1
-	ld (bj_x_vel),hl
+	ld (bj_xvel),hl
 	ld hl,(bj_x_min)
 	ld (bj_x_cur),hl
 	jr draw_bj
 move_bj_x_max:
 	ld hl,-1
-	ld (bj_x_vel),hl
+	ld (bj_xvel),hl
 	ld hl,(bj_x_max)
 	ld (bj_x_cur),hl
 	jr draw_bj
-bj_x_vel: dl 0
+bj_xvel: dl 0
 bj_x_cur: dl 0
 bj_x_min: dl 0
 bj_x_max: dl 0
 
-bj_y_vel: dl 0
+bj_yvel: dl 0
 bj_y_cur: dl 0
 bj_y_min: dl 0
 bj_y_max: dl 0

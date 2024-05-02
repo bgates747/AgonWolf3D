@@ -81,7 +81,7 @@ init:
 	call load_ui_images
 
 ; set up the display
-    ld a,8 + 128 ; 320x240x64 double-buffered
+    ld a,8;+128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
@@ -95,6 +95,9 @@ init:
 	ld c,4 ; dark blue
 	call vdu_gcol_bg
 	call vdu_clg
+
+; set the cursor off again since we changed screen modes
+	call cursor_off
 
 ; VDU 28, left, bottom, right, top: Set text viewport **
 ; MIND THE LITTLE-ENDIANESS
@@ -131,11 +134,6 @@ init:
 	ld hl,dws_load_panels_table
 	ld (cur_load_jump_table),hl
 	call img_load_main
-	
-; clear the screen
-	call vdu_cls
-	call vdu_clg
-	call vdu_flip
 
 ; initialization done
 	ret
@@ -146,6 +144,14 @@ main:
 
 ; initialize player position
 	call player_init
+
+; clear the screen
+	call vdu_cls
+	call vdu_clg
+	call vdu_flip
+	call vdu_cls
+	call vdu_clg
+	call vdu_flip
 	
 ; render initial scene
 	ld de,(cur_x) ; implicitly loads cur_y

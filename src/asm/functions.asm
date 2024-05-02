@@ -181,7 +181,7 @@ stepRegistersHex:
     push af ; dammit
 
 ; home the cursor
-    call vdu_home_cursor
+    ; call vdu_home_cursor
 
 ; print each register
     ld hl,str_afu
@@ -373,8 +373,8 @@ upc: dl 0
 ; inputs: whatever is in the flags register
 ; outputs: binary representation of flags
 ;          with a header so we know which is what
-; destroys: hl
-; preserves: af
+; destroys: nothing
+; preserves: everything
 dumpFlags:
 ; first we curse zilog for not giving direct access to flags
     push af ; this is so we can send it back unharmed
