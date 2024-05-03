@@ -189,22 +189,18 @@ player_input:
     ld a,(cur_y)
     add a,d
     ld d,a
-    ; push de ; save yvel,xvel
     ld (xvel),de ; save yvel,xvel from d,e
     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
 ; check whether target cell contains a sprite
     ld a,(ix+map_sprite_id)
     cp 255 ; value if not sprite
     jr z,@not_sprite
-    ld b,a
-    ld c,sprite_record_size
-    mlt bc
-    ld iy,sprite_table_base
-    add iy,bc
+; is a sprite so run its "use" behavior routine
+    call sprite_set_pointer
     ld a,sp_use
     call do_sprite_behavior
+; fall through because we still need to check out what's going on in the target cell
 @not_sprite:
-    ; pop de ; restore yvel,xvel
     ld de,(xvel) ; restore yvel,xvel to d,e
 ; read map type/status mask from target cell
     ld a,(ix+map_type_status)

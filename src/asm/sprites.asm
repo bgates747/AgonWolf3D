@@ -11,7 +11,7 @@ sprite_animation_timer: equ 08 ; 1 byte  - when hits zero, draw next animation f
 sprite_move_timer:      equ 09 ; 1 byte  - when zero, go to next move program, or step
 sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, varies
 sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
-sprite_health_damage:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (positive gains health)
+sprite_health_modifier:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (positive gains health)
 sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
 sprite_record_size: equ 16 ; 16 bytes per sprite record
 
@@ -60,7 +60,7 @@ cos_sprite_heading: dl 0x000000 ; signed fixed 16.8
 ; gets the next available sprite id
 ; inputs; none
 ; returns: if new sprite available, a = sprite id, 
-;           ix pointing to new sprite vars, carry set
+;      ix pointing to new sprite vars, carry set
 ;      otherwise, a = 0, carry flag reset, ix pointing to highest sprite vars
 ; destroys: a,b,hl,ix
 ; affects: bumps table_active_sprites by one
@@ -110,9 +110,32 @@ table_deactivate_sprite:
     dec (ix)
     ret
 
+; sets iy and sprite_table_pointer to the sprite record with the given id
+; inputs: a = sprite id
+; outputs: iy = sprite_table_pointer to the sprite record with the given id
+; destroys: bc
+sprite_set_pointer:
+    ld b,a
+    ld c,sprite_record_size
+    mlt bc
+    ld iy,sprite_table_base
+    add iy,bc
+    ld (sprite_table_pointer),iy
+    ret
+
 ; set the active sprite record to no sprite and remove it from the map cell it was in
-; inputs: iy pointed to sprite record
+; inputs: sprite_table_pointer set to the sprite record to clear
 sprite_kill:
+; set sprite table record to no sprite
+    ld iy,(sprite_table_pointer)
+    ld hl,0xFFFFFF ; a string of -1s
+    ld (iy),hl ; populates sprite_id, sprite_obj and sprite_heatlth with -1, all indicating that it is quite dead
+
+; set map cell to no sprite and normal floor
+    ld hl,0x1DFF01 ; normal floor TODO: we should set these values dyanmically based on the defs in tiles.txt at some point
+    ld (ix),hl
+    ld a,0xFF ; no sprite
+    ld (ix+map_sprite_id),a ; now sprite is truly dead
     ret
 
 ; #### SPRITE BEHAVIOR SUBROUTINES ####
@@ -155,9 +178,10 @@ sp_see:    equ 3
 sp_kill:   equ 4
 
 ; calls the sprite behavior routine for the sprite pointed to by iy
-; inputs: iy points to sprite record, sprite_obj set for that record, 
+; inputs: sprite_table_pointer set, sprite_obj set for that record, 
 ;         a = type index of routine to call
 do_sprite_behavior:
+    ld iy,(sprite_table_pointer)
     ld b,(iy+sprite_obj)
     ld c,3 ; three bytes per lookup record
     mlt bc ; bc is offset from the base of the lookup table
@@ -194,7 +218,7 @@ LAMP:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -229,7 +253,7 @@ BARREL:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db -20 ;sprite_health_damage
+    db -20 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -264,7 +288,7 @@ TABLE:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -299,7 +323,7 @@ OVERHEAD_LIGHT:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -334,7 +358,7 @@ RADIOACTIVE_BARREL:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db -50;sprite_health_damage
+    db -50;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -369,15 +393,14 @@ HEALTH_PACK:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 020 ;sprite_health_damage
+    db 020 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ld a,(iy+sprite_health_damage)
+    ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    ld a,sp_kill
-    call do_sprite_behavior
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -408,7 +431,7 @@ GOLD_CHALISE:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 100 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -443,7 +466,7 @@ GOLD_CROSS:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 050 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -478,15 +501,14 @@ PLATE_OF_FOOD:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 010 ;sprite_health_damage
+    db 010 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ld a,(iy+sprite_health_damage)
+    ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    ld a,sp_kill
-    call do_sprite_behavior
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -517,7 +539,7 @@ KEYCARD:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -552,7 +574,7 @@ GOLD_CHEST:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 250 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -587,7 +609,7 @@ MACHINE_GUN:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -622,7 +644,7 @@ GATLING_GUN:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -657,15 +679,14 @@ DOG_FOOD:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 005 ;sprite_health_damage
+    db 005 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
-    ld a,(iy+sprite_health_damage)
+    ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    ld a,sp_kill
-    call do_sprite_behavior
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -696,7 +717,7 @@ GOLD_KEY:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db 000 ;sprite_health_damage
+    db 000 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -731,7 +752,7 @@ DOG:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 010 ;sprite_points
-    db -10 ;sprite_health_damage
+    db -10 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -766,7 +787,7 @@ GERMAN_TROOPER:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 020 ;sprite_points
-    db -20 ;sprite_health_damage
+    db -20 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -801,7 +822,7 @@ SS_GUARD:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 030 ;sprite_points
-    db -30 ;sprite_health_damage
+    db -30 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
