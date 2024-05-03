@@ -124,10 +124,9 @@ sprite_set_pointer:
     ret
 
 ; set the active sprite record to no sprite and remove it from the map cell it was in
-; inputs: sprite_table_pointer set to the sprite record to clear
+; inputs: iy pointed at sprite record to clear
 sprite_kill:
 ; set sprite table record to no sprite
-    ld iy,(sprite_table_pointer)
     ld hl,0xFFFFFF ; a string of -1s
     ld (iy),hl ; populates sprite_id, sprite_obj and sprite_heatlth with -1, all indicating that it is quite dead
 
@@ -160,7 +159,7 @@ sprite_behavior_lookup:
     dl SS_GUARD
 
 ; initializes sprite data for a particular sprite type and id
-; inputs: iy = sprite_table_pointer to correct sprite record, sprite_obj set for that record
+; inputs: iy pointed at sprite record, sprite_obj set for same 
 sprite_init_data:
     ld a,sp_init ; index for sprite init routine
     call do_sprite_behavior ; hl points at address to copy from
@@ -178,10 +177,9 @@ sp_see:    equ 3
 sp_kill:   equ 4
 
 ; calls the sprite behavior routine for the sprite pointed to by iy
-; inputs: sprite_table_pointer set, sprite_obj set for that record, 
+; inputs: iy pointed at sprite record, sprite_obj set for same 
 ;         a = type index of routine to call
 do_sprite_behavior:
-    ld iy,(sprite_table_pointer)
     ld b,(iy+sprite_obj)
     ld c,3 ; three bytes per lookup record
     mlt bc ; bc is offset from the base of the lookup table
