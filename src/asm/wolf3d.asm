@@ -30,7 +30,6 @@
 	include "src/asm/vdu.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
-    ; include "src/asm/map00_0.asm" ; deprecated now that we load map binaries from files
 
 start:              
     push af
@@ -81,7 +80,7 @@ init:
 	call load_ui_images
 
 ; set up the display
-    ld a,8;+128 ; 320x240x64 double-buffered
+    ld a,8+128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
