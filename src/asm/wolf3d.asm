@@ -30,6 +30,7 @@
 	include "src/asm/vdu.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
+	include "src/asm/maths.asm"
 
 start:              
     push af
@@ -65,6 +66,17 @@ loading_dws: defb "Loading distance walls",0
 loading_ui: defb "Loading UI",0
 
 init:
+; ; TEMP DEBUG BCD
+; 	call vdu_cls
+; 	ld a,8
+; 	add a,7
+; 	daa
+; 	call dumpRegistersHex
+; 	ret
+
+; ; END TEMP DEBUG BCD
+
+
 ; set the cursor off
 	call cursor_off
 
