@@ -1457,3 +1457,34 @@ vdu_sprite_add_buff:
 @cmd:      db 23,27,0x26
 @bufferId: dw 0x0000
 @end:      db 0x00 ; padding
+
+; ############################################################
+; VDU SOUND API
+; ############################################################
+; Command 0: Play note
+; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
+    MACRO PLAY_NOTE channel, volume, frequency, duration
+    ld hl, @PLAY_NOTE_CMD        ; Start of command block
+    ld bc, @PLAY_NOTE_END - @PLAY_NOTE_CMD  ; Command block size
+    rst.lil $18
+    jr @PLAY_NOTE_END  
+@PLAY_NOTE_CMD:  db 23, 0, $85               ; Command header
+                 db channel                  ; Channel, 0 (commented out)
+                 db 0                        ; Magic number
+                 db volume                   ; Volume
+                 dw frequency                ; Frequency
+                 dw duration                 ; Duration
+@PLAY_NOTE_END: 
+    ENDMACRO
+
+    MACRO MUTE_CHANNEL channel
+    ld hl, @MUTE_CHANNEL_CMD     ; Start of command block
+    ld bc, @MUTE_CHANNEL_END - @MUTE_CHANNEL_CMD  ; Command block size
+    rst.lil $18
+    jr @MUTE_CHANNEL_END
+@MUTE_CHANNEL_CMD: db 23, 0, $85             ; Command header
+                   db channel                ; Channel, 0 (commented out)
+                   db 2                      ; Magic number
+                   db 0                      ; Volume (mute)
+@MUTE_CHANNEL_END: 
+    ENDMACRO
