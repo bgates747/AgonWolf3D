@@ -173,26 +173,42 @@ def findNearestColorHSV(targetColor, numcolors):
     # Return the nearest color with full opacity
     return nearestColor + (255,)
 
-def convert_to_agon_palette(img,numcolors,method):
-    width, height = img.size
+# the optional transparent_color parameter is a tuple of RGB values to treat as transparent
+# it can contain a fourth value for alpha, but it will be ignored
+def convert_to_agon_palette(image, numcolors, method, transparent_color=None):
+    width, height = image.size
+    # Ensure the image is in RGBA mode
+    if image.mode != 'RGBA':
+        image = image.convert('RGBA')
     
-    # Create a new image for the converted colors
     new_img = Image.new('RGBA', (width, height))
-    
-    # Convert each pixel to the nearest color from the palette
+
+    # Process each pixel according to the color conversion method
     if method == 'RGB':
         for x in range(width):
             for y in range(height):
-                current_pixel = img.getpixel((x, y))
-                nearest_color = findNearestColorRGB(current_pixel, numcolors)
+                current_pixel = image.getpixel((x, y))
+                # Only compare RGB channels for transparency
+                if transparent_color and current_pixel[:3] == transparent_color[:3]:
+                    nearest_color = (0, 0, 0, 0)
+                else:
+                    nearest_color = findNearestColorRGB(current_pixel, numcolors)
+                    nearest_color = nearest_color[:3] + (255,)  # Preserve full opacity unless transparent
                 new_img.putpixel((x, y), nearest_color)
-    else:
+    elif method == 'HSV':
         for x in range(width):
             for y in range(height):
-                current_pixel = img.getpixel((x, y))
-                nearest_color = findNearestColorHSV(current_pixel, numcolors)
+                current_pixel = image.getpixel((x, y))
+                # Apply transparency check for HSV method if needed
+                if transparent_color and current_pixel[:3] == transparent_color[:3]:
+                    nearest_color = (0, 0, 0, 0)
+                else:
+                    nearest_color = findNearestColorHSV(current_pixel, numcolors)
+                    nearest_color = nearest_color[:3] + (255,)  # Preserve full opacity unless transparent
                 new_img.putpixel((x, y), nearest_color)
-    
+    else:
+        raise ValueError("convert_to_agon_palette: Invalid method. Use 'RGB' or 'HSV'.")
+
     return new_img
 
 def img_to_rgba8(image, filepath):
@@ -318,3 +334,15 @@ def rgba2_to_img(src_file_path, dim_x, dim_y):
     # Return the PIL Image object
     return image
 
+if __name__ == "__main__":
+    rgba2_file = "tgt/3.rgba2"
+    bmp_file = "tgt/3.bmp"
+    png_file = "tgt/3b.png"
+    pil_img = Image.open(bmp_file)
+    transparent_color = (255,255,255) ; # White
+    pil_img = convert_to_agon_palette(pil_img, 64, 'HSV', transparent_color)
+    img_to_rgba2(pil_img, rgba2_file)
+    height = pil_img.height
+    width = pil_img.width
+    pil_img2 = rgba2_to_img(rgba2_file, width, height)
+    pil_img2.save(png_file)
