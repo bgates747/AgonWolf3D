@@ -31,6 +31,10 @@
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
 	include "src/asm/maths.asm"
+	include "src/asm/img_load.asm"
+	include "src/asm/sfx.asm"
+	include "src/asm/sfx_load.asm"
+
 
 start:              
     push af
@@ -146,6 +150,14 @@ init:
 	ld (cur_load_jump_table),hl
 	call img_load_main
 
+; load sound effects
+	ld bc,SFX_num_buffers
+	ld hl,SFX_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,SFX_load_routines_table
+	ld (cur_load_jump_table),hl
+	call sfx_load_main
+
 ; initialization done
 	ret
 
@@ -206,6 +218,5 @@ main_end:
 	ret
 
 
-; img_load.asm must go here so that filedata doesn't stomp on program data
-	include "src/asm/img_load.asm"
-	; include "src/asm/img_load_dif_buf.asm"
+; files.asm must go here so that filedata doesn't stomp on program data
+	include "src/asm/files.asm"

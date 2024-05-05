@@ -1489,13 +1489,14 @@ vdu_sprite_add_buff:
 @MUTE_CHANNEL_END: 
     ENDMACRO
 
-; inputs: c = channel, b = volume, e = frequency; d = duration;
+; inputs: c = channel, b = volume, hl = frequency; de = duration;
 vdu_play_note:
     ld a,c
     ld (@channel),a
     ld a,b
     ld (@volume),a
-    ld (@frequency),de
+    ld (@frequency),hl
+    ld (@duration),de
     ld hl,@cmd         
     ld bc,@end-@cmd    
     rst.lil $18         
@@ -1504,8 +1505,8 @@ vdu_play_note:
 @channel:   db 0x00
             db 0x00 ; play note command
 @volume:    db 0x00
-@frequency: dw 0x000
-@duration:  dw 0x000
+@frequency: dw 0x0000
+@duration:  dw 0x0000
 @end:       db 0x00 ; padding
 
 ; Command 1: Status
@@ -1576,7 +1577,7 @@ vdu_channel_frequency:
 
 
 ; VDU 23, 0, &85, channel, 4, waveformOrSample, [bufferId;]
-; inputs: c = channel, b = waveformOrSample, hl = bufferId
+; inputs: c = channel, b = waveformOrSample, [hl = bufferId]
 ; Sets the waveform type for a channel to use. The waveformOrSample value is a single byte treated as a signed value.
 
 ; Using a negative value for the waveform indicates that a sample should be used instead. For more information see the documentation for the sample command.
@@ -1619,27 +1620,57 @@ vdu_channel_waveform:
 
 
 ; VDU 23, 0, &85, 0, 5, 2, bufferId; format
-; inputs: hl = bufferId, a = format
+; inputs: hl = bufferId; a = format
 ; The format parameter is an 8-bit value that indicates the format of the sample data. The following values are supported:
 ; Value 	Description
 ; 0 	8-bit signed, 16KHz
 ; 1 	8-bit unsigned, 16KHz
 vdu_buffer_to_sound:
     ld (@bufferId),hl
-    ld a,b
     ld (@format),a
     ld hl,@cmd         
     ld bc,@end-@cmd    
     rst.lil $18         
     ret
 @cmd:       db 23, 0, 0x85
-@channel:   db 0x00
+            db 0x00 ; a magic number that is always 0
             db 0x05 ; buffer to sound command
+            db 0x02 ; a magic number that is always 2
 @bufferId:  dw 0x0000
 @format:    db 0x00
 @end:       
 
 
+; inputs: c = channel, b = volume, de = duration; hl = bufferId
+vdu_play_sample:
+    ; populate input parameters
+    ld a,c
+    ld (@channel0),a
+    ld (@channel1),a
+    ld a,b
+    ld (@volume),a
+    ld (@frequency),de
+    ld (@bufferId),hl
+    ; clean up byte that got stomped on by bufferId load from hl
+    ld a,23 
+    ld (@cmd1),a 
+    ; prep the vdu command string
+    ld hl, @cmd0
+    ld bc, @end - @cmd0
+    rst.lil $18
+    ret 
+@cmd0:       db 23, 0, 0x85
+@channel0:   db 0x00
+             db 0x04 ; set waveform command
+@waveform:   db 0x08 ; sample
+@bufferId:   dw 0x0000
+@cmd1:       db 23, 0, 0x85
+@channel1:   db 0x00
+             db 0x00 ; play note command
+@volume:     db 0x00
+@frequency:  dw 0x00 ; no effect unless buffer has been set to tuneable sample
+@duration:   dw 0x0000 ; milliseconds
+@end:        db 0x00 ; padding
 
 ; Once a sample has been created in this way, the sample can be selected for use on a channel using the following command:
 
