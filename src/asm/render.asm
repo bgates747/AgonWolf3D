@@ -218,13 +218,19 @@ render_scene:
     call dumpRegistersHex
 ; end debug
 
-; ; TODO: properly implement this
-; ; draw the ui
-; 	ld hl,BUF_UI_LOWER_PANEL
-;     call vdu_buff_select
-; 	ld bc,0
-; 	ld de,160
-; 	call vdu_plot_bmp
+; TODO: properly implement this
+; draw the ui
+	ld hl,BUF_UI_LOWER_PANEL
+    call vdu_buff_select
+	ld bc,0 ; x
+	ld de,160 ; y
+	call vdu_plot_bmp
+
+    ld hl,BUF_UI_BJ_PISTOL_00
+    call vdu_buff_select
+    ld bc,128 ; x
+    ld de,96 ; y
+    call vdu_plot_bmp
 ; all done
     ret
 

@@ -1,7 +1,8 @@
 ; Bitmap indices:
 BUF_UI_BJ_120_120: equ 0x2000
-BUF_UI_LOWER_PANEL: equ 0x2001
-BUF_UI_SPLASH: equ 0x2002
+BUF_UI_BJ_PISTOL: equ 0x2001
+BUF_UI_LOWER_PANEL: equ 0x2002
+BUF_UI_SPLASH: equ 0x2003
 
 ; Import .rgba2 bitmap files and load them into VDP buffers
 load_ui_images:
@@ -15,6 +16,17 @@ load_ui_images:
 	ld bc,120
 	ld de,120
 	ld ix,14400
+	call vdu_load_img
+
+	ld hl,F_UI_bj_pistol
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_UI_BJ_PISTOL
+	ld bc,64
+	ld de,64
+	ld ix,4096
 	call vdu_load_img
 
 	ld hl,F_UI_lower_panel
@@ -42,5 +54,6 @@ load_ui_images:
 	ret
 
 F_UI_bj_120_120: db "ui/bj_120_120.rgba2",0
+F_UI_bj_pistol: db "ui/bj_pistol.rgba2",0
 F_UI_lower_panel: db "ui/lower_panel.rgba2",0
 F_UI_splash: db "ui/splash.rgba2",0

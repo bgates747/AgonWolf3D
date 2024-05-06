@@ -81,6 +81,14 @@ player_mod_health:
     ld (hl),a
     ret
 
+player_shoot:
+    ; play the sound effect
+    call sfx_play_shot_pistol
+    ; check whether the player hit anything
+    
+    ret
+
+
 ; process player keyboard input
 ; Inputs: player_x/y set at desired position
 ; Returns: player position updated
@@ -171,6 +179,7 @@ player_input:
 ; TODO: implement 
     bit 2,(ix+12)
     jr z,@Space
+    call player_shoot
     xor a
 @Space:
 ; =====================

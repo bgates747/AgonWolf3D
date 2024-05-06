@@ -25,6 +25,7 @@
 	include "src/asm/font_retro_computer.asm"
 	include "src/asm/ui.asm"
 	include "src/asm/ui_img.asm"
+	include "src/asm/ui_img_bj.asm"
 	include "src/asm/sprites.asm"
     include "src/asm/mos_api.asm"
 	include "src/asm/vdu.asm"
@@ -64,9 +65,9 @@ exit:
     ret                                 ; Return MOS
 
 hello_world: defb "Welcome to Agon Wolf3D",0
-loading_panels: defb "Loading panels",0
-loading_sprites: defb "Loading sprites",0
-loading_dws: defb "Loading distance walls",0
+; loading_panels: defb "Loading panels",0
+; loading_sprites: defb "Loading sprites",0
+; loading_dws: defb "Loading distance walls",0
 loading_ui: defb "Loading UI",0
 
 init:
@@ -94,6 +95,7 @@ init:
 
 ; load UI images
 	call load_ui_images
+	call load_ui_images_bj
 
 ; set up the display
     ld a,8+128 ; 320x240x64 double-buffered
