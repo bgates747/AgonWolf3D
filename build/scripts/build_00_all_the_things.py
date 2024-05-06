@@ -33,6 +33,7 @@ def do_blender(blender_script_path, blender_executable, blender_local_prefs_path
 def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums):
     # build_00_delete_tgt_dir.py
     if do_00_delete_tgt_dir:
+        print(f"Deleting target directory: {tgt_dir}")
         # Check and delete the target directory if necessary
         if os.path.exists(tgt_dir):
             shutil.rmtree(tgt_dir)
@@ -42,6 +43,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     masks_directory = "build/panels/masks"
     min_scanlines = 2
     if do_01_polys_masks:
+        print(f"build_01_make_polys: Building polys and masks")
         from build_01_make_polys import make_polys_masks
         make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance)
 
@@ -51,6 +53,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     uvs_tgt_dir = 'build/panels/uv'
     thumbs_tgt_dir = 'build/panels/thumbs'
     if do_02_fetch_tiles:
+        print(f"build_02_fetch_tiles: Fetching tiles")
         from build_02_fetch_tiles import fetch_tiles
         fetch_tiles(db_path, src_tiles_path, mapmaker_tiles_dir, uvs_tgt_dir, thumbs_tgt_dir)
 
@@ -58,6 +61,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     panels_png_dir = 'build/panels/png'
     thumbs_dir = 'build/panels/thumbs'
     if do_04_make_panels_png:
+        print(f"build_04_make_panels_png: Making panels and sprites")
         from build_04_make_panels_png import make_panels_and_sprites
         make_panels_and_sprites(db_path, panels_png_dir, thumbs_dir, screen_width, screen_height)
 
@@ -67,37 +71,51 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     dws_rgba_dir = f'tgt/dws'
     dws_src_dir = f'src/assets/images/textures/dws'
     if do_04a_make_dws_png:
+        print(f"build_04a_make_dws: Making distance walls")
         from build_04a_make_dws import make_dws
         make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
 
 # build_05_make_panels_rgba.py
     panels_rgba_dir = 'tgt/panels'
     if do_05_panels_rgba:
+        print(f"build_05_make_panels_rgba: Making 3D panels rgba")
         from build_05_make_panels_rgba import make_panels_rgba
         make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)
 
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'
     if do_06_import_mapmaker_files:
+        print(f"build_06_map_import_mapmaker: Importing mapmaker files")
         from build_06_map_import_mapmaker import import_mapmaker
         for floor_num in floor_nums:
             import_mapmaker(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y)
 
 # build_07_polys_make_map_panels
     if do_07_map_panels:
+        print(f"build_07_polys_make_map_panels: Making map panels")
         from build_07_polys_make_map_panels import make_map_panels
         for floor_num in floor_nums:
             map_masks_directory = f'build/maps/{floor_num:02d}/masks'
             make_map_panels(db_path, floor_num, screen_width, screen_height, masks_directory, map_masks_directory, map_dim_x, map_dim_y)
 
+# build_08_make_sfx.py
+    sfx_src_dir = 'src/assets/sfx'
+    sfx_tgt_dir = 'tgt/sfx'
+    if do_08_make_sfx:
+        print(f"build_08_make_sfx: Making sound effects")
+        from build_08_make_sfx import make_sfx
+        make_sfx(db_path, sfx_src_dir, sfx_tgt_dir)
+        
 # build_90_asm_polys.py
     if do_90_asm_polys:
+        print(f"build_90_asm_polys: Making polys assembler file")
         from build_90_asm_polys import do_all_the_polys
         polys_inc_path = f"src/asm/polys.asm"
         do_all_the_polys(db_path, polys_inc_path)
         
     # build_91_asm_img_load.py
     if do_91_asm_img_load:
+        print(f"build_91_asm_img_load: Making image load assembler file")
         from build_91_asm_img_load import make_asm_images_inc
         panels_inc_path = f"src/asm/images.asm"
         next_buffer_id_counter = 256
@@ -105,29 +123,43 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
 # build_91a_asm_font.py
     if do_91a_asm_font:
+        next_buffer_id = 0x1000
+        print(f"build_91a_asm_font: Making font assembler file")
         from build_91a_asm_font import maken_zee_fonts
-        maken_zee_fonts()
+        maken_zee_fonts(next_buffer_id)
 
 # build_91b_asm_ui.py
     if do_91b_asm_ui:
+        print(f"build_91b_asm_ui: Making UI assembler file")
         from build_91b_asm_ui import make_tbl_91b_UI, make_rgba2_files, make_asm_ui
         ui_inc_path = "src/asm/ui_img.asm"
         src_png_dir = "src/assets/images/ui"
         tgt_cmp_rgba2_dir = "tgt/ui"
-        buffer_id = 0x2000
+        next_buffer_id = 0x2000
         make_tbl_91b_UI(db_path, src_png_dir)
         make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
-        make_asm_ui(db_path, ui_inc_path, buffer_id)
+        make_asm_ui(db_path, ui_inc_path, next_buffer_id)
 
 # build_91c_asm_map_masks.py
     if do_91c_asm_map_masks:
+        print(f"build_91c_asm_map_masks: Making map masks assembler file")
         from build_91c_asm_map_masks import asm_make_map_masks
         maps_tgt_dir = 'tgt/maps'
         asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
 
-# build_93_asm_assemble.py
-    if do_93_asm_assemble:
-        from build_93_asm_assemble import do_assembly
+# build_98_asm_sfx.py
+    sfx_inc_path = 'src/asm/sfx.asm'
+    sfx_tgt_dir = 'sfx'
+    if do_98_asm_sfx:
+        print(f"build_98_asm_sfx: Making sfx assembler file")
+        from build_98_asm_sfx import make_asm_sfx
+        next_buffer_id = 0x3000
+        make_asm_sfx(db_path, sfx_inc_path, sfx_tgt_dir, next_buffer_id)
+
+# build_99_asm_assemble.py
+    if do_99_asm_assemble:
+        print(f"build_99_asm_assemble: Assembling application")
+        from build_99_asm_assemble import do_assembly
         src_file = 'src/asm/wolf3d.asm'
         do_assembly(src_file, tgt_dir)
 
@@ -157,13 +189,15 @@ if __name__ == "__main__":
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
+    do_08_make_sfx = False
     do_90_asm_polys = False
     do_91_asm_img_load = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
     do_91c_asm_map_masks = False
+    do_98_asm_sfx = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
-    do_93_asm_assemble = False
+    do_99_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
     # do_00_delete_tgt_dir = True
@@ -174,12 +208,14 @@ if __name__ == "__main__":
     # do_05_panels_rgba = True
     # do_06_import_mapmaker_files = True
     # do_07_map_panels = True
+    # do_08_make_sfx = True
     # do_90_asm_polys = True
     # do_91_asm_img_load = True
     # do_91a_asm_font = True
     # do_91b_asm_ui = True
     # do_91c_asm_map_masks = True
-    do_93_asm_assemble = True
+    # do_98_asm_sfx = True
+    do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
 
