@@ -1,0 +1,25 @@
+Credits:
+
+
+Classic Wolf3d:
+
+PistolFire - Pavlendia's PD2 LEO pistol from Gamebanana plus Wolfenstein 3D(PC Version)
+EnemyPistolFire - 586 Studios' Enhanced pistol from gamebanana.com plus Wolfenstein 3D(PC Version)
+EnemySmgFire and SmgFire - Apocalyptic Studio's APOCALYPTIC M4 from gamebanana.com plus Wolfenstein 3D(PC Version)
+ChaingunFire - H.A.L.O's M249 Machine Gun from gamebanana.com plus Wolfenstein 3D(PC Version)
+EnemyChaingunFire1 and 2 - Call of Duty 2 by Infinity Ward(Straight from the WildWeasel's Nazis mod) plus Wolfenstein 3D(PC Version)
+Schutzstaffel! and Guten Tag! - Kinsie's Wolfenstein 3D Jaguar Sound Rip, Glad i found it!
+'Komm'herrSchwien - Wolfenstein 3D(Mac Version) with some edits
+GettingCross, GettingCalice, GettingChestofGold and GettingCrown - Remade version of the Score Item Pickup sound effects from ReWolfenstein 3D. i know they aren't mine, but just for memorial. the creator seems removed the download link, which it's shame...
+
+Lost Levels:
+
+LOSPistolFire - 586 Studios' Realistic m1911 from gamebanana.com plus Spear of Destiny: Lost Levels
+LOSSmgFire and EnemyLOSSmgFire - KillerExe_01's Mp 40 sound from gamebanana.com plus Spear of Destiny: Lost Levels
+LOSChaingunFire - BlooP of Gamebanana's 7gamePL M249 Anims plus Spear of Destiny: Lost Levels(It's actually directly from Wolf3d, But whatev)
+
+Spear Resurrection :
+
+MCSMk1Fire, MCSMk2Fire, EnemyMCSMk1Fire - Half-Life 2 Plus Spear Resurrection
+
+The used or original sources of the sound effects are belongs to their games, skins and mods, All rights Reserved!

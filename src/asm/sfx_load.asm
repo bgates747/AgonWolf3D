@@ -73,6 +73,24 @@ sfx_play_shot_pistol:
 	ld hl,BUF_SHOT_PISTOL
 	jp sfx_play
 
+sfx_play_explode:
+	ld hl,BUF_EXPLODE
+	jp sfx_play
+
+sfx_play_ayee_high:
+	ld hl,BUF_AYEE_HIGH
+	jp sfx_play
+
+sfx_play_ugh:
+	ld hl,BUF_UGH
+	jp sfx_play
+
+sfx_play_ahh:
+	ld hl,BUF_AHH
+	jp sfx_play
+
+
+
 ; inputs: bc is the number of sounds to load, cur_buffer_id_lut and cur_load_jump_table set to the address of the first entry in the respective lookup tables
 sfx_load_main:
     ld hl,0

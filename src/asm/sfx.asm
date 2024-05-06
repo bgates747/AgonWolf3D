@@ -1,6 +1,6 @@
 ; This file is created by build_98_asm_sfx.py, do not edit it!
 
-SFX_num_buffers: equ 28
+SFX_num_buffers: equ 29
 ; SFX buffer ids:
 BUF_ACHTUNG: equ 0x3000
 BUF_ACHTUNG2: equ 0x3001
@@ -15,21 +15,22 @@ BUF_DOG_YELP: equ 0x3009
 BUF_DOOR_SHUT: equ 0x300A
 BUF_ENEMY_GATLING: equ 0x300B
 BUF_EVA: equ 0x300C
-BUF_GIB: equ 0x300D
-BUF_GOT_TREASURE: equ 0x300E
-BUF_GUARD_SHOT_PISTOL: equ 0x300F
-BUF_GUTEN_TAG: equ 0x3010
-BUF_LOCKED_DOOR: equ 0x3011
-BUF_MEIN_LEBEN: equ 0x3012
-BUF_MUTTI: equ 0x3013
-BUF_SCHUSSTAFFEL: equ 0x3014
-BUF_SHOT_MACHINE_GUN: equ 0x3015
-BUF_SHOT_MACHINE_GUN_SINGLE: equ 0x3016
-BUF_SHOT_PISTOL: equ 0x3017
-BUF_SPION: equ 0x3018
-BUF_UGH: equ 0x3019
-BUF_WILHELM: equ 0x301A
-BUF_WOOF: equ 0x301B
+BUF_EXPLODE: equ 0x300D
+BUF_GIB: equ 0x300E
+BUF_GOT_TREASURE: equ 0x300F
+BUF_GUARD_SHOT_PISTOL: equ 0x3010
+BUF_GUTEN_TAG: equ 0x3011
+BUF_LOCKED_DOOR: equ 0x3012
+BUF_MEIN_LEBEN: equ 0x3013
+BUF_MUTTI: equ 0x3014
+BUF_SCHUSSTAFFEL: equ 0x3015
+BUF_SHOT_MACHINE_GUN: equ 0x3016
+BUF_SHOT_MACHINE_GUN_SINGLE: equ 0x3017
+BUF_SHOT_PISTOL: equ 0x3018
+BUF_SPION: equ 0x3019
+BUF_UGH: equ 0x301A
+BUF_WILHELM: equ 0x301B
+BUF_WOOF: equ 0x301C
 
 ; SFX buffer id reverse lookup:
 SFX_buffer_id_lut:
@@ -46,6 +47,7 @@ SFX_buffer_id_lut:
 	dl BUF_DOOR_SHUT
 	dl BUF_ENEMY_GATLING
 	dl BUF_EVA
+	dl BUF_EXPLODE
 	dl BUF_GIB
 	dl BUF_GOT_TREASURE
 	dl BUF_GUARD_SHOT_PISTOL
@@ -77,6 +79,7 @@ SFX_duration_lut:
 	dw 491 ; DOOR_SHUT
 	dw 1500 ; ENEMY_GATLING
 	dw 869 ; EVA
+	dw 1247 ; EXPLODE
 	dw 1361 ; GIB
 	dw 1574 ; GOT_TREASURE
 	dw 1223 ; GUARD_SHOT_PISTOL
@@ -108,6 +111,7 @@ SFX_load_routines_table:
 	dl load_sfx_DOOR_SHUT
 	dl load_sfx_ENEMY_GATLING
 	dl load_sfx_EVA
+	dl load_sfx_EXPLODE
 	dl load_sfx_GIB
 	dl load_sfx_GOT_TREASURE
 	dl load_sfx_GUARD_SHOT_PISTOL
@@ -279,6 +283,18 @@ load_sfx_EVA:
 	RST.LIL 08h
 	ld hl,BUF_EVA
 	ld ix,13911
+	call vdu_load_sfx
+	ret
+
+load_sfx_EXPLODE:
+	ld hl,FEXPLODE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_EXPLODE
+	ld ix,19957
 	call vdu_load_sfx
 	ret
 
@@ -476,6 +492,7 @@ FDOG_YELP: db "sfx/DOG_YELP.raw",0
 FDOOR_SHUT: db "sfx/DOOR_SHUT.raw",0
 FENEMY_GATLING: db "sfx/ENEMY_GATLING.raw",0
 FEVA: db "sfx/EVA.raw",0
+FEXPLODE: db "sfx/EXPLODE.raw",0
 FGIB: db "sfx/GIB.raw",0
 FGOT_TREASURE: db "sfx/GOT_TREASURE.raw",0
 FGUARD_SHOT_PISTOL: db "sfx/GUARD_SHOT_PISTOL.raw",0

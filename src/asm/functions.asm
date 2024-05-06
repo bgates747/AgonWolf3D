@@ -181,7 +181,7 @@ stepRegistersHex:
     push af ; dammit
 
 ; home the cursor
-    ; call vdu_home_cursor
+    call vdu_home_cursor
 
 ; print each register
     ld hl,str_afu

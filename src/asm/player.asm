@@ -30,6 +30,15 @@ dy:    db 0x00
 dx:    db 0x00
        db 0x00 ; padding
 
+player_shot_x:      db 0x00
+player_shot_y:      db 0x00
+                    db 0x00 ; padding
+player_shot_xvel:   db 0x00
+player_shot_yvel:   db 0x00
+                    db 0x00 ; padding
+player_shot_status: db 0xFF ; -1 = no shot, otherwise shot direction of travel
+player_shot_time:   dl 0x000000 ; time shot was fired from RTC
+
 ; ######### PLAYER CONSTANTS ##########
 speed_player: equ 0x01 ; 1 map grid unit per movement tick
 move_timer_reset: equ 8 ; 4 ticks per secoond at 32 frames per second
@@ -85,9 +94,59 @@ player_shoot:
     ; play the sound effect
     call sfx_play_shot_pistol
     ; check whether the player hit anything
-    
-    ret
+    ld a,(orientation) ; direction shot is moving
+    ld (player_shot_status),a ; save shot direction -- indicates live shot in flight
+    ld e,a
+    ld d,1 ; shot "velocity" in map units
+    call get_dx_dy ; d,e = dy,dx
+    ld (player_shot_xvel),de ; implicity populates yvel
+    ld hl,(cur_x) ; h,l = player y,x
+    ld (player_shot_x),hl ; initial shot position
 
+    ; call stepRegistersHex
+
+@move_bullet:
+    ld de,(player_shot_xvel) ; d,e = shot yvel,xvel
+    ld hl,(player_shot_x) ; h,l = player shot y,x
+
+    push hl ; DEBUG
+    pop bc ; DEBUG
+
+    ; bump bullet position one map unit in direction of travel
+    ld a,l ; player shot x
+    add a,e ; add xvel
+    ld l,a ; save new x
+    ld a,h ; player shot y
+    add a,d ; add yvel
+    ld h,a ; save new y
+
+    ; call stepRegistersHex
+    
+    ld (player_shot_x),hl ; and save that position
+    ex de,hl ; d,e = bullet y,x
+    call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
+; check whether target cell contains a sprite
+    ld a,(ix+map_sprite_id)
+    cp 255 ; value if not sprite
+    jr z,@not_sprite
+; is a sprite so run its "use" behavior routine
+    call sprite_set_pointer
+    ld a,sp_shoot
+    call do_sprite_behavior ; a = sprite behavior return code
+    cp 255 ; value if shot hit a shootable sprite
+    ret z ; if we hit a sprite, we're done
+; fall through because we still need to check out what's going on in the target cell
+@not_sprite:
+    ld de,(player_shot_xvel) ; restore yvel,xvel to d,e
+; read map type/status mask from target cell
+    ld a,(ix+map_type_status)
+    and %00000011 ; mask off everytying but the render type mask bits
+; branch on the values in the bitmask
+    cp render_type_floor
+    jr z,@move_bullet ; keep going if map cell is a floor
+    ld a,255
+    ld (player_shot_status),a ; set shot status to -1 to indicate shot is done
+    ret ; combat ended
 
 ; process player keyboard input
 ; Inputs: player_x/y set at desired position
@@ -180,7 +239,7 @@ player_input:
     bit 2,(ix+12)
     jr z,@Space
     call player_shoot
-    xor a
+    xor a ; we may not want to reset move timer on a shot
 @Space:
 ; =====================
 ; check whether player pressed a key

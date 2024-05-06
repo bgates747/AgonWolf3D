@@ -258,6 +258,12 @@ BARREL:
 @use:
     jp sprite_behavior_return
 @shoot:
+    ld a,255 ; kill player's shot
+    ld (player_shot_status),a
+    push iy 
+    call sfx_play_explode
+    pop iy 
+    call sprite_kill
     jp sprite_behavior_return
 @see:
     jp sprite_behavior_return
@@ -363,6 +369,12 @@ RADIOACTIVE_BARREL:
 @use:
     jp sprite_behavior_return
 @shoot:
+    ld a,255 ; kill player's shot
+    ld (player_shot_status),a
+    push iy 
+    call sfx_play_explode
+    pop iy 
+    call sprite_kill
     jp sprite_behavior_return
 @see:
     jp sprite_behavior_return
@@ -772,13 +784,17 @@ DOG:
     pop iy 
     jp sprite_behavior_return
 @shoot:
-    jp sprite_behavior_return
-@see:
-    jp sprite_behavior_return
-@kill:
+    ld a,255 ; kill player's shot
+    ld (player_shot_status),a
     push iy 
     call sfx_play_dog_yelp
     pop iy 
+    ; call sprite_kill
+    ; jp sprite_behavior_return
+    jp @kill
+@see:
+    jp sprite_behavior_return
+@kill:
     call sprite_kill
     jp sprite_behavior_return
 
@@ -813,7 +829,14 @@ GERMAN_TROOPER:
     pop iy 
     jp sprite_behavior_return
 @shoot:
-    jp sprite_behavior_return
+    ld a,255 ; kill player's shot
+    ld (player_shot_status),a
+    push iy 
+    call sfx_play_ugh
+    pop iy 
+    ; call sprite_kill
+    ; jp sprite_behavior_return
+    jp @kill
 @see:
     jp sprite_behavior_return
 @kill:
@@ -854,7 +877,14 @@ SS_GUARD:
     pop iy 
     jp sprite_behavior_return
 @shoot:
-    jp sprite_behavior_return
+    ld a,255 ; kill player's shot
+    ld (player_shot_status),a
+    push iy 
+    call sfx_play_ahh
+    pop iy 
+    ; call sprite_kill
+    ; jp sprite_behavior_return
+    jp @kill
 @see:
     jp sprite_behavior_return
 @kill:
