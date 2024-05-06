@@ -124,7 +124,7 @@ if __name__ == "__main__":
     ui_inc_path = "src/asm/ui_img.asm"
     src_png_dir = "src/assets/images/ui"
     tgt_rgba2_dir = "tgt/ui"
-    buffer_id = 0x2000
+    next_buffer_id = 0x2000
     make_tbl_91b_UI(db_path, src_png_dir)
     make_rgba2_files(db_path, src_png_dir, tgt_rgba2_dir)
-    make_asm_ui(db_path, ui_inc_path, buffer_id)
+    make_asm_ui(db_path, ui_inc_path, next_buffer_id)
