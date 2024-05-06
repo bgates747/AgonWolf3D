@@ -17682,7 +17682,7 @@ PC     Output      Line
 04A998 21 00 30 00 0136*  	ld hl,BUF_ACHTUNG
 04A99C DD 21 76 34 0137*  	ld ix,13430
        00          
-04A9A1 CD B4 AF 04 0138*  	call vdu_load_sfx
+04A9A1 CD BA AF 04 0138*  	call vdu_load_sfx
 04A9A5 C9          0139*  	ret
 04A9A6             0140*  
 04A9A6             0141*  load_sfx_ACHTUNG2:
@@ -17695,7 +17695,7 @@ PC     Output      Line
 04A9BA 21 01 30 00 0148*  	ld hl,BUF_ACHTUNG2
 04A9BE DD 21 60 33 0149*  	ld ix,13152
        00          
-04A9C3 CD B4 AF 04 0150*  	call vdu_load_sfx
+04A9C3 CD BA AF 04 0150*  	call vdu_load_sfx
 04A9C7 C9          0151*  	ret
 04A9C8             0152*  
 04A9C8             0153*  load_sfx_AHH:
@@ -17708,7 +17708,7 @@ PC     Output      Line
 04A9DC 21 02 30 00 0160*  	ld hl,BUF_AHH
 04A9E0 DD 21 C4 18 0161*  	ld ix,6340
        00          
-04A9E5 CD B4 AF 04 0162*  	call vdu_load_sfx
+04A9E5 CD BA AF 04 0162*  	call vdu_load_sfx
 04A9E9 C9          0163*  	ret
 04A9EA             0164*  
 04A9EA             0165*  load_sfx_AUF_WEIDERSHEN:
@@ -17721,7 +17721,7 @@ PC     Output      Line
 04A9FE 21 03 30 00 0172*  	ld hl,BUF_AUF_WEIDERSHEN
 04AA02 DD 21 01 49 0173*  	ld ix,18689
        00          
-04AA07 CD B4 AF 04 0174*  	call vdu_load_sfx
+04AA07 CD BA AF 04 0174*  	call vdu_load_sfx
 04AA0B C9          0175*  	ret
 04AA0C             0176*  
 04AA0C             0177*  load_sfx_AUGH:
@@ -17734,7 +17734,7 @@ PC     Output      Line
 04AA20 21 04 30 00 0184*  	ld hl,BUF_AUGH
 04AA24 DD 21 AC 35 0185*  	ld ix,13740
        00          
-04AA29 CD B4 AF 04 0186*  	call vdu_load_sfx
+04AA29 CD BA AF 04 0186*  	call vdu_load_sfx
 04AA2D C9          0187*  	ret
 04AA2E             0188*  
 04AA2E             0189*  load_sfx_AYEE:
@@ -17747,7 +17747,7 @@ PC     Output      Line
 04AA42 21 05 30 00 0196*  	ld hl,BUF_AYEE
 04AA46 DD 21 C9 21 0197*  	ld ix,8649
        00          
-04AA4B CD B4 AF 04 0198*  	call vdu_load_sfx
+04AA4B CD BA AF 04 0198*  	call vdu_load_sfx
 04AA4F C9          0199*  	ret
 04AA50             0200*  
 04AA50             0201*  load_sfx_AYEE_HIGH:
@@ -17760,7 +17760,7 @@ PC     Output      Line
 04AA64 21 06 30 00 0208*  	ld hl,BUF_AYEE_HIGH
 04AA68 DD 21 F0 45 0209*  	ld ix,17904
        00          
-04AA6D CD B4 AF 04 0210*  	call vdu_load_sfx
+04AA6D CD BA AF 04 0210*  	call vdu_load_sfx
 04AA71 C9          0211*  	ret
 04AA72             0212*  
 04AA72             0213*  load_sfx_BANG2:
@@ -17773,7 +17773,7 @@ PC     Output      Line
 04AA86 21 07 30 00 0220*  	ld hl,BUF_BANG2
 04AA8A DD 21 6C 28 0221*  	ld ix,10348
        00          
-04AA8F CD B4 AF 04 0222*  	call vdu_load_sfx
+04AA8F CD BA AF 04 0222*  	call vdu_load_sfx
 04AA93 C9          0223*  	ret
 04AA94             0224*  
 04AA94             0225*  load_sfx_DOG_WOOF:
@@ -17786,7 +17786,7 @@ PC     Output      Line
 04AAA8 21 08 30 00 0232*  	ld hl,BUF_DOG_WOOF
 04AAAC DD 21 69 30 0233*  	ld ix,12393
        00          
-04AAB1 CD B4 AF 04 0234*  	call vdu_load_sfx
+04AAB1 CD BA AF 04 0234*  	call vdu_load_sfx
 04AAB5 C9          0235*  	ret
 04AAB6             0236*  
 04AAB6             0237*  load_sfx_DOG_YELP:
@@ -17799,7 +17799,7 @@ PC     Output      Line
 04AACA 21 09 30 00 0244*  	ld hl,BUF_DOG_YELP
 04AACE DD 21 9F 1B 0245*  	ld ix,7071
        00          
-04AAD3 CD B4 AF 04 0246*  	call vdu_load_sfx
+04AAD3 CD BA AF 04 0246*  	call vdu_load_sfx
 04AAD7 C9          0247*  	ret
 04AAD8             0248*  
 04AAD8             0249*  load_sfx_DOOR_SHUT:
@@ -17812,7 +17812,7 @@ PC     Output      Line
 04AAEC 21 0A 30 00 0256*  	ld hl,BUF_DOOR_SHUT
 04AAF0 DD 21 B1 1E 0257*  	ld ix,7857
        00          
-04AAF5 CD B4 AF 04 0258*  	call vdu_load_sfx
+04AAF5 CD BA AF 04 0258*  	call vdu_load_sfx
 04AAF9 C9          0259*  	ret
 04AAFA             0260*  
 04AAFA             0261*  load_sfx_ENEMY_GATLING:
@@ -17825,7 +17825,7 @@ PC     Output      Line
 04AB0E 21 0B 30 00 0268*  	ld hl,BUF_ENEMY_GATLING
 04AB12 DD 21 C3 5D 0269*  	ld ix,24003
        00          
-04AB17 CD B4 AF 04 0270*  	call vdu_load_sfx
+04AB17 CD BA AF 04 0270*  	call vdu_load_sfx
 04AB1B C9          0271*  	ret
 04AB1C             0272*  
 04AB1C             0273*  load_sfx_EVA:
@@ -17838,7 +17838,7 @@ PC     Output      Line
 04AB30 21 0C 30 00 0280*  	ld hl,BUF_EVA
 04AB34 DD 21 57 36 0281*  	ld ix,13911
        00          
-04AB39 CD B4 AF 04 0282*  	call vdu_load_sfx
+04AB39 CD BA AF 04 0282*  	call vdu_load_sfx
 04AB3D C9          0283*  	ret
 04AB3E             0284*  
 04AB3E             0285*  load_sfx_GIB:
@@ -17851,7 +17851,7 @@ PC     Output      Line
 04AB52 21 0D 30 00 0292*  	ld hl,BUF_GIB
 04AB56 DD 21 16 55 0293*  	ld ix,21782
        00          
-04AB5B CD B4 AF 04 0294*  	call vdu_load_sfx
+04AB5B CD BA AF 04 0294*  	call vdu_load_sfx
 04AB5F C9          0295*  	ret
 04AB60             0296*  
 04AB60             0297*  load_sfx_GOT_TREASURE:
@@ -17864,7 +17864,7 @@ PC     Output      Line
 04AB74 21 0E 30 00 0304*  	ld hl,BUF_GOT_TREASURE
 04AB78 DD 21 6E 62 0305*  	ld ix,25198
        00          
-04AB7D CD B4 AF 04 0306*  	call vdu_load_sfx
+04AB7D CD BA AF 04 0306*  	call vdu_load_sfx
 04AB81 C9          0307*  	ret
 04AB82             0308*  
 04AB82             0309*  load_sfx_GUARD_SHOT_PISTOL:
@@ -17877,7 +17877,7 @@ PC     Output      Line
 04AB96 21 0F 30 00 0316*  	ld hl,BUF_GUARD_SHOT_PISTOL
 04AB9A DD 21 79 4C 0317*  	ld ix,19577
        00          
-04AB9F CD B4 AF 04 0318*  	call vdu_load_sfx
+04AB9F CD BA AF 04 0318*  	call vdu_load_sfx
 04ABA3 C9          0319*  	ret
 04ABA4             0320*  
 04ABA4             0321*  load_sfx_GUTEN_TAG:
@@ -17890,7 +17890,7 @@ PC     Output      Line
 04ABB8 21 10 30 00 0328*  	ld hl,BUF_GUTEN_TAG
 04ABBC DD 21 0D 3A 0329*  	ld ix,14861
        00          
-04ABC1 CD B4 AF 04 0330*  	call vdu_load_sfx
+04ABC1 CD BA AF 04 0330*  	call vdu_load_sfx
 04ABC5 C9          0331*  	ret
 04ABC6             0332*  
 04ABC6             0333*  load_sfx_LOCKED_DOOR:
@@ -17903,7 +17903,7 @@ PC     Output      Line
 04ABDA 21 11 30 00 0340*  	ld hl,BUF_LOCKED_DOOR
 04ABDE DD 21 AC 20 0341*  	ld ix,8364
        00          
-04ABE3 CD B4 AF 04 0342*  	call vdu_load_sfx
+04ABE3 CD BA AF 04 0342*  	call vdu_load_sfx
 04ABE7 C9          0343*  	ret
 04ABE8             0344*  
 04ABE8             0345*  load_sfx_MEIN_LEBEN:
@@ -17916,7 +17916,7 @@ PC     Output      Line
 04ABFC 21 12 30 00 0352*  	ld hl,BUF_MEIN_LEBEN
 04AC00 DD 21 C9 36 0353*  	ld ix,14025
        00          
-04AC05 CD B4 AF 04 0354*  	call vdu_load_sfx
+04AC05 CD BA AF 04 0354*  	call vdu_load_sfx
 04AC09 C9          0355*  	ret
 04AC0A             0356*  
 04AC0A             0357*  load_sfx_MUTTI:
@@ -17929,7 +17929,7 @@ PC     Output      Line
 04AC1E 21 13 30 00 0364*  	ld hl,BUF_MUTTI
 04AC22 DD 21 13 38 0365*  	ld ix,14355
        00          
-04AC27 CD B4 AF 04 0366*  	call vdu_load_sfx
+04AC27 CD BA AF 04 0366*  	call vdu_load_sfx
 04AC2B C9          0367*  	ret
 04AC2C             0368*  
 04AC2C             0369*  load_sfx_SCHUSSTAFFEL:
@@ -17942,7 +17942,7 @@ PC     Output      Line
 04AC40 21 14 30 00 0376*  	ld hl,BUF_SCHUSSTAFFEL
 04AC44 DD 21 08 29 0377*  	ld ix,10504
        00          
-04AC49 CD B4 AF 04 0378*  	call vdu_load_sfx
+04AC49 CD BA AF 04 0378*  	call vdu_load_sfx
 04AC4D C9          0379*  	ret
 04AC4E             0380*  
 04AC4E             0381*  load_sfx_SHOT_MACHINE_GUN:
@@ -17955,7 +17955,7 @@ PC     Output      Line
 04AC62 21 15 30 00 0388*  	ld hl,BUF_SHOT_MACHINE_GUN
 04AC66 DD 21 BB 34 0389*  	ld ix,13499
        00          
-04AC6B CD B4 AF 04 0390*  	call vdu_load_sfx
+04AC6B CD BA AF 04 0390*  	call vdu_load_sfx
 04AC6F C9          0391*  	ret
 04AC70             0392*  
 04AC70             0393*  load_sfx_SHOT_MACHINE_GUN_SINGLE:
@@ -17968,7 +17968,7 @@ PC     Output      Line
 04AC84 21 16 30 00 0400*  	ld hl,BUF_SHOT_MACHINE_GUN_SINGLE
 04AC88 DD 21 31 22 0401*  	ld ix,8753
        00          
-04AC8D CD B4 AF 04 0402*  	call vdu_load_sfx
+04AC8D CD BA AF 04 0402*  	call vdu_load_sfx
 04AC91 C9          0403*  	ret
 04AC92             0404*  
 04AC92             0405*  load_sfx_SHOT_PISTOL:
@@ -17981,7 +17981,7 @@ PC     Output      Line
 04ACA6 21 17 30 00 0412*  	ld hl,BUF_SHOT_PISTOL
 04ACAA DD 21 AC 20 0413*  	ld ix,8364
        00          
-04ACAF CD B4 AF 04 0414*  	call vdu_load_sfx
+04ACAF CD BA AF 04 0414*  	call vdu_load_sfx
 04ACB3 C9          0415*  	ret
 04ACB4             0416*  
 04ACB4             0417*  load_sfx_SPION:
@@ -17994,7 +17994,7 @@ PC     Output      Line
 04ACC8 21 18 30 00 0424*  	ld hl,BUF_SPION
 04ACCC DD 21 68 30 0425*  	ld ix,12392
        00          
-04ACD1 CD B4 AF 04 0426*  	call vdu_load_sfx
+04ACD1 CD BA AF 04 0426*  	call vdu_load_sfx
 04ACD5 C9          0427*  	ret
 04ACD6             0428*  
 04ACD6             0429*  load_sfx_UGH:
@@ -18007,7 +18007,7 @@ PC     Output      Line
 04ACEA 21 19 30 00 0436*  	ld hl,BUF_UGH
 04ACEE DD 21 BF 16 0437*  	ld ix,5823
        00          
-04ACF3 CD B4 AF 04 0438*  	call vdu_load_sfx
+04ACF3 CD BA AF 04 0438*  	call vdu_load_sfx
 04ACF7 C9          0439*  	ret
 04ACF8             0440*  
 04ACF8             0441*  load_sfx_WILHELM:
@@ -18020,7 +18020,7 @@ PC     Output      Line
 04AD0C 21 1A 30 00 0448*  	ld hl,BUF_WILHELM
 04AD10 DD 21 A7 56 0449*  	ld ix,22183
        00          
-04AD15 CD B4 AF 04 0450*  	call vdu_load_sfx
+04AD15 CD BA AF 04 0450*  	call vdu_load_sfx
 04AD19 C9          0451*  	ret
 04AD1A             0452*  
 04AD1A             0453*  load_sfx_WOOF:
@@ -18033,7 +18033,7 @@ PC     Output      Line
 04AD2E 21 1B 30 00 0460*  	ld hl,BUF_WOOF
 04AD32 DD 21 ED 24 0461*  	ld ix,9453
        00          
-04AD37 CD B4 AF 04 0462*  	call vdu_load_sfx
+04AD37 CD BA AF 04 0462*  	call vdu_load_sfx
 04AD3B C9          0463*  	ret
 04AD3C             0464*  
 04AD3C             0465*  ; File name lookups:
@@ -18181,7 +18181,7 @@ PC     Output      Line
 04AF33             0006*  ; back up loop counter
 04AF33 C5          0007*      push bc
 04AF34             0008*  ; load the next sound
-04AF34 CD 78 AF 04 0009*      call load_next_sound
+04AF34 CD 7E AF 04 0009*      call load_next_sound
 04AF38             0010*  ; draw all the things
 04AF38 CD 6D A8 04 0011*      call tmp_draw_all_the_things
 04AF3C             0012*  ; move bj
@@ -18200,75 +18200,76 @@ PC     Output      Line
 04AF61 CD FC A1 04 0024*  	call printNewline
 04AF65             0025*  ; flip screen
 04AF65 CD 81 9D 04 0026*      call vdu_flip
-04AF69             0027*  ; decrement loop counter
-04AF69 C1          0028*      pop bc
-04AF6A 0B          0029*  	dec bc
-04AF6B             0030*  ; ; DEBUG: DUMP REGISTERS
-04AF6B             0031*  ; 	push bc
-04AF6B             0032*  ; 	call dumpRegistersHex
-04AF6B             0033*  ; 	call vdu_flip
-04AF6B             0034*  ; 	pop bc
-04AF6B             0035*  ; ; END DEBUG
-04AF6B 79          0036*      ld a,c
-04AF6C B7          0037*      or a
-04AF6D C2 33 AF 04 0038*      jp nz,sfx_load_main_loop
-04AF71 78          0039*      ld a,b
+04AF69             0027*  ; delay for a bit so sound can play
+04AF69 3E 80       0028*      ld a,%10000000 ; 1 second delay
+04AF6B CD 4A A5 04 0029*      call multiPurposeDelay
+04AF6F             0030*  ; decrement loop counter
+04AF6F C1          0031*      pop bc
+04AF70 0B          0032*  	dec bc
+04AF71             0033*  ; ; DEBUG: DUMP REGISTERS
+04AF71             0034*  ; 	push bc
+04AF71             0035*  ; 	call dumpRegistersHex
+04AF71             0036*  ; 	call vdu_flip
+04AF71             0037*  ; 	pop bc
+04AF71             0038*  ; ; END DEBUG
+04AF71 79          0039*      ld a,c
 04AF72 B7          0040*      or a
 04AF73 C2 33 AF 04 0041*      jp nz,sfx_load_main_loop
-04AF77 C9          0042*      ret
-04AF78             0043*  
-04AF78             0044*  load_next_sound:
-04AF78             0045*  ; look up the load routine for the current file index
-04AF78 2A 14 A7 04 0046*  	ld hl,(cur_file_idx)
-04AF7C 29          0047*  	add hl,hl ; multiply current index by 2 ...
-04AF7D ED 5B 14 A7 0048*  	ld de,(cur_file_idx)
+04AF77 78          0042*      ld a,b
+04AF78 B7          0043*      or a
+04AF79 C2 33 AF 04 0044*      jp nz,sfx_load_main_loop
+04AF7D C9          0045*      ret
+04AF7E             0046*  
+04AF7E             0047*  load_next_sound:
+04AF7E             0048*  ; look up the load routine for the current file index
+04AF7E 2A 14 A7 04 0049*  	ld hl,(cur_file_idx)
+04AF82 29          0050*  	add hl,hl ; multiply current index by 2 ...
+04AF83 ED 5B 14 A7 0051*  	ld de,(cur_file_idx)
        04          
-04AF82 19          0049*  	add hl,de ; ... now by 3
-04AF83 ED 5B 20 A7 0050*  	ld de,(cur_load_jump_table) ; tack it on to the base address of the jump table
+04AF88 19          0052*  	add hl,de ; ... now by 3
+04AF89 ED 5B 20 A7 0053*  	ld de,(cur_load_jump_table) ; tack it on to the base address of the jump table
        04          
-04AF88 19          0051*  	add hl,de
-04AF89 ED 27       0052*  	ld hl,(hl) ; hl is pointing to load routine address
-04AF8B 22 90 AF 04 0053*  	ld (@jump_addr+1),hl ; self-modifying code ...
-04AF8F             0054*  @jump_addr:
-04AF8F CD 00 00 00 0055*  	call 0 ; call the sound load routine
-04AF93             0056*  ; look up the buffer id for the current file
-04AF93 2A 14 A7 04 0057*  	ld hl,(cur_file_idx)
-04AF97 29          0058*  	add hl,hl ; multiply current index by 2 ...
-04AF98 ED 5B 14 A7 0059*  	ld de,(cur_file_idx)
+04AF8E 19          0054*  	add hl,de
+04AF8F ED 27       0055*  	ld hl,(hl) ; hl is pointing to load routine address
+04AF91 22 96 AF 04 0056*  	ld (@jump_addr+1),hl ; self-modifying code ...
+04AF95             0057*  @jump_addr:
+04AF95 CD 00 00 00 0058*  	call 0 ; call the sound load routine
+04AF99             0059*  ; look up the buffer id for the current file
+04AF99 2A 14 A7 04 0060*  	ld hl,(cur_file_idx)
+04AF9D 29          0061*  	add hl,hl ; multiply current index by 2 ...
+04AF9E ED 5B 14 A7 0062*  	ld de,(cur_file_idx)
        04          
-04AF9D 19          0060*  	add hl,de ; ... now by 3
-04AF9E ED 5B 1D A7 0061*  	ld de,(cur_buffer_id_lut) ; tack it on to the base address of the lookup table
+04AFA3 19          0063*  	add hl,de ; ... now by 3
+04AFA4 ED 5B 1D A7 0064*  	ld de,(cur_buffer_id_lut) ; tack it on to the base address of the lookup table
        04          
-04AFA3 19          0062*  	add hl,de
-04AFA4 ED 27       0063*  	ld hl,(hl)
-04AFA6 22 1A A7 04 0064*  	ld (cur_buffer_id),hl
-04AFAA             0065*  ; bump the current file index
-04AFAA 2A 14 A7 04 0066*  	ld hl,(cur_file_idx)
-04AFAE 23          0067*  	inc hl
-04AFAF 22 14 A7 04 0068*  	ld (cur_file_idx),hl
-04AFB3 C9          0069*  	ret
-04AFB4             0070*  
-04AFB4             0071*  ; load a sound file to a buffer
-04AFB4             0072*  ; inputs: hl = bufferId ; ix = file size
-04AFB4             0073*  vdu_load_sfx:
-04AFB4             0074*  ; back up input parameters
-04AFB4 E5          0075*      push hl ; bufferId
-04AFB5             0076*  ; load the sound
-04AFB5 CD 4E B1 04 0077*  	call vdu_load_buffer_from_file
-04AFB9             0078*  ; now make the buffer a sound sample
-04AFB9 E1          0079*      pop hl ; bufferId
-04AFBA AF          0080*  	xor a ; zero is the magic number for 8-bit signed PCM 16KHz
-04AFBB E5          0081*      push hl ; bufferId
-04AFBC CD 90 A1 04 0082*  	call vdu_buffer_to_sound
-04AFC0             0083*  ; play the loaded sound
-04AFC0 0E 00       0084*      ld c,0 ; channel
-04AFC2 06 7F       0085*      ld b,127 ; full volume
-04AFC4 11 E8 03 00 0086*      ld de,1000 ; 1 second duration
-04AFC8 E1          0087*      pop hl ; bufferId
-04AFC9 CD AC A1 04 0088*      call vdu_play_sample
-04AFCD 3E 80       0089*      ld a,%10000000 ; 1 second delay
-04AFCF CD 4A A5 04 0090*      call multiPurposeDelay
-04AFD3 C9          0091*      ret
+04AFA9 19          0065*  	add hl,de
+04AFAA ED 27       0066*  	ld hl,(hl)
+04AFAC 22 1A A7 04 0067*  	ld (cur_buffer_id),hl
+04AFB0             0068*  ; bump the current file index
+04AFB0 2A 14 A7 04 0069*  	ld hl,(cur_file_idx)
+04AFB4 23          0070*  	inc hl
+04AFB5 22 14 A7 04 0071*  	ld (cur_file_idx),hl
+04AFB9 C9          0072*  	ret
+04AFBA             0073*  
+04AFBA             0074*  ; load a sound file to a buffer
+04AFBA             0075*  ; inputs: hl = bufferId ; ix = file size
+04AFBA             0076*  vdu_load_sfx:
+04AFBA             0077*  ; back up input parameters
+04AFBA E5          0078*      push hl ; bufferId
+04AFBB             0079*  ; load the sound
+04AFBB CD 4E B1 04 0080*  	call vdu_load_buffer_from_file
+04AFBF             0081*  ; now make the buffer a sound sample
+04AFBF E1          0082*      pop hl ; bufferId
+04AFC0 AF          0083*  	xor a ; zero is the magic number for 8-bit signed PCM 16KHz
+04AFC1 E5          0084*      push hl ; bufferId
+04AFC2 CD 90 A1 04 0085*  	call vdu_buffer_to_sound
+04AFC6             0086*  ; play the loaded sound
+04AFC6 0E 00       0087*      ld c,0 ; channel
+04AFC8 06 7F       0088*      ld b,127 ; full volume
+04AFCA 11 E8 03 00 0089*      ld de,1000 ; 1 second duration
+04AFCE E1          0090*      pop hl ; bufferId
+04AFCF CD AC A1 04 0091*      call vdu_play_sample
+04AFD3 C9          0092*      ret
 04AFD4             0037   
 04AFD4             0038   
 04AFD4             0039   start:

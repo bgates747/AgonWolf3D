@@ -24,6 +24,9 @@ sfx_load_main_loop:
 	call printNewline
 ; flip screen 
     call vdu_flip 
+; delay for a bit so sound can play
+    ld a,%10000000 ; 1 second delay
+    call multiPurposeDelay
 ; decrement loop counter
     pop bc
 	dec bc
@@ -86,6 +89,4 @@ vdu_load_sfx:
     ld de,1000 ; 1 second duration
     pop hl ; bufferId
     call vdu_play_sample
-    ld a,%10000000 ; 1 second delay
-    call multiPurposeDelay
     ret
