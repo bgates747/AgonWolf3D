@@ -158,6 +158,9 @@ init:
 	ld (cur_load_jump_table),hl
 	call sfx_load_main
 
+; enable all the sound chanels
+	call vdu_enable_channels
+
 ; initialization done
 	ret
 
