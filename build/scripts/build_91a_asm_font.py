@@ -158,7 +158,7 @@ def scale_font_images(font_def_file, base_font_src_dir, font_rgba2_dir, scale_fa
         font_img = img.resize((new_width, new_height), scale_method)
 
         # Convert the image to Agon64 palette
-        font_img = convert_to_agon_palette(font_img, 64, 'HSV')
+        font_img = convert_to_agon_palette(font_img, 64, 'HSV', to_bg)
 
         # Save the scaled image
         font_img.save(os.path.join(scaled_png_dir, row['img_filename']))
