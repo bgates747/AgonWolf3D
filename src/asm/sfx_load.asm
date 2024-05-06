@@ -1,3 +1,74 @@
+sfx_last_channel: db 0x00 ; 8-bit value between 0 and 31
+
+; ; play a sound effect on the next available channel at full volume for its full duration
+; ; inputs: hl = bufferId
+; sfx_play:
+; 	ld iy,sfx_last_channel
+; 	ld a,(iy+0)
+; 	ld (@bufferId),hl
+; @find_next_channel:
+; 	inc a ; bump to next channel
+; 	and 31 ; modulo 32 channel
+; 	cp (iy+0) ; if this is zero we've wrapped around and not found a free channel
+; 	ret z ; so we return to caller without doing anything
+; 	push af ; back up channel
+; 	call vdu_channel_status ; a comes back with channel status bitmask
+; 	and %00000010 ; bit 1 is the "is playing" flag
+; 	jr z,@play_sfx ; if not playing, we can use this channel
+; 	pop af ; restore channel
+; 	jr @find_next_channel ; try the next channel
+; @play_sfx:
+; 	pop af ; restore channel
+; 	ld (iy+0),a ; store channel
+; 	ld hl,(@bufferId)
+; 	ld c,a ; channel
+; 	ld b,127 ; full volume
+; 	ld de,1000 ; 1 second duration (should have no effect)
+; 	jp vdu_play_sample 
+; @bufferId:
+; 	dw 0x0000 ; 16-bit value
+
+; play a sound effect on the next available channel at full volume for its full duration
+; inputs: hl = bufferId
+sfx_play:
+	ld iy,sfx_last_channel
+	ld a,(iy+0)
+	inc a ; bump to next channel
+	and 31 ; modulo 32 channel
+	ld (iy+0),a ; store channel
+	ld c,a ; channel
+	ld b,127 ; full volume
+	ld de,1000 ; 1 second duration (should have no effect)
+	jp vdu_play_sample 
+
+sfx_play_got_treasure:
+	ld hl,BUF_GOT_TREASURE
+	jp sfx_play 
+
+sfx_play_achtung:
+	ld hl,BUF_ACHTUNG
+	jp sfx_play 
+
+sfx_play_schusstaffel:
+	ld hl,BUF_SCHUSSTAFFEL
+	jp sfx_play
+
+sfx_play_dog_woof:
+	ld hl,BUF_DOG_WOOF
+	jp sfx_play 
+
+sfx_play_dog_yelp:
+	ld hl,BUF_DOG_YELP
+	jp sfx_play 
+
+sfx_play_mein_leben:
+	ld hl,BUF_MEIN_LEBEN
+	jp sfx_play 
+
+sfx_play_wilhelm:
+	ld hl,BUF_WILHELM
+	jp sfx_play
+
 ; inputs: bc is the number of sounds to load, cur_buffer_id_lut and cur_load_jump_table set to the address of the first entry in the respective lookup tables
 sfx_load_main:
     ld hl,0
@@ -24,9 +95,9 @@ sfx_load_main_loop:
 	call printNewline
 ; flip screen 
     call vdu_flip 
-; delay for a bit so sound can play
-    ld a,%10000000 ; 1 second delay
-    call multiPurposeDelay
+; ; delay for a bit so sound can play
+;     ld a,%10000000 ; 1 second delay
+;     call multiPurposeDelay
 ; decrement loop counter
     pop bc
 	dec bc
@@ -81,12 +152,12 @@ vdu_load_sfx:
 ; now make the buffer a sound sample
     pop hl ; bufferId
 	xor a ; zero is the magic number for 8-bit signed PCM 16KHz
-    push hl ; bufferId
+    ; push hl ; bufferId
 	call vdu_buffer_to_sound 
-; play the loaded sound
-    ld c,0 ; channel
-    ld b,127 ; full volume
-    ld de,1000 ; 1 second duration
-    pop hl ; bufferId
-    call vdu_play_sample
+; ; play the loaded sound
+;     ld c,0 ; channel
+;     ld b,127 ; full volume
+;     ld de,1000 ; 1 second duration
+;     pop hl ; bufferId
+;     call vdu_play_sample
     ret

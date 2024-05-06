@@ -434,6 +434,10 @@ GOLD_CHALISE:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_got_treasure
+    pop iy 
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -469,6 +473,10 @@ GOLD_CROSS:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_got_treasure
+    pop iy 
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -577,6 +585,10 @@ GOLD_CHEST:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_got_treasure
+    pop iy 
+    call sprite_kill
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -755,12 +767,18 @@ DOG:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_dog_woof
+    pop iy 
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
 @see:
     jp sprite_behavior_return
 @kill:
+    push iy 
+    call sfx_play_dog_yelp
+    pop iy 
     call sprite_kill
     jp sprite_behavior_return
 
@@ -790,12 +808,18 @@ GERMAN_TROOPER:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_achtung
+    pop iy 
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
 @see:
     jp sprite_behavior_return
 @kill:
+    push iy 
+    call sfx_play_wilhelm
+    pop iy 
     call sprite_kill
     jp sprite_behavior_return
 
@@ -825,11 +849,17 @@ SS_GUARD:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    push iy 
+    call sfx_play_schusstaffel
+    pop iy 
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
 @see:
     jp sprite_behavior_return
 @kill:
+    push iy 
+    call sfx_play_mein_leben
+    pop iy 
     call sprite_kill
     jp sprite_behavior_return
