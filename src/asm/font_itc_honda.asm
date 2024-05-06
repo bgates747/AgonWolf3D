@@ -1,5 +1,5 @@
 ; Bitmap indices:
-BUF_4128: equ 0x1020 ; 32  
+BUF_4384: equ 0x1120 ; 32  
 ; Missing character 33 !
 ; Missing character 34 "
 ; Missing character 35 #
@@ -13,18 +13,18 @@ BUF_4128: equ 0x1020 ; 32
 ; Missing character 43 +
 ; Missing character 44 ,
 ; Missing character 45 -
-BUF_4142: equ 0x102E ; 46 .
+BUF_4398: equ 0x112E ; 46 .
 ; Missing character 47 /
-BUF_4144: equ 0x1030 ; 48 0
-BUF_4145: equ 0x1031 ; 49 1
-BUF_4146: equ 0x1032 ; 50 2
-BUF_4147: equ 0x1033 ; 51 3
-BUF_4148: equ 0x1034 ; 52 4
-BUF_4149: equ 0x1035 ; 53 5
-BUF_4150: equ 0x1036 ; 54 6
-BUF_4151: equ 0x1037 ; 55 7
-BUF_4152: equ 0x1038 ; 56 8
-BUF_4153: equ 0x1039 ; 57 9
+BUF_4400: equ 0x1130 ; 48 0
+BUF_4401: equ 0x1131 ; 49 1
+BUF_4402: equ 0x1132 ; 50 2
+BUF_4403: equ 0x1133 ; 51 3
+BUF_4404: equ 0x1134 ; 52 4
+BUF_4405: equ 0x1135 ; 53 5
+BUF_4406: equ 0x1136 ; 54 6
+BUF_4407: equ 0x1137 ; 55 7
+BUF_4408: equ 0x1138 ; 56 8
+BUF_4409: equ 0x1139 ; 57 9
 ; Missing character 58 :
 ; Missing character 59 ;
 ; Missing character 60 <
@@ -32,157 +32,157 @@ BUF_4153: equ 0x1039 ; 57 9
 ; Missing character 62 >
 ; Missing character 63 ?
 ; Missing character 64 @
-BUF_4161: equ 0x1041 ; 65 A
-BUF_4162: equ 0x1042 ; 66 B
-BUF_4163: equ 0x1043 ; 67 C
-BUF_4164: equ 0x1044 ; 68 D
-BUF_4165: equ 0x1045 ; 69 E
-BUF_4166: equ 0x1046 ; 70 F
-BUF_4167: equ 0x1047 ; 71 G
-BUF_4168: equ 0x1048 ; 72 H
-BUF_4169: equ 0x1049 ; 73 I
-BUF_4170: equ 0x104A ; 74 J
-BUF_4171: equ 0x104B ; 75 K
-BUF_4172: equ 0x104C ; 76 L
-BUF_4173: equ 0x104D ; 77 M
-BUF_4174: equ 0x104E ; 78 N
-BUF_4175: equ 0x104F ; 79 O
-BUF_4176: equ 0x1050 ; 80 P
-BUF_4177: equ 0x1051 ; 81 Q
-BUF_4178: equ 0x1052 ; 82 R
-BUF_4179: equ 0x1053 ; 83 S
-BUF_4180: equ 0x1054 ; 84 T
-BUF_4181: equ 0x1055 ; 85 U
-BUF_4182: equ 0x1056 ; 86 V
-BUF_4183: equ 0x1057 ; 87 W
-BUF_4184: equ 0x1058 ; 88 X
-BUF_4185: equ 0x1059 ; 89 Y
-BUF_4186: equ 0x105A ; 90 Z
+BUF_4417: equ 0x1141 ; 65 A
+BUF_4418: equ 0x1142 ; 66 B
+BUF_4419: equ 0x1143 ; 67 C
+BUF_4420: equ 0x1144 ; 68 D
+BUF_4421: equ 0x1145 ; 69 E
+BUF_4422: equ 0x1146 ; 70 F
+BUF_4423: equ 0x1147 ; 71 G
+BUF_4424: equ 0x1148 ; 72 H
+BUF_4425: equ 0x1149 ; 73 I
+BUF_4426: equ 0x114A ; 74 J
+BUF_4427: equ 0x114B ; 75 K
+BUF_4428: equ 0x114C ; 76 L
+BUF_4429: equ 0x114D ; 77 M
+BUF_4430: equ 0x114E ; 78 N
+BUF_4431: equ 0x114F ; 79 O
+BUF_4432: equ 0x1150 ; 80 P
+BUF_4433: equ 0x1151 ; 81 Q
+BUF_4434: equ 0x1152 ; 82 R
+BUF_4435: equ 0x1153 ; 83 S
+BUF_4436: equ 0x1154 ; 84 T
+BUF_4437: equ 0x1155 ; 85 U
+BUF_4438: equ 0x1156 ; 86 V
+BUF_4439: equ 0x1157 ; 87 W
+BUF_4440: equ 0x1158 ; 88 X
+BUF_4441: equ 0x1159 ; 89 Y
+BUF_4442: equ 0x115A ; 90 Z
 ; Missing character 91 [
 ; Missing character 92 \
 ; Missing character 93 ]
 ; Missing character 94 ^
 ; Missing character 95 _
 ; Missing character 96 `
-BUF_4193: equ 0x1061 ; 97 a
-BUF_4194: equ 0x1062 ; 98 b
-BUF_4195: equ 0x1063 ; 99 c
-BUF_4196: equ 0x1064 ; 100 d
-BUF_4197: equ 0x1065 ; 101 e
-BUF_4198: equ 0x1066 ; 102 f
-BUF_4199: equ 0x1067 ; 103 g
-BUF_4200: equ 0x1068 ; 104 h
-BUF_4201: equ 0x1069 ; 105 i
-BUF_4202: equ 0x106A ; 106 j
-BUF_4203: equ 0x106B ; 107 k
-BUF_4204: equ 0x106C ; 108 l
-BUF_4205: equ 0x106D ; 109 m
-BUF_4206: equ 0x106E ; 110 n
-BUF_4207: equ 0x106F ; 111 o
-BUF_4208: equ 0x1070 ; 112 p
-BUF_4209: equ 0x1071 ; 113 q
-BUF_4210: equ 0x1072 ; 114 r
-BUF_4211: equ 0x1073 ; 115 s
-BUF_4212: equ 0x1074 ; 116 t
-BUF_4213: equ 0x1075 ; 117 u
-BUF_4214: equ 0x1076 ; 118 v
-BUF_4215: equ 0x1077 ; 119 w
-BUF_4216: equ 0x1078 ; 120 x
-BUF_4217: equ 0x1079 ; 121 y
-BUF_4218: equ 0x107A ; 122 z
+BUF_4449: equ 0x1161 ; 97 a
+BUF_4450: equ 0x1162 ; 98 b
+BUF_4451: equ 0x1163 ; 99 c
+BUF_4452: equ 0x1164 ; 100 d
+BUF_4453: equ 0x1165 ; 101 e
+BUF_4454: equ 0x1166 ; 102 f
+BUF_4455: equ 0x1167 ; 103 g
+BUF_4456: equ 0x1168 ; 104 h
+BUF_4457: equ 0x1169 ; 105 i
+BUF_4458: equ 0x116A ; 106 j
+BUF_4459: equ 0x116B ; 107 k
+BUF_4460: equ 0x116C ; 108 l
+BUF_4461: equ 0x116D ; 109 m
+BUF_4462: equ 0x116E ; 110 n
+BUF_4463: equ 0x116F ; 111 o
+BUF_4464: equ 0x1170 ; 112 p
+BUF_4465: equ 0x1171 ; 113 q
+BUF_4466: equ 0x1172 ; 114 r
+BUF_4467: equ 0x1173 ; 115 s
+BUF_4468: equ 0x1174 ; 116 t
+BUF_4469: equ 0x1175 ; 117 u
+BUF_4470: equ 0x1176 ; 118 v
+BUF_4471: equ 0x1177 ; 119 w
+BUF_4472: equ 0x1178 ; 120 x
+BUF_4473: equ 0x1179 ; 121 y
+BUF_4474: equ 0x117A ; 122 z
 ; [y_offset, dim_y, dim_x], buffer_id label: ; mind the little-endian order when fetching these!!!
 font_itc_honda:
-	dl 0x000106,BUF_4128
-	dl 0x000106,BUF_4128 ; Missing character 33
-	dl 0x000106,BUF_4128 ; Missing character 34
-	dl 0x000106,BUF_4128 ; Missing character 35
-	dl 0x000106,BUF_4128 ; Missing character 36
-	dl 0x000106,BUF_4128 ; Missing character 37
-	dl 0x000106,BUF_4128 ; Missing character 38
-	dl 0x000106,BUF_4128 ; Missing character 39
-	dl 0x000106,BUF_4128 ; Missing character 40
-	dl 0x000106,BUF_4128 ; Missing character 41
-	dl 0x000106,BUF_4128 ; Missing character 42
-	dl 0x000106,BUF_4128 ; Missing character 43
-	dl 0x000106,BUF_4128 ; Missing character 44
-	dl 0x000106,BUF_4128 ; Missing character 45
-	dl 0x0E0505,BUF_4142
-	dl 0x000106,BUF_4128 ; Missing character 47
-	dl 0x00120A,BUF_4144
-	dl 0x001204,BUF_4145
-	dl 0x001209,BUF_4146
-	dl 0x00120A,BUF_4147
-	dl 0x00120C,BUF_4148
-	dl 0x00120A,BUF_4149
-	dl 0x00120A,BUF_4150
-	dl 0x001208,BUF_4151
-	dl 0x00120A,BUF_4152
-	dl 0x00120A,BUF_4153
-	dl 0x000106,BUF_4128 ; Missing character 58
-	dl 0x000106,BUF_4128 ; Missing character 59
-	dl 0x000106,BUF_4128 ; Missing character 60
-	dl 0x000106,BUF_4128 ; Missing character 61
-	dl 0x000106,BUF_4128 ; Missing character 62
-	dl 0x000106,BUF_4128 ; Missing character 63
-	dl 0x000106,BUF_4128 ; Missing character 64
-	dl 0x01120A,BUF_4161
-	dl 0x00120A,BUF_4162
-	dl 0x001308,BUF_4163
-	dl 0x00120A,BUF_4164
-	dl 0x001208,BUF_4165
-	dl 0x001208,BUF_4166
-	dl 0x00120A,BUF_4167
-	dl 0x00120A,BUF_4168
-	dl 0x001203,BUF_4169
-	dl 0x001206,BUF_4170
-	dl 0x00120A,BUF_4171
-	dl 0x011208,BUF_4172
-	dl 0x00120E,BUF_4173
-	dl 0x00120A,BUF_4174
-	dl 0x00120A,BUF_4175
-	dl 0x00120A,BUF_4176
-	dl 0x00150A,BUF_4177
-	dl 0x00120A,BUF_4178
-	dl 0x001309,BUF_4179
-	dl 0x00120A,BUF_4180
-	dl 0x00120A,BUF_4181
-	dl 0x00120A,BUF_4182
-	dl 0x001210,BUF_4183
-	dl 0x00120A,BUF_4184
-	dl 0x01120A,BUF_4185
-	dl 0x011209,BUF_4186
-	dl 0x000106,BUF_4128 ; Missing character 91
-	dl 0x000106,BUF_4128 ; Missing character 92
-	dl 0x000106,BUF_4128 ; Missing character 93
-	dl 0x000106,BUF_4128 ; Missing character 94
-	dl 0x000106,BUF_4128 ; Missing character 95
-	dl 0x000106,BUF_4128 ; Missing character 96
-	dl 0x060C08,BUF_4193
-	dl 0x011209,BUF_4194
-	dl 0x060C07,BUF_4195
-	dl 0x001209,BUF_4196
-	dl 0x060C08,BUF_4197
-	dl 0x001209,BUF_4198
-	dl 0x061209,BUF_4199
-	dl 0x011209,BUF_4200
-	dl 0x001204,BUF_4201
-	dl 0x001808,BUF_4202
-	dl 0x011209,BUF_4203
-	dl 0x001203,BUF_4204
-	dl 0x060D0E,BUF_4205
-	dl 0x060C09,BUF_4206
-	dl 0x060C09,BUF_4207
-	dl 0x061209,BUF_4208
-	dl 0x061209,BUF_4209
-	dl 0x060D06,BUF_4210
-	dl 0x060D08,BUF_4211
-	dl 0x030F07,BUF_4212
-	dl 0x060C09,BUF_4213
-	dl 0x060C09,BUF_4214
-	dl 0x060C0E,BUF_4215
-	dl 0x060C09,BUF_4216
-	dl 0x061109,BUF_4217
-	dl 0x060C09,BUF_4218
+	dl 0x000106,BUF_4384
+	dl 0x000106,BUF_4384 ; Missing character 33
+	dl 0x000106,BUF_4384 ; Missing character 34
+	dl 0x000106,BUF_4384 ; Missing character 35
+	dl 0x000106,BUF_4384 ; Missing character 36
+	dl 0x000106,BUF_4384 ; Missing character 37
+	dl 0x000106,BUF_4384 ; Missing character 38
+	dl 0x000106,BUF_4384 ; Missing character 39
+	dl 0x000106,BUF_4384 ; Missing character 40
+	dl 0x000106,BUF_4384 ; Missing character 41
+	dl 0x000106,BUF_4384 ; Missing character 42
+	dl 0x000106,BUF_4384 ; Missing character 43
+	dl 0x000106,BUF_4384 ; Missing character 44
+	dl 0x000106,BUF_4384 ; Missing character 45
+	dl 0x0E0505,BUF_4398
+	dl 0x000106,BUF_4384 ; Missing character 47
+	dl 0x00120A,BUF_4400
+	dl 0x001204,BUF_4401
+	dl 0x001209,BUF_4402
+	dl 0x00120A,BUF_4403
+	dl 0x00120C,BUF_4404
+	dl 0x00120A,BUF_4405
+	dl 0x00120A,BUF_4406
+	dl 0x001208,BUF_4407
+	dl 0x00120A,BUF_4408
+	dl 0x00120A,BUF_4409
+	dl 0x000106,BUF_4384 ; Missing character 58
+	dl 0x000106,BUF_4384 ; Missing character 59
+	dl 0x000106,BUF_4384 ; Missing character 60
+	dl 0x000106,BUF_4384 ; Missing character 61
+	dl 0x000106,BUF_4384 ; Missing character 62
+	dl 0x000106,BUF_4384 ; Missing character 63
+	dl 0x000106,BUF_4384 ; Missing character 64
+	dl 0x01120A,BUF_4417
+	dl 0x00120A,BUF_4418
+	dl 0x001308,BUF_4419
+	dl 0x00120A,BUF_4420
+	dl 0x001208,BUF_4421
+	dl 0x001208,BUF_4422
+	dl 0x00120A,BUF_4423
+	dl 0x00120A,BUF_4424
+	dl 0x001203,BUF_4425
+	dl 0x001206,BUF_4426
+	dl 0x00120A,BUF_4427
+	dl 0x011208,BUF_4428
+	dl 0x00120E,BUF_4429
+	dl 0x00120A,BUF_4430
+	dl 0x00120A,BUF_4431
+	dl 0x00120A,BUF_4432
+	dl 0x00150A,BUF_4433
+	dl 0x00120A,BUF_4434
+	dl 0x001309,BUF_4435
+	dl 0x00120A,BUF_4436
+	dl 0x00120A,BUF_4437
+	dl 0x00120A,BUF_4438
+	dl 0x001210,BUF_4439
+	dl 0x00120A,BUF_4440
+	dl 0x01120A,BUF_4441
+	dl 0x011209,BUF_4442
+	dl 0x000106,BUF_4384 ; Missing character 91
+	dl 0x000106,BUF_4384 ; Missing character 92
+	dl 0x000106,BUF_4384 ; Missing character 93
+	dl 0x000106,BUF_4384 ; Missing character 94
+	dl 0x000106,BUF_4384 ; Missing character 95
+	dl 0x000106,BUF_4384 ; Missing character 96
+	dl 0x060C08,BUF_4449
+	dl 0x011209,BUF_4450
+	dl 0x060C07,BUF_4451
+	dl 0x001209,BUF_4452
+	dl 0x060C08,BUF_4453
+	dl 0x001209,BUF_4454
+	dl 0x061209,BUF_4455
+	dl 0x011209,BUF_4456
+	dl 0x001204,BUF_4457
+	dl 0x001808,BUF_4458
+	dl 0x011209,BUF_4459
+	dl 0x001203,BUF_4460
+	dl 0x060D0E,BUF_4461
+	dl 0x060C09,BUF_4462
+	dl 0x060C09,BUF_4463
+	dl 0x061209,BUF_4464
+	dl 0x061209,BUF_4465
+	dl 0x060D06,BUF_4466
+	dl 0x060D08,BUF_4467
+	dl 0x030F07,BUF_4468
+	dl 0x060C09,BUF_4469
+	dl 0x060C09,BUF_4470
+	dl 0x060C0E,BUF_4471
+	dl 0x060C09,BUF_4472
+	dl 0x061109,BUF_4473
+	dl 0x060C09,BUF_4474
 
 ; Import .rgba2 bitmap files and load them into VDP buffers
 load_font_itc_honda:
@@ -192,7 +192,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4128
+	ld hl,BUF_4384
 	ld bc,6
 	ld de,1
 	ld ix,6
@@ -216,7 +216,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4142
+	ld hl,BUF_4398
 	ld bc,5
 	ld de,5
 	ld ix,25
@@ -228,7 +228,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4144
+	ld hl,BUF_4400
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -239,7 +239,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4145
+	ld hl,BUF_4401
 	ld bc,4
 	ld de,18
 	ld ix,72
@@ -250,7 +250,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4146
+	ld hl,BUF_4402
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -261,7 +261,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4147
+	ld hl,BUF_4403
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -272,7 +272,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4148
+	ld hl,BUF_4404
 	ld bc,12
 	ld de,18
 	ld ix,216
@@ -283,7 +283,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4149
+	ld hl,BUF_4405
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -294,7 +294,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4150
+	ld hl,BUF_4406
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -305,7 +305,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4151
+	ld hl,BUF_4407
 	ld bc,8
 	ld de,18
 	ld ix,144
@@ -316,7 +316,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4152
+	ld hl,BUF_4408
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -327,7 +327,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4153
+	ld hl,BUF_4409
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -345,7 +345,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4161
+	ld hl,BUF_4417
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -356,7 +356,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4162
+	ld hl,BUF_4418
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -367,7 +367,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4163
+	ld hl,BUF_4419
 	ld bc,8
 	ld de,19
 	ld ix,152
@@ -378,7 +378,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4164
+	ld hl,BUF_4420
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -389,7 +389,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4165
+	ld hl,BUF_4421
 	ld bc,8
 	ld de,18
 	ld ix,144
@@ -400,7 +400,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4166
+	ld hl,BUF_4422
 	ld bc,8
 	ld de,18
 	ld ix,144
@@ -411,7 +411,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4167
+	ld hl,BUF_4423
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -422,7 +422,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4168
+	ld hl,BUF_4424
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -433,7 +433,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4169
+	ld hl,BUF_4425
 	ld bc,3
 	ld de,18
 	ld ix,54
@@ -444,7 +444,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4170
+	ld hl,BUF_4426
 	ld bc,6
 	ld de,18
 	ld ix,108
@@ -455,7 +455,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4171
+	ld hl,BUF_4427
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -466,7 +466,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4172
+	ld hl,BUF_4428
 	ld bc,8
 	ld de,18
 	ld ix,144
@@ -477,7 +477,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4173
+	ld hl,BUF_4429
 	ld bc,14
 	ld de,18
 	ld ix,252
@@ -488,7 +488,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4174
+	ld hl,BUF_4430
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -499,7 +499,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4175
+	ld hl,BUF_4431
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -510,7 +510,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4176
+	ld hl,BUF_4432
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -521,7 +521,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4177
+	ld hl,BUF_4433
 	ld bc,10
 	ld de,21
 	ld ix,210
@@ -532,7 +532,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4178
+	ld hl,BUF_4434
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -543,7 +543,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4179
+	ld hl,BUF_4435
 	ld bc,9
 	ld de,19
 	ld ix,171
@@ -554,7 +554,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4180
+	ld hl,BUF_4436
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -565,7 +565,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4181
+	ld hl,BUF_4437
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -576,7 +576,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4182
+	ld hl,BUF_4438
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -587,7 +587,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4183
+	ld hl,BUF_4439
 	ld bc,16
 	ld de,18
 	ld ix,288
@@ -598,7 +598,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4184
+	ld hl,BUF_4440
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -609,7 +609,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4185
+	ld hl,BUF_4441
 	ld bc,10
 	ld de,18
 	ld ix,180
@@ -620,7 +620,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4186
+	ld hl,BUF_4442
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -637,7 +637,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4193
+	ld hl,BUF_4449
 	ld bc,8
 	ld de,12
 	ld ix,96
@@ -648,7 +648,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4194
+	ld hl,BUF_4450
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -659,7 +659,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4195
+	ld hl,BUF_4451
 	ld bc,7
 	ld de,12
 	ld ix,84
@@ -670,7 +670,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4196
+	ld hl,BUF_4452
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -681,7 +681,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4197
+	ld hl,BUF_4453
 	ld bc,8
 	ld de,12
 	ld ix,96
@@ -692,7 +692,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4198
+	ld hl,BUF_4454
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -703,7 +703,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4199
+	ld hl,BUF_4455
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -714,7 +714,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4200
+	ld hl,BUF_4456
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -725,7 +725,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4201
+	ld hl,BUF_4457
 	ld bc,4
 	ld de,18
 	ld ix,72
@@ -736,7 +736,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4202
+	ld hl,BUF_4458
 	ld bc,8
 	ld de,24
 	ld ix,192
@@ -747,7 +747,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4203
+	ld hl,BUF_4459
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -758,7 +758,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4204
+	ld hl,BUF_4460
 	ld bc,3
 	ld de,18
 	ld ix,54
@@ -769,7 +769,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4205
+	ld hl,BUF_4461
 	ld bc,14
 	ld de,13
 	ld ix,182
@@ -780,7 +780,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4206
+	ld hl,BUF_4462
 	ld bc,9
 	ld de,12
 	ld ix,108
@@ -791,7 +791,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4207
+	ld hl,BUF_4463
 	ld bc,9
 	ld de,12
 	ld ix,108
@@ -802,7 +802,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4208
+	ld hl,BUF_4464
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -813,7 +813,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4209
+	ld hl,BUF_4465
 	ld bc,9
 	ld de,18
 	ld ix,162
@@ -824,7 +824,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4210
+	ld hl,BUF_4466
 	ld bc,6
 	ld de,13
 	ld ix,78
@@ -835,7 +835,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4211
+	ld hl,BUF_4467
 	ld bc,8
 	ld de,13
 	ld ix,104
@@ -846,7 +846,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4212
+	ld hl,BUF_4468
 	ld bc,7
 	ld de,15
 	ld ix,105
@@ -857,7 +857,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4213
+	ld hl,BUF_4469
 	ld bc,9
 	ld de,12
 	ld ix,108
@@ -868,7 +868,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4214
+	ld hl,BUF_4470
 	ld bc,9
 	ld de,12
 	ld ix,108
@@ -879,7 +879,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4215
+	ld hl,BUF_4471
 	ld bc,14
 	ld de,12
 	ld ix,168
@@ -890,7 +890,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4216
+	ld hl,BUF_4472
 	ld bc,9
 	ld de,12
 	ld ix,108
@@ -901,7 +901,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4217
+	ld hl,BUF_4473
 	ld bc,9
 	ld de,17
 	ld ix,153
@@ -912,7 +912,7 @@ load_font_itc_honda:
 	ld bc,65536
 	ld a,mos_load
 	RST.LIL 08h
-	ld hl,BUF_4218
+	ld hl,BUF_4474
 	ld bc,9
 	ld de,12
 	ld ix,108

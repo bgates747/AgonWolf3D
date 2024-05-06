@@ -209,7 +209,7 @@ def replace_colors(image, fr_bg, fr_fg, to_bg, to_fg):
     
     return new_image
 
-def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name):
+def make_asm_font(db_path,font_inc_path,buffer_id_counter,space_width,font_name,abbr_name):
     # Database connection and query setup
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -232,7 +232,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
             if char_num in char_def_dict:
                 plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
                 # Write the relevant information to file
-                buffer_id = char_num + buffer_offset
+                buffer_id = char_num + buffer_id_counter
                 name = f'{buffer_id:04d}'
                 asm_writer.write(f"BUF_{name}: equ 0x{buffer_id:04X} ; {char_num} {char}\n")
             else:
@@ -246,11 +246,11 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
             if char_num in char_def_dict:
                 plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
                 # Write the relevant information to file
-                buffer_id = char_num + buffer_offset
+                buffer_id = char_num + buffer_id_counter
                 name = f'{buffer_id:04d}'
                 asm_writer.write(f"\tdl 0x{y_offset:02X}{dim_y:02X}{dim_x:02X},BUF_{name}\n")
             else:
-                asm_writer.write(f"\tdl 0x{0:02X}{1:02X}{space_width:02X},BUF_{32+buffer_offset:04d}")
+                asm_writer.write(f"\tdl 0x{0:02X}{1:02X}{space_width:02X},BUF_{32+buffer_id_counter:04d}")
                 asm_writer.write(f" ; Missing character {char_num}\n")
 
         asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
@@ -261,7 +261,7 @@ def make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr
             # Check if the char_num is in the dictionary
             if char_num in char_def_dict:
                 plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
-                buffer_id = char_num + buffer_offset
+                buffer_id = char_num + buffer_id_counter
                 name = f'{char_num:03d}'
                 # Write the relevant information to file
                 asm_writer.write(f"\n")
@@ -355,7 +355,7 @@ def make_space_char(db_path,font_name, font_rgba2_dir,space_width):
 
     return space_width
 
-def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method):
+def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_id_counter, space_width, scale_method):
     base_font_src_dir = f'src/assets/images/ui/fonts/{font_name}'
     source_img_path = f"{base_font_src_dir}/{font_name}.png"
     threshold = 128
@@ -378,9 +378,9 @@ def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buf
     font_inc_path = f"src/asm/font_{font_name}.asm"
     make_tbl_91a_font(db_path, font_def_file, font_name)
     make_space_char(db_path,font_name, font_rgba2_dir,space_width)
-    make_asm_font(db_path,font_inc_path,buffer_offset,space_width,font_name,abbr_name)
+    make_asm_font(db_path,font_inc_path,buffer_id_counter,space_width,font_name,abbr_name)
 
-def maken_zee_fonts():
+def maken_zee_fonts(next_buffer_id):
     scale_method = Image.NEAREST
 
     font_name = 'retro_computer'
@@ -391,10 +391,10 @@ def maken_zee_fonts():
     ]
     line_starts = [10, 53]
     character_height = 31
-    buffer_offset = 4096 + 256
+    buffer_id_counter = next_buffer_id
     space_width = 6
 
-    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method)
+    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_id_counter, space_width, scale_method)
 
     font_name = 'itc_honda'
     abbr_name = 'honda'
@@ -405,11 +405,12 @@ def maken_zee_fonts():
     ]
     line_starts = [3, 63, 125]
     character_height = 52
-    buffer_offset = 4096
+    buffer_id_counter = buffer_id_counter + 256
     space_width = 6
 
-    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_offset, space_width, scale_method)
+    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_id_counter, space_width, scale_method)
 
 if __name__ == "__main__":
-    maken_zee_fonts()
+    next_buffer_id = 0x1000
+    maken_zee_fonts(next_buffer_id)
 
