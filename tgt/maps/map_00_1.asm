@@ -524,10 +524,10 @@ cell_status:
 
 ; mind the little-endianess in the bit order here!
 cell_views:
-	dl 0x000000,0x000000 ; Cell 0, Orientation 0
-	dl 0x000000,0x000000 ; Cell 0, Orientation 1
-	dl 0x000000,0x000000 ; Cell 0, Orientation 2
-	dl 0x000000,0x000000 ; Cell 0, Orientation 3
+	dl 0x000000,0x100000 ; Cell 0, Orientation 0
+	dl 0xF011F0,0x171704 ; Cell 0, Orientation 1
+	dl 0x1E201F,0x19A1C8 ; Cell 0, Orientation 2
+	dl 0x000000,0x100000 ; Cell 0, Orientation 3
 	dl 0x000000,0x100000 ; Cell 1, Orientation 0
 	dl 0xF011F0,0x171704 ; Cell 1, Orientation 1
 	dl 0x3E403F,0x13C3D0 ; Cell 1, Orientation 2
@@ -1476,10 +1476,10 @@ cell_views:
 	dl 0x000000,0x100000 ; Cell 237, Orientation 1
 	dl 0x000000,0x100000 ; Cell 237, Orientation 2
 	dl 0x000000,0x171700 ; Cell 237, Orientation 3
-	dl 0x1E0000,0x19A1C8 ; Cell 238, Orientation 0
-	dl 0x000000,0x100000 ; Cell 238, Orientation 1
-	dl 0x000000,0x100000 ; Cell 238, Orientation 2
-	dl 0xF00000,0x171704 ; Cell 238, Orientation 3
+	dl 0x000000,0x000000 ; Cell 238, Orientation 0
+	dl 0x000000,0x000000 ; Cell 238, Orientation 1
+	dl 0x000000,0x000000 ; Cell 238, Orientation 2
+	dl 0x000000,0x000000 ; Cell 238, Orientation 3
 	dl 0x000000,0x000000 ; Cell 239, Orientation 0
 	dl 0x000000,0x000000 ; Cell 239, Orientation 1
 	dl 0x000000,0x000000 ; Cell 239, Orientation 2
