@@ -449,8 +449,9 @@ GOLD_CHALISE:
     push iy 
     call sfx_play_got_treasure
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    ld a,(iy+sprite_points)
+    call player_mod_score
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:
@@ -488,8 +489,9 @@ GOLD_CROSS:
     push iy 
     call sfx_play_got_treasure
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    ld a,(iy+sprite_points)
+    call player_mod_score
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:
@@ -600,8 +602,9 @@ GOLD_CHEST:
     push iy 
     call sfx_play_got_treasure
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    ld a,(iy+sprite_points)
+    call player_mod_score
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:

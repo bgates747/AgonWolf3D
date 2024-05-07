@@ -1,16 +1,25 @@
 ; ######## GAME STATE VARIABLES #######
-; THESE MUST BE IN THIS ORDER FOR new_game TO WORK PROPERLY
-player_score: db 0x00,#00,#00 ; bcd
+; we use 24-bit values for all of these for easy use with Num2String function
+player_score: dl 0x000000 ; binary
 ; player current health,binary
 ; when < 0 player splodes
 ; restores to player_max_health when new ship spawns
-player_health: db 50 ; binary TODO: temp set at 50% for testing, set to 100 for actual game
+player_health: dl 0x000000 ; binary TODO: temp set at 50% for testing, set to 100 for actual game
 ; max player health,binary
 ; can increase with power-ups (todo)
-player_max_health: db 100 ; binary
+player_max_health: dl 100 ; binary
 ; when reaches zero,game ends
 ; can increase based on TODO
-player_lives: db 0x03 ; binary
+player_lives: dl 3 ; binary
+
+player_health_str:  ds 8 ; Num2String buffer
+                    db 0 ; string terminator
+
+player_score_str:   ds 8 ; Num2String buffer
+                    db 0 ; string terminator
+
+player_lives_str:   ds 8 ; Num2String buffer
+                    db 0 ; string terminator
 
 ; ######### Player Variables ##########
 ; player position on the map and orientation
@@ -80,6 +89,8 @@ player_init:
     ld (orientation),a
     ld a,move_timer_reset
     ld (player_move_timer),a
+    ld a,80 ; 80% health
+    ld (player_health),a
     ret
 
 ; modifies the players health by a set amount
@@ -88,6 +99,16 @@ player_mod_health:
     ld hl,player_health
     add a,(hl)
     ld (hl),a
+    ret
+
+; modifies the players score by a set amount
+; inputs: a is the signed amount to modify score
+player_mod_score:
+    ld hl,(player_score)
+    ld de,0 ; clear deu
+    ld e,a
+    add hl,de
+    ld (player_score),hl
     ret
 
 player_shoot:
@@ -102,16 +123,9 @@ player_shoot:
     ld (player_shot_xvel),de ; implicity populates yvel
     ld hl,(cur_x) ; h,l = player y,x
     ld (player_shot_x),hl ; initial shot position
-
-    ; call stepRegistersHex
-
 @move_bullet:
     ld de,(player_shot_xvel) ; d,e = shot yvel,xvel
     ld hl,(player_shot_x) ; h,l = player shot y,x
-
-    push hl ; DEBUG
-    pop bc ; DEBUG
-
     ; bump bullet position one map unit in direction of travel
     ld a,l ; player shot x
     add a,e ; add xvel
@@ -119,9 +133,6 @@ player_shoot:
     ld a,h ; player shot y
     add a,d ; add yvel
     ld h,a ; save new y
-
-    ; call stepRegistersHex
-    
     ld (player_shot_x),hl ; and save that position
     ex de,hl ; d,e = bullet y,x
     call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
