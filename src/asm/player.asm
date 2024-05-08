@@ -62,6 +62,11 @@ player_weapon_select_timer: ds 6 ; time until player can selet a new weapon in 1
 player_weapon_fire_timer: ds 6 ; time until player can fire again in 1/120ths of a second
 player_weapon_fire_rate: dl 0x000000 ; 1/rate of fire in 1/120ths of a second
 
+player_weapon_animation_timer: ds 6 ; time until next weapon animation frame in 1/120ths of a second
+player_weapon_animation_frame: dl 0x000000 ; current weapon animation frame
+player_weapon_animation_timer_reset: equ 10 
+
+
 player_ammo: dl 0x000000 ; ammo for all projectile weapons
 player_ammo_str: ds 8 ; Num2String buffer
                  db 0 ; string terminator
@@ -239,27 +244,6 @@ player_mod_ammo:
     ld (hl),a
     ret
 
-player_shoot:
-; check if fire weapons timer has expired
-    ld iy,player_weapon_fire_timer
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-    ret p ; timer not expired so don't fire weapon
-; reset fire weapon timer
-    ld iy,player_weapon_fire_timer ; DEBUG - we should not need this?
-    ld hl,(player_weapon_fire_rate)
-    call timer_set
-; FIRE ZEE MISSILES!!!111
-    ld a,(player_weapon_active) 
-    cp player_weapon_pistol
-    jp z,player_shoot_pistol
-    cp player_weapon_machine_gun
-    jp z,player_shoot_machine_gun
-    cp player_weapon_gatling_gun
-    jp z,player_shoot_gatling_gun
-    cp player_weapon_knife
-    jp z,player_shoot_knife
-    ret
-
 player_shoot_knife:
 ;     call sfx_play_stab
 ;     jp player_stab
@@ -329,11 +313,61 @@ player_move_bullet:
     ld (player_shot_status),a ; set shot status to -1 to indicate shot is done
     ret ; combat ended
 
+player_shoot:
+; check if fire weapons timer has expired
+    ld iy,player_weapon_fire_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    ret p ; timer not expired so don't fire weapon
+; reset fire weapon timer
+    ld iy,player_weapon_fire_timer ; DEBUG - we should not need this?
+    ld hl,(player_weapon_fire_rate)
+    call timer_set
+; check animation frame for zero
+    ld hl,player_weapon_animation_frame
+    ld a,(hl)
+    and a
+    jr nz,@shoot ; if not zero, we're already in the middle of an animation
+    inc (hl) ; is zero so bump to first animation frame
+; set animation timer
+    ld hl,player_weapon_animation_timer_reset
+    ld iy,player_weapon_animation_timer
+    call timer_set
+@shoot:
+; determine active weapon and shoot it
+    ld a,(player_weapon_active) 
+    cp player_weapon_pistol
+    jp z,player_shoot_pistol
+    cp player_weapon_machine_gun
+    jp z,player_shoot_machine_gun
+    cp player_weapon_gatling_gun
+    jp z,player_shoot_gatling_gun
+    cp player_weapon_knife
+    jp z,player_shoot_knife
+    ret
+
 ; process player keyboard input
 ; Inputs: player_x/y set at desired position
 ; Returns: player position updated
-; Destroys: probably everything except maybe iy
+; Destroys: probably everything
 player_input:
+; check weapon anmation frame for zero
+    ld a,(player_weapon_animation_frame)
+    and 3 ; modulo 4
+    ld (player_weapon_animation_frame),a
+    jr z,@get_input
+; animation frame is not zero so check animation timer
+    ld iy,player_weapon_animation_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    jp p,@get_input ; time left on timer so no animation
+; bump animation frame
+    ld hl,player_weapon_animation_frame
+    inc (hl) ; next frame
+; reset animation timer
+    ld iy,player_weapon_animation_timer ; DEBUG - we should not need this?
+    ld hl,player_weapon_animation_timer_reset
+    call timer_set
+
+@get_input:
 ; reset player component velocities to zero as the default
     ld hl,0
     ld (xvel),hl ; implicitly sets yvel

@@ -221,6 +221,8 @@ render_scene:
 	call vdu_plot_bmp
 
     ld hl,(player_weapon_ui_buffer_id_large)
+    ld de,(player_weapon_animation_frame)
+    add hl,de
     call vdu_buff_select
     ld bc,128 ; x
     ld de,96 ; y
