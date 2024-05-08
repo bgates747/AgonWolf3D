@@ -294,9 +294,9 @@ player_move_bullet:
     ld a,(ix+map_sprite_id)
     cp 255 ; value if not sprite
     jr z,@not_sprite
-; is a sprite so run its "use" behavior routine
+; is a sprite so run its "hurt" behavior routine
     call sprite_set_pointer
-    ld a,sp_shoot
+    ld a,sp_hurt
     call do_sprite_behavior ; a = sprite behavior return code
     cp 255 ; value if shot hit a shootable sprite
     ret z ; if we hit a sprite, we're done

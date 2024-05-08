@@ -172,9 +172,11 @@ sprite_init_data:
 ; sprite behavior indices
 sp_init:   equ 0
 sp_use:    equ 1
-sp_shoot:  equ 2
-sp_see:    equ 3
-sp_kill:   equ 4
+sp_hurt:  equ 2
+sp_kill:   equ 3
+sp_see:    equ 4
+sp_move:  equ 5
+sp_shoot:  equ 6
 
 ; calls the sprite behavior routine for the sprite pointed to by iy
 ; inputs: iy pointed at sprite record, sprite_obj set for same 
@@ -199,9 +201,11 @@ LAMP:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -222,21 +226,27 @@ LAMP:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 BARREL:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -257,26 +267,32 @@ BARREL:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
+@hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     push iy 
     call sfx_play_explode
     pop iy 
     jr @kill
-@see:
-    jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 TABLE:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -297,21 +313,27 @@ TABLE:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 OVERHEAD_LIGHT:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -332,21 +354,27 @@ OVERHEAD_LIGHT:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 RADIOACTIVE_BARREL:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -367,26 +395,32 @@ RADIOACTIVE_BARREL:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
+@hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     push iy 
     call sfx_play_explode
     pop iy 
     jr @kill
-@see:
-    jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 HEALTH_PACK:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -409,21 +443,27 @@ HEALTH_PACK:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GOLD_CHALISE:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -449,21 +489,27 @@ GOLD_CHALISE:
     ld a,(iy+sprite_points)
     call player_mod_score
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GOLD_CROSS:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -489,21 +535,27 @@ GOLD_CROSS:
     ld a,(iy+sprite_points)
     call player_mod_score
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 PLATE_OF_FOOD:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -526,21 +578,27 @@ PLATE_OF_FOOD:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 KEYCARD:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -561,21 +619,27 @@ KEYCARD:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GOLD_CHEST:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -601,21 +665,27 @@ GOLD_CHEST:
     ld a,(iy+sprite_points)
     call player_mod_score
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 MACHINE_GUN:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -636,21 +706,27 @@ MACHINE_GUN:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GATLING_GUN:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -671,21 +747,27 @@ GATLING_GUN:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 DOG_FOOD:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -708,21 +790,27 @@ DOG_FOOD:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
     jr @kill
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GOLD_KEY:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -743,21 +831,27 @@ GOLD_KEY:
     db 000 ;sprite_unassigned_2
 @use:
     jp sprite_behavior_return
-@shoot:
-    jp sprite_behavior_return
-@see:
+@hurt:
     jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 DOG:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -781,26 +875,32 @@ DOG:
     call sfx_play_dog_woof
     pop iy 
     jp sprite_behavior_return
-@shoot:
+@hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     push iy 
     call sfx_play_dog_yelp
     pop iy 
     jr @kill
-@see:
-    jp sprite_behavior_return
 @kill:
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
 
 GERMAN_TROOPER:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -824,29 +924,35 @@ GERMAN_TROOPER:
     call sfx_play_achtung
     pop iy 
     jp sprite_behavior_return
-@shoot:
+@hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     push iy 
     call sfx_play_ugh
     pop iy 
     jr @kill
-@see:
-    jp sprite_behavior_return
 @kill:
     push iy 
     call sfx_play_wilhelm
     pop iy 
     call sprite_kill
     jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
+    jp sprite_behavior_return
 
 SS_GUARD:
 ; behavior routine address lookup
     dl @init
     dl @use
-    dl @shoot
-    dl @see
+    dl @hurt
     dl @kill
+    dl @see
+    dl @move
+    dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
@@ -870,18 +976,22 @@ SS_GUARD:
     call sfx_play_schusstaffel
     pop iy 
     jp sprite_behavior_return
-@shoot:
+@hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     push iy 
     call sfx_play_ahh
     pop iy 
     jr @kill
-@see:
-    jp sprite_behavior_return
 @kill:
     push iy 
     call sfx_play_mein_leben
     pop iy 
     call sprite_kill
+    jp sprite_behavior_return
+@see:
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
     jp sprite_behavior_return
