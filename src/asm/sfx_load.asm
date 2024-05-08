@@ -1,201 +1,561 @@
-sfx_last_channel: db 0x00 ; 8-bit value between 0 and 31
+; This file is created by build_98_asm_sfx.py, do not edit it!
 
-; ; play a sound effect on the next available channel at full volume for its full duration
-; ; inputs: hl = bufferId
-; sfx_play:
-; 	ld iy,sfx_last_channel
-; 	ld a,(iy+0)
-; 	ld (@bufferId),hl
-; @find_next_channel:
-; 	inc a ; bump to next channel
-; 	and 31 ; modulo 32 channel
-; 	cp (iy+0) ; if this is zero we've wrapped around and not found a free channel
-; 	ret z ; so we return to caller without doing anything
-; 	push af ; back up channel
-; 	call vdu_channel_status ; a comes back with channel status bitmask
-; 	and %00000010 ; bit 1 is the "is playing" flag
-; 	jr z,@play_sfx ; if not playing, we can use this channel
-; 	pop af ; restore channel
-; 	jr @find_next_channel ; try the next channel
-; @play_sfx:
-; 	pop af ; restore channel
-; 	ld (iy+0),a ; store channel
-; 	ld hl,(@bufferId)
-; 	ld c,a ; channel
-; 	ld b,127 ; full volume
-; 	ld de,1000 ; 1 second duration (should have no effect)
-; 	jp vdu_play_sample 
-; @bufferId:
-; 	dw 0x0000 ; 16-bit value
+SFX_num_buffers: equ 32
+; SFX buffer ids:
+BUF_ACHTUNG: equ 0x3000
+BUF_ACHTUNG2: equ 0x3001
+BUF_AHH: equ 0x3002
+BUF_AUF_WEIDERSHEN: equ 0x3003
+BUF_AUGH: equ 0x3004
+BUF_AYEE: equ 0x3005
+BUF_AYEE_HIGH: equ 0x3006
+BUF_BANG2: equ 0x3007
+BUF_DOG_WOOF: equ 0x3008
+BUF_DOG_YELP: equ 0x3009
+BUF_DOOR_SHUT: equ 0x300A
+BUF_ENEMY_GATLING: equ 0x300B
+BUF_EVA: equ 0x300C
+BUF_EXPLODE: equ 0x300D
+BUF_GIB: equ 0x300E
+BUF_GOT_TREASURE: equ 0x300F
+BUF_GUARD_SHOT_PISTOL: equ 0x3010
+BUF_GUTEN_TAG: equ 0x3011
+BUF_LOCKED_DOOR: equ 0x3012
+BUF_MEIN_LEBEN: equ 0x3013
+BUF_MUTTI: equ 0x3014
+BUF_SCHUSSTAFFEL: equ 0x3015
+BUF_SHOT_GATLING_BURST: equ 0x3016
+BUF_SHOT_GATLING_SINGLE: equ 0x3017
+BUF_SHOT_MACHINE_GUN: equ 0x3018
+BUF_SHOT_MACHINE_GUN_BURST: equ 0x3019
+BUF_SHOT_MACHINE_GUN_SINGLE: equ 0x301A
+BUF_SHOT_PISTOL: equ 0x301B
+BUF_SPION: equ 0x301C
+BUF_UGH: equ 0x301D
+BUF_WILHELM: equ 0x301E
+BUF_WOOF: equ 0x301F
 
-; play a sound effect on the next available channel at full volume for its full duration
-; inputs: hl = bufferId
-sfx_play:
-	ld iy,sfx_last_channel
-	ld a,(iy+0)
-	inc a ; bump to next channel
-	and 31 ; modulo 32 channel
-	ld (iy+0),a ; store channel
-	ld c,a ; channel
-	ld b,127 ; full volume
-	ld de,1000 ; 1 second duration (should have no effect)
-	jp vdu_play_sample 
+; SFX buffer id reverse lookup:
+SFX_buffer_id_lut:
+	dl BUF_ACHTUNG
+	dl BUF_ACHTUNG2
+	dl BUF_AHH
+	dl BUF_AUF_WEIDERSHEN
+	dl BUF_AUGH
+	dl BUF_AYEE
+	dl BUF_AYEE_HIGH
+	dl BUF_BANG2
+	dl BUF_DOG_WOOF
+	dl BUF_DOG_YELP
+	dl BUF_DOOR_SHUT
+	dl BUF_ENEMY_GATLING
+	dl BUF_EVA
+	dl BUF_EXPLODE
+	dl BUF_GIB
+	dl BUF_GOT_TREASURE
+	dl BUF_GUARD_SHOT_PISTOL
+	dl BUF_GUTEN_TAG
+	dl BUF_LOCKED_DOOR
+	dl BUF_MEIN_LEBEN
+	dl BUF_MUTTI
+	dl BUF_SCHUSSTAFFEL
+	dl BUF_SHOT_GATLING_BURST
+	dl BUF_SHOT_GATLING_SINGLE
+	dl BUF_SHOT_MACHINE_GUN
+	dl BUF_SHOT_MACHINE_GUN_BURST
+	dl BUF_SHOT_MACHINE_GUN_SINGLE
+	dl BUF_SHOT_PISTOL
+	dl BUF_SPION
+	dl BUF_UGH
+	dl BUF_WILHELM
+	dl BUF_WOOF
 
-sfx_play_got_treasure:
-	ld hl,BUF_GOT_TREASURE
-	jp sfx_play 
+; SFX duration lookup:
+SFX_duration_lut:
+	dw 839 ; ACHTUNG
+	dw 822 ; ACHTUNG2
+	dw 396 ; AHH
+	dw 1168 ; AUF_WEIDERSHEN
+	dw 858 ; AUGH
+	dw 540 ; AYEE
+	dw 1119 ; AYEE_HIGH
+	dw 646 ; BANG2
+	dw 774 ; DOG_WOOF
+	dw 441 ; DOG_YELP
+	dw 491 ; DOOR_SHUT
+	dw 1500 ; ENEMY_GATLING
+	dw 869 ; EVA
+	dw 1247 ; EXPLODE
+	dw 1361 ; GIB
+	dw 1574 ; GOT_TREASURE
+	dw 1223 ; GUARD_SHOT_PISTOL
+	dw 928 ; GUTEN_TAG
+	dw 522 ; LOCKED_DOOR
+	dw 876 ; MEIN_LEBEN
+	dw 897 ; MUTTI
+	dw 656 ; SCHUSSTAFFEL
+	dw 333 ; SHOT_GATLING_BURST
+	dw 1207 ; SHOT_GATLING_SINGLE
+	dw 843 ; SHOT_MACHINE_GUN
+	dw 360 ; SHOT_MACHINE_GUN_BURST
+	dw 547 ; SHOT_MACHINE_GUN_SINGLE
+	dw 522 ; SHOT_PISTOL
+	dw 774 ; SPION
+	dw 363 ; UGH
+	dw 1386 ; WILHELM
+	dw 590 ; WOOF
 
-sfx_play_achtung:
+; SFX load routines jump table:
+SFX_load_routines_table:
+	dl load_sfx_ACHTUNG
+	dl load_sfx_ACHTUNG2
+	dl load_sfx_AHH
+	dl load_sfx_AUF_WEIDERSHEN
+	dl load_sfx_AUGH
+	dl load_sfx_AYEE
+	dl load_sfx_AYEE_HIGH
+	dl load_sfx_BANG2
+	dl load_sfx_DOG_WOOF
+	dl load_sfx_DOG_YELP
+	dl load_sfx_DOOR_SHUT
+	dl load_sfx_ENEMY_GATLING
+	dl load_sfx_EVA
+	dl load_sfx_EXPLODE
+	dl load_sfx_GIB
+	dl load_sfx_GOT_TREASURE
+	dl load_sfx_GUARD_SHOT_PISTOL
+	dl load_sfx_GUTEN_TAG
+	dl load_sfx_LOCKED_DOOR
+	dl load_sfx_MEIN_LEBEN
+	dl load_sfx_MUTTI
+	dl load_sfx_SCHUSSTAFFEL
+	dl load_sfx_SHOT_GATLING_BURST
+	dl load_sfx_SHOT_GATLING_SINGLE
+	dl load_sfx_SHOT_MACHINE_GUN
+	dl load_sfx_SHOT_MACHINE_GUN_BURST
+	dl load_sfx_SHOT_MACHINE_GUN_SINGLE
+	dl load_sfx_SHOT_PISTOL
+	dl load_sfx_SPION
+	dl load_sfx_UGH
+	dl load_sfx_WILHELM
+	dl load_sfx_WOOF
+
+; Import sfx .raw files and load them into VDP buffers
+
+load_sfx_ACHTUNG:
+	ld hl,FACHTUNG
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
 	ld hl,BUF_ACHTUNG
-	jp sfx_play 
-
-sfx_play_schusstaffel:
-	ld hl,BUF_SCHUSSTAFFEL
-	jp sfx_play
-
-sfx_play_dog_woof:
-	ld hl,BUF_DOG_WOOF
-	jp sfx_play 
-
-sfx_play_dog_yelp:
-	ld hl,BUF_DOG_YELP
-	jp sfx_play 
-
-sfx_play_mein_leben:
-	ld hl,BUF_MEIN_LEBEN
-	jp sfx_play 
-
-sfx_play_wilhelm:
-	ld hl,BUF_WILHELM
-	jp sfx_play
-
-sfx_play_shot_pistol:
-	ld hl,BUF_SHOT_PISTOL
-	jp sfx_play
-
-sfx_play_shot_machine_gun_single:
-	ld hl,BUF_SHOT_MACHINE_GUN_SINGLE
-	jp sfx_play
-
-sfx_play_shot_machine_gun_burst:
-	ld hl,BUF_SHOT_MACHINE_GUN_BURST
-	jp sfx_play
-
-sfx_play_shot_gatling_single:
-	ld hl,BUF_SHOT_GATLING_SINGLE
-	jp sfx_play
-
-sfx_play_shot_gatling_burst:
-	ld hl,BUF_SHOT_GATLING_BURST
-	jp sfx_play
-
-sfx_play_explode:
-	ld hl,BUF_EXPLODE
-	jp sfx_play
-
-sfx_play_ayee_high:
-	ld hl,BUF_AYEE_HIGH
-	jp sfx_play
-
-sfx_play_ugh:
-	ld hl,BUF_UGH
-	jp sfx_play
-
-sfx_play_ahh:
-	ld hl,BUF_AHH
-	jp sfx_play
-
-
-
-; inputs: bc is the number of sounds to load, cur_buffer_id_lut and cur_load_jump_table set to the address of the first entry in the respective lookup tables
-sfx_load_main:
-    ld hl,0
-    ld (cur_file_idx),hl
-sfx_load_main_loop:
-; back up loop counter
-    push bc
-; load the next sound
-    call load_next_sound
-; draw all the things
-    call tmp_draw_all_the_things
-; move bj
-	call move_bj
-; print welcome message
-	ld ix,font_itc_honda
-	ld hl,hello_world
-	ld bc,32
-	ld de,2
-	call font_bmp_print
-; print current filename
-	call vdu_cls
-	ld hl,(cur_filename)
-	call printString
-	call printNewline
-; flip screen 
-    call vdu_flip 
-; ; delay for a bit so sound can play
-;     ld a,%10000000 ; 1 second delay
-;     call multiPurposeDelay
-; decrement loop counter
-    pop bc
-	dec bc
-; ; DEBUG: DUMP REGISTERS
-; 	push bc
-; 	call dumpRegistersHex
-; 	call vdu_flip
-; 	pop bc
-; ; END DEBUG
-    ld a,c
-    or a
-    jp nz,sfx_load_main_loop
-    ld a,b
-    or a
-    jp nz,sfx_load_main_loop
-    ret
-
-load_next_sound:
-; look up the load routine for the current file index
-	ld hl,(cur_file_idx) 
-	add hl,hl ; multiply current index by 2 ...
-	ld de,(cur_file_idx)
-	add hl,de ; ... now by 3
-	ld de,(cur_load_jump_table) ; tack it on to the base address of the jump table
-	add hl,de 
-	ld hl,(hl) ; hl is pointing to load routine address
-	ld (@jump_addr+1),hl ; self-modifying code ...
-@jump_addr:
-	call 0 ; call the sound load routine
-; look up the buffer id for the current file
-	ld hl,(cur_file_idx) 
-	add hl,hl ; multiply current index by 2 ...
-	ld de,(cur_file_idx)
-	add hl,de ; ... now by 3
-	ld de,(cur_buffer_id_lut) ; tack it on to the base address of the lookup table
-	add hl,de 
-	ld hl,(hl)
-	ld (cur_buffer_id),hl
-; bump the current file index
-	ld hl,(cur_file_idx)
-	inc hl
-	ld (cur_file_idx),hl
+	ld ix,13430
+	call vdu_load_sfx
 	ret
 
-; load a sound file to a buffer
-; inputs: hl = bufferId ; ix = file size
-vdu_load_sfx:
-; back up input parameters
-    push hl ; bufferId
-; load the sound
-	call vdu_load_buffer_from_file
-; now make the buffer a sound sample
-    pop hl ; bufferId
-	xor a ; zero is the magic number for 8-bit signed PCM 16KHz
-    ; push hl ; bufferId
-	call vdu_buffer_to_sound 
-; ; play the loaded sound
-;     ld c,0 ; channel
-;     ld b,127 ; full volume
-;     ld de,1000 ; 1 second duration
-;     pop hl ; bufferId
-;     call vdu_play_sample
-    ret
+load_sfx_ACHTUNG2:
+	ld hl,FACHTUNG2
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_ACHTUNG2
+	ld ix,13152
+	call vdu_load_sfx
+	ret
+
+load_sfx_AHH:
+	ld hl,FAHH
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_AHH
+	ld ix,6340
+	call vdu_load_sfx
+	ret
+
+load_sfx_AUF_WEIDERSHEN:
+	ld hl,FAUF_WEIDERSHEN
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_AUF_WEIDERSHEN
+	ld ix,18689
+	call vdu_load_sfx
+	ret
+
+load_sfx_AUGH:
+	ld hl,FAUGH
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_AUGH
+	ld ix,13740
+	call vdu_load_sfx
+	ret
+
+load_sfx_AYEE:
+	ld hl,FAYEE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_AYEE
+	ld ix,8649
+	call vdu_load_sfx
+	ret
+
+load_sfx_AYEE_HIGH:
+	ld hl,FAYEE_HIGH
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_AYEE_HIGH
+	ld ix,17904
+	call vdu_load_sfx
+	ret
+
+load_sfx_BANG2:
+	ld hl,FBANG2
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_BANG2
+	ld ix,10348
+	call vdu_load_sfx
+	ret
+
+load_sfx_DOG_WOOF:
+	ld hl,FDOG_WOOF
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DOG_WOOF
+	ld ix,12393
+	call vdu_load_sfx
+	ret
+
+load_sfx_DOG_YELP:
+	ld hl,FDOG_YELP
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DOG_YELP
+	ld ix,7071
+	call vdu_load_sfx
+	ret
+
+load_sfx_DOOR_SHUT:
+	ld hl,FDOOR_SHUT
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_DOOR_SHUT
+	ld ix,7857
+	call vdu_load_sfx
+	ret
+
+load_sfx_ENEMY_GATLING:
+	ld hl,FENEMY_GATLING
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_ENEMY_GATLING
+	ld ix,24003
+	call vdu_load_sfx
+	ret
+
+load_sfx_EVA:
+	ld hl,FEVA
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_EVA
+	ld ix,13911
+	call vdu_load_sfx
+	ret
+
+load_sfx_EXPLODE:
+	ld hl,FEXPLODE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_EXPLODE
+	ld ix,19957
+	call vdu_load_sfx
+	ret
+
+load_sfx_GIB:
+	ld hl,FGIB
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GIB
+	ld ix,21782
+	call vdu_load_sfx
+	ret
+
+load_sfx_GOT_TREASURE:
+	ld hl,FGOT_TREASURE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GOT_TREASURE
+	ld ix,25198
+	call vdu_load_sfx
+	ret
+
+load_sfx_GUARD_SHOT_PISTOL:
+	ld hl,FGUARD_SHOT_PISTOL
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GUARD_SHOT_PISTOL
+	ld ix,19577
+	call vdu_load_sfx
+	ret
+
+load_sfx_GUTEN_TAG:
+	ld hl,FGUTEN_TAG
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GUTEN_TAG
+	ld ix,14861
+	call vdu_load_sfx
+	ret
+
+load_sfx_LOCKED_DOOR:
+	ld hl,FLOCKED_DOOR
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_LOCKED_DOOR
+	ld ix,8364
+	call vdu_load_sfx
+	ret
+
+load_sfx_MEIN_LEBEN:
+	ld hl,FMEIN_LEBEN
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_MEIN_LEBEN
+	ld ix,14025
+	call vdu_load_sfx
+	ret
+
+load_sfx_MUTTI:
+	ld hl,FMUTTI
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_MUTTI
+	ld ix,14355
+	call vdu_load_sfx
+	ret
+
+load_sfx_SCHUSSTAFFEL:
+	ld hl,FSCHUSSTAFFEL
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SCHUSSTAFFEL
+	ld ix,10504
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_GATLING_BURST:
+	ld hl,FSHOT_GATLING_BURST
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_GATLING_BURST
+	ld ix,5328
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_GATLING_SINGLE:
+	ld hl,FSHOT_GATLING_SINGLE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_GATLING_SINGLE
+	ld ix,19318
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_MACHINE_GUN:
+	ld hl,FSHOT_MACHINE_GUN
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_MACHINE_GUN
+	ld ix,13499
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_MACHINE_GUN_BURST:
+	ld hl,FSHOT_MACHINE_GUN_BURST
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_MACHINE_GUN_BURST
+	ld ix,5760
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_MACHINE_GUN_SINGLE:
+	ld hl,FSHOT_MACHINE_GUN_SINGLE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_MACHINE_GUN_SINGLE
+	ld ix,8753
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_PISTOL:
+	ld hl,FSHOT_PISTOL
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_PISTOL
+	ld ix,8364
+	call vdu_load_sfx
+	ret
+
+load_sfx_SPION:
+	ld hl,FSPION
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SPION
+	ld ix,12392
+	call vdu_load_sfx
+	ret
+
+load_sfx_UGH:
+	ld hl,FUGH
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_UGH
+	ld ix,5823
+	call vdu_load_sfx
+	ret
+
+load_sfx_WILHELM:
+	ld hl,FWILHELM
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_WILHELM
+	ld ix,22183
+	call vdu_load_sfx
+	ret
+
+load_sfx_WOOF:
+	ld hl,FWOOF
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_WOOF
+	ld ix,9453
+	call vdu_load_sfx
+	ret
+
+; File name lookups:
+FACHTUNG: db "sfx/ACHTUNG.raw",0
+FACHTUNG2: db "sfx/ACHTUNG2.raw",0
+FAHH: db "sfx/AHH.raw",0
+FAUF_WEIDERSHEN: db "sfx/AUF_WEIDERSHEN.raw",0
+FAUGH: db "sfx/AUGH.raw",0
+FAYEE: db "sfx/AYEE.raw",0
+FAYEE_HIGH: db "sfx/AYEE_HIGH.raw",0
+FBANG2: db "sfx/BANG2.raw",0
+FDOG_WOOF: db "sfx/DOG_WOOF.raw",0
+FDOG_YELP: db "sfx/DOG_YELP.raw",0
+FDOOR_SHUT: db "sfx/DOOR_SHUT.raw",0
+FENEMY_GATLING: db "sfx/ENEMY_GATLING.raw",0
+FEVA: db "sfx/EVA.raw",0
+FEXPLODE: db "sfx/EXPLODE.raw",0
+FGIB: db "sfx/GIB.raw",0
+FGOT_TREASURE: db "sfx/GOT_TREASURE.raw",0
+FGUARD_SHOT_PISTOL: db "sfx/GUARD_SHOT_PISTOL.raw",0
+FGUTEN_TAG: db "sfx/GUTEN_TAG.raw",0
+FLOCKED_DOOR: db "sfx/LOCKED_DOOR.raw",0
+FMEIN_LEBEN: db "sfx/MEIN_LEBEN.raw",0
+FMUTTI: db "sfx/MUTTI.raw",0
+FSCHUSSTAFFEL: db "sfx/SCHUSSTAFFEL.raw",0
+FSHOT_GATLING_BURST: db "sfx/SHOT_GATLING_BURST.raw",0
+FSHOT_GATLING_SINGLE: db "sfx/SHOT_GATLING_SINGLE.raw",0
+FSHOT_MACHINE_GUN: db "sfx/SHOT_MACHINE_GUN.raw",0
+FSHOT_MACHINE_GUN_BURST: db "sfx/SHOT_MACHINE_GUN_BURST.raw",0
+FSHOT_MACHINE_GUN_SINGLE: db "sfx/SHOT_MACHINE_GUN_SINGLE.raw",0
+FSHOT_PISTOL: db "sfx/SHOT_PISTOL.raw",0
+FSPION: db "sfx/SPION.raw",0
+FUGH: db "sfx/UGH.raw",0
+FWILHELM: db "sfx/WILHELM.raw",0
+FWOOF: db "sfx/WOOF.raw",0

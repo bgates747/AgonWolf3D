@@ -86,6 +86,6 @@ def make_asm_sfx(db_path, sfx_inc_path, tgt_dir, next_buffer_id):
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     tgt_dir = 'sfx'
-    sfx_inc_path = f"src/asm/sfx.asm"
+    sfx_inc_path = f"src/asm/sfx_load.asm"
     next_buffer_id = 0x3000
     make_asm_sfx(db_path, sfx_inc_path, tgt_dir, next_buffer_id)

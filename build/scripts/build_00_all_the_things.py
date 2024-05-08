@@ -148,7 +148,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
 
 # build_98_asm_sfx.py
-    sfx_inc_path = 'src/asm/sfx.asm'
+    sfx_inc_path = 'src/asm/sfx_load.asm'
     sfx_tgt_dir = 'sfx'
     if do_98_asm_sfx:
         print(f"build_98_asm_sfx: Making sfx assembler file")
