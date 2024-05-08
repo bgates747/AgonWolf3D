@@ -480,3 +480,28 @@ waitLoop:
     ret
 
 oldTimeStamp:   .db 00h
+
+; set a countdown timer
+; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl = current time 
+timer_set:
+    ld (iy+3),hl ; set time remaining
+    MOSCALL mos_sysvars ; ix points to syvars table
+    ld hl,(ix+sysvar_time) ; get current time
+    ld (iy+0),hl ; set start time
+    ret
+
+; gets time remaining on a countdown timer
+; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
+;          sign flags: pos = time not expired, zero or neg = time expired
+timer_get:
+    MOSCALL mos_sysvars ; ix points to syvars table
+    ld de,(ix+sysvar_time) ; get current time
+    ld hl,(iy+0) ; get start time
+    xor a ; clear carry
+    sbc hl,de ; hl = time elapsed (will always be zero or negative)
+    ld de,(iy+3) ; get timer set value
+    xor a ; clear carry
+    adc hl,de ; hl = time remaining (adc because add hl,rr doesn't set sign or zero flags)
+    ret

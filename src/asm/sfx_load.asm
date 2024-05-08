@@ -73,6 +73,22 @@ sfx_play_shot_pistol:
 	ld hl,BUF_SHOT_PISTOL
 	jp sfx_play
 
+sfx_play_shot_machine_gun_single:
+	ld hl,BUF_SHOT_MACHINE_GUN_SINGLE
+	jp sfx_play
+
+sfx_play_shot_machine_gun_burst:
+	ld hl,BUF_SHOT_MACHINE_GUN_BURST
+	jp sfx_play
+
+sfx_play_shot_gatling_single:
+	ld hl,BUF_SHOT_GATLING_SINGLE
+	jp sfx_play
+
+sfx_play_shot_gatling_burst:
+	ld hl,BUF_SHOT_GATLING_BURST
+	jp sfx_play
+
 sfx_play_explode:
 	ld hl,BUF_EXPLODE
 	jp sfx_play

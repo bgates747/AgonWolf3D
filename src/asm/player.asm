@@ -38,6 +38,7 @@ yvel:  db 0x00
 dy:    db 0x00
 dx:    db 0x00
        db 0x00 ; padding
+avel:  db 0x00 ; player angular velocity in orientation ticks per move tick
 
 player_shot_x:      db 0x00
 player_shot_y:      db 0x00
@@ -48,9 +49,27 @@ player_shot_yvel:   db 0x00
 player_shot_status: db 0xFF ; -1 = no shot, otherwise shot direction of travel
 player_shot_time:   dl 0x000000 ; time shot was fired from RTC
 
+player_weapons:     db 0x00 ; weapons in player's possession according to following bitmasks
+player_weapon_active: db 0x00 ; currently active weapon according to following bitmasks
+player_weapon_knife: equ %00000001
+player_weapon_pistol: equ %00000010
+player_weapon_machine_gun: equ %00000100
+player_weapon_gatling_gun: equ %00001000
+player_weapon_damage: db 0x00 ; damage dealt by current weapon
+player_weapon_ui_buffer_id_small: dl 0x000000 ; bufferId for weapon UI
+player_weapon_ui_buffer_id_large: dl 0x000000 ; bufferId for weapon UI
+player_weapon_select_timer: ds 6 ; time until player can selet a new weapon in 1/120ths of a second
+player_weapon_fire_timer: ds 6 ; time until player can fire again in 1/120ths of a second
+player_weapon_fire_rate: dl 0x000000 ; 1/rate of fire in 1/120ths of a second
+
+player_ammo: dl 0x000000 ; ammo for all projectile weapons
+player_ammo_str: ds 8 ; Num2String buffer
+                 db 0 ; string terminator
+
 ; ######### PLAYER CONSTANTS ##########
 speed_player: equ 0x01 ; 1 map grid unit per movement tick
-move_timer_reset: equ 8 ; 4 ticks per secoond at 32 frames per second
+player_move_timer: ds 6 ; time until player can move again in 1/120ths of a second
+player_move_rate: equ 120/4 ; 4 times per second
 
 ; ######### PLAYER SPRITE PARAMETERS ##########
 ; uses the same offsets from its table base as the main sprite table:
@@ -66,16 +85,17 @@ player_x:                dl 0x000000 ; 3 bytes 16.8 fractional x position in pix
 player_y:                dl 0x000000 ; 3 bytes 16.8 fractional y position in pixels
 player_xvel:             dl 0x000000 ; 3 bytes x-component velocity, 16.8 fixed, pixels
 player_yvel:             dl 0x000000 ; 3 bytes y-component velocity, 16.8 fixed, pixels
-playervel:              dl 0x000000 ; 3 bytes velocity px/frame (16.8 fixed)
+playervel:               dl 0x000000 ; 3 bytes velocity px/frame (16.8 fixed)
 player_heading:          dl 0x000000 ; 3 bytes sprite movement direction deg256 16.8 fixed
 player_orientation:      dl 0x000000 ; 3 bytes not currently used
 player_animation:        db     0x00 ; 1 bytes not currently used
 player_animation_timer:  db     0x00 ; 1 bytes not currently used
-player_move_timer:       db     0x00 ; 1 bytes not currently used
+; player_move_timer:       db     0x00 ; 1 bytes not currently used
 player_move_step:        db     0x00 ; 1 bytes not currently used
 player_points:           db     0x00 ; 1 bytes not currently used
 player_health_damage:    db     0x00 ; 1 bytes not currently used
 player_end_variables: ; for when we want to traverse this table in reverse
+
 
 ; set initial player position
 ; inputs: none,everything is hardcoded
@@ -87,10 +107,112 @@ player_init:
     ld (cur_x),de ; implicitly populates cur_y
     xor a ; north is default orientation
     ld (orientation),a
-    ld a,move_timer_reset
-    ld (player_move_timer),a
+    ld hl,player_move_rate
+    ld iy,player_move_timer
+    call timer_set
     ld a,80 ; 80% health
     ld (player_health),a
+    ; ld a,%00000001 ; knife only
+    ld a,%00001111 ; all weapons DEBUG
+    ld (player_weapons),a
+    ld a,player_weapon_knife
+    ld (player_weapon_active),a
+    call player_set_weapon_parameters
+    ld iy,player_weapon_select_timer
+    ld hl,0 ; zero timer means player can immediately select a different weapon
+    ld a,200 ; DEBUG - this is too much ammo to start with
+    ld (player_ammo),a
+    call timer_set
+    ret
+
+
+player_next_weapon:
+; check if select weapons timer has expired
+    ld iy,player_weapon_select_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    ret p ; time left on timer so no weapon select
+; reset weapon select timer
+    ld hl,120/8 ; 1/6 second
+    call timer_set
+; select next weapon
+    ld hl,player_weapons ; hl points to player_weapons flags
+    ld bc,(hl) ; bc contains bitmask of player's weapons inventory
+@loop:
+    ld a,(player_weapon_active)
+    rlca ; rotate left
+    ld (player_weapon_active),a
+    and (hl) ; check inventory mask
+    jr z,@loop
+    jp player_set_weapon_parameters
+    
+player_previous_weapon:
+; check if select weapons timer has expired
+    ld iy,player_weapon_select_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    ret p ; time left on timer so no weapon select
+; reset weapon select timer
+    ld hl,120/8 ; 1/8 second
+    call timer_set
+; select next weapon
+    ld hl,player_weapons ; hl points to player_weapons flags
+    ld bc,(hl) ; bc contains bitmask of player's weapons inventory
+@loop:
+    ld a,(player_weapon_active)
+    rrca ; rotate right
+    ld (player_weapon_active),a
+    and (hl) ; check inventory mask
+    jr z,@loop
+    ; fall through to player_set_weapon_parameters
+
+player_set_weapon_parameters:
+    cp %00000001 ; knife
+    jp z,@knife
+    cp %00000010 ; pistol
+    jp z,@pistol
+    cp %00000100 ; machine gun
+    jp z,@machine_gun
+    cp %00001000 ; gatling gun
+    jp z,@gatling_gun
+    ret ; if none of the above do nothing
+@knife:
+    ld hl,BUF_UI_BJ_KNIFE_00
+    ld (player_weapon_ui_buffer_id_large),hl
+    ld hl,BUF_UI_LOWER_PANEL_KNIFE
+    ld (player_weapon_ui_buffer_id_small),hl
+    ld hl,120/4 ; 4 times/second
+    ld (player_weapon_fire_rate),hl
+    ld iy,player_weapon_fire_timer
+    call timer_set
+    ret
+@pistol:
+    ld hl,BUF_UI_BJ_PISTOL_00
+    ld (player_weapon_ui_buffer_id_large),hl
+    ld hl,BUF_UI_LOWER_PANEL_PISTOL
+    ld (player_weapon_ui_buffer_id_small),hl
+    ld hl,120/2 ; 2 times/second
+    ld (player_weapon_fire_rate),hl
+    ld iy,player_weapon_fire_timer
+    call timer_set
+    ret
+@machine_gun:
+    ld hl,BUF_UI_BJ_MACHINE_GUN_00
+    ld (player_weapon_ui_buffer_id_large),hl
+    ld hl,BUF_UI_LOWER_PANEL_MACHINE_GUN
+    ld (player_weapon_ui_buffer_id_small),hl
+    ld hl,40 ; 3 times/second
+    ld (player_weapon_fire_rate),hl
+    ld iy,player_weapon_fire_timer
+    call timer_set
+    ret
+@gatling_gun:
+    ld hl,BUF_UI_BJ_GATLING_00
+    ld (player_weapon_ui_buffer_id_large),hl
+    ld hl,BUF_UI_LOWER_PANEL_GATLING
+    ld (player_weapon_ui_buffer_id_small),hl
+    ld hl,40 ; 3 times/second
+    ld (player_weapon_fire_rate),hl
+    ld iy,player_weapon_fire_timer
+    call timer_set
     ret
 
 ; modifies the players health by a set amount
@@ -104,16 +226,64 @@ player_mod_health:
 ; modifies the players score by a set amount
 ; inputs: a is the signed amount to modify score
 player_mod_score:
-    ld hl,(player_score)
-    ld de,0 ; clear deu
-    ld e,a
-    add hl,de
-    ld (player_score),hl
+    ld hl,player_score
+    add a,(hl)
+    ld (hl),a
+    ret
+
+; modifies the players ammo by a set amount
+; inputs: a is the signed amount to modify score
+player_mod_ammo:
+    ld hl,player_ammo
+    add a,(hl)
+    ld (hl),a
     ret
 
 player_shoot:
-    ; play the sound effect
+; check if fire weapons timer has expired
+    ld iy,player_weapon_fire_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    ret p ; timer not expired so don't fire weapon
+; reset fire weapon timer
+    ld iy,player_weapon_fire_timer ; DEBUG - we should not need this?
+    ld hl,(player_weapon_fire_rate)
+    call timer_set
+; FIRE ZEE MISSILES!!!111
+    ld a,(player_weapon_active) 
+    cp player_weapon_pistol
+    jp z,player_shoot_pistol
+    cp player_weapon_machine_gun
+    jp z,player_shoot_machine_gun
+    cp player_weapon_gatling_gun
+    jp z,player_shoot_gatling_gun
+    cp player_weapon_knife
+    jp z,player_shoot_knife
+    ret
+
+player_shoot_knife:
+;     call sfx_play_stab
+;     jp player_stab
+    ret ; TODO: implement
+
+player_shoot_pistol:
+    ld a,-1
+    call player_mod_ammo
     call sfx_play_shot_pistol
+    jp player_move_bullet
+
+player_shoot_machine_gun:
+    ld a,-4
+    call player_mod_ammo
+    call sfx_play_shot_machine_gun_burst
+    jp player_move_bullet
+
+player_shoot_gatling_gun:  
+    ld a,-8
+    call player_mod_ammo
+    call sfx_play_shot_gatling_burst
+    jp player_move_bullet
+
+player_move_bullet:
     ; check whether the player hit anything
     ld a,(orientation) ; direction shot is moving
     ld (player_shot_status),a ; save shot direction -- indicates live shot in flight
@@ -151,7 +321,7 @@ player_shoot:
     ld de,(player_shot_xvel) ; restore yvel,xvel to d,e
 ; read map type/status mask from target cell
     ld a,(ix+map_type_status)
-    and %00000011 ; mask off everytying but the render type mask bits
+    and %00000011 ; mask off everything but the render type mask bits
 ; branch on the values in the bitmask
     cp render_type_floor
     jr z,@move_bullet ; keep going if map cell is a floor
@@ -164,31 +334,45 @@ player_shoot:
 ; Returns: player position updated
 ; Destroys: probably everything except maybe iy
 player_input:
-; first check player_move_timer for zero
-    ld a,(player_move_timer)
-    and a ; if zero we can move so get keyboard move input
-    jr z,@get_kb
-    dec a ; otherwise decrement timer and return
-    ld (player_move_timer),a
-    ret
-@get_kb:
 ; reset player component velocities to zero as the default
     ld hl,0
     ld (xvel),hl ; implicitly sets yvel
-; we will set a to zero on a keypress, default of -1 will mean no keypress
-    ld a,-1
+    xor a ;
+    ld (avel),a ; set player angular velocity to zero as default
+
 ; check for keypresses and branch accordingly
-; for how this works,see: https://github.com/breakintoprogram/agon-docs/wiki/MOS-API-%E2%80%90-Virtual-Keyboard
     MOSCALL	mos_getkbmap ;ix = pointer to MOS virtual keys table
-; we test all four arrow keys and add/subract velocities accordingly
-; this handles the case where two opposing movement keys
-; are down simultaneously (velocities will net to zero)
-; and allows diagonal movement when a vertical and horizontal key are down
-; it also allows movement and action keys to be detected simultaneously
-; so we can walk and chew gum at the same time
-;
-; BEGIN CHECKING FOR KEY PRESSES
-;
+
+; CHECK WEAPON CONTROL KEYS
+; 58 Up player selects next weapon
+    bit 1,(ix+7)
+    jr z,@Up
+    push ix ; it gets clobbered by the weapon select routine
+    call player_next_weapon
+    pop ix
+@Up:
+
+; 42 Down
+    bit 1,(ix+5)
+    jr z,@Down
+    push ix ; it gets clobbered by the weapon select routine
+    call player_previous_weapon
+    pop ix
+@Down:
+
+; =====================
+; 99 Space FIRE ZEE MISSILES!!!111
+    bit 2,(ix+12)
+    jr z,@Space
+    push ix ; it gets clobbered by the weapon firing
+    call player_shoot
+    pop ix ; restore ix
+@Space:
+
+; CHECK MOVEMENT KEYS
+; non-zero means no movement key was pressed
+    ld a,-1
+
 ; 34 W player moves forward
     bit 1,(ix+4)
     jr z,@W
@@ -196,7 +380,7 @@ player_input:
     ld (yvel),a
     xor a
 @W: 
-; =====================
+
 ; 82 S player moves backward
     bit 1,(ix+10)
     jr z,@S
@@ -206,7 +390,7 @@ player_input:
     ld (yvel),a
     xor a
 @S:
-; =====================
+
 ; 66 A plyer moves left
     bit 1,(ix+8)
     jr z,@A
@@ -214,7 +398,7 @@ player_input:
     ld (xvel),a
     xor a
 @A:
-; =====================
+
 ; 51 D player moves right
     bit 2,(ix+6)
     jr z,@D
@@ -224,42 +408,41 @@ player_input:
     ld (xvel),a
     xor a
 @D:
-; =====================
+
 ; 26 Left player rotates anti-clockwise
     bit 1,(ix+3)
     jr z,@Left
-    ld a,(orientation)
-    dec a
-    and 0x03 ; modulo 4
-    ld (orientation),a
+    ld hl,avel
+    dec (hl)
     xor a
 @Left:
-; =====================
+
 ; 122 Right player rotates clockwise
     bit 1,(ix+15)
     jr z,@Right
-    ld a,(orientation)
-    inc a
-    and 0x03 ; modulo 4
-    ld (orientation),a
+    ld hl,avel
+    inc (hl)
     xor a
 @Right:
-; =====================
-; 99 Space FIRE ZEE MISSILES!!!111
-; TODO: implement 
-    bit 2,(ix+12)
-    jr z,@Space
-    call player_shoot
-    xor a ; we may not want to reset move timer on a shot
-@Space:
-; =====================
-; check whether player pressed a key
-    and a ; this will be -1 if player didn't press a key
+
+; KEYPRESS DETECTION DONE
+    and a ; this will zero if player pressed a movement key
     ret nz ; non zero so no key pressed
+; check move timer 
+    ld iy,player_move_timer
+    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    ret p ; time left on timer so no movement
+; reset_move_timer
+    ld hl,player_move_rate
+    ld iy,player_move_timer; DEBUG - we should not need this?
+    call timer_set
 ; move player according to velocities set by keypresses
-; TODO: this finagling could go to a conveninece function
     ld de,(xvel) ; d = yvel, e = xvel
-    ld a,(orientation)
+    ld a,(avel)
+    ld hl,orientation
+    add a,(hl)
+    and 0x03 ; modulo 4
+    ld (hl),a
     call trans_dx_dy ; d = dy, e = dx
     ld (dx),de
     ld a,(cur_x)
@@ -323,7 +506,4 @@ player_input:
     add a,b
     ld d,a
     ld (cur_y),a
-@reset_move_timer:
-    ld a,move_timer_reset
-    ld (player_move_timer),a
     ret

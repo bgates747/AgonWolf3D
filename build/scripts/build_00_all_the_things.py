@@ -207,14 +207,14 @@ if __name__ == "__main__":
     # do_04a_make_dws_png = True
     # do_05_panels_rgba = True
     # do_06_import_mapmaker_files = True
-    do_07_map_panels = True
-    # do_08_make_sfx = True
+    # do_07_map_panels = True
+    do_08_make_sfx = True
     # do_90_asm_polys = True
     # do_91_asm_img_load = True
     # do_91a_asm_font = True
     # do_91b_asm_ui = True
-    do_91c_asm_map_masks = True
-    # do_98_asm_sfx = True
+    # do_91c_asm_map_masks = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)

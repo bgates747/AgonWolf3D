@@ -251,7 +251,7 @@ BARREL:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db -20 ;sprite_health_modifier
+    db -50 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -263,8 +263,7 @@ BARREL:
     push iy 
     call sfx_play_explode
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    jr @kill
 @see:
     jp sprite_behavior_return
 @kill:
@@ -362,7 +361,7 @@ RADIOACTIVE_BARREL:
     db 000 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
-    db -50;sprite_health_modifier
+    db -75 ;sprite_health_modifier
     db 000 ;sprite_unassigned_0
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
@@ -374,8 +373,7 @@ RADIOACTIVE_BARREL:
     push iy 
     call sfx_play_explode
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    jr @kill
 @see:
     jp sprite_behavior_return
 @kill:
@@ -410,8 +408,7 @@ HEALTH_PACK:
 @use:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    call sprite_kill
-    jp sprite_behavior_return
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:
@@ -528,8 +525,7 @@ PLATE_OF_FOOD:
 @use:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    call sprite_kill
-    jp sprite_behavior_return
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:
@@ -711,8 +707,7 @@ DOG_FOOD:
 @use:
     ld a,(iy+sprite_health_modifier)
     call player_mod_health
-    call sprite_kill
-    jp sprite_behavior_return
+    jr @kill
 @shoot:
     jp sprite_behavior_return
 @see:
@@ -792,9 +787,7 @@ DOG:
     push iy 
     call sfx_play_dog_yelp
     pop iy 
-    ; call sprite_kill
-    ; jp sprite_behavior_return
-    jp @kill
+    jr @kill
 @see:
     jp sprite_behavior_return
 @kill:
@@ -837,9 +830,7 @@ GERMAN_TROOPER:
     push iy 
     call sfx_play_ugh
     pop iy 
-    ; call sprite_kill
-    ; jp sprite_behavior_return
-    jp @kill
+    jr @kill
 @see:
     jp sprite_behavior_return
 @kill:
@@ -885,9 +876,7 @@ SS_GUARD:
     push iy 
     call sfx_play_ahh
     pop iy 
-    ; call sprite_kill
-    ; jp sprite_behavior_return
-    jp @kill
+    jr @kill
 @see:
     jp sprite_behavior_return
 @kill:

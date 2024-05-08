@@ -1,6 +1,6 @@
 ; This file is created by build_98_asm_sfx.py, do not edit it!
 
-SFX_num_buffers: equ 29
+SFX_num_buffers: equ 32
 ; SFX buffer ids:
 BUF_ACHTUNG: equ 0x3000
 BUF_ACHTUNG2: equ 0x3001
@@ -24,13 +24,16 @@ BUF_LOCKED_DOOR: equ 0x3012
 BUF_MEIN_LEBEN: equ 0x3013
 BUF_MUTTI: equ 0x3014
 BUF_SCHUSSTAFFEL: equ 0x3015
-BUF_SHOT_MACHINE_GUN: equ 0x3016
-BUF_SHOT_MACHINE_GUN_SINGLE: equ 0x3017
-BUF_SHOT_PISTOL: equ 0x3018
-BUF_SPION: equ 0x3019
-BUF_UGH: equ 0x301A
-BUF_WILHELM: equ 0x301B
-BUF_WOOF: equ 0x301C
+BUF_SHOT_GATLING_BURST: equ 0x3016
+BUF_SHOT_GATLING_SINGLE: equ 0x3017
+BUF_SHOT_MACHINE_GUN: equ 0x3018
+BUF_SHOT_MACHINE_GUN_BURST: equ 0x3019
+BUF_SHOT_MACHINE_GUN_SINGLE: equ 0x301A
+BUF_SHOT_PISTOL: equ 0x301B
+BUF_SPION: equ 0x301C
+BUF_UGH: equ 0x301D
+BUF_WILHELM: equ 0x301E
+BUF_WOOF: equ 0x301F
 
 ; SFX buffer id reverse lookup:
 SFX_buffer_id_lut:
@@ -56,7 +59,10 @@ SFX_buffer_id_lut:
 	dl BUF_MEIN_LEBEN
 	dl BUF_MUTTI
 	dl BUF_SCHUSSTAFFEL
+	dl BUF_SHOT_GATLING_BURST
+	dl BUF_SHOT_GATLING_SINGLE
 	dl BUF_SHOT_MACHINE_GUN
+	dl BUF_SHOT_MACHINE_GUN_BURST
 	dl BUF_SHOT_MACHINE_GUN_SINGLE
 	dl BUF_SHOT_PISTOL
 	dl BUF_SPION
@@ -88,7 +94,10 @@ SFX_duration_lut:
 	dw 876 ; MEIN_LEBEN
 	dw 897 ; MUTTI
 	dw 656 ; SCHUSSTAFFEL
+	dw 333 ; SHOT_GATLING_BURST
+	dw 1207 ; SHOT_GATLING_SINGLE
 	dw 843 ; SHOT_MACHINE_GUN
+	dw 360 ; SHOT_MACHINE_GUN_BURST
 	dw 547 ; SHOT_MACHINE_GUN_SINGLE
 	dw 522 ; SHOT_PISTOL
 	dw 774 ; SPION
@@ -120,7 +129,10 @@ SFX_load_routines_table:
 	dl load_sfx_MEIN_LEBEN
 	dl load_sfx_MUTTI
 	dl load_sfx_SCHUSSTAFFEL
+	dl load_sfx_SHOT_GATLING_BURST
+	dl load_sfx_SHOT_GATLING_SINGLE
 	dl load_sfx_SHOT_MACHINE_GUN
+	dl load_sfx_SHOT_MACHINE_GUN_BURST
 	dl load_sfx_SHOT_MACHINE_GUN_SINGLE
 	dl load_sfx_SHOT_PISTOL
 	dl load_sfx_SPION
@@ -394,6 +406,30 @@ load_sfx_SCHUSSTAFFEL:
 	call vdu_load_sfx
 	ret
 
+load_sfx_SHOT_GATLING_BURST:
+	ld hl,FSHOT_GATLING_BURST
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_GATLING_BURST
+	ld ix,5328
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_GATLING_SINGLE:
+	ld hl,FSHOT_GATLING_SINGLE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_GATLING_SINGLE
+	ld ix,19318
+	call vdu_load_sfx
+	ret
+
 load_sfx_SHOT_MACHINE_GUN:
 	ld hl,FSHOT_MACHINE_GUN
 	ld (cur_filename),hl
@@ -403,6 +439,18 @@ load_sfx_SHOT_MACHINE_GUN:
 	RST.LIL 08h
 	ld hl,BUF_SHOT_MACHINE_GUN
 	ld ix,13499
+	call vdu_load_sfx
+	ret
+
+load_sfx_SHOT_MACHINE_GUN_BURST:
+	ld hl,FSHOT_MACHINE_GUN_BURST
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_SHOT_MACHINE_GUN_BURST
+	ld ix,5760
 	call vdu_load_sfx
 	ret
 
@@ -501,7 +549,10 @@ FLOCKED_DOOR: db "sfx/LOCKED_DOOR.raw",0
 FMEIN_LEBEN: db "sfx/MEIN_LEBEN.raw",0
 FMUTTI: db "sfx/MUTTI.raw",0
 FSCHUSSTAFFEL: db "sfx/SCHUSSTAFFEL.raw",0
+FSHOT_GATLING_BURST: db "sfx/SHOT_GATLING_BURST.raw",0
+FSHOT_GATLING_SINGLE: db "sfx/SHOT_GATLING_SINGLE.raw",0
 FSHOT_MACHINE_GUN: db "sfx/SHOT_MACHINE_GUN.raw",0
+FSHOT_MACHINE_GUN_BURST: db "sfx/SHOT_MACHINE_GUN_BURST.raw",0
 FSHOT_MACHINE_GUN_SINGLE: db "sfx/SHOT_MACHINE_GUN_SINGLE.raw",0
 FSHOT_PISTOL: db "sfx/SHOT_PISTOL.raw",0
 FSPION: db "sfx/SPION.raw",0

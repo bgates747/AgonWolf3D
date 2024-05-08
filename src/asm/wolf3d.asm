@@ -192,10 +192,8 @@ main:
 main_loop:
 ; move enemies
 	; call move_enemies
-
 ; get player input and update sprite position
 	call player_input ; ix points to cell defs/status, a is target cell current obj_id
-
 ; render the updated scene
 	call render_scene
 ; flip the screen
