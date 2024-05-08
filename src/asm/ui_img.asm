@@ -20,6 +20,8 @@ load_ui_images:
 	ld de,120
 	ld ix,14400
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_lower_panel
 	ld de,filedata
@@ -31,6 +33,8 @@ load_ui_images:
 	ld de,80
 	ld ix,25600
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_lower_panel_gatling
 	ld de,filedata
@@ -42,6 +46,8 @@ load_ui_images:
 	ld de,20
 	ld ix,800
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_lower_panel_knife
 	ld de,filedata
@@ -53,6 +59,8 @@ load_ui_images:
 	ld de,20
 	ld ix,800
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_lower_panel_machine_gun
 	ld de,filedata
@@ -64,6 +72,8 @@ load_ui_images:
 	ld de,20
 	ld ix,800
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_lower_panel_pistol
 	ld de,filedata
@@ -75,6 +85,8 @@ load_ui_images:
 	ld de,20
 	ld ix,800
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_splash
 	ld de,filedata
@@ -86,6 +98,8 @@ load_ui_images:
 	ld de,160
 	ld ix,51200
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ret
 

@@ -33,6 +33,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_gatling_01
 	ld de,filedata
@@ -44,6 +46,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_gatling_02
 	ld de,filedata
@@ -55,6 +59,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_gatling_03
 	ld de,filedata
@@ -66,6 +72,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_gatling_04
 	ld de,filedata
@@ -77,6 +85,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_knife_00
 	ld de,filedata
@@ -88,6 +98,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_knife_01
 	ld de,filedata
@@ -99,6 +111,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_knife_02
 	ld de,filedata
@@ -110,6 +124,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_knife_03
 	ld de,filedata
@@ -121,6 +137,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_knife_04
 	ld de,filedata
@@ -132,6 +150,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_machine_gun_00
 	ld de,filedata
@@ -143,6 +163,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_machine_gun_01
 	ld de,filedata
@@ -154,6 +176,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_machine_gun_02
 	ld de,filedata
@@ -165,6 +189,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_machine_gun_03
 	ld de,filedata
@@ -176,6 +202,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_machine_gun_04
 	ld de,filedata
@@ -187,6 +215,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_pistol_00
 	ld de,filedata
@@ -198,6 +228,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_pistol_01
 	ld de,filedata
@@ -209,6 +241,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_pistol_02
 	ld de,filedata
@@ -220,6 +254,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_pistol_03
 	ld de,filedata
@@ -231,6 +267,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ld hl,F_UI_bj_pistol_04
 	ld de,filedata
@@ -242,6 +280,8 @@ load_ui_images_bj:
 	ld de,64
 	ld ix,4096
 	call vdu_load_img
+	LD A, '.'
+	RST.LIL 10h
 
 	ret
 
