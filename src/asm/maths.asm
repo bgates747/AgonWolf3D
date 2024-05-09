@@ -63,3 +63,22 @@ subdec:
     inc de
     djnz subdec ; loop until b == 0
     ret 
+
+; http://www.z80.info/pseudo-random.txt
+rand_8:
+    push bc
+    ld a,(r_seed)
+    ld c,a 
+
+    rrca ; multiply by 32
+    rrca
+    rrca
+    xor 0x1f
+
+    add a,c
+    sbc a,255 ; carry
+
+    ld (r_seed),a
+    pop bc
+    ret
+r_seed: defb $50

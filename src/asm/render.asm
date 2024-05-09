@@ -212,7 +212,6 @@ render_scene:
     inc c ; iy address offset 
     jr @loop
 @end:
-; TODO: properly implement this
 ; draw the graphic portions of the ui
 	ld hl,BUF_UI_LOWER_PANEL
     call vdu_buff_select

@@ -48,6 +48,7 @@ player_shot_yvel:   db 0x00
                     db 0x00 ; padding
 player_shot_status: db 0xFF ; -1 = no shot, otherwise shot direction of travel
 player_shot_time:   dl 0x000000 ; time shot was fired from RTC
+player_shot_damage: db 0x00 ; damage dealt by latest shot
 
 player_weapons:     db 0x00 ; weapons in player's possession according to following bitmasks
 player_weapon_active: db 0x00 ; currently active weapon according to following bitmasks
@@ -184,6 +185,8 @@ player_set_weapon_parameters:
     ld (player_weapon_ui_buffer_id_large),hl
     ld hl,BUF_UI_LOWER_PANEL_KNIFE
     ld (player_weapon_ui_buffer_id_small),hl
+    ld a,15 ; dps = 60
+    ld (player_weapon_damage),a
     ld hl,120/4 ; 4 times/second
     ld (player_weapon_fire_rate),hl
     ld iy,player_weapon_fire_timer
@@ -194,7 +197,10 @@ player_set_weapon_parameters:
     ld (player_weapon_ui_buffer_id_large),hl
     ld hl,BUF_UI_LOWER_PANEL_PISTOL
     ld (player_weapon_ui_buffer_id_small),hl
-    ld hl,120/2 ; 2 times/second
+; 1 shots/burst, 3 bursts/sec, 30 dmg/burst, 90 dmg/sec, 30 dmg/shot
+    ld a,30 ; damage/burst
+    ld (player_weapon_damage),a
+    ld hl,120/3 ; 3 bursts/second
     ld (player_weapon_fire_rate),hl
     ld iy,player_weapon_fire_timer
     call timer_set
@@ -204,7 +210,10 @@ player_set_weapon_parameters:
     ld (player_weapon_ui_buffer_id_large),hl
     ld hl,BUF_UI_LOWER_PANEL_MACHINE_GUN
     ld (player_weapon_ui_buffer_id_small),hl
-    ld hl,40 ; 3 times/second
+; 4 shots/burst, 3 bursts/sec, 80 dmg/burst, 240 dmg/sec, 20 dmg/shot
+    ld a,80 ; damage/burst
+    ld (player_weapon_damage),a
+    ld hl,40 ; 3 bursts/second
     ld (player_weapon_fire_rate),hl
     ld iy,player_weapon_fire_timer
     call timer_set
@@ -214,7 +223,10 @@ player_set_weapon_parameters:
     ld (player_weapon_ui_buffer_id_large),hl
     ld hl,BUF_UI_LOWER_PANEL_GATLING
     ld (player_weapon_ui_buffer_id_small),hl
-    ld hl,40 ; 3 times/second
+; 8 shots/burst, 3 bursts/sec, 120 dmg/burst, 360 dmg/sec, 15 dmg/shot
+    ld a,120 ; damage/burst
+    ld (player_weapon_damage),a
+    ld hl,40 ; 3 bursts/second
     ld (player_weapon_fire_rate),hl
     ld iy,player_weapon_fire_timer
     call timer_set
@@ -333,6 +345,12 @@ player_shoot:
     ld iy,player_weapon_animation_timer
     call timer_set
 @shoot:
+; roll for damage modifier
+    call rand_8 ; a is a bitmask we apply to the weapon's dmg/burst
+    ld hl,player_weapon_damage
+    and a,(hl) ; a contains modified damage value
+    neg ; so we can add the negative
+    ld (player_shot_damage),a ; pass shot damage to sprite hurt routine
 ; determine active weapon and shoot it
     ld a,(player_weapon_active) 
     cp player_weapon_pistol

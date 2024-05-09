@@ -251,7 +251,7 @@ BARREL:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
+    db 018 ;sprite_health
     db 000 ;sprite_behavior_index
     db 000 ;sprite_x
     db 000 ;sprite_y
@@ -270,11 +270,15 @@ BARREL:
 @hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
+    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    add a,(iy+sprite_health)
+    ld (iy+sprite_health),a
+    jp p,sprite_behavior_return ; if health is positive, return
+    ; otherwise fall through to kill sprite
+@kill:
     push iy 
     call sfx_play_explode
     pop iy 
-    jr @kill
-@kill:
     call sprite_kill
     jp sprite_behavior_return
 @see:
@@ -379,7 +383,7 @@ RADIOACTIVE_BARREL:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
+    db 024 ;sprite_health
     db 000 ;sprite_behavior_index
     db 000 ;sprite_x
     db 000 ;sprite_y
@@ -398,11 +402,15 @@ RADIOACTIVE_BARREL:
 @hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
+    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    add a,(iy+sprite_health)
+    ld (iy+sprite_health),a
+    jp p,sprite_behavior_return ; if health is positive, return
+    ; otherwise fall through to kill sprite
+@kill:
     push iy 
     call sfx_play_explode
-    pop iy 
-    jr @kill
-@kill:
+    pop iy
     call sprite_kill
     jp sprite_behavior_return
 @see:
@@ -856,7 +864,7 @@ DOG:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
+    db 050 ;sprite_health
     db 000 ;sprite_behavior_index
     db 000 ;sprite_x
     db 000 ;sprite_y
@@ -878,11 +886,15 @@ DOG:
 @hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
+    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    add a,(iy+sprite_health)
+    ld (iy+sprite_health),a
+    jp p,sprite_behavior_return ; if health is positive, return
+    ; otherwise fall through to kill sprite
+@kill:
     push iy 
     call sfx_play_dog_yelp
     pop iy 
-    jr @kill
-@kill:
     call sprite_kill
     jp sprite_behavior_return
 @see:
@@ -905,7 +917,7 @@ GERMAN_TROOPER:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
+    db 075 ;sprite_health
     db 000 ;sprite_behavior_index
     db 000 ;sprite_x
     db 000 ;sprite_y
@@ -927,10 +939,11 @@ GERMAN_TROOPER:
 @hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
-    push iy 
-    call sfx_play_ugh
-    pop iy 
-    jr @kill
+    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    add a,(iy+sprite_health)
+    ld (iy+sprite_health),a
+    jp p,sprite_behavior_return ; if health is positive, return
+    ; otherwise fall through to kill sprite
 @kill:
     push iy 
     call sfx_play_wilhelm
@@ -979,10 +992,11 @@ SS_GUARD:
 @hurt:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
-    push iy 
-    call sfx_play_ahh
-    pop iy 
-    jr @kill
+    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    add a,(iy+sprite_health)
+    ld (iy+sprite_health),a
+    jp p,sprite_behavior_return ; if health is positive, return
+    ; otherwise fall through to kill sprite
 @kill:
     push iy 
     call sfx_play_mein_leben
