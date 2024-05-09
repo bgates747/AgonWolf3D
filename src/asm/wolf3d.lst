@@ -6662,9 +6662,9 @@ PC     Output      Line
 044B7D 3E 01       5254*  	ld a,mos_load
 044B7F 5B CF       5255*  	RST.LIL 08h
 044B81 21 13 02 00 5256*  	ld hl,BUF_20_004
-044B85 01 14 00 00 5257*  	ld bc,20
-044B89 11 14 00 00 5258*  	ld de,20
-044B8D DD 21 90 01 5259*  	ld ix,400
+044B85 01 13 00 00 5257*  	ld bc,19
+044B89 11 12 00 00 5258*  	ld de,18
+044B8D DD 21 56 01 5259*  	ld ix,342
        00          
 044B92 CD C5 B4 04 5260*  	call vdu_load_img
 044B96 C9          5261*  	ret
@@ -6677,9 +6677,9 @@ PC     Output      Line
 044BA7 3E 01       5268*  	ld a,mos_load
 044BA9 5B CF       5269*  	RST.LIL 08h
 044BAB 21 14 02 00 5270*  	ld hl,BUF_20_020
-044BAF 01 19 00 00 5271*  	ld bc,25
-044BB3 11 1A 00 00 5272*  	ld de,26
-044BB7 DD 21 8A 02 5273*  	ld ix,650
+044BAF 01 17 00 00 5271*  	ld bc,23
+044BB3 11 17 00 00 5272*  	ld de,23
+044BB7 DD 21 11 02 5273*  	ld ix,529
        00          
 044BBC CD C5 B4 04 5274*  	call vdu_load_img
 044BC0 C9          5275*  	ret
@@ -6692,9 +6692,9 @@ PC     Output      Line
 044BD1 3E 01       5282*  	ld a,mos_load
 044BD3 5B CF       5283*  	RST.LIL 08h
 044BD5 21 15 02 00 5284*  	ld hl,BUF_20_032
-044BD9 01 25 00 00 5285*  	ld bc,37
-044BDD 11 27 00 00 5286*  	ld de,39
-044BE1 DD 21 A3 05 5287*  	ld ix,1443
+044BD9 01 20 00 00 5285*  	ld bc,32
+044BDD 11 22 00 00 5286*  	ld de,34
+044BE1 DD 21 40 04 5287*  	ld ix,1088
        00          
 044BE6 CD C5 B4 04 5288*  	call vdu_load_img
 044BEA C9          5289*  	ret
@@ -6707,9 +6707,9 @@ PC     Output      Line
 044BFB 3E 01       5296*  	ld a,mos_load
 044BFD 5B CF       5297*  	RST.LIL 08h
 044BFF 21 16 02 00 5298*  	ld hl,BUF_20_040
-044C03 01 3C 00 00 5299*  	ld bc,60
-044C07 11 40 00 00 5300*  	ld de,64
-044C0B DD 21 00 0F 5301*  	ld ix,3840
+044C03 01 36 00 00 5299*  	ld bc,54
+044C07 11 38 00 00 5300*  	ld de,56
+044C0B DD 21 D0 0B 5301*  	ld ix,3024
        00          
 044C10 CD C5 B4 04 5302*  	call vdu_load_img
 044C14 C9          5303*  	ret
@@ -6722,9 +6722,9 @@ PC     Output      Line
 044C25 3E 01       5310*  	ld a,mos_load
 044C27 5B CF       5311*  	RST.LIL 08h
 044C29 21 17 02 00 5312*  	ld hl,BUF_20_044
-044C2D 01 79 00 00 5313*  	ld bc,121
-044C31 11 73 00 00 5314*  	ld de,115
-044C35 DD 21 5B 36 5315*  	ld ix,13915
+044C2D 01 6B 00 00 5313*  	ld bc,107
+044C31 11 5B 00 00 5314*  	ld de,91
+044C35 DD 21 09 26 5315*  	ld ix,9737
        00          
 044C3A CD C5 B4 04 5316*  	call vdu_load_img
 044C3E C9          5317*  	ret
@@ -6737,9 +6737,9 @@ PC     Output      Line
 044C4F 3E 01       5324*  	ld a,mos_load
 044C51 5B CF       5325*  	RST.LIL 08h
 044C53 21 18 02 00 5326*  	ld hl,BUF_21_004
-044C57 01 10 00 00 5327*  	ld bc,16
-044C5B 11 11 00 00 5328*  	ld de,17
-044C5F DD 21 10 01 5329*  	ld ix,272
+044C57 01 0B 00 00 5327*  	ld bc,11
+044C5B 11 0B 00 00 5328*  	ld de,11
+044C5F DD 21 79 00 5329*  	ld ix,121
        00          
 044C64 CD C5 B4 04 5330*  	call vdu_load_img
 044C68 C9          5331*  	ret
@@ -6752,9 +6752,9 @@ PC     Output      Line
 044C79 3E 01       5338*  	ld a,mos_load
 044C7B 5B CF       5339*  	RST.LIL 08h
 044C7D 21 19 02 00 5340*  	ld hl,BUF_21_020
-044C81 01 15 00 00 5341*  	ld bc,21
-044C85 11 16 00 00 5342*  	ld de,22
-044C89 DD 21 CE 01 5343*  	ld ix,462
+044C81 01 0E 00 00 5341*  	ld bc,14
+044C85 11 0E 00 00 5342*  	ld de,14
+044C89 DD 21 C4 00 5343*  	ld ix,196
        00          
 044C8E CD C5 B4 04 5344*  	call vdu_load_img
 044C92 C9          5345*  	ret
@@ -6767,9 +6767,9 @@ PC     Output      Line
 044CA3 3E 01       5352*  	ld a,mos_load
 044CA5 5B CF       5353*  	RST.LIL 08h
 044CA7 21 1A 02 00 5354*  	ld hl,BUF_21_032
-044CAB 01 1F 00 00 5355*  	ld bc,31
-044CAF 11 21 00 00 5356*  	ld de,33
-044CB3 DD 21 FF 03 5357*  	ld ix,1023
+044CAB 01 14 00 00 5355*  	ld bc,20
+044CAF 11 16 00 00 5356*  	ld de,22
+044CB3 DD 21 B8 01 5357*  	ld ix,440
        00          
 044CB8 CD C5 B4 04 5358*  	call vdu_load_img
 044CBC C9          5359*  	ret
@@ -6782,9 +6782,9 @@ PC     Output      Line
 044CCD 3E 01       5366*  	ld a,mos_load
 044CCF 5B CF       5367*  	RST.LIL 08h
 044CD1 21 1B 02 00 5368*  	ld hl,BUF_21_040
-044CD5 01 32 00 00 5369*  	ld bc,50
-044CD9 11 36 00 00 5370*  	ld de,54
-044CDD DD 21 8C 0A 5371*  	ld ix,2700
+044CD5 01 21 00 00 5369*  	ld bc,33
+044CD9 11 24 00 00 5370*  	ld de,36
+044CDD DD 21 A4 04 5371*  	ld ix,1188
        00          
 044CE2 CD C5 B4 04 5372*  	call vdu_load_img
 044CE6 C9          5373*  	ret
@@ -6797,9 +6797,9 @@ PC     Output      Line
 044CF7 3E 01       5380*  	ld a,mos_load
 044CF9 5B CF       5381*  	RST.LIL 08h
 044CFB 21 1C 02 00 5382*  	ld hl,BUF_21_044
-044CFF 01 97 00 00 5383*  	ld bc,151
-044D03 11 55 00 00 5384*  	ld de,85
-044D07 DD 21 23 32 5385*  	ld ix,12835
+044CFF 01 64 00 00 5383*  	ld bc,100
+044D03 11 1E 00 00 5384*  	ld de,30
+044D07 DD 21 B8 0B 5385*  	ld ix,3000
        00          
 044D0C CD C5 B4 04 5386*  	call vdu_load_img
 044D10 C9          5387*  	ret
@@ -6887,9 +6887,9 @@ PC     Output      Line
 044DF3 3E 01       5464*  	ld a,mos_load
 044DF5 5B CF       5465*  	RST.LIL 08h
 044DF7 21 22 02 00 5466*  	ld hl,BUF_23_004
-044DFB 01 15 00 00 5467*  	ld bc,21
-044DFF 11 09 00 00 5468*  	ld de,9
-044E03 DD 21 BD 00 5469*  	ld ix,189
+044DFB 01 0E 00 00 5467*  	ld bc,14
+044DFF 11 06 00 00 5468*  	ld de,6
+044E03 DD 21 54 00 5469*  	ld ix,84
        00          
 044E08 CD C5 B4 04 5470*  	call vdu_load_img
 044E0C C9          5471*  	ret
@@ -6902,9 +6902,9 @@ PC     Output      Line
 044E1D 3E 01       5478*  	ld a,mos_load
 044E1F 5B CF       5479*  	RST.LIL 08h
 044E21 21 23 02 00 5480*  	ld hl,BUF_23_020
-044E25 01 1A 00 00 5481*  	ld bc,26
-044E29 11 0C 00 00 5482*  	ld de,12
-044E2D DD 21 38 01 5483*  	ld ix,312
+044E25 01 11 00 00 5481*  	ld bc,17
+044E29 11 08 00 00 5482*  	ld de,8
+044E2D DD 21 88 00 5483*  	ld ix,136
        00          
 044E32 CD C5 B4 04 5484*  	call vdu_load_img
 044E36 C9          5485*  	ret
@@ -6917,9 +6917,9 @@ PC     Output      Line
 044E47 3E 01       5492*  	ld a,mos_load
 044E49 5B CF       5493*  	RST.LIL 08h
 044E4B 21 24 02 00 5494*  	ld hl,BUF_23_032
-044E4F 01 24 00 00 5495*  	ld bc,36
-044E53 11 11 00 00 5496*  	ld de,17
-044E57 DD 21 64 02 5497*  	ld ix,612
+044E4F 01 19 00 00 5495*  	ld bc,25
+044E53 11 0B 00 00 5496*  	ld de,11
+044E57 DD 21 13 01 5497*  	ld ix,275
        00          
 044E5C CD C5 B4 04 5498*  	call vdu_load_img
 044E60 C9          5499*  	ret
@@ -6932,9 +6932,9 @@ PC     Output      Line
 044E71 3E 01       5506*  	ld a,mos_load
 044E73 5B CF       5507*  	RST.LIL 08h
 044E75 21 25 02 00 5508*  	ld hl,BUF_23_040
-044E79 01 3D 00 00 5509*  	ld bc,61
-044E7D 11 1B 00 00 5510*  	ld de,27
-044E81 DD 21 6F 06 5511*  	ld ix,1647
+044E79 01 28 00 00 5509*  	ld bc,40
+044E7D 11 12 00 00 5510*  	ld de,18
+044E81 DD 21 D0 02 5511*  	ld ix,720
        00          
 044E86 CD C5 B4 04 5512*  	call vdu_load_img
 044E8A C9          5513*  	ret
@@ -6947,9 +6947,9 @@ PC     Output      Line
 044E9B 3E 01       5520*  	ld a,mos_load
 044E9D 5B CF       5521*  	RST.LIL 08h
 044E9F 21 26 02 00 5522*  	ld hl,BUF_23_044
-044EA3 01 B4 00 00 5523*  	ld bc,180
+044EA3 01 01 00 00 5523*  	ld bc,1
 044EA7 11 01 00 00 5524*  	ld de,1
-044EAB DD 21 B4 00 5525*  	ld ix,180
+044EAB DD 21 01 00 5525*  	ld ix,1
        00          
 044EB0 CD C5 B4 04 5526*  	call vdu_load_img
 044EB4 C9          5527*  	ret
@@ -6962,9 +6962,9 @@ PC     Output      Line
 044EC5 3E 01       5534*  	ld a,mos_load
 044EC7 5B CF       5535*  	RST.LIL 08h
 044EC9 21 27 02 00 5536*  	ld hl,BUF_24_004
-044ECD 01 10 00 00 5537*  	ld bc,16
-044ED1 11 11 00 00 5538*  	ld de,17
-044ED5 DD 21 10 01 5539*  	ld ix,272
+044ECD 01 0B 00 00 5537*  	ld bc,11
+044ED1 11 0B 00 00 5538*  	ld de,11
+044ED5 DD 21 79 00 5539*  	ld ix,121
        00          
 044EDA CD C5 B4 04 5540*  	call vdu_load_img
 044EDE C9          5541*  	ret
@@ -6977,9 +6977,9 @@ PC     Output      Line
 044EEF 3E 01       5548*  	ld a,mos_load
 044EF1 5B CF       5549*  	RST.LIL 08h
 044EF3 21 28 02 00 5550*  	ld hl,BUF_24_020
-044EF7 01 15 00 00 5551*  	ld bc,21
-044EFB 11 16 00 00 5552*  	ld de,22
-044EFF DD 21 CE 01 5553*  	ld ix,462
+044EF7 01 0E 00 00 5551*  	ld bc,14
+044EFB 11 0E 00 00 5552*  	ld de,14
+044EFF DD 21 C4 00 5553*  	ld ix,196
        00          
 044F04 CD C5 B4 04 5554*  	call vdu_load_img
 044F08 C9          5555*  	ret
@@ -6992,9 +6992,9 @@ PC     Output      Line
 044F19 3E 01       5562*  	ld a,mos_load
 044F1B 5B CF       5563*  	RST.LIL 08h
 044F1D 21 29 02 00 5564*  	ld hl,BUF_24_032
-044F21 01 1F 00 00 5565*  	ld bc,31
-044F25 11 21 00 00 5566*  	ld de,33
-044F29 DD 21 FF 03 5567*  	ld ix,1023
+044F21 01 14 00 00 5565*  	ld bc,20
+044F25 11 16 00 00 5566*  	ld de,22
+044F29 DD 21 B8 01 5567*  	ld ix,440
        00          
 044F2E CD C5 B4 04 5568*  	call vdu_load_img
 044F32 C9          5569*  	ret
@@ -7007,9 +7007,9 @@ PC     Output      Line
 044F43 3E 01       5576*  	ld a,mos_load
 044F45 5B CF       5577*  	RST.LIL 08h
 044F47 21 2A 02 00 5578*  	ld hl,BUF_24_040
-044F4B 01 32 00 00 5579*  	ld bc,50
-044F4F 11 36 00 00 5580*  	ld de,54
-044F53 DD 21 8C 0A 5581*  	ld ix,2700
+044F4B 01 21 00 00 5579*  	ld bc,33
+044F4F 11 24 00 00 5580*  	ld de,36
+044F53 DD 21 A4 04 5581*  	ld ix,1188
        00          
 044F58 CD C5 B4 04 5582*  	call vdu_load_img
 044F5C C9          5583*  	ret
@@ -7022,9 +7022,9 @@ PC     Output      Line
 044F6D 3E 01       5590*  	ld a,mos_load
 044F6F 5B CF       5591*  	RST.LIL 08h
 044F71 21 2B 02 00 5592*  	ld hl,BUF_24_044
-044F75 01 97 00 00 5593*  	ld bc,151
-044F79 11 55 00 00 5594*  	ld de,85
-044F7D DD 21 23 32 5595*  	ld ix,12835
+044F75 01 64 00 00 5593*  	ld bc,100
+044F79 11 1E 00 00 5594*  	ld de,30
+044F7D DD 21 B8 0B 5595*  	ld ix,3000
        00          
 044F82 CD C5 B4 04 5596*  	call vdu_load_img
 044F86 C9          5597*  	ret
@@ -7037,9 +7037,9 @@ PC     Output      Line
 044F97 3E 01       5604*  	ld a,mos_load
 044F99 5B CF       5605*  	RST.LIL 08h
 044F9B 21 2C 02 00 5606*  	ld hl,BUF_40_004
-044F9F 01 12 00 00 5607*  	ld bc,18
-044FA3 11 09 00 00 5608*  	ld de,9
-044FA7 DD 21 A2 00 5609*  	ld ix,162
+044F9F 01 0E 00 00 5607*  	ld bc,14
+044FA3 11 07 00 00 5608*  	ld de,7
+044FA7 DD 21 62 00 5609*  	ld ix,98
        00          
 044FAC CD C5 B4 04 5610*  	call vdu_load_img
 044FB0 C9          5611*  	ret
@@ -7052,9 +7052,9 @@ PC     Output      Line
 044FC1 3E 01       5618*  	ld a,mos_load
 044FC3 5B CF       5619*  	RST.LIL 08h
 044FC5 21 2D 02 00 5620*  	ld hl,BUF_40_020
-044FC9 01 17 00 00 5621*  	ld bc,23
-044FCD 11 0B 00 00 5622*  	ld de,11
-044FD1 DD 21 FD 00 5623*  	ld ix,253
+044FC9 01 12 00 00 5621*  	ld bc,18
+044FCD 11 0A 00 00 5622*  	ld de,10
+044FD1 DD 21 B4 00 5623*  	ld ix,180
        00          
 044FD6 CD C5 B4 04 5624*  	call vdu_load_img
 044FDA C9          5625*  	ret
@@ -7067,9 +7067,9 @@ PC     Output      Line
 044FEB 3E 01       5632*  	ld a,mos_load
 044FED 5B CF       5633*  	RST.LIL 08h
 044FEF 21 2E 02 00 5634*  	ld hl,BUF_40_032
-044FF3 01 20 00 00 5635*  	ld bc,32
-044FF7 11 12 00 00 5636*  	ld de,18
-044FFB DD 21 40 02 5637*  	ld ix,576
+044FF3 01 1A 00 00 5635*  	ld bc,26
+044FF7 11 0D 00 00 5636*  	ld de,13
+044FFB DD 21 52 01 5637*  	ld ix,338
        00          
 045000 CD C5 B4 04 5638*  	call vdu_load_img
 045004 C9          5639*  	ret
@@ -7082,9 +7082,9 @@ PC     Output      Line
 045015 3E 01       5646*  	ld a,mos_load
 045017 5B CF       5647*  	RST.LIL 08h
 045019 21 2F 02 00 5648*  	ld hl,BUF_40_040
-04501D 01 36 00 00 5649*  	ld bc,54
-045021 11 1D 00 00 5650*  	ld de,29
-045025 DD 21 1E 06 5651*  	ld ix,1566
+04501D 01 2B 00 00 5649*  	ld bc,43
+045021 11 17 00 00 5650*  	ld de,23
+045025 DD 21 DD 03 5651*  	ld ix,989
        00          
 04502A CD C5 B4 04 5652*  	call vdu_load_img
 04502E C9          5653*  	ret
@@ -7097,9 +7097,9 @@ PC     Output      Line
 04503F 3E 01       5660*  	ld a,mos_load
 045041 5B CF       5661*  	RST.LIL 08h
 045043 21 30 02 00 5662*  	ld hl,BUF_40_044
-045047 01 5A 00 00 5663*  	ld bc,90
-04504B 11 0A 00 00 5664*  	ld de,10
-04504F DD 21 84 03 5665*  	ld ix,900
+045047 01 01 00 00 5663*  	ld bc,1
+04504B 11 01 00 00 5664*  	ld de,1
+04504F DD 21 01 00 5665*  	ld ix,1
        00          
 045054 CD C5 B4 04 5666*  	call vdu_load_img
 045058 C9          5667*  	ret
@@ -7112,9 +7112,9 @@ PC     Output      Line
 045069 3E 01       5674*  	ld a,mos_load
 04506B 5B CF       5675*  	RST.LIL 08h
 04506D 21 31 02 00 5676*  	ld hl,BUF_41_004
-045071 01 12 00 00 5677*  	ld bc,18
-045075 11 0F 00 00 5678*  	ld de,15
-045079 DD 21 0E 01 5679*  	ld ix,270
+045071 01 0B 00 00 5677*  	ld bc,11
+045075 11 0B 00 00 5678*  	ld de,11
+045079 DD 21 79 00 5679*  	ld ix,121
        00          
 04507E CD C5 B4 04 5680*  	call vdu_load_img
 045082 C9          5681*  	ret
@@ -7127,9 +7127,9 @@ PC     Output      Line
 045093 3E 01       5688*  	ld a,mos_load
 045095 5B CF       5689*  	RST.LIL 08h
 045097 21 32 02 00 5690*  	ld hl,BUF_41_020
-04509B 01 17 00 00 5691*  	ld bc,23
-04509F 11 14 00 00 5692*  	ld de,20
-0450A3 DD 21 CC 01 5693*  	ld ix,460
+04509B 01 10 00 00 5691*  	ld bc,16
+04509F 11 0E 00 00 5692*  	ld de,14
+0450A3 DD 21 E0 00 5693*  	ld ix,224
        00          
 0450A8 CD C5 B4 04 5694*  	call vdu_load_img
 0450AC C9          5695*  	ret
@@ -7142,9 +7142,9 @@ PC     Output      Line
 0450BD 3E 01       5702*  	ld a,mos_load
 0450BF 5B CF       5703*  	RST.LIL 08h
 0450C1 21 33 02 00 5704*  	ld hl,BUF_41_032
-0450C5 01 20 00 00 5705*  	ld bc,32
-0450C9 11 1E 00 00 5706*  	ld de,30
-0450CD DD 21 C0 03 5707*  	ld ix,960
+0450C5 01 16 00 00 5705*  	ld bc,22
+0450C9 11 14 00 00 5706*  	ld de,20
+0450CD DD 21 B8 01 5707*  	ld ix,440
        00          
 0450D2 CD C5 B4 04 5708*  	call vdu_load_img
 0450D6 C9          5709*  	ret
@@ -7157,9 +7157,9 @@ PC     Output      Line
 0450E7 3E 01       5716*  	ld a,mos_load
 0450E9 5B CF       5717*  	RST.LIL 08h
 0450EB 21 34 02 00 5718*  	ld hl,BUF_41_040
-0450EF 01 36 00 00 5719*  	ld bc,54
-0450F3 11 31 00 00 5720*  	ld de,49
-0450F7 DD 21 56 0A 5721*  	ld ix,2646
+0450EF 01 25 00 00 5719*  	ld bc,37
+0450F3 11 22 00 00 5720*  	ld de,34
+0450F7 DD 21 EA 04 5721*  	ld ix,1258
        00          
 0450FC CD C5 B4 04 5722*  	call vdu_load_img
 045100 C9          5723*  	ret
@@ -7172,9 +7172,9 @@ PC     Output      Line
 045111 3E 01       5730*  	ld a,mos_load
 045113 5B CF       5731*  	RST.LIL 08h
 045115 21 35 02 00 5732*  	ld hl,BUF_41_044
-045119 01 82 00 00 5733*  	ld bc,130
-04511D 11 46 00 00 5734*  	ld de,70
-045121 DD 21 8C 23 5735*  	ld ix,9100
+045119 01 23 00 00 5733*  	ld bc,35
+04511D 11 19 00 00 5734*  	ld de,25
+045121 DD 21 6B 03 5735*  	ld ix,875
        00          
 045126 CD C5 B4 04 5736*  	call vdu_load_img
 04512A C9          5737*  	ret
@@ -7187,9 +7187,9 @@ PC     Output      Line
 04513B 3E 01       5744*  	ld a,mos_load
 04513D 5B CF       5745*  	RST.LIL 08h
 04513F 21 36 02 00 5746*  	ld hl,BUF_42_004
-045143 01 0F 00 00 5747*  	ld bc,15
-045147 11 0C 00 00 5748*  	ld de,12
-04514B DD 21 B4 00 5749*  	ld ix,180
+045143 01 0A 00 00 5747*  	ld bc,10
+045147 11 09 00 00 5748*  	ld de,9
+04514B DD 21 5A 00 5749*  	ld ix,90
        00          
 045150 CD C5 B4 04 5750*  	call vdu_load_img
 045154 C9          5751*  	ret
@@ -7202,9 +7202,9 @@ PC     Output      Line
 045165 3E 01       5758*  	ld a,mos_load
 045167 5B CF       5759*  	RST.LIL 08h
 045169 21 37 02 00 5760*  	ld hl,BUF_42_020
-04516D 01 14 00 00 5761*  	ld bc,20
-045171 11 10 00 00 5762*  	ld de,16
-045175 DD 21 40 01 5763*  	ld ix,320
+04516D 01 0E 00 00 5761*  	ld bc,14
+045171 11 0B 00 00 5762*  	ld de,11
+045175 DD 21 9A 00 5763*  	ld ix,154
        00          
 04517A CD C5 B4 04 5764*  	call vdu_load_img
 04517E C9          5765*  	ret
@@ -7217,9 +7217,9 @@ PC     Output      Line
 04518F 3E 01       5772*  	ld a,mos_load
 045191 5B CF       5773*  	RST.LIL 08h
 045193 21 38 02 00 5774*  	ld hl,BUF_42_032
-045197 01 1C 00 00 5775*  	ld bc,28
-04519B 11 18 00 00 5776*  	ld de,24
-04519F DD 21 A0 02 5777*  	ld ix,672
+045197 01 13 00 00 5775*  	ld bc,19
+04519B 11 10 00 00 5776*  	ld de,16
+04519F DD 21 30 01 5777*  	ld ix,304
        00          
 0451A4 CD C5 B4 04 5778*  	call vdu_load_img
 0451A8 C9          5779*  	ret
@@ -7232,9 +7232,9 @@ PC     Output      Line
 0451B9 3E 01       5786*  	ld a,mos_load
 0451BB 5B CF       5787*  	RST.LIL 08h
 0451BD 21 39 02 00 5788*  	ld hl,BUF_42_040
-0451C1 01 2F 00 00 5789*  	ld bc,47
-0451C5 11 27 00 00 5790*  	ld de,39
-0451C9 DD 21 29 07 5791*  	ld ix,1833
+0451C1 01 20 00 00 5789*  	ld bc,32
+0451C5 11 1B 00 00 5790*  	ld de,27
+0451C9 DD 21 60 03 5791*  	ld ix,864
        00          
 0451CE CD C5 B4 04 5792*  	call vdu_load_img
 0451D2 C9          5793*  	ret
@@ -7247,9 +7247,9 @@ PC     Output      Line
 0451E3 3E 01       5800*  	ld a,mos_load
 0451E5 5B CF       5801*  	RST.LIL 08h
 0451E7 21 3A 02 00 5802*  	ld hl,BUF_42_044
-0451EB 01 64 00 00 5803*  	ld bc,100
-0451EF 11 28 00 00 5804*  	ld de,40
-0451F3 DD 21 A0 0F 5805*  	ld ix,4000
+0451EB 01 3F 00 00 5803*  	ld bc,63
+0451EF 11 04 00 00 5804*  	ld de,4
+0451F3 DD 21 FC 00 5805*  	ld ix,252
        00          
 0451F8 CD C5 B4 04 5806*  	call vdu_load_img
 0451FC C9          5807*  	ret
@@ -7262,9 +7262,9 @@ PC     Output      Line
 04520D 3E 01       5814*  	ld a,mos_load
 04520F 5B CF       5815*  	RST.LIL 08h
 045211 21 3B 02 00 5816*  	ld hl,BUF_43_004
-045215 01 12 00 00 5817*  	ld bc,18
-045219 11 05 00 00 5818*  	ld de,5
-04521D DD 21 5A 00 5819*  	ld ix,90
+045215 01 0B 00 00 5817*  	ld bc,11
+045219 11 04 00 00 5818*  	ld de,4
+04521D DD 21 2C 00 5819*  	ld ix,44
        00          
 045222 CD C5 B4 04 5820*  	call vdu_load_img
 045226 C9          5821*  	ret
@@ -7277,9 +7277,9 @@ PC     Output      Line
 045237 3E 01       5828*  	ld a,mos_load
 045239 5B CF       5829*  	RST.LIL 08h
 04523B 21 3C 02 00 5830*  	ld hl,BUF_43_020
-04523F 01 17 00 00 5831*  	ld bc,23
-045243 11 07 00 00 5832*  	ld de,7
-045247 DD 21 A1 00 5833*  	ld ix,161
+04523F 01 0F 00 00 5831*  	ld bc,15
+045243 11 04 00 00 5832*  	ld de,4
+045247 DD 21 3C 00 5833*  	ld ix,60
        00          
 04524C CD C5 B4 04 5834*  	call vdu_load_img
 045250 C9          5835*  	ret
@@ -7292,9 +7292,9 @@ PC     Output      Line
 045261 3E 01       5842*  	ld a,mos_load
 045263 5B CF       5843*  	RST.LIL 08h
 045265 21 3D 02 00 5844*  	ld hl,BUF_43_032
-045269 01 20 00 00 5845*  	ld bc,32
-04526D 11 0C 00 00 5846*  	ld de,12
-045271 DD 21 80 01 5847*  	ld ix,384
+045269 01 15 00 00 5845*  	ld bc,21
+04526D 11 07 00 00 5846*  	ld de,7
+045271 DD 21 93 00 5847*  	ld ix,147
        00          
 045276 CD C5 B4 04 5848*  	call vdu_load_img
 04527A C9          5849*  	ret
@@ -7307,9 +7307,9 @@ PC     Output      Line
 04528B 3E 01       5856*  	ld a,mos_load
 04528D 5B CF       5857*  	RST.LIL 08h
 04528F 21 3E 02 00 5858*  	ld hl,BUF_43_040
-045293 01 36 00 00 5859*  	ld bc,54
-045297 11 13 00 00 5860*  	ld de,19
-04529B DD 21 02 04 5861*  	ld ix,1026
+045293 01 23 00 00 5859*  	ld bc,35
+045297 11 0D 00 00 5860*  	ld de,13
+04529B DD 21 C7 01 5861*  	ld ix,455
        00          
 0452A0 CD C5 B4 04 5862*  	call vdu_load_img
 0452A4 C9          5863*  	ret
@@ -7337,9 +7337,9 @@ PC     Output      Line
 0452DF 3E 01       5884*  	ld a,mos_load
 0452E1 5B CF       5885*  	RST.LIL 08h
 0452E3 21 40 02 00 5886*  	ld hl,BUF_44_004
-0452E7 01 0D 00 00 5887*  	ld bc,13
-0452EB 11 0A 00 00 5888*  	ld de,10
-0452EF DD 21 82 00 5889*  	ld ix,130
+0452E7 01 05 00 00 5887*  	ld bc,5
+0452EB 11 04 00 00 5888*  	ld de,4
+0452EF DD 21 14 00 5889*  	ld ix,20
        00          
 0452F4 CD C5 B4 04 5890*  	call vdu_load_img
 0452F8 C9          5891*  	ret
@@ -7352,9 +7352,9 @@ PC     Output      Line
 045309 3E 01       5898*  	ld a,mos_load
 04530B 5B CF       5899*  	RST.LIL 08h
 04530D 21 41 02 00 5900*  	ld hl,BUF_44_020
-045311 01 11 00 00 5901*  	ld bc,17
-045315 11 0D 00 00 5902*  	ld de,13
-045319 DD 21 DD 00 5903*  	ld ix,221
+045311 01 08 00 00 5901*  	ld bc,8
+045315 11 06 00 00 5902*  	ld de,6
+045319 DD 21 30 00 5903*  	ld ix,48
        00          
 04531E CD C5 B4 04 5904*  	call vdu_load_img
 045322 C9          5905*  	ret
@@ -7367,9 +7367,9 @@ PC     Output      Line
 045333 3E 01       5912*  	ld a,mos_load
 045335 5B CF       5913*  	RST.LIL 08h
 045337 21 42 02 00 5914*  	ld hl,BUF_44_032
-04533B 01 1A 00 00 5915*  	ld bc,26
-04533F 11 14 00 00 5916*  	ld de,20
-045343 DD 21 08 02 5917*  	ld ix,520
+04533B 01 0D 00 00 5915*  	ld bc,13
+04533F 11 0A 00 00 5916*  	ld de,10
+045343 DD 21 82 00 5917*  	ld ix,130
        00          
 045348 CD C5 B4 04 5918*  	call vdu_load_img
 04534C C9          5919*  	ret
@@ -7382,9 +7382,9 @@ PC     Output      Line
 04535D 3E 01       5926*  	ld a,mos_load
 04535F 5B CF       5927*  	RST.LIL 08h
 045361 21 43 02 00 5928*  	ld hl,BUF_44_040
-045365 01 2B 00 00 5929*  	ld bc,43
-045369 11 20 00 00 5930*  	ld de,32
-04536D DD 21 60 05 5931*  	ld ix,1376
+045365 01 14 00 00 5929*  	ld bc,20
+045369 11 0F 00 00 5930*  	ld de,15
+04536D DD 21 2C 01 5931*  	ld ix,300
        00          
 045372 CD C5 B4 04 5932*  	call vdu_load_img
 045376 C9          5933*  	ret
@@ -7397,9 +7397,9 @@ PC     Output      Line
 045387 3E 01       5940*  	ld a,mos_load
 045389 5B CF       5941*  	RST.LIL 08h
 04538B 21 44 02 00 5942*  	ld hl,BUF_44_044
-04538F 01 5A 00 00 5943*  	ld bc,90
-045393 11 14 00 00 5944*  	ld de,20
-045397 DD 21 08 07 5945*  	ld ix,1800
+04538F 01 01 00 00 5943*  	ld bc,1
+045393 11 01 00 00 5944*  	ld de,1
+045397 DD 21 01 00 5945*  	ld ix,1
        00          
 04539C CD C5 B4 04 5946*  	call vdu_load_img
 0453A0 C9          5947*  	ret
@@ -7412,9 +7412,9 @@ PC     Output      Line
 0453B1 3E 01       5954*  	ld a,mos_load
 0453B3 5B CF       5955*  	RST.LIL 08h
 0453B5 21 45 02 00 5956*  	ld hl,BUF_45_004
-0453B9 01 12 00 00 5957*  	ld bc,18
-0453BD 11 0B 00 00 5958*  	ld de,11
-0453C1 DD 21 C6 00 5959*  	ld ix,198
+0453B9 01 10 00 00 5957*  	ld bc,16
+0453BD 11 0A 00 00 5958*  	ld de,10
+0453C1 DD 21 A0 00 5959*  	ld ix,160
        00          
 0453C6 CD C5 B4 04 5960*  	call vdu_load_img
 0453CA C9          5961*  	ret
@@ -7427,9 +7427,9 @@ PC     Output      Line
 0453DB 3E 01       5968*  	ld a,mos_load
 0453DD 5B CF       5969*  	RST.LIL 08h
 0453DF 21 46 02 00 5970*  	ld hl,BUF_45_020
-0453E3 01 17 00 00 5971*  	ld bc,23
-0453E7 11 0E 00 00 5972*  	ld de,14
-0453EB DD 21 42 01 5973*  	ld ix,322
+0453E3 01 14 00 00 5971*  	ld bc,20
+0453E7 11 0D 00 00 5972*  	ld de,13
+0453EB DD 21 04 01 5973*  	ld ix,260
        00          
 0453F0 CD C5 B4 04 5974*  	call vdu_load_img
 0453F4 C9          5975*  	ret
@@ -7442,9 +7442,9 @@ PC     Output      Line
 045405 3E 01       5982*  	ld a,mos_load
 045407 5B CF       5983*  	RST.LIL 08h
 045409 21 47 02 00 5984*  	ld hl,BUF_45_032
-04540D 01 20 00 00 5985*  	ld bc,32
-045411 11 16 00 00 5986*  	ld de,22
-045415 DD 21 C0 02 5987*  	ld ix,704
+04540D 01 1D 00 00 5985*  	ld bc,29
+045411 11 12 00 00 5986*  	ld de,18
+045415 DD 21 0A 02 5987*  	ld ix,522
        00          
 04541A CD C5 B4 04 5988*  	call vdu_load_img
 04541E C9          5989*  	ret
@@ -7457,9 +7457,9 @@ PC     Output      Line
 04542F 3E 01       5996*  	ld a,mos_load
 045431 5B CF       5997*  	RST.LIL 08h
 045433 21 48 02 00 5998*  	ld hl,BUF_45_040
-045437 01 36 00 00 5999*  	ld bc,54
-04543B 11 24 00 00 6000*  	ld de,36
-04543F DD 21 98 07 6001*  	ld ix,1944
+045437 01 30 00 00 5999*  	ld bc,48
+04543B 11 21 00 00 6000*  	ld de,33
+04543F DD 21 30 06 6001*  	ld ix,1584
        00          
 045444 CD C5 B4 04 6002*  	call vdu_load_img
 045448 C9          6003*  	ret
@@ -7472,9 +7472,9 @@ PC     Output      Line
 045459 3E 01       6010*  	ld a,mos_load
 04545B 5B CF       6011*  	RST.LIL 08h
 04545D 21 49 02 00 6012*  	ld hl,BUF_45_044
-045461 01 82 00 00 6013*  	ld bc,130
-045465 11 1E 00 00 6014*  	ld de,30
-045469 DD 21 3C 0F 6015*  	ld ix,3900
+045461 01 75 00 00 6013*  	ld bc,117
+045465 11 13 00 00 6014*  	ld de,19
+045469 DD 21 AF 08 6015*  	ld ix,2223
        00          
 04546E CD C5 B4 04 6016*  	call vdu_load_img
 045472 C9          6017*  	ret
@@ -7487,9 +7487,9 @@ PC     Output      Line
 045483 3E 01       6024*  	ld a,mos_load
 045485 5B CF       6025*  	RST.LIL 08h
 045487 21 4A 02 00 6026*  	ld hl,BUF_46_004
-04548B 01 12 00 00 6027*  	ld bc,18
-04548F 11 09 00 00 6028*  	ld de,9
-045493 DD 21 A2 00 6029*  	ld ix,162
+04548B 01 10 00 00 6027*  	ld bc,16
+04548F 11 08 00 00 6028*  	ld de,8
+045493 DD 21 80 00 6029*  	ld ix,128
        00          
 045498 CD C5 B4 04 6030*  	call vdu_load_img
 04549C C9          6031*  	ret
@@ -7502,9 +7502,9 @@ PC     Output      Line
 0454AD 3E 01       6038*  	ld a,mos_load
 0454AF 5B CF       6039*  	RST.LIL 08h
 0454B1 21 4B 02 00 6040*  	ld hl,BUF_46_020
-0454B5 01 17 00 00 6041*  	ld bc,23
+0454B5 01 14 00 00 6041*  	ld bc,20
 0454B9 11 0B 00 00 6042*  	ld de,11
-0454BD DD 21 FD 00 6043*  	ld ix,253
+0454BD DD 21 DC 00 6043*  	ld ix,220
        00          
 0454C2 CD C5 B4 04 6044*  	call vdu_load_img
 0454C6 C9          6045*  	ret
@@ -7517,9 +7517,9 @@ PC     Output      Line
 0454D7 3E 01       6052*  	ld a,mos_load
 0454D9 5B CF       6053*  	RST.LIL 08h
 0454DB 21 4C 02 00 6054*  	ld hl,BUF_46_032
-0454DF 01 20 00 00 6055*  	ld bc,32
-0454E3 11 12 00 00 6056*  	ld de,18
-0454E7 DD 21 40 02 6057*  	ld ix,576
+0454DF 01 1D 00 00 6055*  	ld bc,29
+0454E3 11 0F 00 00 6056*  	ld de,15
+0454E7 DD 21 B3 01 6057*  	ld ix,435
        00          
 0454EC CD C5 B4 04 6058*  	call vdu_load_img
 0454F0 C9          6059*  	ret
@@ -7532,9 +7532,9 @@ PC     Output      Line
 045501 3E 01       6066*  	ld a,mos_load
 045503 5B CF       6067*  	RST.LIL 08h
 045505 21 4D 02 00 6068*  	ld hl,BUF_46_040
-045509 01 36 00 00 6069*  	ld bc,54
-04550D 11 1D 00 00 6070*  	ld de,29
-045511 DD 21 1E 06 6071*  	ld ix,1566
+045509 01 30 00 00 6069*  	ld bc,48
+04550D 11 1B 00 00 6070*  	ld de,27
+045511 DD 21 10 05 6071*  	ld ix,1296
        00          
 045516 CD C5 B4 04 6072*  	call vdu_load_img
 04551A C9          6073*  	ret
@@ -7547,9 +7547,9 @@ PC     Output      Line
 04552B 3E 01       6080*  	ld a,mos_load
 04552D 5B CF       6081*  	RST.LIL 08h
 04552F 21 4E 02 00 6082*  	ld hl,BUF_46_044
-045533 01 5A 00 00 6083*  	ld bc,90
-045537 11 0A 00 00 6084*  	ld de,10
-04553B DD 21 84 03 6085*  	ld ix,900
+045533 01 51 00 00 6083*  	ld bc,81
+045537 11 01 00 00 6084*  	ld de,1
+04553B DD 21 51 00 6085*  	ld ix,81
        00          
 045540 CD C5 B4 04 6086*  	call vdu_load_img
 045544 C9          6087*  	ret
@@ -7562,9 +7562,9 @@ PC     Output      Line
 045555 3E 01       6094*  	ld a,mos_load
 045557 5B CF       6095*  	RST.LIL 08h
 045559 21 4F 02 00 6096*  	ld hl,BUF_47_004
-04555D 01 12 00 00 6097*  	ld bc,18
-045561 11 0A 00 00 6098*  	ld de,10
-045565 DD 21 B4 00 6099*  	ld ix,180
+04555D 01 10 00 00 6097*  	ld bc,16
+045561 11 09 00 00 6098*  	ld de,9
+045565 DD 21 90 00 6099*  	ld ix,144
        00          
 04556A CD C5 B4 04 6100*  	call vdu_load_img
 04556E C9          6101*  	ret
@@ -7577,9 +7577,9 @@ PC     Output      Line
 04557F 3E 01       6108*  	ld a,mos_load
 045581 5B CF       6109*  	RST.LIL 08h
 045583 21 50 02 00 6110*  	ld hl,BUF_47_020
-045587 01 17 00 00 6111*  	ld bc,23
-04558B 11 0D 00 00 6112*  	ld de,13
-04558F DD 21 2B 01 6113*  	ld ix,299
+045587 01 14 00 00 6111*  	ld bc,20
+04558B 11 0B 00 00 6112*  	ld de,11
+04558F DD 21 DC 00 6113*  	ld ix,220
        00          
 045594 CD C5 B4 04 6114*  	call vdu_load_img
 045598 C9          6115*  	ret
@@ -7592,9 +7592,9 @@ PC     Output      Line
 0455A9 3E 01       6122*  	ld a,mos_load
 0455AB 5B CF       6123*  	RST.LIL 08h
 0455AD 21 51 02 00 6124*  	ld hl,BUF_47_032
-0455B1 01 20 00 00 6125*  	ld bc,32
-0455B5 11 12 00 00 6126*  	ld de,18
-0455B9 DD 21 40 02 6127*  	ld ix,576
+0455B1 01 1D 00 00 6125*  	ld bc,29
+0455B5 11 11 00 00 6126*  	ld de,17
+0455B9 DD 21 ED 01 6127*  	ld ix,493
        00          
 0455BE CD C5 B4 04 6128*  	call vdu_load_img
 0455C2 C9          6129*  	ret
@@ -7607,9 +7607,9 @@ PC     Output      Line
 0455D3 3E 01       6136*  	ld a,mos_load
 0455D5 5B CF       6137*  	RST.LIL 08h
 0455D7 21 52 02 00 6138*  	ld hl,BUF_47_040
-0455DB 01 36 00 00 6139*  	ld bc,54
-0455DF 11 1E 00 00 6140*  	ld de,30
-0455E3 DD 21 54 06 6141*  	ld ix,1620
+0455DB 01 30 00 00 6139*  	ld bc,48
+0455DF 11 1B 00 00 6140*  	ld de,27
+0455E3 DD 21 10 05 6141*  	ld ix,1296
        00          
 0455E8 CD C5 B4 04 6142*  	call vdu_load_img
 0455EC C9          6143*  	ret
@@ -7622,9 +7622,9 @@ PC     Output      Line
 0455FD 3E 01       6150*  	ld a,mos_load
 0455FF 5B CF       6151*  	RST.LIL 08h
 045601 21 53 02 00 6152*  	ld hl,BUF_47_044
-045605 01 1E 00 00 6153*  	ld bc,30
-045609 11 14 00 00 6154*  	ld de,20
-04560D DD 21 58 02 6155*  	ld ix,600
+045605 01 1B 00 00 6153*  	ld bc,27
+045609 11 0A 00 00 6154*  	ld de,10
+04560D DD 21 0E 01 6155*  	ld ix,270
        00          
 045612 CD C5 B4 04 6156*  	call vdu_load_img
 045616 C9          6157*  	ret
@@ -7637,9 +7637,9 @@ PC     Output      Line
 045627 3E 01       6164*  	ld a,mos_load
 045629 5B CF       6165*  	RST.LIL 08h
 04562B 21 54 02 00 6166*  	ld hl,BUF_48_004
-04562F 01 0D 00 00 6167*  	ld bc,13
-045633 11 05 00 00 6168*  	ld de,5
-045637 DD 21 41 00 6169*  	ld ix,65
+04562F 01 12 00 00 6167*  	ld bc,18
+045633 11 07 00 00 6168*  	ld de,7
+045637 DD 21 7E 00 6169*  	ld ix,126
        00          
 04563C CD C5 B4 04 6170*  	call vdu_load_img
 045640 C9          6171*  	ret
@@ -7652,9 +7652,9 @@ PC     Output      Line
 045651 3E 01       6178*  	ld a,mos_load
 045653 5B CF       6179*  	RST.LIL 08h
 045655 21 55 02 00 6180*  	ld hl,BUF_48_020
-045659 01 12 00 00 6181*  	ld bc,18
-04565D 11 07 00 00 6182*  	ld de,7
-045661 DD 21 7E 00 6183*  	ld ix,126
+045659 01 17 00 00 6181*  	ld bc,23
+04565D 11 0A 00 00 6182*  	ld de,10
+045661 DD 21 E6 00 6183*  	ld ix,230
        00          
 045666 CD C5 B4 04 6184*  	call vdu_load_img
 04566A C9          6185*  	ret
@@ -7667,9 +7667,9 @@ PC     Output      Line
 04567B 3E 01       6192*  	ld a,mos_load
 04567D 5B CF       6193*  	RST.LIL 08h
 04567F 21 56 02 00 6194*  	ld hl,BUF_48_032
-045683 01 1A 00 00 6195*  	ld bc,26
-045687 11 0C 00 00 6196*  	ld de,12
-04568B DD 21 38 01 6197*  	ld ix,312
+045683 01 20 00 00 6195*  	ld bc,32
+045687 11 0D 00 00 6196*  	ld de,13
+04568B DD 21 A0 01 6197*  	ld ix,416
        00          
 045690 CD C5 B4 04 6198*  	call vdu_load_img
 045694 C9          6199*  	ret
@@ -7682,9 +7682,9 @@ PC     Output      Line
 0456A5 3E 01       6206*  	ld a,mos_load
 0456A7 5B CF       6207*  	RST.LIL 08h
 0456A9 21 57 02 00 6208*  	ld hl,BUF_48_040
-0456AD 01 2C 00 00 6209*  	ld bc,44
-0456B1 11 13 00 00 6210*  	ld de,19
-0456B5 DD 21 44 03 6211*  	ld ix,836
+0456AD 01 35 00 00 6209*  	ld bc,53
+0456B1 11 18 00 00 6210*  	ld de,24
+0456B5 DD 21 F8 04 6211*  	ld ix,1272
        00          
 0456BA CD C5 B4 04 6212*  	call vdu_load_img
 0456BE C9          6213*  	ret
@@ -7712,9 +7712,9 @@ PC     Output      Line
 0456F9 3E 01       6234*  	ld a,mos_load
 0456FB 5B CF       6235*  	RST.LIL 08h
 0456FD 21 59 02 00 6236*  	ld hl,BUF_49_004
-045701 01 0F 00 00 6237*  	ld bc,15
-045705 11 07 00 00 6238*  	ld de,7
-045709 DD 21 69 00 6239*  	ld ix,105
+045701 01 0E 00 00 6237*  	ld bc,14
+045705 11 06 00 00 6238*  	ld de,6
+045709 DD 21 54 00 6239*  	ld ix,84
        00          
 04570E CD C5 B4 04 6240*  	call vdu_load_img
 045712 C9          6241*  	ret
@@ -7727,9 +7727,9 @@ PC     Output      Line
 045723 3E 01       6248*  	ld a,mos_load
 045725 5B CF       6249*  	RST.LIL 08h
 045727 21 5A 02 00 6250*  	ld hl,BUF_49_020
-04572B 01 14 00 00 6251*  	ld bc,20
-04572F 11 09 00 00 6252*  	ld de,9
-045733 DD 21 B4 00 6253*  	ld ix,180
+04572B 01 12 00 00 6251*  	ld bc,18
+04572F 11 08 00 00 6252*  	ld de,8
+045733 DD 21 90 00 6253*  	ld ix,144
        00          
 045738 CD C5 B4 04 6254*  	call vdu_load_img
 04573C C9          6255*  	ret
@@ -7742,9 +7742,9 @@ PC     Output      Line
 04574D 3E 01       6262*  	ld a,mos_load
 04574F 5B CF       6263*  	RST.LIL 08h
 045751 21 5B 02 00 6264*  	ld hl,BUF_49_032
-045755 01 1C 00 00 6265*  	ld bc,28
-045759 11 0C 00 00 6266*  	ld de,12
-04575D DD 21 50 01 6267*  	ld ix,336
+045755 01 1A 00 00 6265*  	ld bc,26
+045759 11 0B 00 00 6266*  	ld de,11
+04575D DD 21 1E 01 6267*  	ld ix,286
        00          
 045762 CD C5 B4 04 6268*  	call vdu_load_img
 045766 C9          6269*  	ret
@@ -7757,9 +7757,9 @@ PC     Output      Line
 045777 3E 01       6276*  	ld a,mos_load
 045779 5B CF       6277*  	RST.LIL 08h
 04577B 21 5C 02 00 6278*  	ld hl,BUF_49_040
-04577F 01 2F 00 00 6279*  	ld bc,47
-045783 11 15 00 00 6280*  	ld de,21
-045787 DD 21 DB 03 6281*  	ld ix,987
+04577F 01 2B 00 00 6279*  	ld bc,43
+045783 11 12 00 00 6280*  	ld de,18
+045787 DD 21 06 03 6281*  	ld ix,774
        00          
 04578C CD C5 B4 04 6282*  	call vdu_load_img
 045790 C9          6283*  	ret
@@ -7862,9 +7862,9 @@ PC     Output      Line
 04589D 3E 01       6374*  	ld a,mos_load
 04589F 5B CF       6375*  	RST.LIL 08h
 0458A1 21 63 02 00 6376*  	ld hl,BUF_51_004
-0458A5 01 12 00 00 6377*  	ld bc,18
-0458A9 11 1A 00 00 6378*  	ld de,26
-0458AD DD 21 D4 01 6379*  	ld ix,468
+0458A5 01 11 00 00 6377*  	ld bc,17
+0458A9 11 17 00 00 6378*  	ld de,23
+0458AD DD 21 87 01 6379*  	ld ix,391
        00          
 0458B2 CD C5 B4 04 6380*  	call vdu_load_img
 0458B6 C9          6381*  	ret
@@ -7877,9 +7877,9 @@ PC     Output      Line
 0458C7 3E 01       6388*  	ld a,mos_load
 0458C9 5B CF       6389*  	RST.LIL 08h
 0458CB 21 64 02 00 6390*  	ld hl,BUF_51_020
-0458CF 01 17 00 00 6391*  	ld bc,23
-0458D3 11 21 00 00 6392*  	ld de,33
-0458D7 DD 21 F7 02 6393*  	ld ix,759
+0458CF 01 15 00 00 6391*  	ld bc,21
+0458D3 11 1D 00 00 6392*  	ld de,29
+0458D7 DD 21 61 02 6393*  	ld ix,609
        00          
 0458DC CD C5 B4 04 6394*  	call vdu_load_img
 0458E0 C9          6395*  	ret
@@ -7892,9 +7892,9 @@ PC     Output      Line
 0458F1 3E 01       6402*  	ld a,mos_load
 0458F3 5B CF       6403*  	RST.LIL 08h
 0458F5 21 65 02 00 6404*  	ld hl,BUF_51_032
-0458F9 01 22 00 00 6405*  	ld bc,34
-0458FD 11 30 00 00 6406*  	ld de,48
-045901 DD 21 60 06 6407*  	ld ix,1632
+0458F9 01 1E 00 00 6405*  	ld bc,30
+0458FD 11 2A 00 00 6406*  	ld de,42
+045901 DD 21 EC 04 6407*  	ld ix,1260
        00          
 045906 CD C5 B4 04 6408*  	call vdu_load_img
 04590A C9          6409*  	ret
@@ -7907,9 +7907,9 @@ PC     Output      Line
 04591B 3E 01       6416*  	ld a,mos_load
 04591D 5B CF       6417*  	RST.LIL 08h
 04591F 21 66 02 00 6418*  	ld hl,BUF_51_040
-045923 01 37 00 00 6419*  	ld bc,55
-045927 11 50 00 00 6420*  	ld de,80
-04592B DD 21 30 11 6421*  	ld ix,4400
+045923 01 31 00 00 6419*  	ld bc,49
+045927 11 46 00 00 6420*  	ld de,70
+04592B DD 21 66 0D 6421*  	ld ix,3430
        00          
 045930 CD C5 B4 04 6422*  	call vdu_load_img
 045934 C9          6423*  	ret
@@ -7922,9 +7922,9 @@ PC     Output      Line
 045945 3E 01       6430*  	ld a,mos_load
 045947 5B CF       6431*  	RST.LIL 08h
 045949 21 67 02 00 6432*  	ld hl,BUF_51_044
-04594D 01 A6 00 00 6433*  	ld bc,166
-045951 11 A0 00 00 6434*  	ld de,160
-045955 DD 21 C0 67 6435*  	ld ix,26560
+04594D 01 92 00 00 6433*  	ld bc,146
+045951 11 83 00 00 6434*  	ld de,131
+045955 DD 21 B6 4A 6435*  	ld ix,19126
        00          
 04595A CD C5 B4 04 6436*  	call vdu_load_img
 04595E C9          6437*  	ret
@@ -7937,9 +7937,9 @@ PC     Output      Line
 04596F 3E 01       6444*  	ld a,mos_load
 045971 5B CF       6445*  	RST.LIL 08h
 045973 21 68 02 00 6446*  	ld hl,BUF_52_004
-045977 01 0F 00 00 6447*  	ld bc,15
-04597B 11 1A 00 00 6448*  	ld de,26
-04597F DD 21 86 01 6449*  	ld ix,390
+045977 01 0E 00 00 6447*  	ld bc,14
+04597B 11 17 00 00 6448*  	ld de,23
+04597F DD 21 42 01 6449*  	ld ix,322
        00          
 045984 CD C5 B4 04 6450*  	call vdu_load_img
 045988 C9          6451*  	ret
@@ -7952,9 +7952,9 @@ PC     Output      Line
 045999 3E 01       6458*  	ld a,mos_load
 04599B 5B CF       6459*  	RST.LIL 08h
 04599D 21 69 02 00 6460*  	ld hl,BUF_52_020
-0459A1 01 13 00 00 6461*  	ld bc,19
-0459A5 11 21 00 00 6462*  	ld de,33
-0459A9 DD 21 73 02 6463*  	ld ix,627
+0459A1 01 11 00 00 6461*  	ld bc,17
+0459A5 11 1D 00 00 6462*  	ld de,29
+0459A9 DD 21 ED 01 6463*  	ld ix,493
        00          
 0459AE CD C5 B4 04 6464*  	call vdu_load_img
 0459B2 C9          6465*  	ret
@@ -7967,9 +7967,9 @@ PC     Output      Line
 0459C3 3E 01       6472*  	ld a,mos_load
 0459C5 5B CF       6473*  	RST.LIL 08h
 0459C7 21 6A 02 00 6474*  	ld hl,BUF_52_032
-0459CB 01 1C 00 00 6475*  	ld bc,28
-0459CF 11 30 00 00 6476*  	ld de,48
-0459D3 DD 21 40 05 6477*  	ld ix,1344
+0459CB 01 19 00 00 6475*  	ld bc,25
+0459CF 11 2A 00 00 6476*  	ld de,42
+0459D3 DD 21 1A 04 6477*  	ld ix,1050
        00          
 0459D8 CD C5 B4 04 6478*  	call vdu_load_img
 0459DC C9          6479*  	ret
@@ -7982,9 +7982,9 @@ PC     Output      Line
 0459ED 3E 01       6486*  	ld a,mos_load
 0459EF 5B CF       6487*  	RST.LIL 08h
 0459F1 21 6B 02 00 6488*  	ld hl,BUF_52_040
-0459F5 01 2D 00 00 6489*  	ld bc,45
-0459F9 11 50 00 00 6490*  	ld de,80
-0459FD DD 21 10 0E 6491*  	ld ix,3600
+0459F5 01 28 00 00 6489*  	ld bc,40
+0459F9 11 46 00 00 6490*  	ld de,70
+0459FD DD 21 F0 0A 6491*  	ld ix,2800
        00          
 045A02 CD C5 B4 04 6492*  	call vdu_load_img
 045A06 C9          6493*  	ret
@@ -7997,9 +7997,9 @@ PC     Output      Line
 045A17 3E 01       6500*  	ld a,mos_load
 045A19 5B CF       6501*  	RST.LIL 08h
 045A1B 21 6C 02 00 6502*  	ld hl,BUF_52_044
-045A1F 01 88 00 00 6503*  	ld bc,136
-045A23 11 A0 00 00 6504*  	ld de,160
-045A27 DD 21 00 55 6505*  	ld ix,21760
+045A1F 01 78 00 00 6503*  	ld bc,120
+045A23 11 83 00 00 6504*  	ld de,131
+045A27 DD 21 68 3D 6505*  	ld ix,15720
        00          
 045A2C CD C5 B4 04 6506*  	call vdu_load_img
 045A30 C9          6507*  	ret
@@ -9785,157 +9785,157 @@ PC     Output      Line
 046ABE             0373*  
 046ABE             0374*  ; render_obj_id:20
 046ABE             0375*  sprite_obj_000:
-046ABE 08 00 00 4C 0376*  	dl 0x000008,0x00004C,BUF_20_004
+046ABE 09 00 00 4E 0376*  	dl 0x000009,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AC7 2B 00 00 4C 0377*  	dl 0x00002B,0x00004C,BUF_20_004
+046AC7 2C 00 00 4E 0377*  	dl 0x00002C,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AD0 4F 00 00 4C 0378*  	dl 0x00004F,0x00004C,BUF_20_004
+046AD0 50 00 00 4E 0378*  	dl 0x000050,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AD9 72 00 00 4C 0379*  	dl 0x000072,0x00004C,BUF_20_004
+046AD9 73 00 00 4E 0379*  	dl 0x000073,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AE2 96 00 00 4C 0380*  	dl 0x000096,0x00004C,BUF_20_004
+046AE2 97 00 00 4E 0380*  	dl 0x000097,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AEB B9 00 00 4C 0381*  	dl 0x0000B9,0x00004C,BUF_20_004
+046AEB BA 00 00 4E 0381*  	dl 0x0000BA,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AF4 DD 00 00 4C 0382*  	dl 0x0000DD,0x00004C,BUF_20_004
+046AF4 DE 00 00 4E 0382*  	dl 0x0000DE,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046AFD 00 01 00 4C 0383*  	dl 0x000100,0x00004C,BUF_20_004
+046AFD 01 01 00 4E 0383*  	dl 0x000101,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046B06 24 01 00 4C 0384*  	dl 0x000124,0x00004C,BUF_20_004
+046B06 25 01 00 4E 0384*  	dl 0x000125,0x00004E,BUF_20_004
        00 00 13 02 
        00          
-046B0F 0A 00 00 4B 0385*  	dl 0x00000A,0x00004B,BUF_20_020
+046B0F 0B 00 00 4E 0385*  	dl 0x00000B,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B18 38 00 00 4B 0386*  	dl 0x000038,0x00004B,BUF_20_020
+046B18 39 00 00 4E 0386*  	dl 0x000039,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B21 65 00 00 4B 0387*  	dl 0x000065,0x00004B,BUF_20_020
+046B21 66 00 00 4E 0387*  	dl 0x000066,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B2A 93 00 00 4B 0388*  	dl 0x000093,0x00004B,BUF_20_020
+046B2A 94 00 00 4E 0388*  	dl 0x000094,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B33 C0 00 00 4B 0389*  	dl 0x0000C0,0x00004B,BUF_20_020
+046B33 C1 00 00 4E 0389*  	dl 0x0000C1,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B3C EE 00 00 4B 0390*  	dl 0x0000EE,0x00004B,BUF_20_020
+046B3C EF 00 00 4E 0390*  	dl 0x0000EF,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B45 1B 01 00 4B 0391*  	dl 0x00011B,0x00004B,BUF_20_020
+046B45 1C 01 00 4E 0391*  	dl 0x00011C,0x00004E,BUF_20_020
        00 00 14 02 
        00          
-046B4E 0E 00 00 49 0392*  	dl 0x00000E,0x000049,BUF_20_032
+046B4E 11 00 00 4D 0392*  	dl 0x000011,0x00004D,BUF_20_032
        00 00 15 02 
        00          
-046B57 4D 00 00 49 0393*  	dl 0x00004D,0x000049,BUF_20_032
+046B57 50 00 00 4D 0393*  	dl 0x000050,0x00004D,BUF_20_032
        00 00 15 02 
        00          
-046B60 8E 00 00 49 0394*  	dl 0x00008E,0x000049,BUF_20_032
+046B60 91 00 00 4D 0394*  	dl 0x000091,0x00004D,BUF_20_032
        00 00 15 02 
        00          
-046B69 CE 00 00 49 0395*  	dl 0x0000CE,0x000049,BUF_20_032
+046B69 D1 00 00 4D 0395*  	dl 0x0000D1,0x00004D,BUF_20_032
        00 00 15 02 
        00          
-046B72 0E 01 00 49 0396*  	dl 0x00010E,0x000049,BUF_20_032
+046B72 11 01 00 4D 0396*  	dl 0x000111,0x00004D,BUF_20_032
        00 00 15 02 
        00          
-046B7B 18 00 00 44 0397*  	dl 0x000018,0x000044,BUF_20_040
+046B7B 1B 00 00 4C 0397*  	dl 0x00001B,0x00004C,BUF_20_040
        00 00 16 02 
        00          
-046B84 82 00 00 44 0398*  	dl 0x000082,0x000044,BUF_20_040
+046B84 85 00 00 4C 0398*  	dl 0x000085,0x00004C,BUF_20_040
        00 00 16 02 
        00          
-046B8D ED 00 00 44 0399*  	dl 0x0000ED,0x000044,BUF_20_040
+046B8D F0 00 00 4C 0399*  	dl 0x0000F0,0x00004C,BUF_20_040
        00 00 16 02 
        00          
-046B96 64 00 00 2D 0400*  	dl 0x000064,0x00002D,BUF_20_044
+046B96 6B 00 00 44 0400*  	dl 0x00006B,0x000044,BUF_20_044
        00 00 17 02 
        00          
 046B9F             0401*  
 046B9F             0402*  ; render_obj_id:21
 046B9F             0403*  sprite_obj_001:
-046B9F 0A 00 00 4F 0404*  	dl 0x00000A,0x00004F,BUF_21_004
+046B9F 0D 00 00 55 0404*  	dl 0x00000D,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BA8 2D 00 00 4F 0405*  	dl 0x00002D,0x00004F,BUF_21_004
+046BA8 30 00 00 55 0405*  	dl 0x000030,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BB1 51 00 00 4F 0406*  	dl 0x000051,0x00004F,BUF_21_004
+046BB1 54 00 00 55 0406*  	dl 0x000054,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BBA 74 00 00 4F 0407*  	dl 0x000074,0x00004F,BUF_21_004
+046BBA 77 00 00 55 0407*  	dl 0x000077,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BC3 98 00 00 4F 0408*  	dl 0x000098,0x00004F,BUF_21_004
+046BC3 9B 00 00 55 0408*  	dl 0x00009B,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BCC BB 00 00 4F 0409*  	dl 0x0000BB,0x00004F,BUF_21_004
+046BCC BE 00 00 55 0409*  	dl 0x0000BE,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BD5 DF 00 00 4F 0410*  	dl 0x0000DF,0x00004F,BUF_21_004
+046BD5 E2 00 00 55 0410*  	dl 0x0000E2,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BDE 02 01 00 4F 0411*  	dl 0x000102,0x00004F,BUF_21_004
+046BDE 05 01 00 55 0411*  	dl 0x000105,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BE7 26 01 00 4F 0412*  	dl 0x000126,0x00004F,BUF_21_004
+046BE7 29 01 00 55 0412*  	dl 0x000129,0x000055,BUF_21_004
        00 00 18 02 
        00          
-046BF0 0C 00 00 4F 0413*  	dl 0x00000C,0x00004F,BUF_21_020
+046BF0 10 00 00 57 0413*  	dl 0x000010,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046BF9 3A 00 00 4F 0414*  	dl 0x00003A,0x00004F,BUF_21_020
+046BF9 3E 00 00 57 0414*  	dl 0x00003E,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C02 67 00 00 4F 0415*  	dl 0x000067,0x00004F,BUF_21_020
+046C02 6B 00 00 57 0415*  	dl 0x00006B,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C0B 95 00 00 4F 0416*  	dl 0x000095,0x00004F,BUF_21_020
+046C0B 99 00 00 57 0416*  	dl 0x000099,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C14 C2 00 00 4F 0417*  	dl 0x0000C2,0x00004F,BUF_21_020
+046C14 C6 00 00 57 0417*  	dl 0x0000C6,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C1D F0 00 00 4F 0418*  	dl 0x0000F0,0x00004F,BUF_21_020
+046C1D F4 00 00 57 0418*  	dl 0x0000F4,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C26 1D 01 00 4F 0419*  	dl 0x00011D,0x00004F,BUF_21_020
+046C26 21 01 00 57 0419*  	dl 0x000121,0x000057,BUF_21_020
        00 00 19 02 
        00          
-046C2F 11 00 00 4F 0420*  	dl 0x000011,0x00004F,BUF_21_032
+046C2F 16 00 00 5A 0420*  	dl 0x000016,0x00005A,BUF_21_032
        00 00 1A 02 
        00          
-046C38 50 00 00 4F 0421*  	dl 0x000050,0x00004F,BUF_21_032
+046C38 55 00 00 5A 0421*  	dl 0x000055,0x00005A,BUF_21_032
        00 00 1A 02 
        00          
-046C41 91 00 00 4F 0422*  	dl 0x000091,0x00004F,BUF_21_032
+046C41 96 00 00 5A 0422*  	dl 0x000096,0x00005A,BUF_21_032
        00 00 1A 02 
        00          
-046C4A D1 00 00 4F 0423*  	dl 0x0000D1,0x00004F,BUF_21_032
+046C4A D6 00 00 5A 0423*  	dl 0x0000D6,0x00005A,BUF_21_032
        00 00 1A 02 
        00          
-046C53 11 01 00 4F 0424*  	dl 0x000111,0x00004F,BUF_21_032
+046C53 16 01 00 5A 0424*  	dl 0x000116,0x00005A,BUF_21_032
        00 00 1A 02 
        00          
-046C5C 1D 00 00 4E 0425*  	dl 0x00001D,0x00004E,BUF_21_040
+046C5C 26 00 00 60 0425*  	dl 0x000026,0x000060,BUF_21_040
        00 00 1B 02 
        00          
-046C65 87 00 00 4E 0426*  	dl 0x000087,0x00004E,BUF_21_040
+046C65 90 00 00 60 0426*  	dl 0x000090,0x000060,BUF_21_040
        00 00 1B 02 
        00          
-046C6E F2 00 00 4E 0427*  	dl 0x0000F2,0x00004E,BUF_21_040
+046C6E FB 00 00 60 0427*  	dl 0x0000FB,0x000060,BUF_21_040
        00 00 1B 02 
        00          
-046C77 55 00 00 4B 0428*  	dl 0x000055,0x00004B,BUF_21_044
+046C77 6E 00 00 82 0428*  	dl 0x00006E,0x000082,BUF_21_044
        00 00 1C 02 
        00          
 046C80             0429*  
@@ -10019,937 +10019,937 @@ PC     Output      Line
 046D61             0457*  
 046D61             0458*  ; render_obj_id:23
 046D61             0459*  sprite_obj_003:
-046D61 09 00 00 3E 0460*  	dl 0x000009,0x00003E,BUF_23_004
+046D61 0C 00 00 3E 0460*  	dl 0x00000C,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D6A 2C 00 00 3E 0461*  	dl 0x00002C,0x00003E,BUF_23_004
+046D6A 2F 00 00 3E 0461*  	dl 0x00002F,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D73 50 00 00 3E 0462*  	dl 0x000050,0x00003E,BUF_23_004
+046D73 53 00 00 3E 0462*  	dl 0x000053,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D7C 73 00 00 3E 0463*  	dl 0x000073,0x00003E,BUF_23_004
+046D7C 76 00 00 3E 0463*  	dl 0x000076,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D85 97 00 00 3E 0464*  	dl 0x000097,0x00003E,BUF_23_004
+046D85 9A 00 00 3E 0464*  	dl 0x00009A,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D8E BA 00 00 3E 0465*  	dl 0x0000BA,0x00003E,BUF_23_004
+046D8E BD 00 00 3E 0465*  	dl 0x0000BD,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046D97 DE 00 00 3E 0466*  	dl 0x0000DE,0x00003E,BUF_23_004
+046D97 E1 00 00 3E 0466*  	dl 0x0000E1,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046DA0 01 01 00 3E 0467*  	dl 0x000101,0x00003E,BUF_23_004
+046DA0 04 01 00 3E 0467*  	dl 0x000104,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046DA9 25 01 00 3E 0468*  	dl 0x000125,0x00003E,BUF_23_004
+046DA9 28 01 00 3E 0468*  	dl 0x000128,0x00003E,BUF_23_004
        00 00 22 02 
        00          
-046DB2 0C 00 00 39 0469*  	dl 0x00000C,0x000039,BUF_23_020
+046DB2 0F 00 00 39 0469*  	dl 0x00000F,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DBB 3A 00 00 39 0470*  	dl 0x00003A,0x000039,BUF_23_020
+046DBB 3D 00 00 39 0470*  	dl 0x00003D,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DC4 67 00 00 39 0471*  	dl 0x000067,0x000039,BUF_23_020
+046DC4 6A 00 00 39 0471*  	dl 0x00006A,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DCD 95 00 00 39 0472*  	dl 0x000095,0x000039,BUF_23_020
+046DCD 98 00 00 39 0472*  	dl 0x000098,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DD6 C2 00 00 39 0473*  	dl 0x0000C2,0x000039,BUF_23_020
+046DD6 C5 00 00 39 0473*  	dl 0x0000C5,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DDF F0 00 00 39 0474*  	dl 0x0000F0,0x000039,BUF_23_020
+046DDF F3 00 00 39 0474*  	dl 0x0000F3,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DE8 1D 01 00 39 0475*  	dl 0x00011D,0x000039,BUF_23_020
+046DE8 20 01 00 39 0475*  	dl 0x000120,0x000039,BUF_23_020
        00 00 23 02 
        00          
-046DF1 11 00 00 30 0476*  	dl 0x000011,0x000030,BUF_23_032
+046DF1 16 00 00 30 0476*  	dl 0x000016,0x000030,BUF_23_032
        00 00 24 02 
        00          
-046DFA 50 00 00 30 0477*  	dl 0x000050,0x000030,BUF_23_032
+046DFA 55 00 00 30 0477*  	dl 0x000055,0x000030,BUF_23_032
        00 00 24 02 
        00          
-046E03 91 00 00 30 0478*  	dl 0x000091,0x000030,BUF_23_032
+046E03 96 00 00 30 0478*  	dl 0x000096,0x000030,BUF_23_032
        00 00 24 02 
        00          
-046E0C D1 00 00 30 0479*  	dl 0x0000D1,0x000030,BUF_23_032
+046E0C D6 00 00 30 0479*  	dl 0x0000D6,0x000030,BUF_23_032
        00 00 24 02 
        00          
-046E15 11 01 00 30 0480*  	dl 0x000111,0x000030,BUF_23_032
+046E15 16 01 00 30 0480*  	dl 0x000116,0x000030,BUF_23_032
        00 00 24 02 
        00          
-046E1E 1B 00 00 1A 0481*  	dl 0x00001B,0x00001A,BUF_23_040
+046E1E 24 00 00 1A 0481*  	dl 0x000024,0x00001A,BUF_23_040
        00 00 25 02 
        00          
-046E27 85 00 00 1A 0482*  	dl 0x000085,0x00001A,BUF_23_040
+046E27 8E 00 00 1A 0482*  	dl 0x00008E,0x00001A,BUF_23_040
        00 00 25 02 
        00          
-046E30 F0 00 00 1A 0483*  	dl 0x0000F0,0x00001A,BUF_23_040
+046E30 F9 00 00 1A 0483*  	dl 0x0000F9,0x00001A,BUF_23_040
        00 00 25 02 
        00          
-046E39 51 00 00 00 0484*  	dl 0x000051,0x000000,BUF_23_044
+046E39 09 01 00 83 0484*  	dl 0x000109,0x000083,BUF_23_044
        00 00 26 02 
        00          
 046E42             0485*  
 046E42             0486*  ; render_obj_id:24
 046E42             0487*  sprite_obj_004:
-046E42 0A 00 00 4F 0488*  	dl 0x00000A,0x00004F,BUF_24_004
+046E42 0D 00 00 55 0488*  	dl 0x00000D,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E4B 2D 00 00 4F 0489*  	dl 0x00002D,0x00004F,BUF_24_004
+046E4B 30 00 00 55 0489*  	dl 0x000030,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E54 51 00 00 4F 0490*  	dl 0x000051,0x00004F,BUF_24_004
+046E54 54 00 00 55 0490*  	dl 0x000054,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E5D 74 00 00 4F 0491*  	dl 0x000074,0x00004F,BUF_24_004
+046E5D 77 00 00 55 0491*  	dl 0x000077,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E66 98 00 00 4F 0492*  	dl 0x000098,0x00004F,BUF_24_004
+046E66 9B 00 00 55 0492*  	dl 0x00009B,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E6F BB 00 00 4F 0493*  	dl 0x0000BB,0x00004F,BUF_24_004
+046E6F BE 00 00 55 0493*  	dl 0x0000BE,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E78 DF 00 00 4F 0494*  	dl 0x0000DF,0x00004F,BUF_24_004
+046E78 E2 00 00 55 0494*  	dl 0x0000E2,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E81 02 01 00 4F 0495*  	dl 0x000102,0x00004F,BUF_24_004
+046E81 05 01 00 55 0495*  	dl 0x000105,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E8A 26 01 00 4F 0496*  	dl 0x000126,0x00004F,BUF_24_004
+046E8A 29 01 00 55 0496*  	dl 0x000129,0x000055,BUF_24_004
        00 00 27 02 
        00          
-046E93 0C 00 00 4F 0497*  	dl 0x00000C,0x00004F,BUF_24_020
+046E93 10 00 00 57 0497*  	dl 0x000010,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046E9C 3A 00 00 4F 0498*  	dl 0x00003A,0x00004F,BUF_24_020
+046E9C 3E 00 00 57 0498*  	dl 0x00003E,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046EA5 67 00 00 4F 0499*  	dl 0x000067,0x00004F,BUF_24_020
+046EA5 6B 00 00 57 0499*  	dl 0x00006B,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046EAE 95 00 00 4F 0500*  	dl 0x000095,0x00004F,BUF_24_020
+046EAE 99 00 00 57 0500*  	dl 0x000099,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046EB7 C2 00 00 4F 0501*  	dl 0x0000C2,0x00004F,BUF_24_020
+046EB7 C6 00 00 57 0501*  	dl 0x0000C6,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046EC0 F0 00 00 4F 0502*  	dl 0x0000F0,0x00004F,BUF_24_020
+046EC0 F4 00 00 57 0502*  	dl 0x0000F4,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046EC9 1D 01 00 4F 0503*  	dl 0x00011D,0x00004F,BUF_24_020
+046EC9 21 01 00 57 0503*  	dl 0x000121,0x000057,BUF_24_020
        00 00 28 02 
        00          
-046ED2 11 00 00 4F 0504*  	dl 0x000011,0x00004F,BUF_24_032
+046ED2 16 00 00 5A 0504*  	dl 0x000016,0x00005A,BUF_24_032
        00 00 29 02 
        00          
-046EDB 50 00 00 4F 0505*  	dl 0x000050,0x00004F,BUF_24_032
+046EDB 55 00 00 5A 0505*  	dl 0x000055,0x00005A,BUF_24_032
        00 00 29 02 
        00          
-046EE4 91 00 00 4F 0506*  	dl 0x000091,0x00004F,BUF_24_032
+046EE4 96 00 00 5A 0506*  	dl 0x000096,0x00005A,BUF_24_032
        00 00 29 02 
        00          
-046EED D1 00 00 4F 0507*  	dl 0x0000D1,0x00004F,BUF_24_032
+046EED D6 00 00 5A 0507*  	dl 0x0000D6,0x00005A,BUF_24_032
        00 00 29 02 
        00          
-046EF6 11 01 00 4F 0508*  	dl 0x000111,0x00004F,BUF_24_032
+046EF6 16 01 00 5A 0508*  	dl 0x000116,0x00005A,BUF_24_032
        00 00 29 02 
        00          
-046EFF 1D 00 00 4E 0509*  	dl 0x00001D,0x00004E,BUF_24_040
+046EFF 26 00 00 60 0509*  	dl 0x000026,0x000060,BUF_24_040
        00 00 2A 02 
        00          
-046F08 87 00 00 4E 0510*  	dl 0x000087,0x00004E,BUF_24_040
+046F08 90 00 00 60 0510*  	dl 0x000090,0x000060,BUF_24_040
        00 00 2A 02 
        00          
-046F11 F2 00 00 4E 0511*  	dl 0x0000F2,0x00004E,BUF_24_040
+046F11 FB 00 00 60 0511*  	dl 0x0000FB,0x000060,BUF_24_040
        00 00 2A 02 
        00          
-046F1A 55 00 00 4B 0512*  	dl 0x000055,0x00004B,BUF_24_044
+046F1A 6E 00 00 82 0512*  	dl 0x00006E,0x000082,BUF_24_044
        00 00 2B 02 
        00          
 046F23             0513*  
 046F23             0514*  ; render_obj_id:40
 046F23             0515*  sprite_obj_005:
-046F23 09 00 00 57 0516*  	dl 0x000009,0x000057,BUF_40_004
+046F23 0A 00 00 5A 0516*  	dl 0x00000A,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F2C 2C 00 00 57 0517*  	dl 0x00002C,0x000057,BUF_40_004
+046F2C 2D 00 00 5A 0517*  	dl 0x00002D,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F35 50 00 00 57 0518*  	dl 0x000050,0x000057,BUF_40_004
+046F35 51 00 00 5A 0518*  	dl 0x000051,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F3E 73 00 00 57 0519*  	dl 0x000073,0x000057,BUF_40_004
+046F3E 74 00 00 5A 0519*  	dl 0x000074,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F47 97 00 00 57 0520*  	dl 0x000097,0x000057,BUF_40_004
+046F47 98 00 00 5A 0520*  	dl 0x000098,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F50 BA 00 00 57 0521*  	dl 0x0000BA,0x000057,BUF_40_004
+046F50 BB 00 00 5A 0521*  	dl 0x0000BB,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F59 DE 00 00 57 0522*  	dl 0x0000DE,0x000057,BUF_40_004
+046F59 DF 00 00 5A 0522*  	dl 0x0000DF,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F62 01 01 00 57 0523*  	dl 0x000101,0x000057,BUF_40_004
+046F62 02 01 00 5A 0523*  	dl 0x000102,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F6B 25 01 00 57 0524*  	dl 0x000125,0x000057,BUF_40_004
+046F6B 26 01 00 5A 0524*  	dl 0x000126,0x00005A,BUF_40_004
        00 00 2C 02 
        00          
-046F74 0B 00 00 5A 0525*  	dl 0x00000B,0x00005A,BUF_40_020
+046F74 0D 00 00 5C 0525*  	dl 0x00000D,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046F7D 39 00 00 5A 0526*  	dl 0x000039,0x00005A,BUF_40_020
+046F7D 3B 00 00 5C 0526*  	dl 0x00003B,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046F86 66 00 00 5A 0527*  	dl 0x000066,0x00005A,BUF_40_020
+046F86 68 00 00 5C 0527*  	dl 0x000068,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046F8F 94 00 00 5A 0528*  	dl 0x000094,0x00005A,BUF_40_020
+046F8F 96 00 00 5C 0528*  	dl 0x000096,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046F98 C1 00 00 5A 0529*  	dl 0x0000C1,0x00005A,BUF_40_020
+046F98 C3 00 00 5C 0529*  	dl 0x0000C3,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046FA1 EF 00 00 5A 0530*  	dl 0x0000EF,0x00005A,BUF_40_020
+046FA1 F1 00 00 5C 0530*  	dl 0x0000F1,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046FAA 1C 01 00 5A 0531*  	dl 0x00011C,0x00005A,BUF_40_020
+046FAA 1E 01 00 5C 0531*  	dl 0x00011E,0x00005C,BUF_40_020
        00 00 2D 02 
        00          
-046FB3 10 00 00 5E 0532*  	dl 0x000010,0x00005E,BUF_40_032
+046FB3 13 00 00 62 0532*  	dl 0x000013,0x000062,BUF_40_032
        00 00 2E 02 
        00          
-046FBC 4F 00 00 5E 0533*  	dl 0x00004F,0x00005E,BUF_40_032
+046FBC 52 00 00 62 0533*  	dl 0x000052,0x000062,BUF_40_032
        00 00 2E 02 
        00          
-046FC5 90 00 00 5E 0534*  	dl 0x000090,0x00005E,BUF_40_032
+046FC5 93 00 00 62 0534*  	dl 0x000093,0x000062,BUF_40_032
        00 00 2E 02 
        00          
-046FCE D0 00 00 5E 0535*  	dl 0x0000D0,0x00005E,BUF_40_032
+046FCE D3 00 00 62 0535*  	dl 0x0000D3,0x000062,BUF_40_032
        00 00 2E 02 
        00          
-046FD7 10 01 00 5E 0536*  	dl 0x000110,0x00005E,BUF_40_032
+046FD7 13 01 00 62 0536*  	dl 0x000113,0x000062,BUF_40_032
        00 00 2E 02 
        00          
-046FE0 1B 00 00 67 0537*  	dl 0x00001B,0x000067,BUF_40_040
+046FE0 20 00 00 6D 0537*  	dl 0x000020,0x00006D,BUF_40_040
        00 00 2F 02 
        00          
-046FE9 85 00 00 67 0538*  	dl 0x000085,0x000067,BUF_40_040
+046FE9 8A 00 00 6D 0538*  	dl 0x00008A,0x00006D,BUF_40_040
        00 00 2F 02 
        00          
-046FF2 F0 00 00 67 0539*  	dl 0x0000F0,0x000067,BUF_40_040
+046FF2 F5 00 00 6D 0539*  	dl 0x0000F5,0x00006D,BUF_40_040
        00 00 2F 02 
        00          
-046FFB 6E 00 00 96 0540*  	dl 0x00006E,0x000096,BUF_40_044
+046FFB E0 00 00 A0 0540*  	dl 0x0000E0,0x0000A0,BUF_40_044
        00 00 30 02 
        00          
 047004             0541*  
 047004             0542*  ; render_obj_id:41
 047004             0543*  sprite_obj_006:
-047004 09 00 00 51 0544*  	dl 0x000009,0x000051,BUF_41_004
+047004 0C 00 00 55 0544*  	dl 0x00000C,0x000055,BUF_41_004
        00 00 31 02 
        00          
-04700D 2C 00 00 51 0545*  	dl 0x00002C,0x000051,BUF_41_004
+04700D 2F 00 00 55 0545*  	dl 0x00002F,0x000055,BUF_41_004
        00 00 31 02 
        00          
-047016 50 00 00 51 0546*  	dl 0x000050,0x000051,BUF_41_004
+047016 53 00 00 55 0546*  	dl 0x000053,0x000055,BUF_41_004
        00 00 31 02 
        00          
-04701F 73 00 00 51 0547*  	dl 0x000073,0x000051,BUF_41_004
+04701F 76 00 00 55 0547*  	dl 0x000076,0x000055,BUF_41_004
        00 00 31 02 
        00          
-047028 97 00 00 51 0548*  	dl 0x000097,0x000051,BUF_41_004
+047028 9A 00 00 55 0548*  	dl 0x00009A,0x000055,BUF_41_004
        00 00 31 02 
        00          
-047031 BA 00 00 51 0549*  	dl 0x0000BA,0x000051,BUF_41_004
+047031 BD 00 00 55 0549*  	dl 0x0000BD,0x000055,BUF_41_004
        00 00 31 02 
        00          
-04703A DE 00 00 51 0550*  	dl 0x0000DE,0x000051,BUF_41_004
+04703A E1 00 00 55 0550*  	dl 0x0000E1,0x000055,BUF_41_004
        00 00 31 02 
        00          
-047043 01 01 00 51 0551*  	dl 0x000101,0x000051,BUF_41_004
+047043 04 01 00 55 0551*  	dl 0x000104,0x000055,BUF_41_004
        00 00 31 02 
        00          
-04704C 25 01 00 51 0552*  	dl 0x000125,0x000051,BUF_41_004
+04704C 28 01 00 55 0552*  	dl 0x000128,0x000055,BUF_41_004
        00 00 31 02 
        00          
-047055 0B 00 00 51 0553*  	dl 0x00000B,0x000051,BUF_41_020
+047055 0E 00 00 57 0553*  	dl 0x00000E,0x000057,BUF_41_020
        00 00 32 02 
        00          
-04705E 39 00 00 51 0554*  	dl 0x000039,0x000051,BUF_41_020
+04705E 3C 00 00 57 0554*  	dl 0x00003C,0x000057,BUF_41_020
        00 00 32 02 
        00          
-047067 66 00 00 51 0555*  	dl 0x000066,0x000051,BUF_41_020
+047067 69 00 00 57 0555*  	dl 0x000069,0x000057,BUF_41_020
        00 00 32 02 
        00          
-047070 94 00 00 51 0556*  	dl 0x000094,0x000051,BUF_41_020
+047070 97 00 00 57 0556*  	dl 0x000097,0x000057,BUF_41_020
        00 00 32 02 
        00          
-047079 C1 00 00 51 0557*  	dl 0x0000C1,0x000051,BUF_41_020
+047079 C4 00 00 57 0557*  	dl 0x0000C4,0x000057,BUF_41_020
        00 00 32 02 
        00          
-047082 EF 00 00 51 0558*  	dl 0x0000EF,0x000051,BUF_41_020
+047082 F2 00 00 57 0558*  	dl 0x0000F2,0x000057,BUF_41_020
        00 00 32 02 
        00          
-04708B 1C 01 00 51 0559*  	dl 0x00011C,0x000051,BUF_41_020
+04708B 1F 01 00 57 0559*  	dl 0x00011F,0x000057,BUF_41_020
        00 00 32 02 
        00          
-047094 10 00 00 52 0560*  	dl 0x000010,0x000052,BUF_41_032
+047094 15 00 00 5B 0560*  	dl 0x000015,0x00005B,BUF_41_032
        00 00 33 02 
        00          
-04709D 4F 00 00 52 0561*  	dl 0x00004F,0x000052,BUF_41_032
+04709D 54 00 00 5B 0561*  	dl 0x000054,0x00005B,BUF_41_032
        00 00 33 02 
        00          
-0470A6 90 00 00 52 0562*  	dl 0x000090,0x000052,BUF_41_032
+0470A6 95 00 00 5B 0562*  	dl 0x000095,0x00005B,BUF_41_032
        00 00 33 02 
        00          
-0470AF D0 00 00 52 0563*  	dl 0x0000D0,0x000052,BUF_41_032
+0470AF D5 00 00 5B 0563*  	dl 0x0000D5,0x00005B,BUF_41_032
        00 00 33 02 
        00          
-0470B8 10 01 00 52 0564*  	dl 0x000110,0x000052,BUF_41_032
+0470B8 15 01 00 5B 0564*  	dl 0x000115,0x00005B,BUF_41_032
        00 00 33 02 
        00          
-0470C1 1B 00 00 53 0565*  	dl 0x00001B,0x000053,BUF_41_040
+0470C1 23 00 00 62 0565*  	dl 0x000023,0x000062,BUF_41_040
        00 00 34 02 
        00          
-0470CA 85 00 00 53 0566*  	dl 0x000085,0x000053,BUF_41_040
+0470CA 8D 00 00 62 0566*  	dl 0x00008D,0x000062,BUF_41_040
        00 00 34 02 
        00          
-0470D3 F0 00 00 53 0567*  	dl 0x0000F0,0x000053,BUF_41_040
+0470D3 F8 00 00 62 0567*  	dl 0x0000F8,0x000062,BUF_41_040
        00 00 34 02 
        00          
-0470DC 50 00 00 5A 0568*  	dl 0x000050,0x00005A,BUF_41_044
+0470DC 84 00 00 87 0568*  	dl 0x000084,0x000087,BUF_41_044
        00 00 35 02 
        00          
 0470E5             0569*  
 0470E5             0570*  ; render_obj_id:42
 0470E5             0571*  sprite_obj_007:
-0470E5 0C 00 00 54 0572*  	dl 0x00000C,0x000054,BUF_42_004
+0470E5 0D 00 00 57 0572*  	dl 0x00000D,0x000057,BUF_42_004
        00 00 36 02 
        00          
-0470EE 2F 00 00 54 0573*  	dl 0x00002F,0x000054,BUF_42_004
+0470EE 30 00 00 57 0573*  	dl 0x000030,0x000057,BUF_42_004
        00 00 36 02 
        00          
-0470F7 53 00 00 54 0574*  	dl 0x000053,0x000054,BUF_42_004
+0470F7 54 00 00 57 0574*  	dl 0x000054,0x000057,BUF_42_004
        00 00 36 02 
        00          
-047100 76 00 00 54 0575*  	dl 0x000076,0x000054,BUF_42_004
+047100 77 00 00 57 0575*  	dl 0x000077,0x000057,BUF_42_004
        00 00 36 02 
        00          
-047109 9A 00 00 54 0576*  	dl 0x00009A,0x000054,BUF_42_004
+047109 9B 00 00 57 0576*  	dl 0x00009B,0x000057,BUF_42_004
        00 00 36 02 
        00          
-047112 BD 00 00 54 0577*  	dl 0x0000BD,0x000054,BUF_42_004
+047112 BE 00 00 57 0577*  	dl 0x0000BE,0x000057,BUF_42_004
        00 00 36 02 
        00          
-04711B E1 00 00 54 0578*  	dl 0x0000E1,0x000054,BUF_42_004
+04711B E2 00 00 57 0578*  	dl 0x0000E2,0x000057,BUF_42_004
        00 00 36 02 
        00          
-047124 04 01 00 54 0579*  	dl 0x000104,0x000054,BUF_42_004
+047124 05 01 00 57 0579*  	dl 0x000105,0x000057,BUF_42_004
        00 00 36 02 
        00          
-04712D 28 01 00 54 0580*  	dl 0x000128,0x000054,BUF_42_004
+04712D 29 01 00 57 0580*  	dl 0x000129,0x000057,BUF_42_004
        00 00 36 02 
        00          
-047136 0E 00 00 55 0581*  	dl 0x00000E,0x000055,BUF_42_020
+047136 10 00 00 5A 0581*  	dl 0x000010,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-04713F 3C 00 00 55 0582*  	dl 0x00003C,0x000055,BUF_42_020
+04713F 3E 00 00 5A 0582*  	dl 0x00003E,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-047148 69 00 00 55 0583*  	dl 0x000069,0x000055,BUF_42_020
+047148 6B 00 00 5A 0583*  	dl 0x00006B,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-047151 97 00 00 55 0584*  	dl 0x000097,0x000055,BUF_42_020
+047151 99 00 00 5A 0584*  	dl 0x000099,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-04715A C4 00 00 55 0585*  	dl 0x0000C4,0x000055,BUF_42_020
+04715A C6 00 00 5A 0585*  	dl 0x0000C6,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-047163 F2 00 00 55 0586*  	dl 0x0000F2,0x000055,BUF_42_020
+047163 F4 00 00 5A 0586*  	dl 0x0000F4,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-04716C 1F 01 00 55 0587*  	dl 0x00011F,0x000055,BUF_42_020
+04716C 21 01 00 5A 0587*  	dl 0x000121,0x00005A,BUF_42_020
        00 00 37 02 
        00          
-047175 14 00 00 58 0588*  	dl 0x000014,0x000058,BUF_42_032
+047175 18 00 00 5F 0588*  	dl 0x000018,0x00005F,BUF_42_032
        00 00 38 02 
        00          
-04717E 53 00 00 58 0589*  	dl 0x000053,0x000058,BUF_42_032
+04717E 57 00 00 5F 0589*  	dl 0x000057,0x00005F,BUF_42_032
        00 00 38 02 
        00          
-047187 94 00 00 58 0590*  	dl 0x000094,0x000058,BUF_42_032
+047187 98 00 00 5F 0590*  	dl 0x000098,0x00005F,BUF_42_032
        00 00 38 02 
        00          
-047190 D4 00 00 58 0591*  	dl 0x0000D4,0x000058,BUF_42_032
+047190 D8 00 00 5F 0591*  	dl 0x0000D8,0x00005F,BUF_42_032
        00 00 38 02 
        00          
-047199 14 01 00 58 0592*  	dl 0x000114,0x000058,BUF_42_032
+047199 18 01 00 5F 0592*  	dl 0x000118,0x00005F,BUF_42_032
        00 00 38 02 
        00          
-0471A2 22 00 00 5D 0593*  	dl 0x000022,0x00005D,BUF_42_040
+0471A2 28 00 00 69 0593*  	dl 0x000028,0x000069,BUF_42_040
        00 00 39 02 
        00          
-0471AB 8C 00 00 5D 0594*  	dl 0x00008C,0x00005D,BUF_42_040
+0471AB 92 00 00 69 0594*  	dl 0x000092,0x000069,BUF_42_040
        00 00 39 02 
        00          
-0471B4 F7 00 00 5D 0595*  	dl 0x0000F7,0x00005D,BUF_42_040
+0471B4 FD 00 00 69 0595*  	dl 0x0000FD,0x000069,BUF_42_040
        00 00 39 02 
        00          
-0471BD 64 00 00 78 0596*  	dl 0x000064,0x000078,BUF_42_044
+0471BD 7D 00 00 9C 0596*  	dl 0x00007D,0x00009C,BUF_42_044
        00 00 3A 02 
        00          
 0471C6             0597*  
 0471C6             0598*  ; render_obj_id:43
 0471C6             0599*  sprite_obj_008:
-0471C6 09 00 00 5B 0600*  	dl 0x000009,0x00005B,BUF_43_004
+0471C6 0C 00 00 5C 0600*  	dl 0x00000C,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471CF 2C 00 00 5B 0601*  	dl 0x00002C,0x00005B,BUF_43_004
+0471CF 2F 00 00 5C 0601*  	dl 0x00002F,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471D8 50 00 00 5B 0602*  	dl 0x000050,0x00005B,BUF_43_004
+0471D8 53 00 00 5C 0602*  	dl 0x000053,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471E1 73 00 00 5B 0603*  	dl 0x000073,0x00005B,BUF_43_004
+0471E1 76 00 00 5C 0603*  	dl 0x000076,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471EA 97 00 00 5B 0604*  	dl 0x000097,0x00005B,BUF_43_004
+0471EA 9A 00 00 5C 0604*  	dl 0x00009A,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471F3 BA 00 00 5B 0605*  	dl 0x0000BA,0x00005B,BUF_43_004
+0471F3 BD 00 00 5C 0605*  	dl 0x0000BD,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-0471FC DE 00 00 5B 0606*  	dl 0x0000DE,0x00005B,BUF_43_004
+0471FC E1 00 00 5C 0606*  	dl 0x0000E1,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-047205 01 01 00 5B 0607*  	dl 0x000101,0x00005B,BUF_43_004
+047205 04 01 00 5C 0607*  	dl 0x000104,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-04720E 25 01 00 5B 0608*  	dl 0x000125,0x00005B,BUF_43_004
+04720E 28 01 00 5C 0608*  	dl 0x000128,0x00005C,BUF_43_004
        00 00 3B 02 
        00          
-047217 0B 00 00 5E 0609*  	dl 0x00000B,0x00005E,BUF_43_020
+047217 0F 00 00 61 0609*  	dl 0x00000F,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-047220 39 00 00 5E 0610*  	dl 0x000039,0x00005E,BUF_43_020
+047220 3D 00 00 61 0610*  	dl 0x00003D,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-047229 66 00 00 5E 0611*  	dl 0x000066,0x00005E,BUF_43_020
+047229 6A 00 00 61 0611*  	dl 0x00006A,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-047232 94 00 00 5E 0612*  	dl 0x000094,0x00005E,BUF_43_020
+047232 98 00 00 61 0612*  	dl 0x000098,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-04723B C1 00 00 5E 0613*  	dl 0x0000C1,0x00005E,BUF_43_020
+04723B C5 00 00 61 0613*  	dl 0x0000C5,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-047244 EF 00 00 5E 0614*  	dl 0x0000EF,0x00005E,BUF_43_020
+047244 F3 00 00 61 0614*  	dl 0x0000F3,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-04724D 1C 01 00 5E 0615*  	dl 0x00011C,0x00005E,BUF_43_020
+04724D 20 01 00 61 0615*  	dl 0x000120,0x000061,BUF_43_020
        00 00 3C 02 
        00          
-047256 10 00 00 64 0616*  	dl 0x000010,0x000064,BUF_43_032
+047256 15 00 00 68 0616*  	dl 0x000015,0x000068,BUF_43_032
        00 00 3D 02 
        00          
-04725F 4F 00 00 64 0617*  	dl 0x00004F,0x000064,BUF_43_032
+04725F 54 00 00 68 0617*  	dl 0x000054,0x000068,BUF_43_032
        00 00 3D 02 
        00          
-047268 90 00 00 64 0618*  	dl 0x000090,0x000064,BUF_43_032
+047268 95 00 00 68 0618*  	dl 0x000095,0x000068,BUF_43_032
        00 00 3D 02 
        00          
-047271 D0 00 00 64 0619*  	dl 0x0000D0,0x000064,BUF_43_032
+047271 D5 00 00 68 0619*  	dl 0x0000D5,0x000068,BUF_43_032
        00 00 3D 02 
        00          
-04727A 10 01 00 64 0620*  	dl 0x000110,0x000064,BUF_43_032
+04727A 15 01 00 68 0620*  	dl 0x000115,0x000068,BUF_43_032
        00 00 3D 02 
        00          
-047283 1B 00 00 71 0621*  	dl 0x00001B,0x000071,BUF_43_040
+047283 24 00 00 77 0621*  	dl 0x000024,0x000077,BUF_43_040
        00 00 3E 02 
        00          
-04728C 85 00 00 71 0622*  	dl 0x000085,0x000071,BUF_43_040
+04728C 8E 00 00 77 0622*  	dl 0x00008E,0x000077,BUF_43_040
        00 00 3E 02 
        00          
-047295 F0 00 00 71 0623*  	dl 0x0000F0,0x000071,BUF_43_040
+047295 F9 00 00 77 0623*  	dl 0x0000F9,0x000077,BUF_43_040
        00 00 3E 02 
        00          
-04729E F0 00 00 A0 0624*  	dl 0x0000F0,0x0000A0,BUF_43_044
+04729E D4 00 00 9F 0624*  	dl 0x0000D4,0x00009F,BUF_43_044
        00 00 3F 02 
        00          
 0472A7             0625*  
 0472A7             0626*  ; render_obj_id:44
 0472A7             0627*  sprite_obj_009:
-0472A7 0D 00 00 56 0628*  	dl 0x00000D,0x000056,BUF_44_004
+0472A7 0F 00 00 5C 0628*  	dl 0x00000F,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472B0 30 00 00 56 0629*  	dl 0x000030,0x000056,BUF_44_004
+0472B0 32 00 00 5C 0629*  	dl 0x000032,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472B9 54 00 00 56 0630*  	dl 0x000054,0x000056,BUF_44_004
+0472B9 56 00 00 5C 0630*  	dl 0x000056,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472C2 77 00 00 56 0631*  	dl 0x000077,0x000056,BUF_44_004
+0472C2 79 00 00 5C 0631*  	dl 0x000079,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472CB 9B 00 00 56 0632*  	dl 0x00009B,0x000056,BUF_44_004
+0472CB 9D 00 00 5C 0632*  	dl 0x00009D,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472D4 BE 00 00 56 0633*  	dl 0x0000BE,0x000056,BUF_44_004
+0472D4 C0 00 00 5C 0633*  	dl 0x0000C0,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472DD E2 00 00 56 0634*  	dl 0x0000E2,0x000056,BUF_44_004
+0472DD E4 00 00 5C 0634*  	dl 0x0000E4,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472E6 05 01 00 56 0635*  	dl 0x000105,0x000056,BUF_44_004
+0472E6 07 01 00 5C 0635*  	dl 0x000107,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472EF 29 01 00 56 0636*  	dl 0x000129,0x000056,BUF_44_004
+0472EF 2B 01 00 5C 0636*  	dl 0x00012B,0x00005C,BUF_44_004
        00 00 40 02 
        00          
-0472F8 10 00 00 58 0637*  	dl 0x000010,0x000058,BUF_44_020
+0472F8 14 00 00 5F 0637*  	dl 0x000014,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-047301 3E 00 00 58 0638*  	dl 0x00003E,0x000058,BUF_44_020
+047301 42 00 00 5F 0638*  	dl 0x000042,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-04730A 6B 00 00 58 0639*  	dl 0x00006B,0x000058,BUF_44_020
+04730A 6F 00 00 5F 0639*  	dl 0x00006F,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-047313 99 00 00 58 0640*  	dl 0x000099,0x000058,BUF_44_020
+047313 9D 00 00 5F 0640*  	dl 0x00009D,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-04731C C6 00 00 58 0641*  	dl 0x0000C6,0x000058,BUF_44_020
+04731C CA 00 00 5F 0641*  	dl 0x0000CA,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-047325 F4 00 00 58 0642*  	dl 0x0000F4,0x000058,BUF_44_020
+047325 F8 00 00 5F 0642*  	dl 0x0000F8,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-04732E 21 01 00 58 0643*  	dl 0x000121,0x000058,BUF_44_020
+04732E 25 01 00 5F 0643*  	dl 0x000125,0x00005F,BUF_44_020
        00 00 41 02 
        00          
-047337 16 00 00 5C 0644*  	dl 0x000016,0x00005C,BUF_44_032
+047337 1B 00 00 66 0644*  	dl 0x00001B,0x000066,BUF_44_032
        00 00 42 02 
        00          
-047340 55 00 00 5C 0645*  	dl 0x000055,0x00005C,BUF_44_032
+047340 5A 00 00 66 0645*  	dl 0x00005A,0x000066,BUF_44_032
        00 00 42 02 
        00          
-047349 96 00 00 5C 0646*  	dl 0x000096,0x00005C,BUF_44_032
+047349 9B 00 00 66 0646*  	dl 0x00009B,0x000066,BUF_44_032
        00 00 42 02 
        00          
-047352 D6 00 00 5C 0647*  	dl 0x0000D6,0x00005C,BUF_44_032
+047352 DB 00 00 66 0647*  	dl 0x0000DB,0x000066,BUF_44_032
        00 00 42 02 
        00          
-04735B 16 01 00 5C 0648*  	dl 0x000116,0x00005C,BUF_44_032
+04735B 1B 01 00 66 0648*  	dl 0x00011B,0x000066,BUF_44_032
        00 00 42 02 
        00          
-047364 26 00 00 64 0649*  	dl 0x000026,0x000064,BUF_44_040
+047364 2E 00 00 75 0649*  	dl 0x00002E,0x000075,BUF_44_040
        00 00 43 02 
        00          
-04736D 90 00 00 64 0650*  	dl 0x000090,0x000064,BUF_44_040
+04736D 98 00 00 75 0650*  	dl 0x000098,0x000075,BUF_44_040
        00 00 43 02 
        00          
-047376 FB 00 00 64 0651*  	dl 0x0000FB,0x000064,BUF_44_040
+047376 03 01 00 75 0651*  	dl 0x000103,0x000075,BUF_44_040
        00 00 43 02 
        00          
-04737F 6E 00 00 8C 0652*  	dl 0x00006E,0x00008C,BUF_44_044
+04737F C8 00 00 A1 0652*  	dl 0x0000C8,0x0000A1,BUF_44_044
        00 00 44 02 
        00          
 047388             0653*  
 047388             0654*  ; render_obj_id:45
 047388             0655*  sprite_obj_010:
-047388 09 00 00 55 0656*  	dl 0x000009,0x000055,BUF_45_004
+047388 09 00 00 56 0656*  	dl 0x000009,0x000056,BUF_45_004
        00 00 45 02 
        00          
-047391 2C 00 00 55 0657*  	dl 0x00002C,0x000055,BUF_45_004
+047391 2C 00 00 56 0657*  	dl 0x00002C,0x000056,BUF_45_004
        00 00 45 02 
        00          
-04739A 50 00 00 55 0658*  	dl 0x000050,0x000055,BUF_45_004
+04739A 50 00 00 56 0658*  	dl 0x000050,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473A3 73 00 00 55 0659*  	dl 0x000073,0x000055,BUF_45_004
+0473A3 73 00 00 56 0659*  	dl 0x000073,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473AC 97 00 00 55 0660*  	dl 0x000097,0x000055,BUF_45_004
+0473AC 97 00 00 56 0660*  	dl 0x000097,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473B5 BA 00 00 55 0661*  	dl 0x0000BA,0x000055,BUF_45_004
+0473B5 BA 00 00 56 0661*  	dl 0x0000BA,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473BE DE 00 00 55 0662*  	dl 0x0000DE,0x000055,BUF_45_004
+0473BE DE 00 00 56 0662*  	dl 0x0000DE,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473C7 01 01 00 55 0663*  	dl 0x000101,0x000055,BUF_45_004
+0473C7 01 01 00 56 0663*  	dl 0x000101,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473D0 25 01 00 55 0664*  	dl 0x000125,0x000055,BUF_45_004
+0473D0 25 01 00 56 0664*  	dl 0x000125,0x000056,BUF_45_004
        00 00 45 02 
        00          
-0473D9 0B 00 00 57 0665*  	dl 0x00000B,0x000057,BUF_45_020
+0473D9 0C 00 00 58 0665*  	dl 0x00000C,0x000058,BUF_45_020
        00 00 46 02 
        00          
-0473E2 39 00 00 57 0666*  	dl 0x000039,0x000057,BUF_45_020
+0473E2 3A 00 00 58 0666*  	dl 0x00003A,0x000058,BUF_45_020
        00 00 46 02 
        00          
-0473EB 66 00 00 57 0667*  	dl 0x000066,0x000057,BUF_45_020
+0473EB 67 00 00 58 0667*  	dl 0x000067,0x000058,BUF_45_020
        00 00 46 02 
        00          
-0473F4 94 00 00 57 0668*  	dl 0x000094,0x000057,BUF_45_020
+0473F4 95 00 00 58 0668*  	dl 0x000095,0x000058,BUF_45_020
        00 00 46 02 
        00          
-0473FD C1 00 00 57 0669*  	dl 0x0000C1,0x000057,BUF_45_020
+0473FD C2 00 00 58 0669*  	dl 0x0000C2,0x000058,BUF_45_020
        00 00 46 02 
        00          
-047406 EF 00 00 57 0670*  	dl 0x0000EF,0x000057,BUF_45_020
+047406 F0 00 00 58 0670*  	dl 0x0000F0,0x000058,BUF_45_020
        00 00 46 02 
        00          
-04740F 1C 01 00 57 0671*  	dl 0x00011C,0x000057,BUF_45_020
+04740F 1D 01 00 58 0671*  	dl 0x00011D,0x000058,BUF_45_020
        00 00 46 02 
        00          
-047418 10 00 00 5A 0672*  	dl 0x000010,0x00005A,BUF_45_032
+047418 11 00 00 5D 0672*  	dl 0x000011,0x00005D,BUF_45_032
        00 00 47 02 
        00          
-047421 4F 00 00 5A 0673*  	dl 0x00004F,0x00005A,BUF_45_032
+047421 50 00 00 5D 0673*  	dl 0x000050,0x00005D,BUF_45_032
        00 00 47 02 
        00          
-04742A 90 00 00 5A 0674*  	dl 0x000090,0x00005A,BUF_45_032
+04742A 91 00 00 5D 0674*  	dl 0x000091,0x00005D,BUF_45_032
        00 00 47 02 
        00          
-047433 D0 00 00 5A 0675*  	dl 0x0000D0,0x00005A,BUF_45_032
+047433 D1 00 00 5D 0675*  	dl 0x0000D1,0x00005D,BUF_45_032
        00 00 47 02 
        00          
-04743C 10 01 00 5A 0676*  	dl 0x000110,0x00005A,BUF_45_032
+04743C 11 01 00 5D 0676*  	dl 0x000111,0x00005D,BUF_45_032
        00 00 47 02 
        00          
-047445 1B 00 00 60 0677*  	dl 0x00001B,0x000060,BUF_45_040
+047445 1D 00 00 63 0677*  	dl 0x00001D,0x000063,BUF_45_040
        00 00 48 02 
        00          
-04744E 85 00 00 60 0678*  	dl 0x000085,0x000060,BUF_45_040
+04744E 87 00 00 63 0678*  	dl 0x000087,0x000063,BUF_45_040
        00 00 48 02 
        00          
-047457 F0 00 00 60 0679*  	dl 0x0000F0,0x000060,BUF_45_040
+047457 F2 00 00 63 0679*  	dl 0x0000F2,0x000063,BUF_45_040
        00 00 48 02 
        00          
-047460 50 00 00 82 0680*  	dl 0x000050,0x000082,BUF_45_044
+047460 58 00 00 8D 0680*  	dl 0x000058,0x00008D,BUF_45_044
        00 00 49 02 
        00          
 047469             0681*  
 047469             0682*  ; render_obj_id:46
 047469             0683*  sprite_obj_011:
-047469 09 00 00 57 0684*  	dl 0x000009,0x000057,BUF_46_004
+047469 09 00 00 58 0684*  	dl 0x000009,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-047472 2C 00 00 57 0685*  	dl 0x00002C,0x000057,BUF_46_004
+047472 2C 00 00 58 0685*  	dl 0x00002C,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-04747B 50 00 00 57 0686*  	dl 0x000050,0x000057,BUF_46_004
+04747B 50 00 00 58 0686*  	dl 0x000050,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-047484 73 00 00 57 0687*  	dl 0x000073,0x000057,BUF_46_004
+047484 73 00 00 58 0687*  	dl 0x000073,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-04748D 97 00 00 57 0688*  	dl 0x000097,0x000057,BUF_46_004
+04748D 97 00 00 58 0688*  	dl 0x000097,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-047496 BA 00 00 57 0689*  	dl 0x0000BA,0x000057,BUF_46_004
+047496 BA 00 00 58 0689*  	dl 0x0000BA,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-04749F DE 00 00 57 0690*  	dl 0x0000DE,0x000057,BUF_46_004
+04749F DE 00 00 58 0690*  	dl 0x0000DE,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-0474A8 01 01 00 57 0691*  	dl 0x000101,0x000057,BUF_46_004
+0474A8 01 01 00 58 0691*  	dl 0x000101,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-0474B1 25 01 00 57 0692*  	dl 0x000125,0x000057,BUF_46_004
+0474B1 25 01 00 58 0692*  	dl 0x000125,0x000058,BUF_46_004
        00 00 4A 02 
        00          
-0474BA 0B 00 00 5A 0693*  	dl 0x00000B,0x00005A,BUF_46_020
+0474BA 0C 00 00 5A 0693*  	dl 0x00000C,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474C3 39 00 00 5A 0694*  	dl 0x000039,0x00005A,BUF_46_020
+0474C3 3A 00 00 5A 0694*  	dl 0x00003A,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474CC 66 00 00 5A 0695*  	dl 0x000066,0x00005A,BUF_46_020
+0474CC 67 00 00 5A 0695*  	dl 0x000067,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474D5 94 00 00 5A 0696*  	dl 0x000094,0x00005A,BUF_46_020
+0474D5 95 00 00 5A 0696*  	dl 0x000095,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474DE C1 00 00 5A 0697*  	dl 0x0000C1,0x00005A,BUF_46_020
+0474DE C2 00 00 5A 0697*  	dl 0x0000C2,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474E7 EF 00 00 5A 0698*  	dl 0x0000EF,0x00005A,BUF_46_020
+0474E7 F0 00 00 5A 0698*  	dl 0x0000F0,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474F0 1C 01 00 5A 0699*  	dl 0x00011C,0x00005A,BUF_46_020
+0474F0 1D 01 00 5A 0699*  	dl 0x00011D,0x00005A,BUF_46_020
        00 00 4B 02 
        00          
-0474F9 10 00 00 5E 0700*  	dl 0x000010,0x00005E,BUF_46_032
+0474F9 11 00 00 60 0700*  	dl 0x000011,0x000060,BUF_46_032
        00 00 4C 02 
        00          
-047502 4F 00 00 5E 0701*  	dl 0x00004F,0x00005E,BUF_46_032
+047502 50 00 00 60 0701*  	dl 0x000050,0x000060,BUF_46_032
        00 00 4C 02 
        00          
-04750B 90 00 00 5E 0702*  	dl 0x000090,0x00005E,BUF_46_032
+04750B 91 00 00 60 0702*  	dl 0x000091,0x000060,BUF_46_032
        00 00 4C 02 
        00          
-047514 D0 00 00 5E 0703*  	dl 0x0000D0,0x00005E,BUF_46_032
+047514 D1 00 00 60 0703*  	dl 0x0000D1,0x000060,BUF_46_032
        00 00 4C 02 
        00          
-04751D 10 01 00 5E 0704*  	dl 0x000110,0x00005E,BUF_46_032
+04751D 11 01 00 60 0704*  	dl 0x000111,0x000060,BUF_46_032
        00 00 4C 02 
        00          
-047526 1B 00 00 67 0705*  	dl 0x00001B,0x000067,BUF_46_040
+047526 1D 00 00 69 0705*  	dl 0x00001D,0x000069,BUF_46_040
        00 00 4D 02 
        00          
-04752F 85 00 00 67 0706*  	dl 0x000085,0x000067,BUF_46_040
+04752F 87 00 00 69 0706*  	dl 0x000087,0x000069,BUF_46_040
        00 00 4D 02 
        00          
-047538 F0 00 00 67 0707*  	dl 0x0000F0,0x000067,BUF_46_040
+047538 F2 00 00 69 0707*  	dl 0x0000F2,0x000069,BUF_46_040
        00 00 4D 02 
        00          
-047541 8C 00 00 96 0708*  	dl 0x00008C,0x000096,BUF_46_044
+047541 8E 00 00 9F 0708*  	dl 0x00008E,0x00009F,BUF_46_044
        00 00 4E 02 
        00          
 04754A             0709*  
 04754A             0710*  ; render_obj_id:47
 04754A             0711*  sprite_obj_012:
-04754A 09 00 00 56 0712*  	dl 0x000009,0x000056,BUF_47_004
+04754A 09 00 00 57 0712*  	dl 0x000009,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047553 2C 00 00 56 0713*  	dl 0x00002C,0x000056,BUF_47_004
+047553 2C 00 00 57 0713*  	dl 0x00002C,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-04755C 50 00 00 56 0714*  	dl 0x000050,0x000056,BUF_47_004
+04755C 50 00 00 57 0714*  	dl 0x000050,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047565 73 00 00 56 0715*  	dl 0x000073,0x000056,BUF_47_004
+047565 73 00 00 57 0715*  	dl 0x000073,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-04756E 97 00 00 56 0716*  	dl 0x000097,0x000056,BUF_47_004
+04756E 97 00 00 57 0716*  	dl 0x000097,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047577 BA 00 00 56 0717*  	dl 0x0000BA,0x000056,BUF_47_004
+047577 BA 00 00 57 0717*  	dl 0x0000BA,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047580 DE 00 00 56 0718*  	dl 0x0000DE,0x000056,BUF_47_004
+047580 DE 00 00 57 0718*  	dl 0x0000DE,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047589 01 01 00 56 0719*  	dl 0x000101,0x000056,BUF_47_004
+047589 01 01 00 57 0719*  	dl 0x000101,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-047592 25 01 00 56 0720*  	dl 0x000125,0x000056,BUF_47_004
+047592 25 01 00 57 0720*  	dl 0x000125,0x000057,BUF_47_004
        00 00 4F 02 
        00          
-04759B 0B 00 00 58 0721*  	dl 0x00000B,0x000058,BUF_47_020
+04759B 0C 00 00 59 0721*  	dl 0x00000C,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475A4 39 00 00 58 0722*  	dl 0x000039,0x000058,BUF_47_020
+0475A4 3A 00 00 59 0722*  	dl 0x00003A,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475AD 66 00 00 58 0723*  	dl 0x000066,0x000058,BUF_47_020
+0475AD 67 00 00 59 0723*  	dl 0x000067,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475B6 94 00 00 58 0724*  	dl 0x000094,0x000058,BUF_47_020
+0475B6 95 00 00 59 0724*  	dl 0x000095,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475BF C1 00 00 58 0725*  	dl 0x0000C1,0x000058,BUF_47_020
+0475BF C2 00 00 59 0725*  	dl 0x0000C2,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475C8 EF 00 00 58 0726*  	dl 0x0000EF,0x000058,BUF_47_020
+0475C8 F0 00 00 59 0726*  	dl 0x0000F0,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475D1 1C 01 00 58 0727*  	dl 0x00011C,0x000058,BUF_47_020
+0475D1 1D 01 00 59 0727*  	dl 0x00011D,0x000059,BUF_47_020
        00 00 50 02 
        00          
-0475DA 10 00 00 5C 0728*  	dl 0x000010,0x00005C,BUF_47_032
+0475DA 11 00 00 5E 0728*  	dl 0x000011,0x00005E,BUF_47_032
        00 00 51 02 
        00          
-0475E3 4F 00 00 5C 0729*  	dl 0x00004F,0x00005C,BUF_47_032
+0475E3 50 00 00 5E 0729*  	dl 0x000050,0x00005E,BUF_47_032
        00 00 51 02 
        00          
-0475EC 90 00 00 5C 0730*  	dl 0x000090,0x00005C,BUF_47_032
+0475EC 91 00 00 5E 0730*  	dl 0x000091,0x00005E,BUF_47_032
        00 00 51 02 
        00          
-0475F5 D0 00 00 5C 0731*  	dl 0x0000D0,0x00005C,BUF_47_032
+0475F5 D1 00 00 5E 0731*  	dl 0x0000D1,0x00005E,BUF_47_032
        00 00 51 02 
        00          
-0475FE 10 01 00 5C 0732*  	dl 0x000110,0x00005C,BUF_47_032
+0475FE 11 01 00 5E 0732*  	dl 0x000111,0x00005E,BUF_47_032
        00 00 51 02 
        00          
-047607 1B 00 00 64 0733*  	dl 0x00001B,0x000064,BUF_47_040
+047607 1D 00 00 66 0733*  	dl 0x00001D,0x000066,BUF_47_040
        00 00 52 02 
        00          
-047610 85 00 00 64 0734*  	dl 0x000085,0x000064,BUF_47_040
+047610 87 00 00 66 0734*  	dl 0x000087,0x000066,BUF_47_040
        00 00 52 02 
        00          
-047619 F0 00 00 64 0735*  	dl 0x0000F0,0x000064,BUF_47_040
+047619 F2 00 00 66 0735*  	dl 0x0000F2,0x000066,BUF_47_040
        00 00 52 02 
        00          
-047622 B4 00 00 8C 0736*  	dl 0x0000B4,0x00008C,BUF_47_044
+047622 B2 00 00 96 0736*  	dl 0x0000B2,0x000096,BUF_47_044
        00 00 53 02 
        00          
 04762B             0737*  
 04762B             0738*  ; render_obj_id:48
 04762B             0739*  sprite_obj_013:
-04762B 0C 00 00 5B 0740*  	dl 0x00000C,0x00005B,BUF_48_004
+04762B 0A 00 00 5A 0740*  	dl 0x00000A,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-047634 2F 00 00 5B 0741*  	dl 0x00002F,0x00005B,BUF_48_004
+047634 2D 00 00 5A 0741*  	dl 0x00002D,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-04763D 53 00 00 5B 0742*  	dl 0x000053,0x00005B,BUF_48_004
+04763D 51 00 00 5A 0742*  	dl 0x000051,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-047646 76 00 00 5B 0743*  	dl 0x000076,0x00005B,BUF_48_004
+047646 74 00 00 5A 0743*  	dl 0x000074,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-04764F 9A 00 00 5B 0744*  	dl 0x00009A,0x00005B,BUF_48_004
+04764F 98 00 00 5A 0744*  	dl 0x000098,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-047658 BD 00 00 5B 0745*  	dl 0x0000BD,0x00005B,BUF_48_004
+047658 BB 00 00 5A 0745*  	dl 0x0000BB,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-047661 E1 00 00 5B 0746*  	dl 0x0000E1,0x00005B,BUF_48_004
+047661 DF 00 00 5A 0746*  	dl 0x0000DF,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-04766A 04 01 00 5B 0747*  	dl 0x000104,0x00005B,BUF_48_004
+04766A 02 01 00 5A 0747*  	dl 0x000102,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-047673 28 01 00 5B 0748*  	dl 0x000128,0x00005B,BUF_48_004
+047673 26 01 00 5A 0748*  	dl 0x000126,0x00005A,BUF_48_004
        00 00 54 02 
        00          
-04767C 0E 00 00 5E 0749*  	dl 0x00000E,0x00005E,BUF_48_020
+04767C 0D 00 00 5C 0749*  	dl 0x00000D,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-047685 3C 00 00 5E 0750*  	dl 0x00003C,0x00005E,BUF_48_020
+047685 3B 00 00 5C 0750*  	dl 0x00003B,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-04768E 69 00 00 5E 0751*  	dl 0x000069,0x00005E,BUF_48_020
+04768E 68 00 00 5C 0751*  	dl 0x000068,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-047697 97 00 00 5E 0752*  	dl 0x000097,0x00005E,BUF_48_020
+047697 96 00 00 5C 0752*  	dl 0x000096,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-0476A0 C4 00 00 5E 0753*  	dl 0x0000C4,0x00005E,BUF_48_020
+0476A0 C3 00 00 5C 0753*  	dl 0x0000C3,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-0476A9 F2 00 00 5E 0754*  	dl 0x0000F2,0x00005E,BUF_48_020
+0476A9 F1 00 00 5C 0754*  	dl 0x0000F1,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-0476B2 1F 01 00 5E 0755*  	dl 0x00011F,0x00005E,BUF_48_020
+0476B2 1E 01 00 5C 0755*  	dl 0x00011E,0x00005C,BUF_48_020
        00 00 55 02 
        00          
-0476BB 14 00 00 64 0756*  	dl 0x000014,0x000064,BUF_48_032
+0476BB 12 00 00 62 0756*  	dl 0x000012,0x000062,BUF_48_032
        00 00 56 02 
        00          
-0476C4 53 00 00 64 0757*  	dl 0x000053,0x000064,BUF_48_032
+0476C4 51 00 00 62 0757*  	dl 0x000051,0x000062,BUF_48_032
        00 00 56 02 
        00          
-0476CD 94 00 00 64 0758*  	dl 0x000094,0x000064,BUF_48_032
+0476CD 92 00 00 62 0758*  	dl 0x000092,0x000062,BUF_48_032
        00 00 56 02 
        00          
-0476D6 D4 00 00 64 0759*  	dl 0x0000D4,0x000064,BUF_48_032
+0476D6 D2 00 00 62 0759*  	dl 0x0000D2,0x000062,BUF_48_032
        00 00 56 02 
        00          
-0476DF 14 01 00 64 0760*  	dl 0x000114,0x000064,BUF_48_032
+0476DF 12 01 00 62 0760*  	dl 0x000112,0x000062,BUF_48_032
        00 00 56 02 
        00          
-0476E8 22 00 00 71 0761*  	dl 0x000022,0x000071,BUF_48_040
+0476E8 1D 00 00 6C 0761*  	dl 0x00001D,0x00006C,BUF_48_040
        00 00 57 02 
        00          
-0476F1 8C 00 00 71 0762*  	dl 0x00008C,0x000071,BUF_48_040
+0476F1 87 00 00 6C 0762*  	dl 0x000087,0x00006C,BUF_48_040
        00 00 57 02 
        00          
-0476FA F7 00 00 71 0763*  	dl 0x0000F7,0x000071,BUF_48_040
+0476FA F2 00 00 6C 0763*  	dl 0x0000F2,0x00006C,BUF_48_040
        00 00 57 02 
        00          
-047703 F0 00 00 A0 0764*  	dl 0x0000F0,0x0000A0,BUF_48_044
+047703 00 01 00 A0 0764*  	dl 0x000100,0x0000A0,BUF_48_044
        00 00 58 02 
        00          
 04770C             0765*  
 04770C             0766*  ; render_obj_id:49
 04770C             0767*  sprite_obj_014:
-04770C 0B 00 00 58 0768*  	dl 0x00000B,0x000058,BUF_49_004
+04770C 0A 00 00 59 0768*  	dl 0x00000A,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047715 2E 00 00 58 0769*  	dl 0x00002E,0x000058,BUF_49_004
+047715 2D 00 00 59 0769*  	dl 0x00002D,0x000059,BUF_49_004
        00 00 59 02 
        00          
-04771E 52 00 00 58 0770*  	dl 0x000052,0x000058,BUF_49_004
+04771E 51 00 00 59 0770*  	dl 0x000051,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047727 75 00 00 58 0771*  	dl 0x000075,0x000058,BUF_49_004
+047727 74 00 00 59 0771*  	dl 0x000074,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047730 99 00 00 58 0772*  	dl 0x000099,0x000058,BUF_49_004
+047730 98 00 00 59 0772*  	dl 0x000098,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047739 BC 00 00 58 0773*  	dl 0x0000BC,0x000058,BUF_49_004
+047739 BB 00 00 59 0773*  	dl 0x0000BB,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047742 E0 00 00 58 0774*  	dl 0x0000E0,0x000058,BUF_49_004
+047742 DF 00 00 59 0774*  	dl 0x0000DF,0x000059,BUF_49_004
        00 00 59 02 
        00          
-04774B 03 01 00 58 0775*  	dl 0x000103,0x000058,BUF_49_004
+04774B 02 01 00 59 0775*  	dl 0x000102,0x000059,BUF_49_004
        00 00 59 02 
        00          
-047754 27 01 00 58 0776*  	dl 0x000127,0x000058,BUF_49_004
+047754 26 01 00 59 0776*  	dl 0x000126,0x000059,BUF_49_004
        00 00 59 02 
        00          
-04775D 0D 00 00 5B 0777*  	dl 0x00000D,0x00005B,BUF_49_020
+04775D 0E 00 00 5B 0777*  	dl 0x00000E,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-047766 3B 00 00 5B 0778*  	dl 0x00003B,0x00005B,BUF_49_020
+047766 3C 00 00 5B 0778*  	dl 0x00003C,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-04776F 68 00 00 5B 0779*  	dl 0x000068,0x00005B,BUF_49_020
+04776F 69 00 00 5B 0779*  	dl 0x000069,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-047778 96 00 00 5B 0780*  	dl 0x000096,0x00005B,BUF_49_020
+047778 97 00 00 5B 0780*  	dl 0x000097,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-047781 C3 00 00 5B 0781*  	dl 0x0000C3,0x00005B,BUF_49_020
+047781 C4 00 00 5B 0781*  	dl 0x0000C4,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-04778A F1 00 00 5B 0782*  	dl 0x0000F1,0x00005B,BUF_49_020
+04778A F2 00 00 5B 0782*  	dl 0x0000F2,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-047793 1E 01 00 5B 0783*  	dl 0x00011E,0x00005B,BUF_49_020
+047793 1F 01 00 5B 0783*  	dl 0x00011F,0x00005B,BUF_49_020
        00 00 5A 02 
        00          
-04779C 12 00 00 60 0784*  	dl 0x000012,0x000060,BUF_49_032
+04779C 13 00 00 62 0784*  	dl 0x000013,0x000062,BUF_49_032
        00 00 5B 02 
        00          
-0477A5 51 00 00 60 0785*  	dl 0x000051,0x000060,BUF_49_032
+0477A5 52 00 00 62 0785*  	dl 0x000052,0x000062,BUF_49_032
        00 00 5B 02 
        00          
-0477AE 92 00 00 60 0786*  	dl 0x000092,0x000060,BUF_49_032
+0477AE 93 00 00 62 0786*  	dl 0x000093,0x000062,BUF_49_032
        00 00 5B 02 
        00          
-0477B7 D2 00 00 60 0787*  	dl 0x0000D2,0x000060,BUF_49_032
+0477B7 D3 00 00 62 0787*  	dl 0x0000D3,0x000062,BUF_49_032
        00 00 5B 02 
        00          
-0477C0 12 01 00 60 0788*  	dl 0x000112,0x000060,BUF_49_032
+0477C0 13 01 00 62 0788*  	dl 0x000113,0x000062,BUF_49_032
        00 00 5B 02 
        00          
-0477C9 1F 00 00 6A 0789*  	dl 0x00001F,0x00006A,BUF_49_040
+0477C9 20 00 00 6C 0789*  	dl 0x000020,0x00006C,BUF_49_040
        00 00 5C 02 
        00          
-0477D2 89 00 00 6A 0790*  	dl 0x000089,0x00006A,BUF_49_040
+0477D2 8A 00 00 6C 0790*  	dl 0x00008A,0x00006C,BUF_49_040
        00 00 5C 02 
        00          
-0477DB F4 00 00 6A 0791*  	dl 0x0000F4,0x00006A,BUF_49_040
+0477DB F5 00 00 6C 0791*  	dl 0x0000F5,0x00006C,BUF_49_040
        00 00 5C 02 
        00          
-0477E4 F0 00 00 A0 0792*  	dl 0x0000F0,0x0000A0,BUF_49_044
+0477E4 E8 00 00 A0 0792*  	dl 0x0000E8,0x0000A0,BUF_49_044
        00 00 5D 02 
        00          
 0477ED             0793*  
@@ -11033,157 +11033,157 @@ PC     Output      Line
 0478CE             0821*  
 0478CE             0822*  ; render_obj_id:51
 0478CE             0823*  sprite_obj_016:
-0478CE 0A 00 00 46 0824*  	dl 0x00000A,0x000046,BUF_51_004
+0478CE 0B 00 00 49 0824*  	dl 0x00000B,0x000049,BUF_51_004
        00 00 63 02 
        00          
-0478D7 2D 00 00 46 0825*  	dl 0x00002D,0x000046,BUF_51_004
+0478D7 2E 00 00 49 0825*  	dl 0x00002E,0x000049,BUF_51_004
        00 00 63 02 
        00          
-0478E0 51 00 00 46 0826*  	dl 0x000051,0x000046,BUF_51_004
+0478E0 52 00 00 49 0826*  	dl 0x000052,0x000049,BUF_51_004
        00 00 63 02 
        00          
-0478E9 74 00 00 46 0827*  	dl 0x000074,0x000046,BUF_51_004
+0478E9 75 00 00 49 0827*  	dl 0x000075,0x000049,BUF_51_004
        00 00 63 02 
        00          
-0478F2 98 00 00 46 0828*  	dl 0x000098,0x000046,BUF_51_004
+0478F2 99 00 00 49 0828*  	dl 0x000099,0x000049,BUF_51_004
        00 00 63 02 
        00          
-0478FB BB 00 00 46 0829*  	dl 0x0000BB,0x000046,BUF_51_004
+0478FB BC 00 00 49 0829*  	dl 0x0000BC,0x000049,BUF_51_004
        00 00 63 02 
        00          
-047904 DF 00 00 46 0830*  	dl 0x0000DF,0x000046,BUF_51_004
+047904 E0 00 00 49 0830*  	dl 0x0000E0,0x000049,BUF_51_004
        00 00 63 02 
        00          
-04790D 02 01 00 46 0831*  	dl 0x000102,0x000046,BUF_51_004
+04790D 03 01 00 49 0831*  	dl 0x000103,0x000049,BUF_51_004
        00 00 63 02 
        00          
-047916 26 01 00 46 0832*  	dl 0x000126,0x000046,BUF_51_004
+047916 27 01 00 49 0832*  	dl 0x000127,0x000049,BUF_51_004
        00 00 63 02 
        00          
-04791F 0C 00 00 44 0833*  	dl 0x00000C,0x000044,BUF_51_020
+04791F 0D 00 00 48 0833*  	dl 0x00000D,0x000048,BUF_51_020
        00 00 64 02 
        00          
-047928 3A 00 00 44 0834*  	dl 0x00003A,0x000044,BUF_51_020
+047928 3B 00 00 48 0834*  	dl 0x00003B,0x000048,BUF_51_020
        00 00 64 02 
        00          
-047931 67 00 00 44 0835*  	dl 0x000067,0x000044,BUF_51_020
+047931 68 00 00 48 0835*  	dl 0x000068,0x000048,BUF_51_020
        00 00 64 02 
        00          
-04793A 95 00 00 44 0836*  	dl 0x000095,0x000044,BUF_51_020
+04793A 96 00 00 48 0836*  	dl 0x000096,0x000048,BUF_51_020
        00 00 64 02 
        00          
-047943 C2 00 00 44 0837*  	dl 0x0000C2,0x000044,BUF_51_020
+047943 C3 00 00 48 0837*  	dl 0x0000C3,0x000048,BUF_51_020
        00 00 64 02 
        00          
-04794C F0 00 00 44 0838*  	dl 0x0000F0,0x000044,BUF_51_020
+04794C F1 00 00 48 0838*  	dl 0x0000F1,0x000048,BUF_51_020
        00 00 64 02 
        00          
-047955 1D 01 00 44 0839*  	dl 0x00011D,0x000044,BUF_51_020
+047955 1E 01 00 48 0839*  	dl 0x00011E,0x000048,BUF_51_020
        00 00 64 02 
        00          
-04795E 11 00 00 40 0840*  	dl 0x000011,0x000040,BUF_51_032
+04795E 13 00 00 45 0840*  	dl 0x000013,0x000045,BUF_51_032
        00 00 65 02 
        00          
-047967 50 00 00 40 0841*  	dl 0x000050,0x000040,BUF_51_032
+047967 52 00 00 45 0841*  	dl 0x000052,0x000045,BUF_51_032
        00 00 65 02 
        00          
-047970 91 00 00 40 0842*  	dl 0x000091,0x000040,BUF_51_032
+047970 93 00 00 45 0842*  	dl 0x000093,0x000045,BUF_51_032
        00 00 65 02 
        00          
-047979 D1 00 00 40 0843*  	dl 0x0000D1,0x000040,BUF_51_032
+047979 D3 00 00 45 0843*  	dl 0x0000D3,0x000045,BUF_51_032
        00 00 65 02 
        00          
-047982 11 01 00 40 0844*  	dl 0x000111,0x000040,BUF_51_032
+047982 13 01 00 45 0844*  	dl 0x000113,0x000045,BUF_51_032
        00 00 65 02 
        00          
-04798B 1D 00 00 34 0845*  	dl 0x00001D,0x000034,BUF_51_040
+04798B 20 00 00 3E 0845*  	dl 0x000020,0x00003E,BUF_51_040
        00 00 66 02 
        00          
-047994 87 00 00 34 0846*  	dl 0x000087,0x000034,BUF_51_040
+047994 8A 00 00 3E 0846*  	dl 0x00008A,0x00003E,BUF_51_040
        00 00 66 02 
        00          
-04799D F2 00 00 34 0847*  	dl 0x0000F2,0x000034,BUF_51_040
+04799D F5 00 00 3E 0847*  	dl 0x0000F5,0x00003E,BUF_51_040
        00 00 66 02 
        00          
-0479A6 55 00 00 00 0848*  	dl 0x000055,0x000000,BUF_51_044
+0479A6 5E 00 00 1C 0848*  	dl 0x00005E,0x00001C,BUF_51_044
        00 00 67 02 
        00          
 0479AF             0849*  
 0479AF             0850*  ; render_obj_id:52
 0479AF             0851*  sprite_obj_017:
-0479AF 0B 00 00 46 0852*  	dl 0x00000B,0x000046,BUF_52_004
+0479AF 0C 00 00 49 0852*  	dl 0x00000C,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479B8 2E 00 00 46 0853*  	dl 0x00002E,0x000046,BUF_52_004
+0479B8 2F 00 00 49 0853*  	dl 0x00002F,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479C1 52 00 00 46 0854*  	dl 0x000052,0x000046,BUF_52_004
+0479C1 53 00 00 49 0854*  	dl 0x000053,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479CA 75 00 00 46 0855*  	dl 0x000075,0x000046,BUF_52_004
+0479CA 76 00 00 49 0855*  	dl 0x000076,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479D3 99 00 00 46 0856*  	dl 0x000099,0x000046,BUF_52_004
+0479D3 9A 00 00 49 0856*  	dl 0x00009A,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479DC BC 00 00 46 0857*  	dl 0x0000BC,0x000046,BUF_52_004
+0479DC BD 00 00 49 0857*  	dl 0x0000BD,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479E5 E0 00 00 46 0858*  	dl 0x0000E0,0x000046,BUF_52_004
+0479E5 E1 00 00 49 0858*  	dl 0x0000E1,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479EE 03 01 00 46 0859*  	dl 0x000103,0x000046,BUF_52_004
+0479EE 04 01 00 49 0859*  	dl 0x000104,0x000049,BUF_52_004
        00 00 68 02 
        00          
-0479F7 27 01 00 46 0860*  	dl 0x000127,0x000046,BUF_52_004
+0479F7 28 01 00 49 0860*  	dl 0x000128,0x000049,BUF_52_004
        00 00 68 02 
        00          
-047A00 0E 00 00 44 0861*  	dl 0x00000E,0x000044,BUF_52_020
+047A00 0F 00 00 48 0861*  	dl 0x00000F,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A09 3C 00 00 44 0862*  	dl 0x00003C,0x000044,BUF_52_020
+047A09 3D 00 00 48 0862*  	dl 0x00003D,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A12 69 00 00 44 0863*  	dl 0x000069,0x000044,BUF_52_020
+047A12 6A 00 00 48 0863*  	dl 0x00006A,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A1B 97 00 00 44 0864*  	dl 0x000097,0x000044,BUF_52_020
+047A1B 98 00 00 48 0864*  	dl 0x000098,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A24 C4 00 00 44 0865*  	dl 0x0000C4,0x000044,BUF_52_020
+047A24 C5 00 00 48 0865*  	dl 0x0000C5,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A2D F2 00 00 44 0866*  	dl 0x0000F2,0x000044,BUF_52_020
+047A2D F3 00 00 48 0866*  	dl 0x0000F3,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A36 1F 01 00 44 0867*  	dl 0x00011F,0x000044,BUF_52_020
+047A36 20 01 00 48 0867*  	dl 0x000120,0x000048,BUF_52_020
        00 00 69 02 
        00          
-047A3F 14 00 00 40 0868*  	dl 0x000014,0x000040,BUF_52_032
+047A3F 16 00 00 45 0868*  	dl 0x000016,0x000045,BUF_52_032
        00 00 6A 02 
        00          
-047A48 53 00 00 40 0869*  	dl 0x000053,0x000040,BUF_52_032
+047A48 55 00 00 45 0869*  	dl 0x000055,0x000045,BUF_52_032
        00 00 6A 02 
        00          
-047A51 94 00 00 40 0870*  	dl 0x000094,0x000040,BUF_52_032
+047A51 96 00 00 45 0870*  	dl 0x000096,0x000045,BUF_52_032
        00 00 6A 02 
        00          
-047A5A D4 00 00 40 0871*  	dl 0x0000D4,0x000040,BUF_52_032
+047A5A D6 00 00 45 0871*  	dl 0x0000D6,0x000045,BUF_52_032
        00 00 6A 02 
        00          
-047A63 14 01 00 40 0872*  	dl 0x000114,0x000040,BUF_52_032
+047A63 16 01 00 45 0872*  	dl 0x000116,0x000045,BUF_52_032
        00 00 6A 02 
        00          
-047A6C 22 00 00 34 0873*  	dl 0x000022,0x000034,BUF_52_040
+047A6C 24 00 00 3E 0873*  	dl 0x000024,0x00003E,BUF_52_040
        00 00 6B 02 
        00          
-047A75 8C 00 00 34 0874*  	dl 0x00008C,0x000034,BUF_52_040
+047A75 8E 00 00 3E 0874*  	dl 0x00008E,0x00003E,BUF_52_040
        00 00 6B 02 
        00          
-047A7E F7 00 00 34 0875*  	dl 0x0000F7,0x000034,BUF_52_040
+047A7E F9 00 00 3E 0875*  	dl 0x0000F9,0x00003E,BUF_52_040
        00 00 6B 02 
        00          
-047A87 64 00 00 00 0876*  	dl 0x000064,0x000000,BUF_52_044
+047A87 6B 00 00 1C 0876*  	dl 0x00006B,0x00001C,BUF_52_044
        00 00 6C 02 
        00          
 047A90             0877*  

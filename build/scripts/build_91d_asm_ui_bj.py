@@ -119,6 +119,11 @@ def make_rgba2_files(db_path, src_png_dir, tgt_rgba2_dir):
         img_to_rgba2(src_img, tgt_file)
     conn.close()
 
+def asm_ui_bj(db_path, ui_inc_path, src_png_dir, tgt_rgba2_dir, next_buffer_id):
+    make_tbl_91c_UI_BJ(db_path, src_png_dir)
+    make_rgba2_files(db_path, src_png_dir, tgt_rgba2_dir)
+    make_asm_ui(db_path, ui_inc_path, next_buffer_id)
+
 if __name__ == "__main__":
     db_path = 'build/data/build.db'
     ui_inc_path = "src/asm/ui_img_bj.asm"

@@ -147,6 +147,16 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         maps_tgt_dir = 'tgt/maps'
         asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
 
+# build_91d_asm_ui_bj.py
+    if do_91d_asm_ui_bj:
+        print(f"build_91d_asm_ui_bj: Making BJ UI assembler file")
+        from build_91d_asm_ui_bj import asm_ui_bj
+        ui_inc_path = "src/asm/ui_img_bj.asm"
+        src_png_dir = "src/assets/images/ui/bj"
+        tgt_rgba2_dir = "tgt/ui/bj"
+        next_buffer_id = 0x2100
+        asm_ui_bj(db_path, ui_inc_path, src_png_dir, tgt_rgba2_dir, next_buffer_id)
+
 # build_98_asm_sfx.py
     sfx_inc_path = 'src/asm/sfx_load.asm'
     sfx_tgt_dir = 'sfx'
@@ -195,26 +205,28 @@ if __name__ == "__main__":
     do_91a_asm_font = False
     do_91b_asm_ui = False
     do_91c_asm_map_masks = False
+    do_91d_asm_ui_bj = False
     do_98_asm_sfx = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
     do_99_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_00_delete_tgt_dir = True
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
-    # do_06_import_mapmaker_files = True
-    # do_07_map_panels = True
-    # do_08_make_sfx = True
-    # do_90_asm_polys = True
-    # do_91_asm_img_load = True
-    # do_91a_asm_font = True
-    # do_91b_asm_ui = True
-    # do_91c_asm_map_masks = True
-    # do_98_asm_sfx = True
+    do_00_delete_tgt_dir = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_08_make_sfx = True
+    do_90_asm_polys = True
+    do_91_asm_img_load = True
+    do_91a_asm_font = True
+    do_91b_asm_ui = True
+    do_91c_asm_map_masks = True
+    do_91d_asm_ui_bj = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)

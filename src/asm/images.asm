@@ -5254,9 +5254,9 @@ ld_20_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_004
-	ld bc,20
-	ld de,20
-	ld ix,400
+	ld bc,19
+	ld de,18
+	ld ix,342
 	call vdu_load_img
 	ret
 
@@ -5268,9 +5268,9 @@ ld_20_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_020
-	ld bc,25
-	ld de,26
-	ld ix,650
+	ld bc,23
+	ld de,23
+	ld ix,529
 	call vdu_load_img
 	ret
 
@@ -5282,9 +5282,9 @@ ld_20_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_032
-	ld bc,37
-	ld de,39
-	ld ix,1443
+	ld bc,32
+	ld de,34
+	ld ix,1088
 	call vdu_load_img
 	ret
 
@@ -5296,9 +5296,9 @@ ld_20_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_040
-	ld bc,60
-	ld de,64
-	ld ix,3840
+	ld bc,54
+	ld de,56
+	ld ix,3024
 	call vdu_load_img
 	ret
 
@@ -5310,9 +5310,9 @@ ld_20_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_20_044
-	ld bc,121
-	ld de,115
-	ld ix,13915
+	ld bc,107
+	ld de,91
+	ld ix,9737
 	call vdu_load_img
 	ret
 
@@ -5324,9 +5324,9 @@ ld_21_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_004
-	ld bc,16
-	ld de,17
-	ld ix,272
+	ld bc,11
+	ld de,11
+	ld ix,121
 	call vdu_load_img
 	ret
 
@@ -5338,9 +5338,9 @@ ld_21_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_020
-	ld bc,21
-	ld de,22
-	ld ix,462
+	ld bc,14
+	ld de,14
+	ld ix,196
 	call vdu_load_img
 	ret
 
@@ -5352,9 +5352,9 @@ ld_21_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_032
-	ld bc,31
-	ld de,33
-	ld ix,1023
+	ld bc,20
+	ld de,22
+	ld ix,440
 	call vdu_load_img
 	ret
 
@@ -5366,9 +5366,9 @@ ld_21_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_040
-	ld bc,50
-	ld de,54
-	ld ix,2700
+	ld bc,33
+	ld de,36
+	ld ix,1188
 	call vdu_load_img
 	ret
 
@@ -5380,9 +5380,9 @@ ld_21_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_21_044
-	ld bc,151
-	ld de,85
-	ld ix,12835
+	ld bc,100
+	ld de,30
+	ld ix,3000
 	call vdu_load_img
 	ret
 
@@ -5464,9 +5464,9 @@ ld_23_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_004
-	ld bc,21
-	ld de,9
-	ld ix,189
+	ld bc,14
+	ld de,6
+	ld ix,84
 	call vdu_load_img
 	ret
 
@@ -5478,9 +5478,9 @@ ld_23_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_020
-	ld bc,26
-	ld de,12
-	ld ix,312
+	ld bc,17
+	ld de,8
+	ld ix,136
 	call vdu_load_img
 	ret
 
@@ -5492,9 +5492,9 @@ ld_23_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_032
-	ld bc,36
-	ld de,17
-	ld ix,612
+	ld bc,25
+	ld de,11
+	ld ix,275
 	call vdu_load_img
 	ret
 
@@ -5506,9 +5506,9 @@ ld_23_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_040
-	ld bc,61
-	ld de,27
-	ld ix,1647
+	ld bc,40
+	ld de,18
+	ld ix,720
 	call vdu_load_img
 	ret
 
@@ -5520,9 +5520,9 @@ ld_23_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_23_044
-	ld bc,180
+	ld bc,1
 	ld de,1
-	ld ix,180
+	ld ix,1
 	call vdu_load_img
 	ret
 
@@ -5534,9 +5534,9 @@ ld_24_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_004
-	ld bc,16
-	ld de,17
-	ld ix,272
+	ld bc,11
+	ld de,11
+	ld ix,121
 	call vdu_load_img
 	ret
 
@@ -5548,9 +5548,9 @@ ld_24_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_020
-	ld bc,21
-	ld de,22
-	ld ix,462
+	ld bc,14
+	ld de,14
+	ld ix,196
 	call vdu_load_img
 	ret
 
@@ -5562,9 +5562,9 @@ ld_24_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_032
-	ld bc,31
-	ld de,33
-	ld ix,1023
+	ld bc,20
+	ld de,22
+	ld ix,440
 	call vdu_load_img
 	ret
 
@@ -5576,9 +5576,9 @@ ld_24_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_040
-	ld bc,50
-	ld de,54
-	ld ix,2700
+	ld bc,33
+	ld de,36
+	ld ix,1188
 	call vdu_load_img
 	ret
 
@@ -5590,9 +5590,9 @@ ld_24_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_24_044
-	ld bc,151
-	ld de,85
-	ld ix,12835
+	ld bc,100
+	ld de,30
+	ld ix,3000
 	call vdu_load_img
 	ret
 
@@ -5604,9 +5604,9 @@ ld_40_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_004
-	ld bc,18
-	ld de,9
-	ld ix,162
+	ld bc,14
+	ld de,7
+	ld ix,98
 	call vdu_load_img
 	ret
 
@@ -5618,9 +5618,9 @@ ld_40_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_020
-	ld bc,23
-	ld de,11
-	ld ix,253
+	ld bc,18
+	ld de,10
+	ld ix,180
 	call vdu_load_img
 	ret
 
@@ -5632,9 +5632,9 @@ ld_40_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_032
-	ld bc,32
-	ld de,18
-	ld ix,576
+	ld bc,26
+	ld de,13
+	ld ix,338
 	call vdu_load_img
 	ret
 
@@ -5646,9 +5646,9 @@ ld_40_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_040
-	ld bc,54
-	ld de,29
-	ld ix,1566
+	ld bc,43
+	ld de,23
+	ld ix,989
 	call vdu_load_img
 	ret
 
@@ -5660,9 +5660,9 @@ ld_40_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_40_044
-	ld bc,90
-	ld de,10
-	ld ix,900
+	ld bc,1
+	ld de,1
+	ld ix,1
 	call vdu_load_img
 	ret
 
@@ -5674,9 +5674,9 @@ ld_41_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_004
-	ld bc,18
-	ld de,15
-	ld ix,270
+	ld bc,11
+	ld de,11
+	ld ix,121
 	call vdu_load_img
 	ret
 
@@ -5688,9 +5688,9 @@ ld_41_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_020
-	ld bc,23
-	ld de,20
-	ld ix,460
+	ld bc,16
+	ld de,14
+	ld ix,224
 	call vdu_load_img
 	ret
 
@@ -5702,9 +5702,9 @@ ld_41_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_032
-	ld bc,32
-	ld de,30
-	ld ix,960
+	ld bc,22
+	ld de,20
+	ld ix,440
 	call vdu_load_img
 	ret
 
@@ -5716,9 +5716,9 @@ ld_41_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_040
-	ld bc,54
-	ld de,49
-	ld ix,2646
+	ld bc,37
+	ld de,34
+	ld ix,1258
 	call vdu_load_img
 	ret
 
@@ -5730,9 +5730,9 @@ ld_41_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_41_044
-	ld bc,130
-	ld de,70
-	ld ix,9100
+	ld bc,35
+	ld de,25
+	ld ix,875
 	call vdu_load_img
 	ret
 
@@ -5744,9 +5744,9 @@ ld_42_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_004
-	ld bc,15
-	ld de,12
-	ld ix,180
+	ld bc,10
+	ld de,9
+	ld ix,90
 	call vdu_load_img
 	ret
 
@@ -5758,9 +5758,9 @@ ld_42_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_020
-	ld bc,20
-	ld de,16
-	ld ix,320
+	ld bc,14
+	ld de,11
+	ld ix,154
 	call vdu_load_img
 	ret
 
@@ -5772,9 +5772,9 @@ ld_42_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_032
-	ld bc,28
-	ld de,24
-	ld ix,672
+	ld bc,19
+	ld de,16
+	ld ix,304
 	call vdu_load_img
 	ret
 
@@ -5786,9 +5786,9 @@ ld_42_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_040
-	ld bc,47
-	ld de,39
-	ld ix,1833
+	ld bc,32
+	ld de,27
+	ld ix,864
 	call vdu_load_img
 	ret
 
@@ -5800,9 +5800,9 @@ ld_42_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_42_044
-	ld bc,100
-	ld de,40
-	ld ix,4000
+	ld bc,63
+	ld de,4
+	ld ix,252
 	call vdu_load_img
 	ret
 
@@ -5814,9 +5814,9 @@ ld_43_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_004
-	ld bc,18
-	ld de,5
-	ld ix,90
+	ld bc,11
+	ld de,4
+	ld ix,44
 	call vdu_load_img
 	ret
 
@@ -5828,9 +5828,9 @@ ld_43_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_020
-	ld bc,23
-	ld de,7
-	ld ix,161
+	ld bc,15
+	ld de,4
+	ld ix,60
 	call vdu_load_img
 	ret
 
@@ -5842,9 +5842,9 @@ ld_43_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_032
-	ld bc,32
-	ld de,12
-	ld ix,384
+	ld bc,21
+	ld de,7
+	ld ix,147
 	call vdu_load_img
 	ret
 
@@ -5856,9 +5856,9 @@ ld_43_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_43_040
-	ld bc,54
-	ld de,19
-	ld ix,1026
+	ld bc,35
+	ld de,13
+	ld ix,455
 	call vdu_load_img
 	ret
 
@@ -5884,9 +5884,9 @@ ld_44_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_44_004
-	ld bc,13
-	ld de,10
-	ld ix,130
+	ld bc,5
+	ld de,4
+	ld ix,20
 	call vdu_load_img
 	ret
 
@@ -5898,9 +5898,9 @@ ld_44_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_44_020
-	ld bc,17
-	ld de,13
-	ld ix,221
+	ld bc,8
+	ld de,6
+	ld ix,48
 	call vdu_load_img
 	ret
 
@@ -5912,9 +5912,9 @@ ld_44_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_44_032
-	ld bc,26
-	ld de,20
-	ld ix,520
+	ld bc,13
+	ld de,10
+	ld ix,130
 	call vdu_load_img
 	ret
 
@@ -5926,9 +5926,9 @@ ld_44_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_44_040
-	ld bc,43
-	ld de,32
-	ld ix,1376
+	ld bc,20
+	ld de,15
+	ld ix,300
 	call vdu_load_img
 	ret
 
@@ -5940,9 +5940,9 @@ ld_44_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_44_044
-	ld bc,90
-	ld de,20
-	ld ix,1800
+	ld bc,1
+	ld de,1
+	ld ix,1
 	call vdu_load_img
 	ret
 
@@ -5954,9 +5954,9 @@ ld_45_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_004
-	ld bc,18
-	ld de,11
-	ld ix,198
+	ld bc,16
+	ld de,10
+	ld ix,160
 	call vdu_load_img
 	ret
 
@@ -5968,9 +5968,9 @@ ld_45_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_020
-	ld bc,23
-	ld de,14
-	ld ix,322
+	ld bc,20
+	ld de,13
+	ld ix,260
 	call vdu_load_img
 	ret
 
@@ -5982,9 +5982,9 @@ ld_45_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_032
-	ld bc,32
-	ld de,22
-	ld ix,704
+	ld bc,29
+	ld de,18
+	ld ix,522
 	call vdu_load_img
 	ret
 
@@ -5996,9 +5996,9 @@ ld_45_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_040
-	ld bc,54
-	ld de,36
-	ld ix,1944
+	ld bc,48
+	ld de,33
+	ld ix,1584
 	call vdu_load_img
 	ret
 
@@ -6010,9 +6010,9 @@ ld_45_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_45_044
-	ld bc,130
-	ld de,30
-	ld ix,3900
+	ld bc,117
+	ld de,19
+	ld ix,2223
 	call vdu_load_img
 	ret
 
@@ -6024,9 +6024,9 @@ ld_46_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_004
-	ld bc,18
-	ld de,9
-	ld ix,162
+	ld bc,16
+	ld de,8
+	ld ix,128
 	call vdu_load_img
 	ret
 
@@ -6038,9 +6038,9 @@ ld_46_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_020
-	ld bc,23
+	ld bc,20
 	ld de,11
-	ld ix,253
+	ld ix,220
 	call vdu_load_img
 	ret
 
@@ -6052,9 +6052,9 @@ ld_46_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_032
-	ld bc,32
-	ld de,18
-	ld ix,576
+	ld bc,29
+	ld de,15
+	ld ix,435
 	call vdu_load_img
 	ret
 
@@ -6066,9 +6066,9 @@ ld_46_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_040
-	ld bc,54
-	ld de,29
-	ld ix,1566
+	ld bc,48
+	ld de,27
+	ld ix,1296
 	call vdu_load_img
 	ret
 
@@ -6080,9 +6080,9 @@ ld_46_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_46_044
-	ld bc,90
-	ld de,10
-	ld ix,900
+	ld bc,81
+	ld de,1
+	ld ix,81
 	call vdu_load_img
 	ret
 
@@ -6094,9 +6094,9 @@ ld_47_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_004
-	ld bc,18
-	ld de,10
-	ld ix,180
+	ld bc,16
+	ld de,9
+	ld ix,144
 	call vdu_load_img
 	ret
 
@@ -6108,9 +6108,9 @@ ld_47_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_020
-	ld bc,23
-	ld de,13
-	ld ix,299
+	ld bc,20
+	ld de,11
+	ld ix,220
 	call vdu_load_img
 	ret
 
@@ -6122,9 +6122,9 @@ ld_47_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_032
-	ld bc,32
-	ld de,18
-	ld ix,576
+	ld bc,29
+	ld de,17
+	ld ix,493
 	call vdu_load_img
 	ret
 
@@ -6136,9 +6136,9 @@ ld_47_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_040
-	ld bc,54
-	ld de,30
-	ld ix,1620
+	ld bc,48
+	ld de,27
+	ld ix,1296
 	call vdu_load_img
 	ret
 
@@ -6150,9 +6150,9 @@ ld_47_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_47_044
-	ld bc,30
-	ld de,20
-	ld ix,600
+	ld bc,27
+	ld de,10
+	ld ix,270
 	call vdu_load_img
 	ret
 
@@ -6164,9 +6164,9 @@ ld_48_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_48_004
-	ld bc,13
-	ld de,5
-	ld ix,65
+	ld bc,18
+	ld de,7
+	ld ix,126
 	call vdu_load_img
 	ret
 
@@ -6178,9 +6178,9 @@ ld_48_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_48_020
-	ld bc,18
-	ld de,7
-	ld ix,126
+	ld bc,23
+	ld de,10
+	ld ix,230
 	call vdu_load_img
 	ret
 
@@ -6192,9 +6192,9 @@ ld_48_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_48_032
-	ld bc,26
-	ld de,12
-	ld ix,312
+	ld bc,32
+	ld de,13
+	ld ix,416
 	call vdu_load_img
 	ret
 
@@ -6206,9 +6206,9 @@ ld_48_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_48_040
-	ld bc,44
-	ld de,19
-	ld ix,836
+	ld bc,53
+	ld de,24
+	ld ix,1272
 	call vdu_load_img
 	ret
 
@@ -6234,9 +6234,9 @@ ld_49_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_004
-	ld bc,15
-	ld de,7
-	ld ix,105
+	ld bc,14
+	ld de,6
+	ld ix,84
 	call vdu_load_img
 	ret
 
@@ -6248,9 +6248,9 @@ ld_49_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_020
-	ld bc,20
-	ld de,9
-	ld ix,180
+	ld bc,18
+	ld de,8
+	ld ix,144
 	call vdu_load_img
 	ret
 
@@ -6262,9 +6262,9 @@ ld_49_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_032
-	ld bc,28
-	ld de,12
-	ld ix,336
+	ld bc,26
+	ld de,11
+	ld ix,286
 	call vdu_load_img
 	ret
 
@@ -6276,9 +6276,9 @@ ld_49_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_49_040
-	ld bc,47
-	ld de,21
-	ld ix,987
+	ld bc,43
+	ld de,18
+	ld ix,774
 	call vdu_load_img
 	ret
 
@@ -6374,9 +6374,9 @@ ld_51_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_004
-	ld bc,18
-	ld de,26
-	ld ix,468
+	ld bc,17
+	ld de,23
+	ld ix,391
 	call vdu_load_img
 	ret
 
@@ -6388,9 +6388,9 @@ ld_51_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_020
-	ld bc,23
-	ld de,33
-	ld ix,759
+	ld bc,21
+	ld de,29
+	ld ix,609
 	call vdu_load_img
 	ret
 
@@ -6402,9 +6402,9 @@ ld_51_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_032
-	ld bc,34
-	ld de,48
-	ld ix,1632
+	ld bc,30
+	ld de,42
+	ld ix,1260
 	call vdu_load_img
 	ret
 
@@ -6416,9 +6416,9 @@ ld_51_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_040
-	ld bc,55
-	ld de,80
-	ld ix,4400
+	ld bc,49
+	ld de,70
+	ld ix,3430
 	call vdu_load_img
 	ret
 
@@ -6430,9 +6430,9 @@ ld_51_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_51_044
-	ld bc,166
-	ld de,160
-	ld ix,26560
+	ld bc,146
+	ld de,131
+	ld ix,19126
 	call vdu_load_img
 	ret
 
@@ -6444,9 +6444,9 @@ ld_52_004:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_004
-	ld bc,15
-	ld de,26
-	ld ix,390
+	ld bc,14
+	ld de,23
+	ld ix,322
 	call vdu_load_img
 	ret
 
@@ -6458,9 +6458,9 @@ ld_52_020:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_020
-	ld bc,19
-	ld de,33
-	ld ix,627
+	ld bc,17
+	ld de,29
+	ld ix,493
 	call vdu_load_img
 	ret
 
@@ -6472,9 +6472,9 @@ ld_52_032:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_032
-	ld bc,28
-	ld de,48
-	ld ix,1344
+	ld bc,25
+	ld de,42
+	ld ix,1050
 	call vdu_load_img
 	ret
 
@@ -6486,9 +6486,9 @@ ld_52_040:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_040
-	ld bc,45
-	ld de,80
-	ld ix,3600
+	ld bc,40
+	ld de,70
+	ld ix,2800
 	call vdu_load_img
 	ret
 
@@ -6500,9 +6500,9 @@ ld_52_044:
 	ld a,mos_load
 	RST.LIL 08h
 	ld hl,BUF_52_044
-	ld bc,136
-	ld de,160
-	ld ix,21760
+	ld bc,120
+	ld de,131
+	ld ix,15720
 	call vdu_load_img
 	ret
 
