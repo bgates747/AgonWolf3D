@@ -311,8 +311,8 @@ player_move_bullet:
     ld a,sp_hurt
     call do_sprite_behavior ; a = sprite behavior return code
     cp 255 ; value if shot hit a shootable sprite
-    ret z ; if we hit a sprite, we're done
-; fall through because we still need to check out what's going on in the target cell
+    ret z ; if we hit a shootable sprite, we're done
+    jr @move_bullet ; otherwise keep moving bullet
 @not_sprite:
     ld de,(player_shot_xvel) ; restore yvel,xvel to d,e
 ; read map type/status mask from target cell

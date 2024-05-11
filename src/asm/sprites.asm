@@ -227,6 +227,7 @@ LAMP:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -318,6 +319,7 @@ TABLE:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -359,6 +361,7 @@ OVERHEAD_LIGHT:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -452,6 +455,7 @@ HEALTH_PACK:
     call player_mod_health
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -498,6 +502,7 @@ GOLD_CHALISE:
     call player_mod_score
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -544,6 +549,7 @@ GOLD_CROSS:
     call player_mod_score
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -587,6 +593,7 @@ PLATE_OF_FOOD:
     call player_mod_health
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -628,6 +635,7 @@ KEYCARD:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -674,6 +682,7 @@ GOLD_CHEST:
     call player_mod_score
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -715,6 +724,7 @@ MACHINE_GUN:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -756,6 +766,7 @@ GATLING_GUN:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -799,6 +810,7 @@ DOG_FOOD:
     call player_mod_health
     jr @kill
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
@@ -840,6 +852,7 @@ GOLD_KEY:
 @use:
     jp sprite_behavior_return
 @hurt:
+    xor a
     jp sprite_behavior_return
 @kill:
     call sprite_kill
