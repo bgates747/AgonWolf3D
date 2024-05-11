@@ -29,26 +29,26 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 3	37	"DOOR TO ROOM 7"	1	0	0	1	1	cube	57	100	center	center	"to room"	
 3	38	"DOOR TO ROOM 8"	1	0	0	1	1	cube	57	100	center	center	"to room"	
 3	39	"DOOR TO ROOM 9"	1	0	0	1	1	cube	57	100	center	center	"to room"	
-4	40	"HEALTH PACK"	1	0	0	1	0	sprite		40	bottom	center	normal	
-4	41	"GOLD CHALISE"	1	0	0	1	0	sprite		35	bottom	center	normal	
-4	42	"GOLD CROSS"	1	0	0	1	0	sprite		35	bottom	center	normal	
-4	43	"PLATE OF FOOD"	1	0	0	1	0	sprite		33	bottom	center	normal	
-4	44	KEYCARD	1	0	0	1	0	sprite		25	bottom	center	normal	
-4	45	"GOLD CHEST"	1	0	0	1	0	sprite		45	bottom	center	normal	
-4	46	"MACHINE GUN"	1	0	0	1	0	sprite		45	bottom	center	normal	
-4	47	"GATLING GUN"	1	0	0	1	0	sprite		45	bottom	center	normal	
-4	48	"DOG FOOD"	1	0	0	1	0	sprite		60	bottom	center	normal	
-4	49	"GOLD KEY"	1	0	0	1	0	sprite		45	bottom	center	normal	
-5	50	DOG	1	0	0	1	0	sprite		50	bottom	center	normal	
-5	51	"GERMAN TROOPER"	1	0	0	1	0	sprite		66	bottom	center	normal	
-5	52	"SS GUARD"	1	0	0	1	0	sprite		66	bottom	center	normal	
+4	40	"HEALTH PACK"	1	0	0	0	0	sprite		40	bottom	center	normal	
+4	41	"GOLD CHALISE"	1	0	0	0	0	sprite		35	bottom	center	normal	
+4	42	"GOLD CROSS"	1	0	0	0	0	sprite		35	bottom	center	normal	
+4	43	"PLATE OF FOOD"	1	0	0	0	0	sprite		33	bottom	center	normal	
+4	44	KEYCARD	1	0	0	0	0	sprite		25	bottom	center	normal	
+4	45	"GOLD CHEST"	1	0	0	0	0	sprite		45	bottom	center	normal	
+4	46	"MACHINE GUN"	1	0	0	0	0	sprite		45	bottom	center	normal	
+4	47	"GATLING GUN"	1	0	0	0	0	sprite		45	bottom	center	normal	
+4	48	"DOG FOOD"	1	0	0	0	0	sprite		60	bottom	center	normal	
+4	49	"GOLD KEY"	1	0	0	0	0	sprite		45	bottom	center	normal	
+5	50	DOG	1	0	0	0	0	sprite		50	bottom	center	normal	
+5	51	"GERMAN TROOPER"	1	0	0	0	0	sprite		66	bottom	center	normal	
+5	52	"SS GUARD"	1	0	0	0	0	sprite		66	bottom	center	normal	
 5	53		0										normal	
 5	54		0										normal	
 5	55		0										normal	
 5	56		0										normal	
-5	57	"REGULAR DOOR"	1	1	0	0	0	cube		100	center	center	normal	
+5	57	"REGULAR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
 5	58	"ELEVATOR SWITCH"	1	0	1	1	1	cube		100	center	center	elevator	
-5	59	"ELEVATOR DOOR"	1	1	0	0	0	cube		100	center	center	normal	
+5	59	"ELEVATOR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
 6	60		0										normal	
 6	61		0										normal	
 6	62		0										normal	

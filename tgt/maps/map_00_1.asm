@@ -7,227 +7,227 @@
 cell_status:
 ; high to low byte: obj_id, img_idx, map_type_status; sprite_id
 ; map_type_status bit mask = is_door,is_wall,is_trigger,is_blocking,is_start,is_to_room,render_type_masks
-	dl 0x320F23 ; cell 000 x,y (0,0) sprite normal
+	dl 0x1D0F03 ; cell 000 x,y (0,0) sprite normal
 	db 0x00 ; DOG
-	dl 0x331023 ; cell 001 x,y (1,0) sprite normal
+	dl 0x1D1003 ; cell 001 x,y (1,0) sprite normal
 	db 0x01 ; GERMAN TROOPER
-	dl 0x341123 ; cell 002 x,y (2,0) sprite normal
+	dl 0x1D1103 ; cell 002 x,y (2,0) sprite normal
 	db 0x02 ; SS GUARD
-	dl 0x320F23 ; cell 003 x,y (3,0) sprite normal
+	dl 0x1D0F03 ; cell 003 x,y (3,0) sprite normal
 	db 0x03 ; DOG
-	dl 0x331023 ; cell 004 x,y (4,0) sprite normal
+	dl 0x1D1003 ; cell 004 x,y (4,0) sprite normal
 	db 0x04 ; GERMAN TROOPER
-	dl 0x341123 ; cell 005 x,y (5,0) sprite normal
+	dl 0x1D1103 ; cell 005 x,y (5,0) sprite normal
 	db 0x05 ; SS GUARD
-	dl 0x320F23 ; cell 006 x,y (6,0) sprite normal
+	dl 0x1D0F03 ; cell 006 x,y (6,0) sprite normal
 	db 0x06 ; DOG
-	dl 0x331023 ; cell 007 x,y (7,0) sprite normal
+	dl 0x1D1003 ; cell 007 x,y (7,0) sprite normal
 	db 0x07 ; GERMAN TROOPER
-	dl 0x341123 ; cell 008 x,y (8,0) sprite normal
+	dl 0x1D1103 ; cell 008 x,y (8,0) sprite normal
 	db 0x08 ; SS GUARD
-	dl 0x320F23 ; cell 009 x,y (9,0) sprite normal
+	dl 0x1D0F03 ; cell 009 x,y (9,0) sprite normal
 	db 0x09 ; DOG
-	dl 0x331023 ; cell 010 x,y (10,0) sprite normal
+	dl 0x1D1003 ; cell 010 x,y (10,0) sprite normal
 	db 0x0A ; GERMAN TROOPER
-	dl 0x341123 ; cell 011 x,y (11,0) sprite normal
+	dl 0x1D1103 ; cell 011 x,y (11,0) sprite normal
 	db 0x0B ; SS GUARD
-	dl 0x320F23 ; cell 012 x,y (12,0) sprite normal
+	dl 0x1D0F03 ; cell 012 x,y (12,0) sprite normal
 	db 0x0C ; DOG
-	dl 0x331023 ; cell 013 x,y (13,0) sprite normal
+	dl 0x1D1003 ; cell 013 x,y (13,0) sprite normal
 	db 0x0D ; GERMAN TROOPER
-	dl 0x341123 ; cell 014 x,y (14,0) sprite normal
+	dl 0x1D1103 ; cell 014 x,y (14,0) sprite normal
 	db 0x0E ; SS GUARD
 	dl 0x0A0050 ; cell 015 x,y (15,0) cube outer
 	db 0xFF ; no sprite
-	dl 0x331023 ; cell 016 x,y (0,1) sprite normal
+	dl 0x1D1003 ; cell 016 x,y (0,1) sprite normal
 	db 0x0F ; GERMAN TROOPER
-	dl 0x341123 ; cell 017 x,y (1,1) sprite normal
+	dl 0x1D1103 ; cell 017 x,y (1,1) sprite normal
 	db 0x10 ; SS GUARD
-	dl 0x320F23 ; cell 018 x,y (2,1) sprite normal
+	dl 0x1D0F03 ; cell 018 x,y (2,1) sprite normal
 	db 0x11 ; DOG
-	dl 0x331023 ; cell 019 x,y (3,1) sprite normal
+	dl 0x1D1003 ; cell 019 x,y (3,1) sprite normal
 	db 0x12 ; GERMAN TROOPER
-	dl 0x341123 ; cell 020 x,y (4,1) sprite normal
+	dl 0x1D1103 ; cell 020 x,y (4,1) sprite normal
 	db 0x13 ; SS GUARD
-	dl 0x320F23 ; cell 021 x,y (5,1) sprite normal
+	dl 0x1D0F03 ; cell 021 x,y (5,1) sprite normal
 	db 0x14 ; DOG
-	dl 0x331023 ; cell 022 x,y (6,1) sprite normal
+	dl 0x1D1003 ; cell 022 x,y (6,1) sprite normal
 	db 0x15 ; GERMAN TROOPER
-	dl 0x341123 ; cell 023 x,y (7,1) sprite normal
+	dl 0x1D1103 ; cell 023 x,y (7,1) sprite normal
 	db 0x16 ; SS GUARD
-	dl 0x320F23 ; cell 024 x,y (8,1) sprite normal
+	dl 0x1D0F03 ; cell 024 x,y (8,1) sprite normal
 	db 0x17 ; DOG
-	dl 0x331023 ; cell 025 x,y (9,1) sprite normal
+	dl 0x1D1003 ; cell 025 x,y (9,1) sprite normal
 	db 0x18 ; GERMAN TROOPER
-	dl 0x341123 ; cell 026 x,y (10,1) sprite normal
+	dl 0x1D1103 ; cell 026 x,y (10,1) sprite normal
 	db 0x19 ; SS GUARD
-	dl 0x320F23 ; cell 027 x,y (11,1) sprite normal
+	dl 0x1D0F03 ; cell 027 x,y (11,1) sprite normal
 	db 0x1A ; DOG
-	dl 0x331023 ; cell 028 x,y (12,1) sprite normal
+	dl 0x1D1003 ; cell 028 x,y (12,1) sprite normal
 	db 0x1B ; GERMAN TROOPER
-	dl 0x341123 ; cell 029 x,y (13,1) sprite normal
+	dl 0x1D1103 ; cell 029 x,y (13,1) sprite normal
 	db 0x1C ; SS GUARD
-	dl 0x320F23 ; cell 030 x,y (14,1) sprite normal
+	dl 0x1D0F03 ; cell 030 x,y (14,1) sprite normal
 	db 0x1D ; DOG
 	dl 0x0A0050 ; cell 031 x,y (15,1) cube outer
 	db 0xFF ; no sprite
-	dl 0x341123 ; cell 032 x,y (0,2) sprite normal
+	dl 0x1D1103 ; cell 032 x,y (0,2) sprite normal
 	db 0x1E ; SS GUARD
-	dl 0x320F23 ; cell 033 x,y (1,2) sprite normal
+	dl 0x1D0F03 ; cell 033 x,y (1,2) sprite normal
 	db 0x1F ; DOG
-	dl 0x331023 ; cell 034 x,y (2,2) sprite normal
+	dl 0x1D1003 ; cell 034 x,y (2,2) sprite normal
 	db 0x20 ; GERMAN TROOPER
-	dl 0x341123 ; cell 035 x,y (3,2) sprite normal
+	dl 0x1D1103 ; cell 035 x,y (3,2) sprite normal
 	db 0x21 ; SS GUARD
-	dl 0x320F23 ; cell 036 x,y (4,2) sprite normal
+	dl 0x1D0F03 ; cell 036 x,y (4,2) sprite normal
 	db 0x22 ; DOG
-	dl 0x331023 ; cell 037 x,y (5,2) sprite normal
+	dl 0x1D1003 ; cell 037 x,y (5,2) sprite normal
 	db 0x23 ; GERMAN TROOPER
-	dl 0x341123 ; cell 038 x,y (6,2) sprite normal
+	dl 0x1D1103 ; cell 038 x,y (6,2) sprite normal
 	db 0x24 ; SS GUARD
-	dl 0x320F23 ; cell 039 x,y (7,2) sprite normal
+	dl 0x1D0F03 ; cell 039 x,y (7,2) sprite normal
 	db 0x25 ; DOG
-	dl 0x331023 ; cell 040 x,y (8,2) sprite normal
+	dl 0x1D1003 ; cell 040 x,y (8,2) sprite normal
 	db 0x26 ; GERMAN TROOPER
-	dl 0x341123 ; cell 041 x,y (9,2) sprite normal
+	dl 0x1D1103 ; cell 041 x,y (9,2) sprite normal
 	db 0x27 ; SS GUARD
-	dl 0x320F23 ; cell 042 x,y (10,2) sprite normal
+	dl 0x1D0F03 ; cell 042 x,y (10,2) sprite normal
 	db 0x28 ; DOG
-	dl 0x331023 ; cell 043 x,y (11,2) sprite normal
+	dl 0x1D1003 ; cell 043 x,y (11,2) sprite normal
 	db 0x29 ; GERMAN TROOPER
-	dl 0x341123 ; cell 044 x,y (12,2) sprite normal
+	dl 0x1D1103 ; cell 044 x,y (12,2) sprite normal
 	db 0x2A ; SS GUARD
-	dl 0x320F23 ; cell 045 x,y (13,2) sprite normal
+	dl 0x1D0F03 ; cell 045 x,y (13,2) sprite normal
 	db 0x2B ; DOG
-	dl 0x331023 ; cell 046 x,y (14,2) sprite normal
+	dl 0x1D1003 ; cell 046 x,y (14,2) sprite normal
 	db 0x2C ; GERMAN TROOPER
 	dl 0x0A0050 ; cell 047 x,y (15,2) cube outer
 	db 0xFF ; no sprite
-	dl 0x320F23 ; cell 048 x,y (0,3) sprite normal
+	dl 0x1D0F03 ; cell 048 x,y (0,3) sprite normal
 	db 0x2D ; DOG
-	dl 0x331023 ; cell 049 x,y (1,3) sprite normal
+	dl 0x1D1003 ; cell 049 x,y (1,3) sprite normal
 	db 0x2E ; GERMAN TROOPER
-	dl 0x341123 ; cell 050 x,y (2,3) sprite normal
+	dl 0x1D1103 ; cell 050 x,y (2,3) sprite normal
 	db 0x2F ; SS GUARD
-	dl 0x320F23 ; cell 051 x,y (3,3) sprite normal
+	dl 0x1D0F03 ; cell 051 x,y (3,3) sprite normal
 	db 0x30 ; DOG
-	dl 0x331023 ; cell 052 x,y (4,3) sprite normal
+	dl 0x1D1003 ; cell 052 x,y (4,3) sprite normal
 	db 0x31 ; GERMAN TROOPER
-	dl 0x341123 ; cell 053 x,y (5,3) sprite normal
+	dl 0x1D1103 ; cell 053 x,y (5,3) sprite normal
 	db 0x32 ; SS GUARD
-	dl 0x320F23 ; cell 054 x,y (6,3) sprite normal
+	dl 0x1D0F03 ; cell 054 x,y (6,3) sprite normal
 	db 0x33 ; DOG
-	dl 0x331023 ; cell 055 x,y (7,3) sprite normal
+	dl 0x1D1003 ; cell 055 x,y (7,3) sprite normal
 	db 0x34 ; GERMAN TROOPER
-	dl 0x341123 ; cell 056 x,y (8,3) sprite normal
+	dl 0x1D1103 ; cell 056 x,y (8,3) sprite normal
 	db 0x35 ; SS GUARD
-	dl 0x320F23 ; cell 057 x,y (9,3) sprite normal
+	dl 0x1D0F03 ; cell 057 x,y (9,3) sprite normal
 	db 0x36 ; DOG
-	dl 0x331023 ; cell 058 x,y (10,3) sprite normal
+	dl 0x1D1003 ; cell 058 x,y (10,3) sprite normal
 	db 0x37 ; GERMAN TROOPER
-	dl 0x341123 ; cell 059 x,y (11,3) sprite normal
+	dl 0x1D1103 ; cell 059 x,y (11,3) sprite normal
 	db 0x38 ; SS GUARD
-	dl 0x320F23 ; cell 060 x,y (12,3) sprite normal
+	dl 0x1D0F03 ; cell 060 x,y (12,3) sprite normal
 	db 0x39 ; DOG
-	dl 0x331023 ; cell 061 x,y (13,3) sprite normal
+	dl 0x1D1003 ; cell 061 x,y (13,3) sprite normal
 	db 0x3A ; GERMAN TROOPER
-	dl 0x341123 ; cell 062 x,y (14,3) sprite normal
+	dl 0x1D1103 ; cell 062 x,y (14,3) sprite normal
 	db 0x3B ; SS GUARD
 	dl 0x0A0050 ; cell 063 x,y (15,3) cube outer
 	db 0xFF ; no sprite
-	dl 0x331023 ; cell 064 x,y (0,4) sprite normal
+	dl 0x1D1003 ; cell 064 x,y (0,4) sprite normal
 	db 0x3C ; GERMAN TROOPER
-	dl 0x341123 ; cell 065 x,y (1,4) sprite normal
+	dl 0x1D1103 ; cell 065 x,y (1,4) sprite normal
 	db 0x3D ; SS GUARD
-	dl 0x320F23 ; cell 066 x,y (2,4) sprite normal
+	dl 0x1D0F03 ; cell 066 x,y (2,4) sprite normal
 	db 0x3E ; DOG
-	dl 0x331023 ; cell 067 x,y (3,4) sprite normal
+	dl 0x1D1003 ; cell 067 x,y (3,4) sprite normal
 	db 0x3F ; GERMAN TROOPER
-	dl 0x341123 ; cell 068 x,y (4,4) sprite normal
+	dl 0x1D1103 ; cell 068 x,y (4,4) sprite normal
 	db 0x40 ; SS GUARD
-	dl 0x320F23 ; cell 069 x,y (5,4) sprite normal
+	dl 0x1D0F03 ; cell 069 x,y (5,4) sprite normal
 	db 0x41 ; DOG
-	dl 0x341123 ; cell 070 x,y (6,4) sprite normal
+	dl 0x1D1103 ; cell 070 x,y (6,4) sprite normal
 	db 0x42 ; SS GUARD
-	dl 0x320F23 ; cell 071 x,y (7,4) sprite normal
+	dl 0x1D0F03 ; cell 071 x,y (7,4) sprite normal
 	db 0x43 ; DOG
-	dl 0x331023 ; cell 072 x,y (8,4) sprite normal
+	dl 0x1D1003 ; cell 072 x,y (8,4) sprite normal
 	db 0x44 ; GERMAN TROOPER
-	dl 0x341123 ; cell 073 x,y (9,4) sprite normal
+	dl 0x1D1103 ; cell 073 x,y (9,4) sprite normal
 	db 0x45 ; SS GUARD
-	dl 0x320F23 ; cell 074 x,y (10,4) sprite normal
+	dl 0x1D0F03 ; cell 074 x,y (10,4) sprite normal
 	db 0x46 ; DOG
-	dl 0x331023 ; cell 075 x,y (11,4) sprite normal
+	dl 0x1D1003 ; cell 075 x,y (11,4) sprite normal
 	db 0x47 ; GERMAN TROOPER
-	dl 0x341123 ; cell 076 x,y (12,4) sprite normal
+	dl 0x1D1103 ; cell 076 x,y (12,4) sprite normal
 	db 0x48 ; SS GUARD
-	dl 0x320F23 ; cell 077 x,y (13,4) sprite normal
+	dl 0x1D0F03 ; cell 077 x,y (13,4) sprite normal
 	db 0x49 ; DOG
-	dl 0x331023 ; cell 078 x,y (14,4) sprite normal
+	dl 0x1D1003 ; cell 078 x,y (14,4) sprite normal
 	db 0x4A ; GERMAN TROOPER
 	dl 0x0A0050 ; cell 079 x,y (15,4) cube outer
 	db 0xFF ; no sprite
-	dl 0x341123 ; cell 080 x,y (0,5) sprite normal
+	dl 0x1D1103 ; cell 080 x,y (0,5) sprite normal
 	db 0x4B ; SS GUARD
-	dl 0x320F23 ; cell 081 x,y (1,5) sprite normal
+	dl 0x1D0F03 ; cell 081 x,y (1,5) sprite normal
 	db 0x4C ; DOG
-	dl 0x331023 ; cell 082 x,y (2,5) sprite normal
+	dl 0x1D1003 ; cell 082 x,y (2,5) sprite normal
 	db 0x4D ; GERMAN TROOPER
-	dl 0x341123 ; cell 083 x,y (3,5) sprite normal
+	dl 0x1D1103 ; cell 083 x,y (3,5) sprite normal
 	db 0x4E ; SS GUARD
-	dl 0x320F23 ; cell 084 x,y (4,5) sprite normal
+	dl 0x1D0F03 ; cell 084 x,y (4,5) sprite normal
 	db 0x4F ; DOG
-	dl 0x331023 ; cell 085 x,y (5,5) sprite normal
+	dl 0x1D1003 ; cell 085 x,y (5,5) sprite normal
 	db 0x50 ; GERMAN TROOPER
-	dl 0x341123 ; cell 086 x,y (6,5) sprite normal
+	dl 0x1D1103 ; cell 086 x,y (6,5) sprite normal
 	db 0x51 ; SS GUARD
-	dl 0x320F23 ; cell 087 x,y (7,5) sprite normal
+	dl 0x1D0F03 ; cell 087 x,y (7,5) sprite normal
 	db 0x52 ; DOG
-	dl 0x331023 ; cell 088 x,y (8,5) sprite normal
+	dl 0x1D1003 ; cell 088 x,y (8,5) sprite normal
 	db 0x53 ; GERMAN TROOPER
-	dl 0x341123 ; cell 089 x,y (9,5) sprite normal
+	dl 0x1D1103 ; cell 089 x,y (9,5) sprite normal
 	db 0x54 ; SS GUARD
-	dl 0x320F23 ; cell 090 x,y (10,5) sprite normal
+	dl 0x1D0F03 ; cell 090 x,y (10,5) sprite normal
 	db 0x55 ; DOG
-	dl 0x331023 ; cell 091 x,y (11,5) sprite normal
+	dl 0x1D1003 ; cell 091 x,y (11,5) sprite normal
 	db 0x56 ; GERMAN TROOPER
-	dl 0x341123 ; cell 092 x,y (12,5) sprite normal
+	dl 0x1D1103 ; cell 092 x,y (12,5) sprite normal
 	db 0x57 ; SS GUARD
-	dl 0x320F23 ; cell 093 x,y (13,5) sprite normal
+	dl 0x1D0F03 ; cell 093 x,y (13,5) sprite normal
 	db 0x58 ; DOG
-	dl 0x331023 ; cell 094 x,y (14,5) sprite normal
+	dl 0x1D1003 ; cell 094 x,y (14,5) sprite normal
 	db 0x59 ; GERMAN TROOPER
 	dl 0x0A0050 ; cell 095 x,y (15,5) cube outer
 	db 0xFF ; no sprite
-	dl 0x320F23 ; cell 096 x,y (0,6) sprite normal
+	dl 0x1D0F03 ; cell 096 x,y (0,6) sprite normal
 	db 0x5A ; DOG
-	dl 0x331023 ; cell 097 x,y (1,6) sprite normal
+	dl 0x1D1003 ; cell 097 x,y (1,6) sprite normal
 	db 0x5B ; GERMAN TROOPER
-	dl 0x341123 ; cell 098 x,y (2,6) sprite normal
+	dl 0x1D1103 ; cell 098 x,y (2,6) sprite normal
 	db 0x5C ; SS GUARD
-	dl 0x320F23 ; cell 099 x,y (3,6) sprite normal
+	dl 0x1D0F03 ; cell 099 x,y (3,6) sprite normal
 	db 0x5D ; DOG
-	dl 0x331023 ; cell 100 x,y (4,6) sprite normal
+	dl 0x1D1003 ; cell 100 x,y (4,6) sprite normal
 	db 0x5E ; GERMAN TROOPER
-	dl 0x341123 ; cell 101 x,y (5,6) sprite normal
+	dl 0x1D1103 ; cell 101 x,y (5,6) sprite normal
 	db 0x5F ; SS GUARD
-	dl 0x320F23 ; cell 102 x,y (6,6) sprite normal
+	dl 0x1D0F03 ; cell 102 x,y (6,6) sprite normal
 	db 0x60 ; DOG
-	dl 0x331023 ; cell 103 x,y (7,6) sprite normal
+	dl 0x1D1003 ; cell 103 x,y (7,6) sprite normal
 	db 0x61 ; GERMAN TROOPER
-	dl 0x341123 ; cell 104 x,y (8,6) sprite normal
+	dl 0x1D1103 ; cell 104 x,y (8,6) sprite normal
 	db 0x62 ; SS GUARD
-	dl 0x320F23 ; cell 105 x,y (9,6) sprite normal
+	dl 0x1D0F03 ; cell 105 x,y (9,6) sprite normal
 	db 0x63 ; DOG
-	dl 0x331023 ; cell 106 x,y (10,6) sprite normal
+	dl 0x1D1003 ; cell 106 x,y (10,6) sprite normal
 	db 0x64 ; GERMAN TROOPER
-	dl 0x341123 ; cell 107 x,y (11,6) sprite normal
+	dl 0x1D1103 ; cell 107 x,y (11,6) sprite normal
 	db 0x65 ; SS GUARD
-	dl 0x320F23 ; cell 108 x,y (12,6) sprite normal
+	dl 0x1D0F03 ; cell 108 x,y (12,6) sprite normal
 	db 0x66 ; DOG
-	dl 0x331023 ; cell 109 x,y (13,6) sprite normal
+	dl 0x1D1003 ; cell 109 x,y (13,6) sprite normal
 	db 0x67 ; GERMAN TROOPER
-	dl 0x341123 ; cell 110 x,y (14,6) sprite normal
+	dl 0x1D1103 ; cell 110 x,y (14,6) sprite normal
 	db 0x68 ; SS GUARD
 	dl 0x0A0050 ; cell 111 x,y (15,6) cube outer
 	db 0xFF ; no sprite
@@ -337,25 +337,25 @@ cell_status:
 	db 0x6C ; OVERHEAD LIGHT
 	dl 0x180443 ; cell 164 x,y (4,10) sprite normal
 	db 0x6D ; RADIOACTIVE BARREL
-	dl 0x280523 ; cell 165 x,y (5,10) sprite normal
+	dl 0x1D0503 ; cell 165 x,y (5,10) sprite normal
 	db 0x6E ; HEALTH PACK
-	dl 0x290623 ; cell 166 x,y (6,10) sprite normal
+	dl 0x1D0603 ; cell 166 x,y (6,10) sprite normal
 	db 0x6F ; GOLD CHALISE
-	dl 0x2A0723 ; cell 167 x,y (7,10) sprite normal
+	dl 0x1D0703 ; cell 167 x,y (7,10) sprite normal
 	db 0x70 ; GOLD CROSS
-	dl 0x2B0823 ; cell 168 x,y (8,10) sprite normal
+	dl 0x1D0803 ; cell 168 x,y (8,10) sprite normal
 	db 0x71 ; PLATE OF FOOD
-	dl 0x2C0923 ; cell 169 x,y (9,10) sprite normal
+	dl 0x1D0903 ; cell 169 x,y (9,10) sprite normal
 	db 0x72 ; KEYCARD
-	dl 0x2D0A23 ; cell 170 x,y (10,10) sprite normal
+	dl 0x1D0A03 ; cell 170 x,y (10,10) sprite normal
 	db 0x73 ; GOLD CHEST
-	dl 0x2E0B23 ; cell 171 x,y (11,10) sprite normal
+	dl 0x1D0B03 ; cell 171 x,y (11,10) sprite normal
 	db 0x74 ; MACHINE GUN
-	dl 0x2F0C23 ; cell 172 x,y (12,10) sprite normal
+	dl 0x1D0C03 ; cell 172 x,y (12,10) sprite normal
 	db 0x75 ; GATLING GUN
-	dl 0x300D23 ; cell 173 x,y (13,10) sprite normal
+	dl 0x1D0D03 ; cell 173 x,y (13,10) sprite normal
 	db 0x76 ; DOG FOOD
-	dl 0x310E23 ; cell 174 x,y (14,10) sprite normal
+	dl 0x1D0E03 ; cell 174 x,y (14,10) sprite normal
 	db 0x77 ; GOLD KEY
 	dl 0x0A0050 ; cell 175 x,y (15,10) cube outer
 	db 0xFF ; no sprite
@@ -391,7 +391,7 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x0A0050 ; cell 191 x,y (15,11) cube outer
 	db 0xFF ; no sprite
-	dl 0x320F23 ; cell 192 x,y (0,12) sprite normal
+	dl 0x1D0F03 ; cell 192 x,y (0,12) sprite normal
 	db 0x78 ; DOG
 	dl 0x1DFF01 ; cell 193 x,y (1,12) floor normal
 	db 0xFF ; no sprite
@@ -419,11 +419,11 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 205 x,y (13,12) floor normal
 	db 0xFF ; no sprite
-	dl 0x320F23 ; cell 206 x,y (14,12) sprite normal
+	dl 0x1D0F03 ; cell 206 x,y (14,12) sprite normal
 	db 0x79 ; DOG
 	dl 0x0A0050 ; cell 207 x,y (15,12) cube outer
 	db 0xFF ; no sprite
-	dl 0x331023 ; cell 208 x,y (0,13) sprite normal
+	dl 0x1D1003 ; cell 208 x,y (0,13) sprite normal
 	db 0x7A ; GERMAN TROOPER
 	dl 0x1DFF01 ; cell 209 x,y (1,13) floor normal
 	db 0xFF ; no sprite
@@ -451,11 +451,11 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 221 x,y (13,13) floor normal
 	db 0xFF ; no sprite
-	dl 0x331023 ; cell 222 x,y (14,13) sprite normal
+	dl 0x1D1003 ; cell 222 x,y (14,13) sprite normal
 	db 0x7B ; GERMAN TROOPER
 	dl 0x0A0050 ; cell 223 x,y (15,13) cube outer
 	db 0xFF ; no sprite
-	dl 0x341123 ; cell 224 x,y (0,14) sprite normal
+	dl 0x1D1103 ; cell 224 x,y (0,14) sprite normal
 	db 0x7C ; SS GUARD
 	dl 0x1DFF01 ; cell 225 x,y (1,14) floor normal
 	db 0xFF ; no sprite
@@ -483,7 +483,7 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 237 x,y (13,14) floor normal
 	db 0xFF ; no sprite
-	dl 0x341123 ; cell 238 x,y (14,14) sprite normal
+	dl 0x1D1103 ; cell 238 x,y (14,14) sprite normal
 	db 0x7D ; SS GUARD
 	dl 0x0A0050 ; cell 239 x,y (15,14) cube outer
 	db 0xFF ; no sprite
