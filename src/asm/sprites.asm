@@ -897,6 +897,13 @@ DOG:
     pop iy 
     jp sprite_behavior_return
 @hurt:
+    call rand_8
+    and %00000001
+    jr nz,@nosound
+    push iy 
+    call sfx_play_dog_yelp
+    pop iy 
+@nosound:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
@@ -950,6 +957,13 @@ GERMAN_TROOPER:
     pop iy 
     jp sprite_behavior_return
 @hurt:
+    call rand_8
+    and %00000001
+    jr nz,@nosound
+    push iy 
+    call sfx_play_random_hurt
+    pop iy 
+@nosound:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
@@ -1003,6 +1017,13 @@ SS_GUARD:
     pop iy 
     jp sprite_behavior_return
 @hurt:
+    call rand_8
+    and %00000001
+    jr nz,@nosound
+    push iy 
+    call sfx_play_random_hurt
+    pop iy 
+@nosound:
     ld a,255 ; kill player's shot
     ld (player_shot_status),a
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot

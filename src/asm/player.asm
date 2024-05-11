@@ -257,9 +257,35 @@ player_mod_ammo:
     ret
 
 player_shoot_knife:
-;     call sfx_play_stab
-;     jp player_stab
-    ret ; TODO: implement
+    ; check whether the player hit anything
+    ld a,(orientation) ; direction knife is moving
+    ld e,a
+    ld d,1 ; shot "velocity" in map units
+    call get_dx_dy ; d,e = dy,dx
+    ld (player_shot_xvel),de ; implicity populates yvel
+    ld hl,(cur_x) ; h,l = player y,x
+    ld (player_shot_x),hl ; initial shot position
+    ld de,(player_shot_xvel) ; d,e = shot yvel,xvel
+    ld hl,(player_shot_x) ; h,l = player shot y,x
+    ; bump bullet position one map unit in direction of travel
+    ld a,l ; player shot x
+    add a,e ; add xvel
+    ld l,a ; save new x
+    ld a,h ; player shot y
+    add a,d ; add yvel
+    ld h,a ; save new y
+    ld (player_shot_x),hl ; and save that position
+    ex de,hl ; d,e = bullet y,x
+    call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
+; check whether target cell contains a sprite
+    ld a,(ix+map_sprite_id)
+    cp 255 ; value if not sprite
+    ret z ; if we hit a non-sprite, we're done
+; is a sprite so run its "hurt" behavior routine
+    call sprite_set_pointer
+    ld a,sp_hurt
+    call do_sprite_behavior ; a = sprite behavior return code
+    ret
 
 player_shoot_pistol:
     ld a,-1

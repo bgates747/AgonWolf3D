@@ -97,12 +97,31 @@ sfx_play_ayee_high:
 	ld hl,BUF_AYEE_HIGH
 	jp sfx_play
 
-sfx_play_ugh:
-	ld hl,BUF_UGH
-	jp sfx_play
+sfx_play_random_hurt:
+	call rand_8
+	and 3
+	cp 0
+	jr z,sfx_play_ahh
+	cp 1
+	jr z,sfx_play_augh
+	cp 2
+	jr z,sfx_play_ayee
+	jr sfx_play_ugh
 
 sfx_play_ahh:
 	ld hl,BUF_AHH
+	jp sfx_play
+
+sfx_play_augh:
+	ld hl,BUF_AUGH
+	jp sfx_play
+
+sfx_play_ayee:
+	ld hl,BUF_AYEE
+	jp sfx_play
+
+sfx_play_ugh:
+	ld hl,BUF_UGH
 	jp sfx_play
 
 
