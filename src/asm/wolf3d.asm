@@ -35,7 +35,6 @@
 	include "src/asm/maths.asm"
 	include "src/asm/img_load.asm"
 	include "src/asm/sfx.asm"
-	include "src/asm/sfx_load.asm"
 	include "src/asm/timer.asm"
 
 

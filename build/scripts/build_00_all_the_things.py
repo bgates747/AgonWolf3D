@@ -158,12 +158,13 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         asm_ui_bj(db_path, ui_inc_path, src_png_dir, tgt_rgba2_dir, next_buffer_id)
 
 # build_98_asm_sfx.py
-    sfx_inc_path = 'src/asm/sfx_load.asm'
+    sfx_inc_path = 'src/asm/sfx.asm'
     sfx_tgt_dir = 'sfx'
     if do_98_asm_sfx:
         print(f"build_98_asm_sfx: Making sfx assembler file")
         from build_98_asm_sfx import make_asm_sfx
-        next_buffer_id = 0x3000
+        # next_buffer_id = 0x3000
+        next_buffer_id = 64256 
         make_asm_sfx(db_path, sfx_inc_path, sfx_tgt_dir, next_buffer_id)
 
 # build_99_asm_assemble.py
@@ -226,7 +227,7 @@ if __name__ == "__main__":
     # do_91b_asm_ui = True
     # do_91c_asm_map_masks = True
     # do_91d_asm_ui_bj = True
-    # do_98_asm_sfx = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
