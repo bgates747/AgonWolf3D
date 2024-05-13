@@ -29,6 +29,7 @@
 	include "src/asm/sprites.asm"
     include "src/asm/mos_api.asm"
 	include "src/asm/vdu.asm"
+	include "src/asm/vdu_sound.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
 	include "src/asm/maths.asm"
