@@ -287,3 +287,53 @@ FSHOT_MACHINE_GUN_BURST: db "sfx/SHOT_MACHINE_GUN_BURST.raw",0
 FSHOT_PISTOL: db "sfx/SHOT_PISTOL.raw",0
 FUGH: db "sfx/UGH.raw",0
 FWILHELM: db "sfx/WILHELM.raw",0
+
+; Play sfx routines
+
+sfx_play_achtung:
+	PLAY_SAMPLE 1, -1, 127, 839
+
+sfx_play_ahh:
+	PLAY_SAMPLE 2, -2, 127, 396
+
+sfx_play_augh:
+	PLAY_SAMPLE 3, -3, 127, 858
+
+sfx_play_ayee:
+	PLAY_SAMPLE 4, -4, 127, 540
+
+sfx_play_ayee_high:
+	PLAY_SAMPLE 5, -5, 127, 1119
+
+sfx_play_dog_woof:
+	PLAY_SAMPLE 6, -6, 127, 774
+
+sfx_play_dog_yelp:
+	PLAY_SAMPLE 7, -7, 127, 441
+
+sfx_play_explode:
+	PLAY_SAMPLE 8, -8, 127, 1247
+
+sfx_play_got_treasure:
+	PLAY_SAMPLE 9, -9, 127, 1574
+
+sfx_play_mein_leben:
+	PLAY_SAMPLE 10, -10, 127, 876
+
+sfx_play_schusstaffel:
+	PLAY_SAMPLE 11, -11, 127, 656
+
+sfx_play_shot_gatling_burst:
+	PLAY_SAMPLE 12, -12, 127, 333
+
+sfx_play_shot_machine_gun_burst:
+	PLAY_SAMPLE 13, -13, 127, 360
+
+sfx_play_shot_pistol:
+	PLAY_SAMPLE 14, -14, 127, 522
+
+sfx_play_ugh:
+	PLAY_SAMPLE 15, -15, 127, 363
+
+sfx_play_wilhelm:
+	PLAY_SAMPLE 16, -16, 127, 1386

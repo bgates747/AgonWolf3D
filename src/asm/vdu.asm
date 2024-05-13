@@ -1490,103 +1490,16 @@ sfx_last_channel: db 0x00 ; 8-bit value between 0 and 31
 ; @bufferId:
 ; 	dw 0x0000 ; 16-bit value
 
-; play a sound effect on the next available channel at full volume for its full duration
-; inputs: hl = bufferId
-sfx_play:
-	ld iy,sfx_last_channel
-	ld a,(iy+0)
-	inc a ; bump to next channel
-	and 31 ; modulo 32 channel
-	ld (iy+0),a ; store channel
-	ld c,a ; channel
-	ld b,127 ; full volume
-	ld de,1000 ; 1 second duration (should have no effect)
-	jp vdu_play_sample 
-
-sfx_play_got_treasure:
-	ld hl,BUF_GOT_TREASURE
-	jp sfx_play 
-
-sfx_play_achtung:
-	ld hl,BUF_ACHTUNG
-	jp sfx_play 
-
-sfx_play_schusstaffel:
-	ld hl,BUF_SCHUSSTAFFEL
-	jp sfx_play
-
-sfx_play_dog_woof:
-	ld hl,BUF_DOG_WOOF
-	jp sfx_play 
-
-sfx_play_dog_yelp:
-	ld hl,BUF_DOG_YELP
-	jp sfx_play 
-
-sfx_play_mein_leben:
-	ld hl,BUF_MEIN_LEBEN
-	jp sfx_play 
-
-sfx_play_wilhelm:
-	ld hl,BUF_WILHELM
-	jp sfx_play
-
-sfx_play_shot_pistol:
-	ld hl,BUF_SHOT_PISTOL
-	jp sfx_play
-
-; sfx_play_shot_machine_gun_single:
-; 	ld hl,BUF_SHOT_MACHINE_GUN_SINGLE
-; 	jp sfx_play
-
-sfx_play_shot_machine_gun_burst:
-	ld hl,BUF_SHOT_MACHINE_GUN_BURST
-	jp sfx_play
-
-; sfx_play_shot_gatling_single:
-; 	ld hl,BUF_SHOT_GATLING_SINGLE
-; 	jp sfx_play
-
-sfx_play_shot_gatling_burst:
-	ld hl,BUF_SHOT_GATLING_BURST
-	jp sfx_play
-
-sfx_play_explode:
-	ld hl,BUF_EXPLODE
-	jp sfx_play
-
-; sfx_play_ayee_high:
-; 	ld hl,BUF_AYEE_HIGH
-; 	jp sfx_play
-
 sfx_play_random_hurt:
 	call rand_8
 	and 3
 	cp 0
-	jr z,sfx_play_ahh
+	jp z,sfx_play_ahh
 	cp 1
-	jr z,sfx_play_augh
+	jp z,sfx_play_augh
 	cp 2
-	jr z,sfx_play_ayee
-	jr sfx_play_ugh
-
-sfx_play_ahh:
-	ld hl,BUF_AHH
-	jp sfx_play
-
-sfx_play_augh:
-	ld hl,BUF_AUGH
-	jp sfx_play
-
-sfx_play_ayee:
-	ld hl,BUF_AYEE
-	jp sfx_play
-
-sfx_play_ugh:
-	ld hl,BUF_UGH
-	jp sfx_play
-
-
+	jp z,sfx_play_ayee
+	jp sfx_play_ugh
 
 ; inputs: bc is the number of sounds to load, cur_buffer_id_lut and cur_load_jump_table set to the address of the first entry in the respective lookup tables
 sfx_load_main:

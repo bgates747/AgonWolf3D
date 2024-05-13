@@ -1,3 +1,23 @@
+; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
+; play a sound on a given channel, duration and volume
+; referring to a sample number instead of a buffer_id
+; doing it this way causes the duration parameter to have an effect
+    MACRO PLAY_SAMPLE channel, sample, volume, duration
+    ld hl, @startSample
+    ld bc, @endSample - @startSample
+    rst.lil $18
+    ret 
+@startSample: 
+    .db 23,0,$85                        ; do sound
+    .db channel,4,sample                ; channel
+
+    .db 23,0,$85                        ; do sound
+    .db channel,0,volume                ; channel, volume
+    .dw 0                               ; freq (tuneable samples only)
+    .dw duration                        ; duration
+@endSample:
+    ENDMACRO
+
 
 ; ############################################################
 ; VDU SOUND API
