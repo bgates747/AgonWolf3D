@@ -35,6 +35,7 @@
 	include "src/asm/img_load.asm"
 	include "src/asm/sfx.asm"
 	include "src/asm/sfx_load.asm"
+	include "src/asm/timer.asm"
 
 
 start:              
@@ -71,19 +72,15 @@ hello_world: defb "Welcome to Agon Wolf3D",0
 loading_ui: defb "Loading UI",0
 
 init:
-; ; TEMP DEBUG BCD
-; 	call vdu_cls
-; 	ld a,8
-; 	add a,7
-; 	daa
-; 	call dumpRegistersHex
-; 	ret
-
-; ; END TEMP DEBUG BCD
-
-
 ; set the cursor off
 	call cursor_off
+
+; initialize PRT interrupt
+	ld hl,calibrating_timer
+	call printString
+	call prt_irq_init
+	call prt_calibrate
+	call printString
 
 ; print loading ui message
 	ld hl,loading_ui
@@ -166,6 +163,9 @@ init:
 ; initialization done
 	ret
 
+; DEBUG: set up a simple countdown timer
+debug_timer: db 0x01
+
 main:
 ; set map variables and load initial map file
 	call map_init
@@ -190,14 +190,41 @@ main:
 	call vdu_flip
 
 main_loop:
+; ; DEBUG: decrement debug timer
+; 	ld iy,debug_timer
+; 	dec (iy)
+; 	jp nz,@not_zero
+; 	ld (iy),72
+; 	call sfx_play_got_treasure
+; @not_zero:
+
 ; move enemies
 	; call move_enemies
+	call see_orientation
 ; get player input and update sprite position
 	call player_input ; ix points to cell defs/status, a is target cell current obj_id
 ; render the updated scene
 	call render_scene
+
+; print prt interrupt counter
+	ld hl,prt_irq_counter
+    ld c,1 ; x
+    ld b,8 ; y 
+    call vdu_move_cursor
+    ld hl,(prt_irq_counter)
+    ld de,prt_irq_counter_str
+    call Num2String
+    ld hl,prt_irq_counter_str
+    call printString
+; reset prt interrupt counter
+	ld hl,0
+	ld (prt_irq_counter),hl
+
 ; flip the screen
 	call vdu_flip
+; reset prt interrupt counter
+	ld hl,0
+	ld (prt_irq_counter),hl
 ; wait for the next VBLANK
 	call vdu_vblank
 

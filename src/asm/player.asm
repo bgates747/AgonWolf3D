@@ -315,7 +315,9 @@ player_move_bullet:
     ld (player_shot_xvel),de ; implicity populates yvel
     ld hl,(cur_x) ; h,l = player y,x
     ld (player_shot_x),hl ; initial shot position
-@move_bullet:
+    ld b,view_distance ; loop counter so player can't shoot past view distance
+@loop:
+    push bc ; save loop counter
     ld de,(player_shot_xvel) ; d,e = shot yvel,xvel
     ld hl,(player_shot_x) ; h,l = player shot y,x
     ; bump bullet position one map unit in direction of travel
@@ -336,8 +338,9 @@ player_move_bullet:
     call sprite_set_pointer
     ld a,sp_hurt
     call do_sprite_behavior ; a = sprite behavior return code
+    ld a,(player_shot_status)
     cp 255 ; value if shot hit a shootable sprite
-    ret z ; if we hit a shootable sprite, we're done
+    jr z,@stop_bullet ; if we hit a shootable sprite, we're done
     jr @move_bullet ; otherwise keep moving bullet
 @not_sprite:
     ld de,(player_shot_xvel) ; restore yvel,xvel to d,e
@@ -347,6 +350,14 @@ player_move_bullet:
 ; branch on the values in the bitmask
     cp render_type_floor
     jr z,@move_bullet ; keep going if map cell is a floor
+@stop_bullet:
+    pop bc ; dummy pop to balance stack
+    ld a,255
+    ld (player_shot_status),a ; set shot status to -1 to indicate shot is done
+    ret ; combat ended
+@move_bullet:
+    pop bc ; restore loop counter
+    djnz @loop ; keep moving bullet if we have more distance to cover
     ld a,255
     ld (player_shot_status),a ; set shot status to -1 to indicate shot is done
     ret ; combat ended

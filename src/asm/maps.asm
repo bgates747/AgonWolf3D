@@ -223,6 +223,8 @@ map_init_sprites:
 ; initialize pointers
 	ld ix,cell_status
 	ld iy,sprite_table_base
+	xor a
+	ld (@cell_id),a
 @loop:
 	ld (sprite_table_pointer),iy ; probably don't strictly need this but why not
 	ld a,(ix+map_sprite_id)
@@ -232,19 +234,22 @@ map_init_sprites:
 	ld a,(ix+map_img_idx)
 	ld (iy+sprite_obj),a
 	call sprite_init_data
+	ld a,(@cell_id)
+	call cell_id_to_coords ; d = map_y, e = map_x
+	ld (iy+sprite_x),de ; set sprite x,y
 	lea iy,iy+sprite_record_size ; advance pointer to next sprite record
 @next_cell:
 	lea ix,ix+map_record_size ; advance pointer to next cell
 ; check if we've reached the end of the map data
-	ld de,cell_views ; this address is the end of cell_status table + 1
-	push ix ; why no sbc ix,rr, zilog?
-	pop hl
-	xor a ; clear carry
-	sbc hl,de
-	jr nz,@loop
+	ld a,(@cell_id)
+	inc a
+	ld (@cell_id),a
+	jr nz,@loop ; still more to do
+; cleanup and return
 	ld iy,sprite_table_base ; reset pointer
 	ld (sprite_table_pointer),iy
 	ret
+@cell_id: db 0
 
 ; get the x,y map coordinates from a cell_id
 ; inputs: a = cell_id

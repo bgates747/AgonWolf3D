@@ -2,7 +2,7 @@
 sprite_id:              equ 00 ; 1 byte  - unique spriteId, zero-based
 sprite_obj:             equ 01 ; 1 byte  - type of sprite as defined in polys.asm, 255 is dead
 sprite_health:          equ 02 ; 1 byte  - health points, signed binary, zero or negative is dead
-sprite_behavior_index:  equ 03 ; 1 byte  - index of sprite's behavior subroutine in enemies.asm
+sprite_triggers_mask:   equ 03 ; 1 byte  - bitmask for tracking which sprite behaviors have been triggered
 sprite_x:               equ 04 ; 1 byte  - map x position
 sprite_y:               equ 05 ; 1 byte  - map y position
 sprite_orientation:     equ 06 ; 1 byte  - orientation
@@ -15,6 +15,13 @@ sprite_health_modifier:   equ 12 ; 1 byte  - health points deducted per successf
 sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
 sprite_record_size: equ 16 ; 16 bytes per sprite record
 
+; sprite_triggers_mask defs
+sprite_trigger_see:     equ %00000001 ; player has been seen
+sprite_trigger_use:     equ %00000010 ; player has used the sprite
+sprite_trigger_hurt:    equ %00000100 ; player has hurt the sprite
+sprite_trigger_kill:    equ %00001000 ; player has killed the sprite
+sprite_trigger_move:    equ %00010000 ; sprite has moved
+sprite_trigger_shoot:   equ %00100000 ; sprite has shot
 
 ; ###### SPRITE TABLE VARIABLES ######
 ; maximum number of sprites
@@ -137,6 +144,74 @@ sprite_kill:
     ld (ix+map_sprite_id),a ; now sprite is truly dead
     ret
 
+sprite_new_x: db 0x00
+sprite_new_y: db 0x00
+              db 0x00 ; padding
+
+; checks if the sprite can move to the new position
+; inputs: iy pointed at sprite record, d,e = new y,x position
+sprite_check_move:
+    ld (sprite_new_x),de ; save new y,x position
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
+; check whether target cell contains a sprite
+    ld a,(ix+map_sprite_id)
+    cp 255 ; value if not sprite
+    ret nz ; already occupied by another sprite so we can't move there
+; read map type/status mask from target cell
+    ld a,(ix+map_type_status)
+    and render_type_floor
+    ret z ; target cell is not a floor so we can't move there
+; we are cleared for movement so fall through to sprite_move
+
+; moves the sprite to the given map position
+; inputs: iy pointed at sprite record, sprite_new_x/y populated
+sprite_move:
+; update old sprite position to no sprite
+    ld de,(iy+sprite_x) ; d,e = sprite current y,x position
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
+; set map cell to no sprite and normal floor
+    ld hl,0x1DFF01 ; normal floor TODO: we should set these values dyanmically based on the defs in tiles.txt at some point
+    ld (ix),hl
+    ld a,0xFF ; no sprite
+    ld (ix+map_sprite_id),a
+; update sprite record with new position
+    ld de,(sprite_new_x) ; d,e = sprite new y,x position
+    ld (iy+sprite_x),de
+; update new map cell with sprite id
+    call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
+    ld a,(iy+sprite_id)
+    ld (ix+map_sprite_id),a
+    ret
+
+; move a sprite in a random direction
+; inputs: iy pointed at sprite record
+sprite_move_random:
+; point iy at sprite record
+    ld iy,(sprite_table_pointer)
+; DEBUG:
+    ; ld bc,(iy+sprite_x)
+    ; push bc
+; pick a random direction
+    call rand_8
+    and 3 ; direction between 0 and 3
+; get dy,dx for moving once cell in the chosen direction
+    ld e,a
+    ld d,1 ; distance
+    call get_dx_dy ; d,e = dy,dx
+; calculate new position
+    ld a,(iy+sprite_x)
+    add a,e
+    and 15 ; modulo 16
+    ld e,a
+    ld a,(iy+sprite_y)
+    add a,d
+    and 15 ; modulo 16
+    ld d,a
+
+    ; pop bc
+    ; call stepRegistersHex
+    jp sprite_check_move
+
 ; #### SPRITE BEHAVIOR SUBROUTINES ####
 sprite_behavior_lookup:
     dl LAMP
@@ -182,6 +257,7 @@ sp_shoot:  equ 6
 ; inputs: iy pointed at sprite record, sprite_obj set for same 
 ;         a = type index of routine to call
 do_sprite_behavior:
+    ld (sprite_table_pointer),iy ; save pointer to sprite record
     ld b,(iy+sprite_obj)
     ld c,3 ; three bytes per lookup record
     mlt bc ; bc is offset from the base of the lookup table
@@ -211,13 +287,13 @@ LAMP:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -253,13 +329,13 @@ BARREL:
     jp sprite_behavior_return
 @data:
     db 018 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db -50 ;sprite_health_modifier
@@ -303,13 +379,13 @@ TABLE:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -345,13 +421,13 @@ OVERHEAD_LIGHT:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -387,13 +463,13 @@ RADIOACTIVE_BARREL:
     jp sprite_behavior_return
 @data:
     db 024 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db -75 ;sprite_health_modifier
@@ -437,13 +513,13 @@ HEALTH_PACK:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 020 ;sprite_health_modifier
@@ -481,13 +557,13 @@ GOLD_CHALISE:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 100 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -528,13 +604,13 @@ GOLD_CROSS:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 050 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -575,13 +651,13 @@ PLATE_OF_FOOD:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 010 ;sprite_health_modifier
@@ -619,13 +695,13 @@ KEYCARD:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -661,13 +737,13 @@ GOLD_CHEST:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 250 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -708,13 +784,13 @@ MACHINE_GUN:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -750,13 +826,13 @@ GATLING_GUN:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -792,13 +868,13 @@ DOG_FOOD:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 005 ;sprite_health_modifier
@@ -836,13 +912,13 @@ GOLD_KEY:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
     db 000 ;sprite_health_modifier
@@ -878,13 +954,13 @@ DOG:
     jp sprite_behavior_return
 @data:
     db 050 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 010 ;sprite_points
     db -10 ;sprite_health_modifier
@@ -918,8 +994,19 @@ DOG:
     call sprite_kill
     jp sprite_behavior_return
 @see:
-    jp sprite_behavior_return
+    ; fall through to @move
 @move:
+    dec (iy+sprite_move_timer)
+    jr z,@do_move
+    jp sprite_behavior_return
+@do_move:
+    call rand_8
+    and %00111111 ; between 0 and 63
+    ; or %00100000  ; at least 32
+    or %00010000  ; at least 16
+    ld (iy+sprite_move_timer),a
+    call sprite_move_random
+    call sfx_play_dog_woof
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -938,13 +1025,13 @@ GERMAN_TROOPER:
     jp sprite_behavior_return
 @data:
     db 075 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 020 ;sprite_points
     db -20 ;sprite_health_modifier
@@ -978,6 +1065,15 @@ GERMAN_TROOPER:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    ld a,(iy+sprite_triggers_mask)
+    and sprite_trigger_see
+    jp nz,@move
+    ld a,sprite_trigger_see
+    or a,(iy+sprite_triggers_mask)
+    ld (iy+sprite_triggers_mask),a
+    push iy 
+    call sfx_play_achtung
+    pop iy 
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -998,13 +1094,13 @@ SS_GUARD:
     jp sprite_behavior_return
 @data:
     db 100 ;sprite_health
-    db 000 ;sprite_behavior_index
+    db 000 ;sprite_triggers_mask
     db 000 ;sprite_x
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
     db 000 ;sprite_animation_timer
-    db 000 ;sprite_move_timer
+    db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 030 ;sprite_points
     db -30 ;sprite_health_modifier
@@ -1038,8 +1134,94 @@ SS_GUARD:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    ld a,(iy+sprite_triggers_mask)
+    and sprite_trigger_see
+    jp nz,@move
+    ld a,sprite_trigger_see
+    or a,(iy+sprite_triggers_mask)
+    ld (iy+sprite_triggers_mask),a
+    push iy 
+    call sfx_play_schusstaffel
+    pop iy 
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
+
+see_orientation: db 0x00
+; cycle through all cells visible to the player from the current position
+; and all orientations, and trigger the @see behavior for any sprites in those cells
+; inputs: cur_x, cur_y,
+; outputs: player-aware enemies
+; destroys: everything
+sprites_see_player:
+; intialize orientation
+    xor a
+    ld (see_orientation),a
+@loop_orientation:
+; get current map position and camera orientation
+    ld de,(cur_x) ; d,e = cur_y,x
+    call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
+; get cell_views address for this cell and orientation
+    ld a,(see_orientation)
+    ld e,a
+    ld d,6 ; 6 bytes per orientation
+    mlt de ; de = orientation offset 
+    ex de,hl ; hl = orientation offset
+    ld b,24 ; 24 bytes per cell in cell_views lut
+    mlt bc ; bc = offset from base address of cell_views lut
+    add hl,bc ; hl = total offset from cell_views base address
+    ex de,hl ; becaue we can't add iy to hl
+    ld iy,cell_views ; base address of cell_views lut
+    add iy,de ; iy = cell_views address
+    ld (cur_cell_views),iy
+; cycle through the cell views masks and trigger the @see behavior for any sprites in those cells
+    ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
+    xor a ; poly_id
+    ld (to_poly_id),a
+@loop: 
+    ld (@bit_iy+2),bc
+    ld iy,(cur_cell_views)
+@bit_iy:
+    bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
+    jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
+; get_polys_deltas inputs: a is the orientation, c is the poly_id
+    ld a,(to_poly_id)
+    ld c,a ; poly_id
+    ld a,(see_orientation)
+    call get_polys_deltas ; d,e = y,x deltas
+    ld a,(cur_x)
+    add a,e
+    ld e,a
+    ld a,(cur_y)
+    add a,d
+    ld d,a
+    call get_cell_from_coords
+    ld a,(ix+map_sprite_id)
+    cp 0xFF ; no sprite
+    jr z,@next_poly
+    call sprite_set_pointer
+    ld a,sp_see
+    call do_sprite_behavior
+@next_poly:
+    ld bc,(@bit_iy+2)
+    ld a,(to_poly_id)
+    inc a ; a is next poly_id
+    ld (to_poly_id),a
+    cp num_polys
+    jr z,@next_orientation
+    ld a,8
+    add a,b
+    ld b,a ; bit tested codes to 0x46 + b/8
+    cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
+    jr nz,@loop
+    ld b,0x46
+    inc c ; iy address offset 
+    jr @loop
+@next_orientation:
+    ld a,(see_orientation)
+    inc a
+    ld (see_orientation),a
+    jp nz,@loop_orientation
+    ret

@@ -12,6 +12,8 @@ to_buffer_id: ds 3
 
 cur_cell_views: ds 3
 
+view_distance: equ 5 ; furthest player can see or be seen in map units
+
 ; render background as a prelude to rendering panels and sprites
 ; hl is the buffer id, bc and de are plot_x and plot_y
 render_background:
