@@ -1076,6 +1076,16 @@ GERMAN_TROOPER:
     pop iy 
     jp sprite_behavior_return
 @move:
+    dec (iy+sprite_move_timer)
+    jr z,@do_move
+    jp sprite_behavior_return
+@do_move:
+    call rand_8
+    and %00111111 ; between 0 and 63
+    ; or %00100000  ; at least 32
+    or %00010000  ; at least 16
+    ld (iy+sprite_move_timer),a
+    call sprite_move_random
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
@@ -1145,6 +1155,16 @@ SS_GUARD:
     pop iy 
     jp sprite_behavior_return
 @move:
+    dec (iy+sprite_move_timer)
+    jr z,@do_move
+    jp sprite_behavior_return
+@do_move:
+    call rand_8
+    and %00111111 ; between 0 and 63
+    ; or %00100000  ; at least 32
+    or %00010000  ; at least 16
+    ld (iy+sprite_move_timer),a
+    call sprite_move_random
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return
