@@ -1,21 +1,37 @@
 ; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
 ; play a sound on a given channel, duration and volume
-; referring to a sample number instead of a buffer_id
-; doing it this way causes the duration parameter to have an effect
-    MACRO PLAY_SAMPLE channel, sample, volume, duration
+; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
+    MACRO PLAY_SAMPLE channel, volume, duration
     ld hl, @startSample
     ld bc, @endSample - @startSample
     rst.lil $18
     ret 
 @startSample: 
-    .db 23,0,$85                        ; do sound
-    .db channel,4,sample                ; channel
-
+; ; mute channel
+;     db 23, 0, $85             ; Command header
+;     db channel                ; Channel, 0 (commented out)
+;     db 2                      ; Magic number
+;     db 0                      ; Volume (mute)
+; play sammple
     .db 23,0,$85                        ; do sound
     .db channel,0,volume                ; channel, volume
     .dw 0                               ; freq (tuneable samples only)
-    .dw duration                        ; duration
+    .dw 0 ;duration                        ; duration
 @endSample:
+    ENDMACRO
+
+; Command 4: Set waveform
+; VDU 23, 0, &85, channel, 4, 8, bufferId;
+    MACRO WAVEFORM_SAMPLE channel, buffer_id
+    ld hl, @startChannel
+    ld bc, @endChannel - @startChannel
+    rst.lil $18
+    ret 
+@startChannel: 
+    .db 23,0,$85    ; do sound
+    .db channel,4,8 ; channel, command, waveform
+    .dw buffer_id
+@endChannel:
     ENDMACRO
 
 
@@ -255,19 +271,19 @@ enable_channels_cmd:
     db 23, 0, $85, 14, 8
     db 23, 0, $85, 15, 8
     db 23, 0, $85, 16, 8
-    db 23, 0, $85, 17, 8
-    db 23, 0, $85, 18, 8
-    db 23, 0, $85, 19, 8
-    db 23, 0, $85, 20, 8
-    db 23, 0, $85, 21, 8
-    db 23, 0, $85, 22, 8
-    db 23, 0, $85, 23, 8
-    db 23, 0, $85, 24, 8
-    db 23, 0, $85, 25, 8
-    db 23, 0, $85, 26, 8
-    db 23, 0, $85, 27, 8
-    db 23, 0, $85, 28, 8
-    db 23, 0, $85, 29, 8
-    db 23, 0, $85, 30, 8
-    db 23, 0, $85, 31, 8
+    ; db 23, 0, $85, 17, 8
+    ; db 23, 0, $85, 18, 8
+    ; db 23, 0, $85, 19, 8
+    ; db 23, 0, $85, 20, 8
+    ; db 23, 0, $85, 21, 8
+    ; db 23, 0, $85, 22, 8
+    ; db 23, 0, $85, 23, 8
+    ; db 23, 0, $85, 24, 8
+    ; db 23, 0, $85, 25, 8
+    ; db 23, 0, $85, 26, 8
+    ; db 23, 0, $85, 27, 8
+    ; db 23, 0, $85, 28, 8
+    ; db 23, 0, $85, 29, 8
+    ; db 23, 0, $85, 30, 8
+    ; db 23, 0, $85, 31, 8
 enable_channels_end:

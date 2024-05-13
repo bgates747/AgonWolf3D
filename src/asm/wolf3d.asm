@@ -149,6 +149,9 @@ init:
 	ld (cur_load_jump_table),hl
 	call img_load_main
 
+; enable all the sound chanels
+	call vdu_enable_channels
+
 ; load sound effects
 	ld bc,SFX_num_buffers
 	ld hl,SFX_buffer_id_lut
@@ -156,9 +159,6 @@ init:
 	ld hl,SFX_load_routines_table
 	ld (cur_load_jump_table),hl
 	call sfx_load_main
-
-; enable all the sound chanels
-	call vdu_enable_channels
 
 ; initialization done
 	ret

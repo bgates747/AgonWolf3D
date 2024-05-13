@@ -40,22 +40,22 @@ SFX_buffer_id_lut:
 
 ; SFX duration lookup:
 SFX_duration_lut:
-	dw 839 ; ACHTUNG
-	dw 396 ; AHH
-	dw 858 ; AUGH
-	dw 540 ; AYEE
-	dw 1119 ; AYEE_HIGH
-	dw 774 ; DOG_WOOF
-	dw 441 ; DOG_YELP
-	dw 1247 ; EXPLODE
-	dw 1574 ; GOT_TREASURE
-	dw 876 ; MEIN_LEBEN
-	dw 656 ; SCHUSSTAFFEL
-	dw 333 ; SHOT_GATLING_BURST
-	dw 360 ; SHOT_MACHINE_GUN_BURST
-	dw 522 ; SHOT_PISTOL
-	dw 363 ; UGH
-	dw 1386 ; WILHELM
+	dw 818 ; ACHTUNG
+	dw 386 ; AHH
+	dw 837 ; AUGH
+	dw 526 ; AYEE
+	dw 1091 ; AYEE_HIGH
+	dw 755 ; DOG_WOOF
+	dw 430 ; DOG_YELP
+	dw 1216 ; EXPLODE
+	dw 1535 ; GOT_TREASURE
+	dw 854 ; MEIN_LEBEN
+	dw 640 ; SCHUSSTAFFEL
+	dw 324 ; SHOT_GATLING_BURST
+	dw 351 ; SHOT_MACHINE_GUN_BURST
+	dw 509 ; SHOT_PISTOL
+	dw 354 ; UGH
+	dw 1352 ; WILHELM
 
 ; SFX load routines jump table:
 SFX_load_routines_table:
@@ -88,7 +88,7 @@ load_sfx_ACHTUNG:
 	ld hl,BUF_ACHTUNG
 	ld ix,13430
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 1, BUF_ACHTUNG
 
 load_sfx_AHH:
 	ld hl,FAHH
@@ -100,7 +100,7 @@ load_sfx_AHH:
 	ld hl,BUF_AHH
 	ld ix,6340
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 2, BUF_AHH
 
 load_sfx_AUGH:
 	ld hl,FAUGH
@@ -112,7 +112,7 @@ load_sfx_AUGH:
 	ld hl,BUF_AUGH
 	ld ix,13740
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 3, BUF_AUGH
 
 load_sfx_AYEE:
 	ld hl,FAYEE
@@ -124,7 +124,7 @@ load_sfx_AYEE:
 	ld hl,BUF_AYEE
 	ld ix,8649
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 4, BUF_AYEE
 
 load_sfx_AYEE_HIGH:
 	ld hl,FAYEE_HIGH
@@ -136,7 +136,7 @@ load_sfx_AYEE_HIGH:
 	ld hl,BUF_AYEE_HIGH
 	ld ix,17904
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 5, BUF_AYEE_HIGH
 
 load_sfx_DOG_WOOF:
 	ld hl,FDOG_WOOF
@@ -148,7 +148,7 @@ load_sfx_DOG_WOOF:
 	ld hl,BUF_DOG_WOOF
 	ld ix,12393
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 6, BUF_DOG_WOOF
 
 load_sfx_DOG_YELP:
 	ld hl,FDOG_YELP
@@ -160,7 +160,7 @@ load_sfx_DOG_YELP:
 	ld hl,BUF_DOG_YELP
 	ld ix,7071
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 7, BUF_DOG_YELP
 
 load_sfx_EXPLODE:
 	ld hl,FEXPLODE
@@ -172,7 +172,7 @@ load_sfx_EXPLODE:
 	ld hl,BUF_EXPLODE
 	ld ix,19957
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 8, BUF_EXPLODE
 
 load_sfx_GOT_TREASURE:
 	ld hl,FGOT_TREASURE
@@ -184,7 +184,7 @@ load_sfx_GOT_TREASURE:
 	ld hl,BUF_GOT_TREASURE
 	ld ix,25198
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 9, BUF_GOT_TREASURE
 
 load_sfx_MEIN_LEBEN:
 	ld hl,FMEIN_LEBEN
@@ -196,7 +196,7 @@ load_sfx_MEIN_LEBEN:
 	ld hl,BUF_MEIN_LEBEN
 	ld ix,14025
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 10, BUF_MEIN_LEBEN
 
 load_sfx_SCHUSSTAFFEL:
 	ld hl,FSCHUSSTAFFEL
@@ -208,7 +208,7 @@ load_sfx_SCHUSSTAFFEL:
 	ld hl,BUF_SCHUSSTAFFEL
 	ld ix,10504
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 11, BUF_SCHUSSTAFFEL
 
 load_sfx_SHOT_GATLING_BURST:
 	ld hl,FSHOT_GATLING_BURST
@@ -220,7 +220,7 @@ load_sfx_SHOT_GATLING_BURST:
 	ld hl,BUF_SHOT_GATLING_BURST
 	ld ix,5328
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 12, BUF_SHOT_GATLING_BURST
 
 load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,FSHOT_MACHINE_GUN_BURST
@@ -232,7 +232,7 @@ load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,BUF_SHOT_MACHINE_GUN_BURST
 	ld ix,5760
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 13, BUF_SHOT_MACHINE_GUN_BURST
 
 load_sfx_SHOT_PISTOL:
 	ld hl,FSHOT_PISTOL
@@ -244,7 +244,7 @@ load_sfx_SHOT_PISTOL:
 	ld hl,BUF_SHOT_PISTOL
 	ld ix,8364
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 14, BUF_SHOT_PISTOL
 
 load_sfx_UGH:
 	ld hl,FUGH
@@ -256,7 +256,7 @@ load_sfx_UGH:
 	ld hl,BUF_UGH
 	ld ix,5823
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 15, BUF_UGH
 
 load_sfx_WILHELM:
 	ld hl,FWILHELM
@@ -268,7 +268,7 @@ load_sfx_WILHELM:
 	ld hl,BUF_WILHELM
 	ld ix,22183
 	call vdu_load_sfx
-	ret
+	WAVEFORM_SAMPLE 16, BUF_WILHELM
 
 ; File name lookups:
 FACHTUNG: db "sfx/ACHTUNG.raw",0
@@ -291,49 +291,49 @@ FWILHELM: db "sfx/WILHELM.raw",0
 ; Play sfx routines
 
 sfx_play_achtung:
-	PLAY_SAMPLE 1, -1, 127, 839
+	PLAY_SAMPLE 1, 127, 818
 
 sfx_play_ahh:
-	PLAY_SAMPLE 2, -2, 127, 396
+	PLAY_SAMPLE 2, 127, 386
 
 sfx_play_augh:
-	PLAY_SAMPLE 3, -3, 127, 858
+	PLAY_SAMPLE 3, 127, 837
 
 sfx_play_ayee:
-	PLAY_SAMPLE 4, -4, 127, 540
+	PLAY_SAMPLE 4, 127, 526
 
 sfx_play_ayee_high:
-	PLAY_SAMPLE 5, -5, 127, 1119
+	PLAY_SAMPLE 5, 127, 1091
 
 sfx_play_dog_woof:
-	PLAY_SAMPLE 6, -6, 127, 774
+	PLAY_SAMPLE 6, 127, 755
 
 sfx_play_dog_yelp:
-	PLAY_SAMPLE 7, -7, 127, 441
+	PLAY_SAMPLE 7, 127, 430
 
 sfx_play_explode:
-	PLAY_SAMPLE 8, -8, 127, 1247
+	PLAY_SAMPLE 8, 127, 1216
 
 sfx_play_got_treasure:
-	PLAY_SAMPLE 9, -9, 127, 1574
+	PLAY_SAMPLE 9, 127, 1535
 
 sfx_play_mein_leben:
-	PLAY_SAMPLE 10, -10, 127, 876
+	PLAY_SAMPLE 10, 127, 854
 
 sfx_play_schusstaffel:
-	PLAY_SAMPLE 11, -11, 127, 656
+	PLAY_SAMPLE 11, 127, 640
 
 sfx_play_shot_gatling_burst:
-	PLAY_SAMPLE 12, -12, 127, 333
+	PLAY_SAMPLE 12, 127, 324
 
 sfx_play_shot_machine_gun_burst:
-	PLAY_SAMPLE 13, -13, 127, 360
+	PLAY_SAMPLE 13, 127, 351
 
 sfx_play_shot_pistol:
-	PLAY_SAMPLE 14, -14, 127, 522
+	PLAY_SAMPLE 14, 127, 509
 
 sfx_play_ugh:
-	PLAY_SAMPLE 15, -15, 127, 363
+	PLAY_SAMPLE 15, 127, 354
 
 sfx_play_wilhelm:
-	PLAY_SAMPLE 16, -16, 127, 1386
+	PLAY_SAMPLE 16, 127, 1352
