@@ -985,7 +985,8 @@ DOG:
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    jp p,sprite_behavior_return ; if health is positive, return
+    ; jp p,sprite_behavior_return ; if health is positive, return
+    jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
     push iy 
@@ -1056,7 +1057,8 @@ GERMAN_TROOPER:
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    jp p,sprite_behavior_return ; if health is positive, return
+    ; jp p,sprite_behavior_return ; if health is positive, return
+    jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
     push iy 
@@ -1135,7 +1137,8 @@ SS_GUARD:
     ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    jp p,sprite_behavior_return ; if health is positive, return
+    ; jp p,sprite_behavior_return ; if health is positive, return
+    jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
     push iy 

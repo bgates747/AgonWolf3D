@@ -15261,272 +15261,275 @@ PC     Output      Line
 04A385 3A 8E B0 04 0985*      ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
 04A389 FD 86 02    0986*      add a,(iy+sprite_health)
 04A38C FD 77 02    0987*      ld (iy+sprite_health),a
-04A38F F2 9B 9E 04 0988*      jp p,sprite_behavior_return ; if health is positive, return
-04A393             0989*      ; otherwise fall through to kill sprite
-04A393             0990*  @kill:
-04A393 FD E5       0991*      push iy
-04A395 CD 01 B7 04 0992*      call sfx_play_dog_yelp
-04A399 FD E1       0993*      pop iy
-04A39B CD C3 9D 04 0994*      call sprite_kill
-04A39F C3 9B 9E 04 0995*      jp sprite_behavior_return
-04A3A3             0996*  @see:
-04A3A3             0997*      ; fall through to @move
-04A3A3             0998*  @move:
-04A3A3 FD 35 09    0999*      dec (iy+sprite_move_timer)
-04A3A6 28 04       1000*      jr z,@do_move
-04A3A8 C3 9B 9E 04 1001*      jp sprite_behavior_return
-04A3AC             1002*  @do_move:
-04A3AC CD 22 B5 04 1003*      call rand_8
-04A3B0 E6 3F       1004*      and %00111111 ; between 0 and 63
-04A3B2             1005*      ; or %00100000  ; at least 32
-04A3B2 F6 10       1006*      or %00010000  ; at least 16
-04A3B4 FD 77 09    1007*      ld (iy+sprite_move_timer),a
-04A3B7 CD 15 9E 04 1008*      call sprite_move_random
-04A3BB CD F9 B6 04 1009*      call sfx_play_dog_woof
-04A3BF C3 9B 9E 04 1010*      jp sprite_behavior_return
-04A3C3             1011*  @shoot:
-04A3C3 C3 9B 9E 04 1012*      jp sprite_behavior_return
-04A3C7             1013*  
-04A3C7             1014*  GERMAN_TROOPER:
-04A3C7             1015*  ; behavior routine address lookup
-04A3C7 DC A3 04    1016*      dl @init
-04A3CA F2 A3 04    1017*      dl @use
-04A3CD FE A3 04    1018*      dl @hurt
-04A3D0 22 A4 04    1019*      dl @kill
-04A3D3 32 A4 04    1020*      dl @see
-04A3D6 4F A4 04    1021*      dl @move
-04A3D9 6B A4 04    1022*      dl @shoot
-04A3DC             1023*  @init:
-04A3DC 21 E4 A3 04 1024*      ld hl,@data ; address for LDIR to copy from
-04A3E0 C3 9B 9E 04 1025*      jp sprite_behavior_return
-04A3E4             1026*  @data:
-04A3E4 4B          1027*      db 075 ;sprite_health
-04A3E5 00          1028*      db 000 ;sprite_triggers_mask
-04A3E6 00          1029*      db 000 ;sprite_x
-04A3E7 00          1030*      db 000 ;sprite_y
-04A3E8 00          1031*      db 000 ;sprite_orientation
-04A3E9 00          1032*      db 000 ;sprite_animation
-04A3EA 00          1033*      db 000 ;sprite_animation_timer
-04A3EB 01          1034*      db 001 ;sprite_move_timer
-04A3EC 00          1035*      db 000 ;sprite_move_step
-04A3ED 14          1036*      db 020 ;sprite_points
-04A3EE EC          1037*      db -20 ;sprite_health_modifier
-04A3EF 00          1038*      db 000 ;sprite_unassigned_0
-04A3F0 00          1039*      db 000 ;sprite_unassigned_1
-04A3F1 00          1040*      db 000 ;sprite_unassigned_2
-04A3F2             1041*  @use:
-04A3F2 FD E5       1042*      push iy
-04A3F4 CD E9 B6 04 1043*      call sfx_play_achtung
-04A3F8 FD E1       1044*      pop iy
-04A3FA C3 9B 9E 04 1045*      jp sprite_behavior_return
-04A3FE             1046*  @hurt:
-04A3FE CD 22 B5 04 1047*      call rand_8
-04A402 E6 01       1048*      and %00000001
-04A404 20 08       1049*      jr nz,@nosound
-04A406 FD E5       1050*      push iy
-04A408 CD 51 B7 04 1051*      call sfx_play_random_hurt
-04A40C FD E1       1052*      pop iy
-04A40E             1053*  @nosound:
-04A40E 3E FF       1054*      ld a,255 ; kill player's shot
-04A410 32 8A B0 04 1055*      ld (player_shot_status),a
-04A414 3A 8E B0 04 1056*      ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
-04A418 FD 86 02    1057*      add a,(iy+sprite_health)
-04A41B FD 77 02    1058*      ld (iy+sprite_health),a
-04A41E F2 9B 9E 04 1059*      jp p,sprite_behavior_return ; if health is positive, return
-04A422             1060*      ; otherwise fall through to kill sprite
-04A422             1061*  @kill:
-04A422 FD E5       1062*      push iy
-04A424 CD 11 B7 04 1063*      call sfx_play_wilhelm
-04A428 FD E1       1064*      pop iy
-04A42A CD C3 9D 04 1065*      call sprite_kill
-04A42E C3 9B 9E 04 1066*      jp sprite_behavior_return
-04A432             1067*  @see:
-04A432 FD 7E 03    1068*      ld a,(iy+sprite_triggers_mask)
-04A435 E6 01       1069*      and sprite_trigger_see
-04A437 C2 4F A4 04 1070*      jp nz,@move
-04A43B 3E 01       1071*      ld a,sprite_trigger_see
-04A43D FD B6 03    1072*      or a,(iy+sprite_triggers_mask)
-04A440 FD 77 03    1073*      ld (iy+sprite_triggers_mask),a
-04A443 FD E5       1074*      push iy
-04A445 CD E9 B6 04 1075*      call sfx_play_achtung
-04A449 FD E1       1076*      pop iy
-04A44B C3 9B 9E 04 1077*      jp sprite_behavior_return
-04A44F             1078*  @move:
-04A44F FD 35 09    1079*      dec (iy+sprite_move_timer)
-04A452 28 04       1080*      jr z,@do_move
-04A454 C3 9B 9E 04 1081*      jp sprite_behavior_return
-04A458             1082*  @do_move:
-04A458 CD 22 B5 04 1083*      call rand_8
-04A45C E6 3F       1084*      and %00111111 ; between 0 and 63
-04A45E             1085*      ; or %00100000  ; at least 32
-04A45E F6 10       1086*      or %00010000  ; at least 16
-04A460 FD 77 09    1087*      ld (iy+sprite_move_timer),a
-04A463 CD 15 9E 04 1088*      call sprite_move_random
-04A467 C3 9B 9E 04 1089*      jp sprite_behavior_return
-04A46B             1090*  @shoot:
-04A46B C3 9B 9E 04 1091*      jp sprite_behavior_return
-04A46F             1092*  
-04A46F             1093*  SS_GUARD:
-04A46F             1094*  ; behavior routine address lookup
-04A46F 84 A4 04    1095*      dl @init
-04A472 9A A4 04    1096*      dl @use
-04A475 A6 A4 04    1097*      dl @hurt
-04A478 CA A4 04    1098*      dl @kill
-04A47B DA A4 04    1099*      dl @see
-04A47E F7 A4 04    1100*      dl @move
-04A481 13 A5 04    1101*      dl @shoot
-04A484             1102*  @init:
-04A484 21 8C A4 04 1103*      ld hl,@data ; address for LDIR to copy from
-04A488 C3 9B 9E 04 1104*      jp sprite_behavior_return
-04A48C             1105*  @data:
-04A48C 64          1106*      db 100 ;sprite_health
-04A48D 00          1107*      db 000 ;sprite_triggers_mask
-04A48E 00          1108*      db 000 ;sprite_x
-04A48F 00          1109*      db 000 ;sprite_y
-04A490 00          1110*      db 000 ;sprite_orientation
-04A491 00          1111*      db 000 ;sprite_animation
-04A492 00          1112*      db 000 ;sprite_animation_timer
-04A493 01          1113*      db 001 ;sprite_move_timer
-04A494 00          1114*      db 000 ;sprite_move_step
-04A495 1E          1115*      db 030 ;sprite_points
-04A496 E2          1116*      db -30 ;sprite_health_modifier
-04A497 00          1117*      db 000 ;sprite_unassigned_0
-04A498 00          1118*      db 000 ;sprite_unassigned_1
-04A499 00          1119*      db 000 ;sprite_unassigned_2
-04A49A             1120*  @use:
-04A49A FD E5       1121*      push iy
-04A49C CD F1 B6 04 1122*      call sfx_play_schusstaffel
-04A4A0 FD E1       1123*      pop iy
-04A4A2 C3 9B 9E 04 1124*      jp sprite_behavior_return
-04A4A6             1125*  @hurt:
-04A4A6 CD 22 B5 04 1126*      call rand_8
-04A4AA E6 01       1127*      and %00000001
-04A4AC 20 08       1128*      jr nz,@nosound
-04A4AE FD E5       1129*      push iy
-04A4B0 CD 51 B7 04 1130*      call sfx_play_random_hurt
-04A4B4 FD E1       1131*      pop iy
-04A4B6             1132*  @nosound:
-04A4B6 3E FF       1133*      ld a,255 ; kill player's shot
-04A4B8 32 8A B0 04 1134*      ld (player_shot_status),a
-04A4BC 3A 8E B0 04 1135*      ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
-04A4C0 FD 86 02    1136*      add a,(iy+sprite_health)
-04A4C3 FD 77 02    1137*      ld (iy+sprite_health),a
-04A4C6 F2 9B 9E 04 1138*      jp p,sprite_behavior_return ; if health is positive, return
-04A4CA             1139*      ; otherwise fall through to kill sprite
-04A4CA             1140*  @kill:
-04A4CA FD E5       1141*      push iy
-04A4CC CD 09 B7 04 1142*      call sfx_play_mein_leben
-04A4D0 FD E1       1143*      pop iy
-04A4D2 CD C3 9D 04 1144*      call sprite_kill
-04A4D6 C3 9B 9E 04 1145*      jp sprite_behavior_return
-04A4DA             1146*  @see:
-04A4DA FD 7E 03    1147*      ld a,(iy+sprite_triggers_mask)
-04A4DD E6 01       1148*      and sprite_trigger_see
-04A4DF C2 F7 A4 04 1149*      jp nz,@move
-04A4E3 3E 01       1150*      ld a,sprite_trigger_see
-04A4E5 FD B6 03    1151*      or a,(iy+sprite_triggers_mask)
-04A4E8 FD 77 03    1152*      ld (iy+sprite_triggers_mask),a
-04A4EB FD E5       1153*      push iy
-04A4ED CD F1 B6 04 1154*      call sfx_play_schusstaffel
-04A4F1 FD E1       1155*      pop iy
-04A4F3 C3 9B 9E 04 1156*      jp sprite_behavior_return
-04A4F7             1157*  @move:
-04A4F7 FD 35 09    1158*      dec (iy+sprite_move_timer)
-04A4FA 28 04       1159*      jr z,@do_move
-04A4FC C3 9B 9E 04 1160*      jp sprite_behavior_return
-04A500             1161*  @do_move:
-04A500 CD 22 B5 04 1162*      call rand_8
-04A504 E6 3F       1163*      and %00111111 ; between 0 and 63
-04A506             1164*      ; or %00100000  ; at least 32
-04A506 F6 10       1165*      or %00010000  ; at least 16
-04A508 FD 77 09    1166*      ld (iy+sprite_move_timer),a
-04A50B CD 15 9E 04 1167*      call sprite_move_random
-04A50F C3 9B 9E 04 1168*      jp sprite_behavior_return
-04A513             1169*  @shoot:
-04A513 C3 9B 9E 04 1170*      jp sprite_behavior_return
-04A517             1171*  
-04A517 00          1172*  see_orientation: db 0x00
-04A518             1173*  ; cycle through all cells visible to the player from the current position
-04A518             1174*  ; and all orientations, and trigger the @see behavior for any sprites in those cells
-04A518             1175*  ; inputs: cur_x, cur_y,
-04A518             1176*  ; outputs: player-aware enemies
-04A518             1177*  ; destroys: everything
-04A518             1178*  sprites_see_player:
-04A518             1179*  ; intialize orientation
-04A518 AF          1180*      xor a
-04A519 32 17 A5 04 1181*      ld (see_orientation),a
-04A51D             1182*  @loop_orientation:
-04A51D             1183*  ; get current map position and camera orientation
-04A51D ED 5B 7A B0 1184*      ld de,(cur_x) ; d,e = cur_y,x
+04A38F             0988*      ; jp p,sprite_behavior_return ; if health is positive, return
+04A38F F2 AC A3 04 0989*      jp p,@do_move
+04A393             0990*      ; otherwise fall through to kill sprite
+04A393             0991*  @kill:
+04A393 FD E5       0992*      push iy
+04A395 CD 01 B7 04 0993*      call sfx_play_dog_yelp
+04A399 FD E1       0994*      pop iy
+04A39B CD C3 9D 04 0995*      call sprite_kill
+04A39F C3 9B 9E 04 0996*      jp sprite_behavior_return
+04A3A3             0997*  @see:
+04A3A3             0998*      ; fall through to @move
+04A3A3             0999*  @move:
+04A3A3 FD 35 09    1000*      dec (iy+sprite_move_timer)
+04A3A6 28 04       1001*      jr z,@do_move
+04A3A8 C3 9B 9E 04 1002*      jp sprite_behavior_return
+04A3AC             1003*  @do_move:
+04A3AC CD 22 B5 04 1004*      call rand_8
+04A3B0 E6 3F       1005*      and %00111111 ; between 0 and 63
+04A3B2             1006*      ; or %00100000  ; at least 32
+04A3B2 F6 10       1007*      or %00010000  ; at least 16
+04A3B4 FD 77 09    1008*      ld (iy+sprite_move_timer),a
+04A3B7 CD 15 9E 04 1009*      call sprite_move_random
+04A3BB CD F9 B6 04 1010*      call sfx_play_dog_woof
+04A3BF C3 9B 9E 04 1011*      jp sprite_behavior_return
+04A3C3             1012*  @shoot:
+04A3C3 C3 9B 9E 04 1013*      jp sprite_behavior_return
+04A3C7             1014*  
+04A3C7             1015*  GERMAN_TROOPER:
+04A3C7             1016*  ; behavior routine address lookup
+04A3C7 DC A3 04    1017*      dl @init
+04A3CA F2 A3 04    1018*      dl @use
+04A3CD FE A3 04    1019*      dl @hurt
+04A3D0 22 A4 04    1020*      dl @kill
+04A3D3 32 A4 04    1021*      dl @see
+04A3D6 4F A4 04    1022*      dl @move
+04A3D9 6B A4 04    1023*      dl @shoot
+04A3DC             1024*  @init:
+04A3DC 21 E4 A3 04 1025*      ld hl,@data ; address for LDIR to copy from
+04A3E0 C3 9B 9E 04 1026*      jp sprite_behavior_return
+04A3E4             1027*  @data:
+04A3E4 4B          1028*      db 075 ;sprite_health
+04A3E5 00          1029*      db 000 ;sprite_triggers_mask
+04A3E6 00          1030*      db 000 ;sprite_x
+04A3E7 00          1031*      db 000 ;sprite_y
+04A3E8 00          1032*      db 000 ;sprite_orientation
+04A3E9 00          1033*      db 000 ;sprite_animation
+04A3EA 00          1034*      db 000 ;sprite_animation_timer
+04A3EB 01          1035*      db 001 ;sprite_move_timer
+04A3EC 00          1036*      db 000 ;sprite_move_step
+04A3ED 14          1037*      db 020 ;sprite_points
+04A3EE EC          1038*      db -20 ;sprite_health_modifier
+04A3EF 00          1039*      db 000 ;sprite_unassigned_0
+04A3F0 00          1040*      db 000 ;sprite_unassigned_1
+04A3F1 00          1041*      db 000 ;sprite_unassigned_2
+04A3F2             1042*  @use:
+04A3F2 FD E5       1043*      push iy
+04A3F4 CD E9 B6 04 1044*      call sfx_play_achtung
+04A3F8 FD E1       1045*      pop iy
+04A3FA C3 9B 9E 04 1046*      jp sprite_behavior_return
+04A3FE             1047*  @hurt:
+04A3FE CD 22 B5 04 1048*      call rand_8
+04A402 E6 01       1049*      and %00000001
+04A404 20 08       1050*      jr nz,@nosound
+04A406 FD E5       1051*      push iy
+04A408 CD 51 B7 04 1052*      call sfx_play_random_hurt
+04A40C FD E1       1053*      pop iy
+04A40E             1054*  @nosound:
+04A40E 3E FF       1055*      ld a,255 ; kill player's shot
+04A410 32 8A B0 04 1056*      ld (player_shot_status),a
+04A414 3A 8E B0 04 1057*      ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+04A418 FD 86 02    1058*      add a,(iy+sprite_health)
+04A41B FD 77 02    1059*      ld (iy+sprite_health),a
+04A41E             1060*      ; jp p,sprite_behavior_return ; if health is positive, return
+04A41E F2 58 A4 04 1061*      jp p,@do_move
+04A422             1062*      ; otherwise fall through to kill sprite
+04A422             1063*  @kill:
+04A422 FD E5       1064*      push iy
+04A424 CD 11 B7 04 1065*      call sfx_play_wilhelm
+04A428 FD E1       1066*      pop iy
+04A42A CD C3 9D 04 1067*      call sprite_kill
+04A42E C3 9B 9E 04 1068*      jp sprite_behavior_return
+04A432             1069*  @see:
+04A432 FD 7E 03    1070*      ld a,(iy+sprite_triggers_mask)
+04A435 E6 01       1071*      and sprite_trigger_see
+04A437 C2 4F A4 04 1072*      jp nz,@move
+04A43B 3E 01       1073*      ld a,sprite_trigger_see
+04A43D FD B6 03    1074*      or a,(iy+sprite_triggers_mask)
+04A440 FD 77 03    1075*      ld (iy+sprite_triggers_mask),a
+04A443 FD E5       1076*      push iy
+04A445 CD E9 B6 04 1077*      call sfx_play_achtung
+04A449 FD E1       1078*      pop iy
+04A44B C3 9B 9E 04 1079*      jp sprite_behavior_return
+04A44F             1080*  @move:
+04A44F FD 35 09    1081*      dec (iy+sprite_move_timer)
+04A452 28 04       1082*      jr z,@do_move
+04A454 C3 9B 9E 04 1083*      jp sprite_behavior_return
+04A458             1084*  @do_move:
+04A458 CD 22 B5 04 1085*      call rand_8
+04A45C E6 3F       1086*      and %00111111 ; between 0 and 63
+04A45E             1087*      ; or %00100000  ; at least 32
+04A45E F6 10       1088*      or %00010000  ; at least 16
+04A460 FD 77 09    1089*      ld (iy+sprite_move_timer),a
+04A463 CD 15 9E 04 1090*      call sprite_move_random
+04A467 C3 9B 9E 04 1091*      jp sprite_behavior_return
+04A46B             1092*  @shoot:
+04A46B C3 9B 9E 04 1093*      jp sprite_behavior_return
+04A46F             1094*  
+04A46F             1095*  SS_GUARD:
+04A46F             1096*  ; behavior routine address lookup
+04A46F 84 A4 04    1097*      dl @init
+04A472 9A A4 04    1098*      dl @use
+04A475 A6 A4 04    1099*      dl @hurt
+04A478 CA A4 04    1100*      dl @kill
+04A47B DA A4 04    1101*      dl @see
+04A47E F7 A4 04    1102*      dl @move
+04A481 13 A5 04    1103*      dl @shoot
+04A484             1104*  @init:
+04A484 21 8C A4 04 1105*      ld hl,@data ; address for LDIR to copy from
+04A488 C3 9B 9E 04 1106*      jp sprite_behavior_return
+04A48C             1107*  @data:
+04A48C 64          1108*      db 100 ;sprite_health
+04A48D 00          1109*      db 000 ;sprite_triggers_mask
+04A48E 00          1110*      db 000 ;sprite_x
+04A48F 00          1111*      db 000 ;sprite_y
+04A490 00          1112*      db 000 ;sprite_orientation
+04A491 00          1113*      db 000 ;sprite_animation
+04A492 00          1114*      db 000 ;sprite_animation_timer
+04A493 01          1115*      db 001 ;sprite_move_timer
+04A494 00          1116*      db 000 ;sprite_move_step
+04A495 1E          1117*      db 030 ;sprite_points
+04A496 E2          1118*      db -30 ;sprite_health_modifier
+04A497 00          1119*      db 000 ;sprite_unassigned_0
+04A498 00          1120*      db 000 ;sprite_unassigned_1
+04A499 00          1121*      db 000 ;sprite_unassigned_2
+04A49A             1122*  @use:
+04A49A FD E5       1123*      push iy
+04A49C CD F1 B6 04 1124*      call sfx_play_schusstaffel
+04A4A0 FD E1       1125*      pop iy
+04A4A2 C3 9B 9E 04 1126*      jp sprite_behavior_return
+04A4A6             1127*  @hurt:
+04A4A6 CD 22 B5 04 1128*      call rand_8
+04A4AA E6 01       1129*      and %00000001
+04A4AC 20 08       1130*      jr nz,@nosound
+04A4AE FD E5       1131*      push iy
+04A4B0 CD 51 B7 04 1132*      call sfx_play_random_hurt
+04A4B4 FD E1       1133*      pop iy
+04A4B6             1134*  @nosound:
+04A4B6 3E FF       1135*      ld a,255 ; kill player's shot
+04A4B8 32 8A B0 04 1136*      ld (player_shot_status),a
+04A4BC 3A 8E B0 04 1137*      ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+04A4C0 FD 86 02    1138*      add a,(iy+sprite_health)
+04A4C3 FD 77 02    1139*      ld (iy+sprite_health),a
+04A4C6             1140*      ; jp p,sprite_behavior_return ; if health is positive, return
+04A4C6 F2 00 A5 04 1141*      jp p,@do_move
+04A4CA             1142*      ; otherwise fall through to kill sprite
+04A4CA             1143*  @kill:
+04A4CA FD E5       1144*      push iy
+04A4CC CD 09 B7 04 1145*      call sfx_play_mein_leben
+04A4D0 FD E1       1146*      pop iy
+04A4D2 CD C3 9D 04 1147*      call sprite_kill
+04A4D6 C3 9B 9E 04 1148*      jp sprite_behavior_return
+04A4DA             1149*  @see:
+04A4DA FD 7E 03    1150*      ld a,(iy+sprite_triggers_mask)
+04A4DD E6 01       1151*      and sprite_trigger_see
+04A4DF C2 F7 A4 04 1152*      jp nz,@move
+04A4E3 3E 01       1153*      ld a,sprite_trigger_see
+04A4E5 FD B6 03    1154*      or a,(iy+sprite_triggers_mask)
+04A4E8 FD 77 03    1155*      ld (iy+sprite_triggers_mask),a
+04A4EB FD E5       1156*      push iy
+04A4ED CD F1 B6 04 1157*      call sfx_play_schusstaffel
+04A4F1 FD E1       1158*      pop iy
+04A4F3 C3 9B 9E 04 1159*      jp sprite_behavior_return
+04A4F7             1160*  @move:
+04A4F7 FD 35 09    1161*      dec (iy+sprite_move_timer)
+04A4FA 28 04       1162*      jr z,@do_move
+04A4FC C3 9B 9E 04 1163*      jp sprite_behavior_return
+04A500             1164*  @do_move:
+04A500 CD 22 B5 04 1165*      call rand_8
+04A504 E6 3F       1166*      and %00111111 ; between 0 and 63
+04A506             1167*      ; or %00100000  ; at least 32
+04A506 F6 10       1168*      or %00010000  ; at least 16
+04A508 FD 77 09    1169*      ld (iy+sprite_move_timer),a
+04A50B CD 15 9E 04 1170*      call sprite_move_random
+04A50F C3 9B 9E 04 1171*      jp sprite_behavior_return
+04A513             1172*  @shoot:
+04A513 C3 9B 9E 04 1173*      jp sprite_behavior_return
+04A517             1174*  
+04A517 00          1175*  see_orientation: db 0x00
+04A518             1176*  ; cycle through all cells visible to the player from the current position
+04A518             1177*  ; and all orientations, and trigger the @see behavior for any sprites in those cells
+04A518             1178*  ; inputs: cur_x, cur_y,
+04A518             1179*  ; outputs: player-aware enemies
+04A518             1180*  ; destroys: everything
+04A518             1181*  sprites_see_player:
+04A518             1182*  ; intialize orientation
+04A518 AF          1183*      xor a
+04A519 32 17 A5 04 1184*      ld (see_orientation),a
+04A51D             1185*  @loop_orientation:
+04A51D             1186*  ; get current map position and camera orientation
+04A51D ED 5B 7A B0 1187*      ld de,(cur_x) ; d,e = cur_y,x
        04          
-04A522 CD C7 63 04 1185*      call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
-04A526             1186*  ; get cell_views address for this cell and orientation
-04A526 3A 17 A5 04 1187*      ld a,(see_orientation)
-04A52A 5F          1188*      ld e,a
-04A52B 16 06       1189*      ld d,6 ; 6 bytes per orientation
-04A52D ED 5C       1190*      mlt de ; de = orientation offset
-04A52F EB          1191*      ex de,hl ; hl = orientation offset
-04A530 06 18       1192*      ld b,24 ; 24 bytes per cell in cell_views lut
-04A532 ED 4C       1193*      mlt bc ; bc = offset from base address of cell_views lut
-04A534 09          1194*      add hl,bc ; hl = total offset from cell_views base address
-04A535 EB          1195*      ex de,hl ; becaue we can't add iy to hl
-04A536 FD 21 00 E4 1196*      ld iy,cell_views ; base address of cell_views lut
+04A522 CD C7 63 04 1188*      call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
+04A526             1189*  ; get cell_views address for this cell and orientation
+04A526 3A 17 A5 04 1190*      ld a,(see_orientation)
+04A52A 5F          1191*      ld e,a
+04A52B 16 06       1192*      ld d,6 ; 6 bytes per orientation
+04A52D ED 5C       1193*      mlt de ; de = orientation offset
+04A52F EB          1194*      ex de,hl ; hl = orientation offset
+04A530 06 18       1195*      ld b,24 ; 24 bytes per cell in cell_views lut
+04A532 ED 4C       1196*      mlt bc ; bc = offset from base address of cell_views lut
+04A534 09          1197*      add hl,bc ; hl = total offset from cell_views base address
+04A535 EB          1198*      ex de,hl ; becaue we can't add iy to hl
+04A536 FD 21 00 E4 1199*      ld iy,cell_views ; base address of cell_views lut
        B7          
-04A53B FD 19       1197*      add iy,de ; iy = cell_views address
-04A53D FD 22 53 65 1198*      ld (cur_cell_views),iy
+04A53B FD 19       1200*      add iy,de ; iy = cell_views address
+04A53D FD 22 53 65 1201*      ld (cur_cell_views),iy
        04          
-04A542             1199*  ; cycle through the cell views masks and trigger the @see behavior for any sprites in those cells
-04A542 01 00 46 28 1200*      ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
-04A546 AF          1201*      xor a ; poly_id
-04A547 32 4F 65 04 1202*      ld (to_poly_id),a
-04A54B             1203*  @loop:
-04A54B ED 43 57 A5 1204*      ld (@bit_iy+2),bc
+04A542             1202*  ; cycle through the cell views masks and trigger the @see behavior for any sprites in those cells
+04A542 01 00 46 28 1203*      ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
+04A546 AF          1204*      xor a ; poly_id
+04A547 32 4F 65 04 1205*      ld (to_poly_id),a
+04A54B             1206*  @loop:
+04A54B ED 43 57 A5 1207*      ld (@bit_iy+2),bc
        04          
-04A550 FD 2A 53 65 1205*      ld iy,(cur_cell_views)
+04A550 FD 2A 53 65 1208*      ld iy,(cur_cell_views)
        04          
-04A555             1206*  @bit_iy:
-04A555 FD CB 00 46 1207*      bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
-04A559 28 2E       1208*      jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
-04A55B             1209*  ; get_polys_deltas inputs: a is the orientation, c is the poly_id
-04A55B 3A 4F 65 04 1210*      ld a,(to_poly_id)
-04A55F 4F          1211*      ld c,a ; poly_id
-04A560 3A 17 A5 04 1212*      ld a,(see_orientation)
-04A564 CD 74 67 04 1213*      call get_polys_deltas ; d,e = y,x deltas
-04A568 3A 7A B0 04 1214*      ld a,(cur_x)
-04A56C 83          1215*      add a,e
-04A56D 5F          1216*      ld e,a
-04A56E 3A 7B B0 04 1217*      ld a,(cur_y)
-04A572 82          1218*      add a,d
-04A573 57          1219*      ld d,a
-04A574 CD C7 63 04 1220*      call get_cell_from_coords
-04A578 DD 7E 03    1221*      ld a,(ix+map_sprite_id)
-04A57B FE FF       1222*      cp 0xFF ; no sprite
-04A57D 28 0A       1223*      jr z,@next_poly
-04A57F CD B1 9D 04 1224*      call sprite_set_pointer
-04A583 3E 04       1225*      ld a,sp_see
-04A585 CD 7F 9E 04 1226*      call do_sprite_behavior
-04A589             1227*  @next_poly:
-04A589 ED 4B 57 A5 1228*      ld bc,(@bit_iy+2)
+04A555             1209*  @bit_iy:
+04A555 FD CB 00 46 1210*      bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
+04A559 28 2E       1211*      jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
+04A55B             1212*  ; get_polys_deltas inputs: a is the orientation, c is the poly_id
+04A55B 3A 4F 65 04 1213*      ld a,(to_poly_id)
+04A55F 4F          1214*      ld c,a ; poly_id
+04A560 3A 17 A5 04 1215*      ld a,(see_orientation)
+04A564 CD 74 67 04 1216*      call get_polys_deltas ; d,e = y,x deltas
+04A568 3A 7A B0 04 1217*      ld a,(cur_x)
+04A56C 83          1218*      add a,e
+04A56D 5F          1219*      ld e,a
+04A56E 3A 7B B0 04 1220*      ld a,(cur_y)
+04A572 82          1221*      add a,d
+04A573 57          1222*      ld d,a
+04A574 CD C7 63 04 1223*      call get_cell_from_coords
+04A578 DD 7E 03    1224*      ld a,(ix+map_sprite_id)
+04A57B FE FF       1225*      cp 0xFF ; no sprite
+04A57D 28 0A       1226*      jr z,@next_poly
+04A57F CD B1 9D 04 1227*      call sprite_set_pointer
+04A583 3E 04       1228*      ld a,sp_see
+04A585 CD 7F 9E 04 1229*      call do_sprite_behavior
+04A589             1230*  @next_poly:
+04A589 ED 4B 57 A5 1231*      ld bc,(@bit_iy+2)
        04          
-04A58E 3A 4F 65 04 1229*      ld a,(to_poly_id)
-04A592 3C          1230*      inc a ; a is next poly_id
-04A593 32 4F 65 04 1231*      ld (to_poly_id),a
-04A597 FE 2D       1232*      cp num_polys
-04A599 28 0D       1233*      jr z,@next_orientation
-04A59B 3E 08       1234*      ld a,8
-04A59D 80          1235*      add a,b
-04A59E 47          1236*      ld b,a ; bit tested codes to 0x46 + b/8
-04A59F FE 86       1237*      cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
-04A5A1 20 A8       1238*      jr nz,@loop
-04A5A3 06 46       1239*      ld b,0x46
-04A5A5 0C          1240*      inc c ; iy address offset
-04A5A6 18 A3       1241*      jr @loop
-04A5A8             1242*  @next_orientation:
-04A5A8 3A 17 A5 04 1243*      ld a,(see_orientation)
-04A5AC 3C          1244*      inc a
-04A5AD 32 17 A5 04 1245*      ld (see_orientation),a
-04A5B1 C2 1D A5 04 1246*      jp nz,@loop_orientation
-04A5B5 C9          1247*      ret
+04A58E 3A 4F 65 04 1232*      ld a,(to_poly_id)
+04A592 3C          1233*      inc a ; a is next poly_id
+04A593 32 4F 65 04 1234*      ld (to_poly_id),a
+04A597 FE 2D       1235*      cp num_polys
+04A599 28 0D       1236*      jr z,@next_orientation
+04A59B 3E 08       1237*      ld a,8
+04A59D 80          1238*      add a,b
+04A59E 47          1239*      ld b,a ; bit tested codes to 0x46 + b/8
+04A59F FE 86       1240*      cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
+04A5A1 20 A8       1241*      jr nz,@loop
+04A5A3 06 46       1242*      ld b,0x46
+04A5A5 0C          1243*      inc c ; iy address offset
+04A5A6 18 A3       1244*      jr @loop
+04A5A8             1245*  @next_orientation:
+04A5A8 3A 17 A5 04 1246*      ld a,(see_orientation)
+04A5AC 3C          1247*      inc a
+04A5AD 32 17 A5 04 1248*      ld (see_orientation),a
+04A5B1 C2 1D A5 04 1249*      jp nz,@loop_orientation
+04A5B5 C9          1250*      ret
 04A5B6             0030       include "src/asm/mos_api.asm"
 04A5B6             0001*  ; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/mos_api.asm
 04A5B6             0002*  ; Title:	AGON MOS - API for user projects
