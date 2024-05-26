@@ -37,6 +37,11 @@ tgt_cmp/
 autoexec*.txt
 
 ## BOILERPLATE PYTHON TEMPLATE ##
+# Ignore Stupid Windows Thumbs.db files
+Thumbs.db
+# Ignore Similarly Stupid Mac .DS_Store Files
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

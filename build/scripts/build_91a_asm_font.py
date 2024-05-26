@@ -65,7 +65,7 @@ def scale_and_annotate(image_binarized, base_font_src_dir, lines_of_text, line_s
     font_image = image_binarized.resize((image_binarized.width * 4, image_binarized.height * 4), scale_method)
     font_image = font_image.convert("RGBA")
     draw = ImageDraw.Draw(font_image)
-    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+    font_path = "src/assets/images/ui/fonts/Arial Black.ttf"
     font_size = 32
     font = ImageFont.truetype(font_path, font_size)
 

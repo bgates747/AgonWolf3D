@@ -104,8 +104,11 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
 
             # Prepare filenames
             asm_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.asm'
-            bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.py.bin'
-            asm_bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.bin'
+            # this doesnt work in macos because ez80asm is not available
+            # bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.py.bin'
+            # asm_bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.bin'
+            # for mac we will just use the bin file written directly by this script
+            bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.bin'
 
             # Open both assembly and binary files
             with open(asm_filename, 'w') as asm_file, open(bin_filename, 'wb') as bin_file:
@@ -165,18 +168,19 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
                 # Write placeholder data for the sprite table to the binary file
                 bin_file.write(bytes([255]*1024))
             
-            # Assemble the generated assembly file
-            do_assembly(asm_filename, maps_tgt_dir, asm_bin_filename)
+            # none of this is applicable on mac since ez80asm is not available
+            # # Assemble the generated assembly file
+            # do_assembly(asm_filename, maps_tgt_dir, asm_bin_filename)
 
-            # Compute hashes
-            hash_1 = hash_file(asm_bin_filename)
-            hash_2 = hash_file(bin_filename)
+            # # Compute hashes
+            # hash_1 = hash_file(asm_bin_filename)
+            # hash_2 = hash_file(bin_filename)
 
-            # Compare hashes
-            if hash_1 == hash_2:
-                print(asm_bin_filename + " Hashes match!")
-            else:
-                print(asm_bin_filename + " Hashes do not match.")
+            # # Compare hashes
+            # if hash_1 == hash_2:
+            #     print(asm_bin_filename + " Hashes match!")
+            # else:
+            #     print(asm_bin_filename + " Hashes do not match.")
 
 
 def do_assembly(src_file, tgt_dir, tgt_filename=None):
