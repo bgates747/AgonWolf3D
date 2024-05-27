@@ -12,15 +12,6 @@ plyr_max_health: dl 100 ; binary
 ; can increase based on TODO
 plyr_lives: dl 3 ; binary
 
-plyr_health_str:  ds 8 ; Num2String buffer
-                    db 0 ; string terminator
-
-plyr_score_str:   ds 8 ; Num2String buffer
-                    db 0 ; string terminator
-
-plyr_lives_str:   ds 8 ; Num2String buffer
-                    db 0 ; string terminator
-
 ; ######### Player Variables ##########
 ; player position on the map and orientation
 cur_floor: db 0x00 ; 0-255, corresponds to floor_num in build scripts

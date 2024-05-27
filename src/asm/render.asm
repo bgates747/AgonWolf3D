@@ -240,28 +240,19 @@ render_scene:
     ld b,3 ; y 
     call vdu_move_cursor
     ld hl,(plyr_score)
-    ld de,plyr_score_str
-    call Num2String
-    ld hl,plyr_score_str
-    call printString
+    call printDec
 
     ld c,22 ; x
     ld b,3 ; y 
     call vdu_move_cursor
     ld hl,(plyr_health)
-    ld de,plyr_health_str
-    call Num2String
-    ld hl,plyr_health_str
-    call printString
+    call printDec
 
     ld c,28 ; x
     ld b,3 ; y 
     call vdu_move_cursor
     ld hl,(plyr_ammo)
-    ld de,plyr_ammo_str
-    call Num2String
-    ld hl,plyr_ammo_str
-    call printString
+    call printDec
 
 ; all done
     ret
