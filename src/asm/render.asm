@@ -254,6 +254,22 @@ render_scene:
     ld hl,(plyr_ammo)
     call printDec
 
+    ld c,1 ; x
+    ld b,7 ; y 
+    call vdu_move_cursor
+    ld hl,(timestamp_chg)
+    call printDec
+
+; print prt interrupt counter
+    ld c,1 ; x
+    ld b,8 ; y 
+    call vdu_move_cursor
+	ld hl,(prt_irq_counter)
+	call printDec
+; reset prt interrupt counter
+	ld hl,0
+	ld (prt_irq_counter),hl
+
 ; all done
     ret
 
