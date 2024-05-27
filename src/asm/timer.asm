@@ -175,7 +175,6 @@ prt_got_irq:
 	.db 0
 prt_irq_counter:
 	.dl 0
-prt_irq_counter_str: ds 8
 
 ; ===============================================
 ; Timer functions
@@ -208,6 +207,51 @@ timer_get:
 
 timer_test: ds 6 ; example of a buffer to hold timer data
 
+timestamp_now: dl 0
+timestamp_old: dl 0
+timestamp_chg: dl 0
+
+timestamp_tick:
+    push hl
+    push de
+    push ix
+    ld de,(timestamp_now)   ; get previous time
+    ld (timestamp_old),de   ; save previous time
+    MOSCALL mos_sysvars     ; ix points to syvars table
+    ld hl,(ix+sysvar_time)  ; get current time
+    ld (timestamp_now),hl   ; save current time
+    xor a                   ; clear carry
+    sbc hl,de               ; ix = time elapsed
+    ld (timestamp_chg),hl   ; save elapsed time
+    pop ix
+    pop de
+    pop hl
+    ret
+
+
+; set a countdown timer
+; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl = current time 
+timestamp_set:
+    ld (iy+3),hl            ; set time remaining
+    ld hl,(timestamp_now)   ; get current timestamp
+    ld (iy+0),hl            ; set start time
+    ret
+
+; gets time remaining on a countdown timer
+; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
+;          sign flags: pos = time not expired, zero or neg = time expired
+timestamp_get:
+    ld de,(timestamp_now)   ; get current timestamp
+    ld hl,(iy+0)            ; get start time
+    xor a                   ; clear carry
+    sbc hl,de               ; hl = time elapsed (will always be zero or negative)
+    ld de,(iy+3)            ; get timer set value
+    xor a                   ; clear carry
+    adc hl,de               ; hl = time remaining 
+                            ; (we do adc because add hl,rr doesn't set sign or zero flags)
+    ret
 
 ; ------------------
 ; delay routine
