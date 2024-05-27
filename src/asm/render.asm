@@ -221,15 +221,15 @@ render_scene:
 	ld de,160 ; y
 	call vdu_plot_bmp
 
-    ld hl,(player_weapon_ui_buffer_id_large)
-    ld de,(player_weapon_animation_frame)
+    ld hl,(plyr_wpn_ui_lg)
+    ld de,(plyr_wpn_anim_fr)
     add hl,de
     call vdu_buff_select
     ld bc,128 ; x
     ld de,96 ; y
     call vdu_plot_bmp
 
-    ld hl,(player_weapon_ui_buffer_id_small)
+    ld hl,(plyr_wpn_ui_sm)
     call vdu_buff_select
     ld bc,266 ; x
     ld de,178 ; y
@@ -239,28 +239,28 @@ render_scene:
     ld c,8 ; x
     ld b,3 ; y 
     call vdu_move_cursor
-    ld hl,(player_score)
-    ld de,player_score_str
+    ld hl,(plyr_score)
+    ld de,plyr_score_str
     call Num2String
-    ld hl,player_score_str
+    ld hl,plyr_score_str
     call printString
 
     ld c,22 ; x
     ld b,3 ; y 
     call vdu_move_cursor
-    ld hl,(player_health)
-    ld de,player_health_str
+    ld hl,(plyr_health)
+    ld de,plyr_health_str
     call Num2String
-    ld hl,player_health_str
+    ld hl,plyr_health_str
     call printString
 
     ld c,28 ; x
     ld b,3 ; y 
     call vdu_move_cursor
-    ld hl,(player_ammo)
-    ld de,player_ammo_str
+    ld hl,(plyr_ammo)
+    ld de,plyr_ammo_str
     call Num2String
-    ld hl,player_ammo_str
+    ld hl,plyr_ammo_str
     call printString
 
 ; all done

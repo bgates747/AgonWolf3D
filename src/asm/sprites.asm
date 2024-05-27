@@ -7,7 +7,7 @@ sprite_x:               equ 04 ; 1 byte  - map x position
 sprite_y:               equ 05 ; 1 byte  - map y position
 sprite_orientation:     equ 06 ; 1 byte  - orientation
 sprite_animation:       equ 07 ; 1 byte  - current animation index, zero-based
-sprite_animation_timer: equ 08 ; 1 byte  - when hits zero, draw next animation frame
+sprite_anim_tmr: equ 08 ; 1 byte  - when hits zero, draw next animation frame
 sprite_move_timer:      equ 09 ; 1 byte  - when zero, go to next move program, or step
 sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, varies
 sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
@@ -292,7 +292,7 @@ LAMP:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -334,7 +334,7 @@ BARREL:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -346,8 +346,8 @@ BARREL:
     jp sprite_behavior_return
 @hurt:
     ld a,255 ; kill player's shot
-    ld (player_shot_status),a
-    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    ld (plyr_shot_status),a
+    ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
     jp p,sprite_behavior_return ; if health is positive, return
@@ -384,7 +384,7 @@ TABLE:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -426,7 +426,7 @@ OVERHEAD_LIGHT:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -468,7 +468,7 @@ RADIOACTIVE_BARREL:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -480,8 +480,8 @@ RADIOACTIVE_BARREL:
     jp sprite_behavior_return
 @hurt:
     ld a,255 ; kill player's shot
-    ld (player_shot_status),a
-    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    ld (plyr_shot_status),a
+    ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
     jp p,sprite_behavior_return ; if health is positive, return
@@ -518,7 +518,7 @@ HEALTH_PACK:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -528,7 +528,7 @@ HEALTH_PACK:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call player_mod_health
+    call plyr_mod_health
     jr @kill
 @hurt:
     xor a
@@ -562,7 +562,7 @@ GOLD_CHALISE:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 100 ;sprite_points
@@ -575,7 +575,7 @@ GOLD_CHALISE:
     call sfx_play_got_treasure
     pop iy 
     ld a,(iy+sprite_points)
-    call player_mod_score
+    call plyr_mod_score
     jr @kill
 @hurt:
     xor a
@@ -609,7 +609,7 @@ GOLD_CROSS:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 050 ;sprite_points
@@ -622,7 +622,7 @@ GOLD_CROSS:
     call sfx_play_got_treasure
     pop iy 
     ld a,(iy+sprite_points)
-    call player_mod_score
+    call plyr_mod_score
     jr @kill
 @hurt:
     xor a
@@ -656,7 +656,7 @@ PLATE_OF_FOOD:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -666,7 +666,7 @@ PLATE_OF_FOOD:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call player_mod_health
+    call plyr_mod_health
     jr @kill
 @hurt:
     xor a
@@ -700,7 +700,7 @@ KEYCARD:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -742,7 +742,7 @@ GOLD_CHEST:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 250 ;sprite_points
@@ -755,7 +755,7 @@ GOLD_CHEST:
     call sfx_play_got_treasure
     pop iy 
     ld a,(iy+sprite_points)
-    call player_mod_score
+    call plyr_mod_score
     jr @kill
 @hurt:
     xor a
@@ -789,7 +789,7 @@ MACHINE_GUN:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -831,7 +831,7 @@ GATLING_GUN:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -873,7 +873,7 @@ DOG_FOOD:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -883,7 +883,7 @@ DOG_FOOD:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call player_mod_health
+    call plyr_mod_health
     jr @kill
 @hurt:
     xor a
@@ -917,7 +917,7 @@ GOLD_KEY:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 000 ;sprite_points
@@ -959,7 +959,7 @@ DOG:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 010 ;sprite_points
@@ -981,8 +981,8 @@ DOG:
     pop iy 
 @nosound:
     ld a,255 ; kill player's shot
-    ld (player_shot_status),a
-    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    ld (plyr_shot_status),a
+    ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
     ; jp p,sprite_behavior_return ; if health is positive, return
@@ -1031,7 +1031,7 @@ GERMAN_TROOPER:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 020 ;sprite_points
@@ -1053,8 +1053,8 @@ GERMAN_TROOPER:
     pop iy 
 @nosound:
     ld a,255 ; kill player's shot
-    ld (player_shot_status),a
-    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    ld (plyr_shot_status),a
+    ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
     ; jp p,sprite_behavior_return ; if health is positive, return
@@ -1111,7 +1111,7 @@ SS_GUARD:
     db 000 ;sprite_y
     db 000 ;sprite_orientation
     db 000 ;sprite_animation
-    db 000 ;sprite_animation_timer
+    db 000 ;sprite_anim_tmr
     db 001 ;sprite_move_timer
     db 000 ;sprite_move_step
     db 030 ;sprite_points
@@ -1133,8 +1133,8 @@ SS_GUARD:
     pop iy 
 @nosound:
     ld a,255 ; kill player's shot
-    ld (player_shot_status),a
-    ld a,(player_shot_damage) ; damage done by player's shot set by player_shoot
+    ld (plyr_shot_status),a
+    ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
     ; jp p,sprite_behavior_return ; if health is positive, return
@@ -1178,7 +1178,7 @@ see_orientation: db 0x00
 ; inputs: cur_x, cur_y,
 ; outputs: player-aware enemies
 ; destroys: everything
-sprites_see_player:
+sprites_see_plyr:
 ; intialize orientation
     xor a
     ld (see_orientation),a

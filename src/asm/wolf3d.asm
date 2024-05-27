@@ -171,7 +171,7 @@ main:
 	call map_init
 
 ; initialize player position
-	call player_init
+	call plyr_init
 
 ; clear the screen
 	call vdu_cls
@@ -202,7 +202,7 @@ main_loop:
 	; call move_enemies
 	call see_orientation
 ; get player input and update sprite position
-	call player_input ; ix points to cell defs/status, a is target cell current obj_id
+	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
 ; render the updated scene
 	call render_scene
 
