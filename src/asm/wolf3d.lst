@@ -17803,7 +17803,9 @@ PC     Output      Line
 04AD83 CD 29 AD 04 0075*  	CALL printString
 04AD87 C9          0076*  	RET
 04AD88             0077*  _printDecBuffer:
-04AD88             0078*  	DS 9
+04AD88 00 00 00 00 0078*  	blkb 9,0
+       00 00 00 00 
+       00          
 04AD91             0079*  ; This routine converts the value from HL into it's ASCII representation,
 04AD91             0080*  ; starting to memory location pointing by DE, in decimal form and with trailing zeroes
 04AD91             0081*  ; so it will allways be 5 characters length

@@ -75,7 +75,7 @@ printDec:
 	CALL printString
 	RET
 _printDecBuffer:
-	DS 9
+	blkb 9,0
 ; This routine converts the value from HL into it's ASCII representation, 
 ; starting to memory location pointing by DE, in decimal form and with trailing zeroes 
 ; so it will allways be 5 characters length
