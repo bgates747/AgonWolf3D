@@ -66,6 +66,7 @@ DisplayHexPrefix:
 	RST.LIL 10h
 	RET
 
+
 ; Prints the decimal value in HL without leading zeroes
 ; HL : Value to print
 printDec:
@@ -74,42 +75,14 @@ printDec:
 	LD	 HL, _printDecBuffer
 	CALL printString
 	RET
-_printDecBuffer:
-	blkb 9,0
+_printDecBuffer: blkb 9,0 ; nine bytes full of zeroes
+
 ; This routine converts the value from HL into it's ASCII representation, 
 ; starting to memory location pointing by DE, in decimal form and with trailing zeroes 
 ; so it will allways be 5 characters length
 ; HL : Value to convert to string
 ; DE : pointer to buffer, at least 8 byte + 0
 Num2String:
-	PUSH DE
-	CALL Num2String_worker
-	LD	 A, 0
-	LD	 (DE), A	; terminate string
-	POP  DE
-	PUSH DE
-@findfirstzero:
-	LD	 A, (DE)
-	CP	 '0'
-	JR	 NZ, @done
-	INC  DE
-	JR	 @findfirstzero
-@done:
-	OR	 A	; end-of-string reached / was the value 0?
-	JR	 NZ, @removezeroes
-	DEC  DE
-@removezeroes:
-	POP	 HL	; start of string, DE == start of first number
-@copydigit:
-	LD	A, (DE)
-	LD	(HL), A
-	OR  A
-	RET	Z
-	INC	HL
-	INC DE
-	JR	@copydigit
-
-Num2String_worker:
 	LD	 BC,-10000000
 	CALL OneDigit
 	LD	 BC,-1000000
