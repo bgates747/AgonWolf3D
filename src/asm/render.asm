@@ -236,22 +236,22 @@ render_scene:
     call vdu_plot_bmp
 
 ; draw the text portions of the ui
-    ld c,8 ; x
+    ld c,22 ; x
     ld b,3 ; y 
     call vdu_move_cursor
-    ld hl,(plyr_score)
+    ld hl,(plyr_ammo)
     call printDec
 
-    ld c,22 ; x
+    ld c,17 ; x
     ld b,3 ; y 
     call vdu_move_cursor
     ld hl,(plyr_health)
     call printDec
 
-    ld c,28 ; x
+    ld c,7 ; x
     ld b,3 ; y 
     call vdu_move_cursor
-    ld hl,(plyr_ammo)
+    ld hl,(plyr_score)
     call printDec
 
 ; DEBUG: PRINT TIMER STUFF

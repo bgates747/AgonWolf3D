@@ -72,7 +72,22 @@ DisplayHexPrefix:
 printDec:
 	LD	 DE, _printDecBuffer
 	CALL Num2String
-	LD	 HL, _printDecBuffer
+; BEGIN MY CODE
+; replace leading zeroes with spaces
+    LD	 HL, _printDecBuffer
+    ld   B, 7 ; if HL was 0, we want to keep the final zero 
+@loop:
+    LD	 A, (HL)
+    CP	 '0'
+    JP	 NZ, @done
+    LD   A, ' '
+    LD	 (HL), A
+    INC	 HL
+    CALL vdu_cursor_forward
+    DJNZ @loop
+@done:
+; END MY CODE
+	; LD	 HL, _printDecBuffer
 	CALL printString
 	RET
 _printDecBuffer: blkb 9,0 ; nine bytes full of zeroes
