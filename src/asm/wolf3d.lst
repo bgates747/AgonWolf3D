@@ -17439,366 +17439,337 @@ PC     Output      Line
 04AC0B             1594*  ;     call vdu_play_sample
 04AC0B C9          1595*      ret
 04AC0C             0032   	include "src/asm/vdu_sound.asm"
-04AC0C             0001*  ; ; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
-04AC0C             0002*  ; ; play a sound on a given channel, duration and volume
-04AC0C             0003*  ;     MACRO PLAY_SAMPLE channel, volume, duration
-04AC0C             0004*  ; ; Command 11: Seek to position
-04AC0C             0005*  ; ; VDU 23, 0, &85, channel, 11, position; positionHighByte
-04AC0C             0006*  ;     ld hl, @seek
-04AC0C             0007*  ;     ld bc, @seek_end - @seek
-04AC0C             0008*  ;     rst.lil $18
-04AC0C             0009*  ;     jp @seek_end
-04AC0C             0010*  ; @seek:
-04AC0C             0011*  ;     .db 23,0,$85                        ; do sound
-04AC0C             0012*  ;     .db channel,11                      ; channel, command
-04AC0C             0013*  ;     .dw 0                               ; position
-04AC0C             0014*  ;     .db 0                               ; position high byte
-04AC0C             0015*  ; @seek_end:
-04AC0C             0016*  ; ; Command 0: Play note
-04AC0C             0017*  ; ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
-04AC0C             0018*  ;     ld hl, @sample
-04AC0C             0019*  ;     ld bc, @sample_end - @sample
-04AC0C             0020*  ;     rst.lil $18
-04AC0C             0021*  ;     ret
-04AC0C             0022*  ; @sample:
-04AC0C             0023*  ;     .db 23,0,$85                        ; do sound
-04AC0C             0024*  ;     .db channel,0,volume                ; channel, volume
-04AC0C             0025*  ;     .dw 0                               ; freq (tuneable samples only)
-04AC0C             0026*  ;     .dw duration                        ; duration
-04AC0C             0027*  ; @sample_end:
-04AC0C             0028*  ;     ENDMACRO
-04AC0C             0029*  
-04AC0C 00          0030*  last_channel: db 0
-04AC0D             0031*  
-04AC0D             0032*  ; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
-04AC0D             0033*  ; play a sound on a given channel, duration and volume
-04AC0D             0034*      MACRO PLAY_SAMPLE bufferId, volume, duration
-04AC0D             0035*      ld a,(last_channel)
-04AC0D             0036*      inc a
-04AC0D             0037*      and 31 ; modulo 32
-04AC0D             0038*      ld (last_channel),a
-04AC0D             0039*      ld (@channel0),a
-04AC0D             0040*      ld (@channel1),a
-04AC0D             0041*      ld hl, @sample
-04AC0D             0042*      ld bc, @sample_end - @sample
-04AC0D             0043*      rst.lil $18
-04AC0D             0044*      ret
-04AC0D             0045*  @sample:
-04AC0D             0046*  ; Command 4: Set waveform
-04AC0D             0047*  ; VDU 23, 0, &85, channel, 4, waveformOrSample, [bufferId;]
-04AC0D             0048*      .db 23,0,$85                        ; do sound
-04AC0D             0049*  @channel0:
-04AC0D             0050*      .db 0,4,8 ; channel, command, waveform
-04AC0D             0051*      .dw bufferId
-04AC0D             0052*  ; Command 0: Play note
-04AC0D             0053*  ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
-04AC0D             0054*      .db 23,0,$85                        ; do sound
-04AC0D             0055*  @channel1:
-04AC0D             0056*      .db 0,0,volume                ; channel, volume
-04AC0D             0057*      .dw 0                               ; freq (tuneable samples only)
-04AC0D             0058*      .dw duration                        ; duration
-04AC0D             0059*  @sample_end:
-04AC0D             0060*      ENDMACRO
-04AC0D             0061*  
-04AC0D             0062*  ; Command 4: Set waveform
-04AC0D             0063*  ; VDU 23, 0, &85, channel, 4, 8, bufferId;
-04AC0D             0064*      MACRO WAVEFORM_SAMPLE channel, buffer_id
-04AC0D             0065*      ld hl, @startChannel
-04AC0D             0066*      ld bc, @endChannel - @startChannel
-04AC0D             0067*      rst.lil $18
-04AC0D             0068*      ret
-04AC0D             0069*  @startChannel:
-04AC0D             0070*      .db 23,0,$85    ; do sound
-04AC0D             0071*      .db channel,4,8 ; channel, command, waveform
-04AC0D             0072*      .dw buffer_id
-04AC0D             0073*  @endChannel:
-04AC0D             0074*      ENDMACRO
-04AC0D             0075*  
-04AC0D             0076*  
-04AC0D             0077*  ; ############################################################
-04AC0D             0078*  ; VDU SOUND API
-04AC0D             0079*  ; ############################################################
-04AC0D             0080*  ; Command 0: Play note
-04AC0D             0081*  ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
-04AC0D             0082*      MACRO PLAY_NOTE channel, volume, frequency, duration
-04AC0D             0083*      ld hl, @PLAY_NOTE_CMD        ; Start of command block
-04AC0D             0084*      ld bc, @PLAY_NOTE_END - @PLAY_NOTE_CMD  ; Command block size
-04AC0D             0085*      rst.lil $18
-04AC0D             0086*      jr @PLAY_NOTE_END
-04AC0D             0087*  @PLAY_NOTE_CMD:  db 23, 0, 0x85               ; Command header
-04AC0D             0088*                   db channel                  ; Channel, 0 (commented out)
-04AC0D             0089*                   db 0                        ; Play note command
-04AC0D             0090*                   db volume                   ; Volume
-04AC0D             0091*                   dw frequency                ; Frequency
-04AC0D             0092*                   dw duration                 ; Duration
-04AC0D             0093*  @PLAY_NOTE_END:
-04AC0D             0094*      ENDMACRO
-04AC0D             0095*  
-04AC0D             0096*      MACRO MUTE_CHANNEL channel
-04AC0D             0097*      ld hl, @MUTE_CHANNEL_CMD     ; Start of command block
-04AC0D             0098*      ld bc, @MUTE_CHANNEL_END - @MUTE_CHANNEL_CMD  ; Command block size
-04AC0D             0099*      rst.lil $18
-04AC0D             0100*      jr @MUTE_CHANNEL_END
-04AC0D             0101*  @MUTE_CHANNEL_CMD: db 23, 0, 0x85             ; Command header
-04AC0D             0102*                     db channel                ; Channel, 0 (commented out)
-04AC0D             0103*                     db 2                      ; Set volume command
-04AC0D             0104*                     db 0                      ; Volume (mute)
-04AC0D             0105*  @MUTE_CHANNEL_END:
-04AC0D             0106*      ENDMACRO
-04AC0D             0107*  
-04AC0D             0108*  ; inputs: c = channel, b = volume, hl = frequency; de = duration;
-04AC0D             0109*  vdu_play_note:
-04AC0D 79          0110*      ld a,c
-04AC0E 32 2E AC 04 0111*      ld (@channel),a
-04AC12 78          0112*      ld a,b
-04AC13 32 30 AC 04 0113*      ld (@volume),a
-04AC17 22 31 AC 04 0114*      ld (@frequency),hl
-04AC1B ED 53 33 AC 0115*      ld (@duration),de
+04AC0C 00          0001*  last_channel: db 0
+04AC0D             0002*  
+04AC0D             0003*  ; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
+04AC0D             0004*  ; play a sound on a given channel, duration and volume
+04AC0D             0005*      MACRO PLAY_SAMPLE bufferId, volume, duration
+04AC0D             0006*      ld a,(last_channel)
+04AC0D             0007*      inc a
+04AC0D             0008*      and 31 ; modulo 32
+04AC0D             0009*      ld (last_channel),a
+04AC0D             0010*      ld (@channel0),a
+04AC0D             0011*      ld (@channel1),a
+04AC0D             0012*      ld hl, @sample
+04AC0D             0013*      ld bc, @sample_end - @sample
+04AC0D             0014*      rst.lil $18
+04AC0D             0015*      ret
+04AC0D             0016*  @sample:
+04AC0D             0017*  ; Command 4: Set waveform
+04AC0D             0018*  ; VDU 23, 0, &85, channel, 4, waveformOrSample, [bufferId;]
+04AC0D             0019*      .db 23,0,$85                        ; do sound
+04AC0D             0020*  @channel0:
+04AC0D             0021*      .db 0,4,8 ; channel, command, waveform
+04AC0D             0022*      .dw bufferId
+04AC0D             0023*  ; Command 0: Play note
+04AC0D             0024*  ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
+04AC0D             0025*      .db 23,0,$85                        ; do sound
+04AC0D             0026*  @channel1:
+04AC0D             0027*      .db 0,0,volume                ; channel, volume
+04AC0D             0028*      .dw 0                               ; freq (tuneable samples only)
+04AC0D             0029*      .dw duration                        ; duration
+04AC0D             0030*  @sample_end:
+04AC0D             0031*      ENDMACRO
+04AC0D             0032*  
+04AC0D             0033*  ; Command 4: Set waveform
+04AC0D             0034*  ; VDU 23, 0, &85, channel, 4, 8, bufferId;
+04AC0D             0035*      MACRO WAVEFORM_SAMPLE channel, buffer_id
+04AC0D             0036*      ld hl, @startChannel
+04AC0D             0037*      ld bc, @endChannel - @startChannel
+04AC0D             0038*      rst.lil $18
+04AC0D             0039*      ret
+04AC0D             0040*  @startChannel:
+04AC0D             0041*      .db 23,0,$85    ; do sound
+04AC0D             0042*      .db channel,4,8 ; channel, command, waveform
+04AC0D             0043*      .dw buffer_id
+04AC0D             0044*  @endChannel:
+04AC0D             0045*      ENDMACRO
+04AC0D             0046*  
+04AC0D             0047*  
+04AC0D             0048*  ; ############################################################
+04AC0D             0049*  ; VDU SOUND API
+04AC0D             0050*  ; ############################################################
+04AC0D             0051*  ; Command 0: Play note
+04AC0D             0052*  ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
+04AC0D             0053*      MACRO PLAY_NOTE channel, volume, frequency, duration
+04AC0D             0054*      ld hl, @PLAY_NOTE_CMD        ; Start of command block
+04AC0D             0055*      ld bc, @PLAY_NOTE_END - @PLAY_NOTE_CMD  ; Command block size
+04AC0D             0056*      rst.lil $18
+04AC0D             0057*      jr @PLAY_NOTE_END
+04AC0D             0058*  @PLAY_NOTE_CMD:  db 23, 0, 0x85               ; Command header
+04AC0D             0059*                   db channel                  ; Channel, 0 (commented out)
+04AC0D             0060*                   db 0                        ; Play note command
+04AC0D             0061*                   db volume                   ; Volume
+04AC0D             0062*                   dw frequency                ; Frequency
+04AC0D             0063*                   dw duration                 ; Duration
+04AC0D             0064*  @PLAY_NOTE_END:
+04AC0D             0065*      ENDMACRO
+04AC0D             0066*  
+04AC0D             0067*      MACRO MUTE_CHANNEL channel
+04AC0D             0068*      ld hl, @MUTE_CHANNEL_CMD     ; Start of command block
+04AC0D             0069*      ld bc, @MUTE_CHANNEL_END - @MUTE_CHANNEL_CMD  ; Command block size
+04AC0D             0070*      rst.lil $18
+04AC0D             0071*      jr @MUTE_CHANNEL_END
+04AC0D             0072*  @MUTE_CHANNEL_CMD: db 23, 0, 0x85             ; Command header
+04AC0D             0073*                     db channel                ; Channel, 0 (commented out)
+04AC0D             0074*                     db 2                      ; Set volume command
+04AC0D             0075*                     db 0                      ; Volume (mute)
+04AC0D             0076*  @MUTE_CHANNEL_END:
+04AC0D             0077*      ENDMACRO
+04AC0D             0078*  
+04AC0D             0079*  ; inputs: c = channel, b = volume, hl = frequency; de = duration;
+04AC0D             0080*  vdu_play_note:
+04AC0D 79          0081*      ld a,c
+04AC0E 32 2E AC 04 0082*      ld (@channel),a
+04AC12 78          0083*      ld a,b
+04AC13 32 30 AC 04 0084*      ld (@volume),a
+04AC17 22 31 AC 04 0085*      ld (@frequency),hl
+04AC1B ED 53 33 AC 0086*      ld (@duration),de
        04          
-04AC20 21 2B AC 04 0116*      ld hl,@cmd
-04AC24 01 0A 00 00 0117*      ld bc,@end-@cmd
-04AC28 5B DF       0118*      rst.lil $18
-04AC2A C9          0119*      ret
-04AC2B 17 00 85    0120*  @cmd:       db 23, 0, 0x85
-04AC2E 00          0121*  @channel:   db 0x00
-04AC2F 00          0122*              db 0x00 ; play note command
-04AC30 00          0123*  @volume:    db 0x00
-04AC31 00 00       0124*  @frequency: dw 0x0000
-04AC33 00 00       0125*  @duration:  dw 0x0000
-04AC35 00          0126*  @end:       db 0x00 ; padding
-04AC36             0127*  
-04AC36             0128*  ; Command 1: Status
-04AC36             0129*  ; VDU 23, 0, &85, channel, 1
-04AC36             0130*  ; inputs: a = channel
-04AC36             0131*  ; Returns a bit mask indicating the status of the specified channel, or 255 if the channel is not valid, or has been disabled. The bit mask is as follows:
-04AC36             0132*  ; Bit 	Name 	Meaning
-04AC36             0133*  ; 0 	Active 	When set this indicates the channel is in use (has an active waveform)
-04AC36             0134*  ; 1 	Playing 	Indicates the channel is actively playing a note, and thus will reject calls to play a new note
-04AC36             0135*  ; 2 	Indefinite 	Set if the channel is playing an indefinite duration note
-04AC36             0136*  ; 3 	Has Volume Envelope 	Set if the channel has a volume envelope
-04AC36             0137*  ; 4 	Has Frequency Envelope 	Set if the channel has a frequency envelope
-04AC36             0138*  
-04AC36             0139*  ; Bits 5-7 are reserved for future use and, for enabled channels, will currently always be zero.
-04AC36             0140*  vdu_channel_status:
-04AC36 32 48 AC 04 0141*      ld (@channel),a
-04AC3A 21 45 AC 04 0142*      ld hl,@cmd
-04AC3E 01 05 00 00 0143*      ld bc,@end-@cmd
-04AC42 5B DF       0144*      rst.lil $18
-04AC44 C9          0145*      ret
-04AC45 17 00 85    0146*  @cmd:       db 23, 0, 0x85
-04AC48 00          0147*  @channel:   db 0x00
-04AC49 01          0148*              db 0x01 ; get channel status command
-04AC4A             0149*  @end:
-04AC4A             0150*  
-04AC4A             0151*  ; VDU 23, 0, &85, channel, 2, volume
-04AC4A             0152*  ; inputs: c = channel, b = volume
-04AC4A             0153*  ; Sets the volume of the specified channel. The volume is a value from 0 to 127, where 0 is silent and 127 is full volume. Values over 127 will be treated as 127 (with one exception described later).
-04AC4A             0154*  
-04AC4A             0155*  ; Specifying a channel of -1 (or 255) will set the global sound system volume level. (Requires Console8 VDP 2.5.0 or later.)
-04AC4A             0156*  
-04AC4A             0157*  ; Using this command provides more direct control over a channel than the play note command. It can be used to adjust the volume of a channel that is already playing a note.
-04AC4A             0158*  vdu_channel_volume:
-04AC4A 79          0159*      ld a,c
-04AC4B 32 62 AC 04 0160*      ld (@channel),a
-04AC4F 78          0161*      ld a,b
-04AC50 32 64 AC 04 0162*      ld (@volume),a
-04AC54 21 5F AC 04 0163*      ld hl,@cmd
-04AC58 01 06 00 00 0164*      ld bc,@end-@cmd
-04AC5C 5B DF       0165*      rst.lil $18
-04AC5E C9          0166*      ret
-04AC5F 17 00 85    0167*  @cmd:       db 23, 0, 0x85
-04AC62 00          0168*  @channel:   db 0x00
-04AC63 02          0169*              db 0x02 ; set volume command
-04AC64 00          0170*  @volume:    db 0x00
-04AC65             0171*  @end:
-04AC65             0172*  
-04AC65             0173*  ; VDU 23, 0, &85, channel, 3, frequency;
-04AC65             0174*  
-04AC65             0175*  ; Sets the frequency of the specified channel. The frequency is a 16-bit value specifying in Hz the frequency of the note to be played.
-04AC65             0176*  
-04AC65             0177*  ; Using this command provides more direct control over a channel than the play note command. It can be used to adjust the frequency of a channel that is already playing a note.
-04AC65             0178*  
-04AC65             0179*  ; Returns 1 on success, 0 for failure.
-04AC65             0180*  vdu_channel_frequency:
-04AC65 79          0181*      ld a,c
-04AC66 32 7D AC 04 0182*      ld (@channel),a
-04AC6A ED 53 7F AC 0183*      ld (@frequency),de
+04AC20 21 2B AC 04 0087*      ld hl,@cmd
+04AC24 01 0A 00 00 0088*      ld bc,@end-@cmd
+04AC28 5B DF       0089*      rst.lil $18
+04AC2A C9          0090*      ret
+04AC2B 17 00 85    0091*  @cmd:       db 23, 0, 0x85
+04AC2E 00          0092*  @channel:   db 0x00
+04AC2F 00          0093*              db 0x00 ; play note command
+04AC30 00          0094*  @volume:    db 0x00
+04AC31 00 00       0095*  @frequency: dw 0x0000
+04AC33 00 00       0096*  @duration:  dw 0x0000
+04AC35 00          0097*  @end:       db 0x00 ; padding
+04AC36             0098*  
+04AC36             0099*  ; Command 1: Status
+04AC36             0100*  ; VDU 23, 0, &85, channel, 1
+04AC36             0101*  ; inputs: a = channel
+04AC36             0102*  ; Returns a bit mask indicating the status of the specified channel, or 255 if the channel is not valid, or has been disabled. The bit mask is as follows:
+04AC36             0103*  ; Bit 	Name 	Meaning
+04AC36             0104*  ; 0 	Active 	When set this indicates the channel is in use (has an active waveform)
+04AC36             0105*  ; 1 	Playing 	Indicates the channel is actively playing a note, and thus will reject calls to play a new note
+04AC36             0106*  ; 2 	Indefinite 	Set if the channel is playing an indefinite duration note
+04AC36             0107*  ; 3 	Has Volume Envelope 	Set if the channel has a volume envelope
+04AC36             0108*  ; 4 	Has Frequency Envelope 	Set if the channel has a frequency envelope
+04AC36             0109*  
+04AC36             0110*  ; Bits 5-7 are reserved for future use and, for enabled channels, will currently always be zero.
+04AC36             0111*  vdu_channel_status:
+04AC36 32 48 AC 04 0112*      ld (@channel),a
+04AC3A 21 45 AC 04 0113*      ld hl,@cmd
+04AC3E 01 05 00 00 0114*      ld bc,@end-@cmd
+04AC42 5B DF       0115*      rst.lil $18
+04AC44 C9          0116*      ret
+04AC45 17 00 85    0117*  @cmd:       db 23, 0, 0x85
+04AC48 00          0118*  @channel:   db 0x00
+04AC49 01          0119*              db 0x01 ; get channel status command
+04AC4A             0120*  @end:
+04AC4A             0121*  
+04AC4A             0122*  ; VDU 23, 0, &85, channel, 2, volume
+04AC4A             0123*  ; inputs: c = channel, b = volume
+04AC4A             0124*  ; Sets the volume of the specified channel. The volume is a value from 0 to 127, where 0 is silent and 127 is full volume. Values over 127 will be treated as 127 (with one exception described later).
+04AC4A             0125*  
+04AC4A             0126*  ; Specifying a channel of -1 (or 255) will set the global sound system volume level. (Requires Console8 VDP 2.5.0 or later.)
+04AC4A             0127*  
+04AC4A             0128*  ; Using this command provides more direct control over a channel than the play note command. It can be used to adjust the volume of a channel that is already playing a note.
+04AC4A             0129*  vdu_channel_volume:
+04AC4A 79          0130*      ld a,c
+04AC4B 32 62 AC 04 0131*      ld (@channel),a
+04AC4F 78          0132*      ld a,b
+04AC50 32 64 AC 04 0133*      ld (@volume),a
+04AC54 21 5F AC 04 0134*      ld hl,@cmd
+04AC58 01 06 00 00 0135*      ld bc,@end-@cmd
+04AC5C 5B DF       0136*      rst.lil $18
+04AC5E C9          0137*      ret
+04AC5F 17 00 85    0138*  @cmd:       db 23, 0, 0x85
+04AC62 00          0139*  @channel:   db 0x00
+04AC63 02          0140*              db 0x02 ; set volume command
+04AC64 00          0141*  @volume:    db 0x00
+04AC65             0142*  @end:
+04AC65             0143*  
+04AC65             0144*  ; VDU 23, 0, &85, channel, 3, frequency;
+04AC65             0145*  
+04AC65             0146*  ; Sets the frequency of the specified channel. The frequency is a 16-bit value specifying in Hz the frequency of the note to be played.
+04AC65             0147*  
+04AC65             0148*  ; Using this command provides more direct control over a channel than the play note command. It can be used to adjust the frequency of a channel that is already playing a note.
+04AC65             0149*  
+04AC65             0150*  ; Returns 1 on success, 0 for failure.
+04AC65             0151*  vdu_channel_frequency:
+04AC65 79          0152*      ld a,c
+04AC66 32 7D AC 04 0153*      ld (@channel),a
+04AC6A ED 53 7F AC 0154*      ld (@frequency),de
        04          
-04AC6F 21 7A AC 04 0184*      ld hl,@cmd
-04AC73 01 07 00 00 0185*      ld bc,@end-@cmd
-04AC77 5B DF       0186*      rst.lil $18
-04AC79 C9          0187*      ret
-04AC7A 17 00 85    0188*  @cmd:       db 23, 0, 0x85
-04AC7D 00          0189*  @channel:   db 0x00
-04AC7E 03          0190*              db 0x03 ; set frequency command
-04AC7F 00 00       0191*  @frequency: dw 0x0000
-04AC81 00          0192*  @end:       db 0x00 ; padding
-04AC82             0193*  
-04AC82             0194*  
-04AC82             0195*  ; VDU 23, 0, &85, channel, 4, waveformOrSample, [bufferId;]
-04AC82             0196*  ; inputs: c = channel, b = waveformOrSample, [hl = bufferId]
-04AC82             0197*  ; Sets the waveform type for a channel to use. The waveformOrSample value is a single byte treated as a signed value.
-04AC82             0198*  
-04AC82             0199*  ; Using a negative value for the waveform indicates that a sample should be used instead. For more information see the documentation for the sample command.
-04AC82             0200*  
-04AC82             0201*  ; By default a channel is set to use waveform 0 (square wave).
-04AC82             0202*  
-04AC82             0203*  ; Valid waveform values are as follows:
-04AC82             0204*  ; Value 	Waveform
-04AC82             0205*  ; 0 	Square wave
-04AC82             0206*  ; 1 	Triangle wave
-04AC82             0207*  ; 2 	Sawtooth wave
-04AC82             0208*  ; 3 	Sine wave
-04AC82             0209*  ; 4 	Noise (simple white noise with no frequency support)
-04AC82             0210*  ; 5 	VIC Noise (emulates a VIC6561; supports frequency)
-04AC82             0211*  ; 8 	Sample (specifying a 16-bit buffer ID for sample data)
-04AC82             0212*  
-04AC82             0213*  vdu_channel_waveform:
-04AC82 79          0214*      ld a,c
-04AC83 32 A8 AC 04 0215*      ld (@channel),a
-04AC87 78          0216*      ld a,b
-04AC88 32 AA AC 04 0217*      ld (@waveform),a
-04AC8C FE 08       0218*      cp 8 ; check if the waveform is a sample
-04AC8E 28 06       0219*      jr z, @sample
-04AC90 01 06 00 00 0220*      ld bc,@bufferId-@cmd
-04AC94 18 08       0221*      jr @sendToVdu
-04AC96             0222*  @sample:
-04AC96 22 AB AC 04 0223*      ld (@bufferId),hl
-04AC9A 01 08 00 00 0224*      ld bc,@end-@cmd
-04AC9E             0225*  @sendToVdu:
-04AC9E 21 A5 AC 04 0226*      ld hl,@cmd
-04ACA2 5B DF       0227*      rst.lil $18
-04ACA4 C9          0228*      ret
-04ACA5 17 00 85    0229*  @cmd:       db 23, 0, 0x85
-04ACA8 00          0230*  @channel:   db 0x00
-04ACA9 04          0231*              db 0x04 ; set waveform command
-04ACAA 00          0232*  @waveform:  db 0x00
-04ACAB 00 00       0233*  @bufferId:  dw 0x0000
-04ACAD 00          0234*  @end:       db 0x00 ; padding
-04ACAE             0235*  
-04ACAE             0236*  
-04ACAE             0237*  
-04ACAE             0238*  ; VDU 23, 0, &85, 0, 5, 2, bufferId; format
-04ACAE             0239*  ; inputs: hl = bufferId; a = format
-04ACAE             0240*  ; The format parameter is an 8-bit value that indicates the format of the sample data. The following values are supported:
-04ACAE             0241*  ; Value 	Description
-04ACAE             0242*  ; 0 	8-bit signed, 16KHz
-04ACAE             0243*  ; 1 	8-bit unsigned, 16KHz
-04ACAE             0244*  vdu_buffer_to_sound:
-04ACAE 22 C7 AC 04 0245*      ld (@bufferId),hl
-04ACB2 32 C9 AC 04 0246*      ld (@format),a
-04ACB6 21 C1 AC 04 0247*      ld hl,@cmd
-04ACBA 01 09 00 00 0248*      ld bc,@end-@cmd
-04ACBE 5B DF       0249*      rst.lil $18
-04ACC0 C9          0250*      ret
-04ACC1 17 00 85    0251*  @cmd:       db 23, 0, 0x85
-04ACC4 00          0252*              db 0x00 ; a magic number that is always 0
-04ACC5 05          0253*              db 0x05 ; buffer to sound command
-04ACC6 02          0254*              db 0x02 ; a magic number that is always 2
-04ACC7 00 00       0255*  @bufferId:  dw 0x0000
-04ACC9 00          0256*  @format:    db 0x00
-04ACCA             0257*  @end:
-04ACCA             0258*  
-04ACCA             0259*  
-04ACCA             0260*  ; inputs: c = channel, b = volume, de = duration; hl = bufferId
-04ACCA             0261*  vdu_play_sample:
-04ACCA             0262*      ; populate input parameters
-04ACCA 79          0263*      ld a,c
-04ACCB 32 F5 AC 04 0264*      ld (@channel0),a
-04ACCF 32 FD AC 04 0265*      ld (@channel1),a
-04ACD3 78          0266*      ld a,b
-04ACD4 32 FF AC 04 0267*      ld (@volume),a
-04ACD8 ED 53 00 AD 0268*      ld (@frequency),de
+04AC6F 21 7A AC 04 0155*      ld hl,@cmd
+04AC73 01 07 00 00 0156*      ld bc,@end-@cmd
+04AC77 5B DF       0157*      rst.lil $18
+04AC79 C9          0158*      ret
+04AC7A 17 00 85    0159*  @cmd:       db 23, 0, 0x85
+04AC7D 00          0160*  @channel:   db 0x00
+04AC7E 03          0161*              db 0x03 ; set frequency command
+04AC7F 00 00       0162*  @frequency: dw 0x0000
+04AC81 00          0163*  @end:       db 0x00 ; padding
+04AC82             0164*  
+04AC82             0165*  
+04AC82             0166*  ; VDU 23, 0, &85, channel, 4, waveformOrSample, [bufferId;]
+04AC82             0167*  ; inputs: c = channel, b = waveformOrSample, [hl = bufferId]
+04AC82             0168*  ; Sets the waveform type for a channel to use. The waveformOrSample value is a single byte treated as a signed value.
+04AC82             0169*  
+04AC82             0170*  ; Using a negative value for the waveform indicates that a sample should be used instead. For more information see the documentation for the sample command.
+04AC82             0171*  
+04AC82             0172*  ; By default a channel is set to use waveform 0 (square wave).
+04AC82             0173*  
+04AC82             0174*  ; Valid waveform values are as follows:
+04AC82             0175*  ; Value 	Waveform
+04AC82             0176*  ; 0 	Square wave
+04AC82             0177*  ; 1 	Triangle wave
+04AC82             0178*  ; 2 	Sawtooth wave
+04AC82             0179*  ; 3 	Sine wave
+04AC82             0180*  ; 4 	Noise (simple white noise with no frequency support)
+04AC82             0181*  ; 5 	VIC Noise (emulates a VIC6561; supports frequency)
+04AC82             0182*  ; 8 	Sample (specifying a 16-bit buffer ID for sample data)
+04AC82             0183*  
+04AC82             0184*  vdu_channel_waveform:
+04AC82 79          0185*      ld a,c
+04AC83 32 A8 AC 04 0186*      ld (@channel),a
+04AC87 78          0187*      ld a,b
+04AC88 32 AA AC 04 0188*      ld (@waveform),a
+04AC8C FE 08       0189*      cp 8 ; check if the waveform is a sample
+04AC8E 28 06       0190*      jr z, @sample
+04AC90 01 06 00 00 0191*      ld bc,@bufferId-@cmd
+04AC94 18 08       0192*      jr @sendToVdu
+04AC96             0193*  @sample:
+04AC96 22 AB AC 04 0194*      ld (@bufferId),hl
+04AC9A 01 08 00 00 0195*      ld bc,@end-@cmd
+04AC9E             0196*  @sendToVdu:
+04AC9E 21 A5 AC 04 0197*      ld hl,@cmd
+04ACA2 5B DF       0198*      rst.lil $18
+04ACA4 C9          0199*      ret
+04ACA5 17 00 85    0200*  @cmd:       db 23, 0, 0x85
+04ACA8 00          0201*  @channel:   db 0x00
+04ACA9 04          0202*              db 0x04 ; set waveform command
+04ACAA 00          0203*  @waveform:  db 0x00
+04ACAB 00 00       0204*  @bufferId:  dw 0x0000
+04ACAD 00          0205*  @end:       db 0x00 ; padding
+04ACAE             0206*  
+04ACAE             0207*  
+04ACAE             0208*  
+04ACAE             0209*  ; VDU 23, 0, &85, 0, 5, 2, bufferId; format
+04ACAE             0210*  ; inputs: hl = bufferId; a = format
+04ACAE             0211*  ; The format parameter is an 8-bit value that indicates the format of the sample data. The following values are supported:
+04ACAE             0212*  ; Value 	Description
+04ACAE             0213*  ; 0 	8-bit signed, 16KHz
+04ACAE             0214*  ; 1 	8-bit unsigned, 16KHz
+04ACAE             0215*  vdu_buffer_to_sound:
+04ACAE 22 C7 AC 04 0216*      ld (@bufferId),hl
+04ACB2 32 C9 AC 04 0217*      ld (@format),a
+04ACB6 21 C1 AC 04 0218*      ld hl,@cmd
+04ACBA 01 09 00 00 0219*      ld bc,@end-@cmd
+04ACBE 5B DF       0220*      rst.lil $18
+04ACC0 C9          0221*      ret
+04ACC1 17 00 85    0222*  @cmd:       db 23, 0, 0x85
+04ACC4 00          0223*              db 0x00 ; a magic number that is always 0
+04ACC5 05          0224*              db 0x05 ; buffer to sound command
+04ACC6 02          0225*              db 0x02 ; a magic number that is always 2
+04ACC7 00 00       0226*  @bufferId:  dw 0x0000
+04ACC9 00          0227*  @format:    db 0x00
+04ACCA             0228*  @end:
+04ACCA             0229*  
+04ACCA             0230*  
+04ACCA             0231*  ; inputs: c = channel, b = volume, de = duration; hl = bufferId
+04ACCA             0232*  vdu_play_sample:
+04ACCA             0233*      ; populate input parameters
+04ACCA 79          0234*      ld a,c
+04ACCB 32 F5 AC 04 0235*      ld (@channel0),a
+04ACCF 32 FD AC 04 0236*      ld (@channel1),a
+04ACD3 78          0237*      ld a,b
+04ACD4 32 FF AC 04 0238*      ld (@volume),a
+04ACD8 ED 53 00 AD 0239*      ld (@frequency),de
        04          
-04ACDD 22 F8 AC 04 0269*      ld (@bufferId),hl
-04ACE1             0270*      ; clean up byte that got stomped on by bufferId load from hl
-04ACE1 3E 17       0271*      ld a,23
-04ACE3 32 FA AC 04 0272*      ld (@cmd1),a
-04ACE7             0273*      ; prep the vdu command string
-04ACE7 21 F2 AC 04 0274*      ld hl, @cmd0
-04ACEB 01 12 00 00 0275*      ld bc, @end - @cmd0
-04ACEF 5B DF       0276*      rst.lil $18
-04ACF1 C9          0277*      ret
-04ACF2 17 00 85    0278*  @cmd0:       db 23, 0, 0x85
-04ACF5 00          0279*  @channel0:   db 0x00
-04ACF6 04          0280*               db 0x04 ; set waveform command
-04ACF7 08          0281*  @waveform:   db 0x08 ; sample
-04ACF8 00 00       0282*  @bufferId:   dw 0x0000
-04ACFA 17 00 85    0283*  @cmd1:       db 23, 0, 0x85
-04ACFD 00          0284*  @channel1:   db 0x00
-04ACFE 00          0285*               db 0x00 ; play note command
-04ACFF 00          0286*  @volume:     db 0x00
-04AD00 00 00       0287*  @frequency:  dw 0x00 ; no effect unless buffer has been set to tuneable sample
-04AD02 00 00       0288*  @duration:   dw 0x0000 ; milliseconds
-04AD04 00          0289*  @end:        db 0x00 ; padding
-04AD05             0290*  
-04AD05             0291*  
-04AD05             0292*  vdu_enable_channels:
-04AD05             0293*  ; enable all the channels
-04AD05 21 10 AD 04 0294*      ld hl, enable_channels_cmd
-04AD09 01 91 00 00 0295*      ld bc, enable_channels_end - enable_channels_cmd
-04AD0D 5B DF       0296*      rst.lil $18
-04AD0F C9          0297*      ret
-04AD10             0298*  enable_channels_cmd:
-04AD10 17 00 85 03 0299*      db 23, 0, $85, 3, 8
+04ACDD 22 F8 AC 04 0240*      ld (@bufferId),hl
+04ACE1             0241*      ; clean up byte that got stomped on by bufferId load from hl
+04ACE1 3E 17       0242*      ld a,23
+04ACE3 32 FA AC 04 0243*      ld (@cmd1),a
+04ACE7             0244*      ; prep the vdu command string
+04ACE7 21 F2 AC 04 0245*      ld hl, @cmd0
+04ACEB 01 12 00 00 0246*      ld bc, @end - @cmd0
+04ACEF 5B DF       0247*      rst.lil $18
+04ACF1 C9          0248*      ret
+04ACF2 17 00 85    0249*  @cmd0:       db 23, 0, 0x85
+04ACF5 00          0250*  @channel0:   db 0x00
+04ACF6 04          0251*               db 0x04 ; set waveform command
+04ACF7 08          0252*  @waveform:   db 0x08 ; sample
+04ACF8 00 00       0253*  @bufferId:   dw 0x0000
+04ACFA 17 00 85    0254*  @cmd1:       db 23, 0, 0x85
+04ACFD 00          0255*  @channel1:   db 0x00
+04ACFE 00          0256*               db 0x00 ; play note command
+04ACFF 00          0257*  @volume:     db 0x00
+04AD00 00 00       0258*  @frequency:  dw 0x00 ; no effect unless buffer has been set to tuneable sample
+04AD02 00 00       0259*  @duration:   dw 0x0000 ; milliseconds
+04AD04 00          0260*  @end:        db 0x00 ; padding
+04AD05             0261*  
+04AD05             0262*  
+04AD05             0263*  vdu_enable_channels:
+04AD05             0264*  ; enable all the channels
+04AD05 21 10 AD 04 0265*      ld hl, enable_channels_cmd
+04AD09 01 91 00 00 0266*      ld bc, enable_channels_end - enable_channels_cmd
+04AD0D 5B DF       0267*      rst.lil $18
+04AD0F C9          0268*      ret
+04AD10             0269*  enable_channels_cmd:
+04AD10 17 00 85 03 0270*      db 23, 0, $85, 3, 8
        08          
-04AD15 17 00 85 04 0300*      db 23, 0, $85, 4, 8
+04AD15 17 00 85 04 0271*      db 23, 0, $85, 4, 8
        08          
-04AD1A 17 00 85 05 0301*      db 23, 0, $85, 5, 8
+04AD1A 17 00 85 05 0272*      db 23, 0, $85, 5, 8
        08          
-04AD1F 17 00 85 06 0302*      db 23, 0, $85, 6, 8
+04AD1F 17 00 85 06 0273*      db 23, 0, $85, 6, 8
        08          
-04AD24 17 00 85 07 0303*      db 23, 0, $85, 7, 8
+04AD24 17 00 85 07 0274*      db 23, 0, $85, 7, 8
        08          
-04AD29 17 00 85 08 0304*      db 23, 0, $85, 8, 8
+04AD29 17 00 85 08 0275*      db 23, 0, $85, 8, 8
        08          
-04AD2E 17 00 85 09 0305*      db 23, 0, $85, 9, 8
+04AD2E 17 00 85 09 0276*      db 23, 0, $85, 9, 8
        08          
-04AD33 17 00 85 0A 0306*      db 23, 0, $85, 10, 8
+04AD33 17 00 85 0A 0277*      db 23, 0, $85, 10, 8
        08          
-04AD38 17 00 85 0B 0307*      db 23, 0, $85, 11, 8
+04AD38 17 00 85 0B 0278*      db 23, 0, $85, 11, 8
        08          
-04AD3D 17 00 85 0C 0308*      db 23, 0, $85, 12, 8
+04AD3D 17 00 85 0C 0279*      db 23, 0, $85, 12, 8
        08          
-04AD42 17 00 85 0D 0309*      db 23, 0, $85, 13, 8
+04AD42 17 00 85 0D 0280*      db 23, 0, $85, 13, 8
        08          
-04AD47 17 00 85 0E 0310*      db 23, 0, $85, 14, 8
+04AD47 17 00 85 0E 0281*      db 23, 0, $85, 14, 8
        08          
-04AD4C 17 00 85 0F 0311*      db 23, 0, $85, 15, 8
+04AD4C 17 00 85 0F 0282*      db 23, 0, $85, 15, 8
        08          
-04AD51 17 00 85 10 0312*      db 23, 0, $85, 16, 8
+04AD51 17 00 85 10 0283*      db 23, 0, $85, 16, 8
        08          
-04AD56 17 00 85 11 0313*      db 23, 0, $85, 17, 8
+04AD56 17 00 85 11 0284*      db 23, 0, $85, 17, 8
        08          
-04AD5B 17 00 85 12 0314*      db 23, 0, $85, 18, 8
+04AD5B 17 00 85 12 0285*      db 23, 0, $85, 18, 8
        08          
-04AD60 17 00 85 13 0315*      db 23, 0, $85, 19, 8
+04AD60 17 00 85 13 0286*      db 23, 0, $85, 19, 8
        08          
-04AD65 17 00 85 14 0316*      db 23, 0, $85, 20, 8
+04AD65 17 00 85 14 0287*      db 23, 0, $85, 20, 8
        08          
-04AD6A 17 00 85 15 0317*      db 23, 0, $85, 21, 8
+04AD6A 17 00 85 15 0288*      db 23, 0, $85, 21, 8
        08          
-04AD6F 17 00 85 16 0318*      db 23, 0, $85, 22, 8
+04AD6F 17 00 85 16 0289*      db 23, 0, $85, 22, 8
        08          
-04AD74 17 00 85 17 0319*      db 23, 0, $85, 23, 8
+04AD74 17 00 85 17 0290*      db 23, 0, $85, 23, 8
        08          
-04AD79 17 00 85 18 0320*      db 23, 0, $85, 24, 8
+04AD79 17 00 85 18 0291*      db 23, 0, $85, 24, 8
        08          
-04AD7E 17 00 85 19 0321*      db 23, 0, $85, 25, 8
+04AD7E 17 00 85 19 0292*      db 23, 0, $85, 25, 8
        08          
-04AD83 17 00 85 1A 0322*      db 23, 0, $85, 26, 8
+04AD83 17 00 85 1A 0293*      db 23, 0, $85, 26, 8
        08          
-04AD88 17 00 85 1B 0323*      db 23, 0, $85, 27, 8
+04AD88 17 00 85 1B 0294*      db 23, 0, $85, 27, 8
        08          
-04AD8D 17 00 85 1C 0324*      db 23, 0, $85, 28, 8
+04AD8D 17 00 85 1C 0295*      db 23, 0, $85, 28, 8
        08          
-04AD92 17 00 85 1D 0325*      db 23, 0, $85, 29, 8
+04AD92 17 00 85 1D 0296*      db 23, 0, $85, 29, 8
        08          
-04AD97 17 00 85 1E 0326*      db 23, 0, $85, 30, 8
+04AD97 17 00 85 1E 0297*      db 23, 0, $85, 30, 8
        08          
-04AD9C 17 00 85 1F 0327*      db 23, 0, $85, 31, 8
+04AD9C 17 00 85 1F 0298*      db 23, 0, $85, 31, 8
        08          
-04ADA1             0328*  enable_channels_end:
+04ADA1             0299*  enable_channels_end:
 04ADA1             0033       include "src/asm/functions.asm"
 04ADA1             0001*  ; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/functions.s
 04ADA1             0002*  ; Print a zero-terminated string
@@ -19228,7 +19199,7 @@ PC     Output      Line
 04B774 48 02       0061*  	dw 584 ; SCHUSSTAFFEL
 04B776 E0 02       0062*  	dw 736 ; SCREAM
 04B778 B6 05       0063*  	dw 1462 ; SHOT_GATLING_BURST
-04B77A 44 01       0064*  	dw 324 ; SHOT_MACHINE_GUN_BURST
+04B77A F9 03       0064*  	dw 1017 ; SHOT_MACHINE_GUN_BURST
 04B77C 7C 04       0065*  	dw 1148 ; SHOT_PISTOL
 04B77E 77 01       0066*  	dw 375 ; UGH
 04B780 FD 04       0067*  	dw 1277 ; WILHELM
@@ -19595,7 +19566,7 @@ PC     Output      Line
 04BAD7 3E 01       0278*  	ld a,mos_load
 04BAD9 5B CF       0279*  	RST.LIL 08h
 04BADB 21 0F FB 00 0280*  	ld hl,BUF_SHOT_MACHINE_GUN_BURST
-04BADF DD 21 50 15 0281*  	ld ix,5456
+04BADF DD 21 C4 42 0281*  	ld ix,17092
        00          
 04BAE4 CD 00 AC 04 0282*  	call vdu_load_sfx
 04BAE8             0283*  	WAVEFORM_SAMPLE 16, BUF_SHOT_MACHINE_GUN_BURST
@@ -20192,7 +20163,7 @@ PC     Output      Line
 04BFC2             0025*M @sample_end:
 04BFC2             0388*  
 04BFC2             0389*  sfx_play_shot_machine_gun_burst:
-04BFC2             0390*  	PLAY_SAMPLE BUF_SHOT_MACHINE_GUN_BURST, 127, 324
+04BFC2             0390*  	PLAY_SAMPLE BUF_SHOT_MACHINE_GUN_BURST, 127, 1017
 04BFC2 3A 0C AC 04 0001*M     ld a,(last_channel)
 04BFC6 3C          0002*M     inc a
 04BFC7 E6 1F       0003*M     and 31 ; modulo 32
@@ -20216,7 +20187,7 @@ PC     Output      Line
 04BFEB             0021*M @channel1:
 04BFEB 00 00 7F    0022*M     .db 0,0,volume                ; channel, volume
 04BFEE 00 00       0023*M     .dw 0                               ; freq (tuneable samples only)
-04BFF0 44 01       0024*M     .dw duration                        ; duration
+04BFF0 F9 03       0024*M     .dw duration                        ; duration
 04BFF2             0025*M @sample_end:
 04BFF2             0391*  
 04BFF2             0392*  sfx_play_shot_pistol:
@@ -20771,59 +20742,55 @@ PC     Output      Line
 04C2FD             0177   main:
 04C2FD             0178   ; set map variables and load initial map file
 04C2FD CD 58 64 04 0179   	call map_init
-04C301             0180   
-04C301             0181   ; initialize player position
-04C301 CD 62 B1 04 0182   	call plyr_init
-04C305             0183   
-04C305             0184   main_loop:
-04C305             0185   ; move enemies
-04C305 CD 1F A5 04 0186   	call see_orientation
-04C309             0187   ; get player input and update sprite position
-04C309 CD F6 B3 04 0188   	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
-04C30D             0189   ; render the updated scene
-04C30D CD 5B 66 04 0190   	call render_scene
-04C311             0191   
-04C311             0192   ; flip the screen
-04C311 CD EC A7 04 0193   	call vdu_flip
-04C315             0194   ; ; wait for the next VBLANK
-04C315             0195   ; 	call vdu_vblank
-04C315             0196   
-04C315             0197   ; wait for main loop timer to expire before contiuining
-04C315             0198   @wait:
-04C315 FD 21 F7 C2 0199   	ld iy,main_loop_tmr
+04C301             0180   ; initialize player position
+04C301 CD 62 B1 04 0181   	call plyr_init
+04C305             0182   
+04C305             0183   main_loop:
+04C305             0184   ; move enemies
+04C305 CD 1F A5 04 0185   	call see_orientation
+04C309             0186   ; get player input and update sprite position
+04C309 CD F6 B3 04 0187   	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
+04C30D             0188   ; render the updated scene
+04C30D CD 5B 66 04 0189   	call render_scene
+04C311             0190   ; flip the screen
+04C311 CD EC A7 04 0191   	call vdu_flip
+04C315             0192   
+04C315             0193   ; wait for main loop timer to expire before contiuining
+04C315             0194   @wait:
+04C315 FD 21 F7 C2 0195   	ld iy,main_loop_tmr
        04          
-04C31A CD 6C C1 04 0200   	call tmr_get
-04C31E CA 2A C3 04 0201   	jp z,@continue
-04C322 FA 2A C3 04 0202   	jp m,@continue
-04C326 C3 15 C3 04 0203   	jp @wait
-04C32A             0204   @continue:
-04C32A             0205   ; reset main loop timer
-04C32A FD 21 F7 C2 0206   	ld iy,main_loop_tmr
+04C31A CD 6C C1 04 0196   	call tmr_get
+04C31E CA 2A C3 04 0197   	jp z,@continue
+04C322 FA 2A C3 04 0198   	jp m,@continue
+04C326 C3 15 C3 04 0199   	jp @wait
+04C32A             0200   @continue:
+04C32A             0201   ; reset main loop timer
+04C32A FD 21 F7 C2 0202   	ld iy,main_loop_tmr
        04          
-04C32F 21 0A 00 00 0207   	ld hl,120/framerate
-04C333 CD 5E C1 04 0208   	call tmr_set
-04C337             0209   
-04C337             0210   ; check for escape key and quit if pressed
-04C337             0211   	MOSCALL mos_getkbmap
+04C32F 21 0A 00 00 0203   	ld hl,120/framerate
+04C333 CD 5E C1 04 0204   	call tmr_set
+04C337             0205   
+04C337             0206   ; check for escape key and quit if pressed
+04C337             0207   	MOSCALL mos_getkbmap
 04C337 3E 1E       0001M  			LD	A, function
 04C339 5B CF       0002M  			RST.LIL	08h
-04C33B             0212   ; 113 Escape
-04C33B DD CB 0E 46 0213       bit 0,(ix+14)
-04C33F 20 02       0214   	jr nz,main_end
-04C341             0215   @Escape:
-04C341 18 C2       0216   	jr main_loop
-04C343             0217   
-04C343             0218   main_end:
-04C343             0219   	; call do_outro
-04C343             0220   ; restore screen to something normalish
-04C343 AF          0221   	xor a
-04C344 CD AA A6 04 0222   	call vdu_set_screen_mode
-04C348 CD 5B A8 04 0223   	call cursor_on
-04C34C C9          0224   	ret
-04C34D             0225   
-04C34D             0226   
-04C34D             0227   ; files.asm must go here so that filedata doesn't stomp on program data
-04C34D             0228   	include "src/asm/files.asm"
+04C33B             0208   ; 113 Escape
+04C33B DD CB 0E 46 0209       bit 0,(ix+14)
+04C33F 20 02       0210   	jr nz,main_end
+04C341             0211   @Escape:
+04C341 18 C2       0212   	jr main_loop
+04C343             0213   
+04C343             0214   main_end:
+04C343             0215   	; call do_outro
+04C343             0216   ; restore screen to something normalish
+04C343 AF          0217   	xor a
+04C344 CD AA A6 04 0218   	call vdu_set_screen_mode
+04C348 CD 5B A8 04 0219   	call cursor_on
+04C34C C9          0220   	ret
+04C34D             0221   
+04C34D             0222   
+04C34D             0223   ; files.asm must go here so that filedata doesn't stomp on program data
+04C34D             0224   	include "src/asm/files.asm"
 04C34D             0001*  ; WARNING: this routine must be the last one loaded in the main program so that filedata doesn't stomp on any program code
 04C34D             0002*  ; inputs: hl = bufferId, ix = file size
 04C34D             0003*  vdu_load_buffer_from_file:

@@ -177,7 +177,6 @@ framerate: equ 12
 main:
 ; set map variables and load initial map file
 	call map_init
-
 ; initialize player position
 	call plyr_init
 
@@ -188,11 +187,8 @@ main_loop:
 	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
 ; render the updated scene
 	call render_scene
-
 ; flip the screen
 	call vdu_flip
-; ; wait for the next VBLANK
-; 	call vdu_vblank
 
 ; wait for main loop timer to expire before contiuining
 @wait:
