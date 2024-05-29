@@ -18407,7 +18407,7 @@ PC     Output      Line
 04B21C 22 13 B1 04 0178*      ld (plyr_wpn_ui_sm),hl
 04B220 3E 14       0179*      ld a,20 ; dps = 60
 04B222 32 12 B1 04 0180*      ld (plyr_wpn_damage),a
-04B226 21 28 00 00 0181*      ld hl,120/3 ; 3 times/second
+04B226 21 3C 00 00 0181*      ld hl,120/2 ; 3 times/second
 04B22A 22 25 B1 04 0182*      ld (plyr_wpn_fire_rate),hl
 04B22E FD 21 1F B1 0183*      ld iy,plyr_wpn_fire_tmr
        04          
@@ -18435,420 +18435,416 @@ PC     Output      Line
 04B270             0204*  ; 4 shots/burst, 3 bursts/sec, 80 dmg/burst, 240 dmg/sec, 20 dmg/shot
 04B270 3E 50       0205*      ld a,80 ; damage/burst
 04B272 32 12 B1 04 0206*      ld (plyr_wpn_damage),a
-04B276 21 28 00 00 0207*      ld hl,40 ; 3 bursts/second
+04B276 21 28 00 00 0207*      ld hl,120/3 ; 3 bursts/second
 04B27A 22 25 B1 04 0208*      ld (plyr_wpn_fire_rate),hl
 04B27E FD 21 1F B1 0209*      ld iy,plyr_wpn_fire_tmr
        04          
 04B283 CD AC C1 04 0210*      call timestamp_tmr_set
-04B287             0211*      ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
-04B287             0212*      ; ld (plyr_wpn_anim_tmr_rst),hl
-04B287 C9          0213*      ret
-04B288             0214*  @gatling_gun:
-04B288 21 00 21 00 0215*      ld hl,BUF_UI_BJ_GATLING_00
-04B28C 22 16 B1 04 0216*      ld (plyr_wpn_ui_lg),hl
-04B290 21 02 20 00 0217*      ld hl,BUF_UI_LOWER_PANEL_GATLING
-04B294 22 13 B1 04 0218*      ld (plyr_wpn_ui_sm),hl
-04B298             0219*  ; 8 shots/burst, 3 bursts/sec, 120 dmg/burst, 360 dmg/sec, 15 dmg/shot
-04B298 3E 78       0220*      ld a,120 ; damage/burst
-04B29A 32 12 B1 04 0221*      ld (plyr_wpn_damage),a
-04B29E 21 28 00 00 0222*      ld hl,40 ; 3 bursts/second
-04B2A2 22 25 B1 04 0223*      ld (plyr_wpn_fire_rate),hl
-04B2A6 FD 21 1F B1 0224*      ld iy,plyr_wpn_fire_tmr
+04B287 C9          0211*      ret
+04B288             0212*  @gatling_gun:
+04B288 21 00 21 00 0213*      ld hl,BUF_UI_BJ_GATLING_00
+04B28C 22 16 B1 04 0214*      ld (plyr_wpn_ui_lg),hl
+04B290 21 02 20 00 0215*      ld hl,BUF_UI_LOWER_PANEL_GATLING
+04B294 22 13 B1 04 0216*      ld (plyr_wpn_ui_sm),hl
+04B298             0217*  ; 8 shots/burst, 3 bursts/sec, 120 dmg/burst, 360 dmg/sec, 15 dmg/shot
+04B298 3E 78       0218*      ld a,120 ; damage/burst
+04B29A 32 12 B1 04 0219*      ld (plyr_wpn_damage),a
+04B29E 21 28 00 00 0220*      ld hl,120/3 ; 3 bursts/second
+04B2A2 22 25 B1 04 0221*      ld (plyr_wpn_fire_rate),hl
+04B2A6 FD 21 1F B1 0222*      ld iy,plyr_wpn_fire_tmr
        04          
-04B2AB CD AC C1 04 0225*      call timestamp_tmr_set
-04B2AF             0226*      ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
-04B2AF             0227*      ; ld (plyr_wpn_anim_tmr_rst),hl
-04B2AF C9          0228*      ret
-04B2B0             0229*  
-04B2B0             0230*  ; modifies the players health by a set amount
-04B2B0             0231*  ; inputs: a is the signed amount to modify health
-04B2B0             0232*  plyr_mod_health:
-04B2B0 21 EC B0 04 0233*      ld hl,plyr_health
-04B2B4 86          0234*      add a,(hl)
-04B2B5 77          0235*      ld (hl),a
-04B2B6 C9          0236*      ret
-04B2B7             0237*  
-04B2B7             0238*  ; modifies the players score by a set amount
-04B2B7             0239*  ; inputs: a is the signed amount to modify score
-04B2B7             0240*  plyr_mod_score:
-04B2B7 21 E9 B0 04 0241*      ld hl,plyr_score
-04B2BB 86          0242*      add a,(hl)
-04B2BC 77          0243*      ld (hl),a
-04B2BD C9          0244*      ret
-04B2BE             0245*  
-04B2BE             0246*  ; modifies the players ammo by a set amount
-04B2BE             0247*  ; inputs: a is the signed amount to modify score
-04B2BE             0248*  plyr_mod_ammo:
-04B2BE 21 2B B1 04 0249*      ld hl,plyr_ammo
-04B2C2 86          0250*      add a,(hl)
-04B2C3 77          0251*      ld (hl),a
-04B2C4 C9          0252*      ret
-04B2C5             0253*  
-04B2C5             0254*  plyr_shoot_knife:
-04B2C5             0255*      ; check whether the player hit anything
-04B2C5 3A FA B0 04 0256*      ld a,(orientation) ; direction knife is moving
-04B2C9 5F          0257*      ld e,a
-04B2CA 16 01       0258*      ld d,1 ; shot "velocity" in map units
-04B2CC CD EC 63 04 0259*      call get_dx_dy ; d,e = dy,dx
-04B2D0 ED 53 08 B1 0260*      ld (plyr_shot_xvel),de ; implicity populates yvel
+04B2AB CD AC C1 04 0223*      call timestamp_tmr_set
+04B2AF C9          0224*      ret
+04B2B0             0225*  
+04B2B0             0226*  ; modifies the players health by a set amount
+04B2B0             0227*  ; inputs: a is the signed amount to modify health
+04B2B0             0228*  plyr_mod_health:
+04B2B0 21 EC B0 04 0229*      ld hl,plyr_health
+04B2B4 86          0230*      add a,(hl)
+04B2B5 77          0231*      ld (hl),a
+04B2B6 C9          0232*      ret
+04B2B7             0233*  
+04B2B7             0234*  ; modifies the players score by a set amount
+04B2B7             0235*  ; inputs: a is the signed amount to modify score
+04B2B7             0236*  plyr_mod_score:
+04B2B7 21 E9 B0 04 0237*      ld hl,plyr_score
+04B2BB 86          0238*      add a,(hl)
+04B2BC 77          0239*      ld (hl),a
+04B2BD C9          0240*      ret
+04B2BE             0241*  
+04B2BE             0242*  ; modifies the players ammo by a set amount
+04B2BE             0243*  ; inputs: a is the signed amount to modify score
+04B2BE             0244*  plyr_mod_ammo:
+04B2BE 21 2B B1 04 0245*      ld hl,plyr_ammo
+04B2C2 86          0246*      add a,(hl)
+04B2C3 77          0247*      ld (hl),a
+04B2C4 C9          0248*      ret
+04B2C5             0249*  
+04B2C5             0250*  plyr_shoot_knife:
+04B2C5             0251*      ; check whether the player hit anything
+04B2C5 3A FA B0 04 0252*      ld a,(orientation) ; direction knife is moving
+04B2C9 5F          0253*      ld e,a
+04B2CA 16 01       0254*      ld d,1 ; shot "velocity" in map units
+04B2CC CD EC 63 04 0255*      call get_dx_dy ; d,e = dy,dx
+04B2D0 ED 53 08 B1 0256*      ld (plyr_shot_xvel),de ; implicity populates yvel
        04          
-04B2D5 2A FB B0 04 0261*      ld hl,(cur_x) ; h,l = player y,x
-04B2D9 22 05 B1 04 0262*      ld (plyr_shot_x),hl ; initial shot position
-04B2DD ED 5B 08 B1 0263*      ld de,(plyr_shot_xvel) ; d,e = shot yvel,xvel
+04B2D5 2A FB B0 04 0257*      ld hl,(cur_x) ; h,l = player y,x
+04B2D9 22 05 B1 04 0258*      ld (plyr_shot_x),hl ; initial shot position
+04B2DD ED 5B 08 B1 0259*      ld de,(plyr_shot_xvel) ; d,e = shot yvel,xvel
        04          
-04B2E2 2A 05 B1 04 0264*      ld hl,(plyr_shot_x) ; h,l = player shot y,x
-04B2E6             0265*      ; bump bullet position one map unit in direction of travel
-04B2E6 7D          0266*      ld a,l ; player shot x
-04B2E7 83          0267*      add a,e ; add xvel
-04B2E8 6F          0268*      ld l,a ; save new x
-04B2E9 7C          0269*      ld a,h ; player shot y
-04B2EA 82          0270*      add a,d ; add yvel
-04B2EB 67          0271*      ld h,a ; save new y
-04B2EC 22 05 B1 04 0272*      ld (plyr_shot_x),hl ; and save that position
-04B2F0 EB          0273*      ex de,hl ; d,e = bullet y,x
-04B2F1 CD C7 63 04 0274*      call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
-04B2F5             0275*  ; check whether target cell contains a sprite
-04B2F5 DD 7E 03    0276*      ld a,(ix+map_sprite_id)
-04B2F8 FE FF       0277*      cp 255 ; value if not sprite
-04B2FA C8          0278*      ret z ; if we hit a non-sprite, we're done
-04B2FB             0279*  ; is a sprite so run its "hurt" behavior routine
-04B2FB CD B9 9D 04 0280*      call sprite_set_pointer
-04B2FF 3E 02       0281*      ld a,sp_hurt
-04B301 CD 87 9E 04 0282*      call do_sprite_behavior ; a = sprite behavior return code
-04B305 C9          0283*      ret
-04B306             0284*  
-04B306             0285*  plyr_shoot_pistol:
-04B306 3E FF       0286*      ld a,-1
-04B308 CD BE B2 04 0287*      call plyr_mod_ammo
-04B30C CD F2 BF 04 0288*      call sfx_play_shot_pistol
-04B310 C3 30 B3 04 0289*      jp plyr_move_bullet
-04B314             0290*  
-04B314             0291*  plyr_shoot_machine_gun:
-04B314 3E FC       0292*      ld a,-4
-04B316 CD BE B2 04 0293*      call plyr_mod_ammo
-04B31A CD C2 BF 04 0294*      call sfx_play_shot_machine_gun_burst
-04B31E C3 30 B3 04 0295*      jp plyr_move_bullet
-04B322             0296*  
-04B322             0297*  plyr_shoot_gatling_gun:
-04B322 3E F8       0298*      ld a,-8
-04B324 CD BE B2 04 0299*      call plyr_mod_ammo
-04B328 CD 92 BF 04 0300*      call sfx_play_shot_gatling_burst
-04B32C C3 30 B3 04 0301*      jp plyr_move_bullet
-04B330             0302*  
-04B330             0303*  plyr_move_bullet:
-04B330             0304*      ; check whether the player hit anything
-04B330 3A FA B0 04 0305*      ld a,(orientation) ; direction shot is moving
-04B334 32 0B B1 04 0306*      ld (plyr_shot_status),a ; save shot direction -- indicates live shot in flight
-04B338 5F          0307*      ld e,a
-04B339 16 01       0308*      ld d,1 ; shot "velocity" in map units
-04B33B CD EC 63 04 0309*      call get_dx_dy ; d,e = dy,dx
-04B33F ED 53 08 B1 0310*      ld (plyr_shot_xvel),de ; implicity populates yvel
+04B2E2 2A 05 B1 04 0260*      ld hl,(plyr_shot_x) ; h,l = player shot y,x
+04B2E6             0261*      ; bump bullet position one map unit in direction of travel
+04B2E6 7D          0262*      ld a,l ; player shot x
+04B2E7 83          0263*      add a,e ; add xvel
+04B2E8 6F          0264*      ld l,a ; save new x
+04B2E9 7C          0265*      ld a,h ; player shot y
+04B2EA 82          0266*      add a,d ; add yvel
+04B2EB 67          0267*      ld h,a ; save new y
+04B2EC 22 05 B1 04 0268*      ld (plyr_shot_x),hl ; and save that position
+04B2F0 EB          0269*      ex de,hl ; d,e = bullet y,x
+04B2F1 CD C7 63 04 0270*      call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
+04B2F5             0271*  ; check whether target cell contains a sprite
+04B2F5 DD 7E 03    0272*      ld a,(ix+map_sprite_id)
+04B2F8 FE FF       0273*      cp 255 ; value if not sprite
+04B2FA C8          0274*      ret z ; if we hit a non-sprite, we're done
+04B2FB             0275*  ; is a sprite so run its "hurt" behavior routine
+04B2FB CD B9 9D 04 0276*      call sprite_set_pointer
+04B2FF 3E 02       0277*      ld a,sp_hurt
+04B301 CD 87 9E 04 0278*      call do_sprite_behavior ; a = sprite behavior return code
+04B305 C9          0279*      ret
+04B306             0280*  
+04B306             0281*  plyr_shoot_pistol:
+04B306 3E FF       0282*      ld a,-1
+04B308 CD BE B2 04 0283*      call plyr_mod_ammo
+04B30C CD F2 BF 04 0284*      call sfx_play_shot_pistol
+04B310 C3 30 B3 04 0285*      jp plyr_move_bullet
+04B314             0286*  
+04B314             0287*  plyr_shoot_machine_gun:
+04B314 3E FC       0288*      ld a,-4
+04B316 CD BE B2 04 0289*      call plyr_mod_ammo
+04B31A CD C2 BF 04 0290*      call sfx_play_shot_machine_gun_burst
+04B31E C3 30 B3 04 0291*      jp plyr_move_bullet
+04B322             0292*  
+04B322             0293*  plyr_shoot_gatling_gun:
+04B322 3E F8       0294*      ld a,-8
+04B324 CD BE B2 04 0295*      call plyr_mod_ammo
+04B328 CD 92 BF 04 0296*      call sfx_play_shot_gatling_burst
+04B32C C3 30 B3 04 0297*      jp plyr_move_bullet
+04B330             0298*  
+04B330             0299*  plyr_move_bullet:
+04B330             0300*      ; check whether the player hit anything
+04B330 3A FA B0 04 0301*      ld a,(orientation) ; direction shot is moving
+04B334 32 0B B1 04 0302*      ld (plyr_shot_status),a ; save shot direction -- indicates live shot in flight
+04B338 5F          0303*      ld e,a
+04B339 16 01       0304*      ld d,1 ; shot "velocity" in map units
+04B33B CD EC 63 04 0305*      call get_dx_dy ; d,e = dy,dx
+04B33F ED 53 08 B1 0306*      ld (plyr_shot_xvel),de ; implicity populates yvel
        04          
-04B344 2A FB B0 04 0311*      ld hl,(cur_x) ; h,l = player y,x
-04B348 22 05 B1 04 0312*      ld (plyr_shot_x),hl ; initial shot position
-04B34C 06 05       0313*      ld b,view_distance ; loop counter so player can't shoot past view distance
-04B34E             0314*  @loop:
-04B34E C5          0315*      push bc ; save loop counter
-04B34F ED 5B 08 B1 0316*      ld de,(plyr_shot_xvel) ; d,e = shot yvel,xvel
+04B344 2A FB B0 04 0307*      ld hl,(cur_x) ; h,l = player y,x
+04B348 22 05 B1 04 0308*      ld (plyr_shot_x),hl ; initial shot position
+04B34C 06 05       0309*      ld b,view_distance ; loop counter so player can't shoot past view distance
+04B34E             0310*  @loop:
+04B34E C5          0311*      push bc ; save loop counter
+04B34F ED 5B 08 B1 0312*      ld de,(plyr_shot_xvel) ; d,e = shot yvel,xvel
        04          
-04B354 2A 05 B1 04 0317*      ld hl,(plyr_shot_x) ; h,l = player shot y,x
-04B358             0318*      ; bump bullet position one map unit in direction of travel
-04B358 7D          0319*      ld a,l ; player shot x
-04B359 83          0320*      add a,e ; add xvel
-04B35A 6F          0321*      ld l,a ; save new x
-04B35B 7C          0322*      ld a,h ; player shot y
-04B35C 82          0323*      add a,d ; add yvel
-04B35D 67          0324*      ld h,a ; save new y
-04B35E 22 05 B1 04 0325*      ld (plyr_shot_x),hl ; and save that position
-04B362 EB          0326*      ex de,hl ; d,e = bullet y,x
-04B363 CD C7 63 04 0327*      call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
-04B367             0328*  ; check whether target cell contains a sprite
-04B367 DD 7E 03    0329*      ld a,(ix+map_sprite_id)
-04B36A FE FF       0330*      cp 255 ; value if not sprite
-04B36C 28 14       0331*      jr z,@not_sprite
-04B36E             0332*  ; is a sprite so run its "hurt" behavior routine
-04B36E CD B9 9D 04 0333*      call sprite_set_pointer
-04B372 3E 02       0334*      ld a,sp_hurt
-04B374 CD 87 9E 04 0335*      call do_sprite_behavior ; a = sprite behavior return code
-04B378 3A 0B B1 04 0336*      ld a,(plyr_shot_status)
-04B37C FE FF       0337*      cp 255 ; value if shot hit a shootable sprite
-04B37E 28 10       0338*      jr z,@stop_bullet ; if we hit a shootable sprite, we're done
-04B380 18 16       0339*      jr @move_bullet ; otherwise keep moving bullet
-04B382             0340*  @not_sprite:
-04B382 ED 5B 08 B1 0341*      ld de,(plyr_shot_xvel) ; restore yvel,xvel to d,e
+04B354 2A 05 B1 04 0313*      ld hl,(plyr_shot_x) ; h,l = player shot y,x
+04B358             0314*      ; bump bullet position one map unit in direction of travel
+04B358 7D          0315*      ld a,l ; player shot x
+04B359 83          0316*      add a,e ; add xvel
+04B35A 6F          0317*      ld l,a ; save new x
+04B35B 7C          0318*      ld a,h ; player shot y
+04B35C 82          0319*      add a,d ; add yvel
+04B35D 67          0320*      ld h,a ; save new y
+04B35E 22 05 B1 04 0321*      ld (plyr_shot_x),hl ; and save that position
+04B362 EB          0322*      ex de,hl ; d,e = bullet y,x
+04B363 CD C7 63 04 0323*      call get_cell_from_coords ; ix = pointer to cell_status lut; a = obj_id, bc = cell_id
+04B367             0324*  ; check whether target cell contains a sprite
+04B367 DD 7E 03    0325*      ld a,(ix+map_sprite_id)
+04B36A FE FF       0326*      cp 255 ; value if not sprite
+04B36C 28 14       0327*      jr z,@not_sprite
+04B36E             0328*  ; is a sprite so run its "hurt" behavior routine
+04B36E CD B9 9D 04 0329*      call sprite_set_pointer
+04B372 3E 02       0330*      ld a,sp_hurt
+04B374 CD 87 9E 04 0331*      call do_sprite_behavior ; a = sprite behavior return code
+04B378 3A 0B B1 04 0332*      ld a,(plyr_shot_status)
+04B37C FE FF       0333*      cp 255 ; value if shot hit a shootable sprite
+04B37E 28 10       0334*      jr z,@stop_bullet ; if we hit a shootable sprite, we're done
+04B380 18 16       0335*      jr @move_bullet ; otherwise keep moving bullet
+04B382             0336*  @not_sprite:
+04B382 ED 5B 08 B1 0337*      ld de,(plyr_shot_xvel) ; restore yvel,xvel to d,e
        04          
-04B387             0342*  ; read map type/status mask from target cell
-04B387 DD 7E 00    0343*      ld a,(ix+map_type_status)
-04B38A E6 03       0344*      and %00000011 ; mask off everything but the render type mask bits
-04B38C             0345*  ; branch on the values in the bitmask
-04B38C FE 01       0346*      cp render_type_floor
-04B38E 28 08       0347*      jr z,@move_bullet ; keep going if map cell is a floor
-04B390             0348*  @stop_bullet:
-04B390 C1          0349*      pop bc ; dummy pop to balance stack
-04B391 3E FF       0350*      ld a,255
-04B393 32 0B B1 04 0351*      ld (plyr_shot_status),a ; set shot status to -1 to indicate shot is done
-04B397 C9          0352*      ret ; combat ended
-04B398             0353*  @move_bullet:
-04B398 C1          0354*      pop bc ; restore loop counter
-04B399 10 B3       0355*      djnz @loop ; keep moving bullet if we have more distance to cover
-04B39B 3E FF       0356*      ld a,255
-04B39D 32 0B B1 04 0357*      ld (plyr_shot_status),a ; set shot status to -1 to indicate shot is done
-04B3A1 C9          0358*      ret ; combat ended
-04B3A2             0359*  
-04B3A2             0360*  plyr_shoot:
-04B3A2             0361*  ; check if fire weapons timer has expired
-04B3A2 FD 21 1F B1 0362*      ld iy,plyr_wpn_fire_tmr
+04B387             0338*  ; read map type/status mask from target cell
+04B387 DD 7E 00    0339*      ld a,(ix+map_type_status)
+04B38A E6 03       0340*      and %00000011 ; mask off everything but the render type mask bits
+04B38C             0341*  ; branch on the values in the bitmask
+04B38C FE 01       0342*      cp render_type_floor
+04B38E 28 08       0343*      jr z,@move_bullet ; keep going if map cell is a floor
+04B390             0344*  @stop_bullet:
+04B390 C1          0345*      pop bc ; dummy pop to balance stack
+04B391 3E FF       0346*      ld a,255
+04B393 32 0B B1 04 0347*      ld (plyr_shot_status),a ; set shot status to -1 to indicate shot is done
+04B397 C9          0348*      ret ; combat ended
+04B398             0349*  @move_bullet:
+04B398 C1          0350*      pop bc ; restore loop counter
+04B399 10 B3       0351*      djnz @loop ; keep moving bullet if we have more distance to cover
+04B39B 3E FF       0352*      ld a,255
+04B39D 32 0B B1 04 0353*      ld (plyr_shot_status),a ; set shot status to -1 to indicate shot is done
+04B3A1 C9          0354*      ret ; combat ended
+04B3A2             0355*  
+04B3A2             0356*  plyr_shoot:
+04B3A2             0357*  ; check if fire weapons timer has expired
+04B3A2 FD 21 1F B1 0358*      ld iy,plyr_wpn_fire_tmr
        04          
-04B3A7 CD B7 C1 04 0363*      call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-04B3AB CA B4 B3 04 0364*      jp z,@time_up ; timer zero so fire weapon
-04B3AF FA B4 B3 04 0365*      jp m,@time_up ; timer negative so fire weapon
-04B3B3 C9          0366*      ret ; timer not expired so don't fire weapon
-04B3B4             0367*  @time_up:
-04B3B4             0368*  ; reset fire weapon timer
-04B3B4 FD 21 1F B1 0369*      ld iy,plyr_wpn_fire_tmr ; DEBUG - we should not need this?
+04B3A7 CD B7 C1 04 0359*      call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+04B3AB CA B4 B3 04 0360*      jp z,@time_up ; timer zero so fire weapon
+04B3AF FA B4 B3 04 0361*      jp m,@time_up ; timer negative so fire weapon
+04B3B3 C9          0362*      ret ; timer not expired so don't fire weapon
+04B3B4             0363*  @time_up:
+04B3B4             0364*  ; reset fire weapon timer
+04B3B4 FD 21 1F B1 0365*      ld iy,plyr_wpn_fire_tmr ; DEBUG - we should not need this?
        04          
-04B3B9 2A 25 B1 04 0370*      ld hl,(plyr_wpn_fire_rate)
-04B3BD CD AC C1 04 0371*      call timestamp_tmr_set
-04B3C1             0372*  ; check animation frame for zero
-04B3C1 21 28 B1 04 0373*      ld hl,plyr_wpn_anim_fr
-04B3C5 7E          0374*      ld a,(hl)
-04B3C6 A7          0375*      and a
-04B3C7 20 01       0376*      jr nz,@shoot ; if not zero, we're already in the middle of an animation
-04B3C9 34          0377*      inc (hl) ; is zero so bump to first animation frame
-04B3CA             0378*  ; ; set animation timer
-04B3CA             0379*  ;     ld hl,(plyr_wpn_anim_tmr_rst)
-04B3CA             0380*  ;     ld iy,plyr_wpn_anim_tmr
-04B3CA             0381*  ;     call timestamp_tmr_set
-04B3CA             0382*  @shoot:
-04B3CA             0383*  ; roll for damage modifier
-04B3CA CD 7E B5 04 0384*      call rand_8 ; a is a bitmask we apply to the weapon's dmg/burst
-04B3CE 21 12 B1 04 0385*      ld hl,plyr_wpn_damage
-04B3D2 A6          0386*      and a,(hl) ; a contains modified damage value
-04B3D3 ED 44       0387*      neg ; so we can add the negative
-04B3D5 32 0F B1 04 0388*      ld (plyr_shot_damage),a ; pass shot damage to sprite hurt routine
-04B3D9             0389*  ; determine active weapon and shoot it
-04B3D9 3A 11 B1 04 0390*      ld a,(plyr_wpn_active)
-04B3DD FE 02       0391*      cp plyr_wpn_pistol
-04B3DF CA 06 B3 04 0392*      jp z,plyr_shoot_pistol
-04B3E3 FE 04       0393*      cp plyr_wpn_mg
-04B3E5 CA 14 B3 04 0394*      jp z,plyr_shoot_machine_gun
-04B3E9 FE 08       0395*      cp plyr_wpn_gg
-04B3EB CA 22 B3 04 0396*      jp z,plyr_shoot_gatling_gun
-04B3EF FE 01       0397*      cp plyr_wpn_knife
-04B3F1 CA C5 B2 04 0398*      jp z,plyr_shoot_knife
-04B3F5 C9          0399*      ret
-04B3F6             0400*  
-04B3F6             0401*  ; process player keyboard input
-04B3F6             0402*  ; Inputs: plyr_x/y set at desired position
-04B3F6             0403*  ; Returns: player position updated
-04B3F6             0404*  ; Destroys: probably everything
-04B3F6             0405*  plyr_input:
-04B3F6             0406*  ; check weapon anmation frame for zero
-04B3F6 3A 28 B1 04 0407*      ld a,(plyr_wpn_anim_fr)
-04B3FA E6 03       0408*      and 3 ; modulo 4
-04B3FC 32 28 B1 04 0409*      ld (plyr_wpn_anim_fr),a
-04B400 28 05       0410*      jr z,@get_input
-04B402             0411*  ; ; animation frame is not zero so check animation timer
-04B402             0412*  ;     ld iy,plyr_wpn_anim_tmr
-04B402             0413*  ;     call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-04B402             0414*  ;     jp z,@animate ; timer zero so animate
-04B402             0415*  ;     jp m,@animate ; timer negative so animate
-04B402             0416*  ;     jp @get_input ; time left on timer so no animation
-04B402             0417*  ; bump animation frame
-04B402             0418*  @animate:
-04B402 21 28 B1 04 0419*      ld hl,plyr_wpn_anim_fr
-04B406 34          0420*      inc (hl) ; next frame
-04B407             0421*  ; ; reset animation timer
-04B407             0422*  ;     ld iy,plyr_wpn_anim_tmr ; DEBUG - we should not need this?
-04B407             0423*  ;     ld hl,(plyr_wpn_anim_tmr_rst)
-04B407             0424*  ;     call timestamp_tmr_set
-04B407             0425*  
-04B407             0426*  @get_input:
-04B407             0427*  ; reset player component velocities to zero as the default
-04B407 21 00 00 00 0428*      ld hl,0
-04B40B 22 FE B0 04 0429*      ld (xvel),hl ; implicitly sets yvel
-04B40F AF          0430*      xor a ;
-04B410 32 04 B1 04 0431*      ld (avel),a ; set player angular velocity to zero as default
-04B414             0432*  
-04B414             0433*  ; check for keypresses and branch accordingly
-04B414             0434*      MOSCALL	mos_getkbmap ;ix = pointer to MOS virtual keys table
+04B3B9 2A 25 B1 04 0366*      ld hl,(plyr_wpn_fire_rate)
+04B3BD CD AC C1 04 0367*      call timestamp_tmr_set
+04B3C1             0368*  ; check animation frame for zero
+04B3C1 21 28 B1 04 0369*      ld hl,plyr_wpn_anim_fr
+04B3C5 7E          0370*      ld a,(hl)
+04B3C6 A7          0371*      and a
+04B3C7 20 01       0372*      jr nz,@shoot ; if not zero, we're already in the middle of an animation
+04B3C9 34          0373*      inc (hl) ; is zero so bump to first animation frame
+04B3CA             0374*  ; ; set animation timer
+04B3CA             0375*  ;     ld hl,(plyr_wpn_anim_tmr_rst)
+04B3CA             0376*  ;     ld iy,plyr_wpn_anim_tmr
+04B3CA             0377*  ;     call timestamp_tmr_set
+04B3CA             0378*  @shoot:
+04B3CA             0379*  ; roll for damage modifier
+04B3CA CD 7E B5 04 0380*      call rand_8 ; a is a bitmask we apply to the weapon's dmg/burst
+04B3CE 21 12 B1 04 0381*      ld hl,plyr_wpn_damage
+04B3D2 A6          0382*      and a,(hl) ; a contains modified damage value
+04B3D3 ED 44       0383*      neg ; so we can add the negative
+04B3D5 32 0F B1 04 0384*      ld (plyr_shot_damage),a ; pass shot damage to sprite hurt routine
+04B3D9             0385*  ; determine active weapon and shoot it
+04B3D9 3A 11 B1 04 0386*      ld a,(plyr_wpn_active)
+04B3DD FE 02       0387*      cp plyr_wpn_pistol
+04B3DF CA 06 B3 04 0388*      jp z,plyr_shoot_pistol
+04B3E3 FE 04       0389*      cp plyr_wpn_mg
+04B3E5 CA 14 B3 04 0390*      jp z,plyr_shoot_machine_gun
+04B3E9 FE 08       0391*      cp plyr_wpn_gg
+04B3EB CA 22 B3 04 0392*      jp z,plyr_shoot_gatling_gun
+04B3EF FE 01       0393*      cp plyr_wpn_knife
+04B3F1 CA C5 B2 04 0394*      jp z,plyr_shoot_knife
+04B3F5 C9          0395*      ret
+04B3F6             0396*  
+04B3F6             0397*  ; process player keyboard input
+04B3F6             0398*  ; Inputs: plyr_x/y set at desired position
+04B3F6             0399*  ; Returns: player position updated
+04B3F6             0400*  ; Destroys: probably everything
+04B3F6             0401*  plyr_input:
+04B3F6             0402*  ; check weapon anmation frame for zero
+04B3F6 3A 28 B1 04 0403*      ld a,(plyr_wpn_anim_fr)
+04B3FA E6 03       0404*      and 3 ; modulo 4
+04B3FC 32 28 B1 04 0405*      ld (plyr_wpn_anim_fr),a
+04B400 28 05       0406*      jr z,@get_input
+04B402             0407*  ; ; animation frame is not zero so check animation timer
+04B402             0408*  ;     ld iy,plyr_wpn_anim_tmr
+04B402             0409*  ;     call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+04B402             0410*  ;     jp z,@animate ; timer zero so animate
+04B402             0411*  ;     jp m,@animate ; timer negative so animate
+04B402             0412*  ;     jp @get_input ; time left on timer so no animation
+04B402             0413*  ; bump animation frame
+04B402             0414*  @animate:
+04B402 21 28 B1 04 0415*      ld hl,plyr_wpn_anim_fr
+04B406 34          0416*      inc (hl) ; next frame
+04B407             0417*  ; ; reset animation timer
+04B407             0418*  ;     ld iy,plyr_wpn_anim_tmr ; DEBUG - we should not need this?
+04B407             0419*  ;     ld hl,(plyr_wpn_anim_tmr_rst)
+04B407             0420*  ;     call timestamp_tmr_set
+04B407             0421*  
+04B407             0422*  @get_input:
+04B407             0423*  ; reset player component velocities to zero as the default
+04B407 21 00 00 00 0424*      ld hl,0
+04B40B 22 FE B0 04 0425*      ld (xvel),hl ; implicitly sets yvel
+04B40F AF          0426*      xor a ;
+04B410 32 04 B1 04 0427*      ld (avel),a ; set player angular velocity to zero as default
+04B414             0428*  
+04B414             0429*  ; check for keypresses and branch accordingly
+04B414             0430*      MOSCALL	mos_getkbmap ;ix = pointer to MOS virtual keys table
 04B414 3E 1E       0001*M 			LD	A, function
 04B416 5B CF       0002*M 			RST.LIL	08h
-04B418             0435*  
-04B418             0436*  ; CHECK WEAPON CONTROL KEYS
-04B418             0437*  ; 58 Up player selects next weapon
-04B418 DD CB 07 4E 0438*      bit 1,(ix+7)
-04B41C 28 08       0439*      jr z,@Up
-04B41E DD E5       0440*      push ix ; it gets clobbered by the weapon select routine
-04B420 CD AB B1 04 0441*      call plyr_next_weapon
-04B424 DD E1       0442*      pop ix
-04B426             0443*  @Up:
-04B426             0444*  
-04B426             0445*  ; 42 Down
-04B426 DD CB 05 4E 0446*      bit 1,(ix+5)
-04B42A 28 08       0447*      jr z,@Down
-04B42C DD E5       0448*      push ix ; it gets clobbered by the weapon select routine
-04B42E CD D3 B1 04 0449*      call plyr_previous_weapon
-04B432 DD E1       0450*      pop ix
-04B434             0451*  @Down:
-04B434             0452*  
-04B434             0453*  ; =====================
-04B434             0454*  ; 99 Space FIRE ZEE MISSILES!!!111
-04B434 DD CB 0C 56 0455*      bit 2,(ix+12)
-04B438 28 08       0456*      jr z,@Space
-04B43A DD E5       0457*      push ix ; it gets clobbered by the weapon firing
-04B43C CD A2 B3 04 0458*      call plyr_shoot
-04B440 DD E1       0459*      pop ix ; restore ix
-04B442             0460*  @Space:
-04B442             0461*  
-04B442             0462*  ; CHECK MOVEMENT KEYS
-04B442             0463*  ; non-zero means no movement key was pressed
-04B442 3E FF       0464*      ld a,-1
-04B444             0465*  
-04B444             0466*  ; 34 W player moves forward
-04B444 DD CB 04 4E 0467*      bit 1,(ix+4)
-04B448 28 07       0468*      jr z,@W
-04B44A 3E 01       0469*      ld a,speed_plyr ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
-04B44C 32 FF B0 04 0470*      ld (yvel),a
-04B450 AF          0471*      xor a
-04B451             0472*  @W:
-04B451             0473*  
-04B451             0474*  ; 82 S player moves backward
-04B451 DD CB 0A 4E 0475*      bit 1,(ix+10)
-04B455 28 0C       0476*      jr z,@S
-04B457 16 FF       0477*      ld d,-speed_plyr ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
-04B459 3A FF B0 04 0478*      ld a,(yvel)
-04B45D 82          0479*      add a,d
-04B45E 32 FF B0 04 0480*      ld (yvel),a
-04B462 AF          0481*      xor a
-04B463             0482*  @S:
-04B463             0483*  
-04B463             0484*  ; 66 A plyer moves left
-04B463 DD CB 08 4E 0485*      bit 1,(ix+8)
-04B467 28 07       0486*      jr z,@A
-04B469 3E FF       0487*      ld a,-speed_plyr ; no funky axis conversion here
-04B46B 32 FE B0 04 0488*      ld (xvel),a
-04B46F AF          0489*      xor a
-04B470             0490*  @A:
-04B470             0491*  
-04B470             0492*  ; 51 D player moves right
-04B470 DD CB 06 56 0493*      bit 2,(ix+6)
-04B474 28 0C       0494*      jr z,@D
-04B476 16 01       0495*      ld d,speed_plyr ; no funky axis conversion here
-04B478 3A FE B0 04 0496*      ld a,(xvel)
-04B47C 82          0497*      add a,d
-04B47D 32 FE B0 04 0498*      ld (xvel),a
-04B481 AF          0499*      xor a
-04B482             0500*  @D:
-04B482             0501*  
-04B482             0502*  ; 26 Left player rotates anti-clockwise
-04B482 DD CB 03 4E 0503*      bit 1,(ix+3)
-04B486 28 06       0504*      jr z,@Left
-04B488 21 04 B1 04 0505*      ld hl,avel
-04B48C 35          0506*      dec (hl)
-04B48D AF          0507*      xor a
-04B48E             0508*  @Left:
-04B48E             0509*  
-04B48E             0510*  ; 122 Right player rotates clockwise
-04B48E DD CB 0F 4E 0511*      bit 1,(ix+15)
-04B492 28 06       0512*      jr z,@Right
-04B494 21 04 B1 04 0513*      ld hl,avel
-04B498 34          0514*      inc (hl)
-04B499 AF          0515*      xor a
-04B49A             0516*  @Right:
-04B49A             0517*  
-04B49A             0518*  ; KEYPRESS DETECTION DONE
-04B49A A7          0519*      and a ; this will zero if player pressed a movement key
-04B49B C0          0520*      ret nz ; non zero so no key pressed
-04B49C             0521*  ; check move timer
-04B49C FD 21 37 B1 0522*      ld iy,plyr_move_timer
+04B418             0431*  
+04B418             0432*  ; CHECK WEAPON CONTROL KEYS
+04B418             0433*  ; 58 Up player selects next weapon
+04B418 DD CB 07 4E 0434*      bit 1,(ix+7)
+04B41C 28 08       0435*      jr z,@Up
+04B41E DD E5       0436*      push ix ; it gets clobbered by the weapon select routine
+04B420 CD AB B1 04 0437*      call plyr_next_weapon
+04B424 DD E1       0438*      pop ix
+04B426             0439*  @Up:
+04B426             0440*  
+04B426             0441*  ; 42 Down
+04B426 DD CB 05 4E 0442*      bit 1,(ix+5)
+04B42A 28 08       0443*      jr z,@Down
+04B42C DD E5       0444*      push ix ; it gets clobbered by the weapon select routine
+04B42E CD D3 B1 04 0445*      call plyr_previous_weapon
+04B432 DD E1       0446*      pop ix
+04B434             0447*  @Down:
+04B434             0448*  
+04B434             0449*  ; =====================
+04B434             0450*  ; 99 Space FIRE ZEE MISSILES!!!111
+04B434 DD CB 0C 56 0451*      bit 2,(ix+12)
+04B438 28 08       0452*      jr z,@Space
+04B43A DD E5       0453*      push ix ; it gets clobbered by the weapon firing
+04B43C CD A2 B3 04 0454*      call plyr_shoot
+04B440 DD E1       0455*      pop ix ; restore ix
+04B442             0456*  @Space:
+04B442             0457*  
+04B442             0458*  ; CHECK MOVEMENT KEYS
+04B442             0459*  ; non-zero means no movement key was pressed
+04B442 3E FF       0460*      ld a,-1
+04B444             0461*  
+04B444             0462*  ; 34 W player moves forward
+04B444 DD CB 04 4E 0463*      bit 1,(ix+4)
+04B448 28 07       0464*      jr z,@W
+04B44A 3E 01       0465*      ld a,speed_plyr ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
+04B44C 32 FF B0 04 0466*      ld (yvel),a
+04B450 AF          0467*      xor a
+04B451             0468*  @W:
+04B451             0469*  
+04B451             0470*  ; 82 S player moves backward
+04B451 DD CB 0A 4E 0471*      bit 1,(ix+10)
+04B455 28 0C       0472*      jr z,@S
+04B457 16 FF       0473*      ld d,-speed_plyr ; this is *camera* relative, not map relative, so y-axis is NOT inverted!
+04B459 3A FF B0 04 0474*      ld a,(yvel)
+04B45D 82          0475*      add a,d
+04B45E 32 FF B0 04 0476*      ld (yvel),a
+04B462 AF          0477*      xor a
+04B463             0478*  @S:
+04B463             0479*  
+04B463             0480*  ; 66 A plyer moves left
+04B463 DD CB 08 4E 0481*      bit 1,(ix+8)
+04B467 28 07       0482*      jr z,@A
+04B469 3E FF       0483*      ld a,-speed_plyr ; no funky axis conversion here
+04B46B 32 FE B0 04 0484*      ld (xvel),a
+04B46F AF          0485*      xor a
+04B470             0486*  @A:
+04B470             0487*  
+04B470             0488*  ; 51 D player moves right
+04B470 DD CB 06 56 0489*      bit 2,(ix+6)
+04B474 28 0C       0490*      jr z,@D
+04B476 16 01       0491*      ld d,speed_plyr ; no funky axis conversion here
+04B478 3A FE B0 04 0492*      ld a,(xvel)
+04B47C 82          0493*      add a,d
+04B47D 32 FE B0 04 0494*      ld (xvel),a
+04B481 AF          0495*      xor a
+04B482             0496*  @D:
+04B482             0497*  
+04B482             0498*  ; 26 Left player rotates anti-clockwise
+04B482 DD CB 03 4E 0499*      bit 1,(ix+3)
+04B486 28 06       0500*      jr z,@Left
+04B488 21 04 B1 04 0501*      ld hl,avel
+04B48C 35          0502*      dec (hl)
+04B48D AF          0503*      xor a
+04B48E             0504*  @Left:
+04B48E             0505*  
+04B48E             0506*  ; 122 Right player rotates clockwise
+04B48E DD CB 0F 4E 0507*      bit 1,(ix+15)
+04B492 28 06       0508*      jr z,@Right
+04B494 21 04 B1 04 0509*      ld hl,avel
+04B498 34          0510*      inc (hl)
+04B499 AF          0511*      xor a
+04B49A             0512*  @Right:
+04B49A             0513*  
+04B49A             0514*  ; KEYPRESS DETECTION DONE
+04B49A A7          0515*      and a ; this will zero if player pressed a movement key
+04B49B C0          0516*      ret nz ; non zero so no key pressed
+04B49C             0517*  ; check move timer
+04B49C FD 21 37 B1 0518*      ld iy,plyr_move_timer
        04          
-04B4A1 CD B7 C1 04 0523*      call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-04B4A5 F0          0524*      ret p ; time left on timer so no movement
-04B4A6             0525*  ; reset_move_timer
-04B4A6 21 1E 00 00 0526*      ld hl,plyr_move_rate
-04B4AA FD 21 37 B1 0527*      ld iy,plyr_move_timer; DEBUG - we should not need this?
+04B4A1 CD B7 C1 04 0519*      call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+04B4A5 F0          0520*      ret p ; time left on timer so no movement
+04B4A6             0521*  ; reset_move_timer
+04B4A6 21 1E 00 00 0522*      ld hl,plyr_move_rate
+04B4AA FD 21 37 B1 0523*      ld iy,plyr_move_timer; DEBUG - we should not need this?
        04          
-04B4AF CD AC C1 04 0528*      call timestamp_tmr_set
-04B4B3             0529*  ; move player according to velocities set by keypresses
-04B4B3 ED 5B FE B0 0530*      ld de,(xvel) ; d = yvel, e = xvel
+04B4AF CD AC C1 04 0524*      call timestamp_tmr_set
+04B4B3             0525*  ; move player according to velocities set by keypresses
+04B4B3 ED 5B FE B0 0526*      ld de,(xvel) ; d = yvel, e = xvel
        04          
-04B4B8 3A 04 B1 04 0531*      ld a,(avel)
-04B4BC 21 FA B0 04 0532*      ld hl,orientation
-04B4C0 86          0533*      add a,(hl)
-04B4C1 E6 03       0534*      and 0x03 ; modulo 4
-04B4C3 77          0535*      ld (hl),a
-04B4C4 CD 2B 64 04 0536*      call trans_dx_dy ; d = dy, e = dx
-04B4C8 ED 53 02 B1 0537*      ld (dx),de
+04B4B8 3A 04 B1 04 0527*      ld a,(avel)
+04B4BC 21 FA B0 04 0528*      ld hl,orientation
+04B4C0 86          0529*      add a,(hl)
+04B4C1 E6 03       0530*      and 0x03 ; modulo 4
+04B4C3 77          0531*      ld (hl),a
+04B4C4 CD 2B 64 04 0532*      call trans_dx_dy ; d = dy, e = dx
+04B4C8 ED 53 02 B1 0533*      ld (dx),de
        04          
-04B4CD 3A FB B0 04 0538*      ld a,(cur_x)
-04B4D1 83          0539*      add a,e
-04B4D2 5F          0540*      ld e,a
-04B4D3 3A FC B0 04 0541*      ld a,(cur_y)
-04B4D7 82          0542*      add a,d
-04B4D8 57          0543*      ld d,a
-04B4D9 ED 53 FE B0 0544*      ld (xvel),de ; save yvel,xvel from d,e
+04B4CD 3A FB B0 04 0534*      ld a,(cur_x)
+04B4D1 83          0535*      add a,e
+04B4D2 5F          0536*      ld e,a
+04B4D3 3A FC B0 04 0537*      ld a,(cur_y)
+04B4D7 82          0538*      add a,d
+04B4D8 57          0539*      ld d,a
+04B4D9 ED 53 FE B0 0540*      ld (xvel),de ; save yvel,xvel from d,e
        04          
-04B4DE CD C7 63 04 0545*      call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
-04B4E2             0546*  ; check whether target cell contains a sprite
-04B4E2 DD 7E 03    0547*      ld a,(ix+map_sprite_id)
-04B4E5 FE FF       0548*      cp 255 ; value if not sprite
-04B4E7 28 0A       0549*      jr z,@not_sprite
-04B4E9             0550*  ; is a sprite so run its "use" behavior routine
-04B4E9 CD B9 9D 04 0551*      call sprite_set_pointer
-04B4ED 3E 01       0552*      ld a,sp_use
-04B4EF CD 87 9E 04 0553*      call do_sprite_behavior
-04B4F3             0554*  ; fall through because we still need to check out what's going on in the target cell
-04B4F3             0555*  @not_sprite:
-04B4F3 ED 5B FE B0 0556*      ld de,(xvel) ; restore yvel,xvel to d,e
+04B4DE CD C7 63 04 0541*      call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
+04B4E2             0542*  ; check whether target cell contains a sprite
+04B4E2 DD 7E 03    0543*      ld a,(ix+map_sprite_id)
+04B4E5 FE FF       0544*      cp 255 ; value if not sprite
+04B4E7 28 0A       0545*      jr z,@not_sprite
+04B4E9             0546*  ; is a sprite so run its "use" behavior routine
+04B4E9 CD B9 9D 04 0547*      call sprite_set_pointer
+04B4ED 3E 01       0548*      ld a,sp_use
+04B4EF CD 87 9E 04 0549*      call do_sprite_behavior
+04B4F3             0550*  ; fall through because we still need to check out what's going on in the target cell
+04B4F3             0551*  @not_sprite:
+04B4F3 ED 5B FE B0 0552*      ld de,(xvel) ; restore yvel,xvel to d,e
        04          
-04B4F8             0557*  ; read map type/status mask from target cell
-04B4F8 DD 7E 00    0558*      ld a,(ix+map_type_status)
-04B4FB 47          0559*      ld b,a ; b = target cell type/status
-04B4FC             0560*  ; branch on the values in the bitmask
-04B4FC 3E 80       0561*      ld a,cell_is_door
-04B4FE A0          0562*      and b
-04B4FF 20 06       0563*      jr nz,@door
-04B501 3E 40       0564*      ld a,cell_is_wall
-04B503 A0          0565*      and b
-04B504 C0          0566*      ret nz ; can't move thru walls
-04B505 18 2B       0567*      jr @move_it ; if it wasn't a wall or door, move as normal
-04B507             0568*  @door:
-04B507 ED 5B 02 B1 0569*      ld de,(dx) ; d = dy, e = dx
+04B4F8             0553*  ; read map type/status mask from target cell
+04B4F8 DD 7E 00    0554*      ld a,(ix+map_type_status)
+04B4FB 47          0555*      ld b,a ; b = target cell type/status
+04B4FC             0556*  ; branch on the values in the bitmask
+04B4FC 3E 80       0557*      ld a,cell_is_door
+04B4FE A0          0558*      and b
+04B4FF 20 06       0559*      jr nz,@door
+04B501 3E 40       0560*      ld a,cell_is_wall
+04B503 A0          0561*      and b
+04B504 C0          0562*      ret nz ; can't move thru walls
+04B505 18 2B       0563*      jr @move_it ; if it wasn't a wall or door, move as normal
+04B507             0564*  @door:
+04B507 ED 5B 02 B1 0565*      ld de,(dx) ; d = dy, e = dx
        04          
-04B50C CD 19 64 04 0570*      call get_dir_from_dy_dx ; a is direction of attempted movement
-04B510 F5          0571*      push af
-04B511 16 02       0572*      ld d,2 ; 1 past the door in the movement direction
-04B513 5F          0573*      ld e,a
-04B514 CD EC 63 04 0574*      call get_dx_dy
-04B518 ED 53 02 B1 0575*      ld (dx),de
+04B50C CD 19 64 04 0566*      call get_dir_from_dy_dx ; a is direction of attempted movement
+04B510 F5          0567*      push af
+04B511 16 02       0568*      ld d,2 ; 1 past the door in the movement direction
+04B513 5F          0569*      ld e,a
+04B514 CD EC 63 04 0570*      call get_dx_dy
+04B518 ED 53 02 B1 0571*      ld (dx),de
        04          
-04B51D F1          0576*      pop af
-04B51E 5F          0577*      ld e,a
-04B51F 16 02       0578*      ld d,2
-04B521 ED 4B FB B0 0579*      ld bc,(cur_x)
+04B51D F1          0572*      pop af
+04B51E 5F          0573*      ld e,a
+04B51F 16 02       0574*      ld d,2
+04B521 ED 4B FB B0 0575*      ld bc,(cur_x)
        04          
-04B526 CD B9 63 04 0580*      call get_neighbor ; ix points to cell defs/status, a is target cell current obj_id
-04B52A DD 7E 00    0581*      ld a,(ix+map_type_status)
-04B52D 47          0582*      ld b,a ; b = target cell type/status
-04B52E 3E 40       0583*      ld a,cell_is_wall
-04B530 A0          0584*      and b
-04B531 C0          0585*      ret nz ; can't move thru walls
-04B532             0586*      ; fall through to @move_it
-04B532             0587*  @move_it:
-04B532             0588*  ; we are cleared for movement so update player position
-04B532 11 00 00 00 0589*      ld de,0 ; make sure deu is zero
-04B536 ED 4B 02 B1 0590*      ld bc,(dx) ; b = dy, c = dx
+04B526 CD B9 63 04 0576*      call get_neighbor ; ix points to cell defs/status, a is target cell current obj_id
+04B52A DD 7E 00    0577*      ld a,(ix+map_type_status)
+04B52D 47          0578*      ld b,a ; b = target cell type/status
+04B52E 3E 40       0579*      ld a,cell_is_wall
+04B530 A0          0580*      and b
+04B531 C0          0581*      ret nz ; can't move thru walls
+04B532             0582*      ; fall through to @move_it
+04B532             0583*  @move_it:
+04B532             0584*  ; we are cleared for movement so update player position
+04B532 11 00 00 00 0585*      ld de,0 ; make sure deu is zero
+04B536 ED 4B 02 B1 0586*      ld bc,(dx) ; b = dy, c = dx
        04          
-04B53B 3A FB B0 04 0591*      ld a,(cur_x)
-04B53F 81          0592*      add a,c
-04B540 5F          0593*      ld e,a
-04B541 32 FB B0 04 0594*      ld (cur_x),a
-04B545 3A FC B0 04 0595*      ld a,(cur_y)
-04B549 80          0596*      add a,b
-04B54A 57          0597*      ld d,a
-04B54B 32 FC B0 04 0598*      ld (cur_y),a
-04B54F C9          0599*      ret
+04B53B 3A FB B0 04 0587*      ld a,(cur_x)
+04B53F 81          0588*      add a,c
+04B540 5F          0589*      ld e,a
+04B541 32 FB B0 04 0590*      ld (cur_x),a
+04B545 3A FC B0 04 0591*      ld a,(cur_y)
+04B549 80          0592*      add a,b
+04B54A 57          0593*      ld d,a
+04B54B 32 FC B0 04 0594*      ld (cur_y),a
+04B54F C9          0595*      ret
 04B550             0035   	include "src/asm/maths.asm"
 04B550 00 00 00 00 0001*  add_bcd_arg1: db #00,#00,#00,#00
 04B554 00 00 00 00 0002*  add_bcd_arg2: db #00,#00,#00,#00
@@ -20737,7 +20733,7 @@ PC     Output      Line
 04C2F6 01          0172   debug_timer: db 0x01
 04C2F7             0173   
 04C2F7             0174   main_loop_tmr: ds 6
-04C2FD             0175   framerate: equ 12
+04C2FD             0175   framerate: equ 15
 04C2FD             0176   
 04C2FD             0177   main:
 04C2FD             0178   ; set map variables and load initial map file
@@ -20767,7 +20763,7 @@ PC     Output      Line
 04C32A             0201   ; reset main loop timer
 04C32A FD 21 F7 C2 0202   	ld iy,main_loop_tmr
        04          
-04C32F 21 0A 00 00 0203   	ld hl,120/framerate
+04C32F 21 08 00 00 0203   	ld hl,120/framerate
 04C333 CD 5E C1 04 0204   	call tmr_set
 04C337             0205   
 04C337             0206   ; check for escape key and quit if pressed

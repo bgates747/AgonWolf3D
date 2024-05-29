@@ -178,7 +178,7 @@ plyr_set_weapon_parameters:
     ld (plyr_wpn_ui_sm),hl
     ld a,20 ; dps = 60
     ld (plyr_wpn_damage),a
-    ld hl,120/3 ; 3 times/second
+    ld hl,120/2 ; 3 times/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
     call timestamp_tmr_set
@@ -204,12 +204,10 @@ plyr_set_weapon_parameters:
 ; 4 shots/burst, 3 bursts/sec, 80 dmg/burst, 240 dmg/sec, 20 dmg/shot
     ld a,80 ; damage/burst
     ld (plyr_wpn_damage),a
-    ld hl,40 ; 3 bursts/second
+    ld hl,120/3 ; 3 bursts/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
     call timestamp_tmr_set
-    ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
-    ; ld (plyr_wpn_anim_tmr_rst),hl
     ret
 @gatling_gun:
     ld hl,BUF_UI_BJ_GATLING_00
@@ -219,12 +217,10 @@ plyr_set_weapon_parameters:
 ; 8 shots/burst, 3 bursts/sec, 120 dmg/burst, 360 dmg/sec, 15 dmg/shot
     ld a,120 ; damage/burst
     ld (plyr_wpn_damage),a
-    ld hl,40 ; 3 bursts/second
+    ld hl,120/3 ; 3 bursts/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
     call timestamp_tmr_set
-    ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
-    ; ld (plyr_wpn_anim_tmr_rst),hl
     ret
 
 ; modifies the players health by a set amount

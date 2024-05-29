@@ -172,7 +172,7 @@ init:
 debug_timer: db 0x01
 
 main_loop_tmr: ds 6
-framerate: equ 12
+framerate: equ 15
 
 main:
 ; set map variables and load initial map file
