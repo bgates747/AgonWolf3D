@@ -52,11 +52,11 @@ plyr_wpn_ui_sm: dl 0x000000 ; bufferId for weapon UI
 plyr_wpn_ui_lg: dl 0x000000 ; bufferId for weapon UI
 plyr_wpn_select_tmr: ds 6 ; time until player can selet a new weapon in 1/120ths of a second
 plyr_wpn_fire_tmr: ds 6 ; time until player can fire again in 1/120ths of a second
-plyr_wpn_fire_rate: dl 0x000000 ; 1/rate of fire in 1/120ths of a second
+plyr_wpn_fire_rate: dl 0x000000 ; rate of fire in 1/120ths of a second
 
-plyr_wpn_anim_tmr: ds 6 ; time until next weapon animation frame in 1/120ths of a second
+; plyr_wpn_anim_tmr: ds 6 ; time until next weapon animation frame in 1/120ths of a second
 plyr_wpn_anim_fr: dl 0x000000 ; current weapon animation frame
-plyr_wpn_anim_tmr_rst: equ 10 
+; plyr_wpn_anim_tmr_rst: dl 0
 
 
 plyr_ammo: dl 0x000000 ; ammo for all projectile weapons
@@ -64,7 +64,7 @@ plyr_ammo_str: ds 8 ; Num2String buffer
                  db 0 ; string terminator
 
 ; ######### PLAYER CONSTANTS ##########
-speed_plyr: equ 0x01 ; 1 map grid unit per movement tick
+speed_plyr: equ 1 ; 1 map grid unit per movement tick
 plyr_move_timer: ds 6 ; time until player can move again in 1/120ths of a second
 plyr_move_rate: equ 120/4 ; 4 times per second
 
@@ -106,7 +106,7 @@ plyr_init:
     ld (orientation),a
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer
-    call timer_set
+    call timestamp_tmr_set
     ld a,80 ; 80% health
     ld (plyr_health),a
     ; ld a,%00000001 ; knife only
@@ -119,18 +119,18 @@ plyr_init:
     ld hl,0 ; zero timer means player can immediately select a different weapon
     ld a,200 ; DEBUG - this is too much ammo to start with
     ld (plyr_ammo),a
-    call timer_set
+    call timestamp_tmr_set
     ret
 
 
 plyr_next_weapon:
 ; check if select weapons timer has expired
     ld iy,plyr_wpn_select_tmr
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
     ret p ; time left on timer so no weapon select
 ; reset weapon select timer
-    ld hl,120/8 ; 1/6 second
-    call timer_set
+    ld hl,120/6 ; 1/6 second
+    call timestamp_tmr_set
 ; select next weapon
     ld hl,plyr_wpns ; hl points to plyr_wpns flags
     ld bc,(hl) ; bc contains bitmask of player's weapons inventory
@@ -145,11 +145,11 @@ plyr_next_weapon:
 plyr_previous_weapon:
 ; check if select weapons timer has expired
     ld iy,plyr_wpn_select_tmr
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
     ret p ; time left on timer so no weapon select
 ; reset weapon select timer
-    ld hl,120/8 ; 1/8 second
-    call timer_set
+    ld hl,120/6 ; 1/6 second
+    call timestamp_tmr_set
 ; select next weapon
     ld hl,plyr_wpns ; hl points to plyr_wpns flags
     ld bc,(hl) ; bc contains bitmask of player's weapons inventory
@@ -176,12 +176,12 @@ plyr_set_weapon_parameters:
     ld (plyr_wpn_ui_lg),hl
     ld hl,BUF_UI_LOWER_PANEL_KNIFE
     ld (plyr_wpn_ui_sm),hl
-    ld a,15 ; dps = 60
+    ld a,20 ; dps = 60
     ld (plyr_wpn_damage),a
-    ld hl,120/4 ; 4 times/second
+    ld hl,120/3 ; 3 times/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
-    call timer_set
+    call timestamp_tmr_set
     ret
 @pistol:
     ld hl,BUF_UI_BJ_PISTOL_00
@@ -194,7 +194,7 @@ plyr_set_weapon_parameters:
     ld hl,120/3 ; 3 bursts/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
-    call timer_set
+    call timestamp_tmr_set
     ret
 @machine_gun:
     ld hl,BUF_UI_BJ_MACHINE_GUN_00
@@ -207,7 +207,9 @@ plyr_set_weapon_parameters:
     ld hl,40 ; 3 bursts/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
-    call timer_set
+    call timestamp_tmr_set
+    ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
+    ; ld (plyr_wpn_anim_tmr_rst),hl
     ret
 @gatling_gun:
     ld hl,BUF_UI_BJ_GATLING_00
@@ -220,7 +222,9 @@ plyr_set_weapon_parameters:
     ld hl,40 ; 3 bursts/second
     ld (plyr_wpn_fire_rate),hl
     ld iy,plyr_wpn_fire_tmr
-    call timer_set
+    call timestamp_tmr_set
+    ; ld hl,40/5 ; 3 bursts/second, 5 frames/animation
+    ; ld (plyr_wpn_anim_tmr_rst),hl
     ret
 
 ; modifies the players health by a set amount
@@ -356,22 +360,25 @@ plyr_move_bullet:
 plyr_shoot:
 ; check if fire weapons timer has expired
     ld iy,plyr_wpn_fire_tmr
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-    ret p ; timer not expired so don't fire weapon
+    call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    jp z,@time_up ; timer zero so fire weapon
+    jp m,@time_up ; timer negative so fire weapon
+    ret ; timer not expired so don't fire weapon
+@time_up:
 ; reset fire weapon timer
     ld iy,plyr_wpn_fire_tmr ; DEBUG - we should not need this?
     ld hl,(plyr_wpn_fire_rate)
-    call timer_set
+    call timestamp_tmr_set
 ; check animation frame for zero
     ld hl,plyr_wpn_anim_fr
     ld a,(hl)
     and a
     jr nz,@shoot ; if not zero, we're already in the middle of an animation
     inc (hl) ; is zero so bump to first animation frame
-; set animation timer
-    ld hl,plyr_wpn_anim_tmr_rst
-    ld iy,plyr_wpn_anim_tmr
-    call timer_set
+; ; set animation timer
+;     ld hl,(plyr_wpn_anim_tmr_rst)
+;     ld iy,plyr_wpn_anim_tmr
+;     call timestamp_tmr_set
 @shoot:
 ; roll for damage modifier
     call rand_8 ; a is a bitmask we apply to the weapon's dmg/burst
@@ -401,17 +408,20 @@ plyr_input:
     and 3 ; modulo 4
     ld (plyr_wpn_anim_fr),a
     jr z,@get_input
-; animation frame is not zero so check animation timer
-    ld iy,plyr_wpn_anim_tmr
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
-    jp p,@get_input ; time left on timer so no animation
+; ; animation frame is not zero so check animation timer
+;     ld iy,plyr_wpn_anim_tmr
+;     call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+;     jp z,@animate ; timer zero so animate
+;     jp m,@animate ; timer negative so animate
+;     jp @get_input ; time left on timer so no animation
 ; bump animation frame
+@animate:
     ld hl,plyr_wpn_anim_fr
     inc (hl) ; next frame
-; reset animation timer
-    ld iy,plyr_wpn_anim_tmr ; DEBUG - we should not need this?
-    ld hl,plyr_wpn_anim_tmr_rst
-    call timer_set
+; ; reset animation timer
+;     ld iy,plyr_wpn_anim_tmr ; DEBUG - we should not need this?
+;     ld hl,(plyr_wpn_anim_tmr_rst)
+;     call timestamp_tmr_set
 
 @get_input:
 ; reset player component velocities to zero as the default
@@ -510,12 +520,12 @@ plyr_input:
     ret nz ; non zero so no key pressed
 ; check move timer 
     ld iy,plyr_move_timer
-    call timer_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
+    call timestamp_tmr_get ; hl is time left in 120ths of a second, sign flag or zero flag set if expired
     ret p ; time left on timer so no movement
 ; reset_move_timer
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer; DEBUG - we should not need this?
-    call timer_set
+    call timestamp_tmr_set
 ; move player according to velocities set by keypresses
     ld de,(xvel) ; d = yvel, e = xvel
     ld a,(avel)

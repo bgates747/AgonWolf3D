@@ -84,15 +84,15 @@ RTC_UNLOCK_1:   equ %00000001   ; RTC count registers are unlocked to allow Writ
 prt_calibrate:
 ; set a MOS timer
     ld hl,120*1 ; 1 second
-    ld iy,timer_test
-    call timer_set
+    ld iy,tmr_test
+    call tmr_set
 ; set a PRT timer
     ld hl,1000
     ld (prt_reload),hl
     call prt_set
 @loop:
 ; check time remaining on MOS timer
-    call timer_get
+    call tmr_get
     jp z,@done ; time expired, so quit
     jp m,@done ; time past expiration (negative), so quit
     jr @loop
@@ -118,7 +118,6 @@ on_hardware: defb "Running on hardware\r\n",0
 ; 3276d = 1,000 milliseconds on emulator
 ; 1200h = 1,000 milliseconds on hardware
 prt_reload: dl 0x000000
-prt_reload_str: ds 8
 
 ; set PRT timer
 prt_set:
@@ -182,7 +181,7 @@ prt_irq_counter:
 ; set a countdown timer
 ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl = current time 
-timer_set:
+tmr_set:
     ld (iy+3),hl            ; set time remaining
     MOSCALL mos_sysvars     ; ix points to syvars table
     ld hl,(ix+sysvar_time)  ; get current time
@@ -193,7 +192,7 @@ timer_set:
 ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
 ;          sign flags: pos = time not expired, zero or neg = time expired
-timer_get:
+tmr_get:
     MOSCALL mos_sysvars     ; ix points to syvars table
     ld de,(ix+sysvar_time)  ; get current time
     ld hl,(iy+0)            ; get start time
@@ -205,16 +204,13 @@ timer_get:
                             ; (we do adc because add hl,rr doesn't set sign or zero flags)
     ret
 
-timer_test: ds 6 ; example of a buffer to hold timer data
+tmr_test: ds 6 ; example of a buffer to hold timer data
 
 timestamp_now: dl 0
 timestamp_old: dl 0
 timestamp_chg: dl 0
 
 timestamp_tick:
-    push hl
-    push de
-    push ix
     ld de,(timestamp_now)   ; get previous time
     ld (timestamp_old),de   ; save previous time
     MOSCALL mos_sysvars     ; ix points to syvars table
@@ -223,16 +219,12 @@ timestamp_tick:
     xor a                   ; clear carry
     sbc hl,de               ; ix = time elapsed
     ld (timestamp_chg),hl   ; save elapsed time
-    pop ix
-    pop de
-    pop hl
     ret
-
 
 ; set a countdown timer
 ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl = current time 
-timestamp_set:
+timestamp_tmr_set:
     ld (iy+3),hl            ; set time remaining
     ld hl,(timestamp_now)   ; get current timestamp
     ld (iy+0),hl            ; set start time
@@ -242,7 +234,7 @@ timestamp_set:
 ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
 ;          sign flags: pos = time not expired, zero or neg = time expired
-timestamp_get:
+timestamp_tmr_get:
     ld de,(timestamp_now)   ; get current timestamp
     ld hl,(iy+0)            ; get start time
     xor a                   ; clear carry

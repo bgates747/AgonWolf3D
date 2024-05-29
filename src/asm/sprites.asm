@@ -969,7 +969,7 @@ DOG:
     db 000 ;sprite_unassigned_2
 @use:
     push iy 
-    call sfx_play_dog_woof
+    call sfx_play_dog_woof_double
     pop iy 
     jp sprite_behavior_return
 @hurt:
@@ -1007,7 +1007,7 @@ DOG:
     or %00010000  ; at least 16
     ld (iy+sprite_move_timer),a
     call sprite_move_random
-    call sfx_play_dog_woof
+    call sfx_play_dog_woof_double
     jp sprite_behavior_return
 @shoot:
     jp sprite_behavior_return

@@ -72,6 +72,11 @@ hello_world: defb "Welcome to Agon Wolf3D",0
 loading_ui: defb "Loading UI",0
 
 init:
+; initialize global timestamps
+    MOSCALL mos_sysvars     ; ix points to syvars table
+    ld hl,(ix+sysvar_time)  ; get current time
+    ld (timestamp_now),hl
+
 ; set the cursor off
 	call cursor_off
 
@@ -166,6 +171,9 @@ init:
 ; DEBUG: set up a simple countdown timer
 debug_timer: db 0x01
 
+main_loop_tmr: ds 6
+framerate: equ 12
+
 main:
 ; set map variables and load initial map file
 	call map_init
@@ -173,71 +181,39 @@ main:
 ; initialize player position
 	call plyr_init
 
-; clear the screen
-	call vdu_cls
-	call vdu_clg
-	call vdu_flip
-	call vdu_cls
-	call vdu_clg
-	call vdu_flip
-	
-; render initial scene
-	ld de,(cur_x) ; implicitly loads cur_y
-	call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is target cell_id
-	xor a ; north orientation
-	ld (orientation),a
-	call render_scene
-	call vdu_flip
-
 main_loop:
-; ; DEBUG: decrement debug timer
-; 	ld iy,debug_timer
-; 	dec (iy)
-; 	jp nz,@not_zero
-; 	ld (iy),72
-; 	call sfx_play_got_treasure
-; @not_zero:
-
 ; move enemies
-	; call move_enemies
 	call see_orientation
 ; get player input and update sprite position
 	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
 ; render the updated scene
 	call render_scene
 
-; print prt interrupt counter
-	ld hl,prt_irq_counter
-    ld c,1 ; x
-    ld b,8 ; y 
-    call vdu_move_cursor
-    ld hl,(prt_irq_counter)
-    ld de,prt_irq_counter_str
-    call Num2String
-    ld hl,prt_irq_counter_str
-    call printString
-; reset prt interrupt counter
-	ld hl,0
-	ld (prt_irq_counter),hl
-
 ; flip the screen
 	call vdu_flip
-; reset prt interrupt counter
-	ld hl,0
-	ld (prt_irq_counter),hl
-; wait for the next VBLANK
-	call vdu_vblank
+; ; wait for the next VBLANK
+; 	call vdu_vblank
+
+; wait for main loop timer to expire before contiuining
+@wait:
+	ld iy,main_loop_tmr
+	call tmr_get
+	jp z,@continue
+	jp m,@continue
+	jp @wait
+@continue:
+; reset main loop timer
+	ld iy,main_loop_tmr
+	ld hl,120/framerate
+	call tmr_set
 
 ; check for escape key and quit if pressed
 	MOSCALL mos_getkbmap
 ; 113 Escape
     bit 0,(ix+14)
-    jr z,@Escape
-	jr main_end
+	jr nz,main_end
 @Escape:
-
-; do it again, Sam
-    jr main_loop
+	jr main_loop
 
 main_end:
 	; call do_outro

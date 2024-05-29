@@ -227,7 +227,7 @@ if __name__ == "__main__":
     # do_91b_asm_ui = True
     # do_91c_asm_map_masks = True
     # do_91d_asm_ui_bj = True
-    # do_98_asm_sfx = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)

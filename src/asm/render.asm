@@ -254,12 +254,7 @@ render_scene:
     ld hl,(plyr_ammo)
     call printDec
 
-    ld c,1 ; x
-    ld b,7 ; y 
-    call vdu_move_cursor
-    ld hl,(timestamp_chg)
-    call printDec
-
+; DEBUG: PRINT TIMER STUFF
 ; print prt interrupt counter
     ld c,1 ; x
     ld b,8 ; y 
@@ -269,6 +264,15 @@ render_scene:
 ; reset prt interrupt counter
 	ld hl,0
 	ld (prt_irq_counter),hl
+    
+; print timestamp values
+    call timestamp_tick
+
+    ld c,1 ; x
+    ld b,7 ; y 
+    call vdu_move_cursor
+    ld hl,(timestamp_chg)
+    call printDec
 
 ; all done
     ret

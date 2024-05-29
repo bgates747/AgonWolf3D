@@ -88,10 +88,11 @@ def make_asm_sfx(db_path, sfx_inc_path, tgt_dir, next_buffer_id):
         f.write("\n; Play sfx routines\n")
         for row in rows:
             sfx_id, size, duration, filename = row['sfx_id'], row['size'], row['duration'], row['filename']
+            buf_label = f"BUF_{row['filename'].split('.')[0].upper()}"
             base_filename = filename.split('.')[0].lower()
             volume = 127
             f.write(f"\nsfx_play_{base_filename}:\n")
-            f.write(f"\tPLAY_SAMPLE {sfx_id+1}, {volume}, {duration}\n")
+            f.write(f"\tPLAY_SAMPLE {buf_label}, {volume}, {duration}\n")
 
     # Close the connection
     conn.close()
