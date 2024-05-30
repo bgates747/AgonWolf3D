@@ -528,7 +528,7 @@ HEALTH_PACK:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call plyr_mod_health
+    call plyr_add_health
     jr @kill
 @hurt:
     xor a
@@ -666,7 +666,7 @@ PLATE_OF_FOOD:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call plyr_mod_health
+    call plyr_add_health
     jr @kill
 @hurt:
     xor a
@@ -709,6 +709,10 @@ KEYCARD:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    ld a,8
+    call plyr_add_ammo
+    call sfx_play_gun_reload
+    call sprite_kill
     jp sprite_behavior_return
 @hurt:
     xor a
@@ -798,6 +802,17 @@ MACHINE_GUN:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    ld a,16
+    call plyr_add_ammo
+    call sfx_play_gun_reload
+    ld a,plyr_wpn_mg
+    ld hl,plyr_wpns
+    or (hl)
+    ld (hl),a
+    ld a,plyr_wpn_mg
+    ld (plyr_wpn_active),a
+    call plyr_set_weapon_parameters
+    call sprite_kill
     jp sprite_behavior_return
 @hurt:
     xor a
@@ -840,6 +855,17 @@ GATLING_GUN:
     db 000 ;sprite_unassigned_1
     db 000 ;sprite_unassigned_2
 @use:
+    ld a,32
+    call plyr_add_ammo
+    call sfx_play_gun_reload
+    ld a,plyr_wpn_gg
+    ld hl,plyr_wpns
+    or (hl)
+    ld (hl),a
+    ld a,plyr_wpn_gg
+    ld (plyr_wpn_active),a
+    call plyr_set_weapon_parameters
+    call sprite_kill
     jp sprite_behavior_return
 @hurt:
     xor a
@@ -883,7 +909,7 @@ DOG_FOOD:
     db 000 ;sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
-    call plyr_mod_health
+    call plyr_add_health
     jr @kill
 @hurt:
     xor a
@@ -969,8 +995,10 @@ DOG:
     db 000 ;sprite_unassigned_2
 @use:
     push iy 
-    call sfx_play_dog_woof_double
+    call sfx_play_dog_woof_single
     pop iy 
+    ld a,(iy+sprite_health_modifier)
+    call plyr_sub_health
     jp sprite_behavior_return
 @hurt:
     call rand_8
@@ -1043,6 +1071,8 @@ GERMAN_TROOPER:
     push iy 
     call sfx_play_achtung
     pop iy 
+    ld a,-5
+    call plyr_sub_health
     jp sprite_behavior_return
 @hurt:
     call rand_8
@@ -1123,6 +1153,8 @@ SS_GUARD:
     push iy 
     call sfx_play_schusstaffel
     pop iy 
+    ld a,-10
+    call plyr_sub_health
     jp sprite_behavior_return
 @hurt:
     call rand_8

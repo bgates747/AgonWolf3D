@@ -1,6 +1,6 @@
 ; This file is created by build_98_asm_sfx.py, do not edit it!
 
-SFX_num_buffers: equ 19
+SFX_num_buffers: equ 22
 ; SFX buffer ids:
 BUF_ACHTUNG: equ 0xFB00
 BUF_AHH: equ 0xFB01
@@ -12,15 +12,18 @@ BUF_DOG_WOOF_SINGLE: equ 0xFB06
 BUF_DOG_YELP: equ 0xFB07
 BUF_EXPLODE: equ 0xFB08
 BUF_GOT_TREASURE: equ 0xFB09
-BUF_MEIN_LEBEN: equ 0xFB0A
-BUF_OOF: equ 0xFB0B
-BUF_SCHUSSTAFFEL: equ 0xFB0C
-BUF_SCREAM: equ 0xFB0D
-BUF_SHOT_GATLING_BURST: equ 0xFB0E
-BUF_SHOT_MACHINE_GUN_BURST: equ 0xFB0F
-BUF_SHOT_PISTOL: equ 0xFB10
-BUF_UGH: equ 0xFB11
-BUF_WILHELM: equ 0xFB12
+BUF_GUN_EMPTY: equ 0xFB0A
+BUF_GUN_RELOAD: equ 0xFB0B
+BUF_KNIFE: equ 0xFB0C
+BUF_MEIN_LEBEN: equ 0xFB0D
+BUF_OOF: equ 0xFB0E
+BUF_SCHUSSTAFFEL: equ 0xFB0F
+BUF_SCREAM: equ 0xFB10
+BUF_SHOT_GATLING_BURST: equ 0xFB11
+BUF_SHOT_MACHINE_GUN_BURST: equ 0xFB12
+BUF_SHOT_PISTOL: equ 0xFB13
+BUF_UGH: equ 0xFB14
+BUF_WILHELM: equ 0xFB15
 
 ; SFX buffer id reverse lookup:
 SFX_buffer_id_lut:
@@ -34,6 +37,9 @@ SFX_buffer_id_lut:
 	dl BUF_DOG_YELP
 	dl BUF_EXPLODE
 	dl BUF_GOT_TREASURE
+	dl BUF_GUN_EMPTY
+	dl BUF_GUN_RELOAD
+	dl BUF_KNIFE
 	dl BUF_MEIN_LEBEN
 	dl BUF_OOF
 	dl BUF_SCHUSSTAFFEL
@@ -56,6 +62,9 @@ SFX_duration_lut:
 	dw 432 ; DOG_YELP
 	dw 1299 ; EXPLODE
 	dw 1447 ; GOT_TREASURE
+	dw 292 ; GUN_EMPTY
+	dw 442 ; GUN_RELOAD
+	dw 242 ; KNIFE
 	dw 814 ; MEIN_LEBEN
 	dw 974 ; OOF
 	dw 584 ; SCHUSSTAFFEL
@@ -78,6 +87,9 @@ SFX_load_routines_table:
 	dl load_sfx_DOG_YELP
 	dl load_sfx_EXPLODE
 	dl load_sfx_GOT_TREASURE
+	dl load_sfx_GUN_EMPTY
+	dl load_sfx_GUN_RELOAD
+	dl load_sfx_KNIFE
 	dl load_sfx_MEIN_LEBEN
 	dl load_sfx_OOF
 	dl load_sfx_SCHUSSTAFFEL
@@ -210,6 +222,42 @@ load_sfx_GOT_TREASURE:
 	call vdu_load_sfx
 	WAVEFORM_SAMPLE 10, BUF_GOT_TREASURE
 
+load_sfx_GUN_EMPTY:
+	ld hl,FGUN_EMPTY
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GUN_EMPTY
+	ld ix,4927
+	call vdu_load_sfx
+	WAVEFORM_SAMPLE 11, BUF_GUN_EMPTY
+
+load_sfx_GUN_RELOAD:
+	ld hl,FGUN_RELOAD
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_GUN_RELOAD
+	ld ix,7439
+	call vdu_load_sfx
+	WAVEFORM_SAMPLE 12, BUF_GUN_RELOAD
+
+load_sfx_KNIFE:
+	ld hl,FKNIFE
+	ld (cur_filename),hl
+	ld de,filedata
+	ld bc,65536
+	ld a,mos_load
+	RST.LIL 08h
+	ld hl,BUF_KNIFE
+	ld ix,4083
+	call vdu_load_sfx
+	WAVEFORM_SAMPLE 13, BUF_KNIFE
+
 load_sfx_MEIN_LEBEN:
 	ld hl,FMEIN_LEBEN
 	ld (cur_filename),hl
@@ -220,7 +268,7 @@ load_sfx_MEIN_LEBEN:
 	ld hl,BUF_MEIN_LEBEN
 	ld ix,13697
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 11, BUF_MEIN_LEBEN
+	WAVEFORM_SAMPLE 14, BUF_MEIN_LEBEN
 
 load_sfx_OOF:
 	ld hl,FOOF
@@ -232,7 +280,7 @@ load_sfx_OOF:
 	ld hl,BUF_OOF
 	ld ix,16384
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 12, BUF_OOF
+	WAVEFORM_SAMPLE 15, BUF_OOF
 
 load_sfx_SCHUSSTAFFEL:
 	ld hl,FSCHUSSTAFFEL
@@ -244,7 +292,7 @@ load_sfx_SCHUSSTAFFEL:
 	ld hl,BUF_SCHUSSTAFFEL
 	ld ix,9827
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 13, BUF_SCHUSSTAFFEL
+	WAVEFORM_SAMPLE 16, BUF_SCHUSSTAFFEL
 
 load_sfx_SCREAM:
 	ld hl,FSCREAM
@@ -256,7 +304,7 @@ load_sfx_SCREAM:
 	ld hl,BUF_SCREAM
 	ld ix,12382
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 14, BUF_SCREAM
+	WAVEFORM_SAMPLE 17, BUF_SCREAM
 
 load_sfx_SHOT_GATLING_BURST:
 	ld hl,FSHOT_GATLING_BURST
@@ -268,7 +316,7 @@ load_sfx_SHOT_GATLING_BURST:
 	ld hl,BUF_SHOT_GATLING_BURST
 	ld ix,24576
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 15, BUF_SHOT_GATLING_BURST
+	WAVEFORM_SAMPLE 18, BUF_SHOT_GATLING_BURST
 
 load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,FSHOT_MACHINE_GUN_BURST
@@ -280,7 +328,7 @@ load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,BUF_SHOT_MACHINE_GUN_BURST
 	ld ix,17092
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 16, BUF_SHOT_MACHINE_GUN_BURST
+	WAVEFORM_SAMPLE 19, BUF_SHOT_MACHINE_GUN_BURST
 
 load_sfx_SHOT_PISTOL:
 	ld hl,FSHOT_PISTOL
@@ -292,7 +340,7 @@ load_sfx_SHOT_PISTOL:
 	ld hl,BUF_SHOT_PISTOL
 	ld ix,19297
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 17, BUF_SHOT_PISTOL
+	WAVEFORM_SAMPLE 20, BUF_SHOT_PISTOL
 
 load_sfx_UGH:
 	ld hl,FUGH
@@ -304,7 +352,7 @@ load_sfx_UGH:
 	ld hl,BUF_UGH
 	ld ix,6313
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 18, BUF_UGH
+	WAVEFORM_SAMPLE 21, BUF_UGH
 
 load_sfx_WILHELM:
 	ld hl,FWILHELM
@@ -316,7 +364,7 @@ load_sfx_WILHELM:
 	ld hl,BUF_WILHELM
 	ld ix,21463
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 19, BUF_WILHELM
+	WAVEFORM_SAMPLE 22, BUF_WILHELM
 
 ; File name lookups:
 FACHTUNG: db "sfx/ACHTUNG.raw",0
@@ -329,6 +377,9 @@ FDOG_WOOF_SINGLE: db "sfx/DOG_WOOF_SINGLE.raw",0
 FDOG_YELP: db "sfx/DOG_YELP.raw",0
 FEXPLODE: db "sfx/EXPLODE.raw",0
 FGOT_TREASURE: db "sfx/GOT_TREASURE.raw",0
+FGUN_EMPTY: db "sfx/GUN_EMPTY.raw",0
+FGUN_RELOAD: db "sfx/GUN_RELOAD.raw",0
+FKNIFE: db "sfx/KNIFE.raw",0
 FMEIN_LEBEN: db "sfx/MEIN_LEBEN.raw",0
 FOOF: db "sfx/OOF.raw",0
 FSCHUSSTAFFEL: db "sfx/SCHUSSTAFFEL.raw",0
@@ -370,6 +421,15 @@ sfx_play_explode:
 
 sfx_play_got_treasure:
 	PLAY_SAMPLE BUF_GOT_TREASURE, 127, 1447
+
+sfx_play_gun_empty:
+	PLAY_SAMPLE BUF_GUN_EMPTY, 127, 292
+
+sfx_play_gun_reload:
+	PLAY_SAMPLE BUF_GUN_RELOAD, 127, 442
+
+sfx_play_knife:
+	PLAY_SAMPLE BUF_KNIFE, 127, 242
 
 sfx_play_mein_leben:
 	PLAY_SAMPLE BUF_MEIN_LEBEN, 127, 814

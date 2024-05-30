@@ -107,21 +107,22 @@ plyr_init:
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer
     call timestamp_tmr_set
-    ld a,80 ; 80% health
+    ld a,3
+    ld (plyr_lives),a
+    ld a,100
     ld (plyr_health),a
-    ; ld a,%00000001 ; knife only
-    ld a,%00001111 ; all weapons DEBUG
+    ld a,8
+    ld (plyr_ammo),a
+    ld a,plyr_wpn_knife 
+    or plyr_wpn_pistol
     ld (plyr_wpns),a
     ld a,plyr_wpn_knife
     ld (plyr_wpn_active),a
     call plyr_set_weapon_parameters
     ld iy,plyr_wpn_select_tmr
-    ld hl,0 ; zero timer means player can immediately select a different weapon
-    ld a,200 ; DEBUG - this is too much ammo to start with
-    ld (plyr_ammo),a
+    ld hl,0
     call timestamp_tmr_set
     ret
-
 
 plyr_next_weapon:
 ; check if select weapons timer has expired
@@ -223,11 +224,32 @@ plyr_set_weapon_parameters:
     call timestamp_tmr_set
     ret
 
-; modifies the players health by a set amount
+; adds to player's health by a set amount
 ; inputs: a is the signed amount to modify health
-plyr_mod_health:
+; outputs: a will contain amount of health remaining
+;          carry will be set if health maxes out to 255
+plyr_add_health:
     ld hl,plyr_health
     add a,(hl)
+    jp nc,@update ; if we roll over to zero when adding
+    ld a,255 ; ... set health remaining to max
+@update:
+    ld (hl),a
+    ret
+
+; subtracts from player's health by a set amount
+; inputs: a is the signed amount to modify health
+; outputs: zero flag set, carry reset if player health rolls through/becomes zero
+;        a contains remaining health
+plyr_sub_health:
+    ld hl,plyr_health
+    add a,(hl)
+    jp z,@zero
+    jp c,@update
+@zero:
+    xor a ; clear carry, set health to zero
+    ld hl,plyr_health
+@update:
     ld (hl),a
     ret
 
@@ -239,15 +261,38 @@ plyr_mod_score:
     ld (hl),a
     ret
 
-; modifies the players ammo by a set amount
-; inputs: a is the signed amount to modify score
-plyr_mod_ammo:
+; adds to player's ammo by a set amount
+; inputs: a is the signed amount to modify ammo
+; outputs: a will contain amount of ammo remaining
+;          carry will be set if ammo maxes out to 255
+plyr_add_ammo:
     ld hl,plyr_ammo
     add a,(hl)
+    jp nc,@update ; if we roll over to zero when adding
+    ld a,255 ; ... set ammo remaining to max
+@update:
+    ld (hl),a
+    ret
+
+; subtracts from player's ammo by a set amount
+; inputs: a is the signed amount to modify ammo
+; outputs: carry reset if player was out of ammo before firing
+;          a will also contain amount of ammo remaining after shot
+plyr_sub_ammo:
+    ld hl,plyr_ammo
+    add a,(hl)
+    jp c,@update
+    ld a,%00000001 ; knife
+    ld (plyr_wpn_active),a
+    call plyr_set_weapon_parameters
+    xor a ; clear carry, set ammo to zero
+    ld hl,plyr_ammo
+@update:
     ld (hl),a
     ret
 
 plyr_shoot_knife:
+    call sfx_play_knife
     ; check whether the player hit anything
     ld a,(orientation) ; direction knife is moving
     ld e,a
@@ -280,19 +325,31 @@ plyr_shoot_knife:
 
 plyr_shoot_pistol:
     ld a,-1
-    call plyr_mod_ammo
+    call plyr_sub_ammo
+    jp c,@shoot
+    call sfx_play_gun_empty
+    ret
+@shoot:
     call sfx_play_shot_pistol
     jp plyr_move_bullet
 
 plyr_shoot_machine_gun:
     ld a,-4
-    call plyr_mod_ammo
+    call plyr_sub_ammo
+    jp c,@shoot
+    call sfx_play_gun_empty
+    ret
+@shoot:
     call sfx_play_shot_machine_gun_burst
     jp plyr_move_bullet
 
 plyr_shoot_gatling_gun:  
     ld a,-8
-    call plyr_mod_ammo
+    call plyr_sub_ammo
+    jp c,@shoot
+    call sfx_play_gun_empty
+    ret
+@shoot:
     call sfx_play_shot_gatling_burst
     jp plyr_move_bullet
 
@@ -371,10 +428,6 @@ plyr_shoot:
     and a
     jr nz,@shoot ; if not zero, we're already in the middle of an animation
     inc (hl) ; is zero so bump to first animation frame
-; ; set animation timer
-;     ld hl,(plyr_wpn_anim_tmr_rst)
-;     ld iy,plyr_wpn_anim_tmr
-;     call timestamp_tmr_set
 @shoot:
 ; roll for damage modifier
     call rand_8 ; a is a bitmask we apply to the weapon's dmg/burst
