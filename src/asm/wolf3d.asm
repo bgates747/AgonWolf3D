@@ -72,210 +72,6 @@ hello_world: defb "Welcome to Agon Wolf3D",0
 loading_ui: defb "Loading UI",0
 
 init:
-; DEBUG
-	call printNewline
-	ld hl,plyr_ammo
-	ld (hl),1
-	ld a,-2
-	add a,(hl) 
-	call dumpFlags
-	; SZxHxPNC
-	; 10101000
-
-	call printNewline
-	ld hl,plyr_ammo
-	ld (hl),0
-	ld a,-2
-	add a,(hl) 
-	call dumpFlags
-	; SZxHxPNC
-	; 10101000
-
-	call printNewline
-	ld hl,plyr_ammo
-	ld (hl),0
-	ld a,-1
-	add a,(hl) 
-	call dumpFlags
-	; SZxHxPNC
-	; 10101000
-
-	call printNewline
-	ld hl,plyr_ammo
-	ld (hl),1
-	ld a,-1
-	add a,(hl) 
-	call dumpFlags
-	; SZxHxPNC
-	; 01010001
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),100
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 00110001
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),128
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 00101101
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),200
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10010001
-
-	; ret
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),0
-	; ld a,1
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 00000010 
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),0
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10101000
-
-	; ----------------------------
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),1
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 01010001
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),1
-	; ld a,1
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 01000010
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),1
-	; ld a,-2
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10101000
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),1
-	; ld a,2
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC 
-	; ; 00000010
-
-	; ; ----------------------------
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),127
-	; ld a,1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10010100
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),127
-	; ld a,-1
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10000010
-
-	; ; ----------------------------
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),128
-	; ld a,1
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC 
-	; ; 10000111
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),128
-	; ld a,-1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 00101101
-
-	; ; ----------------------------
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),255
-	; ld a,1
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 01010001
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),255
-	; ld a,-1
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 01000010
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),255
-	; ld a,2
-	; add a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 00010001
-
-	; call printNewline
-	; ld hl,plyr_ammo
-	; ld (hl),255
-	; ld a,-2
-	; sub a,(hl) 
-	; call dumpFlags
-	; ; SZxHxPNC
-	; ; 10111011 
-
-	; ret
-
-; END DEBUG
-
 ; initialize global timestamps
     MOSCALL mos_sysvars     ; ix points to syvars table
     ld hl,(ix+sysvar_time)  ; get current time
@@ -385,12 +181,37 @@ main:
 	call plyr_init
 
 main_loop:
+; DEBUG: set up loop timer
+    call prt_loop_reset
+; END DEBUG
+; DEBUG: start loop timer
+    call prt_loop_start
+; END DEBUG
+
+; update timestamp
+    call timestamp_tick
+
 ; move enemies
-	call see_orientation
+	call sprites_see_plyr ; 220-285  prt ticks
+
 ; get player input and update sprite position
+	; 0-1 prt ticks
 	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
+
 ; render the updated scene
-	call render_scene
+	call render_scene ; 6-12 prt ticks
+; full loop 12-16 prt ticks
+
+; DEBUG: stop loop timer
+    call prt_loop_stop
+; END DEBUG
+
+; DEBUG: PRINT TIMER STUFF
+    ld c,1 ; x
+    ld b,8 ; y 
+	call prt_loop_print
+; END DEBUG
+
 ; flip the screen
 	call vdu_flip
 

@@ -309,6 +309,7 @@ LAMP:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -359,6 +360,7 @@ BARREL:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -401,6 +403,7 @@ TABLE:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -443,6 +446,7 @@ OVERHEAD_LIGHT:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -493,6 +497,7 @@ RADIOACTIVE_BARREL:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -537,6 +542,7 @@ HEALTH_PACK:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -584,6 +590,7 @@ GOLD_CHALISE:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -631,6 +638,7 @@ GOLD_CROSS:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -675,6 +683,7 @@ PLATE_OF_FOOD:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -721,6 +730,7 @@ KEYCARD:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -768,6 +778,7 @@ GOLD_CHEST:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -821,6 +832,7 @@ MACHINE_GUN:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -874,6 +886,7 @@ GATLING_GUN:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -918,6 +931,7 @@ DOG_FOOD:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -960,6 +974,7 @@ GOLD_KEY:
     call sprite_kill
     jp sprite_behavior_return
 @see:
+    xor a
     jp sprite_behavior_return
 @move:
     jp sprite_behavior_return
@@ -1025,11 +1040,15 @@ DOG:
     call sprite_kill
     jp sprite_behavior_return
 @see:
-    ; fall through to @move
+    jr @move
+@seen:
+    xor a
+    inc a
+    jp sprite_behavior_return
 @move:
     dec (iy+sprite_move_timer)
     jr z,@do_move
-    jp sprite_behavior_return
+    jr @seen
 @do_move:
     call rand_8
     and %00111111 ; between 0 and 63
@@ -1038,7 +1057,7 @@ DOG:
     ld (iy+sprite_move_timer),a
     call sprite_move_random
     call sfx_play_dog_woof_double
-    jp sprite_behavior_return
+    jr @seen
 @shoot:
     jp sprite_behavior_return
 
@@ -1110,11 +1129,14 @@ GERMAN_TROOPER:
     push iy 
     call sfx_play_achtung
     pop iy 
+@seen:
+    xor a
+    inc a
     jp sprite_behavior_return
 @move:
     dec (iy+sprite_move_timer)
     jr z,@do_move
-    jp sprite_behavior_return
+    jr @seen
 @do_move:
     call rand_8
     and %00111111 ; between 0 and 63
@@ -1122,7 +1144,7 @@ GERMAN_TROOPER:
     or %00010000  ; at least 16
     ld (iy+sprite_move_timer),a
     call sprite_move_random
-    jp sprite_behavior_return
+    jr @seen
 @shoot:
     jp sprite_behavior_return
 
@@ -1194,11 +1216,14 @@ SS_GUARD:
     push iy 
     call sfx_play_schusstaffel
     pop iy 
+@seen:
+    xor a
+    inc a
     jp sprite_behavior_return
 @move:
     dec (iy+sprite_move_timer)
     jr z,@do_move
-    jp sprite_behavior_return
+    jr @seen
 @do_move:
     call rand_8
     and %00111111 ; between 0 and 63
@@ -1206,7 +1231,7 @@ SS_GUARD:
     or %00010000  ; at least 16
     ld (iy+sprite_move_timer),a
     call sprite_move_random
-    jp sprite_behavior_return
+    jr @seen
 @shoot:
     jp sprite_behavior_return
 
@@ -1217,12 +1242,20 @@ see_orientation: db 0x00
 ; outputs: player-aware enemies
 ; destroys: everything
 sprites_see_plyr:
+; ; DEBUG: set up loop timer
+;     call prt_loop_reset
+; ; END DEBUG
+; ; DEBUG: start loop timer
+;     call prt_loop_start
+; ; END DEBUG
+
 ; intialize orientation
     xor a
     ld (see_orientation),a
 @loop_orientation:
 ; get current map position and camera orientation
     ld de,(cur_x) ; d,e = cur_y,x
+    ; 0-1 prt ticks, 4 loops
     call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
 ; get cell_views address for this cell and orientation
     ld a,(see_orientation)
@@ -1233,7 +1266,7 @@ sprites_see_plyr:
     ld b,24 ; 24 bytes per cell in cell_views lut
     mlt bc ; bc = offset from base address of cell_views lut
     add hl,bc ; hl = total offset from cell_views base address
-    ex de,hl ; becaue we can't add iy to hl
+    ex de,hl ; because we can't add iy to hl
     ld iy,cell_views ; base address of cell_views lut
     add iy,de ; iy = cell_views address
     ld (cur_cell_views),iy
@@ -1283,6 +1316,12 @@ sprites_see_plyr:
 @next_orientation:
     ld a,(see_orientation)
     inc a
+    and 3 ; modulo 4
     ld (see_orientation),a
     jp nz,@loop_orientation
+
+; full loop 1-2 prt ticks
+; ; DEBUG: stop loop timer
+;     call prt_loop_stop
+; ; END DEBUG
     ret

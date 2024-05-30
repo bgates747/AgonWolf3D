@@ -174,6 +174,69 @@ prt_got_irq:
 	.db 0
 prt_irq_counter:
 	.dl 0
+prt_irq_counter_saved:
+    .dl 0
+
+prt_loop_reset:
+    push hl
+	ld hl,0
+	ld (prt_irq_counter),hl
+    ld (prt_loop_counter),hl
+    ld (prt_loops),hl
+    pop hl
+    ret
+
+prt_loop_start:
+    push hl
+	ld hl,0
+	ld (prt_irq_counter),hl
+    pop hl
+    ret
+
+prt_loop_stop:
+    push hl
+    push de
+    ld hl,(prt_irq_counter)
+    ld de,(prt_loop_counter)
+    add hl,de
+    ld (prt_loop_counter),hl
+    ld hl,0
+    ld (prt_irq_counter),hl
+    ld hl,(prt_loops)
+    inc hl
+    ld (prt_loops),hl
+    pop de
+    pop hl
+    ret
+
+; inputs: bc = y,x text coordinates to print
+prt_loop_print:
+    push af
+    push hl
+    push bc
+    push de
+    push ix
+    push iy
+    call vdu_move_cursor
+
+    ld hl,(prt_loop_counter)
+    call printDec
+
+    ld hl,(prt_loops)
+    call printDec
+
+    pop iy
+    pop ix
+    pop de
+    pop bc
+    pop hl
+    pop af
+    ret
+
+prt_loop_counter:
+    .dl 0
+prt_loops:
+    .dl 0
 
 ; ===============================================
 ; Timer functions

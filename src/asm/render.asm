@@ -266,25 +266,10 @@ render_scene:
     ld a,(cur_floor)
     call printHex8
 
-; DEBUG: PRINT TIMER STUFF
-; print prt interrupt counter
-    ld c,1 ; x
-    ld b,8 ; y 
-    call vdu_move_cursor
-	ld hl,(prt_irq_counter)
-	call printDec
-; reset prt interrupt counter
-	ld hl,0
-	ld (prt_irq_counter),hl
-    
-; print timestamp values
-    call timestamp_tick
 
-    ld c,1 ; x
-    ld b,7 ; y 
-    call vdu_move_cursor
-    ld hl,(timestamp_chg)
-    call printDec
+    
+
+
 
 ; all done
     ret
