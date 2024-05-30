@@ -256,9 +256,11 @@ plyr_sub_health:
 ; modifies the players score by a set amount
 ; inputs: a is the signed amount to modify score
 plyr_mod_score:
-    ld hl,plyr_score
-    add a,(hl)
-    ld (hl),a
+    ld de,0 ; make sure deu is zero
+    ld e,a
+    ld hl,(plyr_score)
+    add hl,de
+    ld (plyr_score),hl
     ret
 
 ; adds to player's ammo by a set amount

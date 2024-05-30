@@ -248,11 +248,23 @@ render_scene:
     ld hl,(plyr_health)
     call printDec
 
-    ld c,7 ; x
+    ld c,7; x
+    ld b,3 ; y 
+    call vdu_move_cursor
+    ld hl,(plyr_lives)
+    call printDec
+
+    ld c,3 ; x
     ld b,3 ; y 
     call vdu_move_cursor
     ld hl,(plyr_score)
     call printDec
+
+    ld c,1 ; x
+    ld b,3 ; y 
+    call vdu_move_cursor
+    ld a,(cur_floor)
+    call printHex8
 
 ; DEBUG: PRINT TIMER STUFF
 ; print prt interrupt counter

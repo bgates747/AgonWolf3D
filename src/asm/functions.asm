@@ -67,7 +67,7 @@ DisplayHexPrefix:
 	RET
 
 
-; Prints the decimal value in HL without leading zeroes
+; Prints the right justified decimal value in HL without leading zeroes
 ; HL : Value to print
 printDec:
 	LD	 DE, _printDecBuffer
@@ -93,8 +93,8 @@ printDec:
 _printDecBuffer: blkb 9,0 ; nine bytes full of zeroes
 
 ; This routine converts the value from HL into it's ASCII representation, 
-; starting to memory location pointing by DE, in decimal form and with trailing zeroes 
-; so it will allways be 5 characters length
+; starting to memory location pointing by DE, in decimal form and with leading zeroes 
+; so it will allways be 8 characters length
 ; HL : Value to convert to string
 ; DE : pointer to buffer, at least 8 byte + 0
 Num2String:

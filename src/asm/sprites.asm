@@ -1020,6 +1020,8 @@ DOG:
     push iy 
     call sfx_play_dog_yelp
     pop iy 
+    ld a,(iy+sprite_points)
+    call plyr_mod_score
     call sprite_kill
     jp sprite_behavior_return
 @see:
@@ -1094,6 +1096,8 @@ GERMAN_TROOPER:
     push iy 
     call sfx_play_wilhelm
     pop iy 
+    ld a,(iy+sprite_points)
+    call plyr_mod_score
     call sprite_kill
     jp sprite_behavior_return
 @see:
@@ -1176,6 +1180,8 @@ SS_GUARD:
     push iy 
     call sfx_play_mein_leben
     pop iy 
+    ld a,(iy+sprite_points)
+    call plyr_mod_score
     call sprite_kill
     jp sprite_behavior_return
 @see:
