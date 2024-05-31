@@ -20690,288 +20690,291 @@ PC     Output      Line
 04C311 FA 17 C3 04 0097*      jp m,@done ; time past expiration (negative), so quit
 04C315 18 F2       0098*      jr @loop
 04C317             0099*  @done:
-04C317 01 00 12 00 0100*      ld bc,0x1200 ; default value for running on hardware
-04C31B ED 43 80 C3 0101*      ld (prt_reload),bc
+04C317             0100*      ; ld bc,4608 ; default value for running on hardware
+04C317 01 94 01 00 0101*      ld bc,404
+04C31B ED 43 80 C3 0102*      ld (prt_reload),bc
        04          
-04C320 ED 5B C9 C3 0102*      ld de,(prt_irq_counter)
+04C320 ED 5B C9 C3 0103*      ld de,(prt_irq_counter)
        04          
-04C325 21 66 0F 00 0103*      ld hl,3942 ; halfway between 4608 for real hardware and 3276 for emulator
-04C329 AF          0104*      xor a; clear carry, zero is default value for running on hardware
-04C32A ED 52       0105*      sbc hl,de
-04C32C 21 6A C3 04 0106*      ld hl,on_hardware ; default message for running on hardware
-04C330 F8          0107*      ret m ; negative result means we're on hardware
-04C331 3C          0108*      inc a ; we're on emulator
-04C332 01 CC 0C 00 0109*      ld bc,0x0CCC
-04C336 ED 43 80 C3 0110*      ld (prt_reload),bc
+04C325             0104*      ; ld hl,3942 ; halfway between 4608 for real hardware and 3276 for emulator
+04C325 21 59 01 00 0105*      ld hl,345
+04C329 AF          0106*      xor a; clear carry, zero is default value for running on hardware
+04C32A ED 52       0107*      sbc hl,de
+04C32C 21 6A C3 04 0108*      ld hl,on_hardware ; default message for running on hardware
+04C330 F8          0109*      ret m ; negative result means we're on hardware
+04C331 3C          0110*      inc a ; we're on emulator
+04C332             0111*      ; ld bc,3276
+04C332 01 1F 01 00 0112*      ld bc,287
+04C336 ED 43 80 C3 0113*      ld (prt_reload),bc
        04          
-04C33B 21 54 C3 04 0111*      ld hl,on_emulator
-04C33F C9          0112*      ret
-04C340             0113*  
-04C340 43 61 6C 69 0114*  calibrating_timer: defb "Calibrating timer\r\n",0
+04C33B 21 54 C3 04 0114*      ld hl,on_emulator
+04C33F C9          0115*      ret
+04C340             0116*  
+04C340 43 61 6C 69 0117*  calibrating_timer: defb "Calibrating timer\r\n",0
        62 72 61 74 
        69 6E 67 20 
        74 69 6D 65 
        72 0D 0A 00 
-04C354 52 75 6E 6E 0115*  on_emulator: defb "Running on emulator\r\n",0
+04C354 52 75 6E 6E 0118*  on_emulator: defb "Running on emulator\r\n",0
        69 6E 67 20 
        6F 6E 20 65 
        6D 75 6C 61 
        74 6F 72 0D 
        0A 00       
-04C36A 52 75 6E 6E 0116*  on_hardware: defb "Running on hardware\r\n",0
+04C36A 52 75 6E 6E 0119*  on_hardware: defb "Running on hardware\r\n",0
        69 6E 67 20 
        6F 6E 20 68 
        61 72 64 77 
        61 72 65 0D 
        0A 00       
-04C380             0117*  
-04C380             0118*  ; 3276d = 1,000 milliseconds on emulator
-04C380             0119*  ; 1200h = 1,000 milliseconds on hardware
-04C380 00 00 00    0120*  prt_reload: dl 0x000000
-04C383             0121*  
-04C383             0122*  ; set PRT timer
-04C383             0123*  prt_set:
-04C383             0124*  ; set PRT reload value
-04C383 2A 80 C3 04 0125*      ld hl, (prt_reload)
-04C387 ED 29 84    0126*      out0 ($84), l
-04C38A ED 21 85    0127*  	out0 ($85), h
-04C38D             0128*  ; enable PRT, with interrupt and CONTINUOUS mode, clock divider 4
-04C38D 3E 53       0129*      ld a,PRT_IRQ_0 | IRQ_EN_1 | PRT_MODE_1 | CLK_DIV_4 | RST_EN_1 | PRT_EN_1 ; 0x53
-04C38F ED 39 83    0130*  	out0 ($83), a
-04C392 C9          0131*      ret
-04C393             0132*  
-04C393             0133*  ; ===============================================
-04C393             0134*  ; PRT Timer Interrupt Handling
-04C393             0135*  ; https://github.com/tomm/agon-cpu-emulator/blob/main/sdcard/regression_suite/timerirq.asm
-04C393             0136*  ; -----------------------------------------------
-04C393             0137*  prt_irq_init:
-04C393             0138*      ; set up interrupt vector table 2
-04C393 21 00 00 00 0139*  	ld hl, 0
-04C397 3A 0C 01 00 0140*  	ld a,($10c)
-04C39B 6F          0141*  	ld l, a
-04C39C 3A 0D 01 00 0142*  	ld a,($10d)
-04C3A0 67          0143*  	ld h, a
-04C3A1             0144*  
-04C3A1             0145*  	; skip over CALL ($c3)
-04C3A1 23          0146*  	inc hl
-04C3A2             0147*  	; load address of jump into vector table 2 (in ram)
-04C3A2 ED 27       0148*  	ld hl,(hl)
-04C3A4             0149*  
-04C3A4             0150*  	; write CALL prt_irq_handler to vector table 2
-04C3A4 3E C3       0151*  	ld a, $c3
-04C3A6 77          0152*  	ld (hl), a
-04C3A7 23          0153*  	inc hl
-04C3A8 11 AF C3 04 0154*  	ld de, prt_irq_handler
-04C3AC ED 1F       0155*  	ld (hl), de
-04C3AE             0156*  
-04C3AE C9          0157*      ret
-04C3AF             0158*  
-04C3AF             0159*  prt_irq_handler:
-04C3AF F3          0160*  	di
-04C3B0 F5          0161*  	push af
-04C3B1 E5          0162*      push hl
-04C3B2 ED 38 83    0163*  	in0 a,($83)
-04C3B5 32 C8 C3 04 0164*  	ld (prt_got_irq),a
-04C3B9 2A C9 C3 04 0165*  	ld hl,(prt_irq_counter)
-04C3BD 23          0166*  	inc hl
-04C3BE 22 C9 C3 04 0167*  	ld (prt_irq_counter),hl
-04C3C2 E1          0168*      pop hl
-04C3C3 F1          0169*  	pop af
-04C3C4 FB          0170*  	ei
-04C3C5 5B ED 4D    0171*  	reti.l
-04C3C8             0172*  
-04C3C8             0173*  prt_got_irq:
-04C3C8 00          0174*  	.db 0
-04C3C9             0175*  prt_irq_counter:
-04C3C9 00 00 00    0176*  	.dl 0
-04C3CC             0177*  prt_irq_counter_saved:
-04C3CC 00 00 00    0178*      .dl 0
-04C3CF             0179*  
-04C3CF             0180*  prt_loop_reset:
-04C3CF E5          0181*      push hl
-04C3D0 21 00 00 00 0182*  	ld hl,0
-04C3D4 22 C9 C3 04 0183*  	ld (prt_irq_counter),hl
-04C3D8 22 36 C4 04 0184*      ld (prt_loop_counter),hl
-04C3DC 22 39 C4 04 0185*      ld (prt_loops),hl
-04C3E0 E1          0186*      pop hl
-04C3E1 C9          0187*      ret
-04C3E2             0188*  
-04C3E2             0189*  prt_loop_start:
-04C3E2 E5          0190*      push hl
-04C3E3 21 00 00 00 0191*  	ld hl,0
-04C3E7 22 C9 C3 04 0192*  	ld (prt_irq_counter),hl
-04C3EB E1          0193*      pop hl
-04C3EC C9          0194*      ret
-04C3ED             0195*  
-04C3ED             0196*  prt_loop_stop:
-04C3ED E5          0197*      push hl
-04C3EE D5          0198*      push de
-04C3EF 2A C9 C3 04 0199*      ld hl,(prt_irq_counter)
-04C3F3 ED 5B 36 C4 0200*      ld de,(prt_loop_counter)
+04C380             0120*  
+04C380             0121*  ; 3276d = 1,000 milliseconds on emulator
+04C380             0122*  ; 1200h = 1,000 milliseconds on hardware
+04C380 00 00 00    0123*  prt_reload: dl 0x000000
+04C383             0124*  
+04C383             0125*  ; set PRT timer
+04C383             0126*  prt_set:
+04C383             0127*  ; set PRT reload value
+04C383 2A 80 C3 04 0128*      ld hl, (prt_reload)
+04C387 ED 29 84    0129*      out0 ($84), l
+04C38A ED 21 85    0130*  	out0 ($85), h
+04C38D             0131*  ; enable PRT, with interrupt and CONTINUOUS mode, clock divider 64
+04C38D 3E 5B       0132*      ld a,PRT_IRQ_0 | IRQ_EN_1 | PRT_MODE_1 | CLK_DIV_64 | RST_EN_1 | PRT_EN_1 ; 0x53
+04C38F ED 39 83    0133*  	out0 ($83), a
+04C392 C9          0134*      ret
+04C393             0135*  
+04C393             0136*  ; ===============================================
+04C393             0137*  ; PRT Timer Interrupt Handling
+04C393             0138*  ; https://github.com/tomm/agon-cpu-emulator/blob/main/sdcard/regression_suite/timerirq.asm
+04C393             0139*  ; -----------------------------------------------
+04C393             0140*  prt_irq_init:
+04C393             0141*      ; set up interrupt vector table 2
+04C393 21 00 00 00 0142*  	ld hl, 0
+04C397 3A 0C 01 00 0143*  	ld a,($10c)
+04C39B 6F          0144*  	ld l, a
+04C39C 3A 0D 01 00 0145*  	ld a,($10d)
+04C3A0 67          0146*  	ld h, a
+04C3A1             0147*  
+04C3A1             0148*  	; skip over CALL ($c3)
+04C3A1 23          0149*  	inc hl
+04C3A2             0150*  	; load address of jump into vector table 2 (in ram)
+04C3A2 ED 27       0151*  	ld hl,(hl)
+04C3A4             0152*  
+04C3A4             0153*  	; write CALL prt_irq_handler to vector table 2
+04C3A4 3E C3       0154*  	ld a, $c3
+04C3A6 77          0155*  	ld (hl), a
+04C3A7 23          0156*  	inc hl
+04C3A8 11 AF C3 04 0157*  	ld de, prt_irq_handler
+04C3AC ED 1F       0158*  	ld (hl), de
+04C3AE             0159*  
+04C3AE C9          0160*      ret
+04C3AF             0161*  
+04C3AF             0162*  prt_irq_handler:
+04C3AF F3          0163*  	di
+04C3B0 F5          0164*  	push af
+04C3B1 E5          0165*      push hl
+04C3B2 ED 38 83    0166*  	in0 a,($83)
+04C3B5 32 C8 C3 04 0167*  	ld (prt_got_irq),a
+04C3B9 2A C9 C3 04 0168*  	ld hl,(prt_irq_counter)
+04C3BD 23          0169*  	inc hl
+04C3BE 22 C9 C3 04 0170*  	ld (prt_irq_counter),hl
+04C3C2 E1          0171*      pop hl
+04C3C3 F1          0172*  	pop af
+04C3C4 FB          0173*  	ei
+04C3C5 5B ED 4D    0174*  	reti.l
+04C3C8             0175*  
+04C3C8             0176*  prt_got_irq:
+04C3C8 00          0177*  	.db 0
+04C3C9             0178*  prt_irq_counter:
+04C3C9 00 00 00    0179*  	.dl 0
+04C3CC             0180*  prt_irq_counter_saved:
+04C3CC 00 00 00    0181*      .dl 0
+04C3CF             0182*  
+04C3CF             0183*  prt_loop_reset:
+04C3CF E5          0184*      push hl
+04C3D0 21 00 00 00 0185*  	ld hl,0
+04C3D4 22 C9 C3 04 0186*  	ld (prt_irq_counter),hl
+04C3D8 22 36 C4 04 0187*      ld (prt_loop_counter),hl
+04C3DC 22 39 C4 04 0188*      ld (prt_loops),hl
+04C3E0 E1          0189*      pop hl
+04C3E1 C9          0190*      ret
+04C3E2             0191*  
+04C3E2             0192*  prt_loop_start:
+04C3E2 E5          0193*      push hl
+04C3E3 21 00 00 00 0194*  	ld hl,0
+04C3E7 22 C9 C3 04 0195*  	ld (prt_irq_counter),hl
+04C3EB E1          0196*      pop hl
+04C3EC C9          0197*      ret
+04C3ED             0198*  
+04C3ED             0199*  prt_loop_stop:
+04C3ED E5          0200*      push hl
+04C3EE D5          0201*      push de
+04C3EF 2A C9 C3 04 0202*      ld hl,(prt_irq_counter)
+04C3F3 ED 5B 36 C4 0203*      ld de,(prt_loop_counter)
        04          
-04C3F8 19          0201*      add hl,de
-04C3F9 22 36 C4 04 0202*      ld (prt_loop_counter),hl
-04C3FD 21 00 00 00 0203*      ld hl,0
-04C401 22 C9 C3 04 0204*      ld (prt_irq_counter),hl
-04C405 2A 39 C4 04 0205*      ld hl,(prt_loops)
-04C409 23          0206*      inc hl
-04C40A 22 39 C4 04 0207*      ld (prt_loops),hl
-04C40E D1          0208*      pop de
-04C40F E1          0209*      pop hl
-04C410 C9          0210*      ret
-04C411             0211*  
-04C411             0212*  ; inputs: bc = y,x text coordinates to print
-04C411             0213*  prt_loop_print:
-04C411 F5          0214*      push af
-04C412 E5          0215*      push hl
-04C413 C5          0216*      push bc
-04C414 D5          0217*      push de
-04C415 DD E5       0218*      push ix
-04C417 FD E5       0219*      push iy
-04C419 CD D5 A7 04 0220*      call vdu_move_cursor
-04C41D             0221*  
-04C41D 2A 36 C4 04 0222*      ld hl,(prt_loop_counter)
-04C421 CD 6A AE 04 0223*      call printDec
-04C425             0224*  
-04C425 2A 39 C4 04 0225*      ld hl,(prt_loops)
-04C429 CD 6A AE 04 0226*      call printDec
-04C42D             0227*  
-04C42D FD E1       0228*      pop iy
-04C42F DD E1       0229*      pop ix
-04C431 D1          0230*      pop de
-04C432 C1          0231*      pop bc
-04C433 E1          0232*      pop hl
-04C434 F1          0233*      pop af
-04C435 C9          0234*      ret
-04C436             0235*  
-04C436             0236*  prt_loop_counter:
-04C436 00 00 00    0237*      .dl 0
-04C439             0238*  prt_loops:
-04C439 00 00 00    0239*      .dl 0
-04C43C             0240*  
-04C43C             0241*  ; ===============================================
-04C43C             0242*  ; Timer functions
-04C43C             0243*  ; -----------------------------------------------
-04C43C             0244*  ; set a countdown timer
-04C43C             0245*  ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-04C43C             0246*  ; returns: hl = current time
-04C43C             0247*  tmr_set:
-04C43C FD 2F 03    0248*      ld (iy+3),hl            ; set time remaining
-04C43F             0249*      MOSCALL mos_sysvars     ; ix points to syvars table
+04C3F8 19          0204*      add hl,de
+04C3F9 22 36 C4 04 0205*      ld (prt_loop_counter),hl
+04C3FD 21 00 00 00 0206*      ld hl,0
+04C401 22 C9 C3 04 0207*      ld (prt_irq_counter),hl
+04C405 2A 39 C4 04 0208*      ld hl,(prt_loops)
+04C409 23          0209*      inc hl
+04C40A 22 39 C4 04 0210*      ld (prt_loops),hl
+04C40E D1          0211*      pop de
+04C40F E1          0212*      pop hl
+04C410 C9          0213*      ret
+04C411             0214*  
+04C411             0215*  ; inputs: bc = y,x text coordinates to print
+04C411             0216*  prt_loop_print:
+04C411 F5          0217*      push af
+04C412 E5          0218*      push hl
+04C413 C5          0219*      push bc
+04C414 D5          0220*      push de
+04C415 DD E5       0221*      push ix
+04C417 FD E5       0222*      push iy
+04C419 CD D5 A7 04 0223*      call vdu_move_cursor
+04C41D             0224*  
+04C41D 2A 36 C4 04 0225*      ld hl,(prt_loop_counter)
+04C421 CD 6A AE 04 0226*      call printDec
+04C425             0227*  
+04C425 2A 39 C4 04 0228*      ld hl,(prt_loops)
+04C429 CD 6A AE 04 0229*      call printDec
+04C42D             0230*  
+04C42D FD E1       0231*      pop iy
+04C42F DD E1       0232*      pop ix
+04C431 D1          0233*      pop de
+04C432 C1          0234*      pop bc
+04C433 E1          0235*      pop hl
+04C434 F1          0236*      pop af
+04C435 C9          0237*      ret
+04C436             0238*  
+04C436             0239*  prt_loop_counter:
+04C436 00 00 00    0240*      .dl 0
+04C439             0241*  prt_loops:
+04C439 00 00 00    0242*      .dl 0
+04C43C             0243*  
+04C43C             0244*  ; ===============================================
+04C43C             0245*  ; Timer functions
+04C43C             0246*  ; -----------------------------------------------
+04C43C             0247*  ; set a countdown timer
+04C43C             0248*  ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+04C43C             0249*  ; returns: hl = current time
+04C43C             0250*  tmr_set:
+04C43C FD 2F 03    0251*      ld (iy+3),hl            ; set time remaining
+04C43F             0252*      MOSCALL mos_sysvars     ; ix points to syvars table
 04C43F 3E 08       0001*M 			LD	A, function
 04C441 5B CF       0002*M 			RST.LIL	08h
-04C443 DD 27 00    0250*      ld hl,(ix+sysvar_time)  ; get current time
-04C446 FD 2F 00    0251*      ld (iy+0),hl            ; set start time
-04C449 C9          0252*      ret
-04C44A             0253*  
-04C44A             0254*  ; gets time remaining on a countdown timer
-04C44A             0255*  ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-04C44A             0256*  ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
-04C44A             0257*  ;          sign flags: pos = time not expired, zero or neg = time expired
-04C44A             0258*  tmr_get:
-04C44A             0259*      MOSCALL mos_sysvars     ; ix points to syvars table
+04C443 DD 27 00    0253*      ld hl,(ix+sysvar_time)  ; get current time
+04C446 FD 2F 00    0254*      ld (iy+0),hl            ; set start time
+04C449 C9          0255*      ret
+04C44A             0256*  
+04C44A             0257*  ; gets time remaining on a countdown timer
+04C44A             0258*  ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+04C44A             0259*  ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
+04C44A             0260*  ;          sign flags: pos = time not expired, zero or neg = time expired
+04C44A             0261*  tmr_get:
+04C44A             0262*      MOSCALL mos_sysvars     ; ix points to syvars table
 04C44A 3E 08       0001*M 			LD	A, function
 04C44C 5B CF       0002*M 			RST.LIL	08h
-04C44E DD 17 00    0260*      ld de,(ix+sysvar_time)  ; get current time
-04C451 FD 27 00    0261*      ld hl,(iy+0)            ; get start time
-04C454 AF          0262*      xor a                   ; clear carry
-04C455 ED 52       0263*      sbc hl,de               ; hl = time elapsed (will always be zero or negative)
-04C457 FD 17 03    0264*      ld de,(iy+3)            ; get timer set value
-04C45A AF          0265*      xor a                   ; clear carry
-04C45B ED 5A       0266*      adc hl,de               ; hl = time remaining
-04C45D             0267*                              ; (we do adc because add hl,rr doesn't set sign or zero flags)
-04C45D C9          0268*      ret
-04C45E             0269*  
-04C45E             0270*  tmr_test: ds 6 ; example of a buffer to hold timer data
-04C464             0271*  
-04C464 00 00 00    0272*  timestamp_now: dl 0
-04C467 00 00 00    0273*  timestamp_old: dl 0
-04C46A 00 00 00    0274*  timestamp_chg: dl 0
-04C46D             0275*  
-04C46D             0276*  timestamp_tick:
-04C46D ED 5B 64 C4 0277*      ld de,(timestamp_now)   ; get previous time
+04C44E DD 17 00    0263*      ld de,(ix+sysvar_time)  ; get current time
+04C451 FD 27 00    0264*      ld hl,(iy+0)            ; get start time
+04C454 AF          0265*      xor a                   ; clear carry
+04C455 ED 52       0266*      sbc hl,de               ; hl = time elapsed (will always be zero or negative)
+04C457 FD 17 03    0267*      ld de,(iy+3)            ; get timer set value
+04C45A AF          0268*      xor a                   ; clear carry
+04C45B ED 5A       0269*      adc hl,de               ; hl = time remaining
+04C45D             0270*                              ; (we do adc because add hl,rr doesn't set sign or zero flags)
+04C45D C9          0271*      ret
+04C45E             0272*  
+04C45E             0273*  tmr_test: ds 6 ; example of a buffer to hold timer data
+04C464             0274*  
+04C464 00 00 00    0275*  timestamp_now: dl 0
+04C467 00 00 00    0276*  timestamp_old: dl 0
+04C46A 00 00 00    0277*  timestamp_chg: dl 0
+04C46D             0278*  
+04C46D             0279*  timestamp_tick:
+04C46D ED 5B 64 C4 0280*      ld de,(timestamp_now)   ; get previous time
        04          
-04C472 ED 53 67 C4 0278*      ld (timestamp_old),de   ; save previous time
+04C472 ED 53 67 C4 0281*      ld (timestamp_old),de   ; save previous time
        04          
-04C477             0279*      MOSCALL mos_sysvars     ; ix points to syvars table
+04C477             0282*      MOSCALL mos_sysvars     ; ix points to syvars table
 04C477 3E 08       0001*M 			LD	A, function
 04C479 5B CF       0002*M 			RST.LIL	08h
-04C47B DD 27 00    0280*      ld hl,(ix+sysvar_time)  ; get current time
-04C47E 22 64 C4 04 0281*      ld (timestamp_now),hl   ; save current time
-04C482 AF          0282*      xor a                   ; clear carry
-04C483 ED 52       0283*      sbc hl,de               ; ix = time elapsed
-04C485 22 6A C4 04 0284*      ld (timestamp_chg),hl   ; save elapsed time
-04C489 C9          0285*      ret
-04C48A             0286*  
-04C48A             0287*  ; set a countdown timer
-04C48A             0288*  ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-04C48A             0289*  ; returns: hl = current time
-04C48A             0290*  timestamp_tmr_set:
-04C48A FD 2F 03    0291*      ld (iy+3),hl            ; set time remaining
-04C48D 2A 64 C4 04 0292*      ld hl,(timestamp_now)   ; get current timestamp
-04C491 FD 2F 00    0293*      ld (iy+0),hl            ; set start time
-04C494 C9          0294*      ret
-04C495             0295*  
-04C495             0296*  ; gets time remaining on a countdown timer
-04C495             0297*  ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-04C495             0298*  ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
-04C495             0299*  ;          sign flags: pos = time not expired, zero or neg = time expired
-04C495             0300*  timestamp_tmr_get:
-04C495 ED 5B 64 C4 0301*      ld de,(timestamp_now)   ; get current timestamp
+04C47B DD 27 00    0283*      ld hl,(ix+sysvar_time)  ; get current time
+04C47E 22 64 C4 04 0284*      ld (timestamp_now),hl   ; save current time
+04C482 AF          0285*      xor a                   ; clear carry
+04C483 ED 52       0286*      sbc hl,de               ; ix = time elapsed
+04C485 22 6A C4 04 0287*      ld (timestamp_chg),hl   ; save elapsed time
+04C489 C9          0288*      ret
+04C48A             0289*  
+04C48A             0290*  ; set a countdown timer
+04C48A             0291*  ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+04C48A             0292*  ; returns: hl = current time
+04C48A             0293*  timestamp_tmr_set:
+04C48A FD 2F 03    0294*      ld (iy+3),hl            ; set time remaining
+04C48D 2A 64 C4 04 0295*      ld hl,(timestamp_now)   ; get current timestamp
+04C491 FD 2F 00    0296*      ld (iy+0),hl            ; set start time
+04C494 C9          0297*      ret
+04C495             0298*  
+04C495             0299*  ; gets time remaining on a countdown timer
+04C495             0300*  ; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+04C495             0301*  ; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
+04C495             0302*  ;          sign flags: pos = time not expired, zero or neg = time expired
+04C495             0303*  timestamp_tmr_get:
+04C495 ED 5B 64 C4 0304*      ld de,(timestamp_now)   ; get current timestamp
        04          
-04C49A FD 27 00    0302*      ld hl,(iy+0)            ; get start time
-04C49D AF          0303*      xor a                   ; clear carry
-04C49E ED 52       0304*      sbc hl,de               ; hl = time elapsed (will always be zero or negative)
-04C4A0 FD 17 03    0305*      ld de,(iy+3)            ; get timer set value
-04C4A3 AF          0306*      xor a                   ; clear carry
-04C4A4 ED 5A       0307*      adc hl,de               ; hl = time remaining
-04C4A6             0308*                              ; (we do adc because add hl,rr doesn't set sign or zero flags)
-04C4A6 C9          0309*      ret
-04C4A7             0310*  
-04C4A7             0311*  ; ------------------
-04C4A7             0312*  ; delay routine
-04C4A7             0313*  ; Author: Richard Turrnidge
-04C4A7             0314*  ; https://github.com/richardturnnidge/lessons/blob/main/slowdown.asm
-04C4A7             0315*  ; routine waits a fixed time, then returns
-04C4A7             0316*  ; arrive with A =  the delay byte. One bit to be set only.
-04C4A7             0317*  ; eg. ld A, 00000100b
-04C4A7             0318*  
-04C4A7             0319*  multiPurposeDelay:
-04C4A7 F5          0320*      push af
-04C4A8 C5          0321*      push bc
-04C4A9 DD E5       0322*      push ix
-04C4AB 47          0323*      ld b, a
-04C4AC 3E 08       0324*      ld a,$08
-04C4AE 5B CF       0325*      RST.LIL	08h                 ; get IX pointer to sysvars
-04C4B0             0326*  
-04C4B0             0327*  waitLoop:
-04C4B0             0328*  
-04C4B0 DD 7E 00    0329*      ld a, (ix + 0)              ; ix+0h is lowest byte of clock timer
-04C4B3             0330*  
-04C4B3             0331*                                  ;   we check if bit set is same as last time we checked.
-04C4B3             0332*                                  ;   bit 0 - don't use
-04C4B3             0333*                                  ;   bit 1 - changes 64 times per second
-04C4B3             0334*                                  ;   bit 2 - changes 32 times per second
-04C4B3             0335*                                  ;   bit 3 - changes 16 times per second
-04C4B3             0336*  
-04C4B3             0337*                                  ;   bit 4 - changes 8 times per second
-04C4B3             0338*                                  ;   bit 5 - changes 4 times per second
-04C4B3             0339*                                  ;   bit 6 - changes 2 times per second
-04C4B3             0340*                                  ;   bit 7 - changes 1 times per second
-04C4B3 A0          0341*      and b
-04C4B4 4F          0342*      ld c,a
-04C4B5 3A C6 C4 04 0343*      ld a, (oldTimeStamp)
-04C4B9 B9          0344*      cp c                        ; is A same as last value?
-04C4BA 28 F4       0345*      jr z, waitLoop              ; loop here if it is
-04C4BC 79          0346*      ld a, c
-04C4BD 32 C6 C4 04 0347*      ld (oldTimeStamp), a        ; set new value
-04C4C1             0348*  
-04C4C1 DD E1       0349*      pop ix
-04C4C3 C1          0350*      pop bc
-04C4C4 F1          0351*      pop af
-04C4C5 C9          0352*      ret
-04C4C6             0353*  
-04C4C6 00          0354*  oldTimeStamp:   .db 00h
+04C49A FD 27 00    0305*      ld hl,(iy+0)            ; get start time
+04C49D AF          0306*      xor a                   ; clear carry
+04C49E ED 52       0307*      sbc hl,de               ; hl = time elapsed (will always be zero or negative)
+04C4A0 FD 17 03    0308*      ld de,(iy+3)            ; get timer set value
+04C4A3 AF          0309*      xor a                   ; clear carry
+04C4A4 ED 5A       0310*      adc hl,de               ; hl = time remaining
+04C4A6             0311*                              ; (we do adc because add hl,rr doesn't set sign or zero flags)
+04C4A6 C9          0312*      ret
+04C4A7             0313*  
+04C4A7             0314*  ; ------------------
+04C4A7             0315*  ; delay routine
+04C4A7             0316*  ; Author: Richard Turrnidge
+04C4A7             0317*  ; https://github.com/richardturnnidge/lessons/blob/main/slowdown.asm
+04C4A7             0318*  ; routine waits a fixed time, then returns
+04C4A7             0319*  ; arrive with A =  the delay byte. One bit to be set only.
+04C4A7             0320*  ; eg. ld A, 00000100b
+04C4A7             0321*  
+04C4A7             0322*  multiPurposeDelay:
+04C4A7 F5          0323*      push af
+04C4A8 C5          0324*      push bc
+04C4A9 DD E5       0325*      push ix
+04C4AB 47          0326*      ld b, a
+04C4AC 3E 08       0327*      ld a,$08
+04C4AE 5B CF       0328*      RST.LIL	08h                 ; get IX pointer to sysvars
+04C4B0             0329*  
+04C4B0             0330*  waitLoop:
+04C4B0             0331*  
+04C4B0 DD 7E 00    0332*      ld a, (ix + 0)              ; ix+0h is lowest byte of clock timer
+04C4B3             0333*  
+04C4B3             0334*                                  ;   we check if bit set is same as last time we checked.
+04C4B3             0335*                                  ;   bit 0 - don't use
+04C4B3             0336*                                  ;   bit 1 - changes 64 times per second
+04C4B3             0337*                                  ;   bit 2 - changes 32 times per second
+04C4B3             0338*                                  ;   bit 3 - changes 16 times per second
+04C4B3             0339*  
+04C4B3             0340*                                  ;   bit 4 - changes 8 times per second
+04C4B3             0341*                                  ;   bit 5 - changes 4 times per second
+04C4B3             0342*                                  ;   bit 6 - changes 2 times per second
+04C4B3             0343*                                  ;   bit 7 - changes 1 times per second
+04C4B3 A0          0344*      and b
+04C4B4 4F          0345*      ld c,a
+04C4B5 3A C6 C4 04 0346*      ld a, (oldTimeStamp)
+04C4B9 B9          0347*      cp c                        ; is A same as last value?
+04C4BA 28 F4       0348*      jr z, waitLoop              ; loop here if it is
+04C4BC 79          0349*      ld a, c
+04C4BD 32 C6 C4 04 0350*      ld (oldTimeStamp), a        ; set new value
+04C4C1             0351*  
+04C4C1 DD E1       0352*      pop ix
+04C4C3 C1          0353*      pop bc
+04C4C4 F1          0354*      pop af
+04C4C5 C9          0355*      ret
+04C4C6             0356*  
+04C4C6 00          0357*  oldTimeStamp:   .db 00h
 04C4C7             0039   
 04C4C7             0040   
 04C4C7             0041   start:
@@ -21117,7 +21120,7 @@ PC     Output      Line
 04C5D4 01          0172   debug_timer: db 0x01
 04C5D5             0173   
 04C5D5             0174   main_loop_tmr: ds 6
-04C5DB             0175   framerate: equ 15
+04C5DB             0175   framerate: equ 30
 04C5DB             0176   
 04C5DB             0177   main:
 04C5DB             0178   ; set map variables and load initial map file
@@ -21126,76 +21129,99 @@ PC     Output      Line
 04C5DF CD F0 B1 04 0181   	call plyr_init
 04C5E3             0182   
 04C5E3             0183   main_loop:
-04C5E3             0184   ; DEBUG: set up loop timer
-04C5E3 CD CF C3 04 0185       call prt_loop_reset
-04C5E7             0186   ; END DEBUG
-04C5E7             0187   ; DEBUG: start loop timer
-04C5E7 CD E2 C3 04 0188       call prt_loop_start
-04C5EB             0189   ; END DEBUG
-04C5EB             0190   
-04C5EB             0191   ; update timestamp
-04C5EB CD 6D C4 04 0192       call timestamp_tick
-04C5EF             0193   
-04C5EF             0194   ; move enemies
-04C5EF CD 99 A5 04 0195   	call sprites_see_plyr ; 220-285  prt ticks
-04C5F3             0196   
-04C5F3             0197   ; get player input and update sprite position
-04C5F3             0198   	; 0-1 prt ticks
-04C5F3 CD ED B4 04 0199   	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
-04C5F7             0200   
-04C5F7             0201   ; render the updated scene
-04C5F7 CD 5B 66 04 0202   	call render_scene ; 6-12 prt ticks
-04C5FB             0203   ; full loop 230-300 prt ticks
-04C5FB             0204   
-04C5FB             0205   ; DEBUG: stop loop timer
-04C5FB CD ED C3 04 0206       call prt_loop_stop
-04C5FF             0207   ; END DEBUG
-04C5FF             0208   
-04C5FF             0209   ; DEBUG: PRINT TIMER STUFF
-04C5FF 0E 01       0210       ld c,1 ; x
-04C601 06 08       0211       ld b,8 ; y
-04C603 CD 11 C4 04 0212   	call prt_loop_print
-04C607             0213   ; END DEBUG
-04C607             0214   
-04C607             0215   ; flip the screen
-04C607 CD 67 A8 04 0216   	call vdu_flip
-04C60B             0217   
-04C60B             0218   ; wait for main loop timer to expire before contiuining
-04C60B             0219   @wait:
-04C60B FD 21 D5 C5 0220   	ld iy,main_loop_tmr
+04C5E3             0184   ; ; DEBUG: set up loop timer
+04C5E3             0185   ;     call prt_loop_reset
+04C5E3             0186   ; ; END DEBUG
+04C5E3             0187   ; ; DEBUG: start loop timer
+04C5E3             0188   ;     call prt_loop_start
+04C5E3             0189   ; ; END DEBUG
+04C5E3             0190   
+04C5E3             0191   ; update timestamp
+04C5E3 CD 6D C4 04 0192       call timestamp_tick
+04C5E7             0193   
+04C5E7             0194   ; move enemies
+04C5E7 CD 99 A5 04 0195   	call sprites_see_plyr ; 220-285  prt ticks
+04C5EB             0196   
+04C5EB             0197   ; get player input and update sprite position
+04C5EB             0198   	; 0-1 prt ticks
+04C5EB CD ED B4 04 0199   	call plyr_input ; ix points to cell defs/status, a is target cell current obj_id
+04C5EF             0200   
+04C5EF             0201   ; render the updated scene
+04C5EF CD 5B 66 04 0202   	call render_scene ; 6-12 prt ticks
+04C5F3             0203   ; full loop 12-16 prt ticks
+04C5F3             0204   
+04C5F3             0205   ; ; DEBUG: stop loop timer
+04C5F3             0206   ;     call prt_loop_stop
+04C5F3             0207   ; ; END DEBUG
+04C5F3             0208   
+04C5F3             0209   ; DEBUG: PRINT TIMER STUFF
+04C5F3 0E 01       0210       ld c,1 ; x
+04C5F5 06 08       0211       ld b,8 ; y
+04C5F7 CD 11 C4 04 0212   	call prt_loop_print
+04C5FB             0213   ; END DEBUG
+04C5FB             0214   
+04C5FB             0215   ; flip the screen
+04C5FB CD 67 A8 04 0216   	call vdu_flip
+04C5FF             0217   
+04C5FF             0218   ; DEBUG: set up loop timer
+04C5FF CD CF C3 04 0219       call prt_loop_reset
+04C603             0220   ; END DEBUG
+04C603             0221   ; DEBUG: start loop timer
+04C603 CD E2 C3 04 0222       call prt_loop_start
+04C607             0223   ; END DEBUG
+04C607             0224   ; wait for main loop timer to expire before contiuining
+04C607             0225   ; 40-50 prt ticks at 60fps
+04C607             0226   ; 100-120 prt ticks at 30fps
+04C607             0227   ; 160-180 prt ticks at 20fps
+04C607             0228   ; 210-230 prt ticks at 15fps
+04C607             0229   ; 290-310 prt ticks at 12fps
+04C607             0230   ; 340-360 prt ticks at 10fps
+04C607             0231   ; 590-610 prt ticks at 6fps
+04C607             0232   ; 710-730 prt ticks at 5fps
+04C607             0233   ; 890-910 prt ticks at 4fps
+04C607             0234   ; 1200-1230 prt ticks at 3fps
+04C607             0235   ; 1820-1840 prt ticks at 2fps
+04C607             0236   ; 3670-3690 prt ticks at 1fps
+04C607             0237   
+04C607             0238   @wait:
+04C607 FD 21 D5 C5 0239   	ld iy,main_loop_tmr
        04          
-04C610 CD 4A C4 04 0221   	call tmr_get
-04C614 CA 20 C6 04 0222   	jp z,@continue
-04C618 FA 20 C6 04 0223   	jp m,@continue
-04C61C C3 0B C6 04 0224   	jp @wait
-04C620             0225   @continue:
-04C620             0226   ; reset main loop timer
-04C620 FD 21 D5 C5 0227   	ld iy,main_loop_tmr
+04C60C CD 4A C4 04 0240   	call tmr_get
+04C610 CA 1C C6 04 0241   	jp z,@continue
+04C614 FA 1C C6 04 0242   	jp m,@continue
+04C618 C3 07 C6 04 0243   	jp @wait
+04C61C             0244   @continue:
+04C61C             0245   ; DEBUG: stop loop timer
+04C61C CD ED C3 04 0246       call prt_loop_stop
+04C620             0247   ; END DEBUG
+04C620             0248   
+04C620             0249   ; reset main loop timer
+04C620 FD 21 D5 C5 0250   	ld iy,main_loop_tmr
        04          
-04C625 21 08 00 00 0228   	ld hl,120/framerate
-04C629 CD 3C C4 04 0229   	call tmr_set
-04C62D             0230   
-04C62D             0231   ; check for escape key and quit if pressed
-04C62D             0232   	MOSCALL mos_getkbmap
+04C625 21 04 00 00 0251   	ld hl,120/framerate
+04C629 CD 3C C4 04 0252   	call tmr_set
+04C62D             0253   
+04C62D             0254   ; check for escape key and quit if pressed
+04C62D             0255   	MOSCALL mos_getkbmap
 04C62D 3E 1E       0001M  			LD	A, function
 04C62F 5B CF       0002M  			RST.LIL	08h
-04C631             0233   ; 113 Escape
-04C631 DD CB 0E 46 0234       bit 0,(ix+14)
-04C635 20 02       0235   	jr nz,main_end
-04C637             0236   @Escape:
-04C637 18 AA       0237   	jr main_loop
-04C639             0238   
-04C639             0239   main_end:
-04C639             0240   	; call do_outro
-04C639             0241   ; restore screen to something normalish
-04C639 AF          0242   	xor a
-04C63A CD 25 A7 04 0243   	call vdu_set_screen_mode
-04C63E CD D6 A8 04 0244   	call cursor_on
-04C642 C9          0245   	ret
-04C643             0246   
-04C643             0247   
-04C643             0248   ; files.asm must go here so that filedata doesn't stomp on program data
-04C643             0249   	include "src/asm/files.asm"
+04C631             0256   ; 113 Escape
+04C631 DD CB 0E 46 0257       bit 0,(ix+14)
+04C635 20 02       0258   	jr nz,main_end
+04C637             0259   @Escape:
+04C637 18 AA       0260   	jr main_loop
+04C639             0261   
+04C639             0262   main_end:
+04C639             0263   	; call do_outro
+04C639             0264   ; restore screen to something normalish
+04C639 AF          0265   	xor a
+04C63A CD 25 A7 04 0266   	call vdu_set_screen_mode
+04C63E CD D6 A8 04 0267   	call cursor_on
+04C642 C9          0268   	ret
+04C643             0269   
+04C643             0270   
+04C643             0271   ; files.asm must go here so that filedata doesn't stomp on program data
+04C643             0272   	include "src/asm/files.asm"
 04C643             0001*  ; WARNING: this routine must be the last one loaded in the main program so that filedata doesn't stomp on any program code
 04C643             0002*  ; inputs: hl = bufferId, ix = file size
 04C643             0003*  vdu_load_buffer_from_file:

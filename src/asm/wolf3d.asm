@@ -172,7 +172,7 @@ init:
 debug_timer: db 0x01
 
 main_loop_tmr: ds 6
-framerate: equ 15
+framerate: equ 30
 
 main:
 ; set map variables and load initial map file
@@ -181,12 +181,12 @@ main:
 	call plyr_init
 
 main_loop:
-; DEBUG: set up loop timer
-    call prt_loop_reset
-; END DEBUG
-; DEBUG: start loop timer
-    call prt_loop_start
-; END DEBUG
+; ; DEBUG: set up loop timer
+;     call prt_loop_reset
+; ; END DEBUG
+; ; DEBUG: start loop timer
+;     call prt_loop_start
+; ; END DEBUG
 
 ; update timestamp
     call timestamp_tick
@@ -202,9 +202,9 @@ main_loop:
 	call render_scene ; 6-12 prt ticks
 ; full loop 12-16 prt ticks
 
-; DEBUG: stop loop timer
-    call prt_loop_stop
-; END DEBUG
+; ; DEBUG: stop loop timer
+;     call prt_loop_stop
+; ; END DEBUG
 
 ; DEBUG: PRINT TIMER STUFF
     ld c,1 ; x
@@ -215,7 +215,26 @@ main_loop:
 ; flip the screen
 	call vdu_flip
 
+; DEBUG: set up loop timer
+    call prt_loop_reset
+; END DEBUG
+; DEBUG: start loop timer
+    call prt_loop_start
+; END DEBUG
 ; wait for main loop timer to expire before contiuining
+; 40-50 prt ticks at 60fps
+; 100-120 prt ticks at 30fps
+; 160-180 prt ticks at 20fps
+; 210-230 prt ticks at 15fps
+; 290-310 prt ticks at 12fps
+; 340-360 prt ticks at 10fps
+; 590-610 prt ticks at 6fps
+; 710-730 prt ticks at 5fps
+; 890-910 prt ticks at 4fps
+; 1200-1230 prt ticks at 3fps
+; 1820-1840 prt ticks at 2fps
+; 3670-3690 prt ticks at 1fps
+
 @wait:
 	ld iy,main_loop_tmr
 	call tmr_get
@@ -223,6 +242,10 @@ main_loop:
 	jp m,@continue
 	jp @wait
 @continue:
+; DEBUG: stop loop timer
+    call prt_loop_stop
+; END DEBUG
+
 ; reset main loop timer
 	ld iy,main_loop_tmr
 	ld hl,120/framerate
