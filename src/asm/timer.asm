@@ -86,7 +86,6 @@ prt_reload_emulator: equ 11519 ; 1 centisecond on emulator with 16 clock divider
 prt_reload_hardware: equ 11532 ; 1 centisecond on hardware with 16 clock divider
 prt_reload: dl 0x000000
 
-is_emulator: defb 0
 ; returns: a = 0 if running on hardware,1 if running on emulator
 ;          de = number PRT interrupts during test interval
 prt_calibrate:
@@ -126,8 +125,6 @@ prt_calibrate:
     ret
 
 calibrating_timer: defb "Calibrating timer\r\n",0
-on_emulator: defb "Running on emulator\r\n",0
-on_hardware: defb "Running on hardware\r\n",0
 
 ; set PRT timer
 prt_set:
@@ -285,6 +282,12 @@ timestamp_now: dl 0
 timestamp_old: dl 0
 timestamp_chg: dl 0
 
+; update the global timestamp from the system clock
+; inputs: none
+; returns: hl = time elapsed in 1/120ths of a second
+;          de = current time
+;          ix = pointer to syvars table
+; destroys: af,hl,de,ix
 timestamp_tick:
     ld de,(timestamp_now)   ; get previous time
     ld (timestamp_old),de   ; save previous time
@@ -292,23 +295,27 @@ timestamp_tick:
     ld hl,(ix+sysvar_time)  ; get current time
     ld (timestamp_now),hl   ; save current time
     xor a                   ; clear carry
-    sbc hl,de               ; ix = time elapsed
+    sbc hl,de               ; hl = time elapsed
     ld (timestamp_chg),hl   ; save elapsed time
     ret
 
 ; set a countdown timer
 ; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
+; requires: timestamp_tick to be called at least once before this function
 ; returns: hl = current time 
+; destroys: hl
 timestamp_tmr_set:
     ld (iy+3),hl            ; set time remaining
     ld hl,(timestamp_now)   ; get current timestamp
     ld (iy+0),hl            ; set start time
     ret
 
-; gets time remaining on a countdown timer
+; gets time remaining on a countdown timer following the global timestamp
 ; inputs: iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
+; requires: timestamp_tick to be called at least once before this function
 ; returns: hl pos = time remaining in 1/120ths of a second,hl neg = time past expiration
 ;          sign flags: pos = time not expired,zero or neg = time expired
+; destroys: af,hl,de
 timestamp_tmr_get:
     ld de,(timestamp_now)   ; get current timestamp
     ld hl,(iy+0)            ; get start time
@@ -319,6 +326,28 @@ timestamp_tmr_get:
     adc hl,de               ; hl = time remaining 
                             ; (we do adc because add hl,rr doesn't set sign or zero flags)
     ret
+
+; set a stopwatch
+; returns: hl = start time 
+; destroys: hl,ix
+stopwatch_set:
+    MOSCALL mos_sysvars     ; ix points to syvars table
+    ld hl,(ix+sysvar_time)  ; get current time
+    ld (stopwatch_started),hl            ; set start time
+    ret
+
+; gets time elapsed on a stopwatch
+; returns: hl = time elapsed in 1/120ths of a second
+; destroys: af,hl,de,ix
+stopwatch_get:
+    MOSCALL mos_sysvars     ; ix points to syvars table
+    ld hl,(ix+sysvar_time)  ; get current time
+    ld de,(stopwatch_started)            ; get start time
+    xor a                   ; clear carry
+    sbc hl,de               ; hl = time elapsed (will always be zero or positive)
+    ret
+
+stopwatch_started: ds 3 ; buffer to hold stopwatch start time
 
 ; ------------------
 ; delay routine

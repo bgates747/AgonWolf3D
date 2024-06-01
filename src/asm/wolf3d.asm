@@ -8,6 +8,8 @@
     .db 00h         
     .db 01h
 
+	include "src/asm/mos_api.asm" ; wants to be first include b/c it has macros
+	include "src/asm/vdu_sound.asm" ; also has macros
 	include "src/asm/images.asm"
 	include "src/asm/fonts_bmp.asm"
 	include "src/asm/maps.asm"
@@ -19,9 +21,7 @@
 	include "src/asm/ui_img.asm"
 	include "src/asm/ui_img_bj.asm"
 	include "src/asm/sprites.asm"
-    include "src/asm/mos_api.asm"
 	include "src/asm/vdu.asm"
-	include "src/asm/vdu_sound.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
 	include "src/asm/maths.asm"
@@ -53,27 +53,23 @@ exit:
 
 hello_world: defb "Welcome to Agon Wolf3D",0
 loading_ui: defb "Loading UI",0
+loading_time: defb "Loading time:",0
+loading_complete: defb "Press any key to continue.\r\n",0
+is_emulator: defb 0
+on_emulator: defb "Running on emulator, sound enabled.\r\n",0
+on_hardware: defb "Running on hardware, sound disabled.\r\n",0
 
 init:
-; initialize global timestamps
-    MOSCALL mos_sysvars
-    ld hl,(ix+sysvar_time)
+; start generic stopwatch to time setup loop 
+; so we can determine if we're running on emulator or hardware
+	call stopwatch_set
+
+; initialize global timestamp
+    ld hl,(ix+sysvar_time) ; ix was set by stopwatch_start
     ld (timestamp_now),hl
 
 ; set the cursor off
 	call cursor_off
-
-; initialize PRT interrupt and calibrate timer
-	ld hl,calibrating_timer
-	call printString
-	call prt_irq_init
-	call prt_calibrate
-	push de ; save number of PRT interrupts during test interval
-	call printString
-	call prt_set
-	pop hl ; get number of PRT interrupts during test interval
-	call printDec
-	call printNewLine
 
 ; print loading ui message
 	ld hl,loading_ui
@@ -142,11 +138,19 @@ init:
 	ld (cur_load_jump_table),hl
 	call img_load_main
 
-; if running on hardware we don't load sounds and leave vdu_play_sfx disabled
-	ld a,(is_emulator)
-	and a
-	ret z ; initialation done
+; use loading time to determine if we're running on emulator or hardware
+	call stopwatch_get ; hl = elapsed time in 120ths of a second
+	ld de,8000 ; emulator loads in about 2,400 ticks, hardware about 15,000
+	xor a ; clear carry, default is running on hardware
+	ld (is_emulator),a
+	sbc hl,de
+	jp m,@on_emulator
+	call vdu_home_cursor
+	ld hl,on_hardware
+	call printString
+	jp @test_done
 
+@on_emulator:
 ; enable all the sound chanels
 	call vdu_enable_channels
 
@@ -161,6 +165,27 @@ init:
 ; self modify vdu_play_sfx to enable sound
 	xor a
 	ld (vdu_play_sfx_disable),a
+
+; print emulator message
+	ld a,1
+	ld (is_emulator),a
+	call vdu_home_cursor
+	ld hl,on_emulator
+	call printString
+
+@test_done:
+; print final loading time
+	ld hl,loading_time
+	call printString
+	call stopwatch_get ; hl = elapsed time in 120ths of a second
+	call printDec
+	call printNewLine
+
+; print loading complete message and wait for user keypress
+	ld hl,loading_complete
+	call printString
+	call vdu_flip 
+	call waitKeypress
 
 ; initialization done
 	ret
@@ -178,14 +203,7 @@ main:
 	call plyr_init
 
 main_loop:
-; ; DEBUG: set up loop timer
-;     call prt_loop_reset
-; ; END DEBUG
-; ; DEBUG: start loop timer
-;     call prt_loop_start
-; ; END DEBUG
-
-; update timestamp
+; update global timestamp
     call timestamp_tick
 
 ; move enemies
@@ -199,38 +217,8 @@ main_loop:
 	call render_scene ; 6-12 prt ticks
 ; full loop 12-16 prt ticks
 
-; ; DEBUG: stop loop timer
-;     call prt_loop_stop
-; ; END DEBUG
-
-; DEBUG: PRINT TIMER STUFF
-    ld c,1 ; x
-    ld b,8 ; y 
-	call prt_loop_print
-; END DEBUG
-
 ; flip the screen
 	call vdu_flip
-
-; DEBUG: set up loop timer
-    call prt_loop_reset
-; END DEBUG
-; DEBUG: start loop timer
-    call prt_loop_start
-; END DEBUG
-; wait for main loop timer to expire before contiuining
-; 40-50 prt ticks at 60fps
-; 100-120 prt ticks at 30fps
-; 160-180 prt ticks at 20fps
-; 210-230 prt ticks at 15fps
-; 290-310 prt ticks at 12fps
-; 340-360 prt ticks at 10fps
-; 590-610 prt ticks at 6fps
-; 710-730 prt ticks at 5fps
-; 890-910 prt ticks at 4fps
-; 1200-1230 prt ticks at 3fps
-; 1820-1840 prt ticks at 2fps
-; 3670-3690 prt ticks at 1fps
 
 @wait:
 	ld iy,main_loop_tmr
@@ -239,9 +227,6 @@ main_loop:
 	jp m,@continue
 	jp @wait
 @continue:
-; DEBUG: stop loop timer
-    call prt_loop_stop
-; END DEBUG
 
 ; reset main loop timer
 	ld iy,main_loop_tmr
@@ -263,7 +248,6 @@ main_end:
 	call vdu_set_screen_mode
 	call cursor_on
 	ret
-
 
 ; files.asm must go here so that filedata doesn't stomp on program data
 	include "src/asm/files.asm"

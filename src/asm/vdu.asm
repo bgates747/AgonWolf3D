@@ -1525,6 +1525,13 @@ sfx_load_main_loop:
 	ld hl,(cur_filename)
 	call printString
 	call printNewLine
+
+; print current load stopwatch
+	ld hl,loading_time
+	call printString
+	call stopwatch_get ; hl = elapsed time in 120ths of a second
+	call printDec
+	
 ; flip screen 
     call vdu_flip 
 ; ; delay for a bit so sound can play

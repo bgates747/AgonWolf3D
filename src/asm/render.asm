@@ -266,11 +266,6 @@ render_scene:
     ld a,(cur_floor)
     call printHex8
 
-
-    
-
-
-
 ; all done
     ret
 

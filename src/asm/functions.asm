@@ -423,3 +423,17 @@ resetAllFlags:
     push hl
     pop af
     ret
+
+; wait until user presses a key
+; inputs: none
+; outputs: none
+; destroys: af,ix
+waitKeypress:
+    MOSCALL mos_sysvars
+    xor a ; zero out any prior keypresses
+    ld (ix+sysvar_keyascii),a
+@loop:
+    ld a,(ix+sysvar_keyascii)
+    and a
+    ret nz
+    jr @loop
