@@ -4,14 +4,14 @@
 ;   0: control register
 ;   1: low byte of timer reset value
 ;   2: high byte of timer reset value
-; note that the value is only 8-bits, so we use in0/out0 i/o calls,
+; note that the value is only 8-bits,so we use in0/out0 i/o calls,
 ; which correctly force the high and upper bytes of the address bus to zero
 TMR_CTL:     equ 80h
 
 ; Timer Control Register Bit Definitions
 PRT_IRQ_0:    equ %00000000 ; The timer does not reach its end-of-count value. 
                             ; This bit is reset to 0 every time the TMRx_CTL register is read.
-PRT_IRQ_1:    equ %10000000 ; The timer reaches its end-of-count value. If IRQ_EN is set to 1, 
+PRT_IRQ_1:    equ %10000000 ; The timer reaches its end-of-count value. If IRQ_EN is set to 1,
                             ; an interrupt signal is sent to the CPU. This bit remains 1 until 
                             ; the TMRx_CTL register is read.
 
@@ -19,7 +19,7 @@ IRQ_EN_0:     equ %00000000 ; Timer interrupt requests are disabled.
 IRQ_EN_1:     equ %01000000 ; Timer interrupt requests are enabled.
 
 PRT_MODE_0:   equ %00000000 ; The timer operates in SINGLE PASS mode. PRT_EN (bit 0) is reset to
-                            ;  0, and counting stops when the end-of-count value is reached.
+                            ;  0,and counting stops when the end-of-count value is reached.
 PRT_MODE_1:   equ %00010000 ; The timer operates in CONTINUOUS mode. The timer reload value is
                             ; written to the counter when the end-of-count value is reached.
 
@@ -31,7 +31,7 @@ CLK_DIV_4:    equ %00000000 ;
 
 RST_EN_0:     equ %00000000 ; The reload and restart function is disabled. 
 RST_EN_1:     equ %00000010 ; The reload and restart function is enabled. 
-                            ; When a 1 is written to this bit, the values in the reload registers
+                            ; When a 1 is written to this bit,the values in the reload registers
                             ;  are loaded into the downcounter when the timer restarts. The 
                             ; programmer must ensure that this bit is set to 1 each time 
                             ; SINGLE-PASS mode is used.
@@ -42,10 +42,10 @@ PRT_EN_1:     equ %00000001 ;
 
 ; Table 37. Timer Input Source Select Register
 ; Each of the 4 timers are allocated two bits of the 8-bit register
-; in little-endian order, with TMR0 using bits 0 and 1, TMR1 using bits 2 and 3, etc.
+; in little-endian order,with TMR0 using bits 0 and 1,TMR1 using bits 2 and 3,etc.
 ;   00: System clock / CLK_DIV
 ;   01: RTC / CLK_DIV
-;   NOTE: these are the values given in the manual, but it may be a typo
+;   NOTE: these are the values given in the manual,but it may be a typo
 ;   10: GPIO port B pin 1.
 ;   11: GPIO port B pin 1.
 TMR_ISS:   equ 92h ; register address
@@ -80,33 +80,44 @@ RTC_UNLOCK_0:   equ %00000000   ; RTC count registers are locked to prevent Writ
 RTC_UNLOCK_1:   equ %00000001   ; RTC count registers are unlocked to allow Write access. 
                                 ; RTC counter is disabled.
 
-; returns 0 if running on hardware, 1 if running on emulator
+; prt_reload_emulator: equ 11234 ; 1/102.4 seconds on emulator with 16 clock divider
+
+prt_reload_emulator: equ 11519 ; 1 centisecond on emulator with 16 clock divider
+prt_reload_hardware: equ 11532 ; 1 centisecond on hardware with 16 clock divider
+prt_reload: dl 0x000000
+
+; returns: a = 0 if running on hardware,1 if running on emulator
+;          de = number PRT interrupts during test interval
 prt_calibrate:
+    call vdu_vblank
 ; set a MOS timer
     ld hl,120*1 ; 1 second
     ld iy,tmr_test
     call tmr_set
 ; set a PRT timer
-    ld hl,1000
+    ; ld hl,prt_reload_hardware 
+    ; ld hl,prt_reload_emulator
+    ld hl,prt_reload_emulator + prt_reload_hardware / 2
     ld (prt_reload),hl
     call prt_set
 @loop:
 ; check time remaining on MOS timer
     call tmr_get
-    jp z,@done ; time expired, so quit
-    jp m,@done ; time past expiration (negative), so quit
+    jp z,@done ; time expired,so quit
+    jp m,@done ; time past expiration (negative),so quit
     jr @loop
 @done:
-    ld bc,0x1200 ; default value for running on hardware
-    ld (prt_reload),bc
     ld de,(prt_irq_counter)
-    ld hl,3942 ; halfway between 4608 for real hardware and 3276 for emulator
-    xor a; clear carry, zero is default value for running on hardware
+    ld bc,prt_reload_hardware ; default value for running on hardware
+    ld (prt_reload),bc
+    ld hl,100 ; halfway between 101 for real hardware and 99 for emulator
+    xor a ; clear carry,zero is default value for running on hardware
     sbc hl,de
     ld hl,on_hardware ; default message for running on hardware
+    jp z,prt_calibrate ; zero result is indeterminate so we try again
     ret m ; negative result means we're on hardware
     inc a ; we're on emulator
-    ld bc,0x0CCC
+    ld bc,prt_reload_emulator
     ld (prt_reload),bc
     ld hl,on_emulator
     ret
@@ -115,19 +126,19 @@ calibrating_timer: defb "Calibrating timer\r\n",0
 on_emulator: defb "Running on emulator\r\n",0
 on_hardware: defb "Running on hardware\r\n",0
 
-; 3276d = 1,000 milliseconds on emulator
-; 1200h = 1,000 milliseconds on hardware
-prt_reload: dl 0x000000
-
 ; set PRT timer
 prt_set:
-; set PRT reload value
-    ld hl, (prt_reload)
-    out0 ($84), l
-	out0 ($85), h
-; enable PRT, with interrupt and CONTINUOUS mode, clock divider 4
-    ld a,PRT_IRQ_0 | IRQ_EN_1 | PRT_MODE_1 | CLK_DIV_4 | RST_EN_1 | PRT_EN_1 ; 0x53
-	out0 ($83), a
+    ld hl,0
+    ld (prt_irq_counter),hl
+    ld hl,(prt_reload)
+    out0 ($84),l
+	out0 ($85),h
+; disable timer
+    ld a,PRT_IRQ_0 | IRQ_EN_0 | PRT_MODE_0 | CLK_DIV_16 | RST_EN_1 | PRT_EN_0
+	out0 ($83),a
+; enable timer,with interrupt and CONTINUOUS mode,clock divider 16
+    ld a,PRT_IRQ_0 | IRQ_EN_1 | PRT_MODE_1 | CLK_DIV_16 | RST_EN_1 | PRT_EN_1
+	out0 ($83),a
     ret
 
 ; ===============================================
@@ -136,11 +147,11 @@ prt_set:
 ; -----------------------------------------------
 prt_irq_init:
     ; set up interrupt vector table 2
-	ld hl, 0
+	ld hl,0
 	ld a,($10c)
-	ld l, a
+	ld l,a
 	ld a,($10d)
-	ld h, a
+	ld h,a
 
 	; skip over CALL ($c3)
 	inc hl
@@ -148,11 +159,11 @@ prt_irq_init:
 	ld hl,(hl)
 
 	; write CALL prt_irq_handler to vector table 2
-	ld a, $c3
-	ld (hl), a
+	ld a,$c3
+	ld (hl),a
 	inc hl
-	ld de, prt_irq_handler
-	ld (hl), de
+	ld de,prt_irq_handler
+	ld (hl),de
 
     ret
 
@@ -161,7 +172,6 @@ prt_irq_handler:
 	push af
     push hl
 	in0 a,($83)
-	ld (prt_got_irq),a
 	ld hl,(prt_irq_counter)
 	inc hl
 	ld (prt_irq_counter),hl
@@ -170,8 +180,6 @@ prt_irq_handler:
 	ei
 	reti.l
 
-prt_got_irq:
-	.db 0
 prt_irq_counter:
 	.dl 0
 prt_irq_counter_saved:
@@ -183,6 +191,7 @@ prt_loop_reset:
 	ld (prt_irq_counter),hl
     ld (prt_loop_counter),hl
     ld (prt_loops),hl
+    call prt_set
     pop hl
     ret
 
@@ -242,7 +251,7 @@ prt_loops:
 ; Timer functions
 ; -----------------------------------------------
 ; set a countdown timer
-; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl = current time 
 tmr_set:
     ld (iy+3),hl            ; set time remaining
@@ -252,9 +261,9 @@ tmr_set:
     ret
 
 ; gets time remaining on a countdown timer
-; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
-;          sign flags: pos = time not expired, zero or neg = time expired
+; inputs: iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl pos = time remaining in 1/120ths of a second,hl neg = time past expiration
+;          sign flags: pos = time not expired,zero or neg = time expired
 tmr_get:
     MOSCALL mos_sysvars     ; ix points to syvars table
     ld de,(ix+sysvar_time)  ; get current time
@@ -285,7 +294,7 @@ timestamp_tick:
     ret
 
 ; set a countdown timer
-; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
+; inputs: hl = time to set in 1/120ths of a second; iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
 ; returns: hl = current time 
 timestamp_tmr_set:
     ld (iy+3),hl            ; set time remaining
@@ -294,9 +303,9 @@ timestamp_tmr_set:
     ret
 
 ; gets time remaining on a countdown timer
-; inputs: iy = pointer to 3-byte buffer holding start time, iy+3 = pointer to 3-byte buffer holding timer set value
-; returns: hl pos = time remaining in 1/120ths of a second, hl neg = time past expiration
-;          sign flags: pos = time not expired, zero or neg = time expired
+; inputs: iy = pointer to 3-byte buffer holding start time,iy+3 = pointer to 3-byte buffer holding timer set value
+; returns: hl pos = time remaining in 1/120ths of a second,hl neg = time past expiration
+;          sign flags: pos = time not expired,zero or neg = time expired
 timestamp_tmr_get:
     ld de,(timestamp_now)   ; get current timestamp
     ld hl,(iy+0)            ; get start time
@@ -312,21 +321,21 @@ timestamp_tmr_get:
 ; delay routine
 ; Author: Richard Turrnidge
 ; https://github.com/richardturnnidge/lessons/blob/main/slowdown.asm
-; routine waits a fixed time, then returns
+; routine waits a fixed time,then returns
 ; arrive with A =  the delay byte. One bit to be set only.
-; eg. ld A, 00000100b
+; eg. ld A,00000100b
 
 multiPurposeDelay:
     push af                      
     push bc
     push ix                 
-    ld b, a 
+    ld b,a 
     ld a,$08
     RST.LIL	08h                 ; get IX pointer to sysvars               
 
 waitLoop:
 
-    ld a, (ix + 0)              ; ix+0h is lowest byte of clock timer
+    ld a,(ix + 0)              ; ix+0h is lowest byte of clock timer
 
                                 ;   we check if bit set is same as last time we checked.
                                 ;   bit 0 - don't use
@@ -340,11 +349,11 @@ waitLoop:
                                 ;   bit 7 - changes 1 times per second
     and b 
     ld c,a 
-    ld a, (oldTimeStamp)
+    ld a,(oldTimeStamp)
     cp c                        ; is A same as last value?
-    jr z, waitLoop              ; loop here if it is
-    ld a, c 
-    ld (oldTimeStamp), a        ; set new value
+    jr z,waitLoop              ; loop here if it is
+    ld a,c 
+    ld (oldTimeStamp),a        ; set new value
 
     pop ix
     pop bc

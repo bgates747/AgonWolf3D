@@ -80,12 +80,24 @@ init:
 ; set the cursor off
 	call cursor_off
 
-; initialize PRT interrupt
+; initialize PRT interrupt and calibrate timer
 	ld hl,calibrating_timer
 	call printString
 	call prt_irq_init
+
+	ld b,10
+@calibrate:
+	push bc
 	call prt_calibrate
+	push de ; save number of PRT interrupts during test interval
 	call printString
+	call prt_set
+	pop hl ; get number of PRT interrupts during test interval
+	call printDec
+	call printNewLine
+
+	pop bc
+	djnz @calibrate
 
 ; print loading ui message
 	ld hl,loading_ui

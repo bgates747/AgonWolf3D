@@ -55,7 +55,7 @@ img_load_main_loop:
 	call vdu_cls
 	ld hl,(cur_filename)
 	call printString
-	call printNewline
+	call printNewLine
 ; ; flip screen 
 ;     call vdu_flip 
 ; decrement loop counter

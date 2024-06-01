@@ -18,7 +18,7 @@ sendVDUsequence:
 	POP		BC
 	RET
 ; Print Newline sequence to VDP
-printNewline:
+printNewLine:
 	LD	A, '\r'
 	RST.LIL 10h
 	LD	A, '\n'
@@ -176,41 +176,41 @@ stepRegistersHex:
     call printString
     ld hl,(uaf)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_hlu
     call printString
     ld hl,(uhl)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_bcu
     call printString
     ld hl,(ubc)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_deu
     call printString
     ld hl,(ude)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_ixu
     call printString
     ld hl,(uix)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_iyu
     call printString
     ld hl,(uiy)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ; call vsync
 
-    call printNewline
+    call printNewLine
 
 ; check for escape key and quit if pressed
 	MOSCALL mos_getkbmap
@@ -259,41 +259,41 @@ dumpRegistersHex:
     call printString
     ld hl,(uaf)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_hlu
     call printString
     ld hl,(uhl)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_bcu
     call printString
     ld hl,(ubc)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_deu
     call printString
     ld hl,(ude)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_ixu
     call printString
     ld hl,(uix)
     call printHex24
-    call printNewline
+    call printNewLine
 
     ld hl,str_iyu
     call printString
     ld hl,(uiy)
     call printHex24
-    call printNewline
+    call printNewLine
 
     call vdu_vblank
 
-    call printNewline
+    call printNewLine
 ; restore everything
     ld hl, (uhl)
     ld bc, (ubc)
@@ -334,7 +334,7 @@ dumpUDEUHLHex:
 	rst.lil 10h
     ld hl,(uhl)
     call printHex24
-    call printNewline
+    call printNewLine
 
 ; restore everything
     ld hl, (uhl)
@@ -379,7 +379,7 @@ dumpFlags:
     pop hl ; flags are now in l
     ld a,l ; flags are now in a
     call printBin8
-	call printNewline
+	call printNewLine
 ; restore everything
     ld hl, (uhl)
     ld bc, (ubc)
