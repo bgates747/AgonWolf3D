@@ -112,7 +112,7 @@ load_sfx_ACHTUNG:
 	ld hl,BUF_ACHTUNG
 	ld ix,14394
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 1, BUF_ACHTUNG
+	ret
 
 load_sfx_AHH:
 	ld hl,FAHH
@@ -124,7 +124,7 @@ load_sfx_AHH:
 	ld hl,BUF_AHH
 	ld ix,6755
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 2, BUF_AHH
+	ret
 
 load_sfx_AUGH:
 	ld hl,FAUGH
@@ -136,7 +136,7 @@ load_sfx_AUGH:
 	ld hl,BUF_AUGH
 	ld ix,12857
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 3, BUF_AUGH
+	ret
 
 load_sfx_AYEE:
 	ld hl,FAYEE
@@ -148,7 +148,7 @@ load_sfx_AYEE:
 	ld hl,BUF_AYEE
 	ld ix,8192
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 4, BUF_AYEE
+	ret
 
 load_sfx_AYEE_HIGH:
 	ld hl,FAYEE_HIGH
@@ -160,7 +160,7 @@ load_sfx_AYEE_HIGH:
 	ld hl,BUF_AYEE_HIGH
 	ld ix,18295
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 5, BUF_AYEE_HIGH
+	ret
 
 load_sfx_DOG_WOOF_DOUBLE:
 	ld hl,FDOG_WOOF_DOUBLE
@@ -172,7 +172,7 @@ load_sfx_DOG_WOOF_DOUBLE:
 	ld hl,BUF_DOG_WOOF_DOUBLE
 	ld ix,10276
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 6, BUF_DOG_WOOF_DOUBLE
+	ret
 
 load_sfx_DOG_WOOF_SINGLE:
 	ld hl,FDOG_WOOF_SINGLE
@@ -184,7 +184,7 @@ load_sfx_DOG_WOOF_SINGLE:
 	ld hl,BUF_DOG_WOOF_SINGLE
 	ld ix,8976
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 7, BUF_DOG_WOOF_SINGLE
+	ret
 
 load_sfx_DOG_YELP:
 	ld hl,FDOG_YELP
@@ -196,7 +196,7 @@ load_sfx_DOG_YELP:
 	ld hl,BUF_DOG_YELP
 	ld ix,7264
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 8, BUF_DOG_YELP
+	ret
 
 load_sfx_EXPLODE:
 	ld hl,FEXPLODE
@@ -208,7 +208,7 @@ load_sfx_EXPLODE:
 	ld hl,BUF_EXPLODE
 	ld ix,21832
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 9, BUF_EXPLODE
+	ret
 
 load_sfx_GOT_TREASURE:
 	ld hl,FGOT_TREASURE
@@ -220,7 +220,7 @@ load_sfx_GOT_TREASURE:
 	ld hl,BUF_GOT_TREASURE
 	ld ix,24327
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 10, BUF_GOT_TREASURE
+	ret
 
 load_sfx_GUN_EMPTY:
 	ld hl,FGUN_EMPTY
@@ -232,7 +232,7 @@ load_sfx_GUN_EMPTY:
 	ld hl,BUF_GUN_EMPTY
 	ld ix,4927
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 11, BUF_GUN_EMPTY
+	ret
 
 load_sfx_GUN_RELOAD:
 	ld hl,FGUN_RELOAD
@@ -244,7 +244,7 @@ load_sfx_GUN_RELOAD:
 	ld hl,BUF_GUN_RELOAD
 	ld ix,7439
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 12, BUF_GUN_RELOAD
+	ret
 
 load_sfx_KNIFE:
 	ld hl,FKNIFE
@@ -256,7 +256,7 @@ load_sfx_KNIFE:
 	ld hl,BUF_KNIFE
 	ld ix,4083
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 13, BUF_KNIFE
+	ret
 
 load_sfx_MEIN_LEBEN:
 	ld hl,FMEIN_LEBEN
@@ -268,7 +268,7 @@ load_sfx_MEIN_LEBEN:
 	ld hl,BUF_MEIN_LEBEN
 	ld ix,13697
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 14, BUF_MEIN_LEBEN
+	ret
 
 load_sfx_OOF:
 	ld hl,FOOF
@@ -280,7 +280,7 @@ load_sfx_OOF:
 	ld hl,BUF_OOF
 	ld ix,16384
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 15, BUF_OOF
+	ret
 
 load_sfx_SCHUSSTAFFEL:
 	ld hl,FSCHUSSTAFFEL
@@ -292,7 +292,7 @@ load_sfx_SCHUSSTAFFEL:
 	ld hl,BUF_SCHUSSTAFFEL
 	ld ix,9827
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 16, BUF_SCHUSSTAFFEL
+	ret
 
 load_sfx_SCREAM:
 	ld hl,FSCREAM
@@ -304,7 +304,7 @@ load_sfx_SCREAM:
 	ld hl,BUF_SCREAM
 	ld ix,12382
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 17, BUF_SCREAM
+	ret
 
 load_sfx_SHOT_GATLING_BURST:
 	ld hl,FSHOT_GATLING_BURST
@@ -316,7 +316,7 @@ load_sfx_SHOT_GATLING_BURST:
 	ld hl,BUF_SHOT_GATLING_BURST
 	ld ix,24576
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 18, BUF_SHOT_GATLING_BURST
+	ret
 
 load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,FSHOT_MACHINE_GUN_BURST
@@ -328,7 +328,7 @@ load_sfx_SHOT_MACHINE_GUN_BURST:
 	ld hl,BUF_SHOT_MACHINE_GUN_BURST
 	ld ix,17092
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 19, BUF_SHOT_MACHINE_GUN_BURST
+	ret
 
 load_sfx_SHOT_PISTOL:
 	ld hl,FSHOT_PISTOL
@@ -340,7 +340,7 @@ load_sfx_SHOT_PISTOL:
 	ld hl,BUF_SHOT_PISTOL
 	ld ix,19297
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 20, BUF_SHOT_PISTOL
+	ret
 
 load_sfx_UGH:
 	ld hl,FUGH
@@ -352,7 +352,7 @@ load_sfx_UGH:
 	ld hl,BUF_UGH
 	ld ix,6313
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 21, BUF_UGH
+	ret
 
 load_sfx_WILHELM:
 	ld hl,FWILHELM
@@ -364,7 +364,7 @@ load_sfx_WILHELM:
 	ld hl,BUF_WILHELM
 	ld ix,21463
 	call vdu_load_sfx
-	WAVEFORM_SAMPLE 22, BUF_WILHELM
+	ret
 
 ; File name lookups:
 FACHTUNG: db "sfx/ACHTUNG.raw",0
@@ -393,67 +393,111 @@ FWILHELM: db "sfx/WILHELM.raw",0
 ; Play sfx routines
 
 sfx_play_achtung:
-	PLAY_SAMPLE BUF_ACHTUNG, 127, 856
+	ld hl,BUF_ACHTUNG
+	ld bc,856
+	jp vdu_play_sfx
 
 sfx_play_ahh:
-	PLAY_SAMPLE BUF_AHH, 127, 401
+	ld hl,BUF_AHH
+	ld bc,401
+	jp vdu_play_sfx
 
 sfx_play_augh:
-	PLAY_SAMPLE BUF_AUGH, 127, 764
+	ld hl,BUF_AUGH
+	ld bc,764
+	jp vdu_play_sfx
 
 sfx_play_ayee:
-	PLAY_SAMPLE BUF_AYEE, 127, 486
+	ld hl,BUF_AYEE
+	ld bc,486
+	jp vdu_play_sfx
 
 sfx_play_ayee_high:
-	PLAY_SAMPLE BUF_AYEE_HIGH, 127, 1088
+	ld hl,BUF_AYEE_HIGH
+	ld bc,1088
+	jp vdu_play_sfx
 
 sfx_play_dog_woof_double:
-	PLAY_SAMPLE BUF_DOG_WOOF_DOUBLE, 127, 611
+	ld hl,BUF_DOG_WOOF_DOUBLE
+	ld bc,611
+	jp vdu_play_sfx
 
 sfx_play_dog_woof_single:
-	PLAY_SAMPLE BUF_DOG_WOOF_SINGLE, 127, 533
+	ld hl,BUF_DOG_WOOF_SINGLE
+	ld bc,533
+	jp vdu_play_sfx
 
 sfx_play_dog_yelp:
-	PLAY_SAMPLE BUF_DOG_YELP, 127, 432
+	ld hl,BUF_DOG_YELP
+	ld bc,432
+	jp vdu_play_sfx
 
 sfx_play_explode:
-	PLAY_SAMPLE BUF_EXPLODE, 127, 1299
+	ld hl,BUF_EXPLODE
+	ld bc,1299
+	jp vdu_play_sfx
 
 sfx_play_got_treasure:
-	PLAY_SAMPLE BUF_GOT_TREASURE, 127, 1447
+	ld hl,BUF_GOT_TREASURE
+	ld bc,1447
+	jp vdu_play_sfx
 
 sfx_play_gun_empty:
-	PLAY_SAMPLE BUF_GUN_EMPTY, 127, 292
+	ld hl,BUF_GUN_EMPTY
+	ld bc,292
+	jp vdu_play_sfx
 
 sfx_play_gun_reload:
-	PLAY_SAMPLE BUF_GUN_RELOAD, 127, 442
+	ld hl,BUF_GUN_RELOAD
+	ld bc,442
+	jp vdu_play_sfx
 
 sfx_play_knife:
-	PLAY_SAMPLE BUF_KNIFE, 127, 242
+	ld hl,BUF_KNIFE
+	ld bc,242
+	jp vdu_play_sfx
 
 sfx_play_mein_leben:
-	PLAY_SAMPLE BUF_MEIN_LEBEN, 127, 814
+	ld hl,BUF_MEIN_LEBEN
+	ld bc,814
+	jp vdu_play_sfx
 
 sfx_play_oof:
-	PLAY_SAMPLE BUF_OOF, 127, 974
+	ld hl,BUF_OOF
+	ld bc,974
+	jp vdu_play_sfx
 
 sfx_play_schusstaffel:
-	PLAY_SAMPLE BUF_SCHUSSTAFFEL, 127, 584
+	ld hl,BUF_SCHUSSTAFFEL
+	ld bc,584
+	jp vdu_play_sfx
 
 sfx_play_scream:
-	PLAY_SAMPLE BUF_SCREAM, 127, 736
+	ld hl,BUF_SCREAM
+	ld bc,736
+	jp vdu_play_sfx
 
 sfx_play_shot_gatling_burst:
-	PLAY_SAMPLE BUF_SHOT_GATLING_BURST, 127, 1462
+	ld hl,BUF_SHOT_GATLING_BURST
+	ld bc,1462
+	jp vdu_play_sfx
 
 sfx_play_shot_machine_gun_burst:
-	PLAY_SAMPLE BUF_SHOT_MACHINE_GUN_BURST, 127, 1017
+	ld hl,BUF_SHOT_MACHINE_GUN_BURST
+	ld bc,1017
+	jp vdu_play_sfx
 
 sfx_play_shot_pistol:
-	PLAY_SAMPLE BUF_SHOT_PISTOL, 127, 1148
+	ld hl,BUF_SHOT_PISTOL
+	ld bc,1148
+	jp vdu_play_sfx
 
 sfx_play_ugh:
-	PLAY_SAMPLE BUF_UGH, 127, 375
+	ld hl,BUF_UGH
+	ld bc,375
+	jp vdu_play_sfx
 
 sfx_play_wilhelm:
-	PLAY_SAMPLE BUF_WILHELM, 127, 1277
+	ld hl,BUF_WILHELM
+	ld bc,1277
+	jp vdu_play_sfx

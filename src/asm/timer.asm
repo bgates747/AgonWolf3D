@@ -86,6 +86,7 @@ prt_reload_emulator: equ 11519 ; 1 centisecond on emulator with 16 clock divider
 prt_reload_hardware: equ 11532 ; 1 centisecond on hardware with 16 clock divider
 prt_reload: dl 0x000000
 
+is_emulator: defb 0
 ; returns: a = 0 if running on hardware,1 if running on emulator
 ;          de = number PRT interrupts during test interval
 prt_calibrate:
@@ -112,11 +113,13 @@ prt_calibrate:
     ld (prt_reload),bc
     ld hl,100 ; halfway between 101 for real hardware and 99 for emulator
     xor a ; clear carry,zero is default value for running on hardware
+    ld (is_emulator),a
     sbc hl,de
     ld hl,on_hardware ; default message for running on hardware
     jp z,prt_calibrate ; zero result is indeterminate so we try again
     ret m ; negative result means we're on hardware
     inc a ; we're on emulator
+    ld (is_emulator),a
     ld bc,prt_reload_emulator
     ld (prt_reload),bc
     ld hl,on_emulator

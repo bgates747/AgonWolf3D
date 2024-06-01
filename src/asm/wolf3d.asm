@@ -142,6 +142,11 @@ init:
 	ld (cur_load_jump_table),hl
 	call img_load_main
 
+; if running on hardware we don't load sounds and leave vdu_play_sfx disabled
+	ld a,(is_emulator)
+	and a
+	ret z ; initialation done
+
 ; enable all the sound chanels
 	call vdu_enable_channels
 
@@ -152,6 +157,10 @@ init:
 	ld hl,SFX_load_routines_table
 	ld (cur_load_jump_table),hl
 	call sfx_load_main
+
+; self modify vdu_play_sfx to enable sound
+	xor a
+	ld (vdu_play_sfx_disable),a
 
 ; initialization done
 	ret

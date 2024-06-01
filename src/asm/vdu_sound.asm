@@ -1,8 +1,11 @@
 last_channel: db 0
 
-; https://github.com/richardturnnidge/lessons/blob/main/sound.asm
-; play a sound on a given channel, duration and volume
-    MACRO PLAY_SAMPLE bufferId, volume, duration
+vdu_play_sfx:
+vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
+    ld (@bufferId),hl
+    ld (@duration),bc
+    ld a,23
+    ld (@bufferId+2),a
     ld a,(last_channel)
     inc a
     and 31 ; modulo 32
@@ -19,31 +22,18 @@ last_channel: db 0
     .db 23,0,$85                        ; do sound
 @channel0:   
     .db 0,4,8 ; channel, command, waveform
-    .dw bufferId
+@bufferId:    
+    .dw 0x0000
 ; Command 0: Play note
 ; VDU 23, 0, &85, channel, 0, volume, frequency; duration;
     .db 23,0,$85                        ; do sound
 @channel1:    
-    .db 0,0,volume                ; channel, volume
-    .dw 0                               ; freq (tuneable samples only)
-    .dw duration                        ; duration
+    .db 0,0,127                ; channel, volume
+    .dw 0 
+@duration:                              ; freq (tuneable samples only)
+    .dw 0x0000                        ; duration
 @sample_end:
-    ENDMACRO
-
-; Command 4: Set waveform
-; VDU 23, 0, &85, channel, 4, 8, bufferId;
-    MACRO WAVEFORM_SAMPLE channel, buffer_id
-    ld hl, @startChannel
-    ld bc, @endChannel - @startChannel
-    rst.lil $18
-    ret 
-@startChannel: 
-    .db 23,0,$85    ; do sound
-    .db channel,4,8 ; channel, command, waveform
-    .dw buffer_id
-@endChannel:
-    ENDMACRO
-
+    .db 0x00 ; padding
 
 ; ############################################################
 ; VDU SOUND API

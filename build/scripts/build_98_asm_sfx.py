@@ -73,9 +73,7 @@ def make_asm_sfx(db_path, sfx_inc_path, tgt_dir, next_buffer_id):
             f.write(f"\tld hl,{buf_label}\n")
             f.write(f"\tld ix,{size}\n")
             f.write(f"\tcall vdu_load_sfx\n")
-        # write the channel assignment routine
-            f.write(f"\tWAVEFORM_SAMPLE {sfx_id+1}, {buf_label}\n")
-            # f.write(f"\tret\n")
+            f.write(f"\tret\n")
 
         # Write the file name lookups
         f.write("\n; File name lookups:\n")
@@ -92,7 +90,9 @@ def make_asm_sfx(db_path, sfx_inc_path, tgt_dir, next_buffer_id):
             base_filename = filename.split('.')[0].lower()
             volume = 127
             f.write(f"\nsfx_play_{base_filename}:\n")
-            f.write(f"\tPLAY_SAMPLE {buf_label}, {volume}, {duration}\n")
+            f.write(f"\tld hl,{buf_label}\n")
+            f.write(f"\tld bc,{duration}\n")
+            f.write(f"\tjp vdu_play_sfx\n")
 
     # Close the connection
     conn.close()
