@@ -1,8 +1,3 @@
-; macros, macro include files, globals and constants can go here
-; but anything which will generate bytes must go below MOS initialization
-    ; include "src/asm/agon_api/asm/macros.asm"
-
-; MOS INITIALIATION MUST GO HERE BEFORE ANY OTHER CODE
     .assume adl=1   
     .org 0x040000    
 
@@ -12,11 +7,8 @@
     .db "MOS"       
     .db 00h         
     .db 01h
-; END OF MOS INITIALIZATION
 
-; include files can go here
 	include "src/asm/images.asm"
-	; include "src/asm/images_CMP.asm"
 	include "src/asm/fonts_bmp.asm"
 	include "src/asm/maps.asm"
 	include "src/asm/render.asm"
@@ -45,36 +37,27 @@ start:
     push ix
     push iy
 
-; ###############################################
-; ez80asmLinker.py loader code goes here if used.
-; ###############################################
-
-; ###############################################
 	call init ; Initialization code
     call main ; Call the main function
-; ###############################################
 
 exit:
 
-    pop iy                              ; Pop all registers back from the stack
+    pop iy 
     pop ix
     pop de
     pop bc
     pop af
-    ld hl,0                             ; Load the MOS API return code (0) for no errors.
+    ld hl,0
 
-    ret                                 ; Return MOS
+    ret 
 
 hello_world: defb "Welcome to Agon Wolf3D",0
-; loading_panels: defb "Loading panels",0
-; loading_sprites: defb "Loading sprites",0
-; loading_dws: defb "Loading distance walls",0
 loading_ui: defb "Loading UI",0
 
 init:
 ; initialize global timestamps
-    MOSCALL mos_sysvars     ; ix points to syvars table
-    ld hl,(ix+sysvar_time)  ; get current time
+    MOSCALL mos_sysvars
+    ld hl,(ix+sysvar_time)
     ld (timestamp_now),hl
 
 ; set the cursor off
@@ -84,10 +67,6 @@ init:
 	ld hl,calibrating_timer
 	call printString
 	call prt_irq_init
-
-	ld b,10
-@calibrate:
-	push bc
 	call prt_calibrate
 	push de ; save number of PRT interrupts during test interval
 	call printString
@@ -95,9 +74,6 @@ init:
 	pop hl ; get number of PRT interrupts during test interval
 	call printDec
 	call printNewLine
-
-	pop bc
-	djnz @calibrate
 
 ; print loading ui message
 	ld hl,loading_ui
