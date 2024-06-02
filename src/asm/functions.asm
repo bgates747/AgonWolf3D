@@ -151,6 +151,31 @@ printBin8:
 @cmd: ds 8 ; eight bytes for eight bits
 @end:
 
+; print the binary representation of the 8-bit value in a
+; in reverse order (lsb first)
+; destroys a, hl, bc
+printBin8Rev:
+    ld b,8      ; loop counter for 8 bits
+    ld hl,@cmd  ; set hl to the low byte of the output string
+                ; (which will be the high bit of the value in a)
+@loop:
+    rrca ; put the next lowest bit into carry
+    jr c,@one
+    ld (hl),'0'
+    jr @next_bit
+@one:
+    ld (hl),'1'
+@next_bit:
+    inc hl
+    djnz @loop
+; print it
+	ld hl,@cmd         
+	ld bc,@end-@cmd    
+	rst.lil $18         
+	ret
+@cmd: ds 8 ; eight bytes for eight bits
+@end:
+
 ; print registers to screen in hexidecimal format
 ; inputs: none
 ; outputs: values of every register printed to screen
@@ -212,14 +237,14 @@ stepRegistersHex:
 
     call printNewLine
 
-; check for escape key and quit if pressed
+; check for right shift key and quit if pressed
 	MOSCALL mos_getkbmap
 @stayhere:
-; 113 Escape
-    bit 0,(ix+14)
-    jr nz,@Escape
-	jr @stayhere
-@Escape:
+; 7 RightShift
+    bit 6,(ix+0)
+    jr nz,@RightShift
+    jr @stayhere
+@RightShift:
     res 0,(ix+14) ; debounce the key (hopefully)
     ld a,%10000000
     call multiPurposeDelay
@@ -437,3 +462,122 @@ waitKeypress:
     and a
     ret nz
     jr @loop
+
+
+; print bytes from an address to the screen in hexidecimal format
+; inputs: hl = address of first byte to print, a = number of bytes to print
+; outputs: values of each byte printed to screen separated by spaces
+; destroys: nothing
+dumpMemoryHex:
+; save all registers to the stack
+    push af
+    push bc
+    push de
+    push hl
+    push ix
+    push iy
+
+; set b to be our loop counter
+    ld b,a
+@loop:
+; print the byte
+    ld a,(hl)
+    call printHex8
+; print a space
+    ld a,' '
+    rst.lil 10h
+    inc hl
+    djnz @loop
+    call printNewLine
+
+; restore everything
+    pop iy
+    pop ix
+    pop hl
+    pop de
+    pop bc
+    pop af
+; all done
+    ret
+
+
+; print bytes from an address to the screen in binary format
+; inputs: hl = address of first byte to print, a = number of bytes to print
+; outputs: values of each byte printed to screen separated by spaces
+; destroys: nothing
+dumpMemoryBin:
+; save all registers to the stack
+    push af
+    push bc
+    push de
+    push hl
+    push ix
+    push iy
+
+; set b to be our loop counter
+    ld b,a
+@loop:
+; print the byte
+    ld a,(hl)
+    push hl
+    push bc
+    call printBin8
+    pop bc
+; print a space
+    ld a,' '
+    rst.lil 10h
+    pop hl
+    inc hl
+    djnz @loop
+    call printNewLine
+
+; restore everything
+    pop iy
+    pop ix
+    pop hl
+    pop de
+    pop bc
+    pop af
+; all done
+    ret
+
+; print bytes from an address to the screen in binary format
+; with the bits of each byte in reverse order (lsb first)
+; inputs: hl = address of first byte to print, a = number of bytes to print
+; outputs: values of each byte printed to screen separated by spaces
+; destroys: nothing
+dumpMemoryBinRev:
+; save all registers to the stack
+    push af
+    push bc
+    push de
+    push hl
+    push ix
+    push iy
+
+; set b to be our loop counter
+    ld b,a
+@loop:
+; print the byte
+    ld a,(hl)
+    push hl
+    push bc
+    call printBin8Rev
+    pop bc
+; print a space
+    ld a,' '
+    rst.lil 10h
+    pop hl
+    inc hl
+    djnz @loop
+    call printNewLine
+
+; restore everything
+    pop iy
+    pop ix
+    pop hl
+    pop de
+    pop bc
+    pop af
+; all done
+    ret

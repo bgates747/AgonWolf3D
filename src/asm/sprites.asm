@@ -152,6 +152,14 @@ sprite_new_y: db 0x00
 ; inputs: iy pointed at sprite record, d,e = new y,x position
 sprite_check_move:
     ld (sprite_new_x),de ; save new y,x position
+; check whether target cell is occupied by player
+    ld hl,(cur_x) ; h,l = player y,x position
+    xor a ; clear carry
+    sbc hl,de ; h,l = player y,x position - new y,x position
+    jr nz,@not_player
+    ld a,sp_use ; TODO: add melee attack behavior to sprite routines
+    jp do_sprite_behavior ; will return to caller from there
+@not_player:
     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
 ; check whether target cell contains a sprite
     ld a,(ix+map_sprite_id)

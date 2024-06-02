@@ -18,7 +18,7 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 2	26	"BJ 50%"	1	0	0	0	0	ui					normal	
 2	27	"BJ 75%"	1	0	0	0	0	ui					normal	
 2	28	"BJ 100%/ START POSITION"	1	0	0	0	0	ui					start	
-2	29	"GREY FLOOR"	1	0	0	0	0	floor		100	bottom	center	normal	
+2	29	"GREY FLOOR"	1	0	0	0	0	floor		100	bottom	center	normal	1D
 3	30	"DOOR TO ROOM 0"	1	0	0	1	1	cube	57	100	center	center	"to room"	
 3	31	"DOOR TO ROOM 1"	1	0	0	1	1	cube	57	100	center	center	"to room"	
 3	32	"DOOR TO ROOM 2"	1	0	0	1	1	cube	57	100	center	center	"to room"	
@@ -39,9 +39,9 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 4	47	"GATLING GUN"	1	0	0	0	0	sprite		45	bottom	center	normal	
 4	48	"DOG FOOD"	1	0	0	0	0	sprite		60	bottom	center	normal	
 4	49	"GOLD KEY"	1	0	0	0	0	sprite		45	bottom	center	normal	
-5	50	DOG	1	0	0	0	0	sprite		50	bottom	center	normal	
-5	51	"GERMAN TROOPER"	1	0	0	0	0	sprite		66	bottom	center	normal	
-5	52	"SS GUARD"	1	0	0	0	0	sprite		66	bottom	center	normal	
+5	50	DOG	1	0	1	0	0	sprite		50	bottom	center	normal	
+5	51	"GERMAN TROOPER"	1	0	1	0	0	sprite		66	bottom	center	normal	
+5	52	"SS GUARD"	1	0	1	0	0	sprite		66	bottom	center	normal	
 5	53		0										normal	
 5	54		0										normal	
 5	55		0										normal	

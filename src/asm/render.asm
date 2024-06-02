@@ -266,8 +266,32 @@ render_scene:
     ld a,(cur_floor)
     call printHex8
 
+; DEBUG
+    ld c,1 ; x
+    ld b,5 ; y 
+    call vdu_move_cursor
+    ld hl,test_spr_cur_x ; h,l = new y,x position
+    ld a,2
+    call dumpMemoryHex
+
+    ld c,1 ; x
+    ld b,6 ; y 
+    call vdu_move_cursor
+    ld hl,test_cur_x
+    ld a,2
+    call dumpMemoryHex
+; END DEBUG
+
 ; all done
     ret
+
+test_cur_x: db 0x00
+test_cur_y: db 0x00
+       db 0x00 ; padding so we can read/write 24-bit registers
+
+test_spr_cur_x: db 0x00
+test_spr_cur_y: db 0x00
+       db 0x00 ; padding so we can read/write 24-bit registers
 
 ; get the map coordinates deltas for a given orientation and poly_id
 ; inputs: a is the orientation, c is the poly_id
