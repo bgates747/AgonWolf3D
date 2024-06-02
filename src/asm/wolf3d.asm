@@ -13,7 +13,8 @@
 	include "src/asm/images.asm"
 	include "src/asm/fonts_bmp.asm"
 	include "src/asm/maps.asm"
-	include "src/asm/render.asm"
+	; include "src/asm/render.asm"
+	include "src/asm/render_buff.asm"
 	include "src/asm/polys.asm"
 	include "src/asm/font_itc_honda.asm"
 	include "src/asm/font_retro_computer.asm"
@@ -22,6 +23,7 @@
 	include "src/asm/ui_img_bj.asm"
 	include "src/asm/sprites.asm"
 	include "src/asm/vdu.asm"
+	; include "src/asm/vdu_buff.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
 	include "src/asm/maths.asm"
@@ -148,6 +150,24 @@ init:
 	call vdu_home_cursor
 	ld hl,on_hardware
 	call printString
+
+; DEBUG: load sfx after all
+; enable all the sound chanels
+	call vdu_enable_channels
+
+; load sound effects
+	ld bc,SFX_num_buffers
+	ld hl,SFX_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,SFX_load_routines_table
+	ld (cur_load_jump_table),hl
+	call sfx_load_main
+
+; self modify vdu_play_sfx to enable sound
+	xor a
+	ld (vdu_play_sfx_disable),a
+
+; END DEBUG
 	jp @test_done
 
 @on_emulator:
@@ -184,7 +204,7 @@ init:
 ; print loading complete message and wait for user keypress
 	ld hl,loading_complete
 	call printString
-	call vdu_flip 
+	call vdu_flip
 	call waitKeypress
 
 ; initialization done

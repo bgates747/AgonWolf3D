@@ -8,7 +8,12 @@ vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
     ld (@bufferId+2),a
     ld a,(last_channel)
     inc a
-    and 31 ; modulo 32
+    ; and 31 ; modulo 32
+    ; and 3 ; modulo 4
+    cp 3
+    jp nz,@play
+    xor a
+@play:
     ld (last_channel),a
     ld (@channel0),a
     ld (@channel1),a
@@ -251,6 +256,7 @@ vdu_play_sample:
 
 
 vdu_enable_channels:
+    RET ; DEBUG
 ; enable all the channels
     ld hl, enable_channels_cmd
     ld bc, enable_channels_end - enable_channels_cmd

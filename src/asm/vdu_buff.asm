@@ -527,19 +527,51 @@ vdu_bmp_select:
 
 ; VDU 23, 27, &20, bufferId; : Select bitmap (using a buffer ID)
 ; inputs: hl=bufferId
-vdu_buff_select:
+vdu_buff_select_buff:
 	ld (@bufferId),hl
-	ld hl,@cmd
-	ld bc,@end-@cmd
+	ld hl,@start
+	ld bc,@end-@start
 	rst.lil $18
 	ret
+; VDU 23, 0, &A0, bufferId; 0, length; <buffer-data>
+@start: db 23,0,0xA0,0xFE,0xFF,0,@end-@cmd ; buffer 65534
 @cmd: db 23,27,0x20
 @bufferId: dw 0x0000
 @end: db 0x00 ; padding
 
+; Command 1: Call a buffer
+; VDU 23, 0 &A0, bufferId; 1
+vdu_buff_call:
+	ld (@bufferId),hl
+    ld a,2
+    ld (@end-1),a
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd: db 23,0,0xA0
+@bufferId: dw 0x0000
+    db 0x01 ; call buffer
+@end: 
+
+; Command 2: Clear a buffer
+; VDU 23, 0, &A0, bufferId; 2
+vdu_buff_clear:
+	ld (@bufferId),hl
+    ld a,2
+    ld (@end-1),a
+	ld hl,@cmd
+	ld bc,@end-@cmd
+	rst.lil $18
+	ret
+@cmd: db 23,0,0xA0
+@bufferId: dw 0x0000
+    db 0x02 ; clear buffer
+@end: 
+
 ; VDU 23, 27, &21, w; h; format: Create bitmap from selected buffer
 ; inputs: a=format; bc=width; de=height
-; prerequisites: buffer selected by vdu_bmp_select or vdu_buff_select
+; prerequisites: buffer selected by vdu_bmp_select or vdu_buff_select_buff
 ; formats: https://agonconsole8.github.io/agon-docs/VDP---Bitmaps-API.html
 ; 0 	RGBA8888 (4-bytes per pixel)
 ; 1 	RGBA2222 (1-bytes per pixel)
@@ -1008,14 +1040,16 @@ vdu_plot:
 ; &E8-&EF 	232-239 	Bitmap plot §
 ; VDU 25, mode, x; y;: PLOT command
 ; inputs: bc=x0, de=y0
-; prerequisites: vdu_buff_select
-vdu_plot_bmp:
+; prerequisites: vdu_buff_select_buff
+vdu_plot_bmp_buff:
     ld (@x0),bc
     ld (@y0),de
-	ld hl,@cmd
-	ld bc,@end-@cmd
+	ld hl,@start
+	ld bc,@end-@start
 	rst.lil $18
 	ret
+; VDU 23, 0 &A0, bufferId; 0, length; <buffer-data>
+@start: db 23,0,0xA0,0xFE,0xFF,0,@end-@cmd
 @cmd:   db 25
 @mode:  db plot_bmp+dr_abs_fg ; 0xED
 @x0: 	dw 0x0000
@@ -1030,7 +1064,7 @@ vdu_plot_bmp:
 ; inputs: ub.c is x coordinate, ud.e is y coordinate
 ;   the fractional portiion of the inputs are truncated
 ;   leaving only the 16-bit integer portion
-; prerequisites: vdu_buff_select
+; prerequisites: vdu_buff_select_buff
 vdu_plot_bmp168:
 ; populate in the reverse of normal to keep the 
 ; inputs from stomping on each other
@@ -1600,130 +1634,3 @@ vdu_load_sfx:
 ;     pop hl ; bufferId
 ;     call vdu_play_sample
     ret
-
-; VDU 23, 27, &20, bufferId; : Select bitmap (using a buffer ID)
-; inputs: hl=bufferId
-vdu_buff_select_buff:
-	ld (@bufferId),hl
-	ld hl,@start
-	ld bc,@end-@start
-	rst.lil $18
-	ret
-; VDU 23, 0, &A0, bufferId; 0, length; <buffer-data>
-@start: db 23,0,0xA0,0xFE,0xFF,0 ; bufferId 65534
-        dw @end-@cmd
-@cmd: db 23,27,0x20
-@bufferId: dw 0x0000
-@end: db 0x00 ; padding
-
-; https://agonconsole8.github.io/agon-docs/VDP---PLOT-Commands.html
-; &E8-&EF 	232-239 	Bitmap plot §
-; VDU 25, mode, x; y;: PLOT command
-; inputs: bc=x0, de=y0
-; prerequisites: vdu_buff_select_buff
-vdu_plot_bmp_buff:
-    ld (@x0),bc
-    ld (@y0),de
-	ld hl,@start
-	ld bc,@end-@start
-	rst.lil $18
-	ret
-; VDU 23, 0, &A0, bufferId; 0, length; <buffer-data>
-@start: db 23,0,0xA0,0xFE,0xFF,0 ; bufferId 65534
-        dw @end-@cmd
-@cmd:   db 25
-@mode:  db plot_bmp+dr_abs_fg ; 0xED
-@x0: 	dw 0x0000
-@y0: 	dw 0x0000
-@end:   db 0x00 ; padding
-
-; Command 1: Call a buffer
-; VDU 23, 0 &A0, bufferId; 1
-vdu_buff_call:
-	ld (@bufferId),hl
-    ld a,1
-    ld (@end-1),a
-	ld hl,@cmd
-	ld bc,@end-@cmd
-	rst.lil $18
-	ret
-@cmd: db 23,0,0xA0
-@bufferId: dw 0x0000
-    db 0x01 ; call buffer
-@end: 
-
-; Command 2: Clear a buffer
-; VDU 23, 0, &A0, bufferId; 2
-vdu_buff_clear:
-	ld (@bufferId),hl
-    ld a,2
-    ld (@end-1),a
-	ld hl,@cmd
-	ld bc,@end-@cmd
-	rst.lil $18
-	ret
-@cmd: db 23,0,0xA0
-@bufferId: dw 0x0000
-    db 0x02 ; clear buffer
-@end: 
-
-
-; VDU 18, mode, colour: Set graphics colour (GCOL mode, colour)
-; inputs: a is the plotting mode, c is the colour
-; outputs: a VDU set to put pixels on the screen with the selected mode/colour
-vdu_gcol_fg_buff:
-; This command will set both the current graphics colour, 
-; and the current graphics plotting mode.
-; As with VDU 17 the colour number will set the foreground colour 
-; if it is in the range 0-127, or the background colour if it is 
-; in the range 128-255, and will be interpreted in the same manner.
-; Support for different plotting modes on Agon is currently very limited. 
-; The only fully supported mode is mode 0, which is the default mode. 
-; This mode will plot the given colour at the given graphics coordinate, 
-; and will overwrite any existing graphics at that coordinate. There is 
-; very limited support for mode 4, which will invert the colour of any 
-; existing graphics at the given coordinate, but this is not fully supported 
-; and may not work as expected.
-; Support for other plotting modes, matching those provided by Acorn’s 
-; original VDU system, may be added in the future.
-; This command is identical to the BASIC GCOL keyword.
-	ld (@mode),a
-    ld a,c
-    ld (@col),a   
-	ld hl,@start         
-	ld bc,@end-@start    
-	rst.lil $18         
-	ret
-; VDU 23, 0, &A0, bufferId; 0, length; <buffer-data>
-@start: db 23,0,0xA0,0xFE,0xFF,0 ; bufferId 65534
-        dw @end-@cmd
-@cmd: db 18
-@mode: db 0
-@col: db 0 
-@end:
-
-
-; draw a filled rectangle
-vdu_plot_rf_buff:
-    ld (@x0),bc
-    ld (@y0),de
-    ld (@x1),ix
-    ld (@y1),iy
-    ld a,25 ; we have to reload the 2nd plot command
-    ld (@cmd1),a ; because the 24-bit y0 load stomped on it
-	ld hl,@start 
-	ld bc,@end-@start 
-	rst.lil $18
-    ret
-; VDU 23, 0, &A0, bufferId; 0, length; <buffer-data>
-@start: db 23,0,0xA0,0xFE,0xFF,0 ; bufferId 65534
-        dw @end-@cmd0
-@cmd0:  db 25 ; plot
-@arg0:  db plot_sl_both+mv_abs
-@x0:    dw 0x0000
-@y0:    dw 0x0000
-@cmd1:  db 25 ; plot
-@arg1:  db plot_rf+dr_abs_fg
-@x1:    dw 0x0000
-@y1:    dw 0x0000
-@end:   db 0x00 ; padding
