@@ -266,21 +266,21 @@ render_scene:
     ld a,(cur_floor)
     call printHex8
 
-; DEBUG
-    ld c,1 ; x
-    ld b,7 ; y 
-    call vdu_move_cursor
-    ld hl,sprite_new_x
-    ld a,3
-    call dumpMemoryHex
+; ; DEBUG
+;     ld c,1 ; x
+;     ld b,7 ; y 
+;     call vdu_move_cursor
+;     ld hl,sprite_new_x
+;     ld a,3
+;     call dumpMemoryHex
 
-    ld c,1 ; x
-    ld b,8 ; y 
-    call vdu_move_cursor
-    ld hl,cur_x
-    ld a,3
-    call dumpMemoryHex
-; END DEBUG
+;     ld c,1 ; x
+;     ld b,8 ; y 
+;     call vdu_move_cursor
+;     ld hl,cur_x
+;     ld a,3
+;     call dumpMemoryHex
+; ; END DEBUG
 
 ; all done
     ret

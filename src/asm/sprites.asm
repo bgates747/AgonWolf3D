@@ -150,26 +150,36 @@ sprite_new_y: db 0x00
 
 ; checks if the sprite can move to the new position
 ; inputs: iy pointed at sprite record, d,e = new y,x position
+; returns: a = 1 if move legal, 0 if not
+; modifies: sprite_new_x,y populated by de with new y,x position irrespecitve of legality
 sprite_check_move:
     ld (sprite_new_x),de ; save new y,x position
 ; check whether target cell is occupied by player
     ld hl,(cur_x) ; h,l = player y,x position
     xor a ; clear carry
-    sbc hl,de ; h,l = player y,x position - new y,x position
-    jr nz,@not_player
+    sbc hl,de ; zero if player is at target cell
+    jp nz,@not_player
     ld a,sp_use ; TODO: add melee attack behavior to sprite routines
-    jp do_sprite_behavior ; will return to caller from there
+    call do_sprite_behavior
+    ld a,1 ; signals caller that move was legal
+    ret
 @not_player:
     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
 ; check whether target cell contains a sprite
     ld a,(ix+map_sprite_id)
     cp 255 ; value if not sprite
-    ret nz ; already occupied by another sprite so we can't move there
+    jp z,@not_sprite
+    xor a ; signals caller that move was illegal
+    ret
+@not_sprite:
 ; read map type/status mask from target cell
     ld a,(ix+map_type_status)
     and render_type_floor
     ret z ; target cell is not a floor so we can't move there
-; we are cleared for movement so fall through to sprite_move
+; we are cleared for movement
+    call sprite_move
+    ld a,1 ; signals caller that move was legal
+    ret
 
 ; moves the sprite to the given map position
 ; inputs: iy pointed at sprite record, sprite_new_x/y populated
@@ -178,7 +188,7 @@ sprite_move:
     ld de,(iy+sprite_x) ; d,e = sprite current y,x position
     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
 ; set map cell to no sprite and normal floor
-    ld hl,0x1DFF01 ; normal floor TODO: we should set these values dyanmically based on the defs in tiles.txt at some point
+    ld hl,0x1DFF01 ; normal floor TODO: we should set these values dynanmically based on the defs in tiles.txt at some point
     ld (ix),hl
     ld a,0xFF ; no sprite
     ld (ix+map_sprite_id),a
@@ -193,9 +203,14 @@ sprite_move:
 
 ; move a sprite in a random direction
 ; inputs: iy pointed at sprite record
+; destroys: potentially everything
 sprite_move_random:
 ; point iy at sprite record
     ld iy,(sprite_table_pointer)
+; set number of times to try a random direction before giving up
+    ld b,8
+@loop:
+    push bc ; save loop counter
 ; pick a random direction
     call rand_8
     and 3 ; direction between 0 and 3
@@ -212,7 +227,12 @@ sprite_move_random:
     add a,d
     and 15 ; modulo 16
     ld d,a
-    jp sprite_check_move
+    call sprite_check_move
+    pop bc ; get back loop counter
+    and a
+    ret nz ; move was legal so we're done
+    djnz @loop ; try again
+    ret ; no move found in 8 tries, so we're done
 
 ; #### SPRITE BEHAVIOR SUBROUTINES ####
 sprite_behavior_lookup:
@@ -1020,7 +1040,7 @@ DOG:
 @hurt:
     call rand_8
     and %00000001
-    jr nz,@nosound
+    jp nz,@nosound
     push iy 
     call sfx_play_dog_yelp
     pop iy 
@@ -1100,7 +1120,7 @@ GERMAN_TROOPER:
 @hurt:
     call rand_8
     and %00000001
-    jr nz,@nosound
+    jp nz,@nosound
     push iy 
     call sfx_play_random_hurt
     pop iy 
@@ -1187,7 +1207,7 @@ SS_GUARD:
 @hurt:
     call rand_8
     and %00000001
-    jr nz,@nosound
+    jp nz,@nosound
     push iy 
     call sfx_play_random_hurt
     pop iy 
@@ -1311,7 +1331,7 @@ sprites_see_plyr:
     add a,b
     ld b,a ; bit tested codes to 0x46 + b/8
     cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
-    jr nz,@loop
+    jp nz,@loop
     ld b,0x46
     inc c ; iy address offset 
     jr @loop

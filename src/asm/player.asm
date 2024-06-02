@@ -103,6 +103,7 @@ plyr_init:
     ld (cur_cell),a
     ld (cur_x),de ; implicitly populates cur_y
     xor a ; north is default orientation
+    ld a,3 ; DEBUG
     ld (orientation),a
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer
