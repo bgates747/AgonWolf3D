@@ -196,9 +196,6 @@ sprite_move:
 sprite_move_random:
 ; point iy at sprite record
     ld iy,(sprite_table_pointer)
-; DEBUG:
-    ; ld bc,(iy+sprite_x)
-    ; push bc
 ; pick a random direction
     call rand_8
     and 3 ; direction between 0 and 3
@@ -215,9 +212,6 @@ sprite_move_random:
     add a,d
     and 15 ; modulo 16
     ld d,a
-
-    ; pop bc
-    ; call stepRegistersHex
     jp sprite_check_move
 
 ; #### SPRITE BEHAVIOR SUBROUTINES ####

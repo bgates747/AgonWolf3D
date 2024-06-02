@@ -77,6 +77,13 @@ get_cell_from_coords:
 ; d = distance ; e = orientation
 ; returns: d,e = dy,dx
 get_dx_dy:
+; make sure deu is zero
+	push hl
+	ld hl,0
+	ld h,d 
+	ld l,e
+	ex de,hl
+	pop hl
 ; modulo 4 on orientation
 	ld a,e
 	and 0x03
