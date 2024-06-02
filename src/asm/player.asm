@@ -102,9 +102,6 @@ plyr_init:
     call get_start_pos ; a = cell_id, d = map_y, e = map_x
     ld (cur_cell),a
     ld (cur_x),de ; implicitly populates cur_y
-
-    call stepRegistersHex
-    
     xor a ; north is default orientation
     ld (orientation),a
     ld hl,plyr_move_rate

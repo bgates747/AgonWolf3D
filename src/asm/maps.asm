@@ -258,10 +258,10 @@ cell_id_to_coords:
 	push af	; Save the cell id
 ; Calculate the y coordinate by dividing the index by 16
 	ld d,a      ; Move index into d
-	sra d        ; Shift right once (d = d / 2)
-	sra d        ; Shift right again (d = d / 4)
-	sra d        ; Shift right again (d = d / 8)
-	sra d        ; Shift right again (d = d / 16)
+	srl d        ; Shift right once (d = d / 2)
+	srl d        ; Shift right again (d = d / 4)
+	srl d        ; Shift right again (d = d / 8)
+	srl d        ; Shift right again (d = d / 16)
 ; Calculate the x coordinate by taking the index modulo 16
 	and 15       ; e = e & 15 (retain the lower 4 bits of the cell id, which is modulo 16)
 	ld e,a      ; e is now the x coordinate
