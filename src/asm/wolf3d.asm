@@ -56,8 +56,8 @@ loading_ui: defb "Loading UI",0
 loading_time: defb "Loading time:",0
 loading_complete: defb "Press any key to continue.\r\n",0
 is_emulator: defb 0
-on_emulator: defb "Running on emulator, sound enabled.\r\n",0
-on_hardware: defb "Running on hardware, sound disabled.\r\n",0
+on_emulator: defb "Running on emulator.\r\n",0
+on_hardware: defb "Running on hardware.\r\n",0
 
 init:
 ; start generic stopwatch to time setup loop 
@@ -138,6 +138,18 @@ init:
 	ld (cur_load_jump_table),hl
 	call img_load_main
 
+; load sound effects
+	ld bc,SFX_num_buffers
+	ld hl,SFX_buffer_id_lut
+	ld (cur_buffer_id_lut),hl
+	ld hl,SFX_load_routines_table
+	ld (cur_load_jump_table),hl
+	call sfx_load_main
+
+; self modify vdu_play_sfx to enable sound
+	xor a
+	ld (vdu_play_sfx_disable),a
+
 ; use loading time to determine if we're running on emulator or hardware
 	call stopwatch_get ; hl = elapsed time in 120ths of a second
 	ld de,8000 ; emulator loads in about 2,400 ticks, hardware about 15,000
@@ -151,21 +163,6 @@ init:
 	jp @test_done
 
 @on_emulator:
-; enable all the sound chanels
-	call vdu_enable_channels
-
-; load sound effects
-	ld bc,SFX_num_buffers
-	ld hl,SFX_buffer_id_lut
-	ld (cur_buffer_id_lut),hl
-	ld hl,SFX_load_routines_table
-	ld (cur_load_jump_table),hl
-	call sfx_load_main
-
-; self modify vdu_play_sfx to enable sound
-	xor a
-	ld (vdu_play_sfx_disable),a
-
 ; print emulator message
 	ld a,1
 	ld (is_emulator),a
