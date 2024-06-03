@@ -193,14 +193,14 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 092 x,y (12,5) floor normal
 	db 0xFF ; no sprite
-	dl 0x320F43 ; cell 093 x,y (13,5) sprite normal
-	db 0x0E ; DOG
+	dl 0x1DFF01 ; cell 093 x,y (13,5) floor normal
+	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 094 x,y (14,5) floor normal
 	db 0xFF ; no sprite
 	dl 0x0A0050 ; cell 095 x,y (15,5) cube outer
 	db 0xFF ; no sprite
 	dl 0x150143 ; cell 096 x,y (0,6) sprite normal
-	db 0x0F ; BARREL
+	db 0x0E ; BARREL
 	dl 0x1DFF01 ; cell 097 x,y (1,6) floor normal
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 098 x,y (2,6) floor normal
@@ -212,11 +212,11 @@ cell_status:
 	dl 0x1DFF01 ; cell 101 x,y (5,6) floor normal
 	db 0xFF ; no sprite
 	dl 0x150143 ; cell 102 x,y (6,6) sprite normal
-	db 0x10 ; BARREL
+	db 0x0F ; BARREL
 	dl 0x0A0050 ; cell 103 x,y (7,6) cube outer
 	db 0xFF ; no sprite
 	dl 0x331043 ; cell 104 x,y (8,6) sprite normal
-	db 0x11 ; GERMAN TROOPER
+	db 0x10 ; GERMAN TROOPER
 	dl 0x1DFF01 ; cell 105 x,y (9,6) floor normal
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 106 x,y (10,6) floor normal
@@ -285,8 +285,8 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x0A0050 ; cell 138 x,y (10,8) cube outer
 	db 0xFF ; no sprite
-	dl 0x1DFF01 ; cell 139 x,y (11,8) floor normal
-	db 0xFF ; no sprite
+	dl 0x1D1203 ; cell 139 x,y (11,8) sprite normal
+	db 0x11 ; DEAD GUARD
 	dl 0x1DFF01 ; cell 140 x,y (12,8) floor normal
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 141 x,y (13,8) floor normal

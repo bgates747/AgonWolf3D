@@ -254,6 +254,7 @@ sprite_behavior_lookup:
     dl DOG
     dl GERMAN_TROOPER
     dl SS_GUARD
+    dl DEAD_GUARD
 
 ; initializes sprite data for a particular sprite type and id
 ; inputs: iy pointed at sprite record, sprite_obj set for same 
@@ -1252,6 +1253,54 @@ SS_GUARD:
     call sprite_reset_move_timer
     call sprite_shoot
     ret
+
+DEAD_GUARD:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @hurt
+    dl @kill
+    dl @see
+    dl @move
+    dl @shoot
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    jp sprite_behavior_return
+@data:
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
+@use:
+    call rand_8
+    and %00000111
+    call plyr_add_ammo
+    call sfx_play_gun_reload
+    call sprite_kill
+    jp sprite_behavior_return
+@hurt:
+    xor a
+    jp sprite_behavior_return
+@kill:
+    call sprite_kill
+    jp sprite_behavior_return
+@see:
+    xor a
+    jp sprite_behavior_return
+@move:
+    jp sprite_behavior_return
+@shoot:
+    jp sprite_behavior_return
 
 sprite_reset_move_timer:
     call rand_8
