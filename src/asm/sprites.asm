@@ -7,13 +7,13 @@ sprite_x:               equ 04 ; 1 byte  - map x position
 sprite_y:               equ 05 ; 1 byte  - map y position
 sprite_orientation:     equ 06 ; 1 byte  - orientation
 sprite_animation:       equ 07 ; 1 byte  - current animation index, zero-based
-sprite_anim_tmr: equ 08 ; 1 byte  - when hits zero, draw next animation frame
+sprite_anim_timer:      equ 08 ; 1 byte  - when hits zero, draw next animation frame
 sprite_move_timer:      equ 09 ; 1 byte  - when zero, go to next move program, or step
 sprite_move_step:       equ 10 ; 1 byte  - stage in a move program sequence, varies
-sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, BCD
-sprite_health_modifier:   equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (positive gains health)
+sprite_points:          equ 11 ; 1 byte  - points awarded for killing this sprite type, binary
+sprite_health_modifier: equ 12 ; 1 byte  - health points deducted per successful attack on player, signed binary (positive gains health)
 sprite_unassigned:      equ 13 ; 3 bytes - unassigned can be used for custom properties
-sprite_record_size: equ 16 ; 16 bytes per sprite record
+sprite_record_size:     equ 16 ; 16 bytes per sprite record
 
 ; sprite_triggers_mask defs
 sprite_trigger_see:     equ %00000001 ; player has been seen
@@ -308,20 +308,20 @@ LAMP:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -351,20 +351,20 @@ BARREL:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 018 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db -50 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 018 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db -50 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -402,20 +402,20 @@ TABLE:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -445,20 +445,20 @@ OVERHEAD_LIGHT:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -488,20 +488,20 @@ RADIOACTIVE_BARREL:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 024 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db -75 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 024 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db -75 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -539,20 +539,20 @@ HEALTH_PACK:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 020 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 020 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
@@ -584,20 +584,20 @@ GOLD_CHALISE:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 100 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 100 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_got_treasure
@@ -632,20 +632,20 @@ GOLD_CROSS:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 050 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 050 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_got_treasure
@@ -680,20 +680,20 @@ PLATE_OF_FOOD:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 010 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 010 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
@@ -725,20 +725,20 @@ KEYCARD:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,8
     call plyr_add_ammo
@@ -772,20 +772,20 @@ GOLD_CHEST:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 250 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 250 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_got_treasure
@@ -820,20 +820,20 @@ MACHINE_GUN:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,16
     call plyr_add_ammo
@@ -874,20 +874,20 @@ GATLING_GUN:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,32
     call plyr_add_ammo
@@ -928,20 +928,20 @@ DOG_FOOD:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 005 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 005 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
@@ -973,20 +973,20 @@ GOLD_KEY:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 000 ;sprite_points
-    db 000 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db 000 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     jp sprite_behavior_return
 @hurt:
@@ -1016,20 +1016,20 @@ DOG:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 050 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 010 ;sprite_points
-    db -10 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 050 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 010 ; sprite_points
+    db -10 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_dog_woof_single
@@ -1096,20 +1096,20 @@ GERMAN_TROOPER:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 075 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 020 ;sprite_points
-    db -20 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 075 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 020 ; sprite_points
+    db -20 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_achtung
@@ -1157,18 +1157,16 @@ GERMAN_TROOPER:
     jp sprite_behavior_return
 @move:
     dec (iy+sprite_move_timer)
-    jr z,@do_move
+    call z,@shoot
+    call z,@do_move
     jr @seen
 @do_move:
-    call rand_8
-    and %00111111 ; between 0 and 63
-    ; or %00100000  ; at least 32
-    or %00010000  ; at least 16
-    ld (iy+sprite_move_timer),a
     call sprite_move_random
     jr @seen
 @shoot:
-    jp sprite_behavior_return
+    call sprite_reset_move_timer
+    call sprite_shoot
+    ret
 
 SS_GUARD:
 ; behavior routine address lookup
@@ -1183,20 +1181,20 @@ SS_GUARD:
     ld hl,@data ; address for LDIR to copy from
     jp sprite_behavior_return
 @data:
-    db 100 ;sprite_health
-    db 000 ;sprite_triggers_mask
-    db 000 ;sprite_x
-    db 000 ;sprite_y
-    db 000 ;sprite_orientation
-    db 000 ;sprite_animation
-    db 000 ;sprite_anim_tmr
-    db 001 ;sprite_move_timer
-    db 000 ;sprite_move_step
-    db 030 ;sprite_points
-    db -30 ;sprite_health_modifier
-    db 000 ;sprite_unassigned_0
-    db 000 ;sprite_unassigned_1
-    db 000 ;sprite_unassigned_2
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 030 ; sprite_points
+    db -30 ; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
 @use:
     push iy 
     call sfx_play_schusstaffel
@@ -1244,18 +1242,47 @@ SS_GUARD:
     jp sprite_behavior_return
 @move:
     dec (iy+sprite_move_timer)
-    jr z,@do_move
+    call z,@shoot
+    call z,@do_move
     jr @seen
 @do_move:
-    call rand_8
-    and %00111111 ; between 0 and 63
-    ; or %00100000  ; at least 32
-    or %00010000  ; at least 16
-    ld (iy+sprite_move_timer),a
     call sprite_move_random
     jr @seen
 @shoot:
-    jp sprite_behavior_return
+    call sprite_reset_move_timer
+    call sprite_shoot
+    ret
+
+sprite_reset_move_timer:
+    call rand_8
+    and %00111111 ; between 0 and 63
+    or %00010000  ; at least 16
+    ld (iy+sprite_move_timer),a
+    ret
+
+; determines whether an enemy sprite can shoot at the player
+; and handles the shooting mechanics if so
+; inputs: iy pointed at sprite record, hl = buffer id of sfx to play on firing
+; returns: a = 0 if the sprite didn't shoot, 1 if it did
+; destroys: probably everything
+sprite_shoot:
+; check whether sprite has the same x or y coordinate as player
+    ld hl,(iy+sprite_x) ; h,l = sprite y,x position
+    ld de,(cur_x) ; d,e = player y,x position
+    ld a,l ; compare x
+    cp e
+    jr z,@shoot
+    ld a,h ; compare y
+    cp d
+    jr z,@shoot
+    xor a ; no shot so return zero
+    ret
+@shoot:
+    call sfx_play_shot_pistol
+    ld a,(iy+sprite_health_modifier)
+    call plyr_sub_health
+    ld a,1
+    ret
 
 see_orientation: db 0x00
 ; cycle through all cells visible to the player from the current position

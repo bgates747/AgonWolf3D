@@ -103,7 +103,6 @@ plyr_init:
     ld (cur_cell),a
     ld (cur_x),de ; implicitly populates cur_y
     xor a ; north is default orientation
-    ld a,3 ; DEBUG
     ld (orientation),a
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer
@@ -123,6 +122,27 @@ plyr_init:
     ld iy,plyr_wpn_select_tmr
     ld hl,0
     call timestamp_tmr_set
+    ret
+
+; restart player after dying
+; inputs: none,everything is hardcoded
+; outputs: player set to the first valid position on the map
+; destroys: a
+plyr_restart:
+    call get_start_pos ; a = cell_id, d = map_y, e = map_x
+    ld (cur_cell),a
+    ld (cur_x),de ; implicitly populates cur_y
+    xor a ; north is default orientation
+    ld (orientation),a
+    ld hl,plyr_move_rate
+    ld iy,plyr_move_timer
+    ld a,(plyr_lives)
+    dec a
+    ld (plyr_lives),a
+    ld a,100
+    ld (plyr_health),a
+    ld a,8
+    call plyr_add_ammo
     ret
 
 plyr_next_weapon:
@@ -248,8 +268,7 @@ plyr_sub_health:
     jp z,@zero
     jp c,@update
 @zero:
-    xor a ; clear carry, set health to zero
-    ld hl,plyr_health
+    jp plyr_restart ; will go the right place from there
 @update:
     ld (hl),a
     ret
