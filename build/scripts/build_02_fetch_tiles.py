@@ -47,7 +47,7 @@ def make_uvs(db_path, mapmaker_tiles_dir, uvs_tgt_dir):
     cursor.execute('''
         SELECT bank_id, obj_id, render_type, scale
         FROM tbl_02_tiles
-        WHERE render_obj_id IS NULL AND render_type IN ('cube', 'sprite');
+        WHERE render_obj_id IS NULL AND render_type IN ('cube', 'sprite') AND is_active = 1;
     ''')
     for tile_row in cursor.fetchall():
         obj_id = tile_row['obj_id']
@@ -73,7 +73,8 @@ def make_thumbs(db_path, mapmaker_tiles_dir, thumbs_tgt_dir):
     
     cursor.execute('''
         SELECT bank_id, obj_id, render_type, scale
-        FROM tbl_02_tiles;
+        FROM tbl_02_tiles 
+        WHERE is_active = 1;
     ''')
     
     for tile_row in cursor.fetchall():
@@ -113,7 +114,7 @@ def make_tbl_tiles(db_path, src_tiles_path):
         )
     ''')
     df_tiles = pd.read_csv(src_tiles_path, sep='\t')
-    df_tiles = df_tiles[df_tiles['is_active'] == 1]
+    # df_tiles = df_tiles[df_tiles['is_active'] == 1]
     df_tiles.to_sql('tbl_02_tiles', conn, if_exists='replace', index=False, 
         dtype={
             'bank_id': 'INTEGER',
@@ -133,7 +134,7 @@ def make_tbl_tiles(db_path, src_tiles_path):
             'notes': 'TEXT'
         })
     conn.commit()
-    cursor.execute("""UPDATE tbl_02_tiles SET render_obj_id = obj_id WHERE render_obj_id IS NULL""")
+    cursor.execute("""UPDATE tbl_02_tiles SET render_obj_id = obj_id WHERE render_obj_id IS NULL AND is_active = 1;""")
     conn.commit()
     conn.close()
 
@@ -146,7 +147,7 @@ def make_qry_img_idx(db_path):
         SELECT ROW_NUMBER() OVER (PARTITION BY render_type ORDER BY obj_id)-1 AS img_idx,
         bank_id, obj_id, tile_name, is_active, is_door, is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, align_vert, align_horiz, special, notes
         FROM tbl_02_tiles
-        WHERE obj_id = render_obj_id
+        WHERE obj_id = render_obj_id AND is_active = 1
     ''')
     conn.commit()
     conn.close()

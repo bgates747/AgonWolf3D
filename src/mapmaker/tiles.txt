@@ -7,7 +7,7 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 1	15	"HANGING FLAG"	1	0	1	0	1	cube		100	center	center	normal	
 1	16	"WOOD EAGLE"	1	0	1	0	1	cube		100	center	center	normal	
 1	17	"BLUE WALL"	1	0	1	0	1	cube		100	center	center	normal	
-1	18		0										normal	
+1	18	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
 1	19	"NULL CELL"	1	0	1	0	0	"null cell"					"null cell"	
 2	20	LAMP	1	0	1	0	0	sprite		66	bottom	center	normal	
 2	21	BARREL	1	0	1	0	0	sprite		50	bottom	center	normal	
@@ -42,50 +42,50 @@ bank_id	obj_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render
 5	50	DOG	1	0	1	0	0	sprite		50	bottom	center	normal	
 5	51	"GERMAN TROOPER"	1	0	1	0	0	sprite		66	bottom	center	normal	
 5	52	"SS GUARD"	1	0	1	0	0	sprite		66	bottom	center	normal	
-5	53		0										normal	
-5	54		0										normal	
-5	55		0										normal	
+5	53	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+5	54	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+5	55	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
 5	56	"DEAD GUARD"	1	0	0	0	0	sprite		66	bottom	center	normal	
 5	57	"REGULAR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
 5	58	"ELEVATOR SWITCH"	1	0	1	1	1	cube		100	center	center	elevator	
 5	59	"ELEVATOR DOOR"	1	1	0	0	1	cube		100	center	center	normal	
-6	60		0										normal	
-6	61		0										normal	
-6	62		0										normal	
-6	63		0										normal	
-6	64		0										normal	
-6	65		0										normal	
-6	66		0										normal	
-6	67		0										normal	
-6	68		0										normal	
-6	69		0										normal	
-7	70		0										normal	
-7	71		0										normal	
-7	72		0										normal	
-7	73		0										normal	
-7	74		0										normal	
-7	75		0										normal	
-7	76		0										normal	
-7	77		0										normal	
-7	78		0										normal	
-7	79		0										normal	
-8	80		0										normal	
-8	81		0										normal	
-8	82		0										normal	
-8	83		0										normal	
-8	84		0										normal	
-8	85		0										normal	
-8	86		0										normal	
-8	87		0										normal	
-8	88		0										normal	
-8	89		0										normal	
-9	90		0										normal	
-9	91		0										normal	
-9	92		0										normal	
-9	93		0										normal	
-9	94		0										normal	
-9	95		0										normal	
-9	96		0										normal	
-9	97		0										normal	
-9	98		0										normal	
-9	99		0										normal	
+6	60	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	61	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	62	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	63	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	64	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	65	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	66	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	67	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	68	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+6	69	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	70	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	71	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	72	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	73	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	74	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	75	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	76	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	77	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	78	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+7	79	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	80	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	81	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	82	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	83	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	84	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	85	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	86	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	87	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	88	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+8	89	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	90	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	91	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	92	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	93	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	94	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	95	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	96	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	97	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	98	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	
+9	99	PLACEHOLDER	0	0	0	0	0	"null cell"					"null cell"	

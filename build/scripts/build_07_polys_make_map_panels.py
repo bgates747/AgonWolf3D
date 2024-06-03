@@ -154,14 +154,11 @@ def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_direc
     # or it has been hardcoded.
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer'
-                    """)
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer' AND is_active = 1""")
     outer_obj_id = cursor.fetchone()[0]
-    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'null cell'
-                    """)
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'null cell' AND is_active = 1""")
     null_obj_id = cursor.fetchone()[0]
-    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'start'
-                    """)    
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'start' AND is_active = 1""")    
     start_obj_id = cursor.fetchone()[0]
     conn.commit()
     conn.close()

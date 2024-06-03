@@ -75,7 +75,7 @@ def get_render_type_masks(db_path):
         FROM (
             SELECT DISTINCT render_type
             FROM tbl_02_tiles
-            WHERE render_type NOT IN ('ui')
+            WHERE render_type NOT IN ('ui') AND is_active = 1
         ) AS t1""")
     render_types = cursor.fetchall()
     conn.close()

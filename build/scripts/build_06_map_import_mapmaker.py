@@ -37,7 +37,7 @@ def make_tbl_06_maps(db_path):
 def parse_map_files(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer'")
+    cursor.execute("SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer' AND is_active = 1")
     outer_obj_id = cursor.fetchone()[0]
 
     for room_id in range(0, 10):
@@ -77,7 +77,7 @@ def add_tile_info(db_path, floor_num):
     maps_rows = cursor.fetchall()
 
     for m_row in maps_rows:
-        cursor.execute('SELECT * FROM tbl_02_tiles WHERE obj_id = ?', (m_row['obj_id'],))
+        cursor.execute('SELECT * FROM tbl_02_tiles WHERE obj_id = ? AND is_active = 1 ', (m_row['obj_id'],))
         tile_row = cursor.fetchone()
         render_obj_id = tile_row['render_obj_id']
         render_type = tile_row['render_type']
@@ -96,7 +96,7 @@ def add_tile_info(db_path, floor_num):
                 render_obj_id, tile_row['scale'], tile_row['special'], m_row['obj_id'], floor_num
             ))
     conn.commit()
-    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE render_type = 'floor'""")
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE render_type = 'floor' AND is_active = 1""")
     default_floor_obj = cursor.fetchone()[0]
     cursor.execute(f"""
         UPDATE tbl_06_maps
