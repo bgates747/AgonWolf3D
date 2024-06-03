@@ -181,26 +181,6 @@ sprite_check_move:
     ld a,1 ; signals caller that move was legal
     ret
 
-; ; moves the sprite to the given map position
-; ; inputs: iy pointed at sprite record, sprite_new_x/y populated
-; sprite_move:
-; ; update old sprite position to no sprite
-;     ld de,(iy+sprite_x) ; d,e = sprite current y,x position
-;     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
-; ; set map cell to no sprite and normal floor
-;     ld hl,0x1DFF01 ; normal floor TODO: we should set these values dynanmically based on the defs in tiles.txt at some point
-;     ld (ix),hl
-;     ld a,0xFF ; no sprite
-;     ld (ix+map_sprite_id),a
-; ; update sprite record with new position
-;     ld de,(sprite_new_x) ; d,e = sprite new y,x position
-;     ld (iy+sprite_x),de
-; ; update new map cell with sprite id
-;     call get_cell_from_coords ; ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
-;     ld a,(iy+sprite_id)
-;     ld (ix+map_sprite_id),a
-;     ret
-
 ; moves the sprite to the given map position
 ; inputs: iy pointed at sprite record, sprite_new_x/y populated
 sprite_move:

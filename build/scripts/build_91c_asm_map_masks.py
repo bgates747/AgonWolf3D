@@ -66,8 +66,6 @@ def get_sprite_ids(db_path, floor_num, room_id):
     conn.close()
     return sprite_ids
 
-import sqlite3
-
 def get_render_type_masks(db_path):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
