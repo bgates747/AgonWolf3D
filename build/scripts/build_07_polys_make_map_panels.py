@@ -156,7 +156,7 @@ def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_direc
     cursor = conn.cursor()
     cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer' AND is_active = 1""")
     outer_obj_id = cursor.fetchone()[0]
-    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'null cell' AND is_active = 1""")
+    cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'null cell' AND is_active = 1 ORDER BY obj_id""")
     null_obj_id = cursor.fetchone()[0]
     cursor.execute("""SELECT obj_id FROM tbl_02_tiles WHERE special = 'start' AND is_active = 1""")    
     start_obj_id = cursor.fetchone()[0]
@@ -183,7 +183,7 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
         SELECT floor_num, room_id, cell_id, orientation
         FROM qry_07_map_orientations
         -- WHERE floor_num = {floor_num} AND is_door = 0 and is_wall = 0
-        WHERE floor_num = {floor_num} AND is_blocking = 0
+        WHERE floor_num = {floor_num} AND (is_blocking = 0 OR is_door = 1 OR special = 'to room')
         ORDER BY floor_num, room_id, cell_id, orientation""")
     unique_groups = cursor.fetchall()
 

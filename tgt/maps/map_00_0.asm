@@ -552,10 +552,10 @@ cell_views:
 	dl 0x000000,0x100000 ; Cell 6, Orientation 1
 	dl 0x701070,0x171724 ; Cell 6, Orientation 2
 	dl 0x000000,0x19A1C0 ; Cell 6, Orientation 3
-	dl 0x000000,0x000000 ; Cell 7, Orientation 0
-	dl 0x000000,0x000000 ; Cell 7, Orientation 1
-	dl 0x000000,0x000000 ; Cell 7, Orientation 2
-	dl 0x000000,0x000000 ; Cell 7, Orientation 3
+	dl 0x000000,0x100000 ; Cell 7, Orientation 0
+	dl 0x000000,0x171700 ; Cell 7, Orientation 1
+	dl 0x000000,0x100000 ; Cell 7, Orientation 2
+	dl 0x1E0000,0x19A1C8 ; Cell 7, Orientation 3
 	dl 0x000000,0x100000 ; Cell 8, Orientation 0
 	dl 0x000000,0x170000 ; Cell 8, Orientation 1
 	dl 0x182818,0x19A98A ; Cell 8, Orientation 2
@@ -716,10 +716,10 @@ cell_views:
 	dl 0x000000,0x000000 ; Cell 47, Orientation 1
 	dl 0x000000,0x000000 ; Cell 47, Orientation 2
 	dl 0x000000,0x000000 ; Cell 47, Orientation 3
-	dl 0x000000,0x000000 ; Cell 48, Orientation 0
-	dl 0x000000,0x000000 ; Cell 48, Orientation 1
-	dl 0x000000,0x000000 ; Cell 48, Orientation 2
-	dl 0x000000,0x000000 ; Cell 48, Orientation 3
+	dl 0x700000,0x171724 ; Cell 48, Orientation 0
+	dl 0x000000,0x100000 ; Cell 48, Orientation 1
+	dl 0x1E0202,0x19A1C8 ; Cell 48, Orientation 2
+	dl 0x000000,0x100000 ; Cell 48, Orientation 3
 	dl 0x000000,0x000000 ; Cell 49, Orientation 0
 	dl 0x000000,0x000000 ; Cell 49, Orientation 1
 	dl 0x000000,0x000000 ; Cell 49, Orientation 2
@@ -828,10 +828,10 @@ cell_views:
 	dl 0x000000,0x000000 ; Cell 75, Orientation 1
 	dl 0x000000,0x000000 ; Cell 75, Orientation 2
 	dl 0x000000,0x000000 ; Cell 75, Orientation 3
-	dl 0x000000,0x000000 ; Cell 76, Orientation 0
-	dl 0x000000,0x000000 ; Cell 76, Orientation 1
-	dl 0x000000,0x000000 ; Cell 76, Orientation 2
-	dl 0x000000,0x000000 ; Cell 76, Orientation 3
+	dl 0x788878,0x138FA2 ; Cell 76, Orientation 0
+	dl 0x000000,0x100000 ; Cell 76, Orientation 1
+	dl 0x000000,0x1387C0 ; Cell 76, Orientation 2
+	dl 0x000000,0x100000 ; Cell 76, Orientation 3
 	dl 0x000000,0x000000 ; Cell 77, Orientation 0
 	dl 0x000000,0x000000 ; Cell 77, Orientation 1
 	dl 0x000000,0x000000 ; Cell 77, Orientation 2
@@ -1024,10 +1024,10 @@ cell_views:
 	dl 0x000000,0x000000 ; Cell 124, Orientation 1
 	dl 0x000000,0x000000 ; Cell 124, Orientation 2
 	dl 0x000000,0x000000 ; Cell 124, Orientation 3
-	dl 0x000000,0x000000 ; Cell 125, Orientation 0
-	dl 0x000000,0x000000 ; Cell 125, Orientation 1
-	dl 0x000000,0x000000 ; Cell 125, Orientation 2
-	dl 0x000000,0x000000 ; Cell 125, Orientation 3
+	dl 0x000000,0x13C3C0 ; Cell 125, Orientation 0
+	dl 0x000000,0x100000 ; Cell 125, Orientation 1
+	dl 0xF011F0,0x171704 ; Cell 125, Orientation 2
+	dl 0x000000,0x100000 ; Cell 125, Orientation 3
 	dl 0x000000,0x000000 ; Cell 126, Orientation 0
 	dl 0x000000,0x000000 ; Cell 126, Orientation 1
 	dl 0x000000,0x000000 ; Cell 126, Orientation 2
@@ -1048,10 +1048,10 @@ cell_views:
 	dl 0x000000,0x000000 ; Cell 130, Orientation 1
 	dl 0x000000,0x000000 ; Cell 130, Orientation 2
 	dl 0x000000,0x000000 ; Cell 130, Orientation 3
-	dl 0x000000,0x000000 ; Cell 131, Orientation 0
-	dl 0x000000,0x000000 ; Cell 131, Orientation 1
-	dl 0x000000,0x000000 ; Cell 131, Orientation 2
-	dl 0x000000,0x000000 ; Cell 131, Orientation 3
+	dl 0x380038,0x1D0100 ; Cell 131, Orientation 0
+	dl 0x000000,0x100000 ; Cell 131, Orientation 1
+	dl 0x7C847C,0x1387E1 ; Cell 131, Orientation 2
+	dl 0x000000,0x100000 ; Cell 131, Orientation 3
 	dl 0x000000,0x000000 ; Cell 132, Orientation 0
 	dl 0x000000,0x000000 ; Cell 132, Orientation 1
 	dl 0x000000,0x000000 ; Cell 132, Orientation 2
@@ -1432,10 +1432,10 @@ cell_views:
 	dl 0x000000,0x000000 ; Cell 226, Orientation 1
 	dl 0x000000,0x000000 ; Cell 226, Orientation 2
 	dl 0x000000,0x000000 ; Cell 226, Orientation 3
-	dl 0x000000,0x000000 ; Cell 227, Orientation 0
-	dl 0x000000,0x000000 ; Cell 227, Orientation 1
-	dl 0x000000,0x000000 ; Cell 227, Orientation 2
-	dl 0x000000,0x000000 ; Cell 227, Orientation 3
+	dl 0x7C847C,0x1387E1 ; Cell 227, Orientation 0
+	dl 0x000000,0x100000 ; Cell 227, Orientation 1
+	dl 0x000000,0x100000 ; Cell 227, Orientation 2
+	dl 0x000000,0x100000 ; Cell 227, Orientation 3
 	dl 0x000000,0x000000 ; Cell 228, Orientation 0
 	dl 0x000000,0x000000 ; Cell 228, Orientation 1
 	dl 0x000000,0x000000 ; Cell 228, Orientation 2
