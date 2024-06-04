@@ -1335,7 +1335,7 @@ sprite_reset_move_timer:
 
 ; determines whether an enemy sprite can shoot at the player
 ; and handles the shooting mechanics if so
-; inputs: iy pointed at sprite record, hl = buffer id of sfx to play on firing
+; inputs: iy pointed at sprite record
 ; returns: a = 0 if the sprite didn't shoot, 1 if it did
 ; destroys: probably everything
 sprite_shoot:
@@ -1352,7 +1352,15 @@ sprite_shoot:
     ret
 @shoot:
     call sfx_play_shot_pistol
+; generate randomized fractional damage multiplier
+    call rand_8 ; a is a random fraction
+    ld e,a
     ld a,(iy+sprite_health_modifier)
+    neg ; setting up an unsigned mlt
+    ld d,a
+    mlt de ; d.e is an 8.8 fixed point number
+    ld a,d ; ... we only want the integer portion
+    neg ; back to signed
     call plyr_sub_health
     ld a,1
     ret
