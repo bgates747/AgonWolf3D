@@ -16516,114 +16516,115 @@ PC     Output      Line
 04A9A1 C9          1352*      ret
 04A9A2             1353*  @shoot:
 04A9A2 CD AC C1 04 1354*      call sfx_play_shot_pistol
-04A9A6 CD E9 B9 04 1355*      call rand_8
-04A9AA 57          1356*      ld d,a
-04A9AB FD 7E 0C    1357*      ld a,(iy+sprite_health_modifier)
-04A9AE ED 44       1358*      neg
-04A9B0 5F          1359*      ld e,a
-04A9B1 ED 5C       1360*      mlt de
-04A9B3 7A          1361*      ld a,d
-04A9B4 ED 44       1362*      neg
-04A9B6 CD C8 B6 04 1363*      call plyr_sub_health
-04A9BA 3E 01       1364*      ld a,1
-04A9BC C9          1365*      ret
-04A9BD             1366*  
-04A9BD 00          1367*  see_orientation: db 0x00
-04A9BE             1368*  ; cycle through all cells visible to the player from the current position
-04A9BE             1369*  ; and all orientations, and trigger the @see behavior for any sprites in those cells
-04A9BE             1370*  ; inputs: cur_x, cur_y,
-04A9BE             1371*  ; outputs: player-aware enemies
-04A9BE             1372*  ; destroys: everything
-04A9BE             1373*  sprites_see_plyr:
-04A9BE             1374*  ; ; DEBUG: set up loop timer
-04A9BE             1375*  ;     call prt_loop_reset
-04A9BE             1376*  ; ; END DEBUG
-04A9BE             1377*  ; ; DEBUG: start loop timer
-04A9BE             1378*  ;     call prt_loop_start
-04A9BE             1379*  ; ; END DEBUG
-04A9BE             1380*  
-04A9BE             1381*  ; intialize orientation
-04A9BE AF          1382*      xor a
-04A9BF 32 BD A9 04 1383*      ld (see_orientation),a
-04A9C3             1384*  @loop_orientation:
-04A9C3             1385*  ; get current map position and camera orientation
-04A9C3 ED 5B CD B4 1386*      ld de,(cur_x) ; d,e = cur_y,x
+04A9A6             1355*  ; generate randomized fractional damage multiplier
+04A9A6 CD E9 B9 04 1356*      call rand_8 ; a is a random fraction
+04A9AA 5F          1357*      ld e,a
+04A9AB FD 7E 0C    1358*      ld a,(iy+sprite_health_modifier)
+04A9AE ED 44       1359*      neg ; setting up an unsigned mlt
+04A9B0 57          1360*      ld d,a
+04A9B1 ED 5C       1361*      mlt de ; d.e is an 8.8 fixed point number
+04A9B3 7A          1362*      ld a,d ; ... we only want the integer portion
+04A9B4 ED 44       1363*      neg ; back to signed
+04A9B6 CD C8 B6 04 1364*      call plyr_sub_health
+04A9BA 3E 01       1365*      ld a,1
+04A9BC C9          1366*      ret
+04A9BD             1367*  
+04A9BD 00          1368*  see_orientation: db 0x00
+04A9BE             1369*  ; cycle through all cells visible to the player from the current position
+04A9BE             1370*  ; and all orientations, and trigger the @see behavior for any sprites in those cells
+04A9BE             1371*  ; inputs: cur_x, cur_y,
+04A9BE             1372*  ; outputs: player-aware enemies
+04A9BE             1373*  ; destroys: everything
+04A9BE             1374*  sprites_see_plyr:
+04A9BE             1375*  ; ; DEBUG: set up loop timer
+04A9BE             1376*  ;     call prt_loop_reset
+04A9BE             1377*  ; ; END DEBUG
+04A9BE             1378*  ; ; DEBUG: start loop timer
+04A9BE             1379*  ;     call prt_loop_start
+04A9BE             1380*  ; ; END DEBUG
+04A9BE             1381*  
+04A9BE             1382*  ; intialize orientation
+04A9BE AF          1383*      xor a
+04A9BF 32 BD A9 04 1384*      ld (see_orientation),a
+04A9C3             1385*  @loop_orientation:
+04A9C3             1386*  ; get current map position and camera orientation
+04A9C3 ED 5B CD B4 1387*      ld de,(cur_x) ; d,e = cur_y,x
        04          
-04A9C8             1387*      ; 0-1 prt ticks, 4 loops
-04A9C8 CD F6 66 04 1388*      call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
-04A9CC             1389*  ; get cell_views address for this cell and orientation
-04A9CC 3A BD A9 04 1390*      ld a,(see_orientation)
-04A9D0 5F          1391*      ld e,a
-04A9D1 16 06       1392*      ld d,6 ; 6 bytes per orientation
-04A9D3 ED 5C       1393*      mlt de ; de = orientation offset
-04A9D5 EB          1394*      ex de,hl ; hl = orientation offset
-04A9D6 06 18       1395*      ld b,24 ; 24 bytes per cell in cell_views lut
-04A9D8 ED 4C       1396*      mlt bc ; bc = offset from base address of cell_views lut
-04A9DA 09          1397*      add hl,bc ; hl = total offset from cell_views base address
-04A9DB EB          1398*      ex de,hl ; because we can't add iy to hl
-04A9DC FD 21 00 E4 1399*      ld iy,cell_views ; base address of cell_views lut
+04A9C8             1388*      ; 0-1 prt ticks, 4 loops
+04A9C8 CD F6 66 04 1389*      call get_cell_from_coords ; ix=cell_status lut; a=obj_id, bc = cell_id
+04A9CC             1390*  ; get cell_views address for this cell and orientation
+04A9CC 3A BD A9 04 1391*      ld a,(see_orientation)
+04A9D0 5F          1392*      ld e,a
+04A9D1 16 06       1393*      ld d,6 ; 6 bytes per orientation
+04A9D3 ED 5C       1394*      mlt de ; de = orientation offset
+04A9D5 EB          1395*      ex de,hl ; hl = orientation offset
+04A9D6 06 18       1396*      ld b,24 ; 24 bytes per cell in cell_views lut
+04A9D8 ED 4C       1397*      mlt bc ; bc = offset from base address of cell_views lut
+04A9DA 09          1398*      add hl,bc ; hl = total offset from cell_views base address
+04A9DB EB          1399*      ex de,hl ; because we can't add iy to hl
+04A9DC FD 21 00 E4 1400*      ld iy,cell_views ; base address of cell_views lut
        B7          
-04A9E1 FD 19       1400*      add iy,de ; iy = cell_views address
-04A9E3 FD 22 8B 68 1401*      ld (cur_cell_views),iy
+04A9E1 FD 19       1401*      add iy,de ; iy = cell_views address
+04A9E3 FD 22 8B 68 1402*      ld (cur_cell_views),iy
        04          
-04A9E8             1402*  ; cycle through the cell views masks and trigger the @see behavior for any sprites in those cells
-04A9E8 01 00 46 28 1403*      ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
-04A9EC AF          1404*      xor a ; poly_id
-04A9ED 32 87 68 04 1405*      ld (to_poly_id),a
-04A9F1             1406*  @loop:
-04A9F1 ED 43 FD A9 1407*      ld (@bit_iy+2),bc
+04A9E8             1403*  ; cycle through the cell views masks and trigger the @see behavior for any sprites in those cells
+04A9E8 01 00 46 28 1404*      ld bc,0x284600 ; bcu = jr z,nnn opcode, c = bit operand, b = displacement operand
+04A9EC AF          1405*      xor a ; poly_id
+04A9ED 32 87 68 04 1406*      ld (to_poly_id),a
+04A9F1             1407*  @loop:
+04A9F1 ED 43 FD A9 1408*      ld (@bit_iy+2),bc
        04          
-04A9F6 FD 2A 8B 68 1408*      ld iy,(cur_cell_views)
+04A9F6 FD 2A 8B 68 1409*      ld iy,(cur_cell_views)
        04          
-04A9FB             1409*  @bit_iy:
-04A9FB FD CB 00 46 1410*      bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
-04A9FF 28 2E       1411*      jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
-04AA01             1412*  ; get_polys_deltas inputs: a is the orientation, c is the poly_id
-04AA01 3A 87 68 04 1413*      ld a,(to_poly_id)
-04AA05 4F          1414*      ld c,a ; poly_id
-04AA06 3A BD A9 04 1415*      ld a,(see_orientation)
-04AA0A CD A8 6A 04 1416*      call get_polys_deltas ; d,e = y,x deltas
-04AA0E 3A CD B4 04 1417*      ld a,(cur_x)
-04AA12 83          1418*      add a,e
-04AA13 5F          1419*      ld e,a
-04AA14 3A CE B4 04 1420*      ld a,(cur_y)
-04AA18 82          1421*      add a,d
-04AA19 57          1422*      ld d,a
-04AA1A CD F6 66 04 1423*      call get_cell_from_coords
-04AA1E DD 7E 03    1424*      ld a,(ix+map_sprite_id)
-04AA21 FE FF       1425*      cp 0xFF ; no sprite
-04AA23 28 0A       1426*      jr z,@next_poly
-04AA25 CD 7D A2 04 1427*      call sprite_set_pointer
-04AA29 3E 04       1428*      ld a,sp_see
-04AA2B CD B7 A3 04 1429*      call do_sprite_behavior
-04AA2F             1430*  @next_poly:
-04AA2F ED 4B FD A9 1431*      ld bc,(@bit_iy+2)
+04A9FB             1410*  @bit_iy:
+04A9FB FD CB 00 46 1411*      bit 0,(iy+0) ; the bit tested and offset will be self-modified through the loop
+04A9FF 28 2E       1412*      jr z,@next_poly ; the first byte of this instruction is 0x28, and will be re-written as such each loop
+04AA01             1413*  ; get_polys_deltas inputs: a is the orientation, c is the poly_id
+04AA01 3A 87 68 04 1414*      ld a,(to_poly_id)
+04AA05 4F          1415*      ld c,a ; poly_id
+04AA06 3A BD A9 04 1416*      ld a,(see_orientation)
+04AA0A CD A8 6A 04 1417*      call get_polys_deltas ; d,e = y,x deltas
+04AA0E 3A CD B4 04 1418*      ld a,(cur_x)
+04AA12 83          1419*      add a,e
+04AA13 5F          1420*      ld e,a
+04AA14 3A CE B4 04 1421*      ld a,(cur_y)
+04AA18 82          1422*      add a,d
+04AA19 57          1423*      ld d,a
+04AA1A CD F6 66 04 1424*      call get_cell_from_coords
+04AA1E DD 7E 03    1425*      ld a,(ix+map_sprite_id)
+04AA21 FE FF       1426*      cp 0xFF ; no sprite
+04AA23 28 0A       1427*      jr z,@next_poly
+04AA25 CD 7D A2 04 1428*      call sprite_set_pointer
+04AA29 3E 04       1429*      ld a,sp_see
+04AA2B CD B7 A3 04 1430*      call do_sprite_behavior
+04AA2F             1431*  @next_poly:
+04AA2F ED 4B FD A9 1432*      ld bc,(@bit_iy+2)
        04          
-04AA34 3A 87 68 04 1432*      ld a,(to_poly_id)
-04AA38 3C          1433*      inc a ; a is next poly_id
-04AA39 32 87 68 04 1434*      ld (to_poly_id),a
-04AA3D FE 2D       1435*      cp num_polys
-04AA3F 28 0F       1436*      jr z,@next_orientation
-04AA41 3E 08       1437*      ld a,8
-04AA43 80          1438*      add a,b
-04AA44 47          1439*      ld b,a ; bit tested codes to 0x46 + b/8
-04AA45 FE 86       1440*      cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
-04AA47 C2 F1 A9 04 1441*      jp nz,@loop
-04AA4B 06 46       1442*      ld b,0x46
-04AA4D 0C          1443*      inc c ; iy address offset
-04AA4E 18 A1       1444*      jr @loop
-04AA50             1445*  @next_orientation:
-04AA50 3A BD A9 04 1446*      ld a,(see_orientation)
-04AA54 3C          1447*      inc a
-04AA55 E6 03       1448*      and 3 ; modulo 4
-04AA57 32 BD A9 04 1449*      ld (see_orientation),a
-04AA5B C2 C3 A9 04 1450*      jp nz,@loop_orientation
-04AA5F             1451*  
-04AA5F             1452*  ; full loop 1-2 prt ticks
-04AA5F             1453*  ; ; DEBUG: stop loop timer
-04AA5F             1454*  ;     call prt_loop_stop
-04AA5F             1455*  ; ; END DEBUG
-04AA5F C9          1456*      ret
+04AA34 3A 87 68 04 1433*      ld a,(to_poly_id)
+04AA38 3C          1434*      inc a ; a is next poly_id
+04AA39 32 87 68 04 1435*      ld (to_poly_id),a
+04AA3D FE 2D       1436*      cp num_polys
+04AA3F 28 0F       1437*      jr z,@next_orientation
+04AA41 3E 08       1438*      ld a,8
+04AA43 80          1439*      add a,b
+04AA44 47          1440*      ld b,a ; bit tested codes to 0x46 + b/8
+04AA45 FE 86       1441*      cp 0x86 ; = 0x7E + 8 where 0x7E is the highest bit possible (7)
+04AA47 C2 F1 A9 04 1442*      jp nz,@loop
+04AA4B 06 46       1443*      ld b,0x46
+04AA4D 0C          1444*      inc c ; iy address offset
+04AA4E 18 A1       1445*      jr @loop
+04AA50             1446*  @next_orientation:
+04AA50 3A BD A9 04 1447*      ld a,(see_orientation)
+04AA54 3C          1448*      inc a
+04AA55 E6 03       1449*      and 3 ; modulo 4
+04AA57 32 BD A9 04 1450*      ld (see_orientation),a
+04AA5B C2 C3 A9 04 1451*      jp nz,@loop_orientation
+04AA5F             1452*  
+04AA5F             1453*  ; full loop 1-2 prt ticks
+04AA5F             1454*  ; ; DEBUG: stop loop timer
+04AA5F             1455*  ;     call prt_loop_stop
+04AA5F             1456*  ; ; END DEBUG
+04AA5F C9          1457*      ret
 04AA60             0024   	include "src/asm/vdu.asm"
 04AA60             0001*  ; The following is a high-level list of the VDU sequences that are supported:
 04AA60             0002*  ; VDU 0: Null (no operation)
