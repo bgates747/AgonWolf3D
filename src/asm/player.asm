@@ -638,28 +638,6 @@ plyr_input:
     ld a,(ix+map_type_status)
     ld b,a ; b = target cell type/status
 ; branch on the values in the bitmask
-    ld a,cell_is_door
-    and b
-    jr nz,@door
-    ld a,cell_is_wall
-    and b
-    ret nz ; can't move thru walls
-    jr @move_it ; if it wasn't a wall or door, move as normal
-@door:
-    ld de,(dx) ; d = dy, e = dx
-    call get_dir_from_dy_dx ; a is direction of attempted movement
-    push af
-    ld d,2 ; 1 past the door in the movement direction
-    ld e,a
-    call get_dx_dy
-    ld (dx),de
-    pop af
-    ld e,a
-    ld d,2
-    ld bc,(cur_x)
-    call get_neighbor ; ix points to cell defs/status, a is target cell current obj_id
-    ld a,(ix+map_type_status)
-    ld b,a ; b = target cell type/status
     ld a,cell_is_wall
     and b
     ret nz ; can't move thru walls
