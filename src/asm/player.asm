@@ -641,6 +641,9 @@ plyr_input:
     ld a,cell_is_wall
     and b
     ret nz ; can't move thru walls
+    ld a,cell_is_to_room
+    and b
+    call z,change_room
     ; fall through to @move_it
 @move_it:
 ; we are cleared for movement so update player position
