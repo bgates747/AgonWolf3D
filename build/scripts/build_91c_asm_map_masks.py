@@ -41,7 +41,7 @@ def get_map_cells(db_path, floor_num, room_id):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute(f"""
-        SELECT t1.cell_id, t1.map_x, t1.map_y, t1.obj_id, t1.is_door, t1.is_wall, t1.is_trigger, t1.is_blocking, t1.render_type, t1.render_obj_id, t1.special, COALESCE(t2.img_idx,255) AS img_idx
+        SELECT t1.cell_id, t1.map_x, t1.map_y, t1.obj_id, t1.is_door, t1.is_wall, t1.is_trigger, t1.is_blocking, t1.render_type, t1.render_obj_id, t1.special, COALESCE(t2.img_idx,255) AS img_idx, t1.tile_name
         FROM tbl_06_maps as t1
         LEFT JOIN qry_02_img_idx as t2
         ON t1.render_obj_id = t2.obj_id
@@ -123,13 +123,14 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
                 for cell in map_cells:
                     cell_id = cell['cell_id']
                     render_type = cell['render_type']
+                    tile_name = cell['tile_name']
                     if render_type == 'ui':
                         render_type_mask = 1 # floor (the only ui element on a map should be BJ's starting position, which renders as floor)
                     else:
                         render_type_mask = render_types_dict[cell['render_type']]
                     render_type_mask = format(int(render_type_mask), '02b')
                     
-                    sprite_id, tile_name = sprite_ids.get(cell_id, (-1, 'no sprite'))
+                    sprite_id, sprite_tile_name = sprite_ids.get(cell_id, (-1, 'no sprite'))
                     hex_sprite_id = format(sprite_id & 0xFF, "02X")
                     map_type_status = f'{cell["is_door"]}{cell["is_wall"]}{cell["is_trigger"]}{cell["is_blocking"]}{int(cell["special"] == "start")}{int(cell["special"] == "to room")}{render_type_mask}'
                     
@@ -138,8 +139,8 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
                     hex_img_idx = format(cell['img_idx'] & 0xFF, "02X")
 
                     # Write to assembly file
-                    asm_file.write(f'\tdl 0x{hex_obj_id}{hex_img_idx}{hex_type_status} ; cell {cell_id:03d} x,y ({cell["map_x"]},{cell["map_y"]}) {cell["render_type"]} {cell["special"]}\n')
-                    asm_file.write(f'\tdb 0x{hex_sprite_id} ; {tile_name}\n')
+                    asm_file.write(f'\tdl 0x{hex_obj_id}{hex_img_idx}{hex_type_status} ; cell {cell_id:03d} x,y ({cell["map_x"]},{cell["map_y"]}) {cell["render_type"]} {cell["special"]} {tile_name} \n')
+                    asm_file.write(f'\tdb 0x{hex_sprite_id} ; {sprite_tile_name}\n')
 
                     # Write to binary file
                     bin_file.write(bytes([int(map_type_status, 2), cell['img_idx'], cell['obj_id'], sprite_id & 0xFF]))
