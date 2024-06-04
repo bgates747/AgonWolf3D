@@ -248,6 +248,14 @@ render_scene:
     ld hl,(plyr_health)
     call printDec
 
+; DEBUG
+    ld c,17 ; x
+    ld b,4  ; y 
+    call vdu_move_cursor
+    ld hl,(last_damage)
+    call printDec
+; END DEBUG
+
     ld c,7; x
     ld b,3 ; y 
     call vdu_move_cursor

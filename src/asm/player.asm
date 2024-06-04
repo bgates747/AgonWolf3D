@@ -263,6 +263,13 @@ plyr_add_health:
 ; outputs: zero flag set, carry reset if player health rolls through/becomes zero
 ;        a contains remaining health
 plyr_sub_health:
+    and a
+    ret z
+; DEBUG
+    neg
+    ld (last_damage),a
+    neg
+; END DEBUG
     ld hl,plyr_health
     add a,(hl)
     jp z,@zero
@@ -272,6 +279,8 @@ plyr_sub_health:
 @update:
     ld (hl),a
     ret
+
+last_damage: dl 0x00 ; last damage dealt to player
 
 ; modifies the players score by a set amount
 ; inputs: a is the signed amount to modify score
