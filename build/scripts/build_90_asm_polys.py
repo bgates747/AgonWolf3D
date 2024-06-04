@@ -201,7 +201,7 @@ def make_map_type_status(db_path, polys_inc_path):
     cursor = conn.cursor()
     cursor.execute("""
         SELECT t1.obj_id, t1.tile_name, t1.render_type, t1.render_obj_id, t2.render_type_idx, 
-        t1.is_door || t1.is_wall || t1.is_trigger || t1.is_blocking || CASE WHEN t1.special = 'start' THEN '1' ELSE '0' END || CASE WHEN t1.special = 'to room' THEN '1' ELSE '0' END || substr(printf('%02d', (t2.render_type_idx >> 1) & 1) || printf('%01d', t2.render_type_idx & 1),2,2) AS map_type_status
+        t1.is_door || t1.is_wall || t1.is_trigger || t1.is_blocking || CASE WHEN t1.special = 'start' THEN '1' ELSE '0' END || CASE WHEN t1.special = 'to room' THEN '1' ELSE '0' END || substr(printf('%02d', (t2.render_type_idx >> 1) & 1) || printf('%01d', t2.render_type_idx & 1),2,2) AS map_type_status, COALESCE(t3.sprite_obj, 255) AS sprite_obj
         FROM tbl_02_tiles AS t1
         JOIN (
             SELECT 
@@ -212,15 +212,20 @@ def make_map_type_status(db_path, polys_inc_path):
                 FROM tbl_02_tiles
             ) AS t1
         ) AS t2 ON t1.render_type = t2.render_type
+        LEFT JOIN (
+            SELECT row_number() OVER (ORDER BY render_obj_id) - 1 AS sprite_obj, obj_id
+            FROM tbl_02_tiles
+            WHERE render_type = 'sprite' AND is_active = 1
+        ) AS t3 ON t1.obj_id = t3.obj_id
         ORDER BY t1.obj_id;""")
     map_types = cursor.fetchall()
 
     with open(polys_inc_path, 'a') as writer: # append to the file
         writer.write("\nmap_type_status_lut:\n")
-        writer.write("; {map_type_status} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} \n")
+        writer.write("; {map_type_status}, {sprite_obj} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} \n")
         for map_type in map_types:
-            obj_id, tile_name, render_type, render_obj_id, render_type_idx, map_type_status = map_type
-            writer.write(f"\tdb %{map_type_status} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} \n")
+            obj_id, tile_name, render_type, render_obj_id, render_type_idx, map_type_status, sprite_obj = map_type
+            writer.write(f"\tdb %{map_type_status}, {sprite_obj} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} \n")
 
 def do_all_the_polys(db_path, polys_inc_path):
     make_asm_polys_plot(db_path, polys_inc_path)

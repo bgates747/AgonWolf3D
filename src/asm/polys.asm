@@ -907,94 +907,94 @@ sprite_obj_018:
 sprite_obj_255: ; placeholder to keep the assembler happy, CANNOT BE A VALID sprite_obj
 
 map_type_status_lut:
-; {map_type_status} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} 
-	db %01010000 ; 10 (10) LIGHT GREY WALL 0 cube 
-	db %01010000 ; 11 (11) JAIL CELL 0 cube 
-	db %01010000 ; 12 (12) STONE ARCH BIRD 0 cube 
-	db %01010000 ; 13 (13) DARK GREY WALL 0 cube 
-	db %01010000 ; 14 (14) WOOD WALL 0 cube 
-	db %01010000 ; 15 (15) HANGING FLAG 0 cube 
-	db %01010000 ; 16 (16) WOOD EAGLE 0 cube 
-	db %01010000 ; 17 (17) BLUE WALL 0 cube 
-	db %00000010 ; 18 (None) PLACEHOLDER 2 null cell 
-	db %01000010 ; 19 (19) NULL CELL 2 null cell 
-	db %01000011 ; 20 (20) LAMP 3 sprite 
-	db %01000011 ; 21 (21) BARREL 3 sprite 
-	db %01000011 ; 22 (22) TABLE 3 sprite 
-	db %00000011 ; 23 (23) OVERHEAD LIGHT 3 sprite 
-	db %01000011 ; 24 (24) RADIOACTIVE BARREL 3 sprite 
-	db %00000000 ; 25 (25) BJ 25% 4 ui 
-	db %00000000 ; 26 (26) BJ 50% 4 ui 
-	db %00000000 ; 27 (27) BJ 75% 4 ui 
-	db %00001000 ; 28 (28) BJ 100%/ START POSITION 4 ui 
-	db %00000001 ; 29 (29) GREY FLOOR 1 floor 
-	db %00110100 ; 30 (57) DOOR TO ROOM 0 0 cube 
-	db %00110100 ; 31 (57) DOOR TO ROOM 1 0 cube 
-	db %00110100 ; 32 (57) DOOR TO ROOM 2 0 cube 
-	db %00110100 ; 33 (57) DOOR TO ROOM 3 0 cube 
-	db %00110100 ; 34 (57) DOOR TO ROOM 4 0 cube 
-	db %00110100 ; 35 (57) DOOR TO ROOM 5 0 cube 
-	db %00110100 ; 36 (57) DOOR TO ROOM 6 0 cube 
-	db %00110100 ; 37 (57) DOOR TO ROOM 7 0 cube 
-	db %00110100 ; 38 (57) DOOR TO ROOM 8 0 cube 
-	db %00110100 ; 39 (57) DOOR TO ROOM 9 0 cube 
-	db %00000011 ; 40 (40) HEALTH PACK 3 sprite 
-	db %00000011 ; 41 (41) GOLD CHALISE 3 sprite 
-	db %00000011 ; 42 (42) GOLD CROSS 3 sprite 
-	db %00000011 ; 43 (43) PLATE OF FOOD 3 sprite 
-	db %00000011 ; 44 (44) KEYCARD 3 sprite 
-	db %00000011 ; 45 (45) GOLD CHEST 3 sprite 
-	db %00000011 ; 46 (46) MACHINE GUN 3 sprite 
-	db %00000011 ; 47 (47) GATLING GUN 3 sprite 
-	db %00000011 ; 48 (48) DOG FOOD 3 sprite 
-	db %00000011 ; 49 (49) GOLD KEY 3 sprite 
-	db %01000011 ; 50 (50) DOG 3 sprite 
-	db %01000011 ; 51 (51) GERMAN TROOPER 3 sprite 
-	db %01000011 ; 52 (52) SS GUARD 3 sprite 
-	db %00000010 ; 53 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 54 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 55 (None) PLACEHOLDER 2 null cell 
-	db %00000011 ; 56 (56) DEAD GUARD 3 sprite 
-	db %10010000 ; 57 (57) REGULAR DOOR 0 cube 
-	db %01110000 ; 58 (58) ELEVATOR SWITCH 0 cube 
-	db %10010000 ; 59 (59) ELEVATOR DOOR 0 cube 
-	db %00000010 ; 60 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 61 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 62 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 63 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 64 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 65 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 66 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 67 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 68 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 69 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 70 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 71 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 72 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 73 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 74 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 75 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 76 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 77 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 78 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 79 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 80 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 81 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 82 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 83 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 84 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 85 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 86 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 87 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 88 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 89 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 90 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 91 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 92 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 93 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 94 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 95 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 96 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 97 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 98 (None) PLACEHOLDER 2 null cell 
-	db %00000010 ; 99 (None) PLACEHOLDER 2 null cell 
+; {map_type_status}, {sprite_obj} ; {obj_id} ({render_obj_id}) {tile_name} {render_type_idx} {render_type} 
+	db %01010000, 255 ; 10 (10) LIGHT GREY WALL 0 cube 
+	db %01010000, 255 ; 11 (11) JAIL CELL 0 cube 
+	db %01010000, 255 ; 12 (12) STONE ARCH BIRD 0 cube 
+	db %01010000, 255 ; 13 (13) DARK GREY WALL 0 cube 
+	db %01010000, 255 ; 14 (14) WOOD WALL 0 cube 
+	db %01010000, 255 ; 15 (15) HANGING FLAG 0 cube 
+	db %01010000, 255 ; 16 (16) WOOD EAGLE 0 cube 
+	db %01010000, 255 ; 17 (17) BLUE WALL 0 cube 
+	db %00000010, 255 ; 18 (None) PLACEHOLDER 2 null cell 
+	db %01000010, 255 ; 19 (19) NULL CELL 2 null cell 
+	db %01000011, 0 ; 20 (20) LAMP 3 sprite 
+	db %01000011, 1 ; 21 (21) BARREL 3 sprite 
+	db %01000011, 2 ; 22 (22) TABLE 3 sprite 
+	db %00000011, 3 ; 23 (23) OVERHEAD LIGHT 3 sprite 
+	db %01000011, 4 ; 24 (24) RADIOACTIVE BARREL 3 sprite 
+	db %00000000, 255 ; 25 (25) BJ 25% 4 ui 
+	db %00000000, 255 ; 26 (26) BJ 50% 4 ui 
+	db %00000000, 255 ; 27 (27) BJ 75% 4 ui 
+	db %00001000, 255 ; 28 (28) BJ 100%/ START POSITION 4 ui 
+	db %00000001, 255 ; 29 (29) GREY FLOOR 1 floor 
+	db %00110100, 255 ; 30 (57) DOOR TO ROOM 0 0 cube 
+	db %00110100, 255 ; 31 (57) DOOR TO ROOM 1 0 cube 
+	db %00110100, 255 ; 32 (57) DOOR TO ROOM 2 0 cube 
+	db %00110100, 255 ; 33 (57) DOOR TO ROOM 3 0 cube 
+	db %00110100, 255 ; 34 (57) DOOR TO ROOM 4 0 cube 
+	db %00110100, 255 ; 35 (57) DOOR TO ROOM 5 0 cube 
+	db %00110100, 255 ; 36 (57) DOOR TO ROOM 6 0 cube 
+	db %00110100, 255 ; 37 (57) DOOR TO ROOM 7 0 cube 
+	db %00110100, 255 ; 38 (57) DOOR TO ROOM 8 0 cube 
+	db %00110100, 255 ; 39 (57) DOOR TO ROOM 9 0 cube 
+	db %00000011, 5 ; 40 (40) HEALTH PACK 3 sprite 
+	db %00000011, 6 ; 41 (41) GOLD CHALISE 3 sprite 
+	db %00000011, 7 ; 42 (42) GOLD CROSS 3 sprite 
+	db %00000011, 8 ; 43 (43) PLATE OF FOOD 3 sprite 
+	db %00000011, 9 ; 44 (44) KEYCARD 3 sprite 
+	db %00000011, 10 ; 45 (45) GOLD CHEST 3 sprite 
+	db %00000011, 11 ; 46 (46) MACHINE GUN 3 sprite 
+	db %00000011, 12 ; 47 (47) GATLING GUN 3 sprite 
+	db %00000011, 13 ; 48 (48) DOG FOOD 3 sprite 
+	db %00000011, 14 ; 49 (49) GOLD KEY 3 sprite 
+	db %01000011, 15 ; 50 (50) DOG 3 sprite 
+	db %01000011, 16 ; 51 (51) GERMAN TROOPER 3 sprite 
+	db %01000011, 17 ; 52 (52) SS GUARD 3 sprite 
+	db %00000010, 255 ; 53 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 54 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 55 (None) PLACEHOLDER 2 null cell 
+	db %00000011, 18 ; 56 (56) DEAD GUARD 3 sprite 
+	db %10010000, 255 ; 57 (57) REGULAR DOOR 0 cube 
+	db %01110000, 255 ; 58 (58) ELEVATOR SWITCH 0 cube 
+	db %10010000, 255 ; 59 (59) ELEVATOR DOOR 0 cube 
+	db %00000010, 255 ; 60 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 61 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 62 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 63 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 64 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 65 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 66 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 67 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 68 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 69 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 70 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 71 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 72 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 73 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 74 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 75 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 76 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 77 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 78 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 79 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 80 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 81 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 82 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 83 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 84 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 85 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 86 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 87 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 88 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 89 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 90 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 91 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 92 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 93 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 94 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 95 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 96 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 97 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 98 (None) PLACEHOLDER 2 null cell 
+	db %00000010, 255 ; 99 (None) PLACEHOLDER 2 null cell 

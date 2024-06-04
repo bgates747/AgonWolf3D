@@ -23,6 +23,10 @@ sprite_trigger_kill:    equ %00001000 ; player has killed the sprite
 sprite_trigger_move:    equ %00010000 ; sprite has moved
 sprite_trigger_shoot:   equ %00100000 ; sprite has shot
 
+; obj_ids for selected sprites
+; these are the sprite_obj values for the selected sprites
+OBJ_ID_DEAD_GUARD:      equ 56
+
 ; ###### SPRITE TABLE VARIABLES ######
 ; maximum number of sprites
 table_max_records:      equ 64 ; at 16 bytes per record = 1024 bytes + 7 KiB for the map is an even 8 KiB
@@ -130,9 +134,23 @@ sprite_set_pointer:
     ld (sprite_table_pointer),iy
     ret
 
+; points ix at the map address of the sprite's current location
+; inputs: iy pointed at sprite record
+; outputs: ix points to cell defs/status, a is target cell current obj_id, bc is cell_id
+; destroys: af,de,hl
+sprite_get_cell:
+; point ix at sprite's current map location
+    ld de,0 ; make sure deu is zero
+    ld e,(iy+sprite_x)
+    ld d,(iy+sprite_y)
+    call get_cell_from_coords
+    ret
+
 ; set the active sprite record to no sprite and remove it from the map cell it was in
 ; inputs: iy pointed at sprite record to clear
 sprite_kill:
+; point ix at sprite's current map location
+    call sprite_get_cell
 ; set sprite table record to no sprite
     ld hl,0xFFFFFF ; a string of -1s
     ld (iy),hl ; populates sprite_id, sprite_obj and sprite_heatlth with -1, all indicating that it is quite dead
@@ -179,6 +197,35 @@ sprite_check_move:
 ; we are cleared for movement
     call sprite_move
     ld a,1 ; signals caller that move was legal
+    ret
+
+; creates a new sprite at the given map position
+; inputs: a = obj_id, ix pointing at map address, iy pointing at sprite address
+sprite_spawn:
+; copy obj_id to map_obj_id
+    ld (ix+map_obj_id),a
+; lookup map_type_status and sprite_obj from obj_id
+    sub 10 ; first record in list is 10
+    ld hl,map_type_status_lut
+    ld b,a
+    ld c,2 ; two bytes per record
+    mlt bc
+    add hl,bc ; hl points to lookup record
+    ld hl,(hl) ; l = map_type_status, h = sprite_obj
+; copy sprite_obj to sprite record
+    ld (iy+sprite_obj),h
+; copy map_type_status to map cell
+    ld (ix+map_type_status),l
+; write sprite_id to map cell
+    ld a,(iy+sprite_id)
+    ld (ix+map_sprite_id),a
+; write 255 to map_img_idx to indicate type sprite
+    ld a,255
+    ld (ix+map_img_idx),a
+; ; TODO: this will be clunky to do until the sprite table layout is adjusted to better separate definitional from state data
+; ; initialize sprite data
+;     ld a,sp_init
+;     call sprite_init_data
     ret
 
 ; moves the sprite to the given map position
@@ -298,7 +345,6 @@ do_sprite_behavior:
     add hl,bc ; hl points to the label of the routine to call
     ld hl,(hl) ; hl points to the routine to call
     jp (hl) ; call the behavior routine
-sprite_behavior_return: ; we always return here from a sprite behavior call
     ret
 
 LAMP:
@@ -312,7 +358,7 @@ LAMP:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -329,20 +375,19 @@ LAMP:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 BARREL:
 ; behavior routine address lookup
@@ -355,7 +400,7 @@ BARREL:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 018 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -372,28 +417,27 @@ BARREL:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     ld a,255 ; kill player's shot
     ld (plyr_shot_status),a
     ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    jp p,sprite_behavior_return ; if health is positive, return
+    ret p ; if health is positive, return
     ; otherwise fall through to kill sprite
 @kill:
     push iy 
     call sfx_play_explode
     pop iy 
-    call sprite_kill
-    jp sprite_behavior_return
+    jp sprite_kill
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 TABLE:
 ; behavior routine address lookup
@@ -406,7 +450,7 @@ TABLE:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -423,20 +467,19 @@ TABLE:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 OVERHEAD_LIGHT:
 ; behavior routine address lookup
@@ -449,7 +492,7 @@ OVERHEAD_LIGHT:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -466,20 +509,19 @@ OVERHEAD_LIGHT:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 RADIOACTIVE_BARREL:
 ; behavior routine address lookup
@@ -492,7 +534,7 @@ RADIOACTIVE_BARREL:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 024 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -509,28 +551,27 @@ RADIOACTIVE_BARREL:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     ld a,255 ; kill player's shot
     ld (plyr_shot_status),a
     ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    jp p,sprite_behavior_return ; if health is positive, return
+    ret p ; if health is positive, return
     ; otherwise fall through to kill sprite
 @kill:
     push iy 
     call sfx_play_explode
     pop iy
-    call sprite_kill
-    jp sprite_behavior_return
+    jp sprite_kill
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 HEALTH_PACK:
 ; behavior routine address lookup
@@ -543,7 +584,7 @@ HEALTH_PACK:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -562,20 +603,19 @@ HEALTH_PACK:
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GOLD_CHALISE:
 ; behavior routine address lookup
@@ -588,7 +628,7 @@ GOLD_CHALISE:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -610,20 +650,19 @@ GOLD_CHALISE:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GOLD_CROSS:
 ; behavior routine address lookup
@@ -636,7 +675,7 @@ GOLD_CROSS:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -658,20 +697,19 @@ GOLD_CROSS:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 PLATE_OF_FOOD:
 ; behavior routine address lookup
@@ -684,7 +722,7 @@ PLATE_OF_FOOD:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -703,20 +741,19 @@ PLATE_OF_FOOD:
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 KEYCARD:
 ; behavior routine address lookup
@@ -729,7 +766,7 @@ KEYCARD:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -749,21 +786,19 @@ KEYCARD:
     ld a,8
     call plyr_add_ammo
     call sfx_play_gun_reload
-    call sprite_kill
-    jp sprite_behavior_return
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GOLD_CHEST:
 ; behavior routine address lookup
@@ -776,7 +811,7 @@ GOLD_CHEST:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -798,20 +833,19 @@ GOLD_CHEST:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 MACHINE_GUN:
 ; behavior routine address lookup
@@ -824,7 +858,7 @@ MACHINE_GUN:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -841,6 +875,7 @@ MACHINE_GUN:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
+    call sprite_kill
     ld a,16
     call plyr_add_ammo
     call sfx_play_gun_reload
@@ -851,21 +886,18 @@ MACHINE_GUN:
     ld a,plyr_wpn_mg
     ld (plyr_wpn_active),a
     call plyr_set_weapon_parameters
-    call sprite_kill
-    jp sprite_behavior_return
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GATLING_GUN:
 ; behavior routine address lookup
@@ -878,7 +910,7 @@ GATLING_GUN:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -895,6 +927,7 @@ GATLING_GUN:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
+    call sprite_kill
     ld a,32
     call plyr_add_ammo
     call sfx_play_gun_reload
@@ -905,21 +938,18 @@ GATLING_GUN:
     ld a,plyr_wpn_gg
     ld (plyr_wpn_active),a
     call plyr_set_weapon_parameters
-    call sprite_kill
-    jp sprite_behavior_return
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 DOG_FOOD:
 ; behavior routine address lookup
@@ -932,7 +962,7 @@ DOG_FOOD:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -951,20 +981,19 @@ DOG_FOOD:
 @use:
     ld a,(iy+sprite_health_modifier)
     call plyr_add_health
-    jr @kill
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GOLD_KEY:
 ; behavior routine address lookup
@@ -977,7 +1006,7 @@ GOLD_KEY:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -994,20 +1023,19 @@ GOLD_KEY:
     db 000 ; sprite_unassigned_1
     db 000 ; sprite_unassigned_2
 @use:
-    jp sprite_behavior_return
+    ret
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 DOG:
 ; behavior routine address lookup
@@ -1020,7 +1048,7 @@ DOG:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 050 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -1042,11 +1070,8 @@ DOG:
     pop iy 
     ld a,(iy+sprite_health_modifier)
     call plyr_sub_health
-    jp sprite_behavior_return
+    ret
 @hurt:
-    call rand_8
-    and %00000001
-    jp nz,@nosound
     push iy 
     call sfx_play_dog_yelp
     pop iy 
@@ -1056,7 +1081,7 @@ DOG:
     ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    ; jp p,sprite_behavior_return ; if health is positive, return
+    ; ret p ; if health is positive, return
     jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
@@ -1065,14 +1090,14 @@ DOG:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    call sprite_kill
-    jp sprite_behavior_return
+    jp sprite_kill
+    ret
 @see:
     jr @move
 @seen:
     xor a
     inc a
-    jp sprite_behavior_return
+    ret
 @move:
     dec (iy+sprite_move_timer)
     jr z,@do_move
@@ -1087,7 +1112,7 @@ DOG:
     call sfx_play_dog_woof_double
     jr @seen
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 GERMAN_TROOPER:
 ; behavior routine address lookup
@@ -1100,7 +1125,7 @@ GERMAN_TROOPER:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 075 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -1122,11 +1147,8 @@ GERMAN_TROOPER:
     pop iy 
     ld a,-5
     call plyr_sub_health
-    jp sprite_behavior_return
+    ret
 @hurt:
-    call rand_8
-    and %00000001
-    jp nz,@nosound
     push iy 
     call sfx_play_random_hurt
     pop iy 
@@ -1136,7 +1158,7 @@ GERMAN_TROOPER:
     ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    ; jp p,sprite_behavior_return ; if health is positive, return
+    ; ret p ; if health is positive, return
     jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
@@ -1145,8 +1167,9 @@ GERMAN_TROOPER:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    call sprite_kill
-    jp sprite_behavior_return
+    ld a,OBJ_ID_DEAD_GUARD
+    call sprite_spawn
+    ret
 @see:
     ld a,(iy+sprite_triggers_mask)
     and sprite_trigger_see
@@ -1160,7 +1183,7 @@ GERMAN_TROOPER:
 @seen:
     xor a
     inc a
-    jp sprite_behavior_return
+    ret
 @move:
     dec (iy+sprite_move_timer)
     call z,@shoot
@@ -1185,7 +1208,7 @@ SS_GUARD:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -1207,11 +1230,8 @@ SS_GUARD:
     pop iy 
     ld a,-10
     call plyr_sub_health
-    jp sprite_behavior_return
+    ret
 @hurt:
-    call rand_8
-    and %00000001
-    jp nz,@nosound
     push iy 
     call sfx_play_random_hurt
     pop iy 
@@ -1221,7 +1241,7 @@ SS_GUARD:
     ld a,(plyr_shot_damage) ; damage done by player's shot set by plyr_shoot
     add a,(iy+sprite_health)
     ld (iy+sprite_health),a
-    ; jp p,sprite_behavior_return ; if health is positive, return
+    ; ret p ; if health is positive, return
     jp p,@do_move
     ; otherwise fall through to kill sprite
 @kill:
@@ -1230,8 +1250,9 @@ SS_GUARD:
     pop iy 
     ld a,(iy+sprite_points)
     call plyr_mod_score
-    call sprite_kill
-    jp sprite_behavior_return
+    ld a,OBJ_ID_DEAD_GUARD
+    call sprite_spawn
+    ret
 @see:
     ld a,(iy+sprite_triggers_mask)
     and sprite_trigger_see
@@ -1245,7 +1266,7 @@ SS_GUARD:
 @seen:
     xor a
     inc a
-    jp sprite_behavior_return
+    ret
 @move:
     dec (iy+sprite_move_timer)
     call z,@shoot
@@ -1270,7 +1291,7 @@ DEAD_GUARD:
     dl @shoot
 @init:
     ld hl,@data ; address for LDIR to copy from
-    jp sprite_behavior_return
+    ret
 @data:
     db 100 ; sprite_health
     db 000 ; sprite_triggers_mask
@@ -1291,21 +1312,19 @@ DEAD_GUARD:
     and %00000111
     call plyr_add_ammo
     call sfx_play_gun_reload
-    call sprite_kill
-    jp sprite_behavior_return
+    jp sprite_kill
 @hurt:
     xor a
-    jp sprite_behavior_return
+    ret
 @kill:
-    call sprite_kill
-    jp sprite_behavior_return
+    ret
 @see:
     xor a
-    jp sprite_behavior_return
+    ret
 @move:
-    jp sprite_behavior_return
+    ret
 @shoot:
-    jp sprite_behavior_return
+    ret
 
 sprite_reset_move_timer:
     call rand_8
