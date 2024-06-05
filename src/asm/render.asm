@@ -14,6 +14,8 @@ cur_cell_views: ds 3
 
 view_distance: equ 5 ; furthest player can see or be seen in map units
 
+bj_health_image: dl BUF_UI_BJ_100 ; 100% health default
+
 ; render background as a prelude to rendering panels and sprites
 ; hl is the buffer id, bc and de are plot_x and plot_y
 render_background:
@@ -233,6 +235,12 @@ render_scene:
     call vdu_buff_select
     ld bc,266 ; x
     ld de,178 ; y
+    call vdu_plot_bmp
+
+    ld hl,(bj_health_image)
+    call vdu_buff_select
+    ld bc,132 ; x
+    ld de,170 ; y
     call vdu_plot_bmp
 
 ; draw the text portions of the ui

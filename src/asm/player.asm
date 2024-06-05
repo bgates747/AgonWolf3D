@@ -290,7 +290,7 @@ plyr_add_health:
     ld a,255 ; ... set health remaining to max
 @update:
     ld (hl),a
-    ret
+    jp plyr_health_image
 
 ; subtracts from player's health by a set amount
 ; inputs: a is the signed amount to modify health
@@ -309,9 +309,32 @@ plyr_sub_health:
     jp z,@zero
     jp c,@update
 @zero:
+    ld hl,BUF_UI_BJ_100
+    ld (bj_health_image),hl
     jp plyr_restart ; will go the right place from there
 @update:
     ld (hl),a
+; fall through to plyr_health_image
+
+plyr_health_image:
+    cp 25
+    jr c,@less_than_25
+    cp 50
+    jr c,@less_than_50
+    cp 75
+    jr c,@less_than_75
+    ld hl,BUF_UI_BJ_100
+    jr @update
+@less_than_25:
+    ld hl,BUF_UI_BJ_025
+    jr @update
+@less_than_50:
+    ld hl,BUF_UI_BJ_050
+    jr @update
+@less_than_75:
+    ld hl,BUF_UI_BJ_075
+@update:
+    ld (bj_health_image),hl
     ret
 
 last_damage: dl 0x00 ; last damage dealt to player
