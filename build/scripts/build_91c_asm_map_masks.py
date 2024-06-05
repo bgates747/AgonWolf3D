@@ -102,6 +102,9 @@ def asm_make_map_masks(db_path, floor_nums, maps_tgt_dir):
 
             # Prepare filenames
             asm_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.asm'
+
+            print(f'Building: {asm_filename}')
+
             # this doesnt work in macos because ez80asm is not available
             # bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.py.bin'
             # asm_bin_filename = f'{maps_tgt_dir}/map_{floor_num:02d}_{room_id}.bin'
@@ -279,5 +282,5 @@ if __name__ == "__main__":
     
     # Set which maps to build
     floor_nums = list(range(1))
-    # asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
+    asm_make_map_masks(db_path, floor_nums, maps_tgt_dir)
     update_maps_asm(db_path)

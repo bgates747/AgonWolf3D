@@ -182,13 +182,15 @@ def process_potential_panels(db_path, floor_num, map_masks_directory, masks_dire
     cursor.execute(f"""
         SELECT floor_num, room_id, cell_id, orientation
         FROM qry_07_map_orientations
-        -- WHERE floor_num = {floor_num} AND is_door = 0 and is_wall = 0
         WHERE floor_num = {floor_num} AND (is_blocking = 0 OR is_door = 1 OR special = 'to room')
         ORDER BY floor_num, room_id, cell_id, orientation""")
     unique_groups = cursor.fetchall()
 
     for group in unique_groups:
         floor_num, room_id, cell_id, orientation = group["floor_num"], group["room_id"], group["cell_id"], group["orientation"]
+
+        if cell_id == 0 and orientation == 0:
+            print(f"Making panels for Floor Number: {floor_num}, Room ID: {room_id}")
 
         cursor.execute(f"""
             SELECT *

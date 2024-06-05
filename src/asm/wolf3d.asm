@@ -84,13 +84,17 @@ init:
 	call load_ui_images_bj
 
 ; set up the display
-    ld a,8;+128 ; 320x240x64 double-buffered
+    ld a,8+128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
 
 ; set text background color
 	ld a,4 + 128
+	call vdu_colour_text
+
+; set text foreground color
+	ld a,47 ; aaaaff lavenderish
 	call vdu_colour_text
 
 ; set gfx bg color

@@ -129,13 +129,42 @@ plyr_init:
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 plyr_restart:
-    call get_floor_start ; a = cell_id, d = map_y, e = map_x
-    ld (cur_cell),a
-    ld (cur_x),de ; implicitly populates cur_y
-    xor a ; north is default orientation
-    ld (orientation),a
+    ld a,(cur_room)
+    and a
+    jr z,@no_load
+; not in room zero so save state of current room
+    ld hl,room_flags
+	ld de,0 ; make sure deu and d are zero
+	ld e,a
+	add hl,de ; hl = address of room flags entry
+	ld a,room_flag_visited
+	or (hl)
+	ld (hl),a
+; update from_room
+	ld a,(cur_room)
+	ld (from_room),a
+; save old room state to room dat memory location
+	ld hl,room_dat_lut
+	ld d,a
+	ld e,3 ; three bytes per lookup record
+	mlt de ; de = offset to room dat entry
+	add hl,de ; hl = address of room dat entry
+	ld de,(hl) ; destination address for room data
+	ld hl,cell_status ; source address for room data
+	ld bc,8*1024 ; size of room data
+	ldir
+; fetch room zero state from room dat memory location
+	ld hl,(room_00_dat) ; source address for room data
+	ld de,cell_status ; destination address for room data
+	ld bc,8*1024 ; size of room data
+	ldir
+@no_load:
+    xor a
+    ld (cur_room),a
+    ld (orientation),a ; north is default orientation
     ld hl,plyr_move_rate
     ld iy,plyr_move_timer
+
     ld a,(plyr_lives)
     dec a
     ld (plyr_lives),a
@@ -143,6 +172,11 @@ plyr_restart:
     ld (plyr_health),a
     ld a,8
     call plyr_add_ammo
+
+    call get_floor_start ; a = cell_id, d = map_y, e = map_x
+    ld (cur_cell),a
+    ld (cur_x),de ; implicitly populates cur_y
+
     ret
 
 plyr_next_weapon:

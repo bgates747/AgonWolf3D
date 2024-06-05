@@ -281,6 +281,20 @@ render_scene:
     call printHex8
 
 ; ; DEBUG
+    ; ld c,1 ; x
+    ; ld b,5 ; y 
+    ; call vdu_move_cursor
+    ; ld hl,cur_x
+    ; ld a,5
+    ; call dumpMemoryHex
+
+    ; ld c,1 ; x
+    ; ld b,7 ; y 
+    ; call vdu_move_cursor
+    ; ld hl,room_flags
+    ; ld a,10
+    ; call dumpMemoryHex
+
 ;     ld c,1 ; x
 ;     ld b,7 ; y 
 ;     call vdu_move_cursor
