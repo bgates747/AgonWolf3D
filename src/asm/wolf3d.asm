@@ -84,7 +84,7 @@ init:
 	call load_ui_images_bj
 
 ; set up the display
-    ld a,8+128 ; 320x240x64 double-buffered
+    ld a,8;+128 ; 320x240x64 double-buffered
     call vdu_set_screen_mode
     xor a
     call vdu_set_scaling
@@ -193,11 +193,36 @@ debug_timer: db 0x01
 main_loop_tmr: ds 6
 framerate: equ 30
 
-main:
-; set map variables and load initial map file
-	call map_init
+new_game:
+; initialize map variables and load map file
+	ld hl,room_flags
+	xor a
+	ld b,10
+@room_flags_loop:
+	ld (hl),a
+	inc hl
+	djnz @room_flags_loop
+; map_init:
+	ld (cur_floor),a
+	ld (cur_room),a
+; load room file
+	call map_load
+; initialize sprite data
+	call map_init_sprites
 ; initialize player position
 	call plyr_init
+
+	ret
+
+main:
+	call new_game
+
+; main:
+; ; set map variables and load initial map file
+; 	call map_init
+; ; initialize player position
+; 	call plyr_init
+
 
 main_loop:
 ; update global timestamp

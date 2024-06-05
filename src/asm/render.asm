@@ -274,6 +274,12 @@ render_scene:
     ld a,(cur_floor)
     call printHex8
 
+    ld c,1 ; x
+    ld b,4 ; y 
+    call vdu_move_cursor
+    ld a,(cur_room)
+    call printHex8
+
 ; ; DEBUG
 ;     ld c,1 ; x
 ;     ld b,7 ; y 

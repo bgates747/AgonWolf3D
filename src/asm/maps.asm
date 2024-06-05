@@ -275,39 +275,164 @@ cell_id_to_coords:
 	pop af	; a is cell id
 	ret
 
-; get starting position based on the start flag
+; ; get starting position based on the start flag
+; ; inputs: none
+; ; returns: a = cell_id, d = map_y, e = map_x
+; get_floor_start:
+; 	ld de,0 ; initialize to 0,0 as a default
+; 	ld ix,cell_status ; ix points to the start of the map data
+; 	xor a ; start at cell 0
+; @loop:
+; 	push af ; save cell_id
+; 	ld a,(ix+map_type_status) ; a is the cell status bitmmask
+; 	and cell_is_start ; testing whether the cell start bit is lit
+; 	jr z,@not_start ; go to the next cell if not
+; 	pop	af ; a is cell_id
+; 	call cell_id_to_coords ; d = map_y, e = map_x
+; 	ret
+; @not_start:
+; 	pop	af ; a is cell_id
+; 	inc a ; bump cell id
+; 	ret z ; if zero we've wrapped around so we return 0,0 in de and 0 in a as cell_id
+; 	lea ix,ix+map_record_size ; otherwise bump pointer to next map record
+; 	jr @loop
+
+; get starting position in room 0 of a floor based on is_start flag being set
 ; inputs: none
 ; returns: a = cell_id, d = map_y, e = map_x
-get_start_pos:
-	ld de,0 ; initialize to 0,0 as a default
-	ld ix,cell_status ; ix points to the start of the map data
-	xor a ; start at cell 0
-@loop:
-	push af ; save cell_id
-	ld a,(ix+map_type_status) ; a is the cell status bitmmask
-	and cell_is_start ; testing whether the cell start bit is lit
-	jr z,@not_start ; go to the next cell if not
-	pop	af ; a is cell_id
-	call cell_id_to_coords ; d = map_y, e = map_x
+get_floor_start:
+; loop through map data to find the obj_id in a
+	ld ix,cell_status
+	ld bc,0 ; c will be a loop counter giving us cell_id
+@start_cell_loop:
+	ld a,(ix+map_type_status)
+	and cell_is_start
+	jr nz,@start_cell_found
+	lea ix,ix+map_record_size
+	inc c
+	jr @start_cell_loop
+@start_cell_found:
+	ld a,c
+	call cell_id_to_coords ; d = map_y, e = map_x, a = cell_id
+	ld (cur_x),de
 	ret
-@not_start:
-	pop	af ; a is cell_id
-	inc a ; bump cell id
-	ret z ; if zero we've wrapped around so we return 0,0 in de and 0 in a as cell_id
-	lea ix,ix+map_record_size ; otherwise bump pointer to next map record
-	jr @loop
+
+; get starting position based an obj_id
+; inputs: a is the obj_id to search for
+; returns: a = cell_id, d = map_y, e = map_x
+get_room_start:
+; loop through map data to find the obj_id in a
+	ld ix,cell_status
+	ld bc,0 ; c will be a loop counter giving us cell_id
+@start_cell_loop:
+	cp (ix+map_obj_id)
+	jr z,@start_cell_found
+	lea ix,ix+map_record_size
+	inc c
+	jr @start_cell_loop
+@start_cell_found:
+	ld a,c
+	call cell_id_to_coords ; d = map_y, e = map_x, a = cell_id
+	ld (cur_x),de
+	ret
+
+
+; moves player to the room indicated by the too room cell they've just entered
+; inputs: ix = pointer to the cell containing the too room door
+change_room:
+; update room flags for current floor to visited
+	ld hl,room_flags
+	ld a,(cur_room)
+	ld de,0 ; make sure deu and d are zero
+	ld e,a
+	add hl,de ; hl = address of room flags entry
+	ld a,room_flag_visited
+	or (hl)
+	ld (hl),a
+; update from_room
+	ld a,(cur_room)
+	ld (from_room),a
+; get the new room id from the cell and update cur_room
+	ld hl,to_room_obj_lut
+	ld a,(ix+map_obj_id)
+	sub (hl)
+	ld (cur_room),a
+; save old room state to room dat memory location
+	ld hl,room_dat_lut
+	ld a,(from_room)
+	ld d,a
+	ld e,3 ; three bytes per lookup record
+	mlt de ; de = offset to room dat entry
+	add hl,de ; hl = address of room dat entry
+	ld de,(hl) ; destination address for room data
+	ld hl,cell_status ; source address for room data
+	ld bc,8*1024 ; size of room data
+	ldir
+; check room visited flag for target room
+	ld hl,room_flags
+	ld a,(cur_room)
+	ld de,0 ; make sure deu and d are zero
+	ld e,a
+	add hl,de ; hl = address of room flags entry
+	ld a,room_flag_visited
+	and (hl)
+	jr nz,@room_visited
+; room not visited so load room data from file
+	call map_load
+	call map_init_sprites
+	jr @get_room_start
+@room_visited:
+; fetch new room state from room dat memory location
+	ld hl,room_dat_lut
+	ld a,(cur_room)
+	ld d,a
+	ld e,3 ; three bytes per lookup record
+	mlt de ; de = offset to room dat entry
+	add hl,de ; hl = address of room dat entry
+	ld hl,(hl) ; source address for room data
+	ld de,cell_status ; destination address for room data
+	ld bc,8*1024 ; size of room data
+	ldir
+@get_room_start:
+; get player starting position from to_room_obj_lut
+	ld a,(from_room)
+	ld hl,to_room_obj_lut
+	ld de,0 ; make sure deu and d are zero
+	ld e,a
+	add hl,de ; hl = address of to_room_obj_lut entry
+	ld a,(hl)
+	call get_room_start
+	ld (cur_x),de
+	ret
+
+to_room_obj_lut: db 30,31,32,33,34,35,36,37,38,39
+
+room_flags: blkb 10,0 
+room_flag_visited: equ %00000001
+
+room_dat_lut:
+room_00_dat: dl 0x0B6000
+room_01_dat: dl 0x0B8000
+room_02_dat: dl 0x0BA000
+room_03_dat: dl 0x0BC000
+room_04_dat: dl 0x0BE000
+room_05_dat: dl 0x0C0000
+room_06_dat: dl 0x0C2000
+room_07_dat: dl 0x0C4000
+room_08_dat: dl 0x0C6000
+room_09_dat: dl 0x0C8000
 
 ; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
+
+start_obj_id: equ 28
 
 floors:
 	dl floor_00
 
-; map room filename labels
 room_files:
 floor_00:
 	dl room_00_0
 	dl room_00_1
 
-; map data filenames
 room_00_0: db "maps/map_00_0.bin",0
 room_00_1: db "maps/map_00_1.bin",0

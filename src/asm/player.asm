@@ -99,7 +99,7 @@ plyr_end_variables: ; for when we want to traverse this table in reverse
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 plyr_init:
-    call get_start_pos ; a = cell_id, d = map_y, e = map_x
+    call get_floor_start ; a = cell_id, d = map_y, e = map_x
     ld (cur_cell),a
     ld (cur_x),de ; implicitly populates cur_y
     xor a ; north is default orientation
@@ -129,7 +129,7 @@ plyr_init:
 ; outputs: player set to the first valid position on the map
 ; destroys: a
 plyr_restart:
-    call get_start_pos ; a = cell_id, d = map_y, e = map_x
+    call get_floor_start ; a = cell_id, d = map_y, e = map_x
     ld (cur_cell),a
     ld (cur_x),de ; implicitly populates cur_y
     xor a ; north is default orientation
@@ -643,7 +643,7 @@ plyr_input:
     ret nz ; can't move thru walls
     ld a,cell_is_to_room
     and b
-    call z,change_room
+    jp nz,change_room
     ; fall through to @move_it
 @move_it:
 ; we are cleared for movement so update player position
