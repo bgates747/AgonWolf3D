@@ -379,12 +379,10 @@ LAMP:
 @use:
     ret
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -431,11 +429,12 @@ BARREL:
 @kill:
     push iy 
     call sfx_play_explode
-    pop iy 
+    pop iy
     ld a,OBJ_ID_EXPLOSION
     call sprite_spawn
+    ld (iy+sprite_anim_timer),5
+    ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -472,12 +471,10 @@ TABLE:
 @use:
     ret
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -514,12 +511,10 @@ OVERHEAD_LIGHT:
 @use:
     ret
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -569,8 +564,9 @@ RADIOACTIVE_BARREL:
     pop iy
     ld a,OBJ_ID_EXPLOSION
     call sprite_spawn
+    ld (iy+sprite_anim_timer),5
+    ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -609,12 +605,10 @@ HEALTH_PACK:
     call plyr_add_health
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -656,12 +650,10 @@ GOLD_CHALISE:
     call plyr_mod_score
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -703,12 +695,10 @@ GOLD_CROSS:
     call plyr_mod_score
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -747,12 +737,10 @@ PLATE_OF_FOOD:
     call plyr_add_health
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -792,12 +780,10 @@ KEYCARD:
     call sfx_play_gun_reload
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -839,12 +825,10 @@ GOLD_CHEST:
     call plyr_mod_score
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -891,12 +875,10 @@ MACHINE_GUN:
     ld (plyr_wpn_active),a
     call plyr_set_weapon_parameters
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -943,12 +925,10 @@ GATLING_GUN:
     ld (plyr_wpn_active),a
     call plyr_set_weapon_parameters
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -987,12 +967,10 @@ DOG_FOOD:
     call plyr_add_health
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -1029,12 +1007,10 @@ GOLD_KEY:
 @use:
     ret
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -1318,12 +1294,10 @@ DEAD_GUARD:
     call sfx_play_gun_reload
     jp sprite_kill
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
     ret
 @move:
     ret
@@ -1349,7 +1323,7 @@ EXPLOSION:
     db 000 ; sprite_y
     db 000 ; sprite_orientation
     db 000 ; sprite_animation
-    db 000 ; sprite_anim_timer
+    db 005 ; sprite_anim_timer
     db 001 ; sprite_move_timer
     db 000 ; sprite_move_step
     db 000 ; sprite_points
@@ -1365,12 +1339,12 @@ EXPLOSION:
     call plyr_sub_health
     ret
 @hurt:
-    xor a
     ret
 @kill:
     ret
 @see:
-    xor a
+    dec (iy+sprite_anim_timer)
+    call z,sprite_kill
     ret
 @move:
     ret
