@@ -370,6 +370,7 @@ sprite_imgs_lookup:
 	dl sprite_obj_016 ; render_obj_id:51
 	dl sprite_obj_017 ; render_obj_id:52
 	dl sprite_obj_018 ; render_obj_id:56
+	dl sprite_obj_019 ; render_obj_id:60
 ;	 plot_x,  plot_y, buffer_label
 
 ; render_obj_id:20
@@ -904,6 +905,34 @@ sprite_obj_018:
 	dl 0x0000EC,0x000066,BUF_56_040
 	dl 0x0000A0,0x000093,BUF_56_044
 
+; render_obj_id:60
+sprite_obj_019:
+	dl 0x000003,0x000041,BUF_60_004
+	dl 0x000026,0x000041,BUF_60_004
+	dl 0x00004A,0x000041,BUF_60_004
+	dl 0x00006D,0x000041,BUF_60_004
+	dl 0x000091,0x000041,BUF_60_004
+	dl 0x0000B4,0x000041,BUF_60_004
+	dl 0x0000D8,0x000041,BUF_60_004
+	dl 0x0000FB,0x000041,BUF_60_004
+	dl 0x00011F,0x000041,BUF_60_004
+	dl 0x000003,0x00003C,BUF_60_020
+	dl 0x000031,0x00003C,BUF_60_020
+	dl 0x00005E,0x00003C,BUF_60_020
+	dl 0x00008C,0x00003C,BUF_60_020
+	dl 0x0000B9,0x00003C,BUF_60_020
+	dl 0x0000E7,0x00003C,BUF_60_020
+	dl 0x000114,0x00003C,BUF_60_020
+	dl 0x000005,0x000035,BUF_60_032
+	dl 0x000044,0x000035,BUF_60_032
+	dl 0x000085,0x000035,BUF_60_032
+	dl 0x0000C5,0x000035,BUF_60_032
+	dl 0x000105,0x000035,BUF_60_032
+	dl 0x000007,0x000021,BUF_60_040
+	dl 0x000071,0x000021,BUF_60_040
+	dl 0x0000DC,0x000021,BUF_60_040
+	dl 0x000015,0x000000,BUF_60_044
+
 sprite_obj_255: ; placeholder to keep the assembler happy, CANNOT BE A VALID sprite_obj
 
 map_type_status_lut:
@@ -958,7 +987,7 @@ map_type_status_lut:
 	db %10010000, 255 ; 57 (57) REGULAR DOOR 0 cube 
 	db %01110000, 255 ; 58 (58) ELEVATOR SWITCH 0 cube 
 	db %10010000, 255 ; 59 (59) ELEVATOR DOOR 0 cube 
-	db %00000010, 255 ; 60 (None) PLACEHOLDER 2 null cell 
+	db %01000011, 19 ; 60 (60) EXPLOSION 3 sprite 
 	db %00000010, 255 ; 61 (None) PLACEHOLDER 2 null cell 
 	db %00000010, 255 ; 62 (None) PLACEHOLDER 2 null cell 
 	db %00000010, 255 ; 63 (None) PLACEHOLDER 2 null cell 

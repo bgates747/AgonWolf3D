@@ -285,8 +285,8 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x0A0050 ; cell 138 x,y (10,8) cube outer LIGHT GREY WALL 
 	db 0xFF ; no sprite
-	dl 0x1DFF01 ; cell 139 x,y (11,8) floor normal GREY FLOOR 
-	db 0xFF ; no sprite
+	dl 0x150143 ; cell 139 x,y (11,8) sprite normal BARREL 
+	db 0x11 ; BARREL
 	dl 0x1DFF01 ; cell 140 x,y (12,8) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 141 x,y (13,8) floor normal GREY FLOOR 
@@ -298,7 +298,7 @@ cell_status:
 	dl 0x0E0450 ; cell 144 x,y (0,9) cube normal WOOD WALL 
 	db 0xFF ; no sprite
 	dl 0x1D0C03 ; cell 145 x,y (1,9) sprite normal GATLING GUN 
-	db 0x11 ; GATLING GUN
+	db 0x12 ; GATLING GUN
 	dl 0x1DFF01 ; cell 146 x,y (2,9) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 147 x,y (3,9) floor normal GREY FLOOR 
@@ -306,7 +306,7 @@ cell_status:
 	dl 0x1DFF01 ; cell 148 x,y (4,9) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1D0903 ; cell 149 x,y (5,9) sprite normal KEYCARD 
-	db 0x12 ; KEYCARD
+	db 0x13 ; KEYCARD
 	dl 0x0E0450 ; cell 150 x,y (6,9) cube normal WOOD WALL 
 	db 0xFF ; no sprite
 	dl 0x0B0150 ; cell 151 x,y (7,9) cube normal JAIL CELL 
@@ -315,14 +315,14 @@ cell_status:
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 153 x,y (9,9) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
-	dl 0x1DFF01 ; cell 154 x,y (10,9) floor normal GREY FLOOR 
-	db 0xFF ; no sprite
+	dl 0x180443 ; cell 154 x,y (10,9) sprite normal RADIOACTIVE BARREL 
+	db 0x14 ; RADIOACTIVE BARREL
 	dl 0x1DFF01 ; cell 155 x,y (11,9) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 156 x,y (12,9) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x320F43 ; cell 157 x,y (13,9) sprite normal DOG 
-	db 0x13 ; DOG
+	db 0x15 ; DOG
 	dl 0x0B0150 ; cell 158 x,y (14,9) cube normal JAIL CELL 
 	db 0xFF ; no sprite
 	dl 0x0A0050 ; cell 159 x,y (15,9) cube outer LIGHT GREY WALL 
@@ -366,7 +366,7 @@ cell_status:
 	dl 0x1DFF01 ; cell 178 x,y (2,11) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1D0303 ; cell 179 x,y (3,11) sprite normal OVERHEAD LIGHT 
-	db 0x14 ; OVERHEAD LIGHT
+	db 0x16 ; OVERHEAD LIGHT
 	dl 0x1DFF01 ; cell 180 x,y (4,11) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 181 x,y (5,11) floor normal GREY FLOOR 
@@ -376,7 +376,7 @@ cell_status:
 	dl 0x0B0150 ; cell 183 x,y (7,11) cube normal JAIL CELL 
 	db 0xFF ; no sprite
 	dl 0x1D0D03 ; cell 184 x,y (8,11) sprite normal DOG FOOD 
-	db 0x15 ; DOG FOOD
+	db 0x17 ; DOG FOOD
 	dl 0x1DFF01 ; cell 185 x,y (9,11) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 186 x,y (10,11) floor normal GREY FLOOR 
@@ -426,7 +426,7 @@ cell_status:
 	dl 0x0E0450 ; cell 208 x,y (0,13) cube normal WOOD WALL 
 	db 0xFF ; no sprite
 	dl 0x1D0503 ; cell 209 x,y (1,13) sprite normal HEALTH PACK 
-	db 0x16 ; HEALTH PACK
+	db 0x18 ; HEALTH PACK
 	dl 0x1DFF01 ; cell 210 x,y (2,13) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1DFF01 ; cell 211 x,y (3,13) floor normal GREY FLOOR 
@@ -434,7 +434,7 @@ cell_status:
 	dl 0x1DFF01 ; cell 212 x,y (4,13) floor normal GREY FLOOR 
 	db 0xFF ; no sprite
 	dl 0x1D0503 ; cell 213 x,y (5,13) sprite normal HEALTH PACK 
-	db 0x17 ; HEALTH PACK
+	db 0x19 ; HEALTH PACK
 	dl 0x0E0450 ; cell 214 x,y (6,13) cube normal WOOD WALL 
 	db 0xFF ; no sprite
 	dl 0x0B0150 ; cell 215 x,y (7,13) cube normal JAIL CELL 

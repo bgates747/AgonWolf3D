@@ -26,6 +26,7 @@ sprite_trigger_shoot:   equ %00100000 ; sprite has shot
 ; obj_ids for selected sprites
 ; these are the sprite_obj values for the selected sprites
 OBJ_ID_DEAD_GUARD:      equ 56
+OBJ_ID_EXPLOSION:       equ 60
 
 ; ###### SPRITE TABLE VARIABLES ######
 ; maximum number of sprites
@@ -307,6 +308,7 @@ sprite_behavior_lookup:
     dl GERMAN_TROOPER
     dl SS_GUARD
     dl DEAD_GUARD
+    dl EXPLOSION
 
 ; initializes sprite data for a particular sprite type and id
 ; inputs: iy pointed at sprite record, sprite_obj set for same 
@@ -430,7 +432,8 @@ BARREL:
     push iy 
     call sfx_play_explode
     pop iy 
-    jp sprite_kill
+    ld a,OBJ_ID_EXPLOSION
+    call sprite_spawn
 @see:
     xor a
     ret
@@ -564,7 +567,8 @@ RADIOACTIVE_BARREL:
     push iy 
     call sfx_play_explode
     pop iy
-    jp sprite_kill
+    ld a,OBJ_ID_EXPLOSION
+    call sprite_spawn
 @see:
     xor a
     ret
@@ -1313,6 +1317,53 @@ DEAD_GUARD:
     call plyr_add_ammo
     call sfx_play_gun_reload
     jp sprite_kill
+@hurt:
+    xor a
+    ret
+@kill:
+    ret
+@see:
+    xor a
+    ret
+@move:
+    ret
+@shoot:
+    ret
+
+EXPLOSION:
+; behavior routine address lookup
+    dl @init
+    dl @use
+    dl @hurt
+    dl @kill
+    dl @see
+    dl @move
+    dl @shoot
+@init:
+    ld hl,@data ; address for LDIR to copy from
+    ret
+@data:
+    db 100 ; sprite_health
+    db 000 ; sprite_triggers_mask
+    db 000 ; sprite_x
+    db 000 ; sprite_y
+    db 000 ; sprite_orientation
+    db 000 ; sprite_animation
+    db 000 ; sprite_anim_timer
+    db 001 ; sprite_move_timer
+    db 000 ; sprite_move_step
+    db 000 ; sprite_points
+    db -100; sprite_health_modifier
+    db 000 ; sprite_unassigned_0
+    db 000 ; sprite_unassigned_1
+    db 000 ; sprite_unassigned_2
+@use:
+    push iy 
+    call sfx_play_explode
+    pop iy 
+    ld a,-100
+    call plyr_sub_health
+    ret
 @hurt:
     xor a
     ret
