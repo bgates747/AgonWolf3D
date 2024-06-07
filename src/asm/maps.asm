@@ -405,6 +405,14 @@ room_09_dat: dl 0x0B2000
 start_obj_id: equ 28
 
 floors:
+	dl floor_00
 
 room_files:
+floor_00:
+	dl room_00_0
+	dl room_00_1
+	dl room_00_2
 
+room_00_0: db "maps/map_00_0.bin",0
+room_00_1: db "maps/map_00_1.bin",0
+room_00_2: db "maps/map_00_2.bin",0
