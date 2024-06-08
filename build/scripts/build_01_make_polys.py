@@ -1,14 +1,15 @@
 import numpy as np
-import pandas as pd
-from scipy.optimize import curve_fit
-import tkinter as tk
-from tkinter import ttk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+import math
 import sqlite3
+import matplotlib.pyplot as plt
+from PIL import Image, ImageDraw
 import os
 import shutil
-from PIL import Image, ImageDraw
+import tkinter as tk
+from tkinter import ttk
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import pandas as pd
 
 class PolygonViewer:
     def __init__(self, master, df):
@@ -49,8 +50,8 @@ class PolygonViewer:
         
         polygon = np.array(vertices)
         self.plot.plot(*polygon.T, marker='o')
-        self.plot.set_xlim(0, screen_width)  # Adjusted for a more centered view
-        self.plot.set_ylim(0, screen_height)  # Adjusted for a more centered view
+        self.plot.set_xlim(-32, screen_width+32)  # Adjusted for a more centered view
+        self.plot.set_ylim(-24, screen_height+24)  # Adjusted for a more centered view
 
         viewport_vertices = [(0, 0), (screen_width, 0), (screen_width, screen_height), (0, screen_height), (0, 0)]
         viewport_polygon = np.array(viewport_vertices)
@@ -69,154 +70,6 @@ class PolygonViewer:
         self.update_plot()
 
 
-def find_points_in_sector(view_distance):
-    something = [(x, y, 0) for y in range(1, view_distance + 1) for x in range(-y, 1)]
-    return something
-
-def make_tbl_01_polys_masks(db_path):
-    drop_table_sql = '''
-    DROP TABLE IF EXISTS tbl_01_polys
-    '''
-    create_table_sql = '''
-    CREATE TABLE IF NOT EXISTS tbl_01_polys (
-        cube_id INTEGER,
-        poly_id INTEGER,
-        face TEXT,
-        cube_x INTEGER,
-        cube_y INTEGER,
-        poly_x0 INTEGER,
-        poly_y0 INTEGER,
-        poly_x1 INTEGER,
-        poly_y1 INTEGER,
-        poly_x2 INTEGER,
-        poly_y2 INTEGER,
-        poly_x3 INTEGER,
-        poly_y3 INTEGER,
-        plot_x INTEGER,
-        plot_y INTEGER,
-        dim_x INTEGER,
-        dim_y INTEGER,
-    	r INTEGER,
-        g INTEGER,
-        b INTEGER,
-        mask_filename TEXT,
-        PRIMARY KEY (cube_x, cube_y, face)
-    )
-    '''
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute(drop_table_sql)
-    cursor.execute(create_table_sql)
-    conn.close()
-
-def make_south_polys(db_path, view_distance):
-    make_tbl_01_polys_masks(db_path)
-
-
-    distances = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
-    sizes = np.array([1.0, 0.3328125, 0.2, 0.1421875, 0.1109375, 0.090625, 0.0765625, 0.0671875, 0.059375, 0.053125, 0.046875, 0.04375, 0.040625, 0.0375, 0.034375, 0.0328125])
-
-    data = []  # Initialize empty list for polygon data
-    
-    for _, (cube_x, cube_y, z) in enumerate(find_points_in_sector(view_distance), start=1):
-        if cube_y in distances:
-            # Direct match in the lookup
-            apparent_size = sizes[np.where(distances == cube_y)[0][0]]
-        else:
-            # Interpolate for values not directly in the lookup
-            apparent_size = np.interp(cube_y, distances, sizes)
-
-        cube_x_camera = cube_x * apparent_size
-
-        # Calculate and round vertices for 'south' face
-        poly_x0 = cube_x_camera - apparent_size / 2
-        poly_y0 = -apparent_size / 2
-
-        poly_x1 = cube_x_camera + apparent_size / 2
-        poly_y1 = -apparent_size / 2
-
-        poly_x2 = cube_x_camera + apparent_size / 2
-        poly_y2 = apparent_size / 2
-
-        poly_x3 = cube_x_camera - apparent_size / 2
-        poly_y3 = apparent_size / 2
-        
-        # Append data for 'south' face
-        # if poly_x1 > -0.5:
-        if True:
-            data.append((1, 1, 'south', cube_x, cube_y, 
-                        poly_x0, poly_y0, poly_x1, poly_y1, 
-                        poly_x2, poly_y2, poly_x3, poly_y3, 
-                        poly_x0, poly_y0, apparent_size, apparent_size, None, None, None, None))
-
-    # Connect to the SQLite database
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-
-    cursor.executemany('INSERT INTO tbl_01_polys (cube_id, poly_id, face, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, r, g, b, mask_filename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
-    conn.commit()
-    conn.close()
-
-def make_east_polys(db_path):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-
-    # Query to find and join necessary records
-    cursor.execute('''
-        SELECT 2 as cube_id, 2 as poly_id, 'east' as face, p1.cube_x, p1.cube_y, 
-                   
-                p1.poly_x1 as poly_x0, p1.poly_y1 as poly_y0, 
-                p2.poly_x1, p2.poly_y1, 
-                p2.poly_x2, p2.poly_y2, 
-                p1.poly_x1 as poly_x3, p1.poly_y2 as poly_y3,
-            
-                null as plot_x, null as plot_y,
-                null as dim_x, null as dim_y,
-                null as r, null as g, null as b, null as mask_filename
-                   
-        FROM tbl_01_polys p1
-        INNER JOIN tbl_01_polys p2 ON p1.cube_x = p2.cube_x AND p1.cube_y + 1 = p2.cube_y
-        WHERE p1.cube_x < 0
-    ''')
-    east_polys_data = cursor.fetchall()
-    cursor.executemany('''
-        INSERT INTO tbl_01_polys (cube_id, poly_id, face, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, r, g, b, mask_filename) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', east_polys_data)
-
-    cursor.execute('''DELETE FROM tbl_01_polys WHERE face = 'south' AND poly_x1 <= -0.4''')
-
-    conn.commit()
-    conn.close()
-
-def make_pos_x_polys(db_path):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute('''
-        select cube_id, poly_id, 
-                case when face = 'east' then 'west' else 'south' end as face,
-                -cube_x as cube_x, cube_y,
-                -poly_x1 as poly_x0, 
-                poly_y1 as poly_y0, 
-                -poly_x0 as poly_x1, 
-                poly_y0 as poly_y1, 
-                -poly_x3 as poly_x2, 
-                poly_y3 as poly_y2, 
-                -poly_x2 as poly_x3, 
-                poly_y2 as poly_y3, 
-                -poly_x1 as plot_x, 
-                poly_y1 as plot_y, 
-                dim_x, dim_y, 
-                r, g, b, mask_filename
-        from tbl_01_polys
-        where cube_x <> 0
-    ''')
-    pos_x_polys_data = cursor.fetchall()
-    cursor.executemany('''INSERT INTO tbl_01_polys (cube_id, poly_id, face, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, r, g, b, mask_filename)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', pos_x_polys_data)
-    conn.commit()
-    conn.close()
-
 def get_df(db_path):
     conn = sqlite3.connect(db_path)
     query = '''
@@ -230,57 +83,8 @@ def get_df(db_path):
 
     return df
 
-def scale_polys_to_screen(db_path, screen_width, screen_height):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute(f'''
-        UPDATE tbl_01_polys
-        SET
-            poly_x0 = CAST({screen_width} * poly_x0 + {screen_height} AS INTEGER), 
-            poly_y0 = CAST({screen_width} * poly_y0 + {screen_height/2} AS INTEGER), 
-            poly_x1 = CAST({screen_width} * poly_x1 + {screen_height} AS INTEGER), 
-            poly_y1 = CAST({screen_width} * poly_y1 + {screen_height/2} AS INTEGER), 
-            poly_x2 = CAST({screen_width} * poly_x2 + {screen_height} AS INTEGER), 
-            poly_y2 = CAST({screen_width} * poly_y2 + {screen_height/2} AS INTEGER), 
-            poly_x3 = CAST({screen_width} * poly_x3 + {screen_height} AS INTEGER), 
-            poly_y3 = CAST({screen_width} * poly_y3 + {screen_height/2} AS INTEGER), 
-            plot_x = CAST({screen_width} * plot_x + {screen_height} AS INTEGER), 
-            plot_y = CAST({screen_width} * plot_y + {screen_height/2} AS INTEGER), 
-            dim_x = CAST({screen_width} * dim_x AS INTEGER), 
-            dim_y = CAST({screen_width} * dim_y AS INTEGER)         
-    ''')
-    conn.commit()
-
-    # Additional updates for 'south' facing polys to close gaps
-    cursor.execute('''
-        UPDATE tbl_01_polys
-        SET
-            poly_x1 = poly_x1 + 1, 
-            poly_x2 = poly_x2 + 1,
-            poly_y2 = poly_y2 + 0, 
-            poly_y3 = poly_y3 + 0,
-            dim_x = dim_x +1,
-            dim_y = dim_y +0
-        WHERE face = 'south';
-    ''')
-    conn.commit()
-
-    cursor = conn.cursor()
-    cursor.execute('''
-        update tbl_01_polys
-        set plot_x = poly_x0, plot_y = case when poly_y0 < 0 then 0 else poly_y0 end,
-                dim_x = poly_x1 - poly_x0 + 1, dim_y = poly_y3 - poly_y0 + 1
-        where face = 'east';''')
-    conn.commit()
-    cursor.execute('''
-        update tbl_01_polys
-        set plot_x = poly_x0, plot_y = case when poly_y1 < 0 then 0 else poly_y1 end, 
-                dim_x = poly_x1 - poly_x0 + 1, dim_y = poly_y2 - poly_y1 + 1
-        where face = 'west';''')
-    conn.commit()
-    conn.close()
-
 def has_sufficient_opaque_scanlines(img, min_scanlines):
+    # return True
     width, height = img.size
     scanline_count = 0
     for x in range(width):
@@ -368,6 +172,42 @@ def make_mask_images(db_path, masks_directory, min_scanlines, screen_size):
 
     conn.commit()
 
+def limit_polygons_in_db(db_path, max_polys):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Retrieve all south polygons
+    cursor.execute('''
+        SELECT poly_id FROM tbl_01_polys WHERE face = 'south'
+    ''')
+    south_polys = cursor.fetchall()
+
+    # Retrieve east and west polygons
+    cursor.execute('''
+        SELECT poly_id, cube_y, ABS(cube_x) AS abs_cube_x 
+        FROM tbl_01_polys 
+        WHERE face IN ('east', 'west') 
+        ORDER BY cube_y, abs_cube_x DESC
+    ''')
+    east_west_polys = cursor.fetchall()
+
+    # Determine how many additional polygons can be included
+    remaining_slots = max_polys - len(south_polys)
+
+    # Select the top east/west polygons based on the remaining slots
+    selected_polys = south_polys + east_west_polys[:remaining_slots]
+
+    # Get the poly_ids of the selected polygons
+    selected_poly_ids = [poly[0] for poly in selected_polys]
+
+    # Delete polygons that are not in the selected list
+    cursor.execute(f'''
+        DELETE FROM tbl_01_polys WHERE poly_id NOT IN ({','.join(['?']*len(selected_poly_ids))})
+    ''', selected_poly_ids)
+
+    conn.commit()
+    conn.close()
+
 def update_ids(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -425,16 +265,239 @@ def create_view_qry_01_polys(db_path):
     conn.commit()
     conn.close()
 
-def make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance):
-    screen_width, screen_height = screen_size[0], screen_size[1]
-    make_south_polys(db_path, view_distance)
-    make_east_polys(db_path)
-    make_pos_x_polys(db_path)
-    scale_polys_to_screen(db_path, screen_width, screen_height)
+def plot_polygons(polygons):
+    fig, ax = plt.subplots()
+    for poly in polygons:
+        polygon = [
+            (poly['poly_x0'], poly['poly_y0']),
+            (poly['poly_x1'], poly['poly_y1']),
+            (poly['poly_x2'], poly['poly_y2']),
+            (poly['poly_x3'], poly['poly_y3'])
+        ]
+        plot_poly = plt.Polygon(polygon, closed=True, fill=None, edgecolor='r')
+        ax.add_patch(plot_poly)
+
+    ax.set_xlim(-100, 250)
+    ax.set_ylim(0, 150)
+    ax.set_aspect('equal', adjustable='box')
+    plt.title('Projected Polygons')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.grid(True)
+    plt.show()
+
+
+def make_tbl_01_polys_masks(db_path):
+    drop_table_sql = '''
+    DROP TABLE IF EXISTS tbl_01_polys
+    '''
+    create_table_sql = '''
+    CREATE TABLE IF NOT EXISTS tbl_01_polys (
+        cube_id INTEGER,
+        poly_id INTEGER,
+        face TEXT,
+        cube_x INTEGER,
+        cube_y INTEGER,
+        poly_x0 INTEGER,
+        poly_y0 INTEGER,
+        poly_x1 INTEGER,
+        poly_y1 INTEGER,
+        poly_x2 INTEGER,
+        poly_y2 INTEGER,
+        poly_x3 INTEGER,
+        poly_y3 INTEGER,
+        plot_x INTEGER,
+        plot_y INTEGER,
+        dim_x INTEGER,
+        dim_y INTEGER,
+    	r INTEGER,
+        g INTEGER,
+        b INTEGER,
+        mask_filename TEXT,
+        PRIMARY KEY (cube_x, cube_y, face)
+    )
+    '''
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute(drop_table_sql)
+    cursor.execute(create_table_sql)
+    conn.close()
+
+def projection_matrix(fov, aspect_ratio, near_plane, far_plane):
+    f = 1 / math.tan(math.radians(fov) / 2)
+    return [
+        [f / aspect_ratio, 0, 0, 0],
+        [0, f, 0, 0],
+        [0, 0, (far_plane + near_plane) / (near_plane - far_plane), (2 * far_plane * near_plane) / (near_plane - far_plane)],
+        [0, 0, -1, 0]
+    ]
+
+def cube_vertices(c, s): # center x,y,z coordinate, s = size
+    s /= 2
+    cx, cy, cz = c
+    return [
+        [cx - s, cy - s, cz - s], # west, south, bottom
+        [cx + s, cy - s, cz - s], # east, south, bottom
+        [cx + s, cy + s, cz - s], # east, north, bottom
+        [cx - s, cy + s, cz - s], # west, north, bottom
+        [cx - s, cy - s, cz + s], # west, south, top
+        [cx + s, cy - s, cz + s], # east, south, top
+        [cx + s, cy + s, cz + s], # east, north, top
+        [cx - s, cy + s, cz + s]  # west, north, top
+    ]
+
+def rotate_x(vertex, angle):
+    x, y, z = vertex
+    cos_theta = math.cos(angle)
+    sin_theta = math.sin(angle)
+    y_new = y * cos_theta - z * sin_theta
+    z_new = y * sin_theta + z * cos_theta
+    return [x, y_new, z_new]
+
+def project(vertex, proj_matrix, output_width, output_height):
+    x, y, z = vertex
+    matrix = proj_matrix
+    x_p = x * matrix[0][0] + y * matrix[1][0] + z * matrix[2][0] + matrix[3][0]
+    y_p = x * matrix[0][1] + y * matrix[1][1] + z * matrix[2][1] + matrix[3][1]
+    z_p = x * matrix[0][2] + y * matrix[1][2] + z * matrix[2][2] + matrix[3][2]
+    w_p = x * matrix[0][3] + y * matrix[1][3] + z * matrix[2][3] + matrix[3][3]
+
+    if w_p != 0:
+        x_p /= w_p
+        y_p /= w_p
+        z_p /= w_p
+
+    x_screen = int((1 - x_p) * output_width / 2)
+    y_screen = int((1 - y_p) * output_height / 2)
+    return [x_screen, y_screen, z_p]
+
+def generate_polygons(cube_center, cube_size, proj_matrix, output_width, output_height):
+    vertices = cube_vertices(cube_center, cube_size)
+    rotated_vertices = [rotate_x(v, math.radians(90)) for v in vertices]
+    projected_vertices = [project(v, proj_matrix, output_width, output_height) for v in rotated_vertices]
+
+    faces = [
+        # ordered by screen coordinates: top-left, top-right, bottom-right, bottom-left
+        {'name': 'south', 'indices': [4, 5, 1, 0]}, 
+        {'name': 'east', 'indices': [5, 6, 2, 1]},
+        {'name': 'west', 'indices': [7, 4, 0, 3]}
+    ]
+
+    polygons = []
+    for face in faces:
+        indices = face['indices']
+        face_vertices = [projected_vertices[i] for i in indices]
+        polygons.append({
+            'cube_id': 0,
+            'poly_id': 0,
+            'face': face['name'],
+            'cube_x': cube_center[0],
+            'cube_y': cube_center[1],
+            'poly_x0': face_vertices[0][0],
+            'poly_y0': face_vertices[0][1],
+            'poly_x1': face_vertices[1][0],
+            'poly_y1': face_vertices[1][1],
+            'poly_x2': face_vertices[2][0],
+            'poly_y2': face_vertices[2][1],
+            'poly_x3': face_vertices[3][0],
+            'poly_y3': face_vertices[3][1],
+            'plot_x': 0,
+            'plot_y': 0,
+            'dim_x': 0,
+            'dim_y': 0,
+            'r': 255,
+            'g': 255,
+            'b': 255,
+            'mask_filename': ''
+        })
+    return polygons
+
+def insert_polygons_into_db(db_path, polygons):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    for poly in polygons:
+        if (poly['face'] == 'east' and poly['cube_x'] < 0) or (poly['face'] == 'west' and poly['cube_x'] > 0) or (poly['face'] == 'south'):
+            cursor.execute('''
+                INSERT INTO tbl_01_polys (cube_id, poly_id, face, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, r, g, b, mask_filename)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            ''', (poly['cube_id'], poly['poly_id'], poly['face'], poly['cube_x'], poly['cube_y'], poly['poly_x0'], poly['poly_y0'], poly['poly_x1'], poly['poly_y1'], poly['poly_x2'], poly['poly_y2'], poly['poly_x3'], poly['poly_y3'], poly['plot_x'], poly['plot_y'], poly['dim_x'], poly['dim_y'], poly['r'], poly['g'], poly['b'], poly['mask_filename'])
+            )
+    
+    conn.commit()
+    conn.close()
+
+def scale_polys_to_screen(db_path, screen_width, screen_height):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Additional updates for 'south' facing polys to close gaps
+    cursor.execute('''
+        UPDATE tbl_01_polys
+        SET
+            poly_x1 = poly_x1 + 1, 
+            poly_x2 = poly_x2 + 1,
+            poly_y2 = poly_y2 + 0, 
+            poly_y3 = poly_y3 + 0,
+            dim_x = dim_x +1,
+            dim_y = dim_y +0
+        WHERE face = 'south';
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+        update tbl_01_polys
+        set plot_x = poly_x0, plot_y = poly_y0
+        where face = 'south';''')
+    conn.commit()
+
+    cursor.execute('''
+        update tbl_01_polys
+        set plot_x = poly_x0, plot_y = case when poly_y0 < 0 then 0 else poly_y0 end,
+                dim_x = poly_x1 - poly_x0 + 1, dim_y = poly_y3 - poly_y0 + 1
+        where face = 'east';''')
+    conn.commit()
+
+    cursor.execute('''
+        update tbl_01_polys
+        set plot_x = poly_x0, plot_y = case when poly_y1 < 0 then 0 else poly_y1 end, 
+                dim_x = poly_x1 - poly_x0 + 1, dim_y = poly_y2 - poly_y1 + 1
+        where face = 'west';''')
+    conn.commit()
+
+    conn.close()
+
+def find_points_in_sector(view_distance):
+    # points = [(x, y, 0) for y in range(0, view_distance + 1) for x in range(-y-1, 1) if not (x == 0 and y == 0)]
+    # points = [(x, y, 0) for y in range(2, view_distance + 1) for x in range(-y, 1) if not (x == 0 and y == 0)]
+    points = [(x,y,0) for y in range (1,view_distance+1) for x in range(-view_distance,view_distance+1) if not (x == 0 and y == 0)]
+    return points
+
+def make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance, cube_size, fov, aspect_ratio, near_plane, far_plane, max_polys):
+    screen_width, screen_height = screen_size
+    make_tbl_01_polys_masks(db_path)
+    cube_coords = find_points_in_sector(view_distance)
+    # print(f'cube_coords: {cube_coords}')
+
+    proj_matrix = projection_matrix(fov, aspect_ratio, near_plane, far_plane)
+    # print(f'proj_matrix: {proj_matrix}')
+
+    all_polygons = []
+    for coord in cube_coords:
+        polygons = generate_polygons(coord, cube_size, proj_matrix, screen_width, screen_height)
+        # print(f'Polygons for coord {coord}: {polygons}')  # Debugging line
+        all_polygons.extend(polygons)
+    # print(f'all_polygons: {all_polygons}')
+
+    insert_polygons_into_db(db_path, all_polygons)
+    print("Polygons inserted into the database.")
     update_ids(db_path)
     min_x, max_x, min_y, max_y = get_min_max_cube_coords(db_path)
     update_mask_colors(db_path, min_x, max_x, min_y, max_y)
     make_mask_images(db_path, masks_directory, min_scanlines, screen_size)
+    scale_polys_to_screen(db_path, screen_width, screen_height)
+    limit_polygons_in_db(db_path, max_polys)
+    update_ids(db_path)
     create_view_qry_01_polys(db_path)
 
 if __name__ == "__main__":
@@ -445,11 +508,19 @@ if __name__ == "__main__":
     view_distance = 5
     min_scanlines = 5
 
-    make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance)
+    aspect_ratio = 2
+    near_plane = 0.25
+    far_plane = 1000.0
+    fov = 90
+    # fov = 101.7
+    cube_size = 1
+    max_polys = 48
+
+    make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance, cube_size, fov, aspect_ratio, near_plane, far_plane, max_polys)
 
     df_polys = get_df(db_path)
     root = tk.Tk()
     root.title("Polygon Viewer")
-    root.geometry("800x440")  
+    root.geometry("800x480")  
     viewer = PolygonViewer(root, df_polys)
     root.mainloop()

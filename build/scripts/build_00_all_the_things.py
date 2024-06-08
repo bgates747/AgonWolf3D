@@ -41,11 +41,18 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
     # build_01_make_polys_masks.py
     masks_directory = "build/panels/masks"
-    min_scanlines = 2
+    min_scanlines = 5
+    cube_size = 1
+    fov = 90
+    # fov = 101.7
+    aspect_ratio = 2
+    near_plane = 0.25
+    far_plane = 1000.0
+    max_polys = 48
     if do_01_polys_masks:
         print(f"build_01_make_polys: Building polys and masks")
         from build_01_make_polys import make_polys_masks
-        make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance)
+        make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_distance, cube_size, fov, aspect_ratio, near_plane, far_plane, max_polys)
 
     # build_02_fetch_tiles.py
     src_tiles_path = 'src/mapmaker/tiles.txt'
@@ -213,22 +220,22 @@ if __name__ == "__main__":
     do_99_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    # do_00_delete_tgt_dir = True
-    # do_01_polys_masks = True
-    # do_02_fetch_tiles = True
-    # do_04_make_panels_png = True
-    # do_04a_make_dws_png = True
-    # do_05_panels_rgba = True
-    # do_06_import_mapmaker_files = True
-    # do_07_map_panels = True
-    # do_08_make_sfx = True
-    # do_90_asm_polys = True
-    # do_91_asm_img_load = True
-    # do_91a_asm_font = True
-    # do_91b_asm_ui = True
-    # do_91c_asm_map_masks = True
-    # do_91d_asm_ui_bj = True
-    # do_98_asm_sfx = True
+    do_00_delete_tgt_dir = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_08_make_sfx = True
+    do_90_asm_polys = True
+    do_91_asm_img_load = True
+    do_91a_asm_font = True
+    do_91b_asm_ui = True
+    do_91c_asm_map_masks = True
+    do_91d_asm_ui_bj = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
