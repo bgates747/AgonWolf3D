@@ -201,7 +201,11 @@ def limit_polygons_in_db(db_path, max_polys):
     cursor.execute('''
         SELECT poly_id
         FROM tbl_01_polys
-        ORDER BY cube_y, abs(cube_x) desc, case when face = 'south' then 1 else 0 end
+        -- ORDER BY cube_y, abs(cube_x), case when face = 'south' then 1 else 0 end
+        ORDER BY 
+            case when face = 'south' then 0 else 1 end, 
+            cube_y, abs(cube_x), 
+            case when face = 'south' then 1 else 0 end
         LIMIT ?
     ''', (max_polys,))
     selected_polys = cursor.fetchall()
