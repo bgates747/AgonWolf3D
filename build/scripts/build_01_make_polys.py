@@ -10,6 +10,7 @@ from tkinter import ttk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
+import io
 
 class PolygonViewer:
     def __init__(self, master, df):
@@ -83,7 +84,7 @@ def get_df(db_path):
 
     return df
 
-def has_sufficient_opaque_scanlines(img, min_scanlines):
+def has_scanlines(img, min_scanlines):
     # return True
     width, height = img.size
     scanline_count = 0
@@ -138,15 +139,11 @@ def update_mask_colors(db_path, min_x, max_x, min_y, max_y):
     conn.commit()
     conn.close()
 
-def make_mask_images(db_path, masks_directory, min_scanlines, screen_size):
-    if os.path.exists(masks_directory):
-        shutil.rmtree(masks_directory)
-    os.makedirs(masks_directory)
-
+def draw_masks(db_path, min_scanlines, screen_size):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, r, g, b, mask_filename 
+        SELECT poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3
         FROM tbl_01_polys
         WHERE face = 'south' or (face = 'west' and cube_x > 0) or (face = 'east' and cube_x < 0)
         ORDER BY poly_id
@@ -155,52 +152,60 @@ def make_mask_images(db_path, masks_directory, min_scanlines, screen_size):
 
     new_poly_id = 0 
     for record in records:
-        poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, r, g, b, mask_filename = record
-        mask_filename = f"{new_poly_id:03d}.png"
+        poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3 = record
         img = Image.new('RGBA', screen_size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
-        draw.polygon([(poly_x0, poly_y0), (poly_x1, poly_y1), (poly_x2, poly_y2), (poly_x3, poly_y3)], fill=(r, g, b, 255))
+        draw.polygon([(poly_x0, poly_y0), (poly_x1, poly_y1), (poly_x2, poly_y2), (poly_x3, poly_y3)], fill=(255, 255, 255, 255))
         
-        if has_sufficient_opaque_scanlines(img, min_scanlines):
-            img.save(os.path.join(masks_directory, mask_filename))
-            # Update the poly_id in the table
-            cursor.execute('UPDATE tbl_01_polys SET poly_id = ?, mask_filename = ? WHERE poly_id = ?', (new_poly_id, mask_filename, poly_id))
-            new_poly_id += 1  # Increment only if the image meets the criteria
+        if has_scanlines(img, min_scanlines):
+            cursor.execute('UPDATE tbl_01_polys SET poly_id = ? WHERE poly_id = ?', (new_poly_id, poly_id))
+            new_poly_id += 1
         else:
-            # Delete the record if it doesn't meet the criteria
             cursor.execute('DELETE FROM tbl_01_polys WHERE poly_id = ?', (poly_id,))
 
     conn.commit()
+    conn.close()
+
+
+def generate_mask_images(db_path, masks_directory, screen_size):
+    if os.path.exists(masks_directory):
+        shutil.rmtree(masks_directory)
+    os.makedirs(masks_directory)
+
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, r, g, b
+        FROM tbl_01_polys
+        ORDER BY poly_id
+    ''')
+    records = cursor.fetchall()
+
+    for record in records:
+        poly_id, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, r, g, b = record
+        mask_filename = f"{poly_id:03d}.png"
+        img = Image.new('RGBA', screen_size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        draw.polygon([(poly_x0, poly_y0), (poly_x1, poly_y1), (poly_x2, poly_y2), (poly_x3, poly_y3)], fill=(r, g, b, 255))
+        img.save(os.path.join(masks_directory, mask_filename))
+        
+        # Update the mask_filename in the table
+        cursor.execute('UPDATE tbl_01_polys SET mask_filename = ? WHERE poly_id = ?', (mask_filename, poly_id))
+
+    conn.commit()
+    conn.close()
 
 def limit_polygons_in_db(db_path, max_polys):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-
-    # Retrieve all south polygons
     cursor.execute('''
-        SELECT poly_id FROM tbl_01_polys WHERE face = 'south'
-    ''')
-    south_polys = cursor.fetchall()
-
-    # Retrieve east and west polygons
-    cursor.execute('''
-        SELECT poly_id, cube_y, ABS(cube_x) AS abs_cube_x 
-        FROM tbl_01_polys 
-        WHERE face IN ('east', 'west') 
-        ORDER BY cube_y, abs_cube_x DESC
-    ''')
-    east_west_polys = cursor.fetchall()
-
-    # Determine how many additional polygons can be included
-    remaining_slots = max_polys - len(south_polys)
-
-    # Select the top east/west polygons based on the remaining slots
-    selected_polys = south_polys + east_west_polys[:remaining_slots]
-
-    # Get the poly_ids of the selected polygons
+        SELECT poly_id
+        FROM tbl_01_polys
+        ORDER BY cube_y, abs(cube_x) desc, case when face = 'south' then 1 else 0 end
+        LIMIT ?
+    ''', (max_polys,))
+    selected_polys = cursor.fetchall()
     selected_poly_ids = [poly[0] for poly in selected_polys]
-
-    # Delete polygons that are not in the selected list
     cursor.execute(f'''
         DELETE FROM tbl_01_polys WHERE poly_id NOT IN ({','.join(['?']*len(selected_poly_ids))})
     ''', selected_poly_ids)
@@ -468,8 +473,6 @@ def scale_polys_to_screen(db_path, screen_width, screen_height):
     conn.close()
 
 def find_points_in_sector(view_distance):
-    # points = [(x, y, 0) for y in range(0, view_distance + 1) for x in range(-y-1, 1) if not (x == 0 and y == 0)]
-    # points = [(x, y, 0) for y in range(2, view_distance + 1) for x in range(-y, 1) if not (x == 0 and y == 0)]
     points = [(x,y,0) for y in range (1,view_distance+1) for x in range(-view_distance,view_distance+1) if not (x == 0 and y == 0)]
     return points
 
@@ -492,12 +495,13 @@ def make_polys_masks(db_path, masks_directory, min_scanlines, screen_size, view_
     insert_polygons_into_db(db_path, all_polygons)
     print("Polygons inserted into the database.")
     update_ids(db_path)
-    min_x, max_x, min_y, max_y = get_min_max_cube_coords(db_path)
-    update_mask_colors(db_path, min_x, max_x, min_y, max_y)
-    make_mask_images(db_path, masks_directory, min_scanlines, screen_size)
+    draw_masks(db_path, min_scanlines, screen_size)
     scale_polys_to_screen(db_path, screen_width, screen_height)
     limit_polygons_in_db(db_path, max_polys)
     update_ids(db_path)
+    min_x, max_x, min_y, max_y = get_min_max_cube_coords(db_path)
+    update_mask_colors(db_path, min_x, max_x, min_y, max_y)
+    generate_mask_images(db_path, masks_directory, screen_size)
     create_view_qry_01_polys(db_path)
 
 if __name__ == "__main__":

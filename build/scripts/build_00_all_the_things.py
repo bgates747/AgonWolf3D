@@ -30,7 +30,7 @@ def do_blender(blender_script_path, blender_executable, blender_local_prefs_path
     print(' '.join(cmd))
     subprocess.run(cmd, env=env_vars)
 
-def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums):
+def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums, min_scanlines, cube_size, fov, aspect_ratio, near_plane, far_plane, max_polys):
     # build_00_delete_tgt_dir.py
     if do_00_delete_tgt_dir:
         print(f"Deleting target directory: {tgt_dir}")
@@ -41,14 +41,6 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
     # build_01_make_polys_masks.py
     masks_directory = "build/panels/masks"
-    min_scanlines = 5
-    cube_size = 1
-    fov = 90
-    # fov = 101.7
-    aspect_ratio = 2
-    near_plane = 0.25
-    far_plane = 1000.0
-    max_polys = 48
     if do_01_polys_masks:
         print(f"build_01_make_polys: Building polys and masks")
         from build_01_make_polys import make_polys_masks
@@ -188,13 +180,6 @@ if __name__ == "__main__":
     # Set paths
     db_path = 'build/data/build.db' # Literally everything the app needs to build goes through this database
     tgt_dir = 'tgt' # This is where all the build artifacts go
-    map_dim_x, map_dim_y = 16, 16 # Don't mess with this
-    screen_size = (320,160) # you could could change this for giggles I guess
-    screen_width, screen_height = screen_size[0], screen_size[1]
-    view_distance = 5 # This you can fiddle with. A full build is required to see the results, and it pukes at around 11.
-
-    # Set which maps to build
-    floor_nums = list(range(1))
 
 # By default don't run any scripts
     do_00_delete_tgt_dir = False
@@ -238,7 +223,23 @@ if __name__ == "__main__":
     do_98_asm_sfx = True
     do_99_asm_assemble = True
 
-    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums)
+    map_dim_x, map_dim_y = 16, 16 # Don't mess with this
+    screen_size = (320,160) # you could could change this for giggles I guess
+    screen_width, screen_height = screen_size[0], screen_size[1]
+    view_distance = 5 # This you can fiddle with. A full build is required to see the results, and it pukes at around 11.
+    min_scanlines = 5
+    cube_size = 1
+    fov = 90
+    # fov = 101.7
+    aspect_ratio = 2
+    near_plane = 0.25
+    far_plane = 1000.0
+    max_polys = 48
+
+    # Set which maps to build
+    floor_nums = list(range(1))
+
+    do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance, screen_width, screen_height, tgt_dir, floor_nums, min_scanlines, cube_size, fov, aspect_ratio, near_plane, far_plane, max_polys)
 
     # # The Blender scripts for regular map development and deployment 
     # # have been deprecated and replaced with pure python scripts, 
