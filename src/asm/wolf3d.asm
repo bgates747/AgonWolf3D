@@ -60,6 +60,9 @@ on_emulator: defb "Running on emulator.\r\n",0
 on_hardware: defb "Running on hardware.\r\n",0
 
 init:
+; enable additional sound channels
+	call vdu_enable_channels
+	
 ; start generic stopwatch to time setup loop 
 ; so we can determine if we're running on emulator or hardware
 	call stopwatch_set
