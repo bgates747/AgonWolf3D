@@ -1,4 +1,5 @@
 last_channel: db 0
+max_channels: equ 4
 
 vdu_play_sfx:
 vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
@@ -9,7 +10,7 @@ vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
     ld a,(last_channel)
     inc a
     ; and 31 ; modulo 32
-    cp 3
+    cp max_channels
     jp nz,@load_channel
     xor a
 @load_channel:
@@ -38,6 +39,33 @@ vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
     .dw 0x0000                        ; duration
 @sample_end:
     .db 0x00 ; padding
+
+; enable enough additional channels so that total enabled = max_channels
+; inputs: max_channels set
+; returns: nothing
+; destroys: af, bc, hl
+vdu_enable_channels:
+    ld a,max_channels
+    sub 3 ; subtract number of default channels already enabled
+    jp p,@loop
+    ret
+    ld a,3 ; first non-default channel
+@loop:
+    ld (@channel),a
+    ld hl,@beg
+    ld bc,@end-@beg
+    push af
+    rst.lil $18
+    pop af
+    inc a
+    cp max_channels
+    jp nz,@loop
+    ret
+@beg:
+            db 23, 0, $85
+@channel:   db 0
+            db 8 ; command 8: enable channel
+@end:
 
 ; ############################################################
 ; VDU SOUND API
@@ -252,42 +280,3 @@ vdu_play_sample:
 @frequency:  dw 0x00 ; no effect unless buffer has been set to tuneable sample
 @duration:   dw 0x0000 ; milliseconds
 @end:        db 0x00 ; padding
-
-
-vdu_enable_channels:
-; enable all the channels
-    ld hl, enable_channels_cmd
-    ld bc, enable_channels_end - enable_channels_cmd
-    rst.lil $18
-    ret
-enable_channels_cmd:
-    db 23, 0, $85, 3, 8
-    db 23, 0, $85, 4, 8
-    db 23, 0, $85, 5, 8
-    db 23, 0, $85, 6, 8
-    db 23, 0, $85, 7, 8
-    db 23, 0, $85, 8, 8
-    db 23, 0, $85, 9, 8
-    db 23, 0, $85, 10, 8
-    db 23, 0, $85, 11, 8
-    db 23, 0, $85, 12, 8
-    db 23, 0, $85, 13, 8
-    db 23, 0, $85, 14, 8
-    db 23, 0, $85, 15, 8
-    db 23, 0, $85, 16, 8
-    db 23, 0, $85, 17, 8
-    db 23, 0, $85, 18, 8
-    db 23, 0, $85, 19, 8
-    db 23, 0, $85, 20, 8
-    db 23, 0, $85, 21, 8
-    db 23, 0, $85, 22, 8
-    db 23, 0, $85, 23, 8
-    db 23, 0, $85, 24, 8
-    db 23, 0, $85, 25, 8
-    db 23, 0, $85, 26, 8
-    db 23, 0, $85, 27, 8
-    db 23, 0, $85, 28, 8
-    db 23, 0, $85, 29, 8
-    db 23, 0, $85, 30, 8
-    db 23, 0, $85, 31, 8
-enable_channels_end:
