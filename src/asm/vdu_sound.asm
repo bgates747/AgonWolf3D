@@ -1,5 +1,5 @@
 last_channel: db 0
-max_channels: equ 4
+max_channels: equ 6
 
 vdu_play_sfx:
 vdu_play_sfx_disable: ret ; disabled by default, set to nop to enable
@@ -66,6 +66,34 @@ vdu_enable_channels:
 @channel:   db 0
             db 8 ; command 8: enable channel
 @end:
+
+; disable all but the three default sound channels
+; inputs: max_channels set
+; outputs: none
+; destroys: ah,hl,bc
+vdu_disable_channels:
+    ld a,max_channels
+    sub 3 ; subtract number of default channels already enabled
+    jp p,@loop
+    ret
+    ld a,3 ; first non-default channel
+@loop:
+    ld (@channel),a
+    ld hl,@beg
+    ld bc,@end-@beg
+    push af
+    rst.lil $18
+    pop af
+    inc a
+    cp max_channels
+    jp nz,@loop
+    ret
+@beg:
+    db 23, 0, $85
+@channel: db 0
+    db 9 ; command 9: disable channel
+@end:
+
 
 ; ############################################################
 ; VDU SOUND API

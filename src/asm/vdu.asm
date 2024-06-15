@@ -1600,3 +1600,14 @@ vdu_load_sfx:
 ;     pop hl ; bufferId
 ;     call vdu_play_sample
     ret
+
+vdu_clear_all_buffers:
+; clear all buffers
+    ld hl,@beg
+    ld bc,@end-@beg
+    rst.lil $18
+    ret
+@beg: db 23,0,$A0
+      dw -1 ; clear all buffers
+      db 2  ; command 2: clear a buffer
+@end:

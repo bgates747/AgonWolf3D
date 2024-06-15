@@ -60,6 +60,15 @@ on_emulator: defb "Running on emulator.\r\n",0
 on_hardware: defb "Running on hardware.\r\n",0
 
 init:
+; clear all buffers
+    call vdu_clear_all_buffers
+
+; set up the display
+    ld a,8+128 ; 320x240x64 double-buffered
+    call vdu_set_screen_mode
+    xor a
+    call vdu_set_scaling
+	
 ; start generic stopwatch to time setup loop 
 ; so we can determine if we're running on emulator or hardware
 	call stopwatch_set
@@ -67,6 +76,9 @@ init:
 ; initialize global timestamp
     ld hl,(ix+sysvar_time) ; ix was set by stopwatch_start
     ld (timestamp_now),hl
+
+; enable additional audio channels
+	call vdu_enable_channels
 
 ; set the cursor off
 	call cursor_off
@@ -82,12 +94,6 @@ init:
 ; load UI images
 	call load_ui_images
 	call load_ui_images_bj
-
-; set up the display
-    ld a,8+128 ; 320x240x64 double-buffered
-    call vdu_set_screen_mode
-    xor a
-    call vdu_set_scaling
 
 ; set text background color
 	ld a,4 + 128
@@ -269,6 +275,10 @@ main_loop:
 
 main_end:
 	; call do_outro
+
+        call vdu_clear_all_buffers
+	call vdu_disable_channels
+
 ; restore screen to something normalish
 	xor a
 	call vdu_set_screen_mode
