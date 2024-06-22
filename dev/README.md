@@ -1,0 +1,1 @@
+This folder is the place for individual developers to do their scratchwork before promoting to the main branch, or to keep their own scripts to suit their particlar needs, etc. It can be structured however one wishes.

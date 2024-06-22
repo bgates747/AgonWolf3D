@@ -10,16 +10,16 @@ flicker/
 .python
 .vscode
 
-# Ignore everything in the 'dev' directory
-dev/*
+# # Ignore everything in the 'dev' directory
+# dev/*
 
 # Ignore all directories and their contents named archive
 **/archive/
 
-# Ignore everything in 'build' except 'data', and 'scripts'
-build/*
-!build/data/
-!build/scripts/
+# # Ignore everything in 'build' except 'data', and 'scripts'
+# build/*
+# !build/data/
+# !build/scripts/
 
 # Ignore everything in 'src/agon_api' except for the 'asm' directory
 src/agon_api/*

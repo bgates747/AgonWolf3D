@@ -1,0 +1,513 @@
+floor_num	room_id	cell_id	map_x	map_y	obj_id	n	e	s	w	bank_id	tile_name	is_active	is_door	is_wall	is_trigger	is_blocking	render_type	render_as	scale	special	notes
+1	0	0	0	0	19	-1	1	16	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	1	0	1	19	0	2	17	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	2	0	2	19	1	3	18	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	3	0	3	12	2	4	19	-1	1	STONE ARCH BIRD	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	4	0	4	29	3	5	20	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	5	0	5	29	4	6	21	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	6	0	6	29	5	7	22	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	7	0	7	29	6	8	23	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	8	0	8	29	7	9	24	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	9	0	9	10	8	10	25	-1	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	10	0	10	29	9	11	26	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	11	0	11	29	10	12	27	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	12	0	12	29	11	13	28	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	13	0	13	29	12	14	29	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	14	0	14	28	13	15	30	-1	2	BJ 100%/ START POSITION	1	0.0	0.0	0.0	0.0	ui			start	
+1	0	15	0	15	10	14	-1	31	-1	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	16	1	0	19	-1	17	32	0	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	17	1	1	19	16	18	33	1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	18	1	2	19	17	19	34	2	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	19	1	3	15	18	20	35	3	1	HANGING FLAG	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	20	1	4	29	19	21	36	4	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	21	1	5	41	20	22	37	5	4	GOLD CHALISE	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	22	1	6	29	21	23	38	6	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	23	1	7	42	22	24	39	7	4	GOLD CROSS	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	24	1	8	29	23	25	40	8	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	25	1	9	57	24	26	41	9	5	REGULAR DOOR	1	1.0	0.0	0.0	1.0	cube		100.0		
+1	0	26	1	10	29	25	27	42	10	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	27	1	11	45	26	28	43	11	4	GOLD CHEST	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	28	1	12	29	27	29	44	12	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	29	1	13	46	28	30	45	13	4	MACHINE GUN	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	30	1	14	29	29	31	46	14	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	31	1	15	10	30	-1	47	15	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	32	2	0	19	-1	33	48	16	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	33	2	1	19	32	34	49	17	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	34	2	2	19	33	35	50	18	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	35	2	3	31	34	36	51	19	3	DOOR TO ROOM 1	1	0.0	0.0	1.0	1.0	cube	57.0	100.0	to room	
+1	0	36	2	4	29	35	37	52	20	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	37	2	5	29	36	38	53	21	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	38	2	6	23	37	39	54	22	2	OVERHEAD LIGHT	1	0.0	0.0	0.0	0.0	sprite		100.0		
+1	0	39	2	7	29	38	40	55	23	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	40	2	8	29	39	41	56	24	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	41	2	9	17	40	42	57	25	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	42	2	10	29	41	43	58	26	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	43	2	11	29	42	44	59	27	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	44	2	12	20	43	45	60	28	2	LAMP	1	0.0	1.0	0.0	0.0	sprite		100.0		
+1	0	45	2	13	29	44	46	61	29	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	46	2	14	29	45	47	62	30	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	47	2	15	10	46	-1	63	31	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	48	3	0	19	-1	49	64	32	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	49	3	1	19	48	50	65	33	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	50	3	2	19	49	51	66	34	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	51	3	3	16	50	52	67	35	1	WOOD EAGLE	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	52	3	4	29	51	53	68	36	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	53	3	5	40	52	54	69	37	4	HEALTH PACK	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	54	3	6	29	53	55	70	38	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	55	3	7	43	54	56	71	39	4	PLATE OF FOOD	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	56	3	8	29	55	57	72	40	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	57	3	9	16	56	58	73	41	1	WOOD EAGLE	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	58	3	10	29	57	59	74	42	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	59	3	11	44	58	60	75	43	4	KEYCARD	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	60	3	12	29	59	61	76	44	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	61	3	13	47	60	62	77	45	4	GATLING GUN	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	62	3	14	29	61	63	78	46	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	63	3	15	10	62	-1	79	47	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	64	4	0	19	-1	65	80	48	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	65	4	1	19	64	66	81	49	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	66	4	2	19	65	67	82	50	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	67	4	3	14	66	68	83	51	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	68	4	4	21	67	69	84	52	2	BARREL	1	0.0	1.0	0.0	0.0	sprite		100.0		
+1	0	69	4	5	24	68	70	85	53	2	RADIOACTIVE BARREL	1	0.0	1.0	0.0	0.0	sprite		100.0		
+1	0	70	4	6	29	69	71	86	54	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	71	4	7	29	70	72	87	55	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	72	4	8	29	71	73	88	56	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	73	4	9	15	72	74	89	57	1	HANGING FLAG	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	74	4	10	48	73	75	90	58	4	DOG FOOD	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	75	4	11	49	74	76	91	59	4	GOLD KEY	1	0.0	0.0	1.0	0.0	sprite		50.0		
+1	0	76	4	12	29	75	77	92	60	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	77	4	13	29	76	78	93	61	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	78	4	14	29	77	79	94	62	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	0	79	4	15	10	78	-1	95	63	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	80	5	0	19	-1	81	96	64	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	81	5	1	19	80	82	97	65	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	82	5	2	19	81	83	98	66	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	83	5	3	19	82	84	99	67	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	84	5	4	14	83	85	100	68	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	85	5	5	14	84	86	101	69	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	86	5	6	16	85	87	102	70	1	WOOD EAGLE	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	87	5	7	15	86	88	103	71	1	HANGING FLAG	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	88	5	8	14	87	89	104	72	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	89	5	9	19	88	90	105	73	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	90	5	10	14	89	91	106	74	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	91	5	11	13	90	92	107	75	1	DARK GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	92	5	12	12	91	93	108	76	1	STONE ARCH BIRD	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	93	5	13	11	92	94	109	77	1	CELL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	0	94	5	14	10	93	95	110	78	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	95	5	15	10	94	-1	111	79	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	96	6	0	19	-1	97	112	80	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	97	6	1	19	96	98	113	81	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	98	6	2	19	97	99	114	82	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	99	6	3	19	98	100	115	83	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	100	6	4	19	99	101	116	84	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	101	6	5	19	100	102	117	85	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	102	6	6	19	101	103	118	86	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	103	6	7	19	102	104	119	87	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	104	6	8	19	103	105	120	88	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	105	6	9	19	104	106	121	89	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	106	6	10	19	105	107	122	90	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	107	6	11	19	106	108	123	91	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	108	6	12	19	107	109	124	92	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	109	6	13	19	108	110	125	93	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	110	6	14	19	109	111	126	94	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	111	6	15	10	110	-1	127	95	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	112	7	0	19	-1	113	128	96	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	113	7	1	19	112	114	129	97	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	114	7	2	19	113	115	130	98	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	115	7	3	19	114	116	131	99	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	116	7	4	19	115	117	132	100	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	117	7	5	19	116	118	133	101	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	118	7	6	19	117	119	134	102	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	119	7	7	19	118	120	135	103	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	120	7	8	19	119	121	136	104	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	121	7	9	19	120	122	137	105	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	122	7	10	19	121	123	138	106	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	123	7	11	19	122	124	139	107	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	124	7	12	19	123	125	140	108	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	125	7	13	19	124	126	141	109	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	126	7	14	19	125	127	142	110	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	127	7	15	10	126	-1	143	111	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	128	8	0	19	-1	129	144	112	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	129	8	1	19	128	130	145	113	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	130	8	2	19	129	131	146	114	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	131	8	3	19	130	132	147	115	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	132	8	4	19	131	133	148	116	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	133	8	5	19	132	134	149	117	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	134	8	6	19	133	135	150	118	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	135	8	7	19	134	136	151	119	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	136	8	8	19	135	137	152	120	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	137	8	9	19	136	138	153	121	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	138	8	10	19	137	139	154	122	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	139	8	11	19	138	140	155	123	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	140	8	12	19	139	141	156	124	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	141	8	13	19	140	142	157	125	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	142	8	14	19	141	143	158	126	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	143	8	15	10	142	-1	159	127	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	144	9	0	19	-1	145	160	128	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	145	9	1	19	144	146	161	129	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	146	9	2	19	145	147	162	130	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	147	9	3	19	146	148	163	131	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	148	9	4	19	147	149	164	132	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	149	9	5	19	148	150	165	133	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	150	9	6	19	149	151	166	134	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	151	9	7	19	150	152	167	135	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	152	9	8	19	151	153	168	136	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	153	9	9	19	152	154	169	137	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	154	9	10	19	153	155	170	138	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	155	9	11	19	154	156	171	139	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	156	9	12	19	155	157	172	140	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	157	9	13	19	156	158	173	141	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	158	9	14	19	157	159	174	142	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	159	9	15	10	158	-1	175	143	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	160	10	0	19	-1	161	176	144	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	161	10	1	19	160	162	177	145	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	162	10	2	19	161	163	178	146	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	163	10	3	19	162	164	179	147	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	164	10	4	19	163	165	180	148	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	165	10	5	19	164	166	181	149	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	166	10	6	19	165	167	182	150	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	167	10	7	19	166	168	183	151	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	168	10	8	19	167	169	184	152	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	169	10	9	19	168	170	185	153	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	170	10	10	19	169	171	186	154	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	171	10	11	19	170	172	187	155	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	172	10	12	19	171	173	188	156	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	173	10	13	19	172	174	189	157	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	174	10	14	19	173	175	190	158	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	175	10	15	10	174	-1	191	159	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	176	11	0	19	-1	177	192	160	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	177	11	1	19	176	178	193	161	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	178	11	2	19	177	179	194	162	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	179	11	3	19	178	180	195	163	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	180	11	4	19	179	181	196	164	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	181	11	5	19	180	182	197	165	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	182	11	6	19	181	183	198	166	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	183	11	7	19	182	184	199	167	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	184	11	8	19	183	185	200	168	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	185	11	9	19	184	186	201	169	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	186	11	10	19	185	187	202	170	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	187	11	11	19	186	188	203	171	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	188	11	12	19	187	189	204	172	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	189	11	13	19	188	190	205	173	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	190	11	14	19	189	191	206	174	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	191	11	15	10	190	-1	207	175	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	192	12	0	19	-1	193	208	176	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	193	12	1	19	192	194	209	177	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	194	12	2	19	193	195	210	178	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	195	12	3	19	194	196	211	179	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	196	12	4	19	195	197	212	180	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	197	12	5	19	196	198	213	181	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	198	12	6	19	197	199	214	182	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	199	12	7	19	198	200	215	183	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	200	12	8	19	199	201	216	184	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	201	12	9	19	200	202	217	185	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	202	12	10	19	201	203	218	186	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	203	12	11	19	202	204	219	187	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	204	12	12	19	203	205	220	188	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	205	12	13	19	204	206	221	189	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	206	12	14	19	205	207	222	190	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	207	12	15	10	206	-1	223	191	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	208	13	0	19	-1	209	224	192	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	209	13	1	19	208	210	225	193	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	210	13	2	19	209	211	226	194	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	211	13	3	19	210	212	227	195	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	212	13	4	19	211	213	228	196	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	213	13	5	19	212	214	229	197	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	214	13	6	19	213	215	230	198	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	215	13	7	19	214	216	231	199	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	216	13	8	19	215	217	232	200	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	217	13	9	19	216	218	233	201	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	218	13	10	19	217	219	234	202	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	219	13	11	19	218	220	235	203	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	220	13	12	19	219	221	236	204	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	221	13	13	19	220	222	237	205	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	222	13	14	19	221	223	238	206	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	223	13	15	10	222	-1	239	207	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	224	14	0	19	-1	225	240	208	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	225	14	1	19	224	226	241	209	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	226	14	2	19	225	227	242	210	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	227	14	3	19	226	228	243	211	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	228	14	4	19	227	229	244	212	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	229	14	5	19	228	230	245	213	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	230	14	6	19	229	231	246	214	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	231	14	7	19	230	232	247	215	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	232	14	8	19	231	233	248	216	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	233	14	9	19	232	234	249	217	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	234	14	10	19	233	235	250	218	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	235	14	11	19	234	236	251	219	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	236	14	12	19	235	237	252	220	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	237	14	13	19	236	238	253	221	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	238	14	14	19	237	239	254	222	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	0	239	14	15	10	238	-1	255	223	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	240	15	0	10	-1	241	-1	224	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	241	15	1	10	240	242	-1	225	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	242	15	2	10	241	243	-1	226	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	243	15	3	10	242	244	-1	227	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	244	15	4	10	243	245	-1	228	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	245	15	5	10	244	246	-1	229	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	246	15	6	10	245	247	-1	230	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	247	15	7	10	246	248	-1	231	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	248	15	8	10	247	249	-1	232	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	249	15	9	10	248	250	-1	233	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	250	15	10	10	249	251	-1	234	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	251	15	11	10	250	252	-1	235	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	252	15	12	10	251	253	-1	236	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	253	15	13	10	252	254	-1	237	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	254	15	14	10	253	255	-1	238	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	0	255	15	15	10	254	-1	-1	239	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	0	0	0	19	-1	1	16	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	1	0	1	19	0	2	17	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	2	0	2	19	1	3	18	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	3	0	3	19	2	4	19	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	4	0	4	19	3	5	20	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	5	0	5	19	4	6	21	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	6	0	6	19	5	7	22	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	7	0	7	19	6	8	23	-1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	8	0	8	17	7	9	24	-1	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	9	0	9	29	8	10	25	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	10	0	10	29	9	11	26	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	11	0	11	29	10	12	27	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	12	0	12	29	11	13	28	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	13	0	13	29	12	14	29	-1	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	14	0	14	10	13	15	30	-1	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	15	0	15	10	14	-1	31	-1	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	16	1	0	19	-1	17	32	0	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	17	1	1	19	16	18	33	1	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	18	1	2	19	17	19	34	2	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	19	1	3	19	18	20	35	3	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	20	1	4	19	19	21	36	4	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	21	1	5	19	20	22	37	5	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	22	1	6	19	21	23	38	6	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	23	1	7	19	22	24	39	7	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	24	1	8	10	23	25	40	8	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	25	1	9	29	24	26	41	9	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	26	1	10	29	25	27	42	10	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	27	1	11	29	26	28	43	11	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	28	1	12	29	27	29	44	12	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	29	1	13	29	28	30	45	13	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	30	1	14	30	29	31	46	14	3	DOOR TO ROOM 0	1	0.0	0.0	1.0	1.0	cube	57.0	100.0	to room	
+1	1	31	1	15	10	30	-1	47	15	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	32	2	0	19	-1	33	48	16	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	33	2	1	19	32	34	49	17	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	34	2	2	19	33	35	50	18	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	35	2	3	14	34	36	51	19	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	36	2	4	14	35	37	52	20	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	37	2	5	19	36	38	53	21	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	38	2	6	17	37	39	54	22	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	39	2	7	10	38	40	55	23	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	40	2	8	17	39	41	56	24	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	41	2	9	29	40	42	57	25	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	42	2	10	29	41	43	58	26	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	43	2	11	29	42	44	59	27	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	44	2	12	29	43	45	60	28	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	45	2	13	29	44	46	61	29	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	46	2	14	10	45	47	62	30	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	47	2	15	10	46	-1	63	31	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	48	3	0	19	-1	49	64	32	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	49	3	1	19	48	50	65	33	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	50	3	2	59	49	51	66	34	5	ELEVATOR SWITCH	1	0.0	1.0	1.0	1.0	cube		100.0	elevator	
+1	1	51	3	3	29	50	52	67	35	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	52	3	4	29	51	53	68	36	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	53	3	5	58	52	54	69	37	5	ELEVATOR DOOR	1	1.0	0.0	0.0	1.0	cube		100.0		
+1	1	54	3	6	29	53	55	70	38	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	55	3	7	29	54	56	71	39	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	56	3	8	57	55	57	72	40	5	REGULAR DOOR	1	1.0	0.0	0.0	1.0	cube		100.0		
+1	1	57	3	9	29	56	58	73	41	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	58	3	10	29	57	59	74	42	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	59	3	11	29	58	60	75	43	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	60	3	12	29	59	61	76	44	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	61	3	13	29	60	62	77	45	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	62	3	14	17	61	63	78	46	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	63	3	15	10	62	-1	79	47	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	64	4	0	19	-1	65	80	48	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	65	4	1	19	64	66	81	49	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	66	4	2	19	65	67	82	50	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	67	4	3	14	66	68	83	51	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	68	4	4	14	67	69	84	52	1	WOOD WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	69	4	5	19	68	70	85	53	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	70	4	6	17	69	71	86	54	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	71	4	7	10	70	72	87	55	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	72	4	8	17	71	73	88	56	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	73	4	9	29	72	74	89	57	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	74	4	10	29	73	75	90	58	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	75	4	11	29	74	76	91	59	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	76	4	12	29	75	77	92	60	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	77	4	13	29	76	78	93	61	2	GREY FLOOR	1	0.0	0.0	0.0	0.0	floor		100.0		
+1	1	78	4	14	10	77	79	94	62	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	79	4	15	10	78	-1	95	63	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	80	5	0	19	-1	81	96	64	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	81	5	1	19	80	82	97	65	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	82	5	2	19	81	83	98	66	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	83	5	3	19	82	84	99	67	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	84	5	4	19	83	85	100	68	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	85	5	5	19	84	86	101	69	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	86	5	6	19	85	87	102	70	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	87	5	7	19	86	88	103	71	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	88	5	8	19	87	89	104	72	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	89	5	9	17	88	90	105	73	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	90	5	10	10	89	91	106	74	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	91	5	11	17	90	92	107	75	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	92	5	12	10	91	93	108	76	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	93	5	13	17	92	94	109	77	1	BLUE WALL	1	0.0	1.0	0.0	1.0	cube		100.0		
+1	1	94	5	14	19	93	95	110	78	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	95	5	15	10	94	-1	111	79	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	96	6	0	19	-1	97	112	80	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	97	6	1	19	96	98	113	81	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	98	6	2	19	97	99	114	82	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	99	6	3	19	98	100	115	83	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	100	6	4	19	99	101	116	84	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	101	6	5	19	100	102	117	85	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	102	6	6	19	101	103	118	86	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	103	6	7	19	102	104	119	87	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	104	6	8	19	103	105	120	88	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	105	6	9	19	104	106	121	89	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	106	6	10	19	105	107	122	90	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	107	6	11	19	106	108	123	91	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	108	6	12	19	107	109	124	92	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	109	6	13	19	108	110	125	93	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	110	6	14	19	109	111	126	94	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	111	6	15	10	110	-1	127	95	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	112	7	0	19	-1	113	128	96	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	113	7	1	19	112	114	129	97	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	114	7	2	19	113	115	130	98	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	115	7	3	19	114	116	131	99	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	116	7	4	19	115	117	132	100	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	117	7	5	19	116	118	133	101	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	118	7	6	19	117	119	134	102	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	119	7	7	19	118	120	135	103	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	120	7	8	19	119	121	136	104	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	121	7	9	19	120	122	137	105	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	122	7	10	19	121	123	138	106	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	123	7	11	19	122	124	139	107	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	124	7	12	19	123	125	140	108	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	125	7	13	19	124	126	141	109	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	126	7	14	19	125	127	142	110	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	127	7	15	10	126	-1	143	111	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	128	8	0	19	-1	129	144	112	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	129	8	1	19	128	130	145	113	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	130	8	2	19	129	131	146	114	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	131	8	3	19	130	132	147	115	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	132	8	4	19	131	133	148	116	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	133	8	5	19	132	134	149	117	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	134	8	6	19	133	135	150	118	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	135	8	7	19	134	136	151	119	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	136	8	8	19	135	137	152	120	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	137	8	9	19	136	138	153	121	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	138	8	10	19	137	139	154	122	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	139	8	11	19	138	140	155	123	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	140	8	12	19	139	141	156	124	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	141	8	13	19	140	142	157	125	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	142	8	14	19	141	143	158	126	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	143	8	15	10	142	-1	159	127	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	144	9	0	19	-1	145	160	128	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	145	9	1	19	144	146	161	129	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	146	9	2	19	145	147	162	130	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	147	9	3	19	146	148	163	131	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	148	9	4	19	147	149	164	132	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	149	9	5	19	148	150	165	133	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	150	9	6	19	149	151	166	134	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	151	9	7	19	150	152	167	135	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	152	9	8	19	151	153	168	136	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	153	9	9	19	152	154	169	137	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	154	9	10	19	153	155	170	138	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	155	9	11	19	154	156	171	139	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	156	9	12	19	155	157	172	140	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	157	9	13	19	156	158	173	141	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	158	9	14	19	157	159	174	142	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	159	9	15	10	158	-1	175	143	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	160	10	0	19	-1	161	176	144	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	161	10	1	19	160	162	177	145	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	162	10	2	19	161	163	178	146	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	163	10	3	19	162	164	179	147	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	164	10	4	19	163	165	180	148	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	165	10	5	19	164	166	181	149	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	166	10	6	19	165	167	182	150	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	167	10	7	19	166	168	183	151	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	168	10	8	19	167	169	184	152	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	169	10	9	19	168	170	185	153	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	170	10	10	19	169	171	186	154	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	171	10	11	19	170	172	187	155	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	172	10	12	19	171	173	188	156	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	173	10	13	19	172	174	189	157	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	174	10	14	19	173	175	190	158	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	175	10	15	10	174	-1	191	159	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	176	11	0	19	-1	177	192	160	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	177	11	1	19	176	178	193	161	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	178	11	2	19	177	179	194	162	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	179	11	3	19	178	180	195	163	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	180	11	4	19	179	181	196	164	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	181	11	5	19	180	182	197	165	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	182	11	6	19	181	183	198	166	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	183	11	7	19	182	184	199	167	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	184	11	8	19	183	185	200	168	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	185	11	9	19	184	186	201	169	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	186	11	10	19	185	187	202	170	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	187	11	11	19	186	188	203	171	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	188	11	12	19	187	189	204	172	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	189	11	13	19	188	190	205	173	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	190	11	14	19	189	191	206	174	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	191	11	15	10	190	-1	207	175	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	192	12	0	19	-1	193	208	176	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	193	12	1	19	192	194	209	177	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	194	12	2	19	193	195	210	178	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	195	12	3	19	194	196	211	179	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	196	12	4	19	195	197	212	180	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	197	12	5	19	196	198	213	181	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	198	12	6	19	197	199	214	182	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	199	12	7	19	198	200	215	183	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	200	12	8	19	199	201	216	184	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	201	12	9	19	200	202	217	185	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	202	12	10	19	201	203	218	186	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	203	12	11	19	202	204	219	187	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	204	12	12	19	203	205	220	188	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	205	12	13	19	204	206	221	189	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	206	12	14	19	205	207	222	190	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	207	12	15	10	206	-1	223	191	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	208	13	0	19	-1	209	224	192	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	209	13	1	19	208	210	225	193	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	210	13	2	19	209	211	226	194	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	211	13	3	19	210	212	227	195	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	212	13	4	19	211	213	228	196	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	213	13	5	19	212	214	229	197	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	214	13	6	19	213	215	230	198	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	215	13	7	19	214	216	231	199	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	216	13	8	19	215	217	232	200	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	217	13	9	19	216	218	233	201	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	218	13	10	19	217	219	234	202	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	219	13	11	19	218	220	235	203	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	220	13	12	19	219	221	236	204	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	221	13	13	19	220	222	237	205	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	222	13	14	19	221	223	238	206	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	223	13	15	10	222	-1	239	207	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	224	14	0	19	-1	225	240	208	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	225	14	1	19	224	226	241	209	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	226	14	2	19	225	227	242	210	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	227	14	3	19	226	228	243	211	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	228	14	4	19	227	229	244	212	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	229	14	5	19	228	230	245	213	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	230	14	6	19	229	231	246	214	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	231	14	7	19	230	232	247	215	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	232	14	8	19	231	233	248	216	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	233	14	9	19	232	234	249	217	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	234	14	10	19	233	235	250	218	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	235	14	11	19	234	236	251	219	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	236	14	12	19	235	237	252	220	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	237	14	13	19	236	238	253	221	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	238	14	14	19	237	239	254	222	1	NULL CELL	1	0.0	0.0	0.0	0.0	none			nul	completely empty map cells
+1	1	239	14	15	10	238	-1	255	223	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	240	15	0	10	-1	241	-1	224	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	241	15	1	10	240	242	-1	225	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	242	15	2	10	241	243	-1	226	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	243	15	3	10	242	244	-1	227	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	244	15	4	10	243	245	-1	228	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	245	15	5	10	244	246	-1	229	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	246	15	6	10	245	247	-1	230	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	247	15	7	10	246	248	-1	231	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	248	15	8	10	247	249	-1	232	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	249	15	9	10	248	250	-1	233	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	250	15	10	10	249	251	-1	234	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	251	15	11	10	250	252	-1	235	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	252	15	12	10	251	253	-1	236	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	253	15	13	10	252	254	-1	237	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	254	15	14	10	253	255	-1	238	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
+1	1	255	15	15	10	254	-1	-1	239	1	LIGHT GREY WALL	1	0.0	1.0	0.0	1.0	cube		100.0	outer	the default wall texture on the outer edges of the map
