@@ -24,260 +24,261 @@ PC     Output      Line
 040044 01          0009       .db 01h
 040045             0010   
 040045             0011   	include "src/asm/mos_api.asm" ; wants to be first include b/c it has macros
-040045             0001*  ; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/mos_api.asm
-040045             0002*  ; Title:	AGON MOS - API for user projects
-040045             0003*  ; Author:	Dean Belfield
-040045             0004*  ;			Adapted for agon-ez80asm by Jeroen Venema
-040045             0005*  ;			Added MOS error codes for return in HL
-040045             0006*  ; Created:	03/08/2022
-040045             0007*  ; Last Updated:	10/08/2023
-040045             0008*  ;
-040045             0009*  ; Modinfo:
-040045             0010*  ; 05/08/2022:	Added mos_feof
-040045             0011*  ; 09/08/2022:	Added system variables: cursorX, cursorY
-040045             0012*  ; 18/08/2022:	Added system variables: scrchar, scrpixel, audioChannel, audioSuccess, vpd_pflags
-040045             0013*  ; 05/09/2022:	Added mos_ren, vdp_pflag_mode
-040045             0014*  ; 24/09/2022:	Added mos_getError, mos_mkdir
-040045             0015*  ; 13/10/2022:	Added mos_oscli
-040045             0016*  ; 23/02/2023:	Added more sysvars, fixed typo in sysvar_audioSuccess, offsets for sysvar_scrCols, sysvar_scrRows
-040045             0017*  ; 04/03/2023:	Added sysvar_scrpixelIndex
-040045             0018*  ; 08/03/2023:	Renamed sysvar_keycode to sysvar_keyascii, added sysvar_vkeycode
-040045             0019*  ; 15/03/2023:	Added mos_copy, mos_getrtc, mos_setrtc, rtc, vdp_pflag_rtc
-040045             0020*  ; 21/03/2023:	Added mos_setintvector, sysvars for keyboard status, vdu codes for vdp
-040045             0021*  ; 22/03/2023:	The VDP commands are now indexed from 0x80
-040045             0022*  ; 29/03/2023:	Added mos_uopen, mos_uclose, mos_ugetc, mos_uputc
-040045             0023*  ; 13/04/2023:	Added FatFS file structures (FFOBJID, FIL, DIR, FILINFO)
-040045             0024*  ; 15/04/2023:	Added mos_getfil, mos_fread, mos_fwrite and mos_flseek
-040045             0025*  ; 19/05/2023:	Added sysvar_scrMode
-040045             0026*  ; 05/06/2023:	Added sysvar_rtcEnable
-040045             0027*  ; 03/08/2023:	Added mos_setkbvector
-040045             0028*  ; 10/08/2023:	Added mos_getkbmap
-040045             0029*  
-040045             0030*  ; VDP control (VDU 23, 0, n)
-040045             0031*  ;
-040045             0032*  vdp_gp:				EQU 80h
-040045             0033*  vdp_keycode:		EQU 81h
-040045             0034*  vdp_cursor:			EQU	82h
-040045             0035*  vdp_scrchar:		EQU	83h
-040045             0036*  vdp_scrpixel:		EQU	84h
-040045             0037*  vdp_audio:			EQU	85h
-040045             0038*  vdp_mode:			EQU	86h
-040045             0039*  vdp_rtc:			EQU	87h
-040045             0040*  vdp_keystate:		EQU	88h
-040045             0041*  vdp_logicalcoords:	EQU	C0h
-040045             0042*  vdp_terminalmode:	EQU	FFh
-040045             0043*  
-040045             0044*  ; MOS high level functions
-040045             0045*  ;
-040045             0046*  mos_getkey:			EQU	00h
-040045             0047*  mos_load:			EQU	01h
-040045             0048*  mos_save:			EQU	02h
-040045             0049*  mos_cd:				EQU	03h
-040045             0050*  mos_dir:			EQU	04h
-040045             0051*  mos_del:			EQU	05h
-040045             0052*  mos_ren:			EQU	06h
-040045             0053*  mos_mkdir:			EQU	07h
-040045             0054*  mos_sysvars:		EQU	08h
-040045             0055*  mos_editline:		EQU	09h
-040045             0056*  mos_fopen:			EQU	0Ah
-040045             0057*  mos_fclose:			EQU	0Bh
-040045             0058*  mos_fgetc:			EQU	0Ch
-040045             0059*  mos_fputc:			EQU	0Dh
-040045             0060*  mos_feof:			EQU	0Eh
-040045             0061*  mos_getError:		EQU	0Fh
-040045             0062*  mos_oscli:			EQU	10h
-040045             0063*  mos_copy:			EQU	11h
-040045             0064*  mos_getrtc:			EQU	12h
-040045             0065*  mos_setrtc:			EQU	13h
-040045             0066*  mos_setintvector:	EQU	14h
-040045             0067*  mos_uopen:			EQU	15h
-040045             0068*  mos_uclose:			EQU	16h
-040045             0069*  mos_ugetc:			EQU	17h
-040045             0070*  mos_uputc:			EQU	18h
-040045             0071*  mos_getfil:			EQU	19h
-040045             0072*  mos_fread:			EQU	1Ah
-040045             0073*  mos_fwrite:			EQU	1Bh
-040045             0074*  mos_flseek:			EQU	1Ch
-040045             0075*  mos_setkbvector:	EQU	1Dh
-040045             0076*  mos_getkbmap:		EQU	1Eh
-040045             0077*  
-040045             0078*  ; MOS program exit codes
-040045             0079*  ;
-040045             0080*  EXIT_OK:				EQU  0;	"OK",
-040045             0081*  EXIT_ERROR_SD_ACCESS:	EQU	 1;	"Error accessing SD card",
-040045             0082*  EXIT_ERROR_ASSERTION:	EQU  2;	"Assertion failed",
-040045             0083*  EXIT_SD_CARDFAILURE:	EQU  3;	"SD card failure",
-040045             0084*  EXIT_FILENOTFOUND:		EQU  4;	"Could not find file",
-040045             0085*  EXIT_PATHNOTFOUND:		EQU  5;	"Could not find path",
-040045             0086*  EXIT_INVALIDPATHNAME:	EQU  6;	"Invalid path name",
-040045             0087*  EXIT_ACCESSDENIED_FULL:	EQU  7;	"Access denied or directory full",
-040045             0088*  EXIT_ACCESSDENIED:		EQU  8;	"Access denied",
-040045             0089*  EXIT_INVALIDOBJECT:		EQU  9;	"Invalid file/directory object",
-040045             0090*  EXIT_SD_WRITEPROTECTED:	EQU 10;	"SD card is write protected",
-040045             0091*  EXIT_INVALIDDRIVENUMBER:EQU 11;	"Logical drive number is invalid",
-040045             0092*  EXIT_NOVOLUMEWORKAREA:	EQU 12;	"Volume has no work area",
-040045             0093*  EXIT_NOVALIDFATVOLUME:	EQU 13;	"No valid FAT volume",
-040045             0094*  EXIT_ERRORMKFS:			EQU 14;	"Error occurred during mkfs",
-040045             0095*  EXIT_VOLUMETIMEOUT:		EQU 15;	"Volume timeout",
-040045             0096*  EXIT_VOLUMELOCKED:		EQU 16;	"Volume locked",
-040045             0097*  EXIT_LFNALLOCATION:		EQU 17;	"LFN working buffer could not be allocated",
-040045             0098*  EXIT_MAXOPENFILES:		EQU 18;	"Too many open files",
-040045             0099*  EXIT_INVALIDPARAMETER:	EQU 19;	"Invalid parameter",
-040045             0100*  EXIT_INVALIDCOMMAND:	EQU 20;	"Invalid command",
-040045             0101*  EXIT_INVALIDEXECUTABLE:	EQU 21;	"Invalid executable",
-040045             0102*  ; FatFS file access functions
-040045             0103*  ;
-040045             0104*  ffs_fopen:			EQU	80h
-040045             0105*  ffs_fclose:			EQU	81h
-040045             0106*  ffs_fread:			EQU	82h
-040045             0107*  ffs_fwrite:			EQU	83h
-040045             0108*  ffs_flseek:			EQU	84h
-040045             0109*  ffs_ftruncate:		EQU	85h
-040045             0110*  ffs_fsync:			EQU	86h
-040045             0111*  ffs_fforward:		EQU	87h
-040045             0112*  ffs_fexpand:		EQU	88h
-040045             0113*  ffs_fgets:			EQU	89h
-040045             0114*  ffs_fputc:			EQU	8Ah
-040045             0115*  ffs_fputs:			EQU	8Bh
-040045             0116*  ffs_fprintf:		EQU	8Ch
-040045             0117*  ffs_ftell:			EQU	8Dh
-040045             0118*  ffs_feof:			EQU	8Eh
-040045             0119*  ffs_fsize:			EQU	8Fh
-040045             0120*  ffs_ferror:			EQU	90h
-040045             0121*  
-040045             0122*  ; FatFS directory access functions
-040045             0123*  ;
-040045             0124*  ffs_dopen:			EQU	91h
-040045             0125*  ffs_dclose:			EQU	92h
-040045             0126*  ffs_dread:			EQU	93h
-040045             0127*  ffs_dfindfirst:		EQU	94h
-040045             0128*  ffs_dfindnext:		EQU	95h
-040045             0129*  
-040045             0130*  ; FatFS file and directory management functions
-040045             0131*  ;
-040045             0132*  ffs_stat:			EQU	96h
-040045             0133*  ffs_unlink:			EQU	97h
-040045             0134*  ffs_rename:			EQU	98h
-040045             0135*  ffs_chmod:			EQU	99h
-040045             0136*  ffs_utime:			EQU	9Ah
-040045             0137*  ffs_mkdir:			EQU	9Bh
-040045             0138*  ffs_chdir:			EQU	9Ch
-040045             0139*  ffs_chdrive:		EQU	9Dh
-040045             0140*  ffs_getcwd:			EQU	9Eh
-040045             0141*  
-040045             0142*  ; FatFS volume management and system configuration functions
-040045             0143*  ;
-040045             0144*  ffs_mount:			EQU	9Fh
-040045             0145*  ffs_mkfs:			EQU	A0h
-040045             0146*  ffs_fdisk:			EQU	A1h
-040045             0147*  ffs_getfree:		EQU	A2h
-040045             0148*  ffs_getlabel:		EQU	A3h
-040045             0149*  ffs_setlabel:		EQU	A4h
-040045             0150*  ffs_setcp:			EQU	A5h
-040045             0151*  
-040045             0152*  ; File access modes
-040045             0153*  ;
-040045             0154*  fa_read:			EQU	01h
-040045             0155*  fa_write:			EQU	02h
-040045             0156*  fa_open_existing:	EQU	00h
-040045             0157*  fa_create_new:		EQU	04h
-040045             0158*  fa_create_always:	EQU	08h
-040045             0159*  fa_open_always:		EQU	10h
-040045             0160*  fa_open_append:		EQU	30h
-040045             0161*  
-040045             0162*  ; System variable indexes for api_sysvars
-040045             0163*  ; Index into _sysvars in globals.asm
-040045             0164*  ;
-040045             0165*  sysvar_time:			EQU	00h	; 4: Clock timer in centiseconds (incremented by 2 every VBLANK)
-040045             0166*  sysvar_vpd_pflags:		EQU	04h	; 1: Flags to indicate completion of VDP commands
-040045             0167*  sysvar_keyascii:		EQU	05h	; 1: ASCII keycode, or 0 if no key is pressed
-040045             0168*  sysvar_keymods:			EQU	06h	; 1: Keycode modifiers
-040045             0169*  sysvar_cursorX:			EQU	07h	; 1: Cursor X position
-040045             0170*  sysvar_cursorY:			EQU	08h	; 1: Cursor Y position
-040045             0171*  sysvar_scrchar:			EQU	09h	; 1: Character read from screen
-040045             0172*  sysvar_scrpixel:		EQU	0Ah	; 3: Pixel data read from screen (R,B,G)
-040045             0173*  sysvar_audioChannel:	EQU	0Dh	; 1: Audio channel
-040045             0174*  sysvar_audioSuccess:	EQU	0Eh	; 1: Audio channel note queued (0 = no, 1 = yes)
-040045             0175*  sysvar_scrWidth:		EQU	0Fh	; 2: Screen width in pixels
-040045             0176*  sysvar_scrHeight:		EQU	11h	; 2: Screen height in pixels
-040045             0177*  sysvar_scrCols:			EQU	13h	; 1: Screen columns in characters
-040045             0178*  sysvar_scrRows:			EQU	14h	; 1: Screen rows in characters
-040045             0179*  sysvar_scrColours:		EQU	15h	; 1: Number of colours displayed
-040045             0180*  sysvar_scrpixelIndex:	EQU	16h	; 1: Index of pixel data read from screen
-040045             0181*  sysvar_vkeycode:		EQU	17h	; 1: Virtual key code from FabGL
-040045             0182*  sysvar_vkeydown:		EQU	18h	; 1: Virtual key state from FabGL (0=up, 1=down)
-040045             0183*  sysvar_vkeycount:		EQU	19h	; 1: Incremented every time a key packet is received
-040045             0184*  sysvar_rtc:				EQU	1Ah	; 6: Real time clock data
-040045             0185*  sysvar_spare:			EQU	20h	; 2: Spare, previously used by rtc
-040045             0186*  sysvar_keydelay:		EQU	22h	; 2: Keyboard repeat delay
-040045             0187*  sysvar_keyrate:			EQU	24h	; 2: Keyboard repeat reat
-040045             0188*  sysvar_keyled:			EQU	26h	; 1: Keyboard LED status
-040045             0189*  sysvar_scrMode:			EQU	27h	; 1: Screen mode
-040045             0190*  sysvar_rtcEnable:		EQU	28h	; 1: RTC enable flag (0: disabled, 1: use ESP32 RTC)
-040045             0191*  
-040045             0192*  ; Flags for the VPD protocol
-040045             0193*  ;
-040045             0194*  vdp_pflag_cursor:		EQU	00000001b
-040045             0195*  vdp_pflag_scrchar:		EQU	00000010b
-040045             0196*  vdp_pflag_point:		EQU	00000100b
-040045             0197*  vdp_pflag_audio:		EQU	00001000b
-040045             0198*  vdp_pflag_mode:			EQU	00010000b
-040045             0199*  vdp_pflag_rtc:			EQU	00100000b
-040045             0200*  
-040045             0201*  ;
-040045             0202*  ; FatFS structures
-040045             0203*  ; These mirror the structures contained in src_fatfs/ff.h in the MOS project
-040045             0204*  ;
-040045             0205*  ; Object ID and allocation information (FFOBJID)
-040045             0206*  ;
-040045             0207*  ; Indexes into FFOBJID structure
-040045             0208*  ffobjid_fs:			EQU	0	; 3: Pointer to the hosting volume of this object
-040045             0209*  ffobjid_id:			EQU	3	; 2: Hosting volume mount ID
-040045             0210*  ffobjid_attr:		EQU	5	; 1: Object attribute
-040045             0211*  ffobjid_stat:		EQU	6	; 1: Object chain status (b1-0: =0:not contiguous, =2:contiguous, =3:fragmented in this session, b2:sub-directory stretched)
-040045             0212*  ffobjid_sclust:		EQU	7	; 4: Object data start cluster (0:no cluster or root directory)
-040045             0213*  ffobjid_objsize:	EQU	11	; 4: Object size (valid when sclust != 0)
-040045             0214*  ;
-040045             0215*  ; File object structure (FIL)
-040045             0216*  ;
-040045             0217*  ; Indexes into FIL structure
-040045             0218*  fil_obj:		EQU 0	; 15: Object identifier
-040045             0219*  fil_flag:		EQU	15 	;  1: File status flags
-040045             0220*  fil_err:		EQU	16	;  1: Abort flag (error code)
-040045             0221*  fil_fptr:		EQU	17	;  4: File read/write pointer (Zeroed on file open)
-040045             0222*  fil_clust:		EQU	21	;  4: Current cluster of fpter (invalid when fptr is 0)
-040045             0223*  fil_sect:		EQU	25	;  4: Sector number appearing in buf[] (0:invalid)
-040045             0224*  fil_dir_sect:	EQU	29	;  4: Sector number containing the directory entry
-040045             0225*  fil_dir_ptr:	EQU	33	;  3: Pointer to the directory entry in the win[]
-040045             0226*  ;
-040045             0227*  ; Directory object structure (DIR)
-040045             0228*  ; Indexes into DIR structure
-040045             0229*  dir_obj:		EQU  0	; 15: Object identifier
-040045             0230*  dir_dptr:		EQU	15	;  4: Current read/write offset
-040045             0231*  dir_clust:		EQU	19	;  4: Current cluster
-040045             0232*  dir_sect:		EQU	23	;  4: Current sector (0:Read operation has terminated)
-040045             0233*  dir_dir:		EQU	27	;  3: Pointer to the directory item in the win[]
-040045             0234*  dir_fn:			EQU	30	; 12: SFN (in/out) {body[8],ext[3],status[1]}
-040045             0235*  dir_blk_ofs:	EQU	42	;  4: Offset of current entry block being processed (0xFFFFFFFF:Invalid)
-040045             0236*  ;
-040045             0237*  ; File information structure (FILINFO)
-040045             0238*  ;
-040045             0239*  ; Indexes into FILINFO structure
-040045             0240*  filinfo_fsize:		EQU 0	;   4: File size
-040045             0241*  filinfo_fdate:		EQU	4	;   2: Modified date
-040045             0242*  filinfo_ftime:		EQU	6	;   2: Modified time
-040045             0243*  filinfo_fattrib:	EQU	8	;   1: File attribute
-040045             0244*  filinfo_altname:	EQU	9	;  13: Alternative file name
-040045             0245*  filinfo_fname:		EQU	22	; 256: Primary file name
-040045             0246*  ;
-040045             0247*  ; Macro for calling the API
-040045             0248*  ; Parameters:
-040045             0249*  ; - function: One of the function numbers listed above
-040045             0250*  ;
-040045             0251*  	MACRO	MOSCALL	function
-040045             0252*  			LD	A, function
-040045             0253*  			RST.LIL	08h
-040045             0254*  	ENDMACRO
+040045             0001*  ; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/mos_api.inc
+040045             0002*  ;
+040045             0003*  ; Title:	AGON MOS - API for user projects
+040045             0004*  ; Author:	Dean Belfield
+040045             0005*  ;			Adapted for agon-ez80asm by Jeroen Venema
+040045             0006*  ;			Added MOS error codes for return in HL
+040045             0007*  ; Created:	03/08/2022
+040045             0008*  ; Last Updated:	10/08/2023
+040045             0009*  ;
+040045             0010*  ; Modinfo:
+040045             0011*  ; 05/08/2022:	Added mos_feof
+040045             0012*  ; 09/08/2022:	Added system variables: cursorX, cursorY
+040045             0013*  ; 18/08/2022:	Added system variables: scrchar, scrpixel, audioChannel, audioSuccess, vpd_pflags
+040045             0014*  ; 05/09/2022:	Added mos_ren, vdp_pflag_mode
+040045             0015*  ; 24/09/2022:	Added mos_getError, mos_mkdir
+040045             0016*  ; 13/10/2022:	Added mos_oscli
+040045             0017*  ; 23/02/2023:	Added more sysvars, fixed typo in sysvar_audioSuccess, offsets for sysvar_scrCols, sysvar_scrRows
+040045             0018*  ; 04/03/2023:	Added sysvar_scrpixelIndex
+040045             0019*  ; 08/03/2023:	Renamed sysvar_keycode to sysvar_keyascii, added sysvar_vkeycode
+040045             0020*  ; 15/03/2023:	Added mos_copy, mos_getrtc, mos_setrtc, rtc, vdp_pflag_rtc
+040045             0021*  ; 21/03/2023:	Added mos_setintvector, sysvars for keyboard status, vdu codes for vdp
+040045             0022*  ; 22/03/2023:	The VDP commands are now indexed from 0x80
+040045             0023*  ; 29/03/2023:	Added mos_uopen, mos_uclose, mos_ugetc, mos_uputc
+040045             0024*  ; 13/04/2023:	Added FatFS file structures (FFOBJID, FIL, DIR, FILINFO)
+040045             0025*  ; 15/04/2023:	Added mos_getfil, mos_fread, mos_fwrite and mos_flseek
+040045             0026*  ; 19/05/2023:	Added sysvar_scrMode
+040045             0027*  ; 05/06/2023:	Added sysvar_rtcEnable
+040045             0028*  ; 03/08/2023:	Added mos_setkbvector
+040045             0029*  ; 10/08/2023:	Added mos_getkbmap
+040045             0030*  
+040045             0031*  ; VDP control (VDU 23, 0, n)
+040045             0032*  ;
+040045             0033*  vdp_gp:				EQU 80h
+040045             0034*  vdp_keycode:		EQU 81h
+040045             0035*  vdp_cursor:			EQU	82h
+040045             0036*  vdp_scrchar:		EQU	83h
+040045             0037*  vdp_scrpixel:		EQU	84h
+040045             0038*  vdp_audio:			EQU	85h
+040045             0039*  vdp_mode:			EQU	86h
+040045             0040*  vdp_rtc:			EQU	87h
+040045             0041*  vdp_keystate:		EQU	88h
+040045             0042*  vdp_logicalcoords:	EQU	C0h
+040045             0043*  vdp_terminalmode:	EQU	FFh
+040045             0044*  
+040045             0045*  ; MOS high level functions
+040045             0046*  ;
+040045             0047*  mos_getkey:			EQU	00h
+040045             0048*  mos_load:			EQU	01h
+040045             0049*  mos_save:			EQU	02h
+040045             0050*  mos_cd:				EQU	03h
+040045             0051*  mos_dir:			EQU	04h
+040045             0052*  mos_del:			EQU	05h
+040045             0053*  mos_ren:			EQU	06h
+040045             0054*  mos_mkdir:			EQU	07h
+040045             0055*  mos_sysvars:		EQU	08h
+040045             0056*  mos_editline:		EQU	09h
+040045             0057*  mos_fopen:			EQU	0Ah
+040045             0058*  mos_fclose:			EQU	0Bh
+040045             0059*  mos_fgetc:			EQU	0Ch
+040045             0060*  mos_fputc:			EQU	0Dh
+040045             0061*  mos_feof:			EQU	0Eh
+040045             0062*  mos_getError:		EQU	0Fh
+040045             0063*  mos_oscli:			EQU	10h
+040045             0064*  mos_copy:			EQU	11h
+040045             0065*  mos_getrtc:			EQU	12h
+040045             0066*  mos_setrtc:			EQU	13h
+040045             0067*  mos_setintvector:	EQU	14h
+040045             0068*  mos_uopen:			EQU	15h
+040045             0069*  mos_uclose:			EQU	16h
+040045             0070*  mos_ugetc:			EQU	17h
+040045             0071*  mos_uputc:			EQU	18h
+040045             0072*  mos_getfil:			EQU	19h
+040045             0073*  mos_fread:			EQU	1Ah
+040045             0074*  mos_fwrite:			EQU	1Bh
+040045             0075*  mos_flseek:			EQU	1Ch
+040045             0076*  mos_setkbvector:	EQU	1Dh
+040045             0077*  mos_getkbmap:		EQU	1Eh
+040045             0078*  
+040045             0079*  ; MOS program exit codes
+040045             0080*  ;
+040045             0081*  EXIT_OK:				EQU  0;	"OK",
+040045             0082*  EXIT_ERROR_SD_ACCESS:	EQU	 1;	"Error accessing SD card",
+040045             0083*  EXIT_ERROR_ASSERTION:	EQU  2;	"Assertion failed",
+040045             0084*  EXIT_SD_CARDFAILURE:	EQU  3;	"SD card failure",
+040045             0085*  EXIT_FILENOTFOUND:		EQU  4;	"Could not find file",
+040045             0086*  EXIT_PATHNOTFOUND:		EQU  5;	"Could not find path",
+040045             0087*  EXIT_INVALIDPATHNAME:	EQU  6;	"Invalid path name",
+040045             0088*  EXIT_ACCESSDENIED_FULL:	EQU  7;	"Access denied or directory full",
+040045             0089*  EXIT_ACCESSDENIED:		EQU  8;	"Access denied",
+040045             0090*  EXIT_INVALIDOBJECT:		EQU  9;	"Invalid file/directory object",
+040045             0091*  EXIT_SD_WRITEPROTECTED:	EQU 10;	"SD card is write protected",
+040045             0092*  EXIT_INVALIDDRIVENUMBER:EQU 11;	"Logical drive number is invalid",
+040045             0093*  EXIT_NOVOLUMEWORKAREA:	EQU 12;	"Volume has no work area",
+040045             0094*  EXIT_NOVALIDFATVOLUME:	EQU 13;	"No valid FAT volume",
+040045             0095*  EXIT_ERRORMKFS:			EQU 14;	"Error occurred during mkfs",
+040045             0096*  EXIT_VOLUMETIMEOUT:		EQU 15;	"Volume timeout",
+040045             0097*  EXIT_VOLUMELOCKED:		EQU 16;	"Volume locked",
+040045             0098*  EXIT_LFNALLOCATION:		EQU 17;	"LFN working buffer could not be allocated",
+040045             0099*  EXIT_MAXOPENFILES:		EQU 18;	"Too many open files",
+040045             0100*  EXIT_INVALIDPARAMETER:	EQU 19;	"Invalid parameter",
+040045             0101*  EXIT_INVALIDCOMMAND:	EQU 20;	"Invalid command",
+040045             0102*  EXIT_INVALIDEXECUTABLE:	EQU 21;	"Invalid executable",
+040045             0103*  ; FatFS file access functions
+040045             0104*  ;
+040045             0105*  ffs_fopen:			EQU	80h
+040045             0106*  ffs_fclose:			EQU	81h
+040045             0107*  ffs_fread:			EQU	82h
+040045             0108*  ffs_fwrite:			EQU	83h
+040045             0109*  ffs_flseek:			EQU	84h
+040045             0110*  ffs_ftruncate:		EQU	85h
+040045             0111*  ffs_fsync:			EQU	86h
+040045             0112*  ffs_fforward:		EQU	87h
+040045             0113*  ffs_fexpand:		EQU	88h
+040045             0114*  ffs_fgets:			EQU	89h
+040045             0115*  ffs_fputc:			EQU	8Ah
+040045             0116*  ffs_fputs:			EQU	8Bh
+040045             0117*  ffs_fprintf:		EQU	8Ch
+040045             0118*  ffs_ftell:			EQU	8Dh
+040045             0119*  ffs_feof:			EQU	8Eh
+040045             0120*  ffs_fsize:			EQU	8Fh
+040045             0121*  ffs_ferror:			EQU	90h
+040045             0122*  
+040045             0123*  ; FatFS directory access functions
+040045             0124*  ;
+040045             0125*  ffs_dopen:			EQU	91h
+040045             0126*  ffs_dclose:			EQU	92h
+040045             0127*  ffs_dread:			EQU	93h
+040045             0128*  ffs_dfindfirst:		EQU	94h
+040045             0129*  ffs_dfindnext:		EQU	95h
+040045             0130*  
+040045             0131*  ; FatFS file and directory management functions
+040045             0132*  ;
+040045             0133*  ffs_stat:			EQU	96h
+040045             0134*  ffs_unlink:			EQU	97h
+040045             0135*  ffs_rename:			EQU	98h
+040045             0136*  ffs_chmod:			EQU	99h
+040045             0137*  ffs_utime:			EQU	9Ah
+040045             0138*  ffs_mkdir:			EQU	9Bh
+040045             0139*  ffs_chdir:			EQU	9Ch
+040045             0140*  ffs_chdrive:		EQU	9Dh
+040045             0141*  ffs_getcwd:			EQU	9Eh
+040045             0142*  
+040045             0143*  ; FatFS volume management and system configuration functions
+040045             0144*  ;
+040045             0145*  ffs_mount:			EQU	9Fh
+040045             0146*  ffs_mkfs:			EQU	A0h
+040045             0147*  ffs_fdisk:			EQU	A1h
+040045             0148*  ffs_getfree:		EQU	A2h
+040045             0149*  ffs_getlabel:		EQU	A3h
+040045             0150*  ffs_setlabel:		EQU	A4h
+040045             0151*  ffs_setcp:			EQU	A5h
+040045             0152*  
+040045             0153*  ; File access modes
+040045             0154*  ;
+040045             0155*  fa_read:			EQU	01h
+040045             0156*  fa_write:			EQU	02h
+040045             0157*  fa_open_existing:	EQU	00h
+040045             0158*  fa_create_new:		EQU	04h
+040045             0159*  fa_create_always:	EQU	08h
+040045             0160*  fa_open_always:		EQU	10h
+040045             0161*  fa_open_append:		EQU	30h
+040045             0162*  
+040045             0163*  ; System variable indexes for api_sysvars
+040045             0164*  ; Index into _sysvars in globals.asm
+040045             0165*  ;
+040045             0166*  sysvar_time:			EQU	00h	; 4: Clock timer in centiseconds (incremented by 2 every VBLANK)
+040045             0167*  sysvar_vpd_pflags:		EQU	04h	; 1: Flags to indicate completion of VDP commands
+040045             0168*  sysvar_keyascii:		EQU	05h	; 1: ASCII keycode, or 0 if no key is pressed
+040045             0169*  sysvar_keymods:			EQU	06h	; 1: Keycode modifiers
+040045             0170*  sysvar_cursorX:			EQU	07h	; 1: Cursor X position
+040045             0171*  sysvar_cursorY:			EQU	08h	; 1: Cursor Y position
+040045             0172*  sysvar_scrchar:			EQU	09h	; 1: Character read from screen
+040045             0173*  sysvar_scrpixel:		EQU	0Ah	; 3: Pixel data read from screen (R,B,G)
+040045             0174*  sysvar_audioChannel:	EQU	0Dh	; 1: Audio channel
+040045             0175*  sysvar_audioSuccess:	EQU	0Eh	; 1: Audio channel note queued (0 = no, 1 = yes)
+040045             0176*  sysvar_scrWidth:		EQU	0Fh	; 2: Screen width in pixels
+040045             0177*  sysvar_scrHeight:		EQU	11h	; 2: Screen height in pixels
+040045             0178*  sysvar_scrCols:			EQU	13h	; 1: Screen columns in characters
+040045             0179*  sysvar_scrRows:			EQU	14h	; 1: Screen rows in characters
+040045             0180*  sysvar_scrColours:		EQU	15h	; 1: Number of colours displayed
+040045             0181*  sysvar_scrpixelIndex:	EQU	16h	; 1: Index of pixel data read from screen
+040045             0182*  sysvar_vkeycode:		EQU	17h	; 1: Virtual key code from FabGL
+040045             0183*  sysvar_vkeydown:		EQU	18h	; 1: Virtual key state from FabGL (0=up, 1=down)
+040045             0184*  sysvar_vkeycount:		EQU	19h	; 1: Incremented every time a key packet is received
+040045             0185*  sysvar_rtc:				EQU	1Ah	; 6: Real time clock data
+040045             0186*  sysvar_spare:			EQU	20h	; 2: Spare, previously used by rtc
+040045             0187*  sysvar_keydelay:		EQU	22h	; 2: Keyboard repeat delay
+040045             0188*  sysvar_keyrate:			EQU	24h	; 2: Keyboard repeat reat
+040045             0189*  sysvar_keyled:			EQU	26h	; 1: Keyboard LED status
+040045             0190*  sysvar_scrMode:			EQU	27h	; 1: Screen mode
+040045             0191*  sysvar_rtcEnable:		EQU	28h	; 1: RTC enable flag (0: disabled, 1: use ESP32 RTC)
+040045             0192*  
+040045             0193*  ; Flags for the VPD protocol
+040045             0194*  ;
+040045             0195*  vdp_pflag_cursor:		EQU	00000001b
+040045             0196*  vdp_pflag_scrchar:		EQU	00000010b
+040045             0197*  vdp_pflag_point:		EQU	00000100b
+040045             0198*  vdp_pflag_audio:		EQU	00001000b
+040045             0199*  vdp_pflag_mode:			EQU	00010000b
+040045             0200*  vdp_pflag_rtc:			EQU	00100000b
+040045             0201*  
+040045             0202*  ;
+040045             0203*  ; FatFS structures
+040045             0204*  ; These mirror the structures contained in src_fatfs/ff.h in the MOS project
+040045             0205*  ;
+040045             0206*  ; Object ID and allocation information (FFOBJID)
+040045             0207*  ;
+040045             0208*  ; Indexes into FFOBJID structure
+040045             0209*  ffobjid_fs:			EQU	0	; 3: Pointer to the hosting volume of this object
+040045             0210*  ffobjid_id:			EQU	3	; 2: Hosting volume mount ID
+040045             0211*  ffobjid_attr:		EQU	5	; 1: Object attribute
+040045             0212*  ffobjid_stat:		EQU	6	; 1: Object chain status (b1-0: =0:not contiguous, =2:contiguous, =3:fragmented in this session, b2:sub-directory stretched)
+040045             0213*  ffobjid_sclust:		EQU	7	; 4: Object data start cluster (0:no cluster or root directory)
+040045             0214*  ffobjid_objsize:	EQU	11	; 4: Object size (valid when sclust != 0)
+040045             0215*  ;
+040045             0216*  ; File object structure (FIL)
+040045             0217*  ;
+040045             0218*  ; Indexes into FIL structure
+040045             0219*  fil_obj:		EQU 0	; 15: Object identifier
+040045             0220*  fil_flag:		EQU	15 	;  1: File status flags
+040045             0221*  fil_err:		EQU	16	;  1: Abort flag (error code)
+040045             0222*  fil_fptr:		EQU	17	;  4: File read/write pointer (Zeroed on file open)
+040045             0223*  fil_clust:		EQU	21	;  4: Current cluster of fpter (invalid when fptr is 0)
+040045             0224*  fil_sect:		EQU	25	;  4: Sector number appearing in buf[] (0:invalid)
+040045             0225*  fil_dir_sect:	EQU	29	;  4: Sector number containing the directory entry
+040045             0226*  fil_dir_ptr:	EQU	33	;  3: Pointer to the directory entry in the win[]
+040045             0227*  ;
+040045             0228*  ; Directory object structure (DIR)
+040045             0229*  ; Indexes into DIR structure
+040045             0230*  dir_obj:		EQU  0	; 15: Object identifier
+040045             0231*  dir_dptr:		EQU	15	;  4: Current read/write offset
+040045             0232*  dir_clust:		EQU	19	;  4: Current cluster
+040045             0233*  dir_sect:		EQU	23	;  4: Current sector (0:Read operation has terminated)
+040045             0234*  dir_dir:		EQU	27	;  3: Pointer to the directory item in the win[]
+040045             0235*  dir_fn:			EQU	30	; 12: SFN (in/out) {body[8],ext[3],status[1]}
+040045             0236*  dir_blk_ofs:	EQU	42	;  4: Offset of current entry block being processed (0xFFFFFFFF:Invalid)
+040045             0237*  ;
+040045             0238*  ; File information structure (FILINFO)
+040045             0239*  ;
+040045             0240*  ; Indexes into FILINFO structure
+040045             0241*  filinfo_fsize:		EQU 0	;   4: File size
+040045             0242*  filinfo_fdate:		EQU	4	;   2: Modified date
+040045             0243*  filinfo_ftime:		EQU	6	;   2: Modified time
+040045             0244*  filinfo_fattrib:	EQU	8	;   1: File attribute
+040045             0245*  filinfo_altname:	EQU	9	;  13: Alternative file name
+040045             0246*  filinfo_fname:		EQU	22	; 256: Primary file name
+040045             0247*  ;
+040045             0248*  ; Macro for calling the API
+040045             0249*  ; Parameters:
+040045             0250*  ; - function: One of the function numbers listed above
+040045             0251*  ;
+040045             0252*  	MACRO	MOSCALL	function
+040045             0253*  			LD	A, function
+040045             0254*  			RST.LIL	08h
+040045             0255*  	ENDMACRO
 040045             0012   	include "src/asm/vdu_sound.asm" ; also has macros
 040045 00          0001*  last_channel: db 0
 040046             0002*  max_channels: equ 6

@@ -1,7 +1,6 @@
 import os
 import subprocess
-import glob
-import sqlite3
+import shutil
 
 def do_assembly(src_file, tgt_dir, tgt_filename=None):
     # Generate target filepath
@@ -39,3 +38,9 @@ if __name__ == "__main__":
     src_file = 'src/asm/wolf3d.asm'
     tgt_filename = None # if different from the source filename
     do_assembly(src_file, tgt_dir, tgt_filename)
+    # delete .emulator/sdcard/tgt and copy tgt to .emulator/tgt
+    emulator_tgt_dir = '.emulator/sdcard/tgt'
+    if os.path.exists(emulator_tgt_dir):
+        shutil.rmtree(emulator_tgt_dir)
+        os.makedirs(emulator_tgt_dir)
+    shutil.copytree(tgt_dir, emulator_tgt_dir)
