@@ -81,4 +81,4 @@ rand_8:
     ld (r_seed),a
     pop bc
     ret
-r_seed: defb $50
+r_seed: db $50

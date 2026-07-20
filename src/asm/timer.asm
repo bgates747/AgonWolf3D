@@ -124,7 +124,7 @@ prt_calibrate:
     ld hl,on_emulator
     ret
 
-calibrating_timer: defb "Calibrating timer\r\n",0
+calibrating_timer: db "Calibrating timer\r\n",0
 
 ; set PRT timer
 prt_set:

@@ -24,7 +24,7 @@
 .endm
 
 ; Define a buffer to store file contents
-buffer: defb 0
+buffer: db 0
 buffer_size: equ 256
 
 ; Define a subroutine to process the file contents

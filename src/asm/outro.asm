@@ -191,7 +191,7 @@ outro3:
 ; and out
 	ret
 
-thanks_for_playing: defb "We hope you enjoyed Wolf3D",0
-be_sure_not_to_miss: defb "BE SURE NOT TO MISS",0
-attack_of: defb "ATTACK OF THE",0
-coming_soon: defb "COMING SOON TO AN AGON NEAR YOU!",0
+thanks_for_playing: db "We hope you enjoyed Wolf3D",0
+be_sure_not_to_miss: db "BE SURE NOT TO MISS",0
+attack_of: db "ATTACK OF THE",0
+coming_soon: db "COMING SOON TO AN AGON NEAR YOU!",0

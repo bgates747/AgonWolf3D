@@ -51,13 +51,13 @@ exit:
 
     ret 
 
-hello_world: defb "Welcome to Agon Wolf3D",0
-loading_ui: defb "Loading UI",0
-loading_time: defb "Loading time:",0
-loading_complete: defb "Press any key to continue.\r\n",0
-is_emulator: defb 0
-on_emulator: defb "Running on emulator.\r\n",0
-on_hardware: defb "Running on hardware.\r\n",0
+hello_world: db "Welcome to Agon Wolf3D",0
+loading_ui: db "Loading UI",0
+loading_time: db "Loading time:",0
+loading_complete: db "Press any key to continue.\r\n",0
+is_emulator: db 0
+on_emulator: db "Running on emulator.\r\n",0
+on_hardware: db "Running on hardware.\r\n",0
 
 init:
 ; start generic stopwatch to time setup loop 
