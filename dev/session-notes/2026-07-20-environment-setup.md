@@ -31,6 +31,29 @@ The workspace was configured to use the `.venv` interpreter.
 The `bpy` and `bmesh` modules were not installed with `pip`; they are supplied
 by Blender's own Python runtime and must be used by invoking Blender.
 
+## VS Code Assembly Language Support
+
+Zaets and Alex Parker's EZ80 Assembly extension were evaluated, including a
+temporary and non-durable attempt to combine features from both. They were
+subsequently uninstalled in favor of Maziac's ASM Code Lens 2.6.13, which had
+been used successfully with this project in the past.
+
+The workspace assigns both `.asm` and `.inc` files to ASM Code Lens' native
+`asm-collection` language ID:
+
+```json
+"files.associations": {
+    "*.asm": "asm-collection",
+    "*.inc": "asm-collection"
+}
+```
+
+ASM Code Lens scopes labels as `variable.parameter.label.asm`. The active VS
+Code theme rendered that scope orange, so the workspace adds a TextMate color
+override of `#DCDCAA` (light yellow) to restore the familiar label appearance.
+Mnemonic scopes are similarly overridden to `#569CD6` (medium blue), while
+register coloring remains controlled by the active theme.
+
 ## eZ80 Assembler
 
 `ez80asm` was built from source on Linux from:
@@ -122,6 +145,48 @@ cd mystuff/AgonWolf3D/tgt
 load wolf3d.bin
 ```
 
+## Local Agon Documentation Checkout
+
+The official `AgonPlatform/agon-docs` repository was cloned for local access
+while developing against current MOS and VDP behavior:
+
+```text
+~/Agon/agon-docs
+```
+
+The checkout was on branch `main` at commit `f9806bd` when cloned. A
+machine-local symlink exposes it from the project root:
+
+```text
+AgonWolf3D/agon-docs -> ~/Agon/agon-docs
+```
+
+The root-level `agon-docs` link is ignored by Git. This keeps the external
+repository out of AgonWolf3D version control while making its documentation
+directly available in the project workspace.
+
+The existing AgonVideo project was temporarily exposed through a machine-local
+project-root symlink for reference during file-handling work:
+
+```text
+AgonWolf3D/AgonVideo -> ~/Projects/AgonVideo
+```
+
+The link was removed later in the session to reduce project-root clutter. The
+external repository at `~/Projects/AgonVideo` was not changed.
+
+The `bgates747/nurples` game repository was cloned as another implementation
+reference. It was on branch `main` at commit `2032953` when cloned:
+
+```text
+~/Agon/nurples
+AgonWolf3D/nurples -> ~/Agon/nurples
+```
+
+The project-root link was removed later in the session to reduce clutter. The
+external checkout at `~/Agon/nurples` remains independently versioned and was
+not changed.
+
 ## End-to-End Validation
 
 The complete build pipeline still works with the new environment. In
@@ -145,7 +210,7 @@ performance issue does not prevent the game from starting.
 
 ## Repository Files Changed
 
-- `.gitignore` — explicitly ignored the project-local `.emulator/` directory.
+- `.gitignore` — ignored the local `.emulator/` directory and `agon-docs` link.
 - `build/data/build.db` — regenerated the build database during the full build.
 - `build/panels/png/48_007.png` — regenerated panel image output.
 - `build/scripts/build_00_all_the_things.py` — left only the final assembly stage enabled.
@@ -161,7 +226,10 @@ performance issue does not prevent the game from starting.
 - `.emulator/autoexec.txt` — linked the project to the emulator SD-card startup file.
 - `.vscode/settings.json` — kept `.emulator/` visible and preserved detected line endings.
 - `.venv/` — created the project-local Python environment and installed dependencies.
+- `agon-docs` — linked the project root to the external Agon documentation checkout.
 - `~/Agon/fab-agon-emulator/sdcard/autoexec.txt` — set emulator startup commands with CRLF endings.
 - `~/Agon/fab-agon-emulator/sdcard/mystuff` — linked the emulator SD card to `~/Agon/mystuff`.
+- `~/Agon/agon-docs/` — cloned the official Agon platform documentation repository.
+- `~/Agon/nurples/` — cloned the Nurples game repository for implementation reference.
 - `~/.local/bin/ez80asm` — installed the locally built assembler on `PATH`.
 - `~/.local/bin/fab-agon-emulator` — installed the emulator launcher on `PATH`.
