@@ -7,6 +7,9 @@ flicker/
 **.emulator/
 .emulator/
 
+# Ignore machine-local external documentation link
+/agon-docs
+
 # Ignore .python .vscode
 .python
 .vscode
