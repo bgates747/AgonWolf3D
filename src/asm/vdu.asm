@@ -610,6 +610,64 @@ vdu_flip:
 @cmd: db 23,0,0xC3
 @end:
 
+; load a vdu buffer from local memory
+; inputs: hl = bufferId ; bc = length ; de = pointer to data
+vdu_load_buffer:
+    ld (@length),bc
+    push de ; save data pointer
+; send the vdu command string
+    ld a,l
+    ld (@bufferId),a
+    ld a,h
+    ld (@bufferId+1),a
+    ld hl,@cmd
+    ld bc,@end-@cmd
+    rst.lil $18
+; send the buffer data
+    pop hl ; pointer to data
+    ld bc,(@length)
+    rst.lil $18 ; send it
+    ret
+; Upload data :: VDU 23, 0 &A0, bufferId; 0, length; <buffer-data>
+@cmd:       db 23,0,0xA0
+@bufferId:  dw 0x0000
+            db 0 ; load buffer
+@length:    dw 0x0000
+@end: db 0 ; padding
+
+; clear a buffer
+; inputs: hl = bufferId
+vdu_clear_buffer:
+    ld a,l
+    ld (@bufferId),a
+    ld a,h
+    ld (@bufferId+1),a
+    ld hl,@cmd
+    ld bc,@end-@cmd
+    rst.lil $18
+    ret
+@cmd:       db 23,0,0xA0
+@bufferId:  dw 0x0000
+            db 2 ; clear buffer
+@end:
+
+; Command 14: Consolidate blocks in a buffer
+vdu_consolidate_buffer:
+; set parameters for vdu call
+    ld a,l
+    ld (@bufferId),a
+    ld a,h
+    ld (@bufferId+1),a
+    ld hl,@beg
+    ld bc,@end-@beg
+    rst.lil $18
+    ret
+; VDU 23, 0, &A0, bufferId; 14
+@beg: db 23,0,0xA0
+@bufferId: dw 0x0000
+           db 14
+@end:
+
 ; Command 64: Compress a buffer
 ; VDU 23, 0, &A0, targetBufferId; 64, sourceBufferId;
 ; This command will compress the contents of a buffer, replacing the target buffer with the compressed data. Unless the target buffer is the same as the source, the source buffer will be left unchanged.

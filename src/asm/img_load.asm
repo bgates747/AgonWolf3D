@@ -26,6 +26,60 @@ img_load_init:
 
     ret
 
+; Update the existing loading splash after one AGNB image has been completely
+; streamed, consolidated, and created as a bitmap.
+; inputs: agnb_metadata describes the completed image and its selected buffer
+; outputs: A=0 and Z set
+; destroys: AF, BC, DE, HL, IX
+img_load_agnb_progress:
+; Retain the current writer-specified buffer ID for the shared debug path.
+	ld hl,(agnb_metadata+agnb_meta_bufferId)
+	dec hl
+	inc.s hl
+	ld (cur_buffer_id),hl
+
+; Draw the splash, followed by the most recently loaded panel at the origin.
+	call tmp_draw_all_the_things
+	ld hl,(cur_buffer_id)
+	call vdu_buff_select
+	ld bc,0
+	ld de,0
+	call vdu_plot_bmp
+
+; Advance and draw the BJ loading animation.
+	call move_bj
+
+; Retain the bitmap-font welcome message used by the loose-file loader.
+	ld ix,font_itc_honda
+	ld hl,hello_world
+	ld bc,32
+	ld de,2
+	call font_bmp_print
+
+; The container intentionally has no runtime filenames, so display an ordered
+; panel number instead.
+	call vdu_cls
+	ld hl,loading_panel
+	call printString
+	ld hl,(cur_file_idx)
+	inc hl
+	call printDec
+	call printNewLine
+
+; Display the same cumulative startup stopwatch and present this frame.
+	ld hl,loading_time
+	call printString
+	call stopwatch_get
+	call printDec
+	call vdu_flip
+
+; Advance the progress index for the next AGNB record.
+	ld hl,(cur_file_idx)
+	inc hl
+	ld (cur_file_idx),hl
+	xor a
+	ret
+
 ; inputs: bc is the number of images to load, cur_buffer_id_lut and cur_load_jump_table set to the address of the first entry in the respective lookup tables
 img_load_main:
     ld hl,0

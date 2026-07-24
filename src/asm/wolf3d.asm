@@ -9,6 +9,7 @@
     .db 01h
 
 	include "src/asm/mos_api.asm" ; wants to be first include b/c it has macros
+	include "src/asm/macros.inc"
 	include "src/asm/vdu_sound.asm" ; also has macros
 	include "src/asm/images.asm"
 	include "src/asm/fonts_bmp.asm"
@@ -28,6 +29,7 @@
 	include "src/asm/img_load.asm"
 	include "src/asm/sfx.asm"
 	include "src/asm/timer.asm"
+	include "src/asm/agnb.inc"
 
 
 start:              
@@ -38,6 +40,7 @@ start:
     push iy
 
 	call init ; Initialization code
+    jp nz,exit ; initialization failed
     call main ; Call the main function
 
 exit:
@@ -53,8 +56,10 @@ exit:
 
 hello_world: db "Welcome to Agon Wolf3D",0
 loading_ui: db "Loading UI",0
+loading_panel: db "Loading panel: ",0
 loading_time: db "Loading time:",0
 loading_complete: db "Press any key to continue.\r\n",0
+loading_error: db "AGNB panel load failed: ",0
 is_emulator: db 0
 on_emulator: db "Running on emulator.\r\n",0
 on_hardware: db "Running on hardware.\r\n",0
@@ -125,12 +130,27 @@ init:
 	call img_load_init
 
 ; load panels
-	ld bc,cube_num_panels
-	ld hl,cube_buffer_id_lut
-	ld (cur_buffer_id_lut),hl
-	ld hl,cube_load_panels_table
-	ld (cur_load_jump_table),hl
-	call img_load_main
+    ld hl,0
+    ld (cur_file_idx),hl
+	call agnb_load_images
+	jr z,@panels_loaded
+
+; Fail startup without entering the game if the panel container is invalid or
+; unavailable. Preserve the loader error while presenting it to the user.
+    push af
+    call vdu_cls
+    ld hl,loading_error
+    call printString
+    pop af
+    call printHex8
+    call printNewLine
+    call vdu_flip
+    call waitKeypress
+    ld a,(agnb_last_error)
+    or a
+    ret
+
+@panels_loaded:
 
 ; load sprites
 	ld bc,sprite_num_panels
@@ -195,6 +215,7 @@ init:
 	call waitKeypress
 
 ; initialization done
+    xor a
 	ret
 
 ; DEBUG: set up a simple countdown timer

@@ -188,7 +188,9 @@ agnb_file_is_open:         db 0
 agnb_header:
     blkb agnb_riff_header_size,0
 
-agnb_io_buffer:            equ 0xB7E000 ; same onboard SRAM as app filedata
+; Wolf3D's fixed SRAM beginning at 0xB7E000 is occupied by map and sprite
+; state. Keep a loader-owned buffer in the application image instead.
+agnb_io_buffer:            blkb 8192,0
 agnb_io_buffer_size:       equ 8192
 
 agnb_filename:
@@ -324,14 +326,11 @@ agnb_load_images:
     call agnb_finalize_image
     jr nz,@load_error
 
-; TEMPORARY TRAVERSAL DIAGNOSTIC: display each image immediately after it is
-; loaded and finalized, then wait for a key before parsing the next record.
-; agnb_finalize_image leaves the current writer-specified buffer selected.
-    call vdu_cls
-    ld bc,0
-    ld de,0
-    call vdu_plot_bmp
-    call DEBUG_WAITKEYPRESS
+; Give the application one completed-bitmap boundary per record. Wolf3D uses
+; this to retain its splash/progress/debug update between panel loads.
+; agnb_finalize_image leaves the writer-specified buffer selected and its
+; metadata remains valid for the duration of the callback.
+    call img_load_agnb_progress
 
     call agnb_finish_buffer_list
     jr nz,@load_error

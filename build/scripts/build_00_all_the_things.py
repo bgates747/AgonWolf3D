@@ -81,6 +81,13 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         from build_05_make_panels_rgba import make_panels_rgba
         make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)
 
+# build_05a_make_panels_agnb.py
+    panels_agnb_path = 'tgt/images.agnb'
+    if do_05a_make_panels_agnb:
+        print(f"build_05a_make_panels_agnb: Making panels AGNB container")
+        from build_05a_make_panels_agnb import make_panels_agnb
+        make_panels_agnb(db_path, panels_rgba_dir, panels_agnb_path)
+
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'
     if do_06_import_mapmaker_files:
@@ -112,10 +119,10 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         polys_inc_path = f"src/asm/polys.asm"
         do_all_the_polys(db_path, polys_inc_path)
         
-    # build_91_asm_img_load.py
-    if do_91_asm_img_load:
-        print(f"build_91_asm_img_load: Making image load assembler file")
-        from build_91_asm_img_load import make_asm_images_inc
+    # build_91_asm_images.py
+    if do_91_asm_images:
+        print(f"build_91_asm_images: Making image buffer metadata and remaining loose loaders")
+        from build_91_asm_images import make_asm_images_inc
         panels_inc_path = f"src/asm/images.asm"
         next_buffer_id_counter = 256
         make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)
@@ -190,12 +197,13 @@ if __name__ == "__main__":
     do_04_make_panels_png = False
     do_04a_make_dws_png = False
     do_05_panels_rgba = False
+    do_05a_make_panels_agnb = False
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
     do_08_make_sfx = False
     do_90_asm_polys = False
-    do_91_asm_img_load = False
+    do_91_asm_images = False
     do_91a_asm_font = False
     do_91b_asm_ui = False
     do_91c_asm_map_masks = False
@@ -205,22 +213,23 @@ if __name__ == "__main__":
     do_99_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    do_00_delete_tgt_dir = False
-    do_01_polys_masks = False
-    do_02_fetch_tiles = False
-    do_04_make_panels_png = False
-    do_04a_make_dws_png = False
-    do_05_panels_rgba = False
-    do_06_import_mapmaker_files = False
-    do_07_map_panels = False
-    do_08_make_sfx = False
-    do_90_asm_polys = False
-    do_91_asm_img_load = False
-    do_91a_asm_font = False
-    do_91b_asm_ui = False
-    do_91c_asm_map_masks = False
-    do_91d_asm_ui_bj = False
-    do_98_asm_sfx = False
+    do_00_delete_tgt_dir = True
+    do_01_polys_masks = True
+    do_02_fetch_tiles = True
+    do_04_make_panels_png = True
+    do_04a_make_dws_png = True
+    do_05_panels_rgba = True
+    do_05a_make_panels_agnb = True
+    do_06_import_mapmaker_files = True
+    do_07_map_panels = True
+    do_08_make_sfx = True
+    do_90_asm_polys = True
+    do_91_asm_images = True
+    do_91a_asm_font = True
+    do_91b_asm_ui = True
+    do_91c_asm_map_masks = True
+    do_91d_asm_ui_bj = True
+    do_98_asm_sfx = True
     do_99_asm_assemble = True
 
     map_dim_x, map_dim_y = 16, 16 # Don't mess with this
