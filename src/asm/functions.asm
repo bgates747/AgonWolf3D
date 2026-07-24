@@ -1,4 +1,14 @@
 ; https://github.com/envenomator/Agon/blob/master/ez80asm%20examples%20(annotated)/functions.s
+; Print a zero-terminated string stored inline after the call.
+; The call's return address is the string pointer; printString advances HL past
+; the terminator, and that address becomes the continuation return address.
+; destroys: AF, HL
+printInline:
+    pop hl
+    call printString
+    push hl
+    ret
+
 ; Print a zero-terminated string
 ; HL: Pointer to string
 printString:

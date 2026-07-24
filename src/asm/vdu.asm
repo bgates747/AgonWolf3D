@@ -1574,7 +1574,7 @@ sfx_load_main_loop:
 	call move_bj
 ; print welcome message
 	ld ix,font_itc_honda
-	ld hl,hello_world
+	ld hl,welcome_message
 	ld bc,32
 	ld de,2
 	call font_bmp_print
@@ -1585,8 +1585,8 @@ sfx_load_main_loop:
 	call printNewLine
 
 ; print current load stopwatch
-	ld hl,loading_time
-	call printString
+	call printInline
+	asciz "Loading time:"
 	call stopwatch_get ; hl = elapsed time in 120ths of a second
 	call printDec
 	

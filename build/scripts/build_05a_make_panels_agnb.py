@@ -4,21 +4,20 @@ The RIFF/AGNB writer is adapted from the hardware-proven implementation in:
 
     agon-utils/examples/agnb/container/scripts/do_assembly.py
 
-The panel catalog and ordering are shared with build_91_asm_images.py so the
-container's explicit buffer IDs remain identical to the generated BUF_* values.
+The shared image catalog assigns the explicit buffer IDs consumed by both this
+container writer and build_91_asm_images.py.
 """
 
 import struct
 from dataclasses import dataclass
 from pathlib import Path
 
-from build_91_asm_images import get_panels_data
+from image_catalog import build_image_catalog, family_entries
 
 
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
 IMAGE_FORMAT_RGBA2222 = 1
-FIRST_PANEL_BUFFER_ID = 0x0100
 MAX_U16 = 0xFFFF
 MAX_U32 = 0xFFFFFFFF
 
@@ -53,20 +52,17 @@ def make_chunk(chunk_id, payload):
 def load_panel_records(db_path, panels_rgba_dir):
     """Build and validate the ordered cube/panel catalog."""
     panels_rgba_dir = Path(panels_rgba_dir)
-    rows = get_panels_data(db_path, "cube")
+    catalog = build_image_catalog(db_path, cube_rgba_dir=panels_rgba_dir)
     records = []
-    names = set()
     buffer_ids = set()
 
-    for index, row in enumerate(rows):
-        name = row["panel_base_filename"]
-        buffer_id = FIRST_PANEL_BUFFER_ID + index
-        width = row["dim_x"]
-        height = row["dim_y"]
-        rgba_file = panels_rgba_dir / f"{name}.rgba2"
+    for entry in family_entries(catalog, "cube"):
+        name = entry.name
+        buffer_id = entry.buffer_id
+        width = entry.width
+        height = entry.height
+        rgba_file = entry.payload_path
 
-        if name in names:
-            raise ValueError(f"Duplicate panel name: {name}")
         if buffer_id in buffer_ids:
             raise ValueError(f"Duplicate panel buffer ID: 0x{buffer_id:04X}")
         if buffer_id >= MAX_U16:
@@ -84,7 +80,6 @@ def load_panel_records(db_path, panels_rgba_dir):
                 f"expected {expected_size}, found {data_size}"
             )
 
-        names.add(name)
         buffer_ids.add(buffer_id)
         records.append(
             ImageRecord(
@@ -143,13 +138,6 @@ def build_container(records):
     return b"RIFF" + struct.pack("<I", len(body)) + body
 
 
-def remove_containerized_panel_files(records):
-    """Remove cube payload intermediates after the container is complete."""
-    for record in records:
-        record.rgba_file.unlink()
-    print(f"Removed {len(records)} containerized panel intermediates")
-
-
 def make_panels_agnb(db_path, panels_rgba_dir, output_path):
     records = load_panel_records(db_path, panels_rgba_dir)
     container = build_container(records)
@@ -160,13 +148,12 @@ def make_panels_agnb(db_path, panels_rgba_dir, output_path):
         f"Generated {output_path} with {len(records)} panel records "
         f"({len(container)} bytes)"
     )
-    remove_containerized_panel_files(records)
     return records
 
 
 if __name__ == "__main__":
     make_panels_agnb(
         "build/data/build.db",
-        "tgt/panels",
+        "build/panels/rgba2",
         "tgt/images.agnb",
     )

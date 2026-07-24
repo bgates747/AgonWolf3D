@@ -7,10 +7,11 @@ import sqlite3
 # A simple Tkinter application to review the perspective transformed 
 # texture images for any errors, because weird things sometimes happen.
 class ImageBrowserApp:
-    def __init__(self, master, df, img_dir):
+    def __init__(self, master, df, cube_img_dir, sprite_img_dir):
         self.master = master
         self.df = df
-        self.img_dir = img_dir
+        self.cube_img_dir = cube_img_dir
+        self.sprite_img_dir = sprite_img_dir
         self.current_index = 0
 
         self.canvas = Canvas(master, width=400, height=300)
@@ -39,7 +40,12 @@ class ImageBrowserApp:
         dim_x = row['dim_x']
         dim_y = row['dim_y']
 
-        img_path = f"{self.img_dir}/{row['panel_base_filename']}.rgba2"
+        img_dir = (
+            self.cube_img_dir
+            if row["render_type"] == "cube"
+            else self.sprite_img_dir
+        )
+        img_path = f"{img_dir}/{row['panel_base_filename']}.rgba2"
 
         img_tex = rgba2_to_img(img_path, row['dim_x'], row['dim_y'])
 
@@ -68,10 +74,10 @@ import pandas as pd
 def make_df_panels_lookup(db_path):
     conn = sqlite3.connect(db_path)
     query = """
-        select t1.render_obj_id, t1.poly_id, t1.cube_x, t1.cube_y, t1.poly_x0, t1.poly_y0, t1.poly_x1, t1.poly_y1, t1.poly_x2, t1.poly_y2, t1.poly_x3, t1.poly_y3, t1.plot_x, t1.plot_y, t1.dim_x, t1.dim_y, t1.panel_base_filename,
+        select t1.render_type, t1.render_obj_id, t1.poly_id, t1.cube_x, t1.cube_y, t1.poly_x0, t1.poly_y0, t1.poly_x1, t1.poly_y1, t1.poly_x2, t1.poly_y2, t1.poly_x3, t1.poly_y3, t1.plot_x, t1.plot_y, t1.dim_x, t1.dim_y, t1.panel_base_filename,
         t2.plot_x as plot_x_unscaled, t2.plot_y as plot_y_unscaled, t2.dim_x dim_x_unscaled, t2.dim_y as dim_y_unscaled
         from (
-            select render_obj_id, poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz, panel_base_filename
+            select render_type, render_obj_id, poly_id, cube_x, cube_y, poly_x0, poly_y0, poly_x1, poly_y1, poly_x2, poly_y2, poly_x3, poly_y3, plot_x, plot_y, dim_x, dim_y, scale, align_vert, align_horiz, panel_base_filename
             from tbl_04_panels_lookup
             -- where render_obj_id = 51 and cube_x = 0
         ) as t1 inner join (
@@ -94,11 +100,17 @@ def make_df_panels_lookup(db_path):
 
 if __name__ == '__main__':
     db_path = 'build/data/build.db'
-    panels_img_dir = 'tgt/panels'
+    cube_img_dir = 'build/panels/rgba2'
+    sprite_img_dir = 'tgt/panels'
     df_panels_lookup = make_df_panels_lookup(db_path)
     screen_width = 320
     screen_height = 240
 
     root = tk.Tk()
-    app = ImageBrowserApp(root, df_panels_lookup, panels_img_dir)
+    app = ImageBrowserApp(
+        root,
+        df_panels_lookup,
+        cube_img_dir,
+        sprite_img_dir,
+    )
     root.mainloop()

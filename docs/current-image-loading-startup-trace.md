@@ -22,6 +22,8 @@ The binary is assembled for ADL mode at `0x040000` and begins with `jp start` (`
 1. `start` (`src/asm/wolf3d.asm`)
    - Saves `AF`, `BC`, `DE`, `IX`, and `IY`.
    - Calls `init`.
+   - If `init` fails, calls the shared `app_cleanup` routine and returns to MOS
+     without entering the game.
    - Calls `main`.
    - Restores the saved registers and returns to MOS with `HL=0`.
 
@@ -32,6 +34,10 @@ The binary is assembled for ADL mode at `0x040000` and begins with `jp start` (`
 3. `main` (`src/asm/wolf3d.asm`)
    - Calls `new_game`, then enters `main_loop`.
    - No primary image files are loaded here. Rendering consumes the VDP buffers populated by `init`.
+   - Normal exit reaches `main_end`, which falls through to the same
+     `app_cleanup` routine used after failed initialization. It clears all VDP
+     buffers, disables the additional audio channels, restores screen mode
+     zero, and turns the cursor on before returning.
 
 ## `init` call trace, in execution order
 
@@ -62,7 +68,7 @@ The binary is assembled for ADL mode at `0x040000` and begins with `jp start` (`
 7. `cursor_off` (`src/asm/vdu.asm`)
 
 8. `printString` (`src/asm/functions.asm`)
-   - Prints `loading_ui`, defined in `src/asm/wolf3d.asm`.
+   - Prints the single-site inline `Loading UI` message.
 
 ### Proportional bitmap-font loads
 
@@ -146,8 +152,9 @@ The following three blocks repeat the same setup and call:
 
 The buffer constants, counts, and lookup tables, plus the remaining sprite and
 distance-wall loose loaders, are generated in `src/asm/images.asm` by
-`build/scripts/build_91_asm_images.py`. Cube/panel payloads are generated into
-`tgt/images.agnb` by `build/scripts/build_05a_make_panels_agnb.py`.
+`build/scripts/build_91_asm_images.py`. Cube/panel RGBA2222 intermediates are
+generated under `build/panels/rgba2` and packaged into `tgt/images.agnb` by
+`build/scripts/build_05a_make_panels_agnb.py`.
 
 ### `img_load_main` per-image trace
 
@@ -167,7 +174,7 @@ distance-wall loose loaders, are generated in `src/asm/images.asm` by
    - Plots it at the current `(x,y)`.
 7. Call `font_bmp_print` (`src/asm/fonts_bmp.asm`) with:
    - font table `font_itc_honda` (`src/asm/font_itc_honda.asm`);
-   - string `hello_world` (`src/asm/wolf3d.asm`);
+   - shared string `welcome_message` (`src/asm/wolf3d.asm`);
    - pixel position `(32,2)`.
 8. Call `vdu_cls` (`src/asm/vdu.asm`) to clear the text area.
 9. Print `cur_filename`, then a newline, through `printString` and `printNewLine` (`src/asm/functions.asm`).

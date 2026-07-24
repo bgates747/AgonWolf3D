@@ -114,14 +114,12 @@ prt_calibrate:
     xor a ; clear carry,zero is default value for running on hardware
     ld (is_emulator),a
     sbc hl,de
-    ld hl,on_hardware ; default message for running on hardware
     jp z,prt_calibrate ; zero result is indeterminate so we try again
     ret m ; negative result means we're on hardware
     inc a ; we're on emulator
     ld (is_emulator),a
     ld bc,prt_reload_emulator
     ld (prt_reload),bc
-    ld hl,on_emulator
     ret
 
 calibrating_timer: db "Calibrating timer\r\n",0

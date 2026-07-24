@@ -40,7 +40,12 @@ start:
     push iy
 
 	call init ; Initialization code
-    jp nz,exit ; initialization failed
+    jr z,@initialized
+; Initialization failed after changing VDP/application state. Restore the same
+; MOS-facing state used by a normal game exit before returning to the caller.
+    call app_cleanup
+    jp exit
+@initialized:
     call main ; Call the main function
 
 exit:
@@ -54,15 +59,9 @@ exit:
 
     ret 
 
-hello_world: db "Welcome to Agon Wolf3D",0
-loading_ui: db "Loading UI",0
-loading_panel: db "Loading panel: ",0
-loading_time: db "Loading time:",0
-loading_complete: db "Press any key to continue.\r\n",0
-loading_error: db "AGNB panel load failed: ",0
+welcome_message: asciz "Welcome to Agon Wolf3D"
+press_any_key: asciz "Press any key to continue.\r\n"
 is_emulator: db 0
-on_emulator: db "Running on emulator.\r\n",0
-on_hardware: db "Running on hardware.\r\n",0
 
 init:
 ; clear all buffers
@@ -89,8 +88,8 @@ init:
 	call cursor_off
 
 ; print loading ui message
-	ld hl,loading_ui
-	call printString
+		call printInline
+		asciz "Loading UI"
 
 ; load fonts
 	call load_font_itc_honda
@@ -139,11 +138,13 @@ init:
 ; unavailable. Preserve the loader error while presenting it to the user.
     push af
     call vdu_cls
-    ld hl,loading_error
-    call printString
+    call printInline
+    asciz "AGNB panel load failed: "
     pop af
     call printHex8
     call printNewLine
+    call printInline
+    asciz "Press any key to return to MOS\r\n"
     call vdu_flip
     call waitKeypress
     ld a,(agnb_last_error)
@@ -188,8 +189,8 @@ init:
 	sbc hl,de
 	jp m,@on_emulator
 	call vdu_home_cursor
-	ld hl,on_hardware
-	call printString
+	call printInline
+	asciz "Running on hardware.\r\n"
 	jp @test_done
 
 @on_emulator:
@@ -197,19 +198,19 @@ init:
 	ld a,1
 	ld (is_emulator),a
 	call vdu_home_cursor
-	ld hl,on_emulator
-	call printString
+	call printInline
+	asciz "Running on emulator.\r\n"
 
 @test_done:
 ; print final loading time
-	ld hl,loading_time
-	call printString
+	call printInline
+	asciz "Loading time:"
 	call stopwatch_get ; hl = elapsed time in 120ths of a second
 	call printDec
 	call printNewLine
 
 ; print loading complete message and wait for user keypress
-	ld hl,loading_complete
+	ld hl,press_any_key
 	call printString
 	call vdu_flip 
 	call waitKeypress
@@ -297,7 +298,9 @@ main_loop:
 main_end:
 	; call do_outro
 
-        call vdu_clear_all_buffers
+; Normal and failed-startup exits share one cleanup path.
+app_cleanup:
+    call vdu_clear_all_buffers
 	call vdu_disable_channels
 
 ; restore screen to something normalish

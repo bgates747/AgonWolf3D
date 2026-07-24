@@ -60,6 +60,12 @@ Avoid repeating the same explanation in several documents. A log should note
 that a durable decision was made and point to the authoritative specification
 instead of copying the entire decision.
 
+Code-review findings, identified risks, and recommended follow-up work should
+normally be written into the current development log rather than left only in
+conversation. Record actionable findings as unchecked checklist items so they
+remain visible and can be ticked off as they are resolved. Omit only genuinely
+transient observations or items the user explicitly declines to retain.
+
 ## Python environment
 
 - Before running Python in an open project, look for a project-local `.venv`
@@ -108,6 +114,10 @@ instead of copying the entire decision.
   `docs/ez80_hacks.md` before proposing implementation idioms. It records
   project-tested, non-obvious eZ80 behavior, including undocumented
   instruction details that may be smaller or faster than conventional code.
+- Use `printInline` for a message issued from one distinct call site: place an
+  `ASCIZ` string immediately after `call printInline`. Keep a named string
+  location when multiple callers share the text. Repeated execution of one
+  call site still counts as a single-site message.
 - Use `ASCIZ` for null-terminated string literals instead of spelling out a
   separate zero byte. For example, the current preferred form is:
 

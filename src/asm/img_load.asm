@@ -51,7 +51,7 @@ img_load_agnb_progress:
 
 ; Retain the bitmap-font welcome message used by the loose-file loader.
 	ld ix,font_itc_honda
-	ld hl,hello_world
+	ld hl,welcome_message
 	ld bc,32
 	ld de,2
 	call font_bmp_print
@@ -59,16 +59,16 @@ img_load_agnb_progress:
 ; The container intentionally has no runtime filenames, so display an ordered
 ; panel number instead.
 	call vdu_cls
-	ld hl,loading_panel
-	call printString
+	call printInline
+	asciz "Loading panel: "
 	ld hl,(cur_file_idx)
 	inc hl
 	call printDec
 	call printNewLine
 
 ; Display the same cumulative startup stopwatch and present this frame.
-	ld hl,loading_time
-	call printString
+	call printInline
+	asciz "Loading time:"
 	call stopwatch_get
 	call printDec
 	call vdu_flip
@@ -101,7 +101,7 @@ img_load_main_loop:
 	call move_bj
 ; print welcome message
 	ld ix,font_itc_honda
-	ld hl,hello_world
+	ld hl,welcome_message
 	ld bc,32
 	ld de,2
 	call font_bmp_print
@@ -112,8 +112,8 @@ img_load_main_loop:
 	call printNewLine
 	
 ; print current load stopwatch
-	ld hl,loading_time
-	call printString
+	call printInline
+	asciz "Loading time:"
 	call stopwatch_get ; hl = elapsed time in 120ths of a second
 	call printDec
 

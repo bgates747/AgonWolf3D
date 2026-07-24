@@ -75,18 +75,24 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
 
 # build_05_make_panels_rgba.py
-    panels_rgba_dir = 'tgt/panels'
+    cube_rgba_dir = 'build/panels/rgba2'
+    sprite_rgba_dir = 'tgt/panels'
     if do_05_panels_rgba:
-        print(f"build_05_make_panels_rgba: Making 3D panels rgba")
+        print(f"build_05_make_panels_rgba: Making cube and sprite RGBA2222 files")
         from build_05_make_panels_rgba import make_panels_rgba
-        make_panels_rgba(db_path, panels_png_dir, panels_rgba_dir)
+        make_panels_rgba(
+            db_path,
+            panels_png_dir,
+            cube_rgba_dir,
+            sprite_rgba_dir,
+        )
 
 # build_05a_make_panels_agnb.py
     panels_agnb_path = 'tgt/images.agnb'
     if do_05a_make_panels_agnb:
         print(f"build_05a_make_panels_agnb: Making panels AGNB container")
         from build_05a_make_panels_agnb import make_panels_agnb
-        make_panels_agnb(db_path, panels_rgba_dir, panels_agnb_path)
+        make_panels_agnb(db_path, cube_rgba_dir, panels_agnb_path)
 
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'
@@ -124,8 +130,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         print(f"build_91_asm_images: Making image buffer metadata and remaining loose loaders")
         from build_91_asm_images import make_asm_images_inc
         panels_inc_path = f"src/asm/images.asm"
-        next_buffer_id_counter = 256
-        make_asm_images_inc(db_path, panels_inc_path, next_buffer_id_counter)
+        make_asm_images_inc(db_path, panels_inc_path, panels_agnb_path)
 
 # build_91a_asm_font.py
     if do_91a_asm_font:

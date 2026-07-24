@@ -33,8 +33,9 @@ uses Boolean switches in its `__main__` section to select stages, then calls
 build/data/build.db       generated metadata and build state
 build/panels/thumbs/      source-tile PNG intermediates
 build/panels/png/         transformed panel and sprite PNG intermediates
+build/panels/rgba2/       containerized cube/panel RGBA2222 intermediates
 build/dws/png/            cropped distance-wall PNG intermediates
-tgt/panels/               headerless panel and sprite RGBA2222 payloads
+tgt/panels/               loose sprite RGBA2222 payloads
 tgt/dws/                  headerless distance-wall RGBA2222 payloads
 src/asm/images.asm        generated IDs, lookup tables, loaders, and filenames
 tgt/wolf3d.bin            assembled application
@@ -182,13 +183,23 @@ conversion occur in the same stage.
 
 ## Stage 05: RGBA2222 panel and sprite payloads
 
-`build/scripts/build_05_make_panels_rgba.py` deletes and recreates
-`tgt/panels`, walks the sorted files in `build/panels/png`, and converts every
-PNG to:
+`build/scripts/build_05_make_panels_rgba.py` reads the database catalogs,
+deletes and recreates both output directories, and walks the sorted files in
+`build/panels/png`. Containerized cube/panel intermediates are written to:
+
+```text
+build/panels/rgba2/<panel_base_filename>.rgba2
+```
+
+The still-loose sprite payloads are written directly to the deployable tree:
 
 ```text
 tgt/panels/<panel_base_filename>.rgba2
 ```
+
+The stage rejects cube/sprite filename overlap, uncatalogued transformed PNGs,
+and incomplete catalog conversion. This keeps build-only cube intermediates
+out of `tgt` without changing the sprite runtime path.
 
 The shared `agonImages.img_to_rgba2` converter emits one byte per pixel in
 row-major order. Each RGBA channel is quantized to two bits and packed as:
@@ -260,10 +271,10 @@ It does not need filenames, AGNB record indices, or container offsets. Record
 order therefore remains a build concern only; runtime identity is the explicit
 `BHDR` buffer ID.
 
-## Proposed AGNB build catalog
+## Shared AGNB build catalog
 
-Stage 91 should be refactored to construct one in-memory catalog before writing
-either output. Each catalog entry should contain at least:
+`build/scripts/image_catalog.py` constructs the shared in-memory catalog
+consumed by the assembly and AGNB writers. Each catalog entry contains:
 
 ```text
 family          cube, sprite, or dws
@@ -271,27 +282,29 @@ name            panel_base_filename
 bufferId        exact generated 16-bit VDP buffer ID
 width           dim_x
 height          dim_y
-format          1 (RGBA2222)
-payload_path    tgt/panels/<name>.rgba2 or tgt/dws/<name>.rgba2
-payload_size    width * height
+payload_path    build/panels/rgba2/<cube>.rgba2,
+                tgt/panels/<sprite>.rgba2, or tgt/dws/<name>.rgba2
 ```
 
-This catalog becomes the single authority for:
+`FIRST_IMAGE_BUFFER_ID` in that module is the single authority for the
+`0x0100` starting ID. The catalog assigns IDs continuously in cube, sprite,
+then distance-wall order and is the single authority for:
 
 1. the `BUF_*` constants and runtime buffer-ID lookup tables emitted to
    `src/asm/images.asm`; and
 2. the `BHDR`, `IMAG`, and `DATA` fields emitted to `tgt/images.agnb`.
 
-The writer must not perform a second directory scan to assign IDs or ordering.
-Producing both outputs from the same catalog prevents assembly/container ID
-drift.
+The writer does not perform a second directory scan or independent ID
+assignment. After generating `images.asm`, stage 91 parses `images.agnb` and
+requires its ordered cube `BHDR` IDs to match the shared catalog before final
+assembly can proceed.
 
-During the panels-only migration, stage 05 may continue to create cube and
-sprite RGBA2222 intermediates together in `tgt/panels`. After stage 05a has
-successfully written `tgt/images.agnb`, it removes exactly the catalogued cube
-payload files. The deployable `tgt/panels` directory therefore contains only
-the 100 loose sprite files; the 308 cube/panel payloads exist only in the
-container.
+During the panels-only migration, stage 05 creates the 308 build-only cube
+RGBA2222 intermediates in `build/panels/rgba2` and the 100 loose sprite
+payloads in `tgt/panels`. Stage 05a reads the cube directory and writes
+`tgt/images.agnb`; it does not delete its build inputs. The deployable
+`tgt/panels` directory therefore contains only sprite files, while the cube
+intermediates remain available for container regeneration and inspection.
 
 A tracked manifest is optional at first because the database and deterministic
 queries already define the catalog. If a manifest is introduced, it should be
@@ -302,10 +315,10 @@ artifact, not as a second independently edited source of truth.
 
 ### Hook 1: catalog extraction
 
-Refactor the three queries and sequential-ID assignment currently embedded in
-`build_91_asm_images.py` into a reusable catalog-building function. Preserve
-the existing family order, within-family ordering, names, dimensions, and IDs
-exactly for the first migration.
+Implemented in `build/scripts/image_catalog.py`. It owns the three database
+queries, sequential-ID assignment, family grouping, payload paths, and the
+AGNB ID consistency check. `build_05_make_panels_rgba.py`,
+`build_05a_make_panels_agnb.py`, and `build_91_asm_images.py` consume it.
 
 ### Hook 2: early validation
 
@@ -415,15 +428,8 @@ container path is proven.
 - The application and loose build path should remain runnable until the
   container path has passed emulator and physical-hardware testing.
 
-## Immediate next decision
+## Catalog ownership decision
 
-The next implementation-sized decision is whether to:
-
-1. keep `build_91_asm_images.py` as the owner of the shared catalog and add
-   AGNB output beside its assembly output; or
-2. extract the shared catalog into a small new module consumed by separate
-   assembly and AGNB writers.
-
-The second structure gives the clearest ownership boundary and makes it easier
-to test catalog construction separately, while preserving the current stage-91
-ordering and buffer-ID contract.
+The catalog is a small independent module consumed by the separate assembly
+and AGNB writers. This preserves focused build stages while ensuring that
+ordering and buffer IDs cannot be assigned independently.
