@@ -313,6 +313,10 @@ def make_tbl_91a_font(db_path, font_def_file, font_name):
         )
     ''')
     conn.commit()
+    cursor.execute(
+        """DELETE FROM tbl_91a_font WHERE font_name != ?;""",
+        (font_name,),
+    )
     cursor.execute("""DELETE FROM tbl_91a_font WHERE font_name = ?;""",(font_name,))
     conn.commit()
 
@@ -383,19 +387,6 @@ def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buf
 def maken_zee_fonts(next_buffer_id):
     scale_method = Image.NEAREST
 
-    font_name = 'retro_computer'
-    abbr_name = 'rc'
-    lines_of_text = [
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "9876543210?!",
-    ]
-    line_starts = [10, 53]
-    character_height = 31
-    buffer_id_counter = next_buffer_id
-    space_width = 6
-
-    main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_id_counter, space_width, scale_method)
-
     font_name = 'itc_honda'
     abbr_name = 'honda'
     lines_of_text = [
@@ -405,7 +396,8 @@ def maken_zee_fonts(next_buffer_id):
     ]
     line_starts = [3, 63, 125]
     character_height = 52
-    buffer_id_counter = buffer_id_counter + 256
+    # Preserve the established ITC Honda buffer range beginning at 0x1100.
+    buffer_id_counter = next_buffer_id + 256
     space_width = 6
 
     main(font_name, abbr_name, lines_of_text, line_starts, character_height, buffer_id_counter, space_width, scale_method)
@@ -413,4 +405,3 @@ def maken_zee_fonts(next_buffer_id):
 if __name__ == "__main__":
     next_buffer_id = 0x1000
     maken_zee_fonts(next_buffer_id)
-

@@ -74,9 +74,9 @@ The binary is assembled for ADL mode at `0x040000` and begins with `jp start` (`
 
 9. `load_font_itc_honda` (`src/asm/font_itc_honda.asm`)
 
-10. `load_font_retro_computer` (`src/asm/font_retro_computer.asm`)
-
-Both are generated, straight-line sequences. For every available glyph they:
+This is the only custom bitmap font retained and used by the application. Its
+generated straight-line loader performs the following for every available
+glyph:
 
 1. Put a zero-terminated loose `.rgba2` filename in `HL`.
 2. Put `filedata` in `DE`.
@@ -85,13 +85,20 @@ Both are generated, straight-line sequences. For every available glyph they:
 5. Put the glyph's VDP buffer ID in `HL`, width in `BC`, height in `DE`, and byte count in `IX`.
 6. Call `vdu_load_img` (`src/asm/img_load.asm`).
 
-The Honda buffers occupy the generated character-derived range `0x1120` through `0x117A`; Retro Computer occupies `0x1020` through `0x105A`. Missing glyphs reuse a fallback entry in each font's lookup table and do not cause another file load.
+The Honda buffers occupy the generated character-derived range `0x1120`
+through `0x117A`. Missing glyphs reuse a fallback lookup-table entry and do not
+cause another file load.
 
-Each font lookup record and its `EQU` buffer IDs live in its generated source file. A lookup record contains two 24-bit fields: packed `[y_offset, height, width]`, followed by the glyph buffer ID. `font_bmp_plot` and `font_bmp_print` (`src/asm/fonts_bmp.asm`) use these records to select and plot one VDP bitmap per glyph, which is what permits proportional widths and vertical offsets.
+Each font lookup record and its `EQU` buffer IDs live in the generated source
+file. A lookup record contains two 24-bit fields: packed
+`[y_offset, height, width]`, followed by the glyph buffer ID. `font_bmp_plot`
+and `font_bmp_print` (`src/asm/fonts_bmp.asm`) use these records to select and
+plot one VDP bitmap per glyph, which is what permits proportional widths and
+vertical offsets.
 
 ### UI and splash assets
 
-11. `load_ui_images` (`src/asm/ui_img.asm`)
+10. `load_ui_images` (`src/asm/ui_img.asm`)
    - Loads 11 loose `.rgba2` files by the same MOS-load → `filedata` → `vdu_load_img` sequence.
    - Uses VDP buffers `0x2000` through `0x200A`.
    - Important progress-screen assets:
@@ -270,7 +277,6 @@ These regions still matter when choosing any fixed RAM location for AGNB metadat
 | Panels/cubes | `0x0100`–`0x0233` | `src/asm/images.asm` |
 | Sprites | `0x0234`–`0x0297` | `src/asm/images.asm` |
 | Distance walls | `0x0298`–`0x02A0` | `src/asm/images.asm` |
-| Retro Computer glyphs | character-derived IDs in `0x1020`–`0x105A` | `src/asm/font_retro_computer.asm` |
 | ITC Honda glyphs | character-derived IDs in `0x1120`–`0x117A` | `src/asm/font_itc_honda.asm` |
 | Core UI | `0x2000`–`0x200A` | `src/asm/ui_img.asm` |
 | BJ weapon UI | `0x2100`–`0x2113` | `src/asm/ui_img_bj.asm` |
