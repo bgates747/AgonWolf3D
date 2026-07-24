@@ -7,8 +7,8 @@ from image_catalog import (
 )
 
 
-# Generate image buffer constants and lookup tables. Cube/panel payloads are
-# deployed through images.agnb; distance walls retain loose-file loaders.
+# Generate image buffer constants and renderer lookup tables. All three
+# world-image families are deployed through images.agnb.
 def write_asm_image_family(
     panels_inc_path,
     render_type,
@@ -96,6 +96,7 @@ def make_asm_images_inc(
         "dws",
         "dws",
         family_entries(catalog, "dws"),
+        emit_loose_file_loaders=False,
     )
 
     assert_image_ids_match_agnb(catalog, agnb_path)

@@ -24,7 +24,6 @@ def make_panels_rgba(
     db_path,
     panels_png_dir,
     images_rgba_dir,
-    legacy_sprite_rgba_dir=None,
 ):
     """Convert containerized cube and sprite PNGs to build intermediates."""
     panels_png_dir = Path(panels_png_dir)
@@ -38,10 +37,6 @@ def make_panels_rgba(
         raise ValueError(f"Cube and sprite output names overlap: {names}")
 
     recreate_directory(images_rgba_dir)
-    if legacy_sprite_rgba_dir:
-        legacy_sprite_rgba_dir = Path(legacy_sprite_rgba_dir)
-        if legacy_sprite_rgba_dir.exists():
-            shutil.rmtree(legacy_sprite_rgba_dir)
 
     converted = {"cube": 0, "sprite": 0}
     for png_path in sorted(panels_png_dir.glob("*.png")):
@@ -76,11 +71,9 @@ if __name__ == "__main__":
     db_path = 'build/data/build.db'
     panels_png_dir = 'build/panels/png'
     images_rgba_dir = 'build/panels/rgba2'
-    legacy_sprite_rgba_dir = 'tgt/panels'
 
     make_panels_rgba(
         db_path,
         panels_png_dir,
         images_rgba_dir,
-        legacy_sprite_rgba_dir,
     )

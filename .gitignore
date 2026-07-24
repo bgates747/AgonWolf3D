@@ -9,6 +9,7 @@ flicker/
 
 # Ignore generated container input payloads
 /build/panels/rgba2/
+/build/dws/rgba2/
 
 # Ignore machine-local external documentation link
 /agon-docs

@@ -128,7 +128,7 @@ init:
 ; initialize image load routine
 	call img_load_init
 
-; load cube/panel and sprite images
+; load cube/panel, sprite, and distance-wall images
     ld hl,0
     ld (cur_file_idx),hl
 	call agnb_load_images
@@ -152,14 +152,6 @@ init:
     ret
 
 @images_loaded:
-
-; load distance walls
-	ld bc,dws_num_panels
-	ld hl,dws_buffer_id_lut
-	ld (cur_buffer_id_lut),hl
-	ld hl,dws_load_panels_table
-	ld (cur_load_jump_table),hl
-	call img_load_main
 
 ; load sound effects
 	ld bc,SFX_num_buffers

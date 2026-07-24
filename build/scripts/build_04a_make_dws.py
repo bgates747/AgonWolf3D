@@ -83,7 +83,15 @@ def make_dws_rgba(dws_png_dir, dws_rgba_dir):
         # convert the transformed image to RGBA
         img_to_rgba2(img,tgt_filepath)
 
-def make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y):
+def make_dws(
+    db_path,
+    dws_src_dir,
+    dws_png_dir,
+    dws_rgba_dir,
+    view_distance,
+    map_dim_x,
+    map_dim_y,
+):
     if os.path.exists(dws_png_dir):
         shutil.rmtree(dws_png_dir)
     os.makedirs(dws_png_dir)
@@ -98,9 +106,17 @@ def make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map
 if __name__ == "__main__":
     db_path = f'build/data/build.db'
     dws_png_dir = f'build/dws/png'
-    dws_rgba_dir = f'tgt/dws'
+    dws_rgba_dir = f'build/dws/rgba2'
     dws_src_dir = f'src/assets/images/textures/dws'
     map_dim_x, map_dim_y = 16, 16 # Don't mess with this
     view_distance = 5
 
-    make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
+    make_dws(
+        db_path,
+        dws_src_dir,
+        dws_png_dir,
+        dws_rgba_dir,
+        view_distance,
+        map_dim_x,
+        map_dim_y,
+    )

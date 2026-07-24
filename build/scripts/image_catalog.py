@@ -57,7 +57,7 @@ def build_image_catalog(
     db_path,
     cube_rgba_dir="build/panels/rgba2",
     sprite_rgba_dir="build/panels/rgba2",
-    dws_rgba_dir="tgt/dws",
+    dws_rgba_dir="build/dws/rgba2",
 ):
     """Assign deterministic IDs to every active world-image family."""
     sources = (
@@ -145,7 +145,9 @@ def read_agnb_buffer_ids(path):
     return ids
 
 
-def assert_image_ids_match_agnb(catalog, path, families=("cube", "sprite")):
+def assert_image_ids_match_agnb(
+    catalog, path, families=("cube", "sprite", "dws")
+):
     expected = [
         entry.buffer_id
         for entry in catalog

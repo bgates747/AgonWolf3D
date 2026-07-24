@@ -2,10 +2,10 @@
 
 Date traced: 2026-07-24
 
-> Integration update, 2026-07-24: the loose-file cube/panel and sprite passes
-> documented below have now been replaced by one 408-record
-> `tgt/images.agnb` load. Fonts, UI, distance walls, and sound effects retain
-> their loose paths. `agnb_load_images` calls `img_load_agnb_progress` after each image has
+> Integration update, 2026-07-24: all loose world-image passes documented
+> below have now been replaced by one 417-record `tgt/images.agnb` load.
+> Fonts, UI, and sound effects retain their loose paths. `agnb_load_images`
+> calls `img_load_agnb_progress` after each image has
 > been streamed, consolidated, and created as a bitmap, preserving the splash,
 > per-image debug plot, moving BJ, progress text, stopwatch, and display flip.
 > The historical loose-image trace remains below as the implementation
@@ -129,23 +129,18 @@ The splash and moving 120x120 BJ image must therefore be loaded successfully bef
 
 ### World images
 
-20. Panels/cubes and sprites (`src/asm/wolf3d.asm`)
-   - Calls `agnb_load_images` once for all 408 records in `images.agnb`.
+20. Panels/cubes, sprites, and distance walls (`src/asm/wolf3d.asm`)
+   - Calls `agnb_load_images` once for all 417 records in `images.agnb`.
    - Cube buffer range: `0x0100`–`0x0233`.
    - Sprite buffer range: `0x0234`–`0x0297`.
+   - Distance-wall buffer range: `0x0298`–`0x02A0`.
    - Calls `img_load_agnb_progress` after each finalized bitmap.
 
-21. Distance walls (`src/asm/wolf3d.asm`)
-   - `BC=dws_num_panels` (9).
-   - Uses `dws_buffer_id_lut` and `dws_load_panels_table`.
-   - Calls `img_load_main`.
-   - Generated buffer range: `0x0298`–`0x02A0`.
-
-The buffer constants, counts, and lookup tables, plus the remaining
-distance-wall loose loaders, are generated in `src/asm/images.asm` by
-`build/scripts/build_91_asm_images.py`. Cube and sprite RGBA2222 intermediates
-are generated under `build/panels/rgba2` and packaged into `tgt/images.agnb`
-by `build/scripts/build_05a_make_images_agnb.py`.
+The buffer constants, counts, and lookup tables are generated in
+`src/asm/images.asm` by `build/scripts/build_91_asm_images.py`. Cube and sprite
+RGBA2222 intermediates are generated under `build/panels/rgba2`; distance-wall
+intermediates are generated under `build/dws/rgba2`. All are packaged into
+`tgt/images.agnb` by `build/scripts/build_05a_make_images_agnb.py`.
 
 ### `img_load_main` per-image trace
 

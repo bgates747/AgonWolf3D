@@ -35,7 +35,7 @@ build/panels/thumbs/      source-tile PNG intermediates
 build/panels/png/         transformed panel and sprite PNG intermediates
 build/panels/rgba2/       containerized cube and sprite RGBA2222 intermediates
 build/dws/png/            cropped distance-wall PNG intermediates
-tgt/dws/                  headerless distance-wall RGBA2222 payloads
+build/dws/rgba2/           containerized distance-wall RGBA2222 intermediates
 src/asm/images.asm        generated IDs, lookup tables, loaders, and filenames
 tgt/wolf3d.bin            assembled application
 ```
@@ -175,7 +175,7 @@ map dimension minus one, it:
 3. records distance, placement, final dimensions, and base filename in the
    recreated `tbl_04a_dws_lookup`;
 4. writes `build/dws/png/dw_<distance>.png`; and
-5. converts the PNG to `tgt/dws/dw_<distance>.rgba2`.
+5. converts the PNG to `build/dws/rgba2/dw_<distance>.rgba2`.
 
 Unlike panels and sprites, distance-wall PNG production and RGBA2222
 conversion occur in the same stage.
@@ -236,9 +236,9 @@ three groups. The generated assembly contains, for each group:
 - a `<render_type>_num_panels` count;
 - a `<render_type>_buffer_id_lut`.
 
-Only families still loaded as loose files also receive a load-routine jump
-table, one `mos_load` routine per image, and pathname strings. At present this
-applies only to distance walls.
+Families loaded from AGNB receive no load-routine jump tables, individual
+`mos_load` routines, or pathname strings. All three world-image families now
+use this path.
 
 The constants and buffer-ID lookup tables are consumed by the renderer and
 must survive the first AGNB integration. The jump tables, individual load
@@ -248,10 +248,9 @@ become redundant for containerized families.
 ## Runtime load and render boundary
 
 `src/asm/wolf3d.asm` includes generated `src/asm/images.asm`. During `init`, it
-loads fonts and UI first, calls `agnb_load_images` once to load all cube/panel
-and sprite records from `images.agnb`, then invokes `img_load_main` for the
-remaining loose distance-wall files. The buffer-ID constants and lookup tables
-remain available to the renderer after startup.
+loads fonts and UI first, then calls `agnb_load_images` once to load all
+cube/panel, sprite, and distance-wall records from `images.agnb`. The buffer-ID
+constants and lookup tables remain available to the renderer after startup.
 
 Once loaded, game rendering selects images by their established buffer IDs.
 It does not need filenames, AGNB record indices, or container offsets. Record
@@ -270,7 +269,7 @@ bufferId        exact generated 16-bit VDP buffer ID
 width           dim_x
 height          dim_y
 payload_path    build/panels/rgba2/<cube-or-sprite>.rgba2
-                or tgt/dws/<name>.rgba2
+                or build/dws/rgba2/<name>.rgba2
 ```
 
 `FIRST_IMAGE_BUFFER_ID` in that module is the single authority for the
@@ -283,14 +282,14 @@ then distance-wall order and is the single authority for:
 
 The writer does not perform a second directory scan or independent ID
 assignment. After generating `images.asm`, stage 91 parses `images.agnb` and
-requires its ordered cube and sprite `BHDR` IDs to match the shared catalog
-before final assembly can proceed.
+requires all ordered cube, sprite, and distance-wall `BHDR` IDs to match the
+shared catalog before final assembly can proceed.
 
 Stage 05 creates all 308 cube/panel and 100 sprite RGBA2222 intermediates in
-`build/panels/rgba2`. Stage 05a reads those build-only files and writes all 408
-records to `tgt/images.agnb`; it does not delete its build inputs. No
-`tgt/panels` directory is deployed. Distance-wall payloads remain loose under
-`tgt/dws`.
+`build/panels/rgba2`, while stage 04a creates nine distance-wall intermediates
+in `build/dws/rgba2`. Stage 05a reads both build-only directories and writes
+all 417 records to `tgt/images.agnb`. The build inputs remain available
+locally, while neither `tgt/panels` nor `tgt/dws` is deployed.
 
 A tracked manifest is optional at first because the database and deterministic
 queries already define the catalog. If a manifest is introduced, it should be
@@ -353,7 +352,7 @@ Initially generate `src/asm/images.asm` with:
 - all three image counts; and
 - all buffer-ID lookup tables required by the renderer.
 
-Stop emitting, for the two containerized families:
+Stop emitting, for all three containerized families:
 
 - load-routine jump tables;
 - individual `mos_load` routines; and
@@ -386,17 +385,17 @@ construction functions.
 After the loader dependencies and scratch-memory contract are resolved:
 
 - include `src/asm/agnb.inc`;
-- replace the cube/panel and sprite `img_load_main` passes with one
+- replace all three world-image `img_load_main` passes with one
   `agnb_load_images` call;
 - handle its success/error result explicitly; and
-- retain loose loading for distance walls, fonts, UI, and sound.
+- retain loose loading for fonts, UI, and sound.
 
 ### Hook 7: deployment
 
 `build/scripts/deploy_01_to_sd.py` cleanly copies the entire `tgt` tree to the
 application directory on the physical SD card. Once `images.agnb` is generated
-under `tgt`, no special deployment copy is required. `tgt/panels` has been
-removed; only the loose `tgt/dws/*.rgba2` image family remains.
+under `tgt`, no special deployment copy is required. Both former loose
+world-image directories, `tgt/panels` and `tgt/dws`, have been removed.
 
 ## Build invariants to preserve
 

@@ -1,6 +1,5 @@
 """Replace the Agon hardware SD-card deployment with the local tgt tree."""
 
-import os
 import shutil
 from pathlib import Path
 
@@ -15,8 +14,6 @@ EXPECTED_DEPLOY_ROOT = Path("/media/smith/AGON/mystuff/AgonWolf3D")
 def deploy_to_sd():
     if not SD_MOUNT.is_mount():
         raise SystemExit(f"Agon SD card is not mounted at {SD_MOUNT}")
-    if os.statvfs(SD_MOUNT).f_flag & os.ST_RDONLY:
-        raise SystemExit(f"Agon SD card is mounted read-only at {SD_MOUNT}")
     if not SOURCE_TGT.is_dir():
         raise SystemExit(f"Build target directory is missing: {SOURCE_TGT}")
 
@@ -27,15 +24,16 @@ def deploy_to_sd():
         raise SystemExit(f"Refusing symlinked deployment path: {deploy_root}")
 
     deploy_root.mkdir(parents=True, exist_ok=True)
-    for child in deploy_root.iterdir():
-        if child.is_symlink() or child.is_file():
-            child.unlink()
-        elif child.is_dir():
-            shutil.rmtree(child)
-        else:
-            raise SystemExit(f"Refusing unknown filesystem entry: {child}")
-
     destination = deploy_root / "tgt"
+    if destination.is_symlink():
+        raise SystemExit(f"Refusing symlinked deployment target: {destination}")
+    if destination.exists():
+        if not destination.is_dir():
+            raise SystemExit(
+                f"Refusing non-directory deployment target: {destination}"
+            )
+        shutil.rmtree(destination)
+
     shutil.copytree(SOURCE_TGT, destination)
     print(f"Deployed {SOURCE_TGT} to {destination}")
 

@@ -1,4 +1,4 @@
-"""Build the cube-and-sprite AGNB image container.
+"""Build the complete world-image AGNB container.
 
 The RIFF/AGNB writer is adapted from the hardware-proven implementation in:
 
@@ -49,19 +49,22 @@ def make_chunk(chunk_id, payload):
     return chunk_id + struct.pack("<I", len(payload)) + payload + padding
 
 
-def load_image_records(db_path, images_rgba_dir):
-    """Build and validate the ordered cube-and-sprite catalog."""
+def load_image_records(db_path, images_rgba_dir, dws_rgba_dir):
+    """Build and validate the ordered cube, sprite, and DWS catalog."""
     images_rgba_dir = Path(images_rgba_dir)
     catalog = build_image_catalog(
         db_path,
         cube_rgba_dir=images_rgba_dir,
         sprite_rgba_dir=images_rgba_dir,
+        dws_rgba_dir=dws_rgba_dir,
     )
     records = []
     buffer_ids = set()
 
-    image_entries = family_entries(catalog, "cube") + family_entries(
-        catalog, "sprite"
+    image_entries = (
+        family_entries(catalog, "cube")
+        + family_entries(catalog, "sprite")
+        + family_entries(catalog, "dws")
     )
     for entry in image_entries:
         name = entry.name
@@ -145,8 +148,8 @@ def build_container(records):
     return b"RIFF" + struct.pack("<I", len(body)) + body
 
 
-def make_images_agnb(db_path, images_rgba_dir, output_path):
-    records = load_image_records(db_path, images_rgba_dir)
+def make_images_agnb(db_path, images_rgba_dir, dws_rgba_dir, output_path):
+    records = load_image_records(db_path, images_rgba_dir, dws_rgba_dir)
     container = build_container(records)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -162,5 +165,6 @@ if __name__ == "__main__":
     make_images_agnb(
         "build/data/build.db",
         "build/panels/rgba2",
+        "build/dws/rgba2",
         "tgt/images.agnb",
     )

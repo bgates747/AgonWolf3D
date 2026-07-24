@@ -67,16 +67,23 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
     # build_04a_make_dws.py
     db_path = f'build/data/build.db'
     dws_png_dir = f'build/dws/png'
-    dws_rgba_dir = f'tgt/dws'
+    dws_rgba_dir = f'build/dws/rgba2'
     dws_src_dir = f'src/assets/images/textures/dws'
     if do_04a_make_dws_png:
         print(f"build_04a_make_dws: Making distance walls")
         from build_04a_make_dws import make_dws
-        make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
+        make_dws(
+            db_path,
+            dws_src_dir,
+            dws_png_dir,
+            dws_rgba_dir,
+            view_distance,
+            map_dim_x,
+            map_dim_y,
+        )
 
 # build_05_make_panels_rgba.py
     images_rgba_dir = 'build/panels/rgba2'
-    legacy_sprite_rgba_dir = 'tgt/panels'
     if do_05_panels_rgba:
         print(f"build_05_make_panels_rgba: Making cube and sprite RGBA2222 files")
         from build_05_make_panels_rgba import make_panels_rgba
@@ -84,15 +91,19 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
             db_path,
             panels_png_dir,
             images_rgba_dir,
-            legacy_sprite_rgba_dir,
         )
 
 # build_05a_make_images_agnb.py
     panels_agnb_path = 'tgt/images.agnb'
     if do_05a_make_images_agnb:
-        print(f"build_05a_make_images_agnb: Making cube-and-sprite AGNB container")
+        print(f"build_05a_make_images_agnb: Making world-image AGNB container")
         from build_05a_make_images_agnb import make_images_agnb
-        make_images_agnb(db_path, images_rgba_dir, panels_agnb_path)
+        make_images_agnb(
+            db_path,
+            images_rgba_dir,
+            dws_rgba_dir,
+            panels_agnb_path,
+        )
 
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'
@@ -127,7 +138,7 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         
     # build_91_asm_images.py
     if do_91_asm_images:
-        print(f"build_91_asm_images: Making image buffer metadata and remaining loose loaders")
+        print(f"build_91_asm_images: Making world-image buffer metadata")
         from build_91_asm_images import make_asm_images_inc
         panels_inc_path = f"src/asm/images.asm"
         make_asm_images_inc(db_path, panels_inc_path, panels_agnb_path)
