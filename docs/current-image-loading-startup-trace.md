@@ -2,13 +2,13 @@
 
 Date traced: 2026-07-24
 
-> Integration update, 2026-07-24: the loose-file cube/panel pass documented
-> below has now been replaced by a panels-only `tgt/images.agnb` load. Fonts,
-> UI, sprites, distance walls, and sound effects retain the paths documented
-> here. `agnb_load_images` calls `img_load_agnb_progress` after each panel has
+> Integration update, 2026-07-24: the loose-file cube/panel and sprite passes
+> documented below have now been replaced by one 408-record
+> `tgt/images.agnb` load. Fonts, UI, distance walls, and sound effects retain
+> their loose paths. `agnb_load_images` calls `img_load_agnb_progress` after each image has
 > been streamed, consolidated, and created as a bitmap, preserving the splash,
-> per-panel debug plot, moving BJ, progress text, stopwatch, and display flip.
-> The historical loose panel trace remains below as the implementation
+> per-image debug plot, moving BJ, progress text, stopwatch, and display flip.
+> The historical loose-image trace remains below as the implementation
 > baseline and explains the structure being replaced.
 
 This document records the current, working image-loading path from program entry through application startup. It is a reference for replacing the loose-file panel, sprite, and distance-wall loads with AGNB container loads while preserving the existing splash/progress/debug behavior.
@@ -127,34 +127,25 @@ The splash and moving 120x120 BJ image must therefore be loaded successfully bef
      - vertical position and bounds 45, velocity 0.
    - These values persist across all three world-image families.
 
-### Panels, sprites, and distance walls
+### World images
 
-The following three blocks repeat the same setup and call:
+20. Panels/cubes and sprites (`src/asm/wolf3d.asm`)
+   - Calls `agnb_load_images` once for all 408 records in `images.agnb`.
+   - Cube buffer range: `0x0100`–`0x0233`.
+   - Sprite buffer range: `0x0234`–`0x0297`.
+   - Calls `img_load_agnb_progress` after each finalized bitmap.
 
-20. Panels/cubes (`src/asm/wolf3d.asm`)
-   - `BC=cube_num_panels` (308).
-   - `cur_buffer_id_lut=cube_buffer_id_lut`.
-   - `cur_load_jump_table=cube_load_panels_table`.
-   - Calls `img_load_main`.
-   - Generated buffer range: `0x0100`–`0x0233`.
-
-21. Sprites (`src/asm/wolf3d.asm`)
-   - `BC=sprite_num_panels` (100).
-   - Uses `sprite_buffer_id_lut` and `sprite_load_panels_table`.
-   - Calls `img_load_main`.
-   - Generated buffer range: `0x0234`–`0x0297`.
-
-22. Distance walls (`src/asm/wolf3d.asm`)
+21. Distance walls (`src/asm/wolf3d.asm`)
    - `BC=dws_num_panels` (9).
    - Uses `dws_buffer_id_lut` and `dws_load_panels_table`.
    - Calls `img_load_main`.
    - Generated buffer range: `0x0298`–`0x02A0`.
 
-The buffer constants, counts, and lookup tables, plus the remaining sprite and
+The buffer constants, counts, and lookup tables, plus the remaining
 distance-wall loose loaders, are generated in `src/asm/images.asm` by
-`build/scripts/build_91_asm_images.py`. Cube/panel RGBA2222 intermediates are
-generated under `build/panels/rgba2` and packaged into `tgt/images.agnb` by
-`build/scripts/build_05a_make_panels_agnb.py`.
+`build/scripts/build_91_asm_images.py`. Cube and sprite RGBA2222 intermediates
+are generated under `build/panels/rgba2` and packaged into `tgt/images.agnb`
+by `build/scripts/build_05a_make_images_agnb.py`.
 
 ### `img_load_main` per-image trace
 

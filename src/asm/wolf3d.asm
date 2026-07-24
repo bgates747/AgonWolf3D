@@ -128,18 +128,18 @@ init:
 ; initialize image load routine
 	call img_load_init
 
-; load panels
+; load cube/panel and sprite images
     ld hl,0
     ld (cur_file_idx),hl
 	call agnb_load_images
-	jr z,@panels_loaded
+	jr z,@images_loaded
 
-; Fail startup without entering the game if the panel container is invalid or
+; Fail startup without entering the game if the image container is invalid or
 ; unavailable. Preserve the loader error while presenting it to the user.
     push af
     call vdu_cls
     call printInline
-    asciz "AGNB panel load failed: "
+    asciz "AGNB image load failed: "
     pop af
     call printHex8
     call printNewLine
@@ -151,15 +151,7 @@ init:
     or a
     ret
 
-@panels_loaded:
-
-; load sprites
-	ld bc,sprite_num_panels
-	ld hl,sprite_buffer_id_lut
-	ld (cur_buffer_id_lut),hl
-	ld hl,sprite_load_panels_table
-	ld (cur_load_jump_table),hl
-	call img_load_main
+@images_loaded:
 
 ; load distance walls
 	ld bc,dws_num_panels

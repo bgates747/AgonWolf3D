@@ -630,7 +630,7 @@ agnb_read_buffer_list:
 
 ; LIST payload must at least contain its type and three nested chunk headers.
     ld hl,(agnb_state+agnb_state_chunk_size)
-    ld de,agnb_list_type_size+3*agnb_chunk_header_size
+    ld de,3*agnb_chunk_header_size+agnb_list_type_size
     or a
     sbc hl,de
     jr c,@bad_chunk

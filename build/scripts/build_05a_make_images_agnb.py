@@ -1,4 +1,4 @@
-"""Build the panels-only AGNB image container.
+"""Build the cube-and-sprite AGNB image container.
 
 The RIFF/AGNB writer is adapted from the hardware-proven implementation in:
 
@@ -49,14 +49,21 @@ def make_chunk(chunk_id, payload):
     return chunk_id + struct.pack("<I", len(payload)) + payload + padding
 
 
-def load_panel_records(db_path, panels_rgba_dir):
-    """Build and validate the ordered cube/panel catalog."""
-    panels_rgba_dir = Path(panels_rgba_dir)
-    catalog = build_image_catalog(db_path, cube_rgba_dir=panels_rgba_dir)
+def load_image_records(db_path, images_rgba_dir):
+    """Build and validate the ordered cube-and-sprite catalog."""
+    images_rgba_dir = Path(images_rgba_dir)
+    catalog = build_image_catalog(
+        db_path,
+        cube_rgba_dir=images_rgba_dir,
+        sprite_rgba_dir=images_rgba_dir,
+    )
     records = []
     buffer_ids = set()
 
-    for entry in family_entries(catalog, "cube"):
+    image_entries = family_entries(catalog, "cube") + family_entries(
+        catalog, "sprite"
+    )
+    for entry in image_entries:
         name = entry.name
         buffer_id = entry.buffer_id
         width = entry.width
@@ -64,13 +71,13 @@ def load_panel_records(db_path, panels_rgba_dir):
         rgba_file = entry.payload_path
 
         if buffer_id in buffer_ids:
-            raise ValueError(f"Duplicate panel buffer ID: 0x{buffer_id:04X}")
+            raise ValueError(f"Duplicate image buffer ID: 0x{buffer_id:04X}")
         if buffer_id >= MAX_U16:
-            raise ValueError(f"Invalid panel buffer ID: 0x{buffer_id:04X}")
+            raise ValueError(f"Invalid image buffer ID: 0x{buffer_id:04X}")
         if not 0 < width <= MAX_U16 or not 0 < height <= MAX_U16:
             raise ValueError(f"Invalid dimensions for {name}: {width}x{height}")
         if not rgba_file.is_file():
-            raise FileNotFoundError(f"Missing panel payload: {rgba_file}")
+            raise FileNotFoundError(f"Missing image payload: {rgba_file}")
 
         data_size = rgba_file.stat().st_size
         expected_size = width * height
@@ -93,7 +100,7 @@ def load_panel_records(db_path, panels_rgba_dir):
         )
 
     if not records:
-        raise ValueError("The panel catalog is empty")
+        raise ValueError("The image catalog is empty")
     return records
 
 
@@ -138,21 +145,21 @@ def build_container(records):
     return b"RIFF" + struct.pack("<I", len(body)) + body
 
 
-def make_panels_agnb(db_path, panels_rgba_dir, output_path):
-    records = load_panel_records(db_path, panels_rgba_dir)
+def make_images_agnb(db_path, images_rgba_dir, output_path):
+    records = load_image_records(db_path, images_rgba_dir)
     container = build_container(records)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_bytes(container)
     print(
-        f"Generated {output_path} with {len(records)} panel records "
+        f"Generated {output_path} with {len(records)} image records "
         f"({len(container)} bytes)"
     )
     return records
 
 
 if __name__ == "__main__":
-    make_panels_agnb(
+    make_images_agnb(
         "build/data/build.db",
         "build/panels/rgba2",
         "tgt/images.agnb",

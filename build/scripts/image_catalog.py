@@ -56,7 +56,7 @@ def get_dws_data(db_path):
 def build_image_catalog(
     db_path,
     cube_rgba_dir="build/panels/rgba2",
-    sprite_rgba_dir="tgt/panels",
+    sprite_rgba_dir="build/panels/rgba2",
     dws_rgba_dir="tgt/dws",
 ):
     """Assign deterministic IDs to every active world-image family."""
@@ -145,12 +145,20 @@ def read_agnb_buffer_ids(path):
     return ids
 
 
-def assert_cube_ids_match_agnb(catalog, path):
-    expected = [entry.buffer_id for entry in family_entries(catalog, "cube")]
+def assert_image_ids_match_agnb(catalog, path, families=("cube", "sprite")):
+    expected = [
+        entry.buffer_id
+        for entry in catalog
+        if entry.family in families
+    ]
     actual = read_agnb_buffer_ids(path)
     if actual != expected:
         raise RuntimeError(
-            "AGNB cube buffer IDs do not match the shared image catalog: "
+            "AGNB image buffer IDs do not match the shared image catalog: "
             f"expected {expected}, found {actual}"
         )
-    print(f"Validated {len(actual)} AGNB buffer IDs against the shared catalog")
+    family_names = ", ".join(families)
+    print(
+        f"Validated {len(actual)} AGNB buffer IDs against the shared catalog "
+        f"({family_names})"
+    )

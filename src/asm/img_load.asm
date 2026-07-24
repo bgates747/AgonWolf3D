@@ -38,7 +38,7 @@ img_load_agnb_progress:
 	inc.s hl
 	ld (cur_buffer_id),hl
 
-; Draw the splash, followed by the most recently loaded panel at the origin.
+; Draw the splash, followed by the most recently loaded image at the origin.
 	call tmp_draw_all_the_things
 	ld hl,(cur_buffer_id)
 	call vdu_buff_select
@@ -57,10 +57,10 @@ img_load_agnb_progress:
 	call font_bmp_print
 
 ; The container intentionally has no runtime filenames, so display an ordered
-; panel number instead.
+; image number instead.
 	call vdu_cls
 	call printInline
-	asciz "Loading panel: "
+	asciz "Loading image: "
 	ld hl,(cur_file_idx)
 	inc hl
 	call printDec

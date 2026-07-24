@@ -75,24 +75,24 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         make_dws(db_path, dws_src_dir, dws_png_dir, dws_rgba_dir, view_distance, map_dim_x, map_dim_y)
 
 # build_05_make_panels_rgba.py
-    cube_rgba_dir = 'build/panels/rgba2'
-    sprite_rgba_dir = 'tgt/panels'
+    images_rgba_dir = 'build/panels/rgba2'
+    legacy_sprite_rgba_dir = 'tgt/panels'
     if do_05_panels_rgba:
         print(f"build_05_make_panels_rgba: Making cube and sprite RGBA2222 files")
         from build_05_make_panels_rgba import make_panels_rgba
         make_panels_rgba(
             db_path,
             panels_png_dir,
-            cube_rgba_dir,
-            sprite_rgba_dir,
+            images_rgba_dir,
+            legacy_sprite_rgba_dir,
         )
 
-# build_05a_make_panels_agnb.py
+# build_05a_make_images_agnb.py
     panels_agnb_path = 'tgt/images.agnb'
-    if do_05a_make_panels_agnb:
-        print(f"build_05a_make_panels_agnb: Making panels AGNB container")
-        from build_05a_make_panels_agnb import make_panels_agnb
-        make_panels_agnb(db_path, cube_rgba_dir, panels_agnb_path)
+    if do_05a_make_images_agnb:
+        print(f"build_05a_make_images_agnb: Making cube-and-sprite AGNB container")
+        from build_05a_make_images_agnb import make_images_agnb
+        make_images_agnb(db_path, images_rgba_dir, panels_agnb_path)
 
 # build_06b_map_import_mapmaker
     map_src_dir = f'src/mapmaker'
@@ -202,7 +202,7 @@ if __name__ == "__main__":
     do_04_make_panels_png = False
     do_04a_make_dws_png = False
     do_05_panels_rgba = False
-    do_05a_make_panels_agnb = False
+    do_05a_make_images_agnb = False
 # Start here if all you've done is edit maps but not changed tile textures or defintionss
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
@@ -224,7 +224,7 @@ if __name__ == "__main__":
     do_04_make_panels_png = True
     do_04a_make_dws_png = True
     do_05_panels_rgba = True
-    do_05a_make_panels_agnb = True
+    do_05a_make_images_agnb = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_08_make_sfx = True

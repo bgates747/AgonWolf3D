@@ -101,7 +101,7 @@ def make_df_panels_lookup(db_path):
 if __name__ == '__main__':
     db_path = 'build/data/build.db'
     cube_img_dir = 'build/panels/rgba2'
-    sprite_img_dir = 'tgt/panels'
+    sprite_img_dir = 'build/panels/rgba2'
     df_panels_lookup = make_df_panels_lookup(db_path)
     screen_width = 320
     screen_height = 240

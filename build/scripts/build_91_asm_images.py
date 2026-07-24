@@ -1,5 +1,5 @@
 from image_catalog import (
-    assert_cube_ids_match_agnb,
+    assert_image_ids_match_agnb,
     build_image_catalog,
     family_entries,
     get_dws_data,
@@ -8,8 +8,7 @@ from image_catalog import (
 
 
 # Generate image buffer constants and lookup tables. Cube/panel payloads are
-# deployed through images.agnb; sprites and distance walls retain loose-file
-# loaders during the first container integration phase.
+# deployed through images.agnb; distance walls retain loose-file loaders.
 def write_asm_image_family(
     panels_inc_path,
     render_type,
@@ -90,6 +89,7 @@ def make_asm_images_inc(
         "sprite",
         "panels",
         family_entries(catalog, "sprite"),
+        emit_loose_file_loaders=False,
     )
     write_asm_image_family(
         panels_inc_path,
@@ -98,7 +98,7 @@ def make_asm_images_inc(
         family_entries(catalog, "dws"),
     )
 
-    assert_cube_ids_match_agnb(catalog, agnb_path)
+    assert_image_ids_match_agnb(catalog, agnb_path)
     return catalog
 
 
