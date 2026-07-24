@@ -13,10 +13,10 @@ families in one AGNB container:
 - sprite images; and
 - distance-wall images (`dws`).
 
-The first AGNB implementation deliberately excludes bitmap-font glyphs, UI
-images, maps, and sound effects. Font glyphs and UI images are intended later
-`IMAG` users. Sound effects require a specified `AUDI` form before they can be
-added.
+Maps and sound effects remain outside the image-container work. UI images use
+`ui.agnb`, proportional ITC Honda glyphs use `font.agnb`, and world images use
+`images.agnb`. Sound effects require a specified `AUDI` form before they can
+be added.
 
 The AGNB binary layout remains authoritative in
 `docs/agon-buffer-file-format-specification.md`. This précis describes the
@@ -36,6 +36,8 @@ build/panels/png/         transformed panel and sprite PNG intermediates
 build/panels/rgba2/       containerized cube and sprite RGBA2222 intermediates
 build/dws/png/            cropped distance-wall PNG intermediates
 build/dws/rgba2/           containerized distance-wall RGBA2222 intermediates
+build/ui/rgba2/            containerized UI RGBA2222 intermediates
+build/fonts/               font definition and RGBA2222 intermediates
 src/asm/images.asm        generated IDs, lookup tables, loaders, and filenames
 tgt/wolf3d.bin            assembled application
 ```
@@ -248,7 +250,8 @@ become redundant for containerized families.
 ## Runtime load and render boundary
 
 `src/asm/wolf3d.asm` includes generated `src/asm/images.asm`. During `init`, it
-loads fonts and UI first, then calls `agnb_load_images` once to load all
+loads `ui.agnb` and `font.agnb` in the user's current screen mode, enters the
+game's double-buffered mode, then calls `agnb_load_images` once to load all
 cube/panel, sprite, and distance-wall records from `images.agnb`. The buffer-ID
 constants and lookup tables remain available to the renderer after startup.
 

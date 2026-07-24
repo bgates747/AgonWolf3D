@@ -585,3 +585,16 @@ not yet skip unknown optional chunks or unsupported record forms, it is a
 restricted implementation prototype, not a fully conforming version 0.1
 reader. Conformance requires the skip behavior in the format specification;
 read-and-discard is sufficient and does not require MOS 3 seeking.
+## Application callback boundary
+
+The reusable loader accepts a zero-terminated container filename in `DE` and
+a completed-image callback address in `HL`. `agnb_load_images` stores that
+address in `agnb_image_callback`. After each image is streamed, consolidated,
+and finalized, `agnb_call_image_callback` loads the address and uses `jp (hl)`.
+The callback's `ret` therefore returns directly to the loader after its
+original `call agnb_call_image_callback`.
+
+The loader does not know whether the callback prints a breadcrumb, animates a
+progress screen, or performs another application action. Container filenames,
+callback implementations, and sequencing belong to the consuming
+application.

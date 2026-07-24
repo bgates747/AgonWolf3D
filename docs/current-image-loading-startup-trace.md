@@ -4,8 +4,10 @@ Date traced: 2026-07-24
 
 > Integration update, 2026-07-24: all loose world-image passes documented
 > below have now been replaced by one 417-record `tgt/images.agnb` load.
-> Fonts, UI, and sound effects retain their loose paths. `agnb_load_images`
-> calls `img_load_agnb_progress` after each image has
+> Sound effects retain their loose paths. UI and ITC Honda now load from
+> `tgt/ui.agnb` and `tgt/font.agnb` before the screen-mode change, with a
+> console breadcrumb after each completed bitmap. `agnb_load_images` calls
+> `img_load_agnb_progress` after each world image has
 > been streamed, consolidated, and created as a bitmap, preserving the splash,
 > per-image debug plot, moving BJ, progress text, stopwatch, and display flip.
 > The historical loose-image trace remains below as the implementation
@@ -70,46 +72,39 @@ The binary is assembled for ADL mode at `0x040000` and begins with `jp start` (`
 8. `printString` (`src/asm/functions.asm`)
    - Prints the single-site inline `Loading UI` message.
 
-### Proportional bitmap-font loads
+### Proportional bitmap-font load
 
-9. `load_font_itc_honda` (`src/asm/font_itc_honda.asm`)
+9. `agnb_load_images` with `font_agnb_filename` and
+   `img_load_agnb_breadcrumb` (`src/asm/wolf3d.asm`)
 
-This is the only custom bitmap font retained and used by the application. Its
-generated straight-line loader performs the following for every available
-glyph:
-
-1. Put a zero-terminated loose `.rgba2` filename in `HL`.
-2. Put `filedata` in `DE`.
-3. Put `65536` in `BC`.
-4. Put `mos_load` in `A` and invoke `RST.LIL 08h`.
-5. Put the glyph's VDP buffer ID in `HL`, width in `BC`, height in `DE`, and byte count in `IX`.
-6. Call `vdu_load_img` (`src/asm/img_load.asm`).
+This loads the 64 real ITC Honda glyph bitmaps from `font.agnb` through the
+shared AGNB reader and breadcrumb callback. No glyph is plotted during the
+bootstrap phase.
 
 The Honda buffers occupy the generated character-derived range `0x1120`
 through `0x117A`. Missing glyphs reuse a fallback lookup-table entry and do not
 cause another file load.
 
-Each font lookup record and its `EQU` buffer IDs live in the generated source
-file. A lookup record contains two 24-bit fields: packed
+Each proportional lookup record and its `EQU` buffer IDs remain in the
+generated source file. A lookup record contains two 24-bit fields: packed
 `[y_offset, height, width]`, followed by the glyph buffer ID. `font_bmp_plot`
 and `font_bmp_print` (`src/asm/fonts_bmp.asm`) use these records to select and
 plot one VDP bitmap per glyph, which is what permits proportional widths and
 vertical offsets.
 
-### UI and splash assets
+### UI bootstrap and splash assets
 
-10. `load_ui_images` (`src/asm/ui_img.asm`)
-   - Loads 11 loose `.rgba2` files by the same MOS-load → `filedata` → `vdu_load_img` sequence.
-   - Uses VDP buffers `0x2000` through `0x200A`.
+10. `agnb_load_images` with `ui_agnb_filename` and
+    `img_load_agnb_breadcrumb` (`src/asm/wolf3d.asm`)
+   - Loads 11 core images at `0x2000`–`0x200A` and 20 BJ weapon images at
+     `0x2100`–`0x2113` from `ui.agnb`.
+   - Uses the shared AGNB parser, streamer, consolidator, and bitmap finalizer.
+   - Calls `img_load_agnb_breadcrumb` after each image. It prints one `.` and
+     does not select or plot any bitmap.
+   - Runs in the user's current screen mode.
    - Important progress-screen assets:
      - `BUF_UI_BJ_120_120 EQU 0x2004`
      - `BUF_UI_SPLASH EQU 0x200A`
-   - Prints `.` through `RST.LIL 10h` after each image.
-
-12. `load_ui_images_bj` (`src/asm/ui_img_bj.asm`)
-   - Loads 20 64x64 BJ weapon-animation images by the same sequence.
-   - Uses VDP buffers `0x2100` through `0x2113`.
-   - Prints `.` after each image.
 
 The splash and moving 120x120 BJ image must therefore be loaded successfully before the panel/sprite/distance-wall progress loop begins.
 

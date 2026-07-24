@@ -85,3 +85,48 @@ Normal image records were larger than the erroneous 56-byte threshold, hiding
 the defect. A valid 1-by-1 RGBA2222 placeholder has a 44-byte LIST payload and
 therefore failed with `agnb_error_chunk` (`07`) until the expression was
 reordered.
+
+## Simulate Indirect Calls Through `HL`, `IX`, or `IY`
+
+The eZ80 provides `jp (hl)` but no corresponding indirect `call (hl)`.
+`CALL_HL` in `macros.inc` constructs the missing call by pushing the address
+immediately after the macro expansion, then jumping through `HL`:
+
+```asm
+; inputs: HL = subroutine address
+; destroys: BC, plus whatever the subroutine destroys
+    MACRO CALL_HL
+    ld bc,$+6
+    push bc
+    jp (hl)
+    ENDMACRO
+```
+
+In ADL mode the pushed `BC` is the complete 24-bit return address. The macro
+expands to six bytes, so `$+6` identifies the first instruction after
+`jp (hl)`. When the indirect subroutine executes `ret`, it pops that synthetic
+address and resumes after the macro exactly as if the processor supported
+`call (hl)`.
+
+This is particularly useful for function-pointer tables, callbacks, and state
+machines in which the caller must perform more work after the indirect
+subroutine returns. Account for the unconditional destruction of `BC`, and
+ensure the called routine obeys the normal stack contract.
+
+`CALL_IX` and `CALL_IY` use the same technique, substituting `jp (ix)` or
+`jp (iy)` while retaining the six-byte expansion and synthetic return address.
+A separate useful callback pattern is:
+
+```asm
+    call callback_trampoline
+    ; continuation
+
+callback_trampoline:
+    ld hl,(callback_address)
+    jp (hl)
+```
+
+Here the real `call` has already stacked the continuation address, so the
+trampoline can tail-jump through `HL`; the callback's `ret` returns directly
+to the continuation. This avoids the macro's `BC` clobber when a dedicated
+trampoline is a natural part of the API.

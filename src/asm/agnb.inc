@@ -182,19 +182,18 @@ agnb_file_is_open:         db 0
 ; Reusable I/O storage
 ; --------------------
 ; The 12-byte buffer is large enough for either the RIFF file header or a
-; generic chunk header plus the four-byte LIST type. DATA is streamed through
-; the application's existing 8 KiB SRAM filedata area.
+; generic chunk header plus the four-byte LIST type.
 
 agnb_header:
     blkb agnb_riff_header_size,0
 
-; Wolf3D's fixed SRAM beginning at 0xB7E000 is occupied by map and sprite
-; state. Keep a loader-owned buffer in the application image instead.
+; Loader-owned block used to stream DATA without requiring external scratch
+; memory. Applications may tune this size when integrating the source.
 agnb_io_buffer:            blkb 8192,0
 agnb_io_buffer_size:       equ 8192
 
-agnb_filename:
-    asciz "images.agnb"
+; Application callback invoked after each image has been finalized.
+agnb_image_callback:       dl 0
 
 
 ; Reader subroutine interface
@@ -236,6 +235,15 @@ agnb_open:
     xor a
     ld (agnb_file_is_open),a
     ld (agnb_last_error),a
+
+; Each newly opened container starts at physical and logical offset zero.
+; The original single-container caller received this state from BSS
+; initialization; consecutive container loads must establish it explicitly.
+    ld hl,0
+    ld (agnb_state+agnb_state_file_offset),hl
+    ld (agnb_state+agnb_state_bytes_read),hl
+    ld (agnb_state+agnb_state_file_offset+3),a
+    ld (agnb_state+agnb_state_bytes_read+3),a
 
 ; open the caller-supplied filename into our single reader-owned FIL
     ld hl,agnb_fil
@@ -289,12 +297,14 @@ agnb_error_close:
     ret
 
 ; Top-level image load operation.
-; inputs:  none; uses agnb_filename
+; inputs:  DE = zero-terminated filename
+;          HL = callback invoked after each completed image
+;               callback returns normally; its result is ignored
 ; outputs: A=0 and Z set after all valid LIST BUFR image records are uploaded
 ;          and finalized at their explicit IDs; nonzero error and NZ otherwise
 ; destroys: AF, BC, DE, HL, IX
 agnb_load_images:
-    ld de,agnb_filename
+    ld (agnb_image_callback),hl
     call agnb_open
     ret nz
 
@@ -326,11 +336,10 @@ agnb_load_images:
     call agnb_finalize_image
     jr nz,@load_error
 
-; Give the application one completed-bitmap boundary per record. Wolf3D uses
-; this to retain its splash/progress/debug update between panel loads.
+; Give the application one completed-bitmap boundary per record.
 ; agnb_finalize_image leaves the writer-specified buffer selected and its
 ; metadata remains valid for the duration of the callback.
-    call img_load_agnb_progress
+    call agnb_call_image_callback
 
     call agnb_finish_buffer_list
     jr nz,@load_error
@@ -350,6 +359,12 @@ agnb_load_images:
 
 @success:
     jp agnb_close
+
+; Invoke the application-selected callback. The tail jump lets the callback's
+; RET return directly to the loader instruction after this routine's CALL.
+agnb_call_image_callback:
+    ld hl,(agnb_image_callback)
+    jp (hl)
 
 ; Read exactly BC bytes from agnb_fil into DE.
 ; inputs:  BC = requested u24 length, DE = destination

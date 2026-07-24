@@ -26,6 +26,14 @@ img_load_init:
 
     ret
 
+; Report an image completed during the pre-screen-mode UI container load.
+; No bitmap is selected or plotted here.
+img_load_agnb_breadcrumb:
+	ld a,'.'
+	rst.lil 10h
+	xor a
+	ret
+
 ; Update the existing loading splash after one AGNB image has been completely
 ; streamed, consolidated, and created as a bitmap.
 ; inputs: agnb_metadata describes the completed image and its selected buffer

@@ -150,13 +150,23 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         from build_91a_asm_font import maken_zee_fonts
         maken_zee_fonts(next_buffer_id)
 
+# build_91aa_make_font_agnb.py
+    if do_91aa_make_font_agnb:
+        print(f"build_91aa_make_font_agnb: Making font AGNB container")
+        from build_91aa_make_font_agnb import make_font_agnb
+        make_font_agnb(
+            db_path,
+            "build/fonts/honda/rgba2",
+            "tgt/font.agnb",
+        )
+
 # build_91b_asm_ui.py
     if do_91b_asm_ui:
         print(f"build_91b_asm_ui: Making UI assembler file")
         from build_91b_asm_ui import make_tbl_91b_UI, make_rgba2_files, make_asm_ui
         ui_inc_path = "src/asm/ui_img.asm"
         src_png_dir = "src/assets/images/ui"
-        tgt_cmp_rgba2_dir = "tgt/ui"
+        tgt_cmp_rgba2_dir = "build/ui/rgba2/core"
         next_buffer_id = 0x2000
         make_tbl_91b_UI(db_path, src_png_dir)
         make_rgba2_files(db_path, src_png_dir, tgt_cmp_rgba2_dir)
@@ -176,9 +186,20 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
         from build_91d_asm_ui_bj import asm_ui_bj
         ui_inc_path = "src/asm/ui_img_bj.asm"
         src_png_dir = "src/assets/images/ui/bj"
-        tgt_rgba2_dir = "tgt/ui/bj"
+        tgt_rgba2_dir = "build/ui/rgba2/bj"
         next_buffer_id = 0x2100
         asm_ui_bj(db_path, ui_inc_path, src_png_dir, tgt_rgba2_dir, next_buffer_id)
+
+# build_91e_make_ui_agnb.py
+    if do_91e_make_ui_agnb:
+        print(f"build_91e_make_ui_agnb: Making UI AGNB container")
+        from build_91e_make_ui_agnb import make_ui_agnb
+        make_ui_agnb(
+            db_path,
+            "build/ui/rgba2/core",
+            "build/ui/rgba2/bj",
+            "tgt/ui.agnb",
+        )
 
 # build_98_asm_sfx.py
     sfx_inc_path = 'src/asm/sfx.asm'
@@ -221,9 +242,11 @@ if __name__ == "__main__":
     do_90_asm_polys = False
     do_91_asm_images = False
     do_91a_asm_font = False
+    do_91aa_make_font_agnb = False
     do_91b_asm_ui = False
     do_91c_asm_map_masks = False
     do_91d_asm_ui_bj = False
+    do_91e_make_ui_agnb = False
     do_98_asm_sfx = False
 # Start here if all you've done is change assembler code but not map defintions, tile textures, or 3d gemoetry
     do_99_asm_assemble = False
@@ -242,9 +265,11 @@ if __name__ == "__main__":
     do_90_asm_polys = True
     do_91_asm_images = True
     do_91a_asm_font = True
+    do_91aa_make_font_agnb = True
     do_91b_asm_ui = True
     do_91c_asm_map_masks = True
     do_91d_asm_ui_bj = True
+    do_91e_make_ui_agnb = True
     do_98_asm_sfx = True
     do_99_asm_assemble = True
 

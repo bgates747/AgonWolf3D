@@ -1,7 +1,7 @@
 import sqlite3
 import os
 from PIL import Image
-from agonImages import img_to_rgba2, convert_to_agon_palette
+from agonImages import img_to_rgba2
 
 def dict_factory(cursor, row):
     d = {}
@@ -30,33 +30,10 @@ def make_asm_ui(db_path, ui_inc_path, last_buffer_id):
                 asm_writer.write(f"BUF_UI_{name}: equ 0x{buffer_id_counter:04X}\n")
                 buffer_id_counter += 1
     
-            asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
-            asm_writer.write("load_ui_images:\n")
-    
-            for row in img_rows:
-                panel_base_filename = row['panel_base_filename']
-                dim_x = row['dim_x']
-                dim_y = row['dim_y']
-                constName = "BUF_UI_" + panel_base_filename.upper()
-                asm_writer.write(f"\n")
-                asm_writer.write(f"\tld hl,F_UI_{panel_base_filename}\n")
-                asm_writer.write(f"\tld de,filedata\n")
-                asm_writer.write(f"\tld bc,{65536}\n") # some extra padding just in case
-                asm_writer.write("\tld a,mos_load\n")
-                asm_writer.write("\tRST.LIL 08h\n")
-                asm_writer.write(f"\tld hl,{constName}\n")
-                asm_writer.write(f"\tld bc,{dim_x}\n")
-                asm_writer.write(f"\tld de,{dim_y}\n")
-                asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall vdu_load_img\n")
-                asm_writer.write("\tLD A, '.'\n") # breadcrumbs now handled by vdu_load_img
-                asm_writer.write("\tRST.LIL 10h\n")
-
-            asm_writer.write("\n\tret\n\n")
-
-            for row in img_rows:
-                panel_base_filename = row['panel_base_filename']
-                asm_writer.write(f"F_UI_{panel_base_filename}: db \"ui/{panel_base_filename}.rgba2\",0\n")
+            asm_writer.write(
+                f"\nUI_IMAGE_COUNT: equ {len(img_rows)}\n"
+                "; Pixel data is packaged in ui.agnb by build_91e_make_ui_agnb.py.\n"
+            )
 
         conn.close()
         return buffer_id_counter
@@ -123,7 +100,7 @@ if __name__ == "__main__":
     db_path = 'build/data/build.db'
     ui_inc_path = "src/asm/ui_img.asm"
     src_png_dir = "src/assets/images/ui"
-    tgt_rgba2_dir = "tgt/ui"
+    tgt_rgba2_dir = "build/ui/rgba2/core"
     next_buffer_id = 0x2000
     make_tbl_91b_UI(db_path, src_png_dir)
     make_rgba2_files(db_path, src_png_dir, tgt_rgba2_dir)

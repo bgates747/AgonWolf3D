@@ -253,45 +253,11 @@ def make_asm_font(db_path,font_inc_path,buffer_id_counter,space_width,font_name,
                 asm_writer.write(f"\tdl 0x{0:02X}{1:02X}{space_width:02X},BUF_{32+buffer_id_counter:04d}")
                 asm_writer.write(f" ; Missing character {char_num}\n")
 
-        asm_writer.write("\n; Import .rgba2 bitmap files and load them into VDP buffers\n")
-        asm_writer.write(f"load_font_{font_name}:\n")
-
-        # Iterate through each buffer_id
-        for char_num in range(32, 122 + 1):
-            # Check if the char_num is in the dictionary
-            if char_num in char_def_dict:
-                plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
-                buffer_id = char_num + buffer_id_counter
-                name = f'{char_num:03d}'
-                # Write the relevant information to file
-                asm_writer.write(f"\n")
-                asm_writer.write(f"\tld hl,F{abbr_name}{img_filename}\n")
-                asm_writer.write(f"\tld de,filedata\n")
-                asm_writer.write(f"\tld bc,{65536}\n") # some extra padding just in case
-                asm_writer.write("\tld a,mos_load\n")
-                asm_writer.write("\tRST.LIL 08h\n")
-                asm_writer.write(f"\tld hl,BUF_{buffer_id:04d}\n")
-                asm_writer.write(f"\tld bc,{dim_x}\n")
-                asm_writer.write(f"\tld de,{dim_y}\n")
-                asm_writer.write(f"\tld ix,{dim_x*dim_y}\n")
-                asm_writer.write("\tcall vdu_load_img\n")
-                # asm_writer.write("\tLD A, '.'\n") # this is now handled by the vdu_load_img function
-                # asm_writer.write("\tRST.LIL 10h\n")
-
-            else:
-                asm_writer.write(f"; Missing character {char_num}\n")
-
-        asm_writer.write("\n\tret\n\n")
-
-
-        # Iterate through each buffer_id
-        for char_num in range(32, 122 + 1):
-            # Check if the char_num is in the dictionary
-            if char_num in char_def_dict:
-                plot_x, y_offset, dim_x, dim_y, img_filename = char_def_dict[char_num]
-                # Write the relevant information to file
-                name = f'{char_num:03d}'
-                asm_writer.write(f"F{abbr_name}{name}: db \"fonts/{abbr_name}/{name}.rgba2\",0\n")
+        asm_writer.write(
+            f"\nFONT_{font_name.upper()}_IMAGE_COUNT: "
+            f"equ {len(char_def_rows)}\n"
+            "; Glyph pixels are packaged in font.agnb.\n"
+        )
 
 
         conn.close()
@@ -371,10 +337,12 @@ def main(font_name, abbr_name, lines_of_text, line_starts, character_height, buf
     to_fg = get_rgba_color_by_index(15) # White
 
     scale_factor = 0.5
-    font_rgba2_dir = f"tgt/fonts/{abbr_name}"
+    font_rgba2_dir = f"build/fonts/{abbr_name}/rgba2"
 
     os.makedirs(font_rgba2_dir, exist_ok=True)
-    font_def_file = f'tgt/fonts/{font_name}_{int(scale_factor * 100):03d}.txt'
+    font_def_file = (
+        f'build/fonts/{abbr_name}/{font_name}_{int(scale_factor * 100):03d}.txt'
+    )
     make_font(source_img_path, base_font_src_dir, threshold, lines_of_text, line_starts, character_height, font_def_file, scale_method)
     scale_font_images(font_def_file, base_font_src_dir, font_rgba2_dir, scale_factor, scale_method, fr_bg, fr_fg, to_bg, to_fg)
 

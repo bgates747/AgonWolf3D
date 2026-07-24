@@ -60,18 +60,15 @@ exit:
 
 welcome_message: asciz "Welcome to Agon Wolf3D"
 press_any_key: asciz "Press any key to continue.\r\n"
+ui_agnb_filename: asciz "ui.agnb"
+font_agnb_filename: asciz "font.agnb"
+images_agnb_filename: asciz "images.agnb"
 is_emulator: db 0
 
 init:
 ; clear all buffers
     call vdu_clear_all_buffers
 
-; set up the display
-    ld a,8+128 ; 320x240x64 double-buffered
-    call vdu_set_screen_mode
-    xor a
-    call vdu_set_scaling
-	
 ; start generic stopwatch to time setup loop 
 ; so we can determine if we're running on emulator or hardware
 	call stopwatch_set
@@ -83,19 +80,38 @@ init:
 ; enable additional audio channels
 	call vdu_enable_channels
 
+; Load UI bitmaps in the user's current screen mode. Each completed image
+; prints one console breadcrumb; nothing is plotted during this phase.
+	call printInline
+	asciz "Loading UI"
+	ld de,ui_agnb_filename
+	ld hl,img_load_agnb_breadcrumb
+	call agnb_load_images
+	jr z,@ui_loaded
+	jp @agnb_startup_error
+@ui_loaded:
+	call printNewLine
+
+; Load the original game's proportional glyph bitmaps before the animated
+; world-image splash uses them. Metrics remain in font_itc_honda.
+	call printInline
+	asciz "Loading font"
+	ld de,font_agnb_filename
+	ld hl,img_load_agnb_breadcrumb
+	call agnb_load_images
+	jr z,@font_loaded
+	jp @agnb_startup_error
+@font_loaded:
+	call printNewLine
+
+; Switch to the game's display only after the bootstrap UI load is complete.
+    ld a,8+128 ; 320x240x64 double-buffered
+    call vdu_set_screen_mode
+    xor a
+    call vdu_set_scaling
+
 ; set the cursor off
 	call cursor_off
-
-; print loading ui message
-		call printInline
-		asciz "Loading UI"
-
-; load fonts
-	call load_font_itc_honda
-
-; load UI images
-	call load_ui_images
-	call load_ui_images_bj
 
 ; set text background color
 	ld a,4 + 128
@@ -129,11 +145,14 @@ init:
 ; load cube/panel, sprite, and distance-wall images
     ld hl,0
     ld (cur_file_idx),hl
+	ld de,images_agnb_filename
+	ld hl,img_load_agnb_progress
 	call agnb_load_images
 	jr z,@images_loaded
 
 ; Fail startup without entering the game if the image container is invalid or
 ; unavailable. Preserve the loader error while presenting it to the user.
+@agnb_startup_error:
     push af
     call vdu_cls
     call printInline
