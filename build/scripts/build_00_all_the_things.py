@@ -259,13 +259,13 @@ if __name__ == "__main__":
     do_99_asm_assemble = False
 
 # I find it easier to simply comment out the scripts I don't want to run
-    do_00_delete_tgt_dir = True
-    do_01_polys_masks = True
-    do_02_fetch_tiles = True
-    do_04_make_panels_png = True
-    do_04a_make_dws_png = True
-    do_05_panels_rgba = True
-    do_05a_make_images_agnb = True
+    # do_00_delete_tgt_dir = True
+    # do_01_polys_masks = True
+    # do_02_fetch_tiles = True
+    # do_04_make_panels_png = True
+    # do_04a_make_dws_png = True
+    # do_05_panels_rgba = True
+    # do_05a_make_images_agnb = True
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_08_make_sfx = True
