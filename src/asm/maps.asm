@@ -315,9 +315,63 @@ get_room_start:
 	ret
 
 
+; ############ ROOM-TRANSITION DEPARTURE STATE ############
+; A room transition deliberately places the player on the reciprocal door
+; cell. On the following movement tick:
+; - rotation alone leaves the player on the door;
+; - movement opposite the vector which entered the previous door returns
+;   through the currently occupied door;
+; - any other movement falls through to normal target-cell handling.
+;
+; inputs:  de = requested map-relative dy,dx; (dx) contains the same vector
+; outputs: carry set if this movement tick has been completely handled
+;          carry clear if plyr_input should continue normal movement handling
+; destroys: a,bc,hl,ix when handling a reverse transition
+room_transition_depart:
+	ld a,(room_transition_active)
+	and a
+	ret z
+
+; zero displacement means the player rotated without leaving the door cell
+	ld a,d
+	or e
+	jr z,@handled
+
+; compare requested dx with the negation of the saved entry dx
+	ld hl,(room_transition_entry_delta)
+	ld a,l
+	neg
+	cp e
+	jr nz,@normal_departure
+
+; compare requested dy with the negation of the saved entry dy
+	ld a,h
+	neg
+	cp d
+	jr nz,@normal_departure
+
+; reverse through the transition represented by the currently occupied cell
+	ld de,(cur_x)
+	call get_cell_from_coords ; ix = current reciprocal-door cell record
+	call change_room
+@handled:
+	scf
+	ret
+
+; keep the state armed until normal movement actually succeeds; a blocked
+; attempt must not prevent a later reversal from the same door cell
+@normal_departure:
+	or a ; clear carry
+	ret
+
 ; moves player to the room indicated by the too room cell they've just entered
 ; inputs: ix = pointer to the cell containing the too room door
 change_room:
+; preserve the actual movement vector before this routine repurposes de
+	ld de,(dx)
+	ld (room_transition_entry_delta),de
+	ld a,1
+	ld (room_transition_active),a
 ; set visited flag for old room
 	ld a,(cur_room)
 	ld hl,room_flags

@@ -30,6 +30,8 @@ dy:    db 0x00
 dx:    db 0x00
        db 0x00 ; padding
 avel:  db 0x00 ; player angular velocity in orientation ticks per move tick
+room_transition_active: db 0
+room_transition_entry_delta: dl 0 ; low to high: map-relative dx,dy,0
 
 plyr_shot_x:      db 0x00
 plyr_shot_y:      db 0x00
@@ -672,6 +674,10 @@ plyr_input:
     ld (hl),a
     call trans_dx_dy ; d = dy, e = dx
     ld (dx),de
+; if the player is standing on a room-transition cell, handle rotation or
+; reversal before treating an adjacent cell as the ordinary movement target
+    call room_transition_depart
+    ret c ; transition-door state consumed this movement tick
     ld a,(cur_x)
     add a,e
     ld e,a
@@ -704,6 +710,8 @@ plyr_input:
     ; fall through to @move_it
 @move_it:
 ; we are cleared for movement so update player position
+    xor a
+    ld (room_transition_active),a
     ld de,0 ; make sure deu is zero
     ld bc,(dx) ; b = dy, c = dx
     ld a,(cur_x)
