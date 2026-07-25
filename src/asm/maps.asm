@@ -450,20 +450,3 @@ room_06_dat: dl 0x0AC000
 room_07_dat: dl 0x0AE000
 room_08_dat: dl 0x0B0000
 room_09_dat: dl 0x0B2000
-
-; #### AUTO-GENERATED MAP DATA BELOW THIS LINE DO NOT EDIT ####
-
-start_obj_id: equ 28
-
-floors:
-	dl floor_00
-
-room_files:
-floor_00:
-	dl room_00_0
-	dl room_00_1
-	dl room_00_2
-
-room_00_0: db "maps/map_00_0.bin",0
-room_00_1: db "maps/map_00_1.bin",0
-room_00_2: db "maps/map_00_2.bin",0
