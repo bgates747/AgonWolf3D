@@ -13,6 +13,7 @@ flicker/
 /build/ui/rgba2/
 /build/fonts/
 /build/sfx/
+/build/maps/
 
 # Ignore machine-local external documentation link
 /agon-docs
