@@ -8,10 +8,12 @@ src/mapmaker
 ```
 
 The current directory keeps one MapMaker application beside its numbered tile
-packs and map files. Its emulator environment is initialized by:
+packs and map files. Its emulator environment is initialized from the
+canonical environment repository:
 
 ```bash
-.venv/bin/python src/mapmaker/setup_emulator.py
+cd /home/smith/Agon/mystuff/agon-dev-env
+python3 scripts/setup_emulator.py mapmaker
 ```
 
 Do not edit maps here or use these copies of `mapmaker.bas` and
