@@ -37,15 +37,9 @@ table_total_bytes:      equ table_max_records*sprite_record_size
 sprite_table_base:       equ 0xB7FC00
 sprite_table_limit:      equ sprite_table_base + table_total_bytes + 1 ; in case we ever need to know where it ends
 
-; pointer to top address of current record, initialized to sprite_table_base
-sprite_table_pointer: dl sprite_table_base
-; how many active sprites
-table_active_sprites: db 0x00
 ; flag indicating collision with screen edge
 ; uses orientation codes to specify which edge(s)
 sprite_screen_edge: db #00 
-; next sprite id to use
-sprite_next_id: db 0
 
 ; ######### COLLISION SPRITE PARAMETERS ##########
 ; integer coordinates are all that are needed for collision calculations

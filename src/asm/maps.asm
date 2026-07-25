@@ -439,9 +439,6 @@ change_room:
 
 to_room_obj_lut: db 30,31,32,33,34,35,36,37,38,39
 
-room_flags: blkb 10,0 
-room_flag_visited: equ %00000001
-
 room_dat_lut:
 room_00_dat: dl 0x0A0000
 room_01_dat: dl 0x0A2000

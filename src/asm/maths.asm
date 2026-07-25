@@ -213,7 +213,6 @@ rand_8:
     ld (r_seed),a
     pop bc
     ret
-r_seed: defb $50
 
 ; https://www.omnimaga.org/asm-language/ez80-optimized-routines/msg399325/#msg399325
 prng24:
@@ -240,8 +239,6 @@ prng24:
     ld (seed2),hl
     add hl,de
     ret
-seed1: dl 0
-seed2: dl 0
 
 
 ; https://map.grauw.nl/sources/external/z80bits.html#2.1

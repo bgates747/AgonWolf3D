@@ -21,6 +21,7 @@
 	include "src/asm/ui_img.asm"
 	include "src/asm/ui_img_bj.asm"
 	include "src/asm/sprites.asm"
+	include "src/asm/vars.asm"
 	include "src/asm/vdu.asm"
     include "src/asm/functions.asm"
 	include "src/asm/player.asm"
@@ -221,9 +222,6 @@ init:
 ; initialization done
     xor a
 	ret
-
-; DEBUG: set up a simple countdown timer
-debug_timer: db 0x01
 
 main_loop_tmr: ds 6
 framerate: equ 30
