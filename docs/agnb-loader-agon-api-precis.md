@@ -1,8 +1,34 @@
 # Agon API Précis for an `.agnb` Buffer Loader
 
-Status: implementation guidance based on the local official Agon documentation
-and the focused slideshow-derived test harness in
-`agon-utils/examples/agnb`, reviewed 2026-07-22.
+Status: implementation guidance based on the local official Agon
+documentation and the image/audio test harnesses in
+`agon-utils/examples/agnb`, reviewed 2026-07-24.
+
+## Implemented API status
+
+The canonical public loader is now
+`/home/smith/Agon/mystuff/agon-utils/examples/agnb/api/agnb_api.inc`.
+Wolf3D carries the merged source as `src/asm/agnb_api.inc`.
+
+Its public entry points are:
+
+- `agnb_load_images`, with `DE` pointing to an AGNB 0.1 image filename and an
+  internal no-op completed-image callback;
+- `agnb_load_images_with_callback`, with `DE` pointing to the filename and
+  `HL` pointing to a callback invoked after every finalized bitmap; and
+- `agnb_load_audio`, with `DE` pointing to an AGNB 0.2 audio filename.
+
+All return zero with Z set on success, or an `agnb_error_*` value with NZ set
+on failure. The last result is also retained in `agnb_last_error`.
+
+The audio record sequence is `BHDR/AUDI/DATA`. Wolf3D's current `AUDI`
+descriptor contains VDP format `0x09` followed by a little-endian u16 sample
+rate; its `DATA` is unsigned 8-bit mono PCM. The loader clears, streams,
+consolidates, and converts every explicitly numbered VDP buffer into a sample.
+
+The API owns an allocated 8 KiB transfer window rather than assuming the test
+harness's former fixed address `0xB7E000`. That address conflicts with
+Wolf3D's map and sprite state. Calls remain synchronous and non-reentrant.
 
 ## Purpose
 

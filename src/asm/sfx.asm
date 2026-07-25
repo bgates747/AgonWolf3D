@@ -55,7 +55,7 @@ SFX_duration_lut:
 	dw 856 ; ACHTUNG
 	dw 401 ; AHH
 	dw 764 ; AUGH
-	dw 486 ; AYEE
+	dw 487 ; AYEE
 	dw 1088 ; AYEE_HIGH
 	dw 611 ; DOG_WOOF_DOUBLE
 	dw 533 ; DOG_WOOF_SINGLE
@@ -66,329 +66,16 @@ SFX_duration_lut:
 	dw 442 ; GUN_RELOAD
 	dw 242 ; KNIFE
 	dw 814 ; MEIN_LEBEN
-	dw 974 ; OOF
+	dw 975 ; OOF
 	dw 584 ; SCHUSSTAFFEL
 	dw 736 ; SCREAM
-	dw 1462 ; SHOT_GATLING_BURST
+	dw 1463 ; SHOT_GATLING_BURST
 	dw 1017 ; SHOT_MACHINE_GUN_BURST
 	dw 1148 ; SHOT_PISTOL
 	dw 375 ; UGH
 	dw 1277 ; WILHELM
 
-; SFX load routines jump table:
-SFX_load_routines_table:
-	dl load_sfx_ACHTUNG
-	dl load_sfx_AHH
-	dl load_sfx_AUGH
-	dl load_sfx_AYEE
-	dl load_sfx_AYEE_HIGH
-	dl load_sfx_DOG_WOOF_DOUBLE
-	dl load_sfx_DOG_WOOF_SINGLE
-	dl load_sfx_DOG_YELP
-	dl load_sfx_EXPLODE
-	dl load_sfx_GOT_TREASURE
-	dl load_sfx_GUN_EMPTY
-	dl load_sfx_GUN_RELOAD
-	dl load_sfx_KNIFE
-	dl load_sfx_MEIN_LEBEN
-	dl load_sfx_OOF
-	dl load_sfx_SCHUSSTAFFEL
-	dl load_sfx_SCREAM
-	dl load_sfx_SHOT_GATLING_BURST
-	dl load_sfx_SHOT_MACHINE_GUN_BURST
-	dl load_sfx_SHOT_PISTOL
-	dl load_sfx_UGH
-	dl load_sfx_WILHELM
-
-; Import sfx .raw files and load them into VDP buffers
-
-load_sfx_ACHTUNG:
-	ld hl,FACHTUNG
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_ACHTUNG
-	ld ix,14394
-	call vdu_load_sfx
-	ret
-
-load_sfx_AHH:
-	ld hl,FAHH
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_AHH
-	ld ix,6755
-	call vdu_load_sfx
-	ret
-
-load_sfx_AUGH:
-	ld hl,FAUGH
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_AUGH
-	ld ix,12857
-	call vdu_load_sfx
-	ret
-
-load_sfx_AYEE:
-	ld hl,FAYEE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_AYEE
-	ld ix,8192
-	call vdu_load_sfx
-	ret
-
-load_sfx_AYEE_HIGH:
-	ld hl,FAYEE_HIGH
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_AYEE_HIGH
-	ld ix,18295
-	call vdu_load_sfx
-	ret
-
-load_sfx_DOG_WOOF_DOUBLE:
-	ld hl,FDOG_WOOF_DOUBLE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_DOG_WOOF_DOUBLE
-	ld ix,10276
-	call vdu_load_sfx
-	ret
-
-load_sfx_DOG_WOOF_SINGLE:
-	ld hl,FDOG_WOOF_SINGLE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_DOG_WOOF_SINGLE
-	ld ix,8976
-	call vdu_load_sfx
-	ret
-
-load_sfx_DOG_YELP:
-	ld hl,FDOG_YELP
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_DOG_YELP
-	ld ix,7264
-	call vdu_load_sfx
-	ret
-
-load_sfx_EXPLODE:
-	ld hl,FEXPLODE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_EXPLODE
-	ld ix,21832
-	call vdu_load_sfx
-	ret
-
-load_sfx_GOT_TREASURE:
-	ld hl,FGOT_TREASURE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_GOT_TREASURE
-	ld ix,24327
-	call vdu_load_sfx
-	ret
-
-load_sfx_GUN_EMPTY:
-	ld hl,FGUN_EMPTY
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_GUN_EMPTY
-	ld ix,4927
-	call vdu_load_sfx
-	ret
-
-load_sfx_GUN_RELOAD:
-	ld hl,FGUN_RELOAD
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_GUN_RELOAD
-	ld ix,7439
-	call vdu_load_sfx
-	ret
-
-load_sfx_KNIFE:
-	ld hl,FKNIFE
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_KNIFE
-	ld ix,4083
-	call vdu_load_sfx
-	ret
-
-load_sfx_MEIN_LEBEN:
-	ld hl,FMEIN_LEBEN
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_MEIN_LEBEN
-	ld ix,13697
-	call vdu_load_sfx
-	ret
-
-load_sfx_OOF:
-	ld hl,FOOF
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_OOF
-	ld ix,16384
-	call vdu_load_sfx
-	ret
-
-load_sfx_SCHUSSTAFFEL:
-	ld hl,FSCHUSSTAFFEL
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_SCHUSSTAFFEL
-	ld ix,9827
-	call vdu_load_sfx
-	ret
-
-load_sfx_SCREAM:
-	ld hl,FSCREAM
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_SCREAM
-	ld ix,12382
-	call vdu_load_sfx
-	ret
-
-load_sfx_SHOT_GATLING_BURST:
-	ld hl,FSHOT_GATLING_BURST
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_SHOT_GATLING_BURST
-	ld ix,24576
-	call vdu_load_sfx
-	ret
-
-load_sfx_SHOT_MACHINE_GUN_BURST:
-	ld hl,FSHOT_MACHINE_GUN_BURST
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_SHOT_MACHINE_GUN_BURST
-	ld ix,17092
-	call vdu_load_sfx
-	ret
-
-load_sfx_SHOT_PISTOL:
-	ld hl,FSHOT_PISTOL
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_SHOT_PISTOL
-	ld ix,19297
-	call vdu_load_sfx
-	ret
-
-load_sfx_UGH:
-	ld hl,FUGH
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_UGH
-	ld ix,6313
-	call vdu_load_sfx
-	ret
-
-load_sfx_WILHELM:
-	ld hl,FWILHELM
-	ld (cur_filename),hl
-	ld de,filedata
-	ld bc,65536
-	ld a,mos_load
-	RST.LIL 08h
-	ld hl,BUF_WILHELM
-	ld ix,21463
-	call vdu_load_sfx
-	ret
-
-; File name lookups:
-FACHTUNG: db "sfx/ACHTUNG.raw",0
-FAHH: db "sfx/AHH.raw",0
-FAUGH: db "sfx/AUGH.raw",0
-FAYEE: db "sfx/AYEE.raw",0
-FAYEE_HIGH: db "sfx/AYEE_HIGH.raw",0
-FDOG_WOOF_DOUBLE: db "sfx/DOG_WOOF_DOUBLE.raw",0
-FDOG_WOOF_SINGLE: db "sfx/DOG_WOOF_SINGLE.raw",0
-FDOG_YELP: db "sfx/DOG_YELP.raw",0
-FEXPLODE: db "sfx/EXPLODE.raw",0
-FGOT_TREASURE: db "sfx/GOT_TREASURE.raw",0
-FGUN_EMPTY: db "sfx/GUN_EMPTY.raw",0
-FGUN_RELOAD: db "sfx/GUN_RELOAD.raw",0
-FKNIFE: db "sfx/KNIFE.raw",0
-FMEIN_LEBEN: db "sfx/MEIN_LEBEN.raw",0
-FOOF: db "sfx/OOF.raw",0
-FSCHUSSTAFFEL: db "sfx/SCHUSSTAFFEL.raw",0
-FSCREAM: db "sfx/SCREAM.raw",0
-FSHOT_GATLING_BURST: db "sfx/SHOT_GATLING_BURST.raw",0
-FSHOT_MACHINE_GUN_BURST: db "sfx/SHOT_MACHINE_GUN_BURST.raw",0
-FSHOT_PISTOL: db "sfx/SHOT_PISTOL.raw",0
-FUGH: db "sfx/UGH.raw",0
-FWILHELM: db "sfx/WILHELM.raw",0
+; PCM payloads are packaged in sfx.agnb.
 
 ; Play sfx routines
 
@@ -409,7 +96,7 @@ sfx_play_augh:
 
 sfx_play_ayee:
 	ld hl,BUF_AYEE
-	ld bc,486
+	ld bc,487
 	jp vdu_play_sfx
 
 sfx_play_ayee_high:
@@ -464,7 +151,7 @@ sfx_play_mein_leben:
 
 sfx_play_oof:
 	ld hl,BUF_OOF
-	ld bc,974
+	ld bc,975
 	jp vdu_play_sfx
 
 sfx_play_schusstaffel:
@@ -479,7 +166,7 @@ sfx_play_scream:
 
 sfx_play_shot_gatling_burst:
 	ld hl,BUF_SHOT_GATLING_BURST
-	ld bc,1462
+	ld bc,1463
 	jp vdu_play_sfx
 
 sfx_play_shot_machine_gun_burst:

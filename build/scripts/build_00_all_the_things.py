@@ -123,11 +123,17 @@ def do_all_the_things(db_path, map_dim_x, map_dim_y, screen_size, view_distance,
 
 # build_08_make_sfx.py
     sfx_src_dir = 'src/assets/sfx'
-    sfx_tgt_dir = 'tgt/sfx'
+    sfx_tgt_dir = 'build/sfx/wav'
     if do_08_make_sfx:
         print(f"build_08_make_sfx: Making sound effects")
         from build_08_make_sfx import make_sfx
         make_sfx(db_path, sfx_src_dir, sfx_tgt_dir)
+
+# build_08a_make_sfx_agnb.py
+    if do_08a_make_sfx_agnb:
+        print(f"build_08a_make_sfx_agnb: Making SFX AGNB container")
+        from build_08a_make_sfx_agnb import make_sfx_agnb
+        make_sfx_agnb(db_path, sfx_tgt_dir, "tgt/sfx.agnb")
         
 # build_90_asm_polys.py
     if do_90_asm_polys:
@@ -239,6 +245,7 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = False
     do_07_map_panels = False
     do_08_make_sfx = False
+    do_08a_make_sfx_agnb = False
     do_90_asm_polys = False
     do_91_asm_images = False
     do_91a_asm_font = False
@@ -262,6 +269,7 @@ if __name__ == "__main__":
     do_06_import_mapmaker_files = True
     do_07_map_panels = True
     do_08_make_sfx = True
+    do_08a_make_sfx_agnb = True
     do_90_asm_polys = True
     do_91_asm_images = True
     do_91a_asm_font = True

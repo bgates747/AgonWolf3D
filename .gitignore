@@ -12,6 +12,7 @@ flicker/
 /build/dws/rgba2/
 /build/ui/rgba2/
 /build/fonts/
+/build/sfx/
 
 # Ignore machine-local external documentation link
 /agon-docs

@@ -256,15 +256,17 @@ vdu_channel_waveform:
 
 
 
-; VDU 23, 0, &85, 0, 5, 2, bufferId; format
-; inputs: hl = bufferId; a = format
+; VDU 23, 0, &85, 0, 5, 2, bufferId; format, sampleRate;
+; inputs: hl = bufferId; a = base format; de = sample rate in Hz
 ; The format parameter is an 8-bit value that indicates the format of the sample data. The following values are supported:
 ; Value 	Description
 ; 0 	8-bit signed, 16KHz
 ; 1 	8-bit unsigned, 16KHz
 vdu_buffer_to_sound:
     ld (@bufferId),hl
+    add a,8 ; explicit sample-rate argument follows
     ld (@format),a
+    ld (@sampleRate),de
     ld hl,@cmd         
     ld bc,@end-@cmd    
     rst.lil $18         
@@ -275,6 +277,7 @@ vdu_buffer_to_sound:
             db 0x02 ; a magic number that is always 2
 @bufferId:  dw 0x0000
 @format:    db 0x00
+@sampleRate: dw 0x0000
 @end:       
 
 

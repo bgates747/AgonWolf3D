@@ -28,7 +28,7 @@
 	include "src/asm/img_load.asm"
 	include "src/asm/sfx.asm"
 	include "src/asm/timer.asm"
-	include "src/asm/agnb.inc"
+	include "src/asm/agnb_api.inc"
 
 
 start:              
@@ -63,6 +63,7 @@ press_any_key: asciz "Press any key to continue.\r\n"
 ui_agnb_filename: asciz "ui.agnb"
 font_agnb_filename: asciz "font.agnb"
 images_agnb_filename: asciz "images.agnb"
+sfx_agnb_filename: asciz "sfx.agnb"
 is_emulator: db 0
 
 init:
@@ -86,7 +87,7 @@ init:
 	asciz "Loading UI"
 	ld de,ui_agnb_filename
 	ld hl,img_load_agnb_breadcrumb
-	call agnb_load_images
+	call agnb_load_images_with_callback
 	jr z,@ui_loaded
 	jp @agnb_startup_error
 @ui_loaded:
@@ -98,7 +99,7 @@ init:
 	asciz "Loading font"
 	ld de,font_agnb_filename
 	ld hl,img_load_agnb_breadcrumb
-	call agnb_load_images
+	call agnb_load_images_with_callback
 	jr z,@font_loaded
 	jp @agnb_startup_error
 @font_loaded:
@@ -147,7 +148,7 @@ init:
     ld (cur_file_idx),hl
 	ld de,images_agnb_filename
 	ld hl,img_load_agnb_progress
-	call agnb_load_images
+	call agnb_load_images_with_callback
 	jr z,@images_loaded
 
 ; Fail startup without entering the game if the image container is invalid or
@@ -170,13 +171,10 @@ init:
 
 @images_loaded:
 
-; load sound effects
-	ld bc,SFX_num_buffers
-	ld hl,SFX_buffer_id_lut
-	ld (cur_buffer_id_lut),hl
-	ld hl,SFX_load_routines_table
-	ld (cur_load_jump_table),hl
-	call sfx_load_main
+; load and finalize all sound effects from the AGNB 0.2 audio container
+	ld de,sfx_agnb_filename
+	call agnb_load_audio
+	jr nz,@agnb_startup_error
 
 ; self modify vdu_play_sfx to enable sound
 	xor a
