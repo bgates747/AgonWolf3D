@@ -67,6 +67,9 @@ img_load_agnb_progress:
 ; The container intentionally has no runtime filenames, so display an ordered
 ; image number instead.
 	call vdu_cls
+	ld hl,application_version
+	call printString
+	call printNewLine
 	call printInline
 	asciz "Loading image: "
 	ld hl,(cur_file_idx)
@@ -82,6 +85,44 @@ img_load_agnb_progress:
 	call vdu_flip
 
 ; Advance the progress index for the next AGNB record.
+	ld hl,(cur_file_idx)
+	inc hl
+	ld (cur_file_idx),hl
+	xor a
+	ret
+
+; Update the loading splash after one AGNB audio sample has been finalized.
+; The splash redraw covers the final image-loader debug texture while retaining
+; and advancing BJ's loading animation.
+; outputs: A=0 and Z set
+; destroys: AF, BC, DE, HL, IX
+img_load_agnb_audio_progress:
+	call tmp_draw_all_the_things
+	call move_bj
+
+	ld ix,font_itc_honda
+	ld hl,welcome_message
+	ld bc,32
+	ld de,2
+	call font_bmp_print
+
+	call vdu_cls
+	ld hl,application_version
+	call printString
+	call printNewLine
+	call printInline
+	asciz "Loading sound: "
+	ld hl,(cur_file_idx)
+	inc hl
+	call printDec
+	call printNewLine
+
+	call printInline
+	asciz "Loading time:"
+	call stopwatch_get
+	call printDec
+	call vdu_flip
+
 	ld hl,(cur_file_idx)
 	inc hl
 	ld (cur_file_idx),hl

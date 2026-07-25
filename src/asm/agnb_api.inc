@@ -6,6 +6,8 @@
 ;   agnb_load_images_with_callback:
 ;                     DE -> filename, HL -> completed-image callback
 ;   agnb_load_audio:  DE -> zero-terminated AGNB 0.2 audio filename
+;   agnb_load_audio_with_callback:
+;                     DE -> filename, HL -> completed-audio callback
 ;
 ; Applications own plotting, playback, input, timing, and debug behavior.
 ; External dependencies and reference implementations are documented in
@@ -1107,12 +1109,21 @@ agnb_audio_meta_size:      equ 9
 agnb_audio_metadata:
     blkb agnb_audio_meta_size,0
 
+; Application callback invoked after each audio sample has been finalized.
+agnb_audio_callback:       dl 0
+
 ; Load every valid audio record at its explicit bufferId. Playback remains the
 ; application's responsibility.
 ; inputs:  DE = zero-terminated container filename
 ; outputs: A=0/Z after the complete container; error code/NZ on failure
 ; destroys: AF, BC, DE, HL, IX
 agnb_load_audio:
+    ld hl,agnb_audio_callback_noop
+
+; Callback-enabled audio loader.
+; inputs: DE = filename; HL = callback whose result is ignored
+agnb_load_audio_with_callback:
+    ld (agnb_audio_callback),hl
     call agnb_open
     ret nz
 
@@ -1143,6 +1154,10 @@ agnb_load_audio:
     call agnb_finalize_audio
     jr nz,@load_error
 
+; Give the application one completed-sample boundary per record.
+; Metadata remains valid for the duration of the callback.
+    call agnb_call_audio_callback
+
     call agnb_finish_buffer_list
     jr nz,@load_error
     jr @next_record
@@ -1161,6 +1176,16 @@ agnb_load_audio:
 
 @success:
     jp agnb_close
+
+; Tail-jump to the selected callback so its RET resumes the loader without
+; clobbering BC.
+agnb_call_audio_callback:
+    ld hl,(agnb_audio_callback)
+    jp (hl)
+
+agnb_audio_callback_noop:
+    xor a
+    ret
 
 ; Read and validate the single VERS chunk for the provisional audio layout.
 agnb_read_audio_vers:

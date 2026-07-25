@@ -58,6 +58,7 @@ exit:
 
     ret 
 
+application_version: db "0.2.0.alpha",0
 welcome_message: asciz "Welcome to Agon Wolf3D"
 press_any_key: asciz "Press any key to continue.\r\n"
 ui_agnb_filename: asciz "ui.agnb"
@@ -172,8 +173,11 @@ init:
 @images_loaded:
 
 ; load and finalize all sound effects from the AGNB 0.2 audio container
+	ld hl,0
+	ld (cur_file_idx),hl
 	ld de,sfx_agnb_filename
-	call agnb_load_audio
+	ld hl,img_load_agnb_audio_progress
+	call agnb_load_audio_with_callback
 	jr nz,@agnb_startup_error
 
 ; self modify vdu_play_sfx to enable sound
