@@ -45,6 +45,27 @@ configure its reporting to provide bounded milestones, periodic summaries,
 warnings, and errors instead. Preserve useful progress visibility without
 spending conversation tokens on mechanically repetitive output.
 
+## Checklist conventions
+
+Give every actionable checkbox or TODO an explicit, stable number, including
+Codex recommendations and temporary implementation checklists. This lets the
+Author refer to an item by number alone.
+
+- Number items consecutively within the canonical checklist.
+- Never reuse or silently renumber an item after it has been presented; append
+  newly discovered work with new numbers.
+- Supporting explanation may remain unnumbered, but any independently
+  actionable subtask must receive its own checkbox and number.
+- When work proceeds off the cuff, retroactively add the completed actions in
+  the order performed and mark them complete. Keep planned work after them
+  rather than rewriting history.
+
+Keep implementation status in the goals/checklist and development log.
+Reference manuals describe the settled design contract or expected behavior
+without embedding task numbers, open/complete status, or transitional
+“once implemented” language. This avoids synchronized status edits across
+multiple documents whenever a task is completed.
+
 ## Session-start reading
 
 Read only what the task requires:
@@ -99,12 +120,28 @@ scripts/run_emulator.sh wolf3d
 The active MapMaker tree is `src/mapmaker`. `dev/mapmaker` is deprecated and
 retained only until its contents are audited.
 
-In this project, a **room** means one complete map definition that can be held
-in one MapMaker instance. MapMaker authors a 15×15 tile area because its
-original display layout lacked room for 16×16. The build/runtime representation
-pads that authored area to the engine's natural 16×16 grid, where compact
-4-bit x and y coordinates fit together in one byte. Do not treat the authored
-15×15 size as an accidental off-by-one error.
+The master build's `map_src_dir` is the sole map-selection setting. Stage 06
+discovers every direct `FF_R.map` child, requires dense zero-based floors and
+dense zero-based rooms within each floor, and supplies that ordered set to the
+remaining map stages. Do not reintroduce a manually synchronized
+`floor_nums` list.
+
+The living map-design, build, format, and runtime reference is:
+
+```text
+docs/map-design-manual/README.md
+```
+
+Read the relevant practical chapter before map work and the technical
+appendices before changing map build or assembly behavior. Update the manual
+when a map feature's implemented behavior or authoring contract changes.
+
+In this project, a **map room** means one complete map definition that can be
+held in one MapMaker instance. MapMaker authors a 15×15 tile area because its
+original display layout lacked room for 16×16. The build/runtime
+representation pads that authored area to the engine's natural 16×16 grid,
+where the runtime cell ID holds 4-bit X and Y coordinates. Do not treat the
+authored 15×15 size as an accidental off-by-one error.
 
 Room-to-room movement crosses between separate map definitions. Verifying and
 correcting those transitions is the first Author-defined v0.3.0alpha task. A
