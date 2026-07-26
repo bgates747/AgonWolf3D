@@ -134,7 +134,7 @@ def make_qry_07_potential_panels(db_path, floor_num, map_dim_x, map_dim_y):
     -- WHERE t.render_type IN('cube', 'sprite') -- DEBUG: FOR DEBUGGING
     """)
 
-def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_directory, map_masks_directory, map_dim_x, map_dim_y):
+def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_directory, map_masks_directory, map_dim_x, map_dim_y, reset_table=True):
     """
     High-level function to create map panels.
 
@@ -166,7 +166,8 @@ def make_map_panels(db_path, floor_num, screen_width, screen_height, masks_direc
     make_qry_07_map_orientations(db_path, floor_num)
     make_qry_07_map_polys(db_path, floor_num)
     make_qry_07_potential_panels(db_path, floor_num, map_dim_x, map_dim_y)
-    make_tbl_07_render_panels(db_path, floor_num)
+    if reset_table:
+        make_tbl_07_render_panels(db_path, floor_num)
     
     process_potential_panels(db_path, floor_num, map_masks_directory, masks_directory, screen_width, screen_height)
 

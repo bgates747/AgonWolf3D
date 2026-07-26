@@ -1,5 +1,94 @@
-import os
+import re
 import sqlite3
+from pathlib import Path
+
+
+MAP_FILENAME_PATTERN = re.compile(
+    r"^(?P<floor_num>[0-9]{2})_(?P<room_id>[0-9])\.map$"
+)
+
+
+def _require_dense_ids(ids, description, source_dir, width):
+    expected_ids = list(range(ids[-1] + 1))
+    if ids == expected_ids:
+        return
+
+    missing_ids = sorted(set(expected_ids) - set(ids))
+    found = ", ".join(f"{item:0{width}d}" for item in ids)
+    missing = ", ".join(f"{item:0{width}d}" for item in missing_ids)
+    raise ValueError(
+        f"Sparse {description} in {source_dir}: found [{found}], "
+        f"missing [{missing}]. IDs must be dense and zero-based."
+    )
+
+
+def discover_mapmaker_files(map_src_dir):
+    """Discover and validate the complete floor/room map definition set."""
+    source_dir = Path(map_src_dir)
+    if not source_dir.is_dir():
+        raise FileNotFoundError(f"Map definition directory not found: {source_dir}")
+
+    map_paths = sorted(
+        path
+        for path in source_dir.iterdir()
+        if path.is_file() and path.suffix.lower() == ".map"
+    )
+    if not map_paths:
+        raise ValueError(f"No MapMaker .map files found in {source_dir}")
+
+    malformed_names = [
+        path.name
+        for path in map_paths
+        if MAP_FILENAME_PATTERN.fullmatch(path.name) is None
+    ]
+    if malformed_names:
+        raise ValueError(
+            f"Invalid MapMaker filename(s) in {source_dir}: "
+            f"{', '.join(malformed_names)}. Expected FF_R.map."
+        )
+
+    maps_by_floor = {}
+    for map_path in map_paths:
+        match = MAP_FILENAME_PATTERN.fullmatch(map_path.name)
+        floor_num = int(match.group("floor_num"))
+        room_id = int(match.group("room_id"))
+        room_files = maps_by_floor.setdefault(floor_num, {})
+        if room_id in room_files:
+            raise ValueError(
+                f"Duplicate map definition for floor {floor_num:02d}, "
+                f"room {room_id}: {room_files[room_id]} and {map_path}"
+            )
+        room_files[room_id] = map_path
+
+    floor_nums = sorted(maps_by_floor)
+    _require_dense_ids(floor_nums, "floor numbering", source_dir, width=2)
+
+    discovered = {}
+    for floor_num in floor_nums:
+        room_files = maps_by_floor[floor_num]
+        room_ids = sorted(room_files)
+        _require_dense_ids(
+            room_ids,
+            f"room numbering for floor {floor_num:02d}",
+            source_dir,
+            width=1,
+        )
+        discovered[floor_num] = {
+            room_id: room_files[room_id]
+            for room_id in room_ids
+        }
+
+    total_rooms = sum(len(room_files) for room_files in discovered.values())
+    print(
+        f"Discovered {total_rooms} MapMaker room(s) across "
+        f"{len(discovered)} floor(s) in {source_dir}"
+    )
+    for floor_num, room_files in discovered.items():
+        room_ids = ", ".join(str(room_id) for room_id in room_files)
+        print(f"  floor {floor_num:02d}: rooms [{room_ids}]")
+
+    return discovered
+
 
 def make_tbl_06_maps(db_path):
     conn = sqlite3.connect(db_path)
@@ -34,36 +123,34 @@ def make_tbl_06_maps(db_path):
     conn.commit()
     conn.close()
 
-def parse_map_files(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y):
+def parse_map_files(db_path, floor_num, room_files, map_dim_x, map_dim_y):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT obj_id FROM tbl_02_tiles WHERE special = 'outer' AND is_active = 1")
     outer_obj_id = cursor.fetchone()[0]
 
-    for room_id in range(0, 10):
-        map_file = f'{floor_num:02d}_{room_id}.map'
-        map_path = os.path.join(map_src_dir, map_file)
-        if os.path.exists(map_path):
-            with open(map_path, 'rb') as file:
-                # We don't need the first 5 bytes of header information
-                _, _, _, _ = [int.from_bytes(file.read(5)[:4], 'little') for _ in range(4)]
-                cell_id = 0 
-                for map_y in range(map_dim_y):
-                    for map_x in range(map_dim_x):
-                        if map_x == map_dim_x - 1 or map_y == map_dim_y - 1:
-                            obj_id = outer_obj_id
-                        else:
-                            # snag the next 5 bytes as the obj_id
-                            # automagically advances the file pointer after reading
-                            obj_id = int.from_bytes(file.read(5), 'little')
-                        cursor.execute('''
-                            INSERT INTO tbl_06_maps (
-                                floor_num, room_id, cell_id, map_x, map_y, obj_id,
-                                tile_name, is_active, is_door,
-                                is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, align_vert, align_horiz, special
-                            ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
-                        ''', (floor_num, room_id, cell_id, map_x, map_y, obj_id))
-                        cell_id += 1  
+    for room_id, map_path in room_files.items():
+        print(f"Importing floor {floor_num:02d}, room {room_id}: {map_path}")
+        with map_path.open('rb') as file:
+            # We don't need the first 5 bytes of header information
+            _, _, _, _ = [int.from_bytes(file.read(5)[:4], 'little') for _ in range(4)]
+            cell_id = 0
+            for map_y in range(map_dim_y):
+                for map_x in range(map_dim_x):
+                    if map_x == map_dim_x - 1 or map_y == map_dim_y - 1:
+                        obj_id = outer_obj_id
+                    else:
+                        # snag the next 5 bytes as the obj_id
+                        # automagically advances the file pointer after reading
+                        obj_id = int.from_bytes(file.read(5), 'little')
+                    cursor.execute('''
+                        INSERT INTO tbl_06_maps (
+                            floor_num, room_id, cell_id, map_x, map_y, obj_id,
+                            tile_name, is_active, is_door,
+                            is_wall, is_trigger, is_blocking, render_type, render_obj_id, scale, align_vert, align_horiz, special
+                        ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+                    ''', (floor_num, room_id, cell_id, map_x, map_y, obj_id))
+                    cell_id += 1
                 
     conn.commit()
     conn.close()
@@ -106,14 +193,24 @@ def add_tile_info(db_path, floor_num):
     conn.close()
 
 
-def import_mapmaker(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y):
-    make_tbl_06_maps(db_path)
-    parse_map_files(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y)
+def import_mapmaker(db_path, floor_num, room_files, map_dim_x, map_dim_y, reset_table=True):
+    if reset_table:
+        make_tbl_06_maps(db_path)
+    parse_map_files(db_path, floor_num, room_files, map_dim_x, map_dim_y)
     add_tile_info(db_path, floor_num)
 
+
 if __name__ == "__main__":
-    floor_num = 0
     db_path = 'build/data/build.db'
-    map_src_dir = f'src/mapmaker'
+    map_src_dir = 'src/mapmaker'
     map_dim_x, map_dim_y = 16, 16
-    import_mapmaker(db_path, floor_num, map_src_dir, map_dim_x, map_dim_y)
+    maps_by_floor = discover_mapmaker_files(map_src_dir)
+    for floor_index, (floor_num, room_files) in enumerate(maps_by_floor.items()):
+        import_mapmaker(
+            db_path,
+            floor_num,
+            room_files,
+            map_dim_x,
+            map_dim_y,
+            reset_table=(floor_index == 0),
+        )
