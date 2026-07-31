@@ -278,7 +278,7 @@ vdu_buffer_to_sound:
 @bufferId:  dw 0x0000
 @format:    db 0x00
 @sampleRate: dw 0x0000
-@end:       
+@end:        db 0x00 ; padding absorbs DEU from the native-ADL store
 
 
 ; inputs: c = channel, b = volume, de = duration; hl = bufferId
@@ -289,7 +289,7 @@ vdu_play_sample:
     ld (@channel1),a
     ld a,b
     ld (@volume),a
-    ld (@frequency),de
+    ld (@duration),de ; frequency remains zero for a non-tuneable sample
     ld (@bufferId),hl
     ; clean up byte that got stomped on by bufferId load from hl
     ld a,23 
