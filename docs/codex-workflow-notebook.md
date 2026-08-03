@@ -158,3 +158,56 @@ scripts/run_emulator.sh mapmaker
 
 MapMaker's working BBC BASIC autoexec sequence is documented centrally in
 `codex/emulator.md`.
+
+## Related renderer history
+
+The Author's earlier general-purpose 3D rendering engine is named **Pingo**.
+It was ported to the Agon VDP, corrected and optimized during subsequent
+development, and used for interactive passenger-jet and Wolf3D-maze demos.
+The Agon community Discord has a dedicated Pingo forum whose conversations may
+preserve bug reports, design intent, performance observations, attempted
+optimizations, and explanations absent from the source repository.
+
+If Pingo is investigated later, treat its Git history and exported Discord
+discussion as complementary archaeological evidence. Build an evidence-ranked
+chronology that distinguishes verified code changes and contemporary reports
+from the Author's later recollection and from inference.
+
+A contemporary Discord post by the Author dated **2024-10-24** identifies
+Pingo **2.10.0 on `main`** as an important archaeology boundary. The post says
+that this version contained major perspective-transform corrections for a
+severe failure when rendering objects very close to the camera. It also says
+the Author then stepped away after burning out while attempting to improve
+rasterization performance by porting an elegant but unsuccessful algorithm
+from a 1990s 3D-computing magazine aimed at Windows. When the Pingo repository
+is available, inspect the commits leading to 2.10.0 for the close-camera fix,
+then inspect nearby branches, abandoned files, and commits for the magazine
+rasterizer experiment. No local Pingo checkout was found under
+`/home/smith/Agon` during the initial search. The Author subsequently
+identified and cloned the eZ80-side assembly demo repository to
+`/home/smith/Agon/mystuff/pingoasm`. Its history includes the tag
+`pingo3d2.10.0.alpha6`, which is the first precise revision to examine
+against the Discord report.
+
+The corresponding VDP-side work is in the Author's
+[`bgates747/agon-vdp`](https://github.com/bgates747/agon-vdp) fork of the
+official firmware:
+
+- `pingo` contains most of the Author's engine work;
+- `hecker` and `hecker2` contain the attempts to implement the 1990s-era
+  texture-mapping optimization mentioned in the Discord post; and
+- `compression` explores an older Internet-sourced compression algorithm with
+  an excellent compression ratio but excessive VDP decompression cost.
+
+Future Pingo archaeology should correlate these firmware branches with
+`pingoasm`, especially around the `pingo3d2.10.0.alpha6` tag. Revisit the
+`compression` branch separately by measuring compressed size, decompression
+time, memory pressure, and UART transfer savings to find a useful
+processor-versus-size balance rather than optimizing compression ratio alone.
+
+The current `/home/smith/Agon/agon-vdp` checkout tracks the official
+`AgonPlatform/agon-vdp` repository and must not be repurposed or modified for
+this work. The Author's fork is separately cloned at
+`/home/smith/Agon/mystuff/agon-vdp`; its `origin` is
+`bgates747/agon-vdp`, and the `pingo`, `hecker`, `hecker2`, and `compression`
+branches are available as remote-tracking branches.
